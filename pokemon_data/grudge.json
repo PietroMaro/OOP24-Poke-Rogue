@@ -1,0 +1,10 @@
+{
+    "pp": 5,
+    "isPhysical": false,
+    "effect": "If the user faints, deletes\nthe PP of the final move. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 0,
+    "type": "ghost",
+    "priority": 0
+}

@@ -1,0 +1,10 @@
+{
+    "pp": 20,
+    "isPhysical": false,
+    "effect": "Jabs the foe twice\nusing stingers. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 25,
+    "type": "bug",
+    "priority": 0
+}

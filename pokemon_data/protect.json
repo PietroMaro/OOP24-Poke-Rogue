@@ -1,0 +1,10 @@
+{
+    "pp": 10,
+    "isPhysical": false,
+    "effect": "Foils attack that\nturn. It may fail. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 0,
+    "type": "normal",
+    "priority": 4
+}

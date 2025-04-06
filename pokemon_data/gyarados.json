@@ -1,0 +1,43 @@
+{
+    "pokedexNumber": 130,
+    "types": [
+        "water",
+        "flying"
+    ],
+    "captureRate": 45,
+    "minLevelForEncounter": 1,
+    "stats": {
+        "special-attack": 60,
+        "defense": 79,
+        "attack": 125,
+        "hp": 95,
+        "special-defense": 100,
+        "speed": 81
+    },
+    "moves": {
+        "55": "hyper-beam",
+        "1": "thrash",
+        "45": "rain-dance",
+        "35": "twister",
+        "25": "dragon-rage",
+        "50": "dragon-dance",
+        "40": "hydro-pump",
+        "30": "leer",
+        "20": "bite"
+    },
+    "growthRate": "slow",
+    "name": "gyarados",
+    "weight": 2350,
+    "abilites": [
+        "intimidate",
+        "moxie"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

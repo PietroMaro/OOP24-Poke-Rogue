@@ -1,0 +1,10 @@
+{
+    "pp": 35,
+    "isPhysical": false,
+    "effect": "An attack that may\nlower SPEED. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 10,
+    "type": "normal",
+    "priority": 0
+}

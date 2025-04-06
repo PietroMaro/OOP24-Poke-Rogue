@@ -1,0 +1,10 @@
+{
+    "pp": 20,
+    "isPhysical": false,
+    "effect": "Squeezes the foe\nfor 2-5 turns. TODO Create effect and link it here",
+    "accuracy": 90,
+    "critRate": 0,
+    "baseDamage": 15,
+    "type": "normal",
+    "priority": 0
+}

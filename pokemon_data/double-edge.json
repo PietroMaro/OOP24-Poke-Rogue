@@ -1,0 +1,10 @@
+{
+    "pp": 15,
+    "isPhysical": false,
+    "effect": "A tackle that also\nhurts the user. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 120,
+    "type": "normal",
+    "priority": 0
+}

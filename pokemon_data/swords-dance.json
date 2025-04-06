@@ -1,0 +1,10 @@
+{
+    "pp": 20,
+    "isPhysical": false,
+    "effect": "A dance that in­\ncreases ATTACK. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 0,
+    "type": "normal",
+    "priority": 0
+}

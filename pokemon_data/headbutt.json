@@ -1,0 +1,10 @@
+{
+    "pp": 15,
+    "isPhysical": false,
+    "effect": "An attack that may\nmake foe flinch. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 70,
+    "type": "normal",
+    "priority": 0
+}

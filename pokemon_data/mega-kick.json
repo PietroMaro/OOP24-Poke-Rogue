@@ -1,0 +1,10 @@
+{
+    "pp": 5,
+    "isPhysical": false,
+    "effect": "The target is attacked by a kick launched\nwith muscle-packed power. TODO Create effect and link it here",
+    "accuracy": 75,
+    "critRate": 0,
+    "baseDamage": 120,
+    "type": "normal",
+    "priority": 0
+}

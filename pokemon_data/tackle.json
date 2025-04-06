@@ -1,0 +1,10 @@
+{
+    "pp": 35,
+    "isPhysical": false,
+    "effect": "A full-body charge\nattack. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 40,
+    "type": "normal",
+    "priority": 0
+}

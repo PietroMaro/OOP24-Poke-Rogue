@@ -1,0 +1,10 @@
+{
+    "pp": 10,
+    "isPhysical": false,
+    "effect": "An attack that gains power\nif injured by the foe. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 60,
+    "type": "fighting",
+    "priority": -4
+}

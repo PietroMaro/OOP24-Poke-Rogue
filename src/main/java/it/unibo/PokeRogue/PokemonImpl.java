@@ -9,18 +9,18 @@ public class PokemonImpl implements Pokemon {
 	private Map<String, Range<Integer>> BaseStats;
 	private Map<String, Range<Integer>> ActualStats;
 	private int totalUsedEV = 0;
-	private Map<String, Range<Integer>> EV; // generato a caso
-	private Map<String, Integer> IV; // generato a caso
+	private Map<String, Range<Integer>> EV; // 0-255 the pokemon can have a total of 510 
+	private Map<String, Integer> IV; // 0-31 random when spawned 
 	private Map<String, Move> actualMoves;
 	private Map<Integer, Move> levelMovesLearn;
-	private String levelUpcurve; // nome della curva di lvlup,
+	private String levelUpcurve; // definied by a name,
 									// https://m.bulbapedia.bulbagarden.net/wiki/Experience#Medium_Fast
-	private String evIncreaseType; // il nome dell'ev che aumento all'aversario quando questo pokemon viene ucciso
+	private String evIncreaseType; 
 	private Range<Integer> exp;
 	private int pokedexNumber;
 	private int totEV;
-	private int weight; // specifico
-	private String name; // specifico
+	private int weight; 
+	private String name; 
 
 	public enum Nature {
 		ADAMANT("Attack", "SpecialAttack"),

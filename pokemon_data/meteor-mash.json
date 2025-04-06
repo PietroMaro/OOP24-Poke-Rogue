@@ -1,0 +1,10 @@
+{
+    "pp": 10,
+    "isPhysical": false,
+    "effect": "Fires a meteor-like punch.\nMay raise ATTACK. TODO Create effect and link it here",
+    "accuracy": 90,
+    "critRate": 0,
+    "baseDamage": 90,
+    "type": "steel",
+    "priority": 0
+}

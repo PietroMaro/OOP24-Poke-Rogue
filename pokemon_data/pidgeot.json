@@ -1,0 +1,41 @@
+{
+    "pokedexNumber": 18,
+    "types": [
+        "normal",
+        "flying"
+    ],
+    "captureRate": 45,
+    "minLevelForEncounter": 1,
+    "stats": {
+        "special-attack": 70,
+        "defense": 75,
+        "attack": 80,
+        "hp": 83,
+        "special-defense": 70,
+        "speed": 101
+    },
+    "moves": {
+        "1": "quick-attack",
+        "34": "feather-dance",
+        "48": "agility",
+        "27": "wing-attack",
+        "62": "mirror-move",
+        "20": "whirlwind"
+    },
+    "growthRate": "medium-slow",
+    "name": "pidgeot",
+    "weight": 395,
+    "abilites": [
+        "keen-eye",
+        "tangled-feet",
+        "big-pecks"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

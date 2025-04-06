@@ -1,0 +1,10 @@
+{
+    "pp": 5,
+    "isPhysical": false,
+    "effect": "Restores HP\n(varies by time). TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 0,
+    "type": "fairy",
+    "priority": 0
+}

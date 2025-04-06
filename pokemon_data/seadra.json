@@ -1,0 +1,37 @@
+{
+    "pokedexNumber": 117,
+    "types": ["water"],
+    "captureRate": 75,
+    "minLevelForEncounter": 1,
+    "stats": {
+        "special-attack": 95,
+        "defense": 95,
+        "attack": 65,
+        "hp": 55,
+        "special-defense": 45,
+        "speed": 85
+    },
+    "moves": {
+        "1": "bubble",
+        "29": "twister",
+        "51": "hydro-pump",
+        "40": "agility",
+        "62": "dragon-dance"
+    },
+    "growthRate": "medium",
+    "name": "seadra",
+    "weight": 250,
+    "abilites": [
+        "poison-point",
+        "sniper",
+        "damp"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

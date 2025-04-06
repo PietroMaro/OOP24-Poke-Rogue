@@ -1,0 +1,41 @@
+{
+    "pokedexNumber": 52,
+    "types": ["normal"],
+    "captureRate": 255,
+    "minLevelForEncounter": 1,
+    "stats": {
+        "special-attack": 40,
+        "defense": 35,
+        "attack": 45,
+        "hp": 40,
+        "special-defense": 40,
+        "speed": 90
+    },
+    "moves": {
+        "1": "growl",
+        "45": "swagger",
+        "36": "fury-swipes",
+        "25": "feint-attack",
+        "18": "pay-day",
+        "40": "slash",
+        "31": "screech",
+        "10": "bite",
+        "43": "fake-out"
+    },
+    "growthRate": "medium",
+    "name": "meowth",
+    "weight": 42,
+    "abilites": [
+        "pickup",
+        "technician",
+        "unnerve"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

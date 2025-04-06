@@ -1,0 +1,10 @@
+{
+    "pp": 15,
+    "isPhysical": false,
+    "effect": "Steals HP from a\nsleeping victim. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 100,
+    "type": "psychic",
+    "priority": 0
+}

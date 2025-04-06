@@ -1,0 +1,10 @@
+{
+    "pp": 25,
+    "isPhysical": false,
+    "effect": "Cutely begs to obtain an\nitem held by the foe. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 60,
+    "type": "normal",
+    "priority": 0
+}

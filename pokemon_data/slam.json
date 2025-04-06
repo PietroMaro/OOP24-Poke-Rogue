@@ -1,0 +1,10 @@
+{
+    "pp": 20,
+    "isPhysical": false,
+    "effect": "Slams the foe with\na tail, vine, etc. TODO Create effect and link it here",
+    "accuracy": 75,
+    "critRate": 0,
+    "baseDamage": 80,
+    "type": "normal",
+    "priority": 0
+}

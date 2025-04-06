@@ -1,0 +1,10 @@
+{
+    "pp": 5,
+    "isPhysical": false,
+    "effect": "Has a high criti­\ncal hit ratio. TODO Create effect and link it here",
+    "accuracy": 80,
+    "critRate": 1,
+    "baseDamage": 100,
+    "type": "fighting",
+    "priority": 0
+}

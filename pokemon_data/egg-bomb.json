@@ -1,0 +1,10 @@
+{
+    "pp": 10,
+    "isPhysical": false,
+    "effect": "Eggs are hurled at\nthe foe. TODO Create effect and link it here",
+    "accuracy": 75,
+    "critRate": 0,
+    "baseDamage": 100,
+    "type": "normal",
+    "priority": 0
+}

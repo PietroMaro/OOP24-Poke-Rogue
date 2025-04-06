@@ -1,0 +1,10 @@
+{
+    "pp": 30,
+    "isPhysical": false,
+    "effect": "A move that may\ncause paralysis. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 0,
+    "type": "normal",
+    "priority": 0
+}

@@ -1,0 +1,44 @@
+{
+    "pokedexNumber": 16,
+    "types": [
+        "normal",
+        "flying"
+    ],
+    "captureRate": 255,
+    "minLevelForEncounter": 1,
+    "stats": {
+        "special-attack": 35,
+        "defense": 40,
+        "attack": 45,
+        "hp": 40,
+        "special-defense": 35,
+        "speed": 56
+    },
+    "moves": {
+        "1": "tackle",
+        "13": "quick-attack",
+        "25": "wing-attack",
+        "47": "mirror-move",
+        "5": "sand-attack",
+        "39": "agility",
+        "19": "whirlwind",
+        "9": "gust",
+        "31": "feather-dance"
+    },
+    "growthRate": "medium-slow",
+    "name": "pidgey",
+    "weight": 18,
+    "abilites": [
+        "keen-eye",
+        "tangled-feet",
+        "big-pecks"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

@@ -1,0 +1,40 @@
+{
+    "pokedexNumber": 136,
+    "types": ["fire"],
+    "captureRate": 45,
+    "minLevelForEncounter": 1,
+    "stats": {
+        "special-attack": 95,
+        "defense": 60,
+        "attack": 130,
+        "hp": 65,
+        "special-defense": 110,
+        "speed": 65
+    },
+    "moves": {
+        "1": "helping-hand",
+        "23": "quick-attack",
+        "47": "leer",
+        "36": "fire-spin",
+        "16": "ember",
+        "8": "sand-attack",
+        "30": "bite",
+        "52": "flamethrower",
+        "42": "smog"
+    },
+    "growthRate": "medium",
+    "name": "flareon",
+    "weight": 250,
+    "abilites": [
+        "flash-fire",
+        "guts"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

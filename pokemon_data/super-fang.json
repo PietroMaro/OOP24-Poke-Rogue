@@ -1,0 +1,10 @@
+{
+    "pp": 10,
+    "isPhysical": false,
+    "effect": "Cuts the foe's HP\nby 1/2. TODO Create effect and link it here",
+    "accuracy": 90,
+    "critRate": 0,
+    "baseDamage": 0,
+    "type": "normal",
+    "priority": 0
+}

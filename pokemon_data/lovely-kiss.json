@@ -1,0 +1,10 @@
+{
+    "pp": 10,
+    "isPhysical": false,
+    "effect": "May cause the foe\nto fall asleep. TODO Create effect and link it here",
+    "accuracy": 75,
+    "critRate": 0,
+    "baseDamage": 0,
+    "type": "normal",
+    "priority": 0
+}

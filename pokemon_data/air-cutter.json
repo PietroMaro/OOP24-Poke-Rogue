@@ -1,0 +1,10 @@
+{
+    "pp": 25,
+    "isPhysical": false,
+    "effect": "Hacks with razorlike wind.\nHigh critical-hit ratio. TODO Create effect and link it here",
+    "accuracy": 95,
+    "critRate": 1,
+    "baseDamage": 60,
+    "type": "flying",
+    "priority": 0
+}

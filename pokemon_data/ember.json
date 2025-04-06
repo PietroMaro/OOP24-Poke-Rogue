@@ -1,0 +1,10 @@
+{
+    "pp": 25,
+    "isPhysical": false,
+    "effect": "The foe is attacked\nwith small flames.\nThe foe may suffer\na burn. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 40,
+    "type": "fire",
+    "priority": 0
+}

@@ -1,0 +1,10 @@
+{
+    "pp": 30,
+    "isPhysical": false,
+    "effect": "A double kicking\nattack. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 30,
+    "type": "fighting",
+    "priority": 0
+}

@@ -1,0 +1,10 @@
+{
+    "pp": 25,
+    "isPhysical": false,
+    "effect": "Whips the foe with\nslender vines. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 45,
+    "type": "grass",
+    "priority": 0
+}

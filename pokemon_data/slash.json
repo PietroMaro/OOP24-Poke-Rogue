@@ -1,0 +1,10 @@
+{
+    "pp": 20,
+    "isPhysical": false,
+    "effect": "Has a high criti­\ncal hit ratio. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 1,
+    "baseDamage": 70,
+    "type": "normal",
+    "priority": 0
+}

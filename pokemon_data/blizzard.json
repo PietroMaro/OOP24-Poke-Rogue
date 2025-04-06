@@ -1,0 +1,10 @@
+{
+    "pp": 5,
+    "isPhysical": false,
+    "effect": "An attack that may\nfreeze the foe. TODO Create effect and link it here",
+    "accuracy": 70,
+    "critRate": 0,
+    "baseDamage": 110,
+    "type": "ice",
+    "priority": 0
+}

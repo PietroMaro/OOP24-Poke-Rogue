@@ -1,0 +1,10 @@
+{
+    "pp": 10,
+    "isPhysical": false,
+    "effect": "Exhales a hot breath on the\nfoe. May inflict a burn. TODO Create effect and link it here",
+    "accuracy": 90,
+    "critRate": 0,
+    "baseDamage": 95,
+    "type": "fire",
+    "priority": 0
+}

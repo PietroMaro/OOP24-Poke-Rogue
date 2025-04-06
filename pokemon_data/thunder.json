@@ -1,0 +1,10 @@
+{
+    "pp": 10,
+    "isPhysical": false,
+    "effect": "An attack that may\ncause paralysis. TODO Create effect and link it here",
+    "accuracy": 70,
+    "critRate": 0,
+    "baseDamage": 110,
+    "type": "electric",
+    "priority": 0
+}

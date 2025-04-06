@@ -1,0 +1,10 @@
+{
+    "pp": 20,
+    "isPhysical": false,
+    "effect": "Sprays star-shaped rays\nthat never miss. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 60,
+    "type": "normal",
+    "priority": 0
+}

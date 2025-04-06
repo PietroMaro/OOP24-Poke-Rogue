@@ -1,0 +1,10 @@
+{
+    "pp": 15,
+    "isPhysical": false,
+    "effect": "An attack that may shock\nthe foe into flinching. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 30,
+    "type": "ghost",
+    "priority": 0
+}

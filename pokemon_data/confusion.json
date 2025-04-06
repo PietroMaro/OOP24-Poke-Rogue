@@ -1,0 +1,10 @@
+{
+    "pp": 25,
+    "isPhysical": false,
+    "effect": "The foe is hit by a\nweak telekinetic\nforce. It may also\nleave the foe\nconfused. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 50,
+    "type": "psychic",
+    "priority": 0
+}

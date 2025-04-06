@@ -1,0 +1,43 @@
+{
+    "pokedexNumber": 139,
+    "types": [
+        "rock",
+        "water"
+    ],
+    "captureRate": 45,
+    "minLevelForEncounter": 1,
+    "stats": {
+        "special-attack": 115,
+        "defense": 125,
+        "attack": 60,
+        "hp": 70,
+        "special-defense": 70,
+        "speed": 55
+    },
+    "moves": {
+        "55": "ancient-power",
+        "1": "constrict",
+        "46": "tickle",
+        "25": "mud-shot",
+        "37": "protect",
+        "40": "spike-cannon",
+        "31": "leer",
+        "65": "hydro-pump"
+    },
+    "growthRate": "medium",
+    "name": "omastar",
+    "weight": 350,
+    "abilites": [
+        "swift-swim",
+        "shell-armor",
+        "weak-armor"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

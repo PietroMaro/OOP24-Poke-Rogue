@@ -1,0 +1,41 @@
+{
+    "pokedexNumber": 32,
+    "types": ["poison"],
+    "captureRate": 235,
+    "minLevelForEncounter": 1,
+    "stats": {
+        "special-attack": 40,
+        "defense": 40,
+        "attack": 57,
+        "hp": 46,
+        "special-defense": 40,
+        "speed": 50
+    },
+    "moves": {
+        "12": "double-kick",
+        "1": "peck",
+        "23": "helping-hand",
+        "47": "horn-drill",
+        "38": "flatter",
+        "17": "poison-sting",
+        "8": "focus-energy",
+        "30": "fury-attack",
+        "20": "horn-attack"
+    },
+    "growthRate": "medium-slow",
+    "name": "nidoran-m",
+    "weight": 90,
+    "abilites": [
+        "poison-point",
+        "rivalry",
+        "hustle"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

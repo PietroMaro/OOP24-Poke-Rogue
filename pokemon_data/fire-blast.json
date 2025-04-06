@@ -1,0 +1,10 @@
+{
+    "pp": 5,
+    "isPhysical": false,
+    "effect": "An attack that\nmay cause a burn. TODO Create effect and link it here",
+    "accuracy": 85,
+    "critRate": 0,
+    "baseDamage": 110,
+    "type": "fire",
+    "priority": 0
+}

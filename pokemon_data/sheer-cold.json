@@ -1,0 +1,10 @@
+{
+    "pp": 5,
+    "isPhysical": false,
+    "effect": "A chilling attack that\ncauses fainting if it hits. TODO Create effect and link it here",
+    "accuracy": 30,
+    "critRate": 0,
+    "baseDamage": 0,
+    "type": "ice",
+    "priority": 0
+}

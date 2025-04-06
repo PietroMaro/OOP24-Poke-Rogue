@@ -1,0 +1,40 @@
+{
+    "pokedexNumber": 60,
+    "types": ["water"],
+    "captureRate": 255,
+    "minLevelForEncounter": 1,
+    "stats": {
+        "special-attack": 40,
+        "defense": 40,
+        "attack": 50,
+        "hp": 40,
+        "special-defense": 40,
+        "speed": 90
+    },
+    "moves": {
+        "1": "bubble",
+        "13": "water-gun",
+        "25": "rain-dance",
+        "37": "belly-drum",
+        "7": "hypnosis",
+        "19": "double-slap",
+        "31": "body-slam",
+        "43": "hydro-pump"
+    },
+    "growthRate": "medium-slow",
+    "name": "poliwag",
+    "weight": 124,
+    "abilites": [
+        "water-absorb",
+        "damp",
+        "swift-swim"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

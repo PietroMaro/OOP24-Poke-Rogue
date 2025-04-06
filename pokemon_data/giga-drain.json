@@ -1,0 +1,10 @@
+{
+    "pp": 10,
+    "isPhysical": false,
+    "effect": "Steals 1/2 of the\ndamage inflicted. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 75,
+    "type": "grass",
+    "priority": 0
+}

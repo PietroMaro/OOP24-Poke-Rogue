@@ -1,0 +1,46 @@
+{
+    "pokedexNumber": 95,
+    "types": [
+        "rock",
+        "ground"
+    ],
+    "captureRate": 45,
+    "minLevelForEncounter": 1,
+    "stats": {
+        "special-attack": 30,
+        "defense": 160,
+        "attack": 45,
+        "hp": 35,
+        "special-defense": 45,
+        "speed": 70
+    },
+    "moves": {
+        "1": "screech",
+        "56": "double-edge",
+        "12": "rock-throw",
+        "23": "rage",
+        "34": "sandstorm",
+        "45": "iron-tail",
+        "8": "bind",
+        "19": "harden",
+        "41": "slam",
+        "30": "dragon-breath",
+        "52": "sand-tomb"
+    },
+    "growthRate": "medium",
+    "name": "onix",
+    "weight": 2100,
+    "abilites": [
+        "rock-head",
+        "sturdy",
+        "weak-armor"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

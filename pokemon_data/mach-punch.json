@@ -1,0 +1,10 @@
+{
+    "pp": 30,
+    "isPhysical": false,
+    "effect": "A fast punch that\nlands first. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 40,
+    "type": "fighting",
+    "priority": 1
+}

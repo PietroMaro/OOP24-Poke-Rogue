@@ -1,0 +1,10 @@
+{
+    "pp": 20,
+    "isPhysical": false,
+    "effect": "Attacks with a strange leaf\nthat cannot be evaded. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 60,
+    "type": "grass",
+    "priority": 0
+}

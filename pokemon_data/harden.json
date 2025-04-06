@@ -1,0 +1,10 @@
+{
+    "pp": 30,
+    "isPhysical": false,
+    "effect": "Stiffens the body\u2019s \nmuscles to raise DEFENSE. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 0,
+    "type": "normal",
+    "priority": 0
+}

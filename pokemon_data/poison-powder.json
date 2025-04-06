@@ -1,0 +1,10 @@
+{
+    "pp": 35,
+    "isPhysical": false,
+    "effect": "A move that may\npoison the foe. TODO Create effect and link it here",
+    "accuracy": 75,
+    "critRate": 0,
+    "baseDamage": 0,
+    "type": "poison",
+    "priority": 0
+}

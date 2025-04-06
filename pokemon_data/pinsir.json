@@ -1,0 +1,41 @@
+{
+    "pokedexNumber": 127,
+    "types": ["bug"],
+    "captureRate": 45,
+    "minLevelForEncounter": 1,
+    "stats": {
+        "special-attack": 55,
+        "defense": 100,
+        "attack": 125,
+        "hp": 65,
+        "special-defense": 70,
+        "speed": 85
+    },
+    "moves": {
+        "1": "focus-energy",
+        "13": "seismic-toss",
+        "25": "revenge",
+        "37": "guillotine",
+        "49": "swords-dance",
+        "7": "bind",
+        "19": "harden",
+        "31": "brick-break",
+        "43": "submission"
+    },
+    "growthRate": "slow",
+    "name": "pinsir",
+    "weight": 550,
+    "abilites": [
+        "hyper-cutter",
+        "mold-breaker",
+        "moxie"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "pokedexNumber": 15,
+    "types": [
+        "bug",
+        "poison"
+    ],
+    "captureRate": 45,
+    "minLevelForEncounter": 1,
+    "stats": {
+        "special-attack": 45,
+        "defense": 40,
+        "attack": 90,
+        "hp": 65,
+        "special-defense": 80,
+        "speed": 75
+    },
+    "moves": {
+        "1": "fury-attack",
+        "45": "endeavor",
+        "35": "pin-missile",
+        "25": "rage",
+        "15": "focus-energy",
+        "40": "agility",
+        "30": "pursuit",
+        "20": "twineedle"
+    },
+    "growthRate": "medium",
+    "name": "beedrill",
+    "weight": 295,
+    "abilites": [
+        "swarm",
+        "sniper"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

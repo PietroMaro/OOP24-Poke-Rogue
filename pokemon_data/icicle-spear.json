@@ -1,0 +1,10 @@
+{
+    "pp": 30,
+    "isPhysical": false,
+    "effect": "Attacks the foe by firing\n2 to 5 icicles in a row. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 25,
+    "type": "ice",
+    "priority": 0
+}

@@ -1,0 +1,10 @@
+{
+    "pp": 20,
+    "isPhysical": false,
+    "effect": "An attack that al­\nso hurts the user. TODO Create effect and link it here",
+    "accuracy": 80,
+    "critRate": 0,
+    "baseDamage": 80,
+    "type": "fighting",
+    "priority": 0
+}

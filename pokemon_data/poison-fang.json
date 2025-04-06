@@ -1,0 +1,10 @@
+{
+    "pp": 15,
+    "isPhysical": false,
+    "effect": "A sharp-fanged attack.\nMay badly poison the foe. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 50,
+    "type": "poison",
+    "priority": 0
+}

@@ -1,0 +1,10 @@
+{
+    "pp": 15,
+    "isPhysical": false,
+    "effect": "Repeatedly punches\n2-5 times. TODO Create effect and link it here",
+    "accuracy": 85,
+    "critRate": 0,
+    "baseDamage": 18,
+    "type": "normal",
+    "priority": 0
+}

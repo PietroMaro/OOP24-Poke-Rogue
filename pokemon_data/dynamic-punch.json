@@ -1,0 +1,10 @@
+{
+    "pp": 5,
+    "isPhysical": false,
+    "effect": "An attack that\nalways confuses. TODO Create effect and link it here",
+    "accuracy": 50,
+    "critRate": 0,
+    "baseDamage": 100,
+    "type": "fighting",
+    "priority": 0
+}

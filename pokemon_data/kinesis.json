@@ -1,0 +1,10 @@
+{
+    "pp": 15,
+    "isPhysical": false,
+    "effect": "Reduces the foe's\naccuracy. TODO Create effect and link it here",
+    "accuracy": 80,
+    "critRate": 0,
+    "baseDamage": 0,
+    "type": "psychic",
+    "priority": 0
+}

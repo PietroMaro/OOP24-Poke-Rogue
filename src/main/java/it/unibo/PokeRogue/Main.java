@@ -9,7 +9,13 @@ import java.awt.Font;
 public class Main {
 	public static void main(String[] args) {
 
+		/*
+		NB : This code will erase and rewrite all pokemon in the range
+		and moves of those pokemon use at your own risk
+		(It will delete manually added data)
 		DataExtractor dataExtractor = new DataExtractorImpl("pokemon_data");
 		dataExtractor.extractPokemons(1,151);
+		dataExtractor.extractMoves();
+		*/
 	}
 }

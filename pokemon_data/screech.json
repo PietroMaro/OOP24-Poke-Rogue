@@ -1,0 +1,10 @@
+{
+    "pp": 40,
+    "isPhysical": false,
+    "effect": "Sharply reduces\nthe foe's DEFENSE. TODO Create effect and link it here",
+    "accuracy": 85,
+    "critRate": 0,
+    "baseDamage": 0,
+    "type": "normal",
+    "priority": 0
+}

@@ -1,0 +1,40 @@
+{
+    "pokedexNumber": 44,
+    "types": [
+        "grass",
+        "poison"
+    ],
+    "captureRate": 120,
+    "minLevelForEncounter": 1,
+    "stats": {
+        "special-attack": 85,
+        "defense": 70,
+        "attack": 65,
+        "hp": 60,
+        "special-defense": 75,
+        "speed": 40
+    },
+    "moves": {
+        "44": "petal-dance",
+        "1": "sweet-scent",
+        "24": "acid",
+        "35": "moonlight",
+        "16": "stun-spore",
+        "18": "sleep-powder"
+    },
+    "growthRate": "medium-slow",
+    "name": "gloom",
+    "weight": 86,
+    "abilites": [
+        "chlorophyll",
+        "stench"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

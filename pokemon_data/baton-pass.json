@@ -1,0 +1,10 @@
+{
+    "pp": 40,
+    "isPhysical": false,
+    "effect": "Switches while\nkeeping effects. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 0,
+    "type": "normal",
+    "priority": 0
+}

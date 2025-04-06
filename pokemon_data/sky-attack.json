@@ -1,0 +1,10 @@
+{
+    "pp": 5,
+    "isPhysical": false,
+    "effect": "1st turn: Prepare\n2nd turn: Attack TODO Create effect and link it here",
+    "accuracy": 90,
+    "critRate": 1,
+    "baseDamage": 140,
+    "type": "flying",
+    "priority": 0
+}

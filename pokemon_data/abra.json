@@ -1,0 +1,31 @@
+{
+    "pokedexNumber": 63,
+    "types": ["psychic"],
+    "captureRate": 200,
+    "minLevelForEncounter": 1,
+    "stats": {
+        "special-attack": 105,
+        "defense": 15,
+        "attack": 20,
+        "hp": 25,
+        "special-defense": 55,
+        "speed": 90
+    },
+    "moves": {"1": "teleport"},
+    "growthRate": "medium-slow",
+    "name": "abra",
+    "weight": 195,
+    "abilites": [
+        "synchronize",
+        "inner-focus",
+        "magic-guard"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

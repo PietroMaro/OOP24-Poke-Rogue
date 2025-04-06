@@ -1,0 +1,10 @@
+{
+    "pp": 10,
+    "isPhysical": false,
+    "effect": "1st turn: Burrow\n2nd turn: Attack TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 80,
+    "type": "ground",
+    "priority": 0
+}

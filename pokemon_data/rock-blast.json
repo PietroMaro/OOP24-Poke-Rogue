@@ -1,0 +1,10 @@
+{
+    "pp": 10,
+    "isPhysical": false,
+    "effect": "Hurls boulders at the foe\n2 to 5 times in a row. TODO Create effect and link it here",
+    "accuracy": 90,
+    "critRate": 0,
+    "baseDamage": 25,
+    "type": "rock",
+    "priority": 0
+}

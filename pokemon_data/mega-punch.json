@@ -1,0 +1,10 @@
+{
+    "pp": 20,
+    "isPhysical": false,
+    "effect": "A powerful punch\nthrown very hard. TODO Create effect and link it here",
+    "accuracy": 85,
+    "critRate": 0,
+    "baseDamage": 80,
+    "type": "normal",
+    "priority": 0
+}

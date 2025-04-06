@@ -1,0 +1,10 @@
+{
+    "pp": 10,
+    "isPhysical": false,
+    "effect": "A powerful charge\nattack. TODO Create effect and link it here",
+    "accuracy": 85,
+    "critRate": 0,
+    "baseDamage": 120,
+    "type": "bug",
+    "priority": 0
+}

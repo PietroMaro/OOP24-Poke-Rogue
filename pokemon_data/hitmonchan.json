@@ -1,0 +1,41 @@
+{
+    "pokedexNumber": 107,
+    "types": ["fighting"],
+    "captureRate": 45,
+    "minLevelForEncounter": 1,
+    "stats": {
+        "special-attack": 35,
+        "defense": 79,
+        "attack": 105,
+        "hp": 50,
+        "special-defense": 110,
+        "speed": 76
+    },
+    "moves": {
+        "44": "detect",
+        "1": "revenge",
+        "13": "pursuit",
+        "26": "thunder-punch",
+        "38": "mega-punch",
+        "7": "agility",
+        "50": "counter",
+        "20": "mach-punch",
+        "32": "sky-uppercut"
+    },
+    "growthRate": "medium",
+    "name": "hitmonchan",
+    "weight": 502,
+    "abilites": [
+        "keen-eye",
+        "iron-fist",
+        "inner-focus"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "pp": 15,
+    "isPhysical": false,
+    "effect": "An attack that may\nlower SPCL.DEF. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 80,
+    "type": "dark",
+    "priority": 0
+}

@@ -1,0 +1,10 @@
+{
+    "pp": 25,
+    "isPhysical": false,
+    "effect": "A sharp-edged leaf is\nlaunched to slash at\nthe foe. It has a\nhigh critical-hit\nratio. TODO Create effect and link it here",
+    "accuracy": 95,
+    "critRate": 1,
+    "baseDamage": 55,
+    "type": "grass",
+    "priority": 0
+}

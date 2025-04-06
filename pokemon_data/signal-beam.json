@@ -1,0 +1,10 @@
+{
+    "pp": 15,
+    "isPhysical": false,
+    "effect": "A strange beam attack that\nmay confuse the foe. TODO Create effect and link it here",
+    "accuracy": 100,
+    "critRate": 0,
+    "baseDamage": 75,
+    "type": "bug",
+    "priority": 0
+}
