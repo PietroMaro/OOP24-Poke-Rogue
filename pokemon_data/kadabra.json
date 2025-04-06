@@ -31,7 +31,7 @@
         "magic-guard"
     ],
     "givesEV": {
-        "special-attack": 0,
+        "special-attack": 2,
         "defense": 0,
         "attack": 0,
         "hp": 0,

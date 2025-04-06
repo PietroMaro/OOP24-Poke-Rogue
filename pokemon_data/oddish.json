@@ -32,7 +32,7 @@
         "run-away"
     ],
     "givesEV": {
-        "special-attack": 0,
+        "special-attack": 1,
         "defense": 0,
         "attack": 0,
         "hp": 0,

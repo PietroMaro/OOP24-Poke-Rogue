@@ -36,7 +36,7 @@
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
+        "special-defense": 2,
         "speed": 0
     }
 }
