@@ -119,7 +119,7 @@ public class PokemonImpl implements Pokemon {
 	private Range<Integer> level;
 	private String abilityName; // da scegliere dal json
 
-	public Pokemon(Map<String, Range<Integer>> EV, Map<String, Integer> IV, Map<String, Range<Integer>> BaseStats,
+	public PokemonImpl(Map<String, Range<Integer>> EV, Map<String, Integer> IV, Map<String, Range<Integer>> BaseStats,
 			Map<String, Range<Integer>> ActualStats,
 			String abilityName, Map<String, Move> actualMoves, int captureRate, String evIncreaseType,
 			Range<Integer> exp, String gender, String holdingObject, Range<Integer> level,

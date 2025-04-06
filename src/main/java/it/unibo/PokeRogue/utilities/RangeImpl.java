@@ -12,7 +12,7 @@ public class RangeImpl<T extends Comparable<T>> implements Range<T>{
 
 
 
-    public Range(T currentMin,T currentMax,T currentValue,BiFunction<T,T,T> incrementFunc,BiFunction<T,T,T> decrementFunc){
+    public RangeImpl(T currentMin,T currentMax,T currentValue,BiFunction<T,T,T> incrementFunc,BiFunction<T,T,T> decrementFunc){
 
         this.currentMin = currentMin;
         

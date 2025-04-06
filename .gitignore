@@ -5,6 +5,7 @@
 build/
 bin/
 scripts/
+pokemon_data/
 
 # Ignore Idea customizations
 .idea
