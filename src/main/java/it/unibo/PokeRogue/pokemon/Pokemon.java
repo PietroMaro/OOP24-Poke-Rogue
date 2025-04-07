@@ -20,6 +20,7 @@ public interface Pokemon {
 	int getStat(String statName);
 	List<Type> getTypes();
 	Map<String,Integer> getGivesEV();
+	String name();
 
 	//if exp+amount = max of the level it will trigger level up
 	void increaseExp(int amount,boolean isPlayerPokemon);

@@ -257,6 +257,11 @@ public final class PokemonImpl implements Pokemon {
 	}
 
 	@Override
+	public String name(){
+		return this.name;
+	}
+
+	@Override
 	public void increaseExp(int amount,boolean isPlayerPokemon){
 		this.exp.increment(amount);
 		if(this.exp.getCurrentValue() == this.exp.getCurrentMax()){

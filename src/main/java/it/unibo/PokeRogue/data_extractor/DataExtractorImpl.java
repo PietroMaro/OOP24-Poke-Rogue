@@ -1,4 +1,6 @@
 package it.unibo.PokeRogue;
+import it.unibo.PokeRogue.utilities.JsonReader;
+import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -9,12 +11,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 import java.util.Optional;
-import java.io.BufferedWriter;
-import java.io.BufferedReader;
-import java.nio.file.Path;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.nio.file.Path;
+
 
 public class DataExtractorImpl implements DataExtractor{
 	private String destinationFolder;
@@ -24,14 +23,15 @@ public class DataExtractorImpl implements DataExtractor{
 	private String movesListFilePath;
 	private JSONArray abilitiesList;
 	private String abilitiesListFilePath;
+	private JsonReader jsonReader = new JsonReaderImpl();
 	public DataExtractorImpl(String destionationFolder){
 		this.destinationFolder = destionationFolder; 
 		this.client = HttpClient.newHttpClient();
 		this.apiURL = "https://pokeapi.co/api/v2/";
 		this.movesListFilePath = this.destinationFolder+File.separator+"movesList.json";
-		this.movesList = new JSONArray(readJsonStringFromFile(this.movesListFilePath));
+		this.movesList = jsonReader.readJsonArray(this.movesListFilePath);
 		this.abilitiesListFilePath = this.destinationFolder+File.separator+"abilitiesList.json";
-		this.abilitiesList = new JSONArray(readJsonStringFromFile(this.abilitiesListFilePath));
+		this.abilitiesList = jsonReader.readJsonArray(this.abilitiesListFilePath);
 	}
 	@Override
 	public void extractPokemon(final int apiIndex){
@@ -117,7 +117,7 @@ public class DataExtractorImpl implements DataExtractor{
 			.put("captureRate",newPokemonCaptureRate)
 			.put("growthRate",newPokemonGrowthRate)
 			.put("givesEV",newPokemonGivesEV);
-		dumpJsonToFile(this.destinationFolder+File.separator+pokemonName+".json",newPokemonJSON);
+		jsonReader.dumpJsonToFile(this.destinationFolder+File.separator+pokemonName+".json",this.destinationFolder,newPokemonJSON);
 		System.out.println("Dumped "+pokemonName+"!");
 	}
 
@@ -140,7 +140,7 @@ public class DataExtractorImpl implements DataExtractor{
 			}
 		}
 		this.movesList.put(newMoveName);
-		dumpJsonToFile(this.movesListFilePath, this.movesList);
+		jsonReader.dumpJsonToFile(this.movesListFilePath,this.destinationFolder, this.movesList);
 	}
 	@Override
 	public void extractMove(final String toExtractMoveName){
@@ -182,7 +182,7 @@ public class DataExtractorImpl implements DataExtractor{
 			}
 		}
 		
-		dumpJsonToFile(this.destinationFolder+File.separator+moveName+".json",newMoveJSON);
+		jsonReader.dumpJsonToFile(this.destinationFolder+File.separator+moveName+".json",this.destinationFolder,newMoveJSON);
 		System.out.println("Dumped "+moveName+"!");
 	}
 
@@ -200,7 +200,7 @@ public class DataExtractorImpl implements DataExtractor{
 			}
 		}
 		this.abilitiesList.put(newAbilityName);
-		dumpJsonToFile(this.abilitiesListFilePath, this.abilitiesList);
+		jsonReader.dumpJsonToFile(this.abilitiesListFilePath,this.destinationFolder, this.abilitiesList);
 	}
 	@Override
 	public void setDestinationFolder(String newPath){
@@ -243,61 +243,4 @@ public class DataExtractorImpl implements DataExtractor{
 		return response;
 	}
 
-	private void dumpJsonToFile(final String filePath, final Object jsonFile){
-		if (!(jsonFile instanceof JSONArray) && !(jsonFile instanceof JSONObject)) {
-            throw new IllegalArgumentException("Object dumped must be JSONArray or JSONObject, but was: " + jsonFile.getClass().getName());
-        }
-		final File folder = new File(this.destinationFolder);
-		if(!folder.exists()){
-			folder.mkdirs();
-		}
-		try{
-			final BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-			if(jsonFile instanceof JSONArray){
-				writer.write(((JSONArray)jsonFile).toString(4));		
-			}
-			else if(jsonFile instanceof JSONObject){
-				writer.write(((JSONObject)jsonFile).toString(4));		
-			}
-			writer.close();
-		}
-		catch(IOException e){
-			e.printStackTrace();  
-    		System.out.println("An error occurred while dumping "+filePath);	
-			System.exit(1);
-		}
-	}
-
-	private String readJsonStringFromFile(final String filePath){
-		final File file = new File(filePath);
-		try{
-    	    if (!file.exists()) {
-    	        final boolean fileCreated = file.createNewFile();
-    	        final FileWriter writer = new FileWriter(file);
-    	        writer.write("[]");
-    	        writer.close();
-			}
-		}
-		catch(IOException e){
-			e.printStackTrace();  
-    		System.out.println("Failed to create file "+filePath);	
-			System.exit(1);
-		}
-
-    	final StringBuilder jsonContent = new StringBuilder();
-		try{
-			final BufferedReader reader = new BufferedReader(new FileReader(filePath));
-    	    String line;
-    	    while ((line = reader.readLine()) != null) {
-    	        jsonContent.append(line);
-    	    }
-    	    reader.close();
-		}
-		catch(IOException e){
-			e.printStackTrace();  
-    		System.out.println("Failed convert "+filePath+" to json");	
-			System.exit(1);
-		}
-		return jsonContent.toString();
-	}
 }

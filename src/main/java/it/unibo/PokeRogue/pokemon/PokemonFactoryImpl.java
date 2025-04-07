@@ -1,5 +1,8 @@
 package it.unibo.PokeRogue;
 
+import it.unibo.PokeRogue.utilities.JsonReader;
+import it.unibo.PokeRogue.utilities.JsonReaderImpl;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
@@ -19,66 +22,49 @@ import java.io.IOException;
 public class PokemonFactoryImpl extends SingletonImpl implements PokemonFactory{
 	
    	//make the access in memory and saves the information of all pokemon in local
+	final private JsonReader jsonReader = new JsonReaderImpl();
 	final private Random random = new Random();
 	final private Set<String> allPokemonSet = new HashSet<String>();
 	final private Map<String,PokemonBlueprint> pokemonBlueprints = new HashMap<String,PokemonBlueprint>();
 	@Override
     public void init(){
-		String allPokemonJsonString;
 		JSONArray allPokemonJson;
-		try{
-			allPokemonJsonString = new String(Files.readAllBytes(Paths.get("src","pokemon_data","pokemonList.json")));
-            allPokemonJson = new JSONArray(allPokemonJsonString);
-			for(int pokemonIndex = 0; pokemonIndex < allPokemonJson.length(); pokemonIndex +=1 ){
-				addPokemonToBlueprints(allPokemonJson.getString(pokemonIndex));
-			}
-		}
-		catch(IOException e){
-			e.printStackTrace();  
-    		System.out.println("Failed to read pokemonList.json");	
-			System.exit(1);
+		allPokemonJson = jsonReader.readJsonArray(Paths.get("src","pokemon_data","pokemonList.json").toString());
+		for(int pokemonIndex = 0; pokemonIndex < allPokemonJson.length(); pokemonIndex +=1 ){
+			addPokemonToBlueprints(allPokemonJson.getString(pokemonIndex));
 		}
 	}
 
 	private void addPokemonToBlueprints(final String pokemonName){
-		String pokemonJsonString;
 		JSONObject pokemonJson;
-		try{
-			pokemonJsonString = new String(Files.readAllBytes(Paths.get("src","pokemon_data","pokemon","data",pokemonName+".json")));
-            pokemonJson = new JSONObject(pokemonJsonString);
-			int pokedexNumber = pokemonJson.getInt("pokedexNumber");
-			List<String> types = jsonArrayToList(pokemonJson.getJSONArray("types"));
-			int captureRate = pokemonJson.getInt("captureRate");
-			int minLevelForEncounter = pokemonJson.getInt("minLevelForEncounter");
-			Map<String,Integer> stats = jsonObjectToMap(pokemonJson.getJSONObject("stats"));
-			Map<String,String> learnableMoves = jsonObjectToMap(pokemonJson.getJSONObject("moves"));
-			String growthRate = pokemonJson.getString("growthRate");
-			String name = pokemonJson.getString("name");
-			int weight = pokemonJson.getInt("weight");
-			List<String> possibleAbilities = jsonArrayToList(pokemonJson.getJSONArray("abilites"));
-			Map<String,Integer> givesEV = jsonObjectToMap(pokemonJson.getJSONObject("givesEV"));
+        pokemonJson = jsonReader.readJsonObject(Paths.get("src","pokemon_data","pokemon","data",pokemonName+".json").toString());
+		int pokedexNumber = pokemonJson.getInt("pokedexNumber");
+		List<String> types = jsonArrayToList(pokemonJson.getJSONArray("types"));
+		int captureRate = pokemonJson.getInt("captureRate");
+		int minLevelForEncounter = pokemonJson.getInt("minLevelForEncounter");
+		Map<String,Integer> stats = jsonObjectToMap(pokemonJson.getJSONObject("stats"));
+		Map<String,String> learnableMoves = jsonObjectToMap(pokemonJson.getJSONObject("moves"));
+		String growthRate = pokemonJson.getString("growthRate");
+		String name = pokemonJson.getString("name");
+		int weight = pokemonJson.getInt("weight");
+		List<String> possibleAbilities = jsonArrayToList(pokemonJson.getJSONArray("abilites"));
+		Map<String,Integer> givesEV = jsonObjectToMap(pokemonJson.getJSONObject("givesEV"));
 
-			final PokemonBlueprint newPokemon = new PokemonBlueprint(
-				pokedexNumber,
-				types,	
-				captureRate,
-				minLevelForEncounter,
-				stats,
-				learnableMoves,
-				growthRate,
-				name,
-				weight,
-				possibleAbilities,
-				givesEV);
+		final PokemonBlueprint newPokemon = new PokemonBlueprint(
+			pokedexNumber,
+			types,	
+			captureRate,
+			minLevelForEncounter,
+			stats,
+			learnableMoves,
+			growthRate,
+			name,
+			weight,
+			possibleAbilities,
+			givesEV);
 
-			this.pokemonBlueprints.put(pokemonName,newPokemon);
-			this.allPokemonSet.add(pokemonName);
-		}
-		catch(IOException e){
-			e.printStackTrace();  
-    		System.out.println("Failed to read pokemonList.json");	
-			System.exit(1);
-		}
+		this.pokemonBlueprints.put(pokemonName,newPokemon);
+		this.allPokemonSet.add(pokemonName);
 	}
 
 	@Override
