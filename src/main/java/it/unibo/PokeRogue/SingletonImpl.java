@@ -1,21 +1,23 @@
 package it.unibo.PokeRogue;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
 
 public class SingletonImpl implements Singleton {
-    private static  SingletonImpl instance = null;
+    private static Optional<SingletonImpl> instance = Optional.empty();
 
 
     public static <T extends SingletonImpl> T getInstance(Class<T> newClass) {
-        if (instance == null) {
+        if (instance.isEmpty()) {
              try {
-                // Creiamo l'istanza usando riflessione
-                instance = newClass.getDeclaredConstructor().newInstance();
+
+                instance = Optional.of(newClass.getDeclaredConstructor().newInstance());
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                throw new RuntimeException("Errore durante la creazione dell'istanza", e);
+                throw new RuntimeException("Error while creating the instance", e);
             }
         }
-        return (T) instance;
+        
+        return newClass.cast(instance.get());
     }
 
     public SingletonImpl() {

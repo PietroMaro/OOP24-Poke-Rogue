@@ -44,10 +44,9 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
 
 
     public void keyPressedToScene(int keyCode){
-        //lo passano alla scena e poi fanno una return per i test
 
 
-       
+       System.out.println(keyCode);
         
     }
 
