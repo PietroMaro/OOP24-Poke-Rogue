@@ -22,6 +22,7 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
      * The saving system instance used for saving and loading game progress.
      */
     SavingSystem savingSystemIstance;
+
     
 	public GameEngineImpl(){}
 
@@ -34,7 +35,19 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
      * @param newScene the name of the new scene to load
      */
     @Override
-    public void setScene(String newScene) {      
+    public void setScene(String newScene) {   
+        
+        
+    }
+
+
+
+
+    public void keyPressedToScene(int keyCode){
+        //lo passano alla scena e poi fanno una return per i test
+
+
+       
         
     }
 

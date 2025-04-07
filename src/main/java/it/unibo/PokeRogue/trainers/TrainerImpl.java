@@ -1,8 +1,10 @@
-package it.unibo.PokeRogue;
+package it.unibo.PokeRogue.trainers;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
+
+import it.unibo.PokeRogue.Pokemon;
 
 public class TrainerImpl implements Trainer {
     private List<Optional<Pokemon>> pokemonSquad;

@@ -1,7 +1,9 @@
-package it.unibo.PokeRogue;
+package it.unibo.PokeRogue.trainers;
 
 import java.util.List;
 import java.util.Optional;
+
+import it.unibo.PokeRogue.Pokemon;
 
 public interface Trainer {
 

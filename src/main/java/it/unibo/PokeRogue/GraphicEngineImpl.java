@@ -12,6 +12,7 @@ import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
+import it.unibo.PokeRogue.inputHandling.InputHandlerImpl;
 
 /**
  * Implementation of the {@link GraphicEngine} interface.
@@ -28,12 +29,13 @@ public class GraphicEngineImpl extends SingletonImpl implements GraphicEngine {
     Map<String, PanelElementImpl> allPanelElements;
 
     public GraphicEngineImpl() {
-        gameWindow = new JFrame("Pokérogue Lite");
-        gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameWindow.setResizable(true);
-        gameWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        gameWindow.setLayout(new GridLayout());
-        gameWindow.setVisible(true);
+        this.gameWindow = new JFrame("Pokérogue Lite");
+        this.gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.gameWindow.setResizable(true);
+        this.gameWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.gameWindow.setLayout(new GridLayout());
+        this.gameWindow.addKeyListener(new InputHandlerImpl());
+        this.gameWindow.setVisible(true);
 
     }
 

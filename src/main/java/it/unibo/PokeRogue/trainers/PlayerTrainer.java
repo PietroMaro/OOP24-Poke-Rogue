@@ -1,5 +1,7 @@
-package it.unibo.PokeRogue;
+package it.unibo.PokeRogue.trainers;
 import java.util.Optional;
+
+import it.unibo.PokeRogue.Singleton;
 
 /**
  * Interface representing the player trainer in the game.

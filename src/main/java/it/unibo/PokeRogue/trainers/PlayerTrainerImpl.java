@@ -1,6 +1,8 @@
-package it.unibo.PokeRogue;
+package it.unibo.PokeRogue.trainers;
 
 import java.util.Optional;
+
+import it.unibo.PokeRogue.Singleton;
 
 /**
  * Implementation of the {@link PlayerTrainer} interface.
@@ -23,7 +25,9 @@ public class PlayerTrainerImpl extends TrainerImpl implements PlayerTrainer {
      * 
      * @return an {@link Optional} containing the singleton instance of {@code PlayerTrainerImpl}.
      */
-	@Override
+	
+    
+     @Override
     public Optional<Singleton> getInstance() {
         if (wrapperTrainer.isEmpty()) {
             instanceOfTrainer = Optional.of(new TrainerImpl());
