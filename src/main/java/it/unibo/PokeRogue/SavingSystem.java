@@ -1,6 +1,5 @@
 package it.unibo.PokeRogue;
 
-import it.unibo.PokeRogue.PokemonUtilities.Pokemon;
 import java.util.ArrayList;
 import java.util.HashMap;
 

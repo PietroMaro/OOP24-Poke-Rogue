@@ -1,5 +1,6 @@
-package it.unibo.PokeRogue.PokemonUtilities;
+package it.unibo.PokeRogue;
 
+import it.unibo.PokeRogue.utilities.Range;
 public class Move {
     private Boolean physical;
     private Enum type;

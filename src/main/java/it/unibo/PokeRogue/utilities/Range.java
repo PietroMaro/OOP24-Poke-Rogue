@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.PokemonUtilities;
+package it.unibo.PokeRogue.utilities;
 
 public interface Range<T> {
 

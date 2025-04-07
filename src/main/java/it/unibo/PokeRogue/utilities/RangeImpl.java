@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.PokemonUtilities;
+package it.unibo.PokeRogue.utilities;
 
 import java.util.function.BiFunction;
 

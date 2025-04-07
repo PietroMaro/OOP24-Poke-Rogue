@@ -1,377 +1,275 @@
-package it.unibo.PokeRogue.PokemonUtilities;
+package it.unibo.PokeRogue;
 
+import it.unibo.PokeRogue.utilities.Range;
+import it.unibo.PokeRogue.utilities.RangeImpl;
+import java.util.Optional;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.Random;
 
-public class PokemonImpl implements Pokemon {
-	private Random random = new Random();
-	String[] statNames = { "HP", "Attack", "Defense", "SpAttack", "SpDefense", "Speed" };
-	private Map<String, Range<Integer>> BaseStats;
-	private Map<String, Range<Integer>> ActualStats;
+public final class PokemonImpl implements Pokemon {
+	final private Random random = new Random();
+	final private List<String> statNames = new ArrayList<>(Arrays.asList("hp", "attack", "defense", "special-attack", "special-defense", "speed"));
 	private int totalUsedEV = 0;
-	private Map<String, Range<Integer>> EV; // 0-255 the pokemon can have a total of 510 
+	
+	private Map<String, Integer> baseStats;
+	private Nature nature;
 	private Map<String, Integer> IV; // 0-31 random when spawned 
-	private Map<String, Move> actualMoves;
-	private Map<Integer, Move> levelMovesLearn;
-	private String levelUpcurve; // definied by a name,
-									// https://m.bulbapedia.bulbagarden.net/wiki/Experience#Medium_Fast
-	private String evIncreaseType; 
+	private Map<String, Range<Integer>> EV; // 0-255 the pokemon can have a total of 510 
+	private Range<Integer> level;
+	private Map<String, Range<Integer>> actualStats;
+	private Map<Integer, String> levelMovesLearn;
+	private List<String> actualMoves = new ArrayList<String>(); 
+	private String levelUpCurve; //https://m.bulbapedia.bulbagarden.net/wiki/Experience
+	private Map<String,Integer> givesEV; 
 	private Range<Integer> exp;
 	private int pokedexNumber;
-	private int totEV;
 	private int weight; 
 	private String name; 
+	private Type type1; 
+	private Optional<Type> type2; 
+	private int captureRate; 
+	private String gender; 
+	private Optional<String> holdingObject; 
+	private String abilityName; 
+	private Optional<StatusCondition> statusCondition;
 
-	public enum Nature {
-		ADAMANT("Attack", "SpecialAttack"),
-		BASHFUL("SpecialAttack", "SpecialAttack"),
-		BOLD("Defense", "Attack"),
-		BRAVE("Attack", "Speed"),
-		CALM("SpecialDefense", "Attack"),
-		CAREFUL("SpecialDefense", "SpecialAttack"),
-		DOCILE("Defense", "Defense"),
-		GENTLE("SpecialDefense", "Defense"),
-		HARDY("Attack", "Attack"),
-		HASTY("Speed", "Defense"),
-		IMPISH("Defense", "SpecialAttack"),
-		JOLLY("Speed", "SpecialAttack"),
-		LAX("Defense", "SpecialDefense"),
-		LONELY("Attack", "Defense"),
-		MILD("SpecialAttack", "Defense"),
-		MODEST("SpecialAttack", "Attack"),
-		NAIVE("Speed", "SpecialDefense"),
-		NAUGHTY("Attack", "SpecialDefense"),
-		QUIET("SpecialAttack", "Speed"),
-		QUIRKY("SpecialDefense", "SpecialDefense"),
-		RASH("SpecialAttack", "SpecialDefense"),
-		RELAXED("Defense", "Speed"),
-		SASSY("SpecialDefense", "Speed"),
-		SERIOUS("Speed", "Speed"),
-		TIMID("Speed", "Attack");
+	private boolean hasToLearnMove = false;
+	private Optional<String> newMoveToLearn = Optional.empty(); 
 
-		private final String statIncrease; // Statistica che aumenta
-		private final String statDecrease; // Statistica che diminuisce
+	public PokemonImpl(final PokemonBlueprint pokemonBlueprint){
+		this.baseStats = pokemonBlueprint.stats();	
+		generateIVs();
+		generateEVs();
+		this.nature = Nature.getRandomNature();
+		this.level = new RangeImpl<Integer>(1,100,1, (x, y) -> x + y, (x, y) -> x - y);
+		calculateActualStats();
+		initLevelMovesLearn(pokemonBlueprint.learnableMoves());
+		initActualMoves();
+		this.levelUpCurve = pokemonBlueprint.growthRate();
+		this.givesEV = pokemonBlueprint.givesEV(); 
+		calculateNewExpRange();
+		this.pokedexNumber = pokemonBlueprint.pokedexNumber();
+		this.weight = pokemonBlueprint.weight();
+		this.name = pokemonBlueprint.name();
+		initTypes(pokemonBlueprint.types());
+		this.captureRate = pokemonBlueprint.captureRate();
+		initGender();
+		this.holdingObject = Optional.empty();
+		initAbility(pokemonBlueprint.possibleAbilities());
+		this.statusCondition = Optional.empty();
+	}
 
-		// Costruttore per inizializzare i campi
-		Nature(String statIncrease, String statDecrease) {
-			this.statIncrease = statIncrease;
-			this.statDecrease = statDecrease;
-
+	private void generateIVs() {
+		this.IV = new HashMap<String, Integer>();
+		for (String stat : statNames) { 
+			this.IV.put(stat, random.nextInt(32)); // IV tra 0 e 31
 		}
 	}
 
-	public enum Type {
-		BUG, DARK, DRAGON, ELECTRIC, FAIRY, FIGHT, FIRE, FLYING, GHOST, GRASS, GROUND, ICE, NORMAL, POISON, PSYCHC,
-		ROCK, STELL, WATER;
+	private void generateEVs() {
+		this.EV = new HashMap<String, Range<Integer>>();
+		for (String stat : statNames) {
+			this.EV.put(stat, new RangeImpl<>(0, 252, 0, (x, y) -> x + y, (x, y) -> x - y));
+		}
+	}
 
-		// Metodo che ritorna una stringa che descrive il tipo (utilizzo opzionale)
-		@Override
-		public String toString() {
-			switch (this) {
-				case BUG:
-					return "Bug";
-				case DARK:
-					return "Dark";
-				case DRAGON:
-					return "Dragon";
-				case ELECTRIC:
-					return "Electric";
-				case FAIRY:
-					return "Fairy";
-				case FIGHT:
-					return "Fight";
-				case FIRE:
-					return "Fire";
-				case FLYING:
-					return "Flying";
-				case GHOST:
-					return "Ghost";
-				case GRASS:
-					return "Grass";
-				case GROUND:
-					return "Ground";
-				case ICE:
-					return "Ice";
-				case NORMAL:
-					return "Normal";
-				case POISON:
-					return "Poison";
-				case PSYCHC:
-					return "Psychc";
-				case ROCK:
-					return "Rock";
-				case STELL:
-					return "Steel";
-				case WATER:
-					return "Water";
-				default:
-					return super.toString();
+	private void initGender(){
+		if(random.nextInt(2) == 1){
+			this.gender = "male";
+		}
+		else{
+			this.gender = "female";
+		}
+	}
+
+	private void initAbility(List<String> possibleAbilities){
+		this.abilityName = possibleAbilities.get(random.nextInt(possibleAbilities.size()));
+	}
+
+	private void initTypes(List<String> types){
+		this.type1 = Type.fromString(types.get(0));	
+		this.type2 = Optional.empty();
+		if(types.size() > 1){
+			this.type2 = Optional.of(Type.fromString(types.get(1)));
+		}
+	}
+
+	private void initLevelMovesLearn(Map<String,String> learnableMoves){
+		this.levelMovesLearn = new HashMap<Integer,String>();
+		for(String key : learnableMoves.keySet()){
+			this.levelMovesLearn.put(Integer.parseInt(key),learnableMoves.get(key));
+		}
+	}
+
+	private void initActualMoves(){
+		for(int key : this.levelMovesLearn.keySet()){
+			if(key == 1){
+				this.actualMoves.add(this.levelMovesLearn.get(key));
 			}
 		}
 	}
+			
 
-	private Nature nature;
-	private Type type1; // specifico
-	private Type type2; // specifico
-	private int captureRate; // specifico
-	private String gender; // generato a caso
-	private String holdingObject; // riferimento allogetto PokeObject nel json
-	private Range<Integer> level;
-	private String abilityName; // da scegliere dal json
+	private void calculateActualStats() {
+		actualStats = new HashMap<String, Range<Integer>>();
 
-	public PokemonImpl(Map<String, Range<Integer>> EV, Map<String, Integer> IV, Map<String, Range<Integer>> BaseStats,
-			Map<String, Range<Integer>> ActualStats,
-			String abilityName, Map<String, Move> actualMoves, int captureRate, String evIncreaseType,
-			Range<Integer> exp, String gender, String holdingObject, Range<Integer> level,
-			Map<Integer, Move> levelMovesLearn, String levelUpcurve, String name, String nature, int pokedexNumber,
-			String type1, String type2, int weight) {
-		this.EV = generateEVs();
-		this.IV = generateIVs();
-		this.BaseStats = BaseStats;
-		this.ActualStats = ActualStats;
-		this.abilityName = abilityName;
-		this.actualMoves = actualMoves;
-		this.captureRate = captureRate;
-		this.evIncreaseType = evIncreaseType;
-		this.exp = exp;
-		this.gender = gender;
-		this.holdingObject = holdingObject;
-		this.level = level;
-		this.levelMovesLearn = levelMovesLearn;
-		this.levelUpcurve = levelUpcurve;
-		this.name = name;
-		this.nature = Nature.valueOf(nature);
-		this.pokedexNumber = pokedexNumber;
-		this.type1 = Type.valueOf(type1);
-		this.type2 = Type.valueOf(type2);
-		this.weight = weight;
-	}
-
-	private Map<String, Integer> generateIVs() {
-		for (String stat : statNames) {
-			IV.put(stat, random.nextInt(32)); // IV tra 0 e 31
-
-		}
-		return IV;
-	}
-
-	private Map<String, Range<Integer>> generateEVs() {
-		for (String stat : statNames) {
-			EV.put(stat, new RangeImpl<>(0, 252, 0, (x, y) -> x + y, (x, y) -> x - y));
-
-		}
-
-		return EV;
-	}
-
-	private void evIncrease(String evName) {
-		if (totalUsedEV < 510) {
-
-			totalUsedEV += 1;
-			EV.get(evName).increment(1);
-
-		}
-
-	}
-
-	private void calculateRealStats() {
-		
-		int maxLife = (int) Math.floor(((2 * this.BaseStats.get("HP").getCurrentMax()
-		+ this.IV.get("HP") 
-		+ (this.EV.get("HP").getCurrentValue() / 4)) * this.level.getCurrentValue()) / 100)
+		int maxLife = (int) Math.floor(((2 * this.baseStats.get("hp") + this.IV.get("hp") 
+		+ (this.EV.get("hp").getCurrentValue() / 4)) * this.level.getCurrentValue()) / 100)
 		+ this.level.getCurrentValue() + 10;
 
-		Range<Integer> rangeHP = new RangeImpl<Integer>(0,maxLife,maxLife,(x, y) -> x + y, (x, y) -> x - y);
+		Range<Integer> rangeHp = new RangeImpl<Integer>(0,maxLife,maxLife,(x, y) -> x + y, (x, y) -> x - y);
 		
-		ActualStats.put("HP",rangeHP);
+		actualStats.put("hp",rangeHp);
 	
 		
 		for (String stat : statNames) {
-			double statValue = (Math.floor(((2 * BaseStats.get(stat).getCurrentValue() + IV.get(stat) + (EV.get(stat).getCurrentValue() / 4)) * level.getCurrentValue()) / 100)) + 5;
-	
-			
-			switch (nature) {
-				case ADAMANT:
-					if (stat.equals("Attack")) {
-						statValue *= 1.10; 
-					} else if (stat.equals("SpecialAttack")) {
-						statValue *= 0.90; 
-					}
-					break;
-				case BOLD:
-					if (stat.equals("Defense")) {
-						statValue *= 1.10;
-					} else if (stat.equals("Attack")) {
-						statValue *= 0.90; 
-					}
-					break;
-				case BRAVE:
-					if (stat.equals("Attack")) {
-						statValue *= 1.10; 
-					} else if (stat.equals("Speed")) {
-						statValue *= 0.90; 
-					}
-					break;
-				case CALM:
-					if (stat.equals("SpecialDefense")) {
-						statValue *= 1.10; 
-					} else if (stat.equals("Attack")) {
-						statValue *= 0.90; 
-					}
-					break;
-				case CAREFUL:
-					if (stat.equals("SpecialDefense")) {
-						statValue *= 1.10; 
-					} else if (stat.equals("SpecialAttack")) {
-						statValue *= 0.90; 
-					}
-					break;
-				case GENTLE:
-					if (stat.equals("SpecialDefense")) {
-						statValue *= 1.10; 
-					} else if (stat.equals("Defense")) {
-						statValue *= 0.90;
-					}
-					break;
-				case HASTY:
-					if (stat.equals("Speed")) {
-						statValue *= 1.10;
-					} else if (stat.equals("Defense")) {
-						statValue *= 0.90; 
-					}
-					break;
-				case IMPISH:
-					if (stat.equals("Defense")) {
-						statValue *= 1.10; 
-					} else if (stat.equals("SpecialAttack")) {
-						statValue *= 0.90; 
-					}
-					break;
-				case JOLLY:
-					if (stat.equals("Speed")) {
-						statValue *= 1.10; 
-					} else if (stat.equals("SpecialAttack")) {
-						statValue *= 0.90; 
-					}
-					break;
-				case LAX:
-					if (stat.equals("Defense")) {
-						statValue *= 1.10; 
-					} else if (stat.equals("SpecialDefense")) {
-						statValue *= 0.90;
-					}
-					break;
-				case LONELY:
-					if (stat.equals("Attack")) {
-						statValue *= 1.10; 
-					} else if (stat.equals("Defense")) {
-						statValue *= 0.90; 
-					}
-					break;
-				case MILD:
-					if (stat.equals("SpecialAttack")) {
-						statValue *= 1.10; 
-					} else if (stat.equals("Defense")) {
-						statValue *= 0.90; 
-					}
-					break;
-				case MODEST:
-					if (stat.equals("SpecialAttack")) {
-						statValue *= 1.10; 
-					} else if (stat.equals("Attack")) {
-						statValue *= 0.90; 
-					}
-					break;
-				case NAIVE:
-					if (stat.equals("Speed")) {
-						statValue *= 1.10;
-					} else if (stat.equals("SpecialDefense")) {
-						statValue *= 0.90; 
-					}
-					break;
-				case NAUGHTY:
-					if (stat.equals("Attack")) {
-						statValue *= 1.10; 
-					} else if (stat.equals("SpecialDefense")) {
-						statValue *= 0.90; 
-					}
-					break;
-				case QUIET:
-					if (stat.equals("SpecialAttack")) {
-						statValue *= 1.10; 
-					} else if (stat.equals("Speed")) {
-						statValue *= 0.90; 
-					}
-					break;
-				case RASH:
-					if (stat.equals("SpecialAttack")) {
-						statValue *= 1.10; 
-					} else if (stat.equals("SpecialDefense")) {
-						statValue *= 0.90; 
-					}
-					break;
-				case RELAXED:
-					if (stat.equals("Defense")) {
-						statValue *= 1.10; 
-					} else if (stat.equals("Speed")) {
-						statValue *= 0.90; 
-					}
-					break;
-				case SASSY:
-					if (stat.equals("SpecialDefense")) {
-						statValue *= 1.10; 
-					} else if (stat.equals("Speed")) {
-						statValue *= 0.90; 
-					}
-					break;
-				case TIMID:
-					if (stat.equals("Speed")) {
-						statValue *= 1.10; 
-					} else if (stat.equals("Attack")) {
-						statValue *= 0.90; 
-					}
-					break;
+
+			int statValue = (int) Math.round(
+                Math.floor(
+                    ((2 * baseStats.get(stat) + IV.get(stat) + (double) EV.get(stat).getCurrentValue() / 4) * level.getCurrentValue()) / 100.0)
+                ) + 5;
+
+			if(Nature.checkStatIncrease(this.nature,stat)){
+				statValue*=1.1;
 			}
-	
-			// Aggiorna la statistica attuale
-			if (stat.equals("Attack")) {
-				Range<Integer> range = ActualStats.get("Attack");
-				range.setCurrentValue((int) statValue);
-			} else if (stat.equals("SpAttack")) {
-				Range<Integer> range = ActualStats.get("SpAttack");
-				range.setCurrentValue((int) statValue);
-			} else if (stat.equals("Defense")) {
-				Range<Integer> range = ActualStats.get("Deffense");
-				range.setCurrentValue((int) statValue);
-			} else if (stat.equals("SpDefense")) {
-				Range<Integer> range = ActualStats.get("SpDefense");
-				range.setCurrentValue((int) statValue);
-			} else if (stat.equals("Speed")) {
-				Range<Integer> range = ActualStats.get("Speed");
-				range.setCurrentValue((int) statValue);
+			else if(Nature.checkStatDecrease(this.nature,stat)){
+				statValue*=0.9;
 			}
+
+			Range<Integer> rangeStat = new RangeImpl<Integer>(0,255,statValue,(x, y) -> x + y, (x, y) -> x - y);
+			actualStats.put(stat,rangeStat);
 		}
+		
 	}
 
+	private void calculateNewExpRange(){
+		int newRequiredExp = 0;
+		int currentLevel = this.level.getCurrentValue();
+		if(this.levelUpCurve == "fast"){
+			newRequiredExp = (int)((4*Math.pow(currentLevel,3))/5);
+		}
+		else if(this.levelUpCurve == "medium"){
+			newRequiredExp = (int)Math.pow(currentLevel,3);
+		}
+		else if(this.levelUpCurve == "medium-slow"){
+			newRequiredExp = (int)( (6/5*Math.pow(currentLevel,3)) - 15*Math.pow(currentLevel,2) + 100*currentLevel - 140 );
+		}
+		else if(this.levelUpCurve == "slow"){
+			newRequiredExp = (int)((5*Math.pow(currentLevel,3))/4);
+		}
+		this.exp = new RangeImpl<Integer>(0,newRequiredExp ,0,(x, y) -> x + y, (x, y) -> x - y);
+	}
 
-	//When a Pokémon grows a level, its stats will increase. For each level gained (ignoring Nature),
-	//stats will increase by 1/50 the base stat value, and 1/100 the combined IV and EV
-
-	//l'aumento di exp che serve usa queste formule https://bulbapedia.bulbagarden.net/wiki/Experience#Fluctuating
-	public void levelUpStats() {
-		//da implementare il reset di exp e il cambio di exp max
-		int levelUp = level.getCurrentValue() + 1;
-		level.setCurrentValue(levelUp);
+	private void levelUpStats() {
 		for (String stat : statNames) {
-			int base = BaseStats.get(stat).getCurrentMax();
+			int base = baseStats.get(stat);
 			int iv = IV.get(stat);
 			int ev = EV.get(stat).getCurrentValue();
 	
 			int increase = (int) Math.floor(base / 50.0 + (iv + ev) / 100.0);
 	
-			Range<Integer> actualStat = ActualStats.get(stat);
+			Range<Integer> actualStat = actualStats.get(stat);
 			actualStat.increment(increase);  
 		}
 	}
 
+	
+	@Override
+	public void levelUp(boolean isPlayerPokemon){
+		this.level.increment(1);		
+		levelUpStats();	
+		calculateNewExpRange();
+
+		if(this.levelMovesLearn.keySet().contains(this.level.getCurrentValue())){
+			String moveToLearn = this.levelMovesLearn.get(this.level.getCurrentValue());
+			if(this.actualMoves.size() < 4){
+				this.actualMoves.add(moveToLearn);	
+			}
+			else{
+				if(!isPlayerPokemon){
+					this.actualMoves.set(random.nextInt(4),moveToLearn);
+				}	
+				else{
+					this.hasToLearnMove = true;
+					this.newMoveToLearn = Optional.of(moveToLearn);
+				}
+			}
+		}
+	}
+
+	@Override
+	public boolean hasToLearnMove(){
+		return this.hasToLearnMove;
+	}
+
+	@Override
+	public void learnNewMove(Optional<Integer> indexMoveToReplace){
+		if(!(this.hasToLearnMove && !this.newMoveToLearn.isEmpty())){
+			throw new UnsupportedOperationException("The pokemon "+this.name+" doesn't have to learn a move");	
+		}
+		if(!indexMoveToReplace.isEmpty()){
+			this.actualMoves.set(indexMoveToReplace.get(),this.newMoveToLearn.get());
+		}
+		this.hasToLearnMove = false;
+		this.newMoveToLearn = Optional.empty();
+	}
+
+	@Override
+	public void inflictDamage(int amount){
+		this.actualStats.get("hp").decrement(amount);
+	}
+
+	@Override
+	public Optional<StatusCondition> statusCondition(){
+		return this.statusCondition;
+	}
+
+	@Override
+	public void setStatusCondition(String newStatus){
+		this.statusCondition = Optional.of(StatusCondition.fromString(newStatus));
+	}
+
+	@Override
+	public int getStat(String statName){
+		if(!this.statNames.contains(statName)){
+			throw new UnsupportedOperationException(statName+" is not a legal stats");
+		}
+		return this.actualStats.get(statName).getCurrentValue();
+	}
+
+	@Override
+	public List<Type> getTypes(){
+		List<Type> result = new ArrayList<Type>();		
+		result.add(this.type1);
+		if(!this.type2.isEmpty()){
+			result.add(this.type2.get());
+		}
+		return result;
+	}
+	
+	@Override
+	public Map<String,Integer> getGivesEV(){
+		return this.givesEV;
+	}
+
+	@Override
+	public void increaseExp(int amount,boolean isPlayerPokemon){
+		this.exp.increment(amount);
+		if(this.exp.getCurrentValue() == this.exp.getCurrentMax()){
+			levelUp(isPlayerPokemon);
+		}
+	}
+
+	@Override
+	public void increaseEV(Map<String,Integer> increaseEV){
+		for(String key : increaseEV.keySet()){
+			if(this.totalUsedEV + increaseEV.get(key) < 510){
+				this.EV.get(key).increment(increaseEV.get(key));
+			}		
+		}	
+	}
 }
