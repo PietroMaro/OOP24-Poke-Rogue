@@ -17,9 +17,5 @@ public class Main {
 		dataExtractor.extractPokemons(1,151);
 		dataExtractor.extractMoves();
 		*/
-
-		PokemonFactory pokemonFactory = new PokemonFactoryImpl();
-		pokemonFactory.init();
-		Pokemon testPokemon = pokemonFactory.randomPokemon(10);
 	}
 }

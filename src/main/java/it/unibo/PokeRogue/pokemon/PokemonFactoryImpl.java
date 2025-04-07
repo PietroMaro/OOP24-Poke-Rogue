@@ -94,7 +94,11 @@ public class PokemonFactoryImpl extends SingletonImpl implements PokemonFactory{
 	@Override
 	public Pokemon randomPokemon(int level){
 		String generatedName = (String)this.allPokemonSet.toArray()[random.nextInt(this.allPokemonSet.size())];
-		return new PokemonImpl(this.pokemonBlueprints.get(generatedName)); 
+		Pokemon result = new PokemonImpl(this.pokemonBlueprints.get(generatedName)); 
+		for(int x = 0 ; x < level; x+=1){
+			result.levelUp(false);
+		}
+		return result;
 	}
 
 	@Override
