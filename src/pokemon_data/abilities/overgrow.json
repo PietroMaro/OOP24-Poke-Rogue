@@ -1,0 +1,8 @@
+{
+    "situationChecks" : "attack",
+    "effect" : {
+        "checks" : [["attackUs.type", "==" , "'grass'"],
+                    ["us.hp","<=","us.hp \ 3"]],
+        "activation" : [["attackUs.power","attackUs.power + (attackUs.power \ 2)"]]
+    }
+}
