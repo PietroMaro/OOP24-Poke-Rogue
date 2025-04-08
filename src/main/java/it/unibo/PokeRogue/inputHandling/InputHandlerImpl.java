@@ -25,7 +25,7 @@ public class InputHandlerImpl implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         
-        gameEngine.keyPressedToScene(e.getKeyCode());
+        gameEngine.keyPressedToScene(KeyEvent.getKeyText(e.getKeyCode()));
         
 
     }

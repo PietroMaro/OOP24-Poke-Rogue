@@ -1,6 +1,9 @@
 package it.unibo.PokeRogue;
 
 import it.unibo.PokeRogue.savingSystem.SavingSystem;
+import it.unibo.PokeRogue.savingSystem.SavingSystemImpl;
+import it.unibo.PokeRogue.scene.Scene;
+import it.unibo.PokeRogue.scene.SceneMenu;
 
 /**
  * Implementation of the {@link GameEngine} interface.
@@ -12,21 +15,19 @@ import it.unibo.PokeRogue.savingSystem.SavingSystem;
  * This class is responsible for managing the transition between scenes and other game-related operations.
  */
 public class GameEngineImpl extends SingletonImpl implements GameEngine {
-     /** 
-     * The instance of the graphic engine responsible for rendering the game scenes.
-     */
-    GraphicEngine graphicEngineInstance;
+    
+    private final GraphicEngine graphicEngineInstance;
+    private final SavingSystem savingSystemIstance;
+    private Scene currentScene;
 
-
-    //Scene currentStatus = new menuInitInsatance();
-
-    /**
-     * The saving system instance used for saving and loading game progress.
-     */
-    SavingSystem savingSystemIstance;
 
     
-	public GameEngineImpl(){}
+	public GameEngineImpl(){
+        this.graphicEngineInstance = GraphicEngineImpl.getInstance(GraphicEngineImpl.class);
+        this.savingSystemIstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
+
+
+    }
 
      /**
      * Sets the current scene of the game.
@@ -38,17 +39,27 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
      */
     @Override
     public void setScene(String newScene) {   
+        switch (newScene) {
+            case "main":
+                currentScene = new SceneMenu();
+                break;
         
+            default:
+                break;
+        }
         
     }
 
 
 
 
-    public void keyPressedToScene(int keyCode){
+    public void keyPressedToScene(String keyCode){
 
 
-       System.out.println(keyCode);
+       currentScene.updateStatus(keyCode);
+       currentScene.updateGraphic();
+       graphicEngineInstance.createPanels(currentScene.getAllPanelsElements());
+       graphicEngineInstance.drawScene(currentScene.getSceneGraphicElements());
         
     }
 

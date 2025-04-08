@@ -1,13 +1,22 @@
 package it.unibo.PokeRogue.scene;
 
+import java.util.Map;
+
+import it.unibo.PokeRogue.graphic.GraphicElementImpl;
+import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
+
 public interface Scene {
 
-void initGpraphicElements();
+    void initGpraphicElements();
 
-void initStatus();
+    void initStatus();
 
-void updateGraphic();
+    void updateGraphic();
 
-void updateStatus(String inputKey);
+    void updateStatus(String inputKey);
+
+    Map<Integer, GraphicElementImpl> getSceneGraphicElements();
+
+    Map<String, PanelElementImpl> getAllPanelsElements();
 
 }

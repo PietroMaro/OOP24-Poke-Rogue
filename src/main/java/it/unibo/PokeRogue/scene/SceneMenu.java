@@ -1,19 +1,27 @@
 package it.unibo.PokeRogue.scene;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
-import it.unibo.PokeRogue.graphic.text.TextElementImpl;
-import it.unibo.PokeRogue.graphic.*;
-import it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl;
-import it.unibo.PokeRogue.graphic.box.BoxElement;
-import it.unibo.PokeRogue.graphic.box.BoxElementImpl;
+import it.unibo.PokeRogue.graphic.GraphicElement;
+import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
+import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 
-public class SceneMenu extends AbstractSceneImpl {
+public class SceneMenu implements Scene {
 
     private ButtonsNames currentSelectedButton;
-    private Map<Integer, GraphicElement> sceneGraphicElements = new HashMap<>();
+    private Map<Integer, GraphicElementImpl> sceneGraphicElements;
+    private Map<String, PanelElementImpl> allPanelsElements;
+
+    public SceneMenu() {
+        this.sceneGraphicElements = new LinkedHashMap<>();
+        this.allPanelsElements = new LinkedHashMap<>();
+        this.initStatus();
+        this.initGpraphicElements();
+
+    }
 
     public enum SceneGraphicEnum {
 
@@ -53,13 +61,7 @@ public class SceneMenu extends AbstractSceneImpl {
     @Override
     public void initGpraphicElements() {
         // non esiste il costruttore vuoto quindi da errore
-        sceneGraphicElements.put(SceneGraphicEnum.NEW_GAME_BUTTON.value(), new ButtonElementImpl());
-        sceneGraphicElements.put(SceneGraphicEnum.LOAD_BUTTON.value(), new ButtonElementImpl());
-        sceneGraphicElements.put(SceneGraphicEnum.OPTIONS_BUTTON.value(), new ButtonElementImpl());
-        sceneGraphicElements.put(SceneGraphicEnum.BACKGROUND.value(), new BackgroundElementImpl());
-        sceneGraphicElements.put(SceneGraphicEnum.NEW_GAME_BUTTON_TEXT.value(), new TextElementImpl());
-        sceneGraphicElements.put(SceneGraphicEnum.LOAD_GAME_BUTTON_TEXT.value(), new TextElementImpl());
-        sceneGraphicElements.put(SceneGraphicEnum.OPTIONS_GAME_BUTTON_TEXT.value(), new TextElementImpl());
+
     }
 
     @Override
@@ -77,28 +79,21 @@ public class SceneMenu extends AbstractSceneImpl {
                 button.setSelected(buttonsNames == this.currentSelectedButton);
             }
         }
-        graphicEngineInstance.drawScene(sceneGraphicElements);
     }
 
     @Override
     public void updateStatus(String inputKey) {
-        switch (inputKey) {
-            case "up":
-                currentSelectedButton = ButtonsNames.previousButtonsNames(currentSelectedButton);
-                break;
-            case "down":
-                currentSelectedButton = ButtonsNames.nextButtonsNames(currentSelectedButton);
-                break;
 
-            case "enter":
-                gameEngineInstance.setScene(currentSelectedButton); // da sistemare il tipo in base allo switch di
-                                                                    // gameEngine
-                break;
+    }
 
-            default:
-                break;
-        }
+    @Override
+    public Map<Integer, GraphicElementImpl> getSceneGraphicElements() {
+        return this.sceneGraphicElements;
+    }
 
+    @Override
+    public Map<String, PanelElementImpl> getAllPanelsElements() {
+        return this.allPanelsElements;
     }
 
 }
