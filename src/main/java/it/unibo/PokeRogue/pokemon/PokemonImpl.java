@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue;
+package it.unibo.PokeRogue.pokemon;
 
 import it.unibo.PokeRogue.utilities.Range;
 import it.unibo.PokeRogue.utilities.RangeImpl;

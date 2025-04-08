@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue;
+package it.unibo.PokeRogue.pokemon;
 
 public enum StatusCondition{
 	BURN("burn"),	

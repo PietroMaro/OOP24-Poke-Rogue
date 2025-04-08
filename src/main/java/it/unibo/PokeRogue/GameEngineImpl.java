@@ -1,5 +1,7 @@
 package it.unibo.PokeRogue;
 
+import it.unibo.PokeRogue.savingSystem.SavingSystem;
+
 /**
  * Implementation of the {@link GameEngine} interface.
  * This class represents the actual game engine, managing the different components of the game

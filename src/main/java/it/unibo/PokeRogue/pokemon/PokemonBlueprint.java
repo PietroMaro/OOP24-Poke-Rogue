@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue;
+package it.unibo.PokeRogue.pokemon;
 import java.util.List;
 import java.util.Map;
 public record PokemonBlueprint(

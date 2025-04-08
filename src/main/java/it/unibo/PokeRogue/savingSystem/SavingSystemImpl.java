@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue;
+package it.unibo.PokeRogue.savingSystem;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.HashMap;
 import org.json.JSONArray;
 
+import it.unibo.PokeRogue.SingletonImpl;
+import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 

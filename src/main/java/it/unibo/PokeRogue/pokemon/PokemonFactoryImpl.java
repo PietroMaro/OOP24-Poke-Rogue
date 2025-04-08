@@ -1,5 +1,6 @@
-package it.unibo.PokeRogue;
+package it.unibo.PokeRogue.pokemon;
 
+import it.unibo.PokeRogue.SingletonImpl;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 
