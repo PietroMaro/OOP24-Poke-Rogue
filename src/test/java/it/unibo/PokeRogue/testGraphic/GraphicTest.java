@@ -45,10 +45,11 @@ public class GraphicTest {
                                                 0.5, 0.1));
 
                 graphicElements.put(4, new BackgroundElementImpl("destra",
-                                "OOP24-Poke-Rogue\\src\\test\\java\\it\\unibo\\PokeRogue\\testGraphic\\testBg.jpg"));
+                                "src\\test\\java\\it\\unibo\\PokeRogue\\testGraphic\\testBg.jpg"));
                 graphicElements.put(5, new SpriteElementImpl("destra",
-                                "OOP24-Poke-Rogue\\src\\test\\java\\it\\unibo\\PokeRogue\\testGraphic\\testSprite.jpg",
+                                "src\\test\\java\\it\\unibo\\PokeRogue\\testGraphic\\testSprite.jpg",
                                 0, 0, 0.5, 0.5));
+
 
                 GE.createPanels(panelElements);
                 GE.drawScene(graphicElements);

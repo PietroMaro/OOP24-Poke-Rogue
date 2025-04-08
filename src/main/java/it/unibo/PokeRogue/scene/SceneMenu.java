@@ -83,6 +83,7 @@ public class SceneMenu implements Scene {
 
     @Override
     public void updateStatus(String inputKey) {
+        System.out.println(inputKey);
 
     }
 

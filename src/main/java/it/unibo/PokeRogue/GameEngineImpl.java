@@ -16,15 +16,14 @@ import it.unibo.PokeRogue.scene.SceneMenu;
  */
 public class GameEngineImpl extends SingletonImpl implements GameEngine {
     
-    private final GraphicEngine graphicEngineInstance;
-    private final SavingSystem savingSystemIstance;
+    private  GraphicEngine graphicEngineInstance;
+    private  SavingSystem savingSystemIstance;
     private Scene currentScene;
 
 
     
 	public GameEngineImpl(){
-        this.graphicEngineInstance = GraphicEngineImpl.getInstance(GraphicEngineImpl.class);
-        this.savingSystemIstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
+       
 
 
     }
@@ -54,13 +53,17 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
 
 
     public void keyPressedToScene(String keyCode){
-
-
        currentScene.updateStatus(keyCode);
        currentScene.updateGraphic();
        graphicEngineInstance.createPanels(currentScene.getAllPanelsElements());
        graphicEngineInstance.drawScene(currentScene.getSceneGraphicElements());
         
+    }
+
+    public void setGraphicEngine(GraphicEngine graphicEngine){
+
+        this.graphicEngineInstance = graphicEngine;
+
     }
 
 }

@@ -1,25 +1,25 @@
 package it.unibo.PokeRogue;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Optional;
+import java.util.HashMap;
+import java.util.Map;
+public class SingletonImpl {
+    private static final Map<Class<? extends SingletonImpl>, SingletonImpl> instances = new HashMap<>();
 
-public class SingletonImpl implements Singleton {
-    private static Optional<SingletonImpl> instance = Optional.empty();
-
-
+    @SuppressWarnings("unchecked")
     public static <T extends SingletonImpl> T getInstance(Class<T> newClass) {
-        if (instance.isEmpty()) {
-             try {
-
-                instance = Optional.of(newClass.getDeclaredConstructor().newInstance());
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                throw new RuntimeException("Error while creating the instance", e);
+        return (T) instances.computeIfAbsent(newClass, cls -> {
+            try {
+                return cls.getDeclaredConstructor().newInstance();
+            } catch (InstantiationException | IllegalAccessException |
+                     InvocationTargetException | NoSuchMethodException e) {
+                throw new RuntimeException("Error while creating the instance of " + cls.getName(), e);
             }
-        }
-        
-        return newClass.cast(instance.get());
+        });
     }
 
-    public SingletonImpl() {
+    protected SingletonImpl() {
+
     }
+
 }
