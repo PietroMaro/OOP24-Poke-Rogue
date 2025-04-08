@@ -27,6 +27,11 @@ public class PokemonFactoryImpl extends SingletonImpl implements PokemonFactory{
 	final private Random random = new Random();
 	final private Set<String> allPokemonSet = new HashSet<String>();
 	final private Map<String,PokemonBlueprint> pokemonBlueprints = new HashMap<String,PokemonBlueprint>();
+	
+	public PokemonFactoryImpl(){
+		init();
+	}
+	
 	@Override
     public void init(){
 		JSONArray allPokemonJson;

@@ -3,6 +3,9 @@ package it.unibo.PokeRogue;
 import java.util.HashMap;
 import java.util.Map;
 
+import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.pokemon.PokemonFactoryImpl;
+
 import java.awt.Color;
 import java.awt.Font;
 
