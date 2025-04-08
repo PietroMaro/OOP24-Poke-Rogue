@@ -61,7 +61,7 @@ public class GraphicEngineImpl extends SingletonImpl implements GraphicEngine {
     public void drawScene(Map<Integer, GraphicElementImpl> allGraphicElements) {
 
         for (GraphicElementImpl graphicElement : allGraphicElements.values()) {
-
+            System.out.println(graphicElement.getPanelName());
             switch (graphicElement) {
                 case ButtonElementImpl button -> drawButtonGraphicElement(button);
                 case TextElementImpl text -> drawTextGraphicElement(text);
@@ -99,12 +99,12 @@ public class GraphicEngineImpl extends SingletonImpl implements GraphicEngine {
 
     private void drawBoxGraphicElement(BoxElementImpl boxToDraw) {
 
-        allPanelElements.get(boxToDraw.getPanelName()).add(boxToDraw);
+        allPanelElements.get(boxToDraw.getPanelName()).add(boxToDraw, boxToDraw.getLayerNumber());
 
     }
 
     private void drawSpriteGraphicElement(SpriteElementImpl spriteToDraw) {
-        allPanelElements.get(spriteToDraw.getPanelName()).add(spriteToDraw);
+        allPanelElements.get(spriteToDraw.getPanelName()).add(spriteToDraw, spriteToDraw.getLayerNumber());
 
     }
 
@@ -119,7 +119,8 @@ public class GraphicEngineImpl extends SingletonImpl implements GraphicEngine {
     }
 
     private void drawTextGraphicElement(TextElementImpl textToDraw) {
-        allPanelElements.get(textToDraw.getPanelName()).add(textToDraw);
+        System.out.println(textToDraw.getText());
+        allPanelElements.get(textToDraw.getPanelName()).add(textToDraw, textToDraw.getLayerNumber());
     }
 
 }

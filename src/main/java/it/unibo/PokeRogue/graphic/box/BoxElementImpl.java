@@ -18,9 +18,9 @@ public class BoxElementImpl extends GraphicElementImpl implements BoxElement{
     private double width;
     private double height;
 
-    public BoxElementImpl(String panelName, Color mainColor, Color borderColor, int borderThickness, double x, double y,
+    public BoxElementImpl(String panelName, int layeNumber, Color mainColor, Color borderColor, int borderThickness, double x, double y,
             double width, double height) {
-        super(panelName);
+        super(panelName,layeNumber);
         this.mainColor = mainColor;
         this.borderColor = borderColor;
         this.borderThickness = borderThickness;

@@ -10,12 +10,12 @@ public class ButtonElementImpl extends GraphicElementImpl implements ButtonEleme
     private BoxElementImpl buttonBox;
     private boolean selected;
 
-    public ButtonElementImpl(String panelName, Color mainColor, Color borderColor, int borderThickness, double x, double y,
+    public ButtonElementImpl(String panelName,int layeNumber ,Color mainColor, Color borderColor, int borderThickness, double x, double y,
             int width,
             int height) {
-        super(panelName);
+        super(panelName, layeNumber);
 
-        buttonBox = new BoxElementImpl(panelName,mainColor, borderColor, borderThickness, x, y, width, height);
+        buttonBox = new BoxElementImpl(panelName,layeNumber,mainColor, borderColor, borderThickness, x, y, width, height);
         this.selected = false;
 
     }

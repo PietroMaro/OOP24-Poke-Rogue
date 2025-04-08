@@ -7,10 +7,10 @@ public class BackgroundElementImpl extends GraphicElementImpl implements Backgro
 
     SpriteElementImpl backgroundSprite;
 
-    public BackgroundElementImpl(String panelName, String pathToImage) {
-        super(panelName);
+    public BackgroundElementImpl(String panelName, int layeNumber, String pathToImage) {
+        super(panelName, layeNumber);
 
-        backgroundSprite = new SpriteElementImpl(panelName, pathToImage, 0, 0, 1, 1);
+        backgroundSprite = new SpriteElementImpl(panelName,layeNumber, pathToImage, 0, 0, 1, 1);
     }
 
     public SpriteElementImpl getBackgroundSprite() {

@@ -2,14 +2,21 @@ package it.unibo.PokeRogue.graphic.panel;
 
 import java.awt.LayoutManager;
 
+import javax.swing.OverlayLayout;
+
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 
 public class PanelElementImpl extends GraphicElementImpl implements PanelElement {
 
-    public PanelElementImpl(String panelName, LayoutManager layout, float x, float y, double width, double height) {
-        super(panelName);
 
-        this.setLayout(layout);
+    public PanelElementImpl(String panelName, int layeNumber, LayoutManager layout, float x, float y, double width, double height) {
+        super(panelName, layeNumber);
+
+         if (layout instanceof OverlayLayout) {
+            this.setLayout(new OverlayLayout(this)); 
+        } else {
+            this.setLayout(layout); 
+        }
 
         this.setBounds((int) (getWidth() * x), (int) (getHeight() * y), (int) (getWidth() * width),
                 (int) (getHeight() * height));
