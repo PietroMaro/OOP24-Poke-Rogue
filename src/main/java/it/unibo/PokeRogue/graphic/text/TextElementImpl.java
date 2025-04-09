@@ -14,8 +14,8 @@ public class TextElementImpl extends GraphicElementImpl {
     private Color textColor;
     private Font textFont;
 
-    public TextElementImpl(String panelName,int layeNumber, String text, Color textColor, Font textFont, double leftX, double leftY) {
-        super(panelName, layeNumber);
+    public TextElementImpl(String panelName, String text, Color textColor, Font textFont, double leftX, double leftY) {
+        super(panelName);
         this.text = text;
         this.leftX = leftX;
         this.leftY = leftY;

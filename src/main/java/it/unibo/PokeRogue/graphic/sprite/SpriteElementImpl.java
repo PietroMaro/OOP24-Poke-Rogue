@@ -18,8 +18,8 @@ public class SpriteElementImpl extends GraphicElementImpl implements SpriteEleme
     private double width;
     private double height;
 
-    public SpriteElementImpl(String panelName, int layeNumber, String pathToImage, double LeftUpX, double LeftUpy, double width, double height) {
-        super(panelName, layeNumber);
+    public SpriteElementImpl(String panelName, String pathToImage, double LeftUpX, double LeftUpy, double width, double height) {
+        super(panelName);
 
         try {
             this.spriteImage = ImageIO.read(new File(pathToImage));

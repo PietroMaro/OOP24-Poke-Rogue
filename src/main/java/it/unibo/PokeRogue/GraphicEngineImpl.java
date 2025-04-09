@@ -80,11 +80,14 @@ public class GraphicEngineImpl extends SingletonImpl implements GraphicEngine {
 
     @Override
     public void createPanels(Map<String, PanelElementImpl> panelElements) {
+        this.gameWindow.getContentPane().removeAll();
+
         this.allPanelElements = panelElements;
        
-
+        System.out.println(allPanelElements);
         for (String key : allPanelElements.keySet()) {
             PanelElementImpl panel = allPanelElements.get(key);
+            panel.removeAll();
           
             if (panel.getPanelName() != "") {
                 allPanelElements.get(panel.getPanelName()).add(panel);
@@ -99,12 +102,12 @@ public class GraphicEngineImpl extends SingletonImpl implements GraphicEngine {
 
     private void drawBoxGraphicElement(BoxElementImpl boxToDraw) {
 
-        allPanelElements.get(boxToDraw.getPanelName()).add(boxToDraw, boxToDraw.getLayerNumber());
+        allPanelElements.get(boxToDraw.getPanelName()).add(boxToDraw);
 
     }
 
     private void drawSpriteGraphicElement(SpriteElementImpl spriteToDraw) {
-        allPanelElements.get(spriteToDraw.getPanelName()).add(spriteToDraw, spriteToDraw.getLayerNumber());
+        allPanelElements.get(spriteToDraw.getPanelName()).add(spriteToDraw);
 
     }
 
@@ -120,7 +123,7 @@ public class GraphicEngineImpl extends SingletonImpl implements GraphicEngine {
 
     private void drawTextGraphicElement(TextElementImpl textToDraw) {
         System.out.println(textToDraw.getText());
-        allPanelElements.get(textToDraw.getPanelName()).add(textToDraw, textToDraw.getLayerNumber());
+        allPanelElements.get(textToDraw.getPanelName()).add(textToDraw);
     }
 
 }

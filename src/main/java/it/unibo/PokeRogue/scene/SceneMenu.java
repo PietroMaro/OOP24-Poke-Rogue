@@ -1,19 +1,33 @@
 package it.unibo.PokeRogue.scene;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.swing.OverlayLayout;
+
 import it.unibo.PokeRogue.graphic.GraphicElement;
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
+import it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
+import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 
 public class SceneMenu implements Scene {
 
     private ButtonsNames currentSelectedButton;
     private Map<Integer, GraphicElementImpl> sceneGraphicElements;
     private Map<String, PanelElementImpl> allPanelsElements;
+
+    private String getPathString(String directory, String fileName) {
+
+        return Paths.get("src", "sceneImages", "menu", directory, fileName).toString();
+    }
 
     public SceneMenu() {
         this.sceneGraphicElements = new LinkedHashMap<>();
@@ -60,8 +74,32 @@ public class SceneMenu implements Scene {
 
     @Override
     public void initGpraphicElements() {
-        // non esiste il costruttore vuoto quindi da errore
+        this.allPanelsElements.put("firstPanel", new PanelElementImpl("", new OverlayLayout(null), 0.3, 0, 1, 1));
+        this.allPanelsElements.put("buttonGrid",
+                new PanelElementImpl("firstPanel", new GridLayout(3, 1), 0.3, 0, 0, 0));
+        this.allPanelsElements.put("continuePanel",
+                new PanelElementImpl("buttonGrid", new OverlayLayout(null), 0.33, 0.3, 0, 0));
+        this.allPanelsElements.put("newGamePanel",
+                new PanelElementImpl("buttonGrid", new OverlayLayout(null), 0.33, 0.3, 0, 0));
+        this.allPanelsElements.put("optionsPanel",
+                new PanelElementImpl("buttonGrid", new OverlayLayout(null), 0.33, 0.3, 0, 0));
 
+        this.sceneGraphicElements.put(4, new TextElementImpl("continuePanel", "Continua", Color.BLACK,
+                new Font("Default", Font.PLAIN, 20), 0, 0.1));
+        this.sceneGraphicElements.put(5, new TextElementImpl("newGamePanel", "Nuova Partita", Color.BLACK,
+                new Font("Default", Font.PLAIN, 20), 0, 0.1));
+        this.sceneGraphicElements.put(6, new TextElementImpl("optionsPanel", "Opzioni", Color.BLACK,
+                new Font("Default", Font.PLAIN, 20), 0, 0.1));
+
+        this.sceneGraphicElements.put(0,
+                new BackgroundElementImpl("firstPanel", this.getPathString("images", "sceneMenuBg.png")));
+
+        this.sceneGraphicElements.put(1,
+                new ButtonElementImpl("continuePanel", Color.GREEN, Color.BLACK, 2, 0, 0, 0.33, 0.2));
+        this.sceneGraphicElements.put(2,
+                new ButtonElementImpl("newGamePanel", Color.GREEN, Color.BLACK, 0, 0.33, 0.1, 0.33, 0.2));
+        this.sceneGraphicElements.put(3,
+                new ButtonElementImpl("optionsPanel", Color.GREEN, Color.BLACK, 0, 0.33, 0, 0.33, 0.2));
     }
 
     @Override
@@ -71,19 +109,12 @@ public class SceneMenu implements Scene {
 
     @Override
     public void updateGraphic() {
-        for (ButtonsNames buttonsNames : ButtonsNames.values()) {
-            GraphicElement element = sceneGraphicElements.get(buttonsNames.ordinal());
-
-            if (element instanceof ButtonElementImpl) {
-                ButtonElementImpl button = (ButtonElementImpl) element;
-                button.setSelected(buttonsNames == this.currentSelectedButton);
-            }
-        }
     }
 
     @Override
     public void updateStatus(String inputKey) {
         System.out.println(inputKey);
+       
 
     }
 

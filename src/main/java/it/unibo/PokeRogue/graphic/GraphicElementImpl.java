@@ -8,11 +8,9 @@ import javax.swing.JPanel;
 public class GraphicElementImpl extends JLayeredPane implements GraphicElement {
 
     private String panelName;
-    private int layerNuber;
 
-    public GraphicElementImpl(String panelName, int layerNuber) {
+    public GraphicElementImpl(String panelName) {
         this.panelName = panelName;
-        this.layerNuber = layerNuber;
     }
 
     @Override
@@ -25,8 +23,6 @@ public class GraphicElementImpl extends JLayeredPane implements GraphicElement {
         return this.panelName;
     }
 
-    public int getLayerNumber() {
-        return this.layerNuber;
-    }
+   
 
 }

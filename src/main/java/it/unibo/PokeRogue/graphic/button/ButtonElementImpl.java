@@ -9,13 +9,16 @@ public class ButtonElementImpl extends GraphicElementImpl implements ButtonEleme
 
     private BoxElementImpl buttonBox;
     private boolean selected;
+    private int borderThickness;
 
-    public ButtonElementImpl(String panelName,int layeNumber ,Color mainColor, Color borderColor, int borderThickness, double x, double y,
-            int width,
-            int height) {
-        super(panelName, layeNumber);
+    public ButtonElementImpl(String panelName, Color mainColor, Color borderColor, int borderThickness, double x,
+            double y,
+            double width,
+            double height) {
+        super(panelName);
+        this.borderThickness = borderThickness;
 
-        buttonBox = new BoxElementImpl(panelName,layeNumber,mainColor, borderColor, borderThickness, x, y, width, height);
+        buttonBox = new BoxElementImpl(panelName, mainColor, borderColor, this.borderThickness, x, y, width, height);
         this.selected = false;
 
     }
@@ -23,6 +26,8 @@ public class ButtonElementImpl extends GraphicElementImpl implements ButtonEleme
     @Override
     public void setSelected(boolean newStatus) {
         this.selected = newStatus;
+
+        
 
     }
 
