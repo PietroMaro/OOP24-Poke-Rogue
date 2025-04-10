@@ -1,7 +1,10 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "Evades attack that\nturn. It may fail. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

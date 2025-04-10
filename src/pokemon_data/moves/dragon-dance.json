@@ -1,7 +1,19 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "A mystical dance that ups\nATTACK and SPEED. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.tempStatsBonus.attack",
+                "us.tempStatsBonus.attack + 1"
+            ],
+            [
+                "us.tempStatsBonus.speed",
+                "us.tempStatsBonus.speed + 1"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,
