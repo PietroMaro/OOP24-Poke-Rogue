@@ -1,7 +1,10 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "Charges power to boost the\nelectric move used next. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

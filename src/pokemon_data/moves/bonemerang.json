@@ -1,7 +1,15 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "An attack that\nstrikes twice. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "attackUs.damage",
+                "attackUs.baseDamage * 2"
+            ]
+        ]
+    },
     "accuracy": 90,
     "critRate": 0,
     "baseDamage": 50,

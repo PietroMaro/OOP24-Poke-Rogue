@@ -3,7 +3,7 @@ An Effect is made of \
 *attribute* can be :[\
 RANDOM
 attackUs.pp,\
-AttackUs.isPhysical,\
+attackUs.isPhysical,\
 attackUs.accuracy,\
 attackUs.critRate,\
 attackUs.baseDamage, # damage of move in json\
