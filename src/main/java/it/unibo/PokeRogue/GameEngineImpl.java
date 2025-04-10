@@ -44,6 +44,10 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
                 currentScene = new SceneMenu();
 
                 break;
+            case "box":
+                System.out.println("box");
+
+                break;
 
             default:
                 break;
@@ -55,7 +59,11 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
     }
 
     public void keyPressedToScene(int keyCode) {
-        currentScene.updateStatus(keyCode);
+        if (this.currentScene == null) {
+            System.out.println("No active scene");
+            return;
+        }
+        this.currentScene.updateStatus(keyCode);
         currentScene.updateGraphic();
         graphicEngineInstance.createPanels(currentScene.getAllPanelsElements());
         graphicEngineInstance.drawScene(currentScene.getSceneGraphicElements());
