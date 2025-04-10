@@ -2,16 +2,14 @@ package it.unibo.PokeRogue.scene;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.swing.OverlayLayout;
 
-import it.unibo.PokeRogue.graphic.GraphicElement;
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
@@ -20,31 +18,21 @@ import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 
 public class SceneMenu implements Scene {
 
-    private ButtonsNames currentSelectedButton;
+    private SceneGraphicEnum currentSelectedButton;
     private Map<Integer, GraphicElementImpl> sceneGraphicElements;
     private Map<String, PanelElementImpl> allPanelsElements;
 
-    private String getPathString(String directory, String fileName) {
+   
 
-        return Paths.get("src", "sceneImages", "menu", directory, fileName).toString();
-    }
+    private enum SceneGraphicEnum {
 
-    public SceneMenu() {
-        this.sceneGraphicElements = new LinkedHashMap<>();
-        this.allPanelsElements = new LinkedHashMap<>();
-        this.initStatus();
-        this.initGpraphicElements();
-
-    }
-
-    public enum SceneGraphicEnum {
-
-        NEW_GAME_BUTTON(0),
-        LOAD_BUTTON(1),
+        LOAD_BUTTON(0),
+        NEW_GAME_BUTTON(1),
         OPTIONS_BUTTON(2),
         BACKGROUND(100),
-        NEW_GAME_BUTTON_TEXT(101),
-        LOAD_GAME_BUTTON_TEXT(102),
+        LOAD_GAME_BUTTON_TEXT(101),
+        NEW_GAME_BUTTON_TEXT(102),
+
         OPTIONS_GAME_BUTTON_TEXT(103);
 
         private final int code;
@@ -56,65 +44,123 @@ public class SceneMenu implements Scene {
         public int value() {
             return code;
         }
+
+        public static SceneGraphicEnum nextButtonsNames(SceneGraphicEnum currentSelectedButton) {
+            if(currentSelectedButton.ordinal() == 0){
+                return values()[2];
+            }
+            int nextOrdinal = (currentSelectedButton.ordinal() - 1 );
+            return values()[nextOrdinal];
+        }
+
+        public static SceneGraphicEnum previousButtonsNames(SceneGraphicEnum currentSelectedButton) {
+
+            if(currentSelectedButton.ordinal() == 2){
+                return values()[0];
+            }
+            int nextOrdinal = (currentSelectedButton.ordinal() + 1 );
+            return values()[nextOrdinal];
+        }
     }
 
-    public enum ButtonsNames {
-        NEW_GAME, LOAD_GAME, OPTIONS;
+    private String getPathString(String directory, String fileName) {
 
-        public static ButtonsNames previousButtonsNames(ButtonsNames currentSelectedButton) {
-            int nextOrdinal = (currentSelectedButton.ordinal() - 1 + values().length) % values().length;
-            return values()[nextOrdinal];
-        }
+        return Paths.get("src", "sceneImages", "menu", directory, fileName).toString();
 
-        public static ButtonsNames nextButtonsNames(ButtonsNames currentSelectedButton) {
-            int nextOrdinal = (currentSelectedButton.ordinal() + 1) % values().length;
-            return values()[nextOrdinal];
-        }
+    }
+
+
+    private void setButtonStatus(int buttonCode, boolean status){
+
+        ButtonElementImpl selectedButton = (ButtonElementImpl) sceneGraphicElements.get(buttonCode);
+        selectedButton.setSelected(status);
+
+
+    }
+
+    public SceneMenu() {
+        this.sceneGraphicElements = new LinkedHashMap<>();
+        this.allPanelsElements = new LinkedHashMap<>();
+        this.initStatus();
+        this.initGpraphicElements();
+
     }
 
     @Override
     public void initGpraphicElements() {
         this.allPanelsElements.put("firstPanel", new PanelElementImpl("", new OverlayLayout(null), 0.3, 0, 1, 1));
         this.allPanelsElements.put("buttonGrid",
-                new PanelElementImpl("firstPanel", new GridLayout(3, 1), 0.3, 0, 0, 0));
+                new PanelElementImpl("firstPanel", new GridLayout(3, 1), 0, 0, 0, 0));
         this.allPanelsElements.put("continuePanel",
-                new PanelElementImpl("buttonGrid", new OverlayLayout(null), 0.33, 0.3, 0, 0));
+                new PanelElementImpl("buttonGrid", new OverlayLayout(null), 0, 0, 0, 0));
         this.allPanelsElements.put("newGamePanel",
-                new PanelElementImpl("buttonGrid", new OverlayLayout(null), 0.33, 0.3, 0, 0));
+                new PanelElementImpl("buttonGrid", new OverlayLayout(null), 0, 0, 0, 0));
         this.allPanelsElements.put("optionsPanel",
-                new PanelElementImpl("buttonGrid", new OverlayLayout(null), 0.33, 0.3, 0, 0));
+                new PanelElementImpl("buttonGrid", new OverlayLayout(null), 0, 0, 0, 0));
 
-        this.sceneGraphicElements.put(4, new TextElementImpl("continuePanel", "Continua", Color.BLACK,
-                new Font("Default", Font.PLAIN, 20), 0, 0.1));
-        this.sceneGraphicElements.put(5, new TextElementImpl("newGamePanel", "Nuova Partita", Color.BLACK,
-                new Font("Default", Font.PLAIN, 20), 0, 0.1));
-        this.sceneGraphicElements.put(6, new TextElementImpl("optionsPanel", "Opzioni", Color.BLACK,
-                new Font("Default", Font.PLAIN, 20), 0, 0.1));
-
-        this.sceneGraphicElements.put(0,
+        // Background
+        this.sceneGraphicElements.put(100,
                 new BackgroundElementImpl("firstPanel", this.getPathString("images", "sceneMenuBg.png")));
 
+        // Texts
+        this.sceneGraphicElements.put(101,
+                new TextElementImpl("continuePanel", "Continua", Color.BLACK,
+                        new Font("Default", Font.PLAIN, 20), 0.45, 0.65));
+
+        this.sceneGraphicElements.put(102,
+                new TextElementImpl("newGamePanel", "Nuova Partita", Color.BLACK,
+                        new Font("Default", Font.PLAIN, 20), 0.45, 0.5));
+
+        this.sceneGraphicElements.put(103,
+                new TextElementImpl("optionsPanel", "Opzioni", Color.BLACK,
+                        new Font("Default", Font.PLAIN, 20), 0.45, 0.45));
+
+        // Buttons
+        this.sceneGraphicElements.put(0,
+                new ButtonElementImpl("continuePanel", Color.GREEN, Color.BLACK, 1, 0.3, 0.55, 0.4, 0.15));
         this.sceneGraphicElements.put(1,
-                new ButtonElementImpl("continuePanel", Color.GREEN, Color.BLACK, 2, 0, 0, 0.33, 0.2));
+                new ButtonElementImpl("newGamePanel", Color.GREEN, Color.BLACK, 1, 0.3, 0.4, 0.4, 0.15));
         this.sceneGraphicElements.put(2,
-                new ButtonElementImpl("newGamePanel", Color.GREEN, Color.BLACK, 0, 0.33, 0.1, 0.33, 0.2));
-        this.sceneGraphicElements.put(3,
-                new ButtonElementImpl("optionsPanel", Color.GREEN, Color.BLACK, 0, 0.33, 0, 0.33, 0.2));
+                new ButtonElementImpl("optionsPanel", Color.GREEN, Color.BLACK, 1, 0.3, 0.35, 0.4, 0.15));
+
+
+            this.setButtonStatus(this.currentSelectedButton.value(), true);
     }
 
     @Override
     public void initStatus() {
-        currentSelectedButton = ButtonsNames.NEW_GAME;
+        this.currentSelectedButton = SceneGraphicEnum.LOAD_BUTTON;
+
     }
 
     @Override
     public void updateGraphic() {
+
+        for(int i = 0; i<3;i++){
+            this.setButtonStatus(i, false);
+        }
+
+        this.setButtonStatus(this.currentSelectedButton.value(), true);
+
     }
 
     @Override
-    public void updateStatus(String inputKey) {
-        System.out.println(inputKey);
-       
+    public void updateStatus(int inputKey) {
+
+        switch (inputKey) {
+            case KeyEvent.VK_UP:
+                this.currentSelectedButton = SceneGraphicEnum.nextButtonsNames(this.currentSelectedButton);
+
+                break;
+            case KeyEvent.VK_DOWN:
+                this.currentSelectedButton = SceneGraphicEnum.previousButtonsNames(this.currentSelectedButton);
+
+                break;
+            default:
+                break;
+        }
+
+        System.out.println(this.currentSelectedButton);
 
     }
 

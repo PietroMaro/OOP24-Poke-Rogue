@@ -61,7 +61,6 @@ public class GraphicEngineImpl extends SingletonImpl implements GraphicEngine {
     public void drawScene(Map<Integer, GraphicElementImpl> allGraphicElements) {
 
         for (GraphicElementImpl graphicElement : allGraphicElements.values()) {
-            System.out.println(graphicElement.getPanelName());
             switch (graphicElement) {
                 case ButtonElementImpl button -> drawButtonGraphicElement(button);
                 case TextElementImpl text -> drawTextGraphicElement(text);
@@ -84,7 +83,6 @@ public class GraphicEngineImpl extends SingletonImpl implements GraphicEngine {
 
         this.allPanelElements = panelElements;
        
-        System.out.println(allPanelElements);
         for (String key : allPanelElements.keySet()) {
             PanelElementImpl panel = allPanelElements.get(key);
             panel.removeAll();
@@ -122,7 +120,6 @@ public class GraphicEngineImpl extends SingletonImpl implements GraphicEngine {
     }
 
     private void drawTextGraphicElement(TextElementImpl textToDraw) {
-        System.out.println(textToDraw.getText());
         allPanelElements.get(textToDraw.getPanelName()).add(textToDraw);
     }
 

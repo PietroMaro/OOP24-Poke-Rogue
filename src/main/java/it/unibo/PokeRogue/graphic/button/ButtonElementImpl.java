@@ -25,8 +25,11 @@ public class ButtonElementImpl extends GraphicElementImpl implements ButtonEleme
 
     @Override
     public void setSelected(boolean newStatus) {
-        this.selected = newStatus;
-
+        if (newStatus) {
+            buttonBox.setBorderThickness(this.borderThickness + 2); 
+        } else {
+            buttonBox.setBorderThickness(this.borderThickness);
+        }
         
 
     }

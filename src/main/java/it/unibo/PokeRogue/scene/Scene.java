@@ -13,7 +13,7 @@ public interface Scene {
 
     void updateGraphic();
 
-    void updateStatus(String inputKey);
+    void updateStatus(int inputKey);
 
     Map<Integer, GraphicElementImpl> getSceneGraphicElements();
 

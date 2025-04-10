@@ -54,7 +54,7 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
 
     }
 
-    public void keyPressedToScene(String keyCode) {
+    public void keyPressedToScene(int keyCode) {
         currentScene.updateStatus(keyCode);
         currentScene.updateGraphic();
         graphicEngineInstance.createPanels(currentScene.getAllPanelsElements());
