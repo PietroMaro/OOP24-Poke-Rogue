@@ -32,17 +32,15 @@ public class GraphicTest {
 
                 graphicElements.put(0,
                                 new TextElementImpl("sinistra", "prima colonna prima riga", Color.RED,
-                                                new Font("Default", Font.PLAIN, 20), 0,
+                                                0.05, 0,
                                                 0.1));
 
                 graphicElements.put(1,
-                                new TextElementImpl("sinistra", "prima colonna seconda riga", Color.RED,
-                                                new Font("Default", Font.PLAIN, 20), 0,
-                                                0.1));
+                                new TextElementImpl("sinistra", "prima colonna seconda riga", Color.RED,0.05 ,0,0.1));
 
                 graphicElements.put(2,
                                 new TextElementImpl("sinistra", "prima colonna terza riga", Color.RED,
-                                                new Font("Default", Font.PLAIN, 20), 0,
+                                                0.05, 0,
                                                 0.1));
                 graphicElements.put(3,
                                 new BoxElementImpl("destra", new Color(100, 200, 50), new Color(30, 30, 30), 2, 0.5,

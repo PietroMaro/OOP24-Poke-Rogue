@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -64,6 +66,9 @@ public class SceneMenu implements Scene {
     }
 
     private String getPathString(String directory, String fileName) {
+        
+
+
 
         return Paths.get("src", "sceneImages", "menu", directory, fileName).toString();
 
@@ -72,6 +77,7 @@ public class SceneMenu implements Scene {
 
     private void setButtonStatus(int buttonCode, boolean status){
 
+        
         ButtonElementImpl selectedButton = (ButtonElementImpl) sceneGraphicElements.get(buttonCode);
         selectedButton.setSelected(status);
 
@@ -98,22 +104,21 @@ public class SceneMenu implements Scene {
         this.allPanelsElements.put("optionsPanel",
                 new PanelElementImpl("buttonGrid", new OverlayLayout(null), 0, 0, 0, 0));
 
+        
+
         // Background
         this.sceneGraphicElements.put(100,
                 new BackgroundElementImpl("firstPanel", this.getPathString("images", "sceneMenuBg.png")));
 
         // Texts
         this.sceneGraphicElements.put(101,
-                new TextElementImpl("continuePanel", "Continua", Color.BLACK,
-                        new Font("Default", Font.PLAIN, 20), 0.45, 0.65));
+                new TextElementImpl("continuePanel", "Continua", Color.BLACK,0.1, 0.45, 0.65));
 
         this.sceneGraphicElements.put(102,
-                new TextElementImpl("newGamePanel", "Nuova Partita", Color.BLACK,
-                        new Font("Default", Font.PLAIN, 20), 0.45, 0.5));
+                new TextElementImpl("newGamePanel", "Nuova Partita", Color.BLACK,0.1, 0.45, 0.5));
 
         this.sceneGraphicElements.put(103,
-                new TextElementImpl("optionsPanel", "Opzioni", Color.BLACK,
-                        new Font("Default", Font.PLAIN, 20), 0.45, 0.45));
+                new TextElementImpl("optionsPanel", "Opzioni", Color.BLACK,0.1, 0.45, 0.45));
 
         // Buttons
         this.sceneGraphicElements.put(0,
