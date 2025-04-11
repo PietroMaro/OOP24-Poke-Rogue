@@ -1,7 +1,19 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "A ground-type,\none-hit KO attack. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "enemy.stats.hp.current",
+                "0"
+            ],
+            [
+                "enemy.statusCondition",
+                "'fainted'"
+            ]
+        ]
+    },
     "accuracy": 30,
     "critRate": 0,
     "baseDamage": 0,
