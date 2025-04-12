@@ -23,44 +23,45 @@ public class SceneBox implements Scene {
 
     private enum sceneGraphicEnum {
 
-        upArrowButton(0),
-        downArrowButton(1),
-        firstPokemonButtonSelected(2),
-        secondPokemonButtonSelected(3),
-        thirdPokemonButtonSelected(4),
-        startGameButton(5),
+        UP_ARROW_BUTTON(0),
+        DOWN_ARROW_BUTTON(1),
+        FIRST_POKEMON_BUTTON_SELECTED(2),
+        SECOND_POKEMON_BUTTON_SELECTED(3),
+        THIRD_POKEMON_BUTTON_SELECTED(4),
+        START_GAME_BUTTON(5),
 
-        background(100),
-        detailContainerSprite(101),
-        pokemonNumberText(102),
-        arrowsContainerSprite(103),
-        upArrowSprite(104),
-        downArrowSprite(105),
-        currentBoxText(106),
-        slectedPokemomContainerSprite(107),
-        pokemonSpriteSelected0(108),
-        pokemonSpriteSelected1(109),
-        pokemonSpriteSelected2(110),
-        pokemonContainerSprite(111),
-        pokemonName(112),
-        pokemonAbility(113),
-        pokemonPassive(114),
-        pokemonNature(115),
-        pokemonType1(116),
-        pokemonType2(117),
-        pokemonBoxType1(118),
-        pokemonBoxType2(119),
-        pokemonGender(120),
-        pokemonDetailSprite(121),
-        pokemonGrowthRate(122),
-        pokemonMove1(123),
-        pokemonMove2(124),
-        pokemonMove3(125),
-        pokemonMove4(126),
-        pokemonMoveBox1(127),
-        pokemonMoveBox2(128),
-        pokemonMoveBox3(129),
-        pokemonMoveBox4(130);
+        BACKGROUND(100),
+        DETAIL_CONTAINER_SPRITE(101),
+        POKEMON_NUMBER_TEXT(102),
+        ARROWS_CONTAINER_SPRITE(103),
+        UP_ARROW_SPRITE(104),
+        DOWN_ARROW_SPRITE(105),
+        CURRENT_BOX_TEXT(106),
+        SELECTED_POKEMON_CONTAINER_SPRITE(107),
+        POKEMON_SPRITE_SELECTED_0(108),
+        POKEMON_SPRITE_SELECTED_1(109),
+        POKEMON_SPRITE_SELECTED_2(110),
+        POKEMON_CONTAINER_SPRITE(111),
+        POKEMON_NAME(112),
+        POKEMON_ABILITY(113),
+        POKEMON_PASSIVE(114),
+        POKEMON_NATURE(115),
+        POKEMON_TYPE_1(116),
+        POKEMON_TYPE_2(117),
+        POKEMON_BOX_TYPE_1(118),
+        POKEMON_BOX_TYPE_2(119),
+        POKEMON_GENDER(120),
+        POKEMON_DETAIL_SPRITE(121),
+        POKEMON_GROWTH_RATE(122),
+        POKEMON_MOVE_1(123),
+        POKEMON_MOVE_2(124),
+        POKEMON_MOVE_3(125),
+        POKEMON_MOVE_4(126),
+        POKEMON_MOVE_BOX_1(127),
+        POKEMON_MOVE_BOX_2(128),
+        POKEMON_MOVE_BOX_3(129),
+        POKEMON_MOVE_BOX_4(130),
+        START_BUTTON_CONTAINER_SPRITE(131);
 
         private final int code;
 
@@ -93,19 +94,20 @@ public class SceneBox implements Scene {
 
         // Panels
         this.allPanelsElements.put("firstPanel", new PanelElementImpl("", new OverlayLayout(null)));
-        this.allPanelsElements.put("mainGridPanel", new PanelElementImpl("firstPanel", new GridLayout(1,2)));
-        this.allPanelsElements.put("leftPanel", new PanelElementImpl("mainGridPanel", new OverlayLayout(null)));
-        this.allPanelsElements.put("rightPanel", new PanelElementImpl("mainGridPanel", new OverlayLayout(null)));
-
-
+        this.allPanelsElements.put("mainPanel", new PanelElementImpl("firstPanel", new OverlayLayout(null)));
 
         // Bg
-        this.sceneGraphicElements.put(sceneGraphicEnum.background.value(), new BackgroundElementImpl("firstPanel", this.getPathString("images", "sceneBoxBg.png")));
+        this.sceneGraphicElements.put(sceneGraphicEnum.BACKGROUND.value(),
+                new BackgroundElementImpl("firstPanel", this.getPathString("images", "sceneBoxBg.png")));
+
+        // Sprites
+        this.sceneGraphicElements.put(sceneGraphicEnum.SELECTED_POKEMON_CONTAINER_SPRITE.value(), new SpriteElementImpl("mainPanel", this.getPathString("sprites", "changeBoxSprite.png"), 0.372, 0.06, 0.1, 0.25));
+        this.sceneGraphicElements.put(sceneGraphicEnum.ARROWS_CONTAINER_SPRITE.value(), new SpriteElementImpl("mainPanel", this.getPathString("sprites", "selectedSquadSprite.png"), 0.375, 0.244, 0.09, 0.4));
+      this.sceneGraphicElements.put(sceneGraphicEnum.  START_BUTTON_CONTAINER_SPRITE.value(), new SpriteElementImpl("mainPanel", this.getPathString("sprites", "startSpriteBg.png"), 0.395, 0.613, 0.055, 0.1));
 
 
-
-        //Sprites
-        this.sceneGraphicElements.put(sceneGraphicEnum.pokemonContainerSprite.value(), new SpriteElementImpl("rightPanel", this.getPathString("sprites", "singleBoxSprite.png"), 0, 0.05, 0.95, 0.9));
+        this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_CONTAINER_SPRITE.value(), new SpriteElementImpl(
+                "mainPanel", this.getPathString("sprites", "singleBoxSprite.png"), 0.45, 0.1, 0.45, 0.85));
 
 
     }
