@@ -78,7 +78,7 @@ public final class PokemonImpl implements Pokemon {
 	}
 
 	private void initGender(){
-		if(random.nextInt(2) == 1){
+		if(random.nextInt(100)%2 == 1){
 			this.gender = "male";
 		}
 		else{
@@ -277,4 +277,34 @@ public final class PokemonImpl implements Pokemon {
 			}		
 		}	
 	}
+
+	@Override
+public String toString() {
+    String result = "Pokemon {" +
+            "\n  Name = '" + name + '\'' +
+            ",\n  Pokedex Number = " + pokedexNumber +
+            ",\n  Type1 = " + type1;
+			if(type2.isPresent()){
+				result += ",\n  Type2 = " + type2.get();
+			}
+			result +=
+            ",\n  Ability = '" + abilityName + '\'' +
+            ",\n  Gender = '" + gender + '\'' +
+            ",\n  Weight = " + weight +
+            ",\n  Capture Rate = " + captureRate +
+            ",\n  Level Range = " + level +
+            ",\n  EXP Range = " + exp +
+            ",\n  Level-Up Curve = '" + levelUpCurve + '\'' +
+            ",\n  Total Used EV = " + totalUsedEV +
+            ",\n  Base Stats = " + baseStats +
+            ",\n  Nature = " + nature +
+            ",\n  IVs = " + IV +
+            ",\n  EVs = " + EV +
+            ",\n  Actual Stats = " + actualStats +
+            ",\n  Level Moves Learn = " + levelMovesLearn +
+            ",\n  Actual Moves = " + actualMoves +
+            ",\n  Gives EV = " + givesEV +
+            "\n}";
+		return result;
+		}
 }
