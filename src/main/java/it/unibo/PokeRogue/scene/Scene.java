@@ -7,9 +7,7 @@ import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 
 public interface Scene {
 
-    void initGpraphicElements();
-
-    void initStatus();
+    
 
     void updateGraphic();
 

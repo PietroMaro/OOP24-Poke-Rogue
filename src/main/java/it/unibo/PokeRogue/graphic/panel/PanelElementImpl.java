@@ -8,7 +8,7 @@ import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 
 public class PanelElementImpl extends GraphicElementImpl implements PanelElement {
 
-    public PanelElementImpl(String panelName, LayoutManager layout, double x, double y, double width, double height) {
+    public PanelElementImpl(String panelName, LayoutManager layout) {
         super(panelName);
 
         if (layout instanceof OverlayLayout) {
@@ -17,8 +17,6 @@ public class PanelElementImpl extends GraphicElementImpl implements PanelElement
             this.setLayout(layout);
         }
 
-        this.setBounds((int) (getWidth() * x), (int) (getHeight() * y), (int) (getWidth() * width),
-                (int) (getHeight() * height));
 
     
 

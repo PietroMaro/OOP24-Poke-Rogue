@@ -24,11 +24,11 @@ public class GraphicTest {
                 Map<Integer, GraphicElementImpl> graphicElements = new LinkedHashMap<>();
                 Map<String, PanelElementImpl> panelElements = new LinkedHashMap<>();
 
-                panelElements.put("sfondo", new PanelElementImpl("", new OverlayLayout(null), 0, 0, 1, 1));
+                panelElements.put("sfondo", new PanelElementImpl("", new OverlayLayout(null)));
 
-                panelElements.put("firstPanel", new PanelElementImpl("sfondo", new GridLayout(1, 2), 0, 0, 1, 1));
-                panelElements.put("sinistra", new PanelElementImpl("firstPanel", new GridLayout(3, 1), 0, 0, 1, 1));
-                panelElements.put("destra", new PanelElementImpl("firstPanel", new GridLayout(3, 1), 0, 0, 1, 1));
+                panelElements.put("firstPanel", new PanelElementImpl("sfondo", new GridLayout(1, 2)));
+                panelElements.put("sinistra", new PanelElementImpl("firstPanel", new GridLayout(3, 1)));
+                panelElements.put("destra", new PanelElementImpl("firstPanel", new GridLayout(3, 1)));
 
                 graphicElements.put(0,
                                 new TextElementImpl("sinistra", "prima colonna prima riga", Color.RED,

@@ -3,6 +3,7 @@ package it.unibo.PokeRogue;
 import it.unibo.PokeRogue.savingSystem.SavingSystem;
 import it.unibo.PokeRogue.savingSystem.SavingSystemImpl;
 import it.unibo.PokeRogue.scene.Scene;
+import it.unibo.PokeRogue.scene.SceneBox;
 import it.unibo.PokeRogue.scene.SceneMenu;
 
 /**
@@ -45,7 +46,7 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
 
                 break;
             case "box":
-                System.out.println("box");
+                currentScene = new SceneBox();
 
                 break;
 
