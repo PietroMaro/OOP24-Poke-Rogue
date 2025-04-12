@@ -1,7 +1,15 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "A one-hit KO,\ndrill attack. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "enemy.stats.hp.current",
+                0
+            ]
+        ]
+    },
     "accuracy": 30,
     "critRate": 0,
     "baseDamage": 0,
