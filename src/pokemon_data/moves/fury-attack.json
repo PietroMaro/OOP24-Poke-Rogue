@@ -6,7 +6,7 @@
         "activation": [
             [
                 "attackUs.damage",
-                "attackUs.baseDamage * 3"
+                "attackUs.baseDamage * RANDOM"
             ]
         ]
     },

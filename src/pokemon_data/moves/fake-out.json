@@ -3,12 +3,7 @@
     "isPhysical": false,
     "effect": {
         "checks": [],
-        "activation": [
-            [
-                "enemy.statusCondition",
-                "'flinch'"
-            ]
-        ]
+        "activation": []
     },
     "accuracy": 100,
     "critRate": 0,

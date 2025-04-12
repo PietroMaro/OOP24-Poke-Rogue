@@ -5,10 +5,6 @@
         "checks": [],
         "activation": [
             [
-                "enemy.stats.hp.current",
-                "enemy.stats.hp.current - baseDamage"
-            ],
-            [
                 "us.stats.hp.current",
                 "0"
             ]

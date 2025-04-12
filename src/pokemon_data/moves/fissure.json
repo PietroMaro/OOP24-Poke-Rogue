@@ -2,15 +2,17 @@
     "pp": 5,
     "isPhysical": false,
     "effect": {
-        "checks": [],
+        "checks": [
+            [
+                "enemy.stats.speed",
+                "<",
+                "us.stats.speed"
+            ]
+        ],
         "activation": [
             [
                 "enemy.stats.hp.current",
                 "0"
-            ],
-            [
-                "enemy.statusCondition",
-                "'fainted'"
             ]
         ]
     },

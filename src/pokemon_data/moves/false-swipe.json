@@ -2,7 +2,11 @@
     "pp": 40,
     "isPhysical": false,
     "effect": {
-        "checks": [],
+        "checks": [
+            "enemy.stats.hp.current",
+            "==",
+            "0"
+        ],
         "activation": [
             [
                 "enemy.stats.hp.current",
