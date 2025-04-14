@@ -6,7 +6,7 @@ public enum Type {
 		DRAGON("dragon"),
 		ELECTRIC("electric"),
 		FAIRY("fairy"),
-		FIGHT("fight"),
+		FIGHTING("fighting"),
 		FIRE("fire"),
 		FLYING("flying"),
 		GHOST("ghost"),

@@ -9,6 +9,6 @@ public interface SavingSystem extends Singleton {
 
     void savePokemon(Pokemon pokemon);
     void loadData(String path);
-    void saveData(String path);
+    void saveData(String path, String fileName);
     List<List<String>> getSavedPokemon();
 }

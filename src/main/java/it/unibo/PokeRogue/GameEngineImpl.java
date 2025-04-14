@@ -42,11 +42,11 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
     public void setScene(String newScene) {
         switch (newScene) {
             case "main":
-                currentScene = new SceneBox(); //rimettere menu
+                currentScene = new SceneBox("prova1.json"); //rimettere menu
 
                 break;
             case "box":
-                currentScene = new SceneBox();
+                currentScene = new SceneBox("");
 
                 break;
 

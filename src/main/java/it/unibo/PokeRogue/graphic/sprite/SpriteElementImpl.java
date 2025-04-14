@@ -11,14 +11,14 @@ import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 
 public class SpriteElementImpl extends GraphicElementImpl implements SpriteElement {
 
-
     private Image spriteImage;
     private double LeftUpX;
     private double LeftUpy;
     private double width;
     private double height;
 
-    public SpriteElementImpl(String panelName, String pathToImage, double LeftUpX, double LeftUpy, double width, double height) {
+    public SpriteElementImpl(String panelName, String pathToImage, double LeftUpX, double LeftUpy, double width,
+            double height) {
         super(panelName);
 
         try {
@@ -34,14 +34,26 @@ public class SpriteElementImpl extends GraphicElementImpl implements SpriteEleme
         this.width = width;
         this.height = height;
 
+    }
 
-        
+    public SpriteElementImpl(String panelName, Image image, double LeftUpX, double LeftUpy, double width,
+            double height) {
+        super(panelName);
+
+        this.spriteImage = image;
+
+        this.LeftUpX = LeftUpX;
+        this.LeftUpy = LeftUpy;
+        this.width = width;
+        this.height = height;
+
     }
 
     @Override
     protected void paintComponent(Graphics drawEngine) {
         super.paintComponent(drawEngine);
-        drawEngine.drawImage(this.spriteImage, (int) (getWidth()*this.LeftUpX), (int) (getHeight() * this.LeftUpy),(int) (getWidth() * this.width),(int) (getHeight()*this.height), null);
+        drawEngine.drawImage(this.spriteImage, (int) (getWidth() * this.LeftUpX), (int) (getHeight() * this.LeftUpy),
+                (int) (getWidth() * this.width), (int) (getHeight() * this.height), null);
 
     }
 
