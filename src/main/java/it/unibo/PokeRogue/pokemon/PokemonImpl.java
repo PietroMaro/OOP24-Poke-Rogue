@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Random;
+import java.awt.Image;
 
 public final class PokemonImpl implements Pokemon {
 	final private Random random = new Random();
@@ -40,6 +41,9 @@ public final class PokemonImpl implements Pokemon {
 	private boolean hasToLearnMove = false;
 	private Optional<String> newMoveToLearn = Optional.empty(); 
 
+	private Image spriteFront;
+	private Image spriteBack;
+
 	public PokemonImpl(final PokemonBlueprint pokemonBlueprint){
 		this.baseStats = pokemonBlueprint.stats();	
 		generateIVs();
@@ -61,6 +65,8 @@ public final class PokemonImpl implements Pokemon {
 		this.holdingObject = Optional.empty();
 		initAbility(pokemonBlueprint.possibleAbilities());
 		this.statusCondition = Optional.empty();
+		this.spriteFront = pokemonBlueprint.spriteFront();
+		this.spriteBack = pokemonBlueprint.spriteBack();
 	}
 
 	private void generateIVs() {
@@ -306,5 +312,14 @@ public String toString() {
             ",\n  Gives EV = " + givesEV +
             "\n}";
 		return result;
+		}
+
+		@Override
+		public Image getSpriteFront(){
+			return this.spriteFront;
+		}
+		@Override
+		public Image getSpriteBack(){
+			return this.spriteBack;
 		}
 }
