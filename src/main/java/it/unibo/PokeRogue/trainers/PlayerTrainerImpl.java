@@ -16,13 +16,17 @@ import java.util.Optional;
  */
 public class PlayerTrainerImpl extends TrainerImpl implements PlayerTrainer {
 
-    private static Optional<PlayerTrainerImpl> instanceOfTrainer = Optional.empty();
+    private static PlayerTrainerImpl instanceOfTrainer = null;
 
     public static PlayerTrainerImpl getTrainerInstance() {
-        if (instanceOfTrainer.isEmpty()) {
-            instanceOfTrainer = Optional.of(new PlayerTrainerImpl());
+        if (instanceOfTrainer == null) {
+            instanceOfTrainer = new PlayerTrainerImpl();
         }
 
-        return instanceOfTrainer.get();
+        return instanceOfTrainer;
+    }
+
+    public PlayerTrainerImpl(){
+        super();
     }
 }

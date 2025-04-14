@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.swing.OverlayLayout;
 
@@ -34,11 +35,12 @@ public class SceneBox implements Scene {
         private final SavingSystem savingSystemInstance;
         private int boxIndex;
         private int currentSelectedButton;
-        private final PlayerTrainer playerTrainerInstance;
+        private final PlayerTrainerImpl playerTrainerInstance;
         private final List<List<Pokemon>> boxes;
         private final PokemonFactory pokemonFactoryInstance;
         private int currentBoxLength;
         private int newSelectedButton;
+        private int newBoxIndex;
 
         private enum sceneGraphicEnum {
 
@@ -108,7 +110,7 @@ public class SceneBox implements Scene {
         }
 
         private void addPokemonToBox(final Pokemon pokemon) {
-                
+
                 if (this.boxes.size() == 0) {
                         this.boxes.add(new ArrayList<>());
                         this.currentBoxLength++;
@@ -121,9 +123,6 @@ public class SceneBox implements Scene {
                 }
 
                 this.boxes.get(currentBoxLength - 1).add(pokemon);
-                System.out.println(pokemon.name());
-                System.out.println(this.boxes.get(currentBoxLength - 1).size());
-
 
         }
 
@@ -141,7 +140,6 @@ public class SceneBox implements Scene {
 
                         for (var box : this.savingSystemInstance.getSavedPokemon()) {
                                 for (String pokemonName : box) {
-                                        System.out.println(pokemonName);
                                         this.addPokemonToBox(pokemonFactoryInstance.pokemonFromName(pokemonName));
 
                                 }
@@ -169,6 +167,26 @@ public class SceneBox implements Scene {
 
         }
 
+        private void initPokemonSprites() {
+                for (int pokemonIndex = 0; pokemonIndex < 81; pokemonIndex++) {
+                        if (pokemonIndex < this.boxes.get(this.boxIndex).size()) {
+                                this.sceneGraphicElements.put(pokemonIndex + 206,
+                                                new SpriteElementImpl("pokemonPanel",
+                                                                this.boxes.get(boxIndex).get(pokemonIndex)
+                                                                                .getSpriteFront(),
+                                                                0.455 + ((pokemonIndex % 9) * 0.049),
+                                                                0.115 + ((pokemonIndex / 9) * 0.09), 0.05, 0.07));
+
+                        } else {
+                                this.sceneGraphicElements.remove(pokemonIndex + 206);
+                        }
+
+                }
+
+                this.currentBoxLength = this.boxes.get(this.boxIndex).size();
+
+        }
+
         private void initGpraphicElements() {
 
                 // Panels
@@ -181,7 +199,19 @@ public class SceneBox implements Scene {
                 this.sceneGraphicElements.put(sceneGraphicEnum.CURRENT_BOX_TEXT.value(),
                                 new TextElementImpl("firstPanel", "1", Color.WHITE, 0.07, 0.415, 0.19));
 
+                // Pokemon Buttons
+
+                for (int pokemonIndex = 0; pokemonIndex < 81; pokemonIndex++) {
+
+                        this.sceneGraphicElements.put(pokemonIndex + 6,
+                                        new ButtonElementImpl("firstPanel", null, Color.WHITE, 0,
+                                                        0.465 + ((pokemonIndex % 9) * 0.049),
+                                                        0.125 + ((pokemonIndex / 9) * 0.09), 0.03, 0.05));
+
+                }
+
                 // Buttons
+
                 this.sceneGraphicElements.put(sceneGraphicEnum.UP_ARROW_BUTTON.value(),
                                 new ButtonElementImpl("firstPanel", null, Color.WHITE, 0, 0.41, 0.11, 0.02, 0.04));
                 this.sceneGraphicElements.put(sceneGraphicEnum.DOWN_ARROW_BUTTON.value(),
@@ -208,13 +238,13 @@ public class SceneBox implements Scene {
                                                 this.getPathString("sprites", "upArrowSprite.png"), 0.4, 0.1, 0.04,
                                                 0.06));
                 this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_SPRITE_SELECTED_0.value(), new SpriteElementImpl(
-                                "firstPanel", this.getPathString("sprites", "pokeSquadEmpty.png"), 0.39, 0.3, 0.065,
+                                "pokemonPanel", this.getPathString("sprites", "pokeSquadEmpty.png"), 0.39, 0.3, 0.065,
                                 0.09));
                 this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_SPRITE_SELECTED_1.value(), new SpriteElementImpl(
-                                "firstPanel", this.getPathString("sprites", "pokeSquadEmpty.png"), 0.39, 0.4, 0.065,
+                                "pokemonPanel", this.getPathString("sprites", "pokeSquadEmpty.png"), 0.39, 0.4, 0.065,
                                 0.09));
                 this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_SPRITE_SELECTED_2.value(), new SpriteElementImpl(
-                                "firstPanel", this.getPathString("sprites", "pokeSquadEmpty.png"), 0.39, 0.5, 0.065,
+                                "pokemonPanel", this.getPathString("sprites", "pokeSquadEmpty.png"), 0.39, 0.5, 0.065,
                                 0.09));
 
                 // Sprites Bg
@@ -241,42 +271,61 @@ public class SceneBox implements Scene {
 
                 this.setButtonStatus(this.currentSelectedButton, true);
 
-                // Pokemon
-
-                for (int pokemonIndex = 0; pokemonIndex < 81; pokemonIndex++) {
-                        if (pokemonIndex < this.boxes.get(this.boxIndex).size()) {
-                                this.sceneGraphicElements.put(pokemonIndex + 206,
-                                                new SpriteElementImpl("pokemonPanel",
-                                                                this.boxes.get(boxIndex).get(pokemonIndex)
-                                                                                .getSpriteFront(),
-                                                                0.455 + ((pokemonIndex % 9) * 0.049),
-                                                                0.115 + ((pokemonIndex / 9) * 0.09), 0.05, 0.07));
-
-                        } else {
-                                this.sceneGraphicElements.remove(pokemonIndex + 206);
-                        }
-
-                        this.sceneGraphicElements.put(pokemonIndex + 6,
-                                        new ButtonElementImpl("pokemonPanel", null, Color.WHITE, 0,
-                                                        0.465 + ((pokemonIndex % 9) * 0.049),
-                                                        0.125 + ((pokemonIndex / 9) * 0.09), 0.03, 0.05));
-
-                }
-
+                //Draw Pokemon sprites
+                this.initPokemonSprites();
         }
 
         private void initStatus() {
                 this.boxIndex = 0;
                 this.currentSelectedButton = 0;
                 this.newSelectedButton = 0;
+                this.newBoxIndex = 0;
         }
 
         @Override
         public void updateGraphic() {
 
+                // Update selected button
                 this.setButtonStatus(this.currentSelectedButton, false);
                 this.setButtonStatus(this.newSelectedButton, true);
                 this.currentSelectedButton = newSelectedButton;
+
+                // Update showed box
+                if (this.newBoxIndex != this.boxIndex) {
+                        this.boxIndex = this.newBoxIndex;
+
+                        this.sceneGraphicElements.put(sceneGraphicEnum.CURRENT_BOX_TEXT.value(),
+                                        new TextElementImpl("firstPanel", String.valueOf(this.boxIndex + 1),
+                                                        Color.WHITE, 0.07, 0.415, 0.19));
+
+                        this.initPokemonSprites();
+                }
+
+                // Update pokesquad
+                for (int squadPosition = sceneGraphicEnum.POKEMON_SPRITE_SELECTED_0
+                                .value(); squadPosition < sceneGraphicEnum.POKEMON_SPRITE_SELECTED_2.value()
+                                                + 1; squadPosition++) {
+
+                        Optional<Pokemon> pokemon = this.playerTrainerInstance
+                                        .getPokemon(squadPosition - sceneGraphicEnum.POKEMON_SPRITE_SELECTED_0.value());
+                        if (pokemon.isEmpty()) {
+                                this.sceneGraphicElements.put(squadPosition, new SpriteElementImpl(
+                                                "pokemonPanel", this.getPathString("sprites", "pokeSquadEmpty.png"), 0.39,
+                                                0.1 * squadPosition - 10.5, 0.065,
+                                                0.09));
+                        } else {
+                                this.sceneGraphicElements.put(squadPosition, new SpriteElementImpl(
+                                                "pokemonPanel", pokemon.get().getSpriteFront(), 0.39,
+                                                0.1 * squadPosition - 10.5, 0.065,
+                                                0.09));
+                        }
+
+                }
+
+                if(this.currentSelectedButton > 5){
+                       // Pokemon currentPokemon = this.boxes.get(this.boxIndex).get(this.currentSelectedButton-6);
+                       // this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_NAME.value(), new TextElementImpl("pokemonPanel", null, null, currentSelectedButton, currentBoxLength, boxIndex));
+                }
 
         }
 
@@ -306,22 +355,48 @@ public class SceneBox implements Scene {
                         case KeyEvent.VK_RIGHT:
                                 if (this.currentSelectedButton <= 5
                                                 && (9 * this.currentSelectedButton) <= this.currentBoxLength) {
+
                                         this.newSelectedButton = (9 * this.currentSelectedButton) + 6;
-                                }  
+                                }
                                 if (this.currentSelectedButton > 5 && this.currentSelectedButton % 9 != 5
                                                 && this.currentSelectedButton - 5 < this.currentBoxLength) {
                                         this.newSelectedButton += 1;
                                 }
+
                                 break;
                         case KeyEvent.VK_LEFT:
-                        
-                                if(this.currentSelectedButton >5 && (this.currentSelectedButton-6)% 9 == 0 && (this.currentSelectedButton-6) /9 <=5){
-                                        this.newSelectedButton =  (this.currentSelectedButton-6) /9;
-                                } else if(this.currentSelectedButton >5 ){
+
+                                if (this.currentSelectedButton > 5 && (this.currentSelectedButton - 6) % 9 == 0
+                                                && (this.currentSelectedButton - 6) / 9 <= 5) {
+                                        this.newSelectedButton = (this.currentSelectedButton - 6) / 9;
+                                } else if (this.currentSelectedButton > 5
+                                                && (this.currentSelectedButton - 6) % 9 != 0) {
                                         this.newSelectedButton -= 1;
                                 }
+                                break;
 
                         case KeyEvent.VK_ENTER:
+
+                                if (this.currentSelectedButton == 0 && this.boxIndex > 0) {
+                                        this.newBoxIndex -= 1;
+
+                                }
+
+                                if (this.currentSelectedButton == 1 && this.boxIndex < this.boxes.size() - 1) {
+                                        this.newBoxIndex += 1;
+
+                                }
+
+                                if (this.currentSelectedButton > 5) {
+
+                                        this.playerTrainerInstance.addPokemon(
+                                                        this.boxes.get(boxIndex).get(this.currentSelectedButton - 6),
+                                                        3);
+                                }
+
+                                if (this.currentSelectedButton > 1 && this.currentSelectedButton < 5) {
+                                        this.playerTrainerInstance.removePokemon(this.currentSelectedButton - 2);
+                                }
                                 break;
 
                         default:

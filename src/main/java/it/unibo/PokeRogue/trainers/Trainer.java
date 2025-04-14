@@ -20,4 +20,5 @@ public interface Trainer {
 
 	Boolean addPokemon(Pokemon pokemon,int limits);
 
+
 }
