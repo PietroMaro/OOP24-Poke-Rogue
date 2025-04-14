@@ -1,7 +1,15 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "A chilling attack that\ncauses fainting if it hits. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "enemy.stats.hp.current",
+                "0"
+            ]
+        ]
+    },
     "accuracy": 30,
     "critRate": 0,
     "baseDamage": 0,

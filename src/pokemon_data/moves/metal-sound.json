@@ -5,8 +5,8 @@
         "checks": [],
         "activation": [
             [
-                "enemy.statStages.special-defense",
-                "enemy.statStages.special-defense - 2"
+                "enemy.stats.special-defense",
+                "enemy.stats.special-defense - 2"
             ]
         ]
     },

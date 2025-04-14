@@ -1,7 +1,10 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "Causes an uproar for 2 to 5\nturns and prevents sleep. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 90,

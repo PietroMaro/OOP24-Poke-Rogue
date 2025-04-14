@@ -11,8 +11,8 @@
         ],
         "activation": [
             [
-                "us.statStages.attack",
-                "us.statStages.attack + 1"
+                "us.stats.attack",
+                "us.stats.attack + 1"
             ]
         ]
     },

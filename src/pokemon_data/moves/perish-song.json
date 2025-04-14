@@ -1,7 +1,19 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "Both user and foe\nfaint in 3 turns. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.stats.hp.current",
+                "0"
+            ],
+            [
+                "enemy.stats.hp.current",
+                "0"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

@@ -1,7 +1,37 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "A powdery attack that may\nraise abilities. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "RANDOM",
+                "<",
+                "0.20"
+            ]
+        ],
+        "activation": [
+            [
+                "us.tempStatsBonus.attack",
+                "us.tempStatsBonus.attack + 1"
+            ],
+            [
+                "us.tempStatsBonus.defense",
+                "us.tempStatsBonus.defense + 1"
+            ],
+            [
+                "us.tempStatsBonus.special-attack",
+                "us.tempStatsBonus.special-attack + 1"
+            ],
+            [
+                "us.tempStatsBonus.special-defense",
+                "us.tempStatsBonus.special-defense + 1"
+            ],
+            [
+                "us.tempStatsBonus.speed",
+                "us.tempStatsBonus.speed + 1"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 60,

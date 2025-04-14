@@ -1,7 +1,21 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "Foils attack that\nturn. It may fail. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "RANDOM",
+                "<=",
+                "2" 
+            ]
+        ],
+        "activation": [
+            [
+                "attackEnemy.damage",
+                "0"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,
