@@ -4,8 +4,6 @@ import java.util.List;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
 import org.json.JSONArray;
 
 import it.unibo.PokeRogue.SingletonImpl;
@@ -18,14 +16,14 @@ public class SavingSystemImpl extends SingletonImpl implements SavingSystem {
 	final private JsonReader jsonReader = new JsonReaderImpl();
 	private JSONArray savedPokemon = new JSONArray();
 
-	@Override
-	public void savePokemon(Pokemon pokemon) {
-		for (int pokemonIndex = 0; pokemonIndex < this.savedPokemon.length(); pokemonIndex += 1) {
-			if (pokemon.name().equals(this.savedPokemon.getString(pokemonIndex))) {
+    @Override
+    public void savePokemon(Pokemon pokemon) {
+		for(int pokemonIndex = 0; pokemonIndex < this.savedPokemon.length(); pokemonIndex+=1){
+			if(pokemon.getName().equals(this.savedPokemon.getString(pokemonIndex))){
 				return;
 			}
 		}
-		savedPokemon.put(pokemon.name());
+		savedPokemon.put(pokemon.getName());
 	}
 
 	@Override
