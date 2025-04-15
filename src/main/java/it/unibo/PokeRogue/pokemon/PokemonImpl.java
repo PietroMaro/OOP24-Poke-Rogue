@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Random;
+
+import edu.umd.cs.findbugs.annotations.OverrideMustInvoke;
+
 import java.awt.Image;
 
 public final class PokemonImpl implements Pokemon {
@@ -263,8 +266,25 @@ public final class PokemonImpl implements Pokemon {
 	}
 
 	@Override
-	public String name(){
+	public String getName(){
 		return this.name;
+	}
+
+	@Override
+	public String getGender(){
+		return this.gender;
+	}
+	@Override
+	public String getLevelUpCurve(){
+		return this.levelUpCurve;
+	}
+	@Override
+	public List<String> getActualMoves(){
+		return this.actualMoves;
+	}
+	@Override
+	public Nature getNature(){
+		return this.nature;
 	}
 
 	@Override

@@ -23,7 +23,12 @@ public interface Pokemon {
 	Map<String,Integer> getGivesEV();
 	Image getSpriteFront();
 	Image getSpriteBack();
-	String name();
+	String getName();
+
+	String getGender();
+	String getLevelUpCurve();
+	List<String> getActualMoves();
+	Nature getNature();
 
 	//if exp+amount = max of the level it will trigger level up
 	void increaseExp(int amount,boolean isPlayerPokemon);
