@@ -23,6 +23,7 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
     private GraphicEngine graphicEngineInstance;
     private SavingSystem savingSystemIstance;
     private Scene currentScene;
+    private String fileToLoadName;
 
     public GameEngineImpl() {
 
@@ -39,15 +40,18 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
      * @param newScene the name of the new scene to load
      */
     @Override
-    public void setScene(String newScene) {
+    public void setScene(final String newScene) {
         switch (newScene) {
             case "main":
-                currentScene = new SceneBox("prova1.json"); //rimettere menu
+                currentScene = new SceneMenu();
 
                 break;
             case "box":
-                currentScene = new SceneBox("");
+                currentScene = new SceneBox(this.fileToLoadName);
 
+                break;
+            case "fight":
+                System.out.println("fightScene");
                 break;
 
             default:
@@ -59,7 +63,7 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
 
     }
 
-    public void keyPressedToScene(int keyCode) {
+    public void keyPressedToScene(final int keyCode) {
         if (this.currentScene == null) {
             System.out.println("No active scene");
             return;
@@ -71,10 +75,14 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
 
     }
 
-    public void setGraphicEngine(GraphicEngine graphicEngine) {
+    public void setGraphicEngine(final GraphicEngine graphicEngine) {
 
         this.graphicEngineInstance = graphicEngine;
 
+    }
+
+    public void setFileToLoad(final String fileName) {
+        this.fileToLoadName = fileName;
     }
 
 }

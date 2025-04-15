@@ -204,6 +204,7 @@ public class SceneMenu implements Scene {
 
                         break;
                     case NEW_GAME_BUTTON:
+                        this.gameEngineInstance.setFileToLoad("");
                         this.gameEngineInstance.setScene("box");
                         break;
 

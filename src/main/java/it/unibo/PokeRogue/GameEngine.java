@@ -17,7 +17,8 @@ public interface GameEngine extends Singleton {
      * 
      * @param newScene the name of the new scene to load
      */
-    void setScene(String newScene);
-    void keyPressedToScene(int keyCode);
-    void setGraphicEngine(GraphicEngine graphicEngine);
+    void setScene(final String newScene);
+    void keyPressedToScene(final int keyCode);
+    void setGraphicEngine(final GraphicEngine graphicEngine);
+    void setFileToLoad(final String fileName);
 }

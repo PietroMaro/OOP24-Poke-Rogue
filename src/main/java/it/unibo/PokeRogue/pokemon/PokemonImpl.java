@@ -288,6 +288,13 @@ public final class PokemonImpl implements Pokemon {
 	}
 
 	@Override
+	public String getAbilityName(){
+		return this.abilityName;
+	}
+
+
+
+	@Override
 	public void increaseExp(int amount,boolean isPlayerPokemon){
 		this.exp.increment(amount);
 		if(this.exp.getCurrentValue() == this.exp.getCurrentMax()){
@@ -303,6 +310,9 @@ public final class PokemonImpl implements Pokemon {
 			}		
 		}	
 	}
+
+
+	
 
 	@Override
 public String toString() {

@@ -38,10 +38,10 @@ public enum Nature {
 			this.statDecrease = statDecrease;
 		}
 
-		String statIncrease(){
+		public String statIncrease(){
 			return this.statIncrease;
 		}
-		String statDecrease(){
+		public String statDecrease(){
 			return this.statDecrease;
 		}
 		public static Nature getRandomNature() {

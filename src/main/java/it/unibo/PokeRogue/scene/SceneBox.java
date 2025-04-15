@@ -1,6 +1,7 @@
 package it.unibo.PokeRogue.scene;
 
 import java.awt.Color;
+import java.awt.PageAttributes.ColorType;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.nio.file.Paths;
@@ -27,7 +28,10 @@ import it.unibo.PokeRogue.savingSystem.SavingSystem;
 import it.unibo.PokeRogue.savingSystem.SavingSystemImpl;
 import it.unibo.PokeRogue.trainers.PlayerTrainer;
 import it.unibo.PokeRogue.pokemon.Type;
+import it.unibo.PokeRogue.pokemon.Nature;
+
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
+import it.unibo.PokeRogue.utilities.ColorTypeConversion;
 import it.unibo.PokeRogue.scene.sceneGraphicEnum;
 
 public class SceneBox implements Scene {
@@ -239,6 +243,8 @@ public class SceneBox implements Scene {
 
         @Override
         public void updateGraphic() {
+                Pokemon selectedPokemon;
+                Nature pokemoNature;
 
                 // Update selected button
                 this.setButtonStatus(this.currentSelectedButton, false);
@@ -279,13 +285,15 @@ public class SceneBox implements Scene {
                 }
 
                 // Clean the previus element before adding new ones
-                for (int x = sceneGraphicEnum.POKEMON_NUMBER_TEXT.value(); x < sceneGraphicEnum.POKEMON_MOVE_BOX_4
-                                .value()+1; x++) {
+                for (int x = sceneGraphicEnum.POKEMON_NUMBER_TEXT.value(); x < sceneGraphicEnum.POKEMON_MOVE_BOX_1
+                                .value() + 1; x++) {
                         sceneGraphicElements.remove(x);
                 }
 
+                // Showing selected pokemon details
                 if (this.currentSelectedButton > 5) {
-                        Pokemon selectedPokemon = this.boxes.get(this.boxIndex).get(this.currentSelectedButton - 6);
+                        selectedPokemon = this.boxes.get(this.boxIndex).get(this.currentSelectedButton - 6);
+                        pokemoNature = selectedPokemon.getNature();
                         this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_NUMBER_TEXT.value(),
                                         new TextElementImpl("pokemonPanel",
                                                         String.valueOf((this.currentSelectedButton - 5)
@@ -293,53 +301,69 @@ public class SceneBox implements Scene {
                                                         Color.WHITE, 0.09, 0.14, 0.16));
                         this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_NAME.value(),
                                         new TextElementImpl("pokemonPanel",
-                                                        this.capitalizeFirst(selectedPokemon.name()), Color.WHITE, 0.08,
+                                                        this.capitalizeFirst(selectedPokemon.getName()), Color.WHITE,
+                                                        0.08,
                                                         0.09, 0.77));
                         this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_ABILITY.value(),
-                                        new TextElementImpl("pokemonPanel", "Ability: ", Color.GRAY, 0.03, 0.09, 0.82));
-                        this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_PASSIVE.value(),
-                                        new TextElementImpl("pokemonPanel", "Passive: ", Color.GRAY, 0.03, 0.09, 0.86));
+                                        new TextElementImpl("pokemonPanel", "Ability: "+selectedPokemon.getAbilityName(), Color.GRAY, 0.04, 0.09, 0.84));
+
                         this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_NATURE.value(),
-                                        new TextElementImpl("pokemonPanel", "Nature: ", Color.GRAY, 0.03, 0.09, 0.90));
+                                        new TextElementImpl("pokemonPanel",
+                                                        "Nature: " + pokemoNature + " (+" + pokemoNature.statIncrease()
+                                                                        + "/-" + pokemoNature.statDecrease() + ")",
+                                                        Color.GRAY, 0.04, 0.09, 0.88));
 
                         this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_TYPE_1.value(),
                                         new TextElementImpl("pokemonPanel",
                                                         (selectedPokemon.getTypes().get(0)).typeName().toUpperCase(),
                                                         Color.WHITE, 0.04, 0.09, 0.66));
+
+                        this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_BOX_TYPE_1.value(),
+                                        new BoxElementImpl("pokemonPanel",
+                                                        ColorTypeConversion.getColorForType(
+                                                                        selectedPokemon.getTypes().get(0)),
+                                                        Color.BLACK, 1, 0.09, 0.635, 0.066, 0.03));
+
                         if (selectedPokemon.getTypes().size() > 1) {
                                 this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_TYPE_2.value(),
                                                 new TextElementImpl("pokemonPanel",
                                                                 (selectedPokemon.getTypes().get(1)).typeName()
                                                                                 .toUpperCase(),
                                                                 Color.WHITE, 0.04, 0.16, 0.66));
+                                this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_BOX_TYPE_2.value(),
+                                                new BoxElementImpl("pokemonPanel",
+                                                                ColorTypeConversion.getColorForType(
+                                                                                selectedPokemon.getTypes().get(1)),
+                                                                Color.BLACK, 1, 0.156, 0.635, 0.066, 0.03));
 
                         }
-                        // decidere se aggiungere i due box per i type
 
                         this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_GROWTH_RATE.value(), new TextElementImpl(
-                                        "pokemonPanel", "Growth Rate: ", Color.GRAY, 0.04, 0.09, 0.7));
+                                        "pokemonPanel", "Growth Rate: " + selectedPokemon.getLevelUpCurve(), Color.GRAY,
+                                        0.04, 0.09, 0.7));
 
-                        //The 4 moves
+                        if (selectedPokemon.getGender() == "male") {
+                                this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_GENDER.value(),
+                                                new SpriteElementImpl("pokemonPanel",
+                                                                this.getPathString("sprites", "maleSymbolSprite.png"),
+                                                                0.35,
+                                                                0.75, 0.02, 0.03));
+                        } else {
+                                this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_GENDER.value(),
+                                                new SpriteElementImpl("pokemonPanel",
+                                                                this.getPathString("sprites", "femaleSymbolSprite.png"),
+                                                                0.35,
+                                                                0.75, 0.02, 0.03));
+                        }
+
                         this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_MOVE_1.value(),
-                                        new TextElementImpl("pokemonPanel", "move 1", Color.WHITE, 0.04, 0.26, 0.2));
 
-                                        this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_MOVE_2.value(),
-                                        new TextElementImpl("pokemonPanel", "move 2", Color.WHITE, 0.04, 0.26, 0.233));
-                                        this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_MOVE_3.value(),
-                                        new TextElementImpl("pokemonPanel", "move 3", Color.WHITE, 0.04, 0.26, 0.264));
-                                        this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_MOVE_4.value(),
-                                        new TextElementImpl("pokemonPanel", "move 4", Color.WHITE, 0.04, 0.26, 0.294));
-
-
+                                        new TextElementImpl("pokemonPanel",
+                                                        this.capitalizeFirst(selectedPokemon.getActualMoves().get(0)),
+                                                        Color.WHITE, 0.04, 0.26, 0.2));
 
                         this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_MOVE_BOX_1.value(), new BoxElementImpl(
                                         "pokemonPanel", Color.GRAY, Color.BLACK, 1, 0.25, 0.18, 0.14, 0.03));
-                        this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_MOVE_BOX_2.value(), new BoxElementImpl(
-                                        "pokemonPanel", Color.GRAY, Color.BLACK, 1, 0.25, 0.211, 0.14, 0.03));
-                        this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_MOVE_BOX_3.value(), new BoxElementImpl(
-                                        "pokemonPanel", Color.GRAY, Color.BLACK, 1, 0.25, 0.243, 0.14, 0.03));
-                        this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_MOVE_BOX_4.value(), new BoxElementImpl(
-                                        "pokemonPanel", Color.GRAY, Color.BLACK, 1, 0.25, 0.275, 0.14, 0.03));
 
                         // Pokemon Sprite
                         this.sceneGraphicElements.put(sceneGraphicEnum.POKEMON_DETAIL_SPRITE.value(),
@@ -397,6 +421,10 @@ public class SceneBox implements Scene {
                                 break;
 
                         case KeyEvent.VK_ENTER:
+
+                                if(this.currentSelectedButton == 5){
+                                        this.gameEngineInstance.setScene("fight");
+                                }
 
                                 if (this.currentSelectedButton == 0 && this.boxIndex > 0) {
                                         this.newBoxIndex -= 1;

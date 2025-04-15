@@ -24,6 +24,7 @@ public interface Pokemon {
 	Image getSpriteFront();
 	Image getSpriteBack();
 	String getName();
+	String getAbilityName();
 
 	String getGender();
 	String getLevelUpCurve();

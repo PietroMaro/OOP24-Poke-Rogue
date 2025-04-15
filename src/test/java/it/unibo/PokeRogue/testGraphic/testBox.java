@@ -13,7 +13,7 @@ public class testBox {
         SavingSystem save = SavingSystemImpl.getInstance(SavingSystemImpl.class);
     PokemonFactory pokfa = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
     
-        for(int x = 0;x<120;x++){
+        for(int x = 0;x<100;x++){
             save.savePokemon(pokfa.randomPokemon(1));
         }
 
