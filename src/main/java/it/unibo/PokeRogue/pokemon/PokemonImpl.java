@@ -287,11 +287,7 @@ public final class PokemonImpl implements Pokemon {
 		return this.nature;
 	}
 
-	@Override
-	public String getAbilityName(){
-		return this.abilityName;
-	}
-
+	
 
 
 	@Override

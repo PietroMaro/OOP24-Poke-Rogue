@@ -1,7 +1,6 @@
 package it.unibo.PokeRogue.scene;
 
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.nio.file.Paths;
 import java.util.LinkedHashMap;
@@ -87,33 +86,11 @@ public class SceneMenu implements Scene {
     }
 
     /**
-     * Builds a relative path string for a resource located in the menu scene image
-     * directory.
-     *
-     * @param directory the subdirectory inside "menu".
-     * @param fileName  the name of the file.
-     * @return the full relative path to the file as a string.
+     * Constructs a new SceneMenu object, initializing necessary data structures and
+     * components.
+     * It also calls the methods to initialize the status and graphic elements for
+     * the menu.
      */
-    private String getPathString(final String directory, final String fileName) {
-
-        return Paths.get("src", "sceneImages", "menu", directory, fileName).toString();
-
-    }
-
-    /**
-     * Sets the selection state of a button based on its code.
-     *
-     * @param buttonCode the unique identifier for the button element.
-     * @param status     {@code true} to mark the button as selected, {@code false}
-     *                   to deselect it.
-     */
-    private void setButtonStatus(final int buttonCode, final boolean status) {
-
-        ButtonElementImpl selectedButton = (ButtonElementImpl) sceneGraphicElements.get(buttonCode);
-        selectedButton.setSelected(status);
-
-    }
-
     public SceneMenu() {
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
@@ -124,52 +101,8 @@ public class SceneMenu implements Scene {
     }
 
     /**
-     * Initializes the panel and graphic elements of the scene, including buttons,
-     * texts, and background.
-     */
-    private void initGpraphicElements() {
-
-        // Panels
-        this.allPanelsElements.put("firstPanel", new PanelElementImpl("", new OverlayLayout(null)));
-       
-       
-        // Texts
-        this.sceneGraphicElements.put(sceneGraphicEnum.LOAD_GAME_BUTTON_TEXT.value(),
-                new TextElementImpl("firstPanel", "Continua", Color.BLACK, 0.06, 0.45, 0.24));
-
-        this.sceneGraphicElements.put(sceneGraphicEnum.NEW_GAME_BUTTON_TEXT.value(),
-                new TextElementImpl("firstPanel", "Nuova Partita", Color.BLACK, 0.06, 0.45, 0.44));
-
-        this.sceneGraphicElements.put(sceneGraphicEnum.OPTIONS_GAME_BUTTON_TEXT.value(),
-                new TextElementImpl("firstPanel", "Opzioni", Color.BLACK, 0.06, 0.45, 0.64));
-
-        // Buttons
-        this.sceneGraphicElements.put(sceneGraphicEnum.LOAD_BUTTON.value(),
-                new ButtonElementImpl("firstPanel", Color.GREEN, Color.BLACK, 1, 0.3, 0.2, 0.4, 0.05));
-        this.sceneGraphicElements.put(sceneGraphicEnum.NEW_GAME_BUTTON.value(),
-                new ButtonElementImpl("firstPanel", Color.GREEN, Color.BLACK, 1, 0.3, 0.4, 0.4, 0.05));
-        this.sceneGraphicElements.put(sceneGraphicEnum.OPTIONS_BUTTON.value(),
-                new ButtonElementImpl("firstPanel", Color.GREEN, Color.BLACK, 1, 0.3, 0.6, 0.4, 0.05));
-
-         // Background
-         this.sceneGraphicElements.put(sceneGraphicEnum.BACKGROUND.value(),
-         new BackgroundElementImpl("firstPanel", this.getPathString("images", "sceneMenuBg.png")));
-
-
-        this.setButtonStatus(this.currentSelectedButton.value(), true);
-    }
-
-    /**
-     * Initializes the internal status of the scene, setting the first selected
-     * button.
-     */
-    private void initStatus() {
-        this.currentSelectedButton = sceneGraphicEnum.LOAD_BUTTON;
-
-    }
-
-    /**
-     * Updates the graphical state of the menu by toggling button selection highlights.
+     * Updates the graphical state of the menu by toggling button selection
+     * highlights.
      */
     @Override
     public void updateGraphic() {
@@ -238,6 +171,77 @@ public class SceneMenu implements Scene {
     @Override
     public Map<String, PanelElementImpl> getAllPanelsElements() {
         return new LinkedHashMap<>(this.allPanelsElements);
+    }
+
+    /**
+     * Initializes the panel and graphic elements of the scene, including buttons,
+     * texts, and background.
+     */
+    private void initGpraphicElements() {
+
+        // Panels
+        this.allPanelsElements.put("firstPanel", new PanelElementImpl("", new OverlayLayout(null)));
+
+        // Texts
+        this.sceneGraphicElements.put(sceneGraphicEnum.LOAD_GAME_BUTTON_TEXT.value(),
+                new TextElementImpl("firstPanel", "Continua", Color.BLACK, 0.06, 0.45, 0.24));
+
+        this.sceneGraphicElements.put(sceneGraphicEnum.NEW_GAME_BUTTON_TEXT.value(),
+                new TextElementImpl("firstPanel", "Nuova Partita", Color.BLACK, 0.06, 0.45, 0.44));
+
+        this.sceneGraphicElements.put(sceneGraphicEnum.OPTIONS_GAME_BUTTON_TEXT.value(),
+                new TextElementImpl("firstPanel", "Opzioni", Color.BLACK, 0.06, 0.45, 0.64));
+
+        // Buttons
+        this.sceneGraphicElements.put(sceneGraphicEnum.LOAD_BUTTON.value(),
+                new ButtonElementImpl("firstPanel", Color.GREEN, Color.BLACK, 1, 0.3, 0.2, 0.4, 0.05));
+        this.sceneGraphicElements.put(sceneGraphicEnum.NEW_GAME_BUTTON.value(),
+                new ButtonElementImpl("firstPanel", Color.GREEN, Color.BLACK, 1, 0.3, 0.4, 0.4, 0.05));
+        this.sceneGraphicElements.put(sceneGraphicEnum.OPTIONS_BUTTON.value(),
+                new ButtonElementImpl("firstPanel", Color.GREEN, Color.BLACK, 1, 0.3, 0.6, 0.4, 0.05));
+
+        // Background
+        this.sceneGraphicElements.put(sceneGraphicEnum.BACKGROUND.value(),
+                new BackgroundElementImpl("firstPanel", this.getPathString("images", "sceneMenuBg.png")));
+
+        this.setButtonStatus(this.currentSelectedButton.value(), true);
+    }
+
+    /**
+     * Initializes the internal status of the scene, setting the first selected
+     * button.
+     */
+    private void initStatus() {
+        this.currentSelectedButton = sceneGraphicEnum.LOAD_BUTTON;
+
+    }
+
+    /**
+     * Builds a relative path string for a resource located in the menu scene image
+     * directory.
+     *
+     * @param directory the subdirectory inside "menu".
+     * @param fileName  the name of the file.
+     * @return the full relative path to the file as a string.
+     */
+    private String getPathString(final String directory, final String fileName) {
+
+        return Paths.get("src", "sceneImages", "menu", directory, fileName).toString();
+
+    }
+
+    /**
+     * Sets the selection state of a button based on its code.
+     *
+     * @param buttonCode the unique identifier for the button element.
+     * @param status     {@code true} to mark the button as selected, {@code false}
+     *                   to deselect it.
+     */
+    private void setButtonStatus(final int buttonCode, final boolean status) {
+
+        ButtonElementImpl selectedButton = (ButtonElementImpl) sceneGraphicElements.get(buttonCode);
+        selectedButton.setSelected(status);
+
     }
 
 }

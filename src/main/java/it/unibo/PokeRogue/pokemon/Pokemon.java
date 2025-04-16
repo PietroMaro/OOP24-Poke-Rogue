@@ -30,7 +30,6 @@ public interface Pokemon {
 	String getLevelUpCurve();
 	List<String> getActualMoves();
 	Nature getNature();
-	String getAbilityName();
 
 	//if exp+amount = max of the level it will trigger level up
 	void increaseExp(int amount,boolean isPlayerPokemon);
