@@ -352,4 +352,9 @@ public String toString() {
 		public Image getSpriteBack(){
 			return this.spriteBack;
 		}
-}
+
+		@Override
+		public String getAbilityName(){
+			return this.abilityName;
+		}
+	}
