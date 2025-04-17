@@ -1,0 +1,13 @@
+{
+  "situationChecks": "attacked",
+  "effect": {
+    "checks": [
+      ["attackEnemy.type", "==", "'fire'"]
+    ],
+    "activation": [
+      ["us.type1", "==", "'fire'"],
+      ["us.type2", "==", "'fire'"],
+      ["attackUs.baseDamage", "attackUs.baseDamage * 1.5"]
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+{
+    "situationChecks" : "passive",
+    "effect" : {
+            "checks" : [],
+            "activation" : [["attackUs.accuracy","attackUs.accuracy + (attackUs.accuracy / 5)"]]
+        }
+}

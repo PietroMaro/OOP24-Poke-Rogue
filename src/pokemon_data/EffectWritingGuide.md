@@ -31,7 +31,7 @@ us.statusCondition # Check StatusCondition enum (string values),\
 enemy.hp ... (same of us),\
 weather #Check weather enum (strings values)\
 ]\
-*operand* can be : ["==","<",">","<=",">=","!="]\
+*operand* can be : ["==","<",">","<=",">=","!=","in"]\
 \
 *value* can be : A matematical expression\
 (it will be interpreted like a math one, if you want to be sure put parentesis)\
