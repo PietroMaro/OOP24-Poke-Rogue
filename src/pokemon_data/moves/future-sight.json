@@ -1,7 +1,21 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "An attack that\nhits on 3rd turn. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "RANDOM",
+                "<",
+                "0.3"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.stats.hp.current",
+                "enemy.stats.hp.current - calculatedDamage"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 120,

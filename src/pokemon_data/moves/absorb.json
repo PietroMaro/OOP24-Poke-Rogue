@@ -1,7 +1,17 @@
 {
     "pp": 25,
     "isPhysical": false,
-    "effect":"Steals 1/2 of the\ndamage inflicted. TODO Create effect and link it here",
+
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.stats.hp.current",
+                "us.stats.hp.current + (attackUs.damage / 2)"
+            ]
+        ]
+    },
+
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 20,

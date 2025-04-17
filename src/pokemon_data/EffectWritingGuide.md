@@ -1,8 +1,9 @@
 An Effect is made of \
 "checks" : [] of [] made out of 3 parts (1 "attribute") (operand) (1 value) \
 *attribute* can be :[\
+RANDOM
 attackUs.pp,\
-AttackUs.isPhysical,\
+attackUs.isPhysical,\
 attackUs.accuracy,\
 attackUs.critRate,\
 attackUs.baseDamage, # damage of move in json\

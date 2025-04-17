@@ -1,7 +1,19 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "Makes the foe laugh to\nlower ATTACK and DEFENSE. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "enemy.stats.attack",
+                "enemy.stats.attack - 2"
+            ],
+            [
+                "enemy.stats.defense",
+                "enemy.stats.defense - 2"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,
