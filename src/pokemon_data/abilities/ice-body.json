@@ -1,0 +1,11 @@
+{
+  "situationChecks": "passive",
+  "effect": {
+    "checks": [
+      ["weather", "==", "'snow'"]
+    ],
+    "activation": [
+      ["us.stats.hp.current", "us.stats.hp.current + (us.stats.hp.max / 16)"]
+    ]
+  }
+}

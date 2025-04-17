@@ -1,0 +1,12 @@
+{
+  "situationChecks": "passive",
+  "effect": {
+    "checks": [
+      ["weather", "==", "'rain'"],
+      ["us.statusCondition", "!=", "null"]
+    ],
+    "activation": [
+      ["us.statusCondition", "null"]
+    ]
+  }
+}
