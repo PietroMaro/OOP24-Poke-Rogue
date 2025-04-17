@@ -1,0 +1,11 @@
+{
+  "situationChecks": "switchIn",
+  "effect": {
+    "checks": [
+      []
+    ],
+    "activation": [
+      ["us.statusCondition","''"]
+    ]
+  }
+}

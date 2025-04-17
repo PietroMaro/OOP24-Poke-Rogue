@@ -1,0 +1,11 @@
+{
+  "situationChecks": "passive",
+  "effect": {
+    "checks": [
+      ["us.statusCondition", "==", "'sleep'"]
+    ],
+    "activation": [
+      ["us.statusCondition","''"]
+    ]
+  }
+}

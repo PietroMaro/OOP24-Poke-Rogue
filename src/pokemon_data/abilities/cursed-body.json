@@ -1,0 +1,10 @@
+{
+  "situationChecks": "attacked",
+  "effect": {
+    "checks": [["RANDOM","<=","0.05"]
+    ],
+    "activation": [
+      ["attackEnemy.pp",0]
+    ]
+  }
+}
