@@ -1,0 +1,40 @@
+{
+    "pokedexNumber": 3,
+    "types": [
+        "grass",
+        "poison"
+    ],
+    "captureRate": 45,
+    "stats": {
+        "special-attack": 100,
+        "defense": 83,
+        "attack": 82,
+        "hp": 80,
+        "special-defense": 100,
+        "speed": 80
+    },
+    "moves": {
+        "22": "razor-leaf",
+        "1": "leech-seed",
+        "15": "sleep-powder",
+        "29": "sweet-scent",
+        "41": "growth",
+        "53": "synthesis",
+        "65": "solar-beam"
+    },
+    "growthRate": "medium-slow",
+    "name": "venusaur",
+    "weight": 1000,
+    "abilites": [
+        "overgrow",
+        "chlorophyll"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

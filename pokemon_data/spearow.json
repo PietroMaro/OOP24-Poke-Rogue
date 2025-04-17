@@ -1,0 +1,41 @@
+{
+    "pokedexNumber": 21,
+    "types": [
+        "normal",
+        "flying"
+    ],
+    "captureRate": 255,
+    "stats": {
+        "special-attack": 31,
+        "defense": 30,
+        "attack": 60,
+        "hp": 40,
+        "special-defense": 31,
+        "speed": 70
+    },
+    "moves": {
+        "1": "peck",
+        "13": "fury-attack",
+        "25": "aerial-ace",
+        "37": "drill-peck",
+        "7": "leer",
+        "19": "pursuit",
+        "31": "mirror-move",
+        "43": "agility"
+    },
+    "growthRate": "medium",
+    "name": "spearow",
+    "weight": 20,
+    "abilites": [
+        "keen-eye",
+        "sniper"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

@@ -1,5 +1,5 @@
 An Ability is composed of\
-"situationChecks" : ["attack","attacked","switchIn","switchOut","neutral"]\
+"situationChecks" : ["attack","attacked","switchIn","switchOut","neutral","passive"]\
 neutral is a moment before attack phase begin\
 "effect" Check effect guide \
 Ex:\

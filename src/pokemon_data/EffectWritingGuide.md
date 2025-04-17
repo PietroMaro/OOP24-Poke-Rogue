@@ -4,14 +4,15 @@ An Effect is made of \
 attackUs.pp,\
 AttackUs.isPhysical,\
 attackUs.accuracy,\
-attackUs.critaRate,\
+attackUs.critRate,\
 attackUs.baseDamage, # damage of move in json\
 attackUs.damage, # damage after calculation\
 attackUs.type, # Check type enum (strings values)\
 attackUs.priority,\
 attackEnemy.pp, \
 ... (same of AttackUs),\
-us.stats.hp,     # taken from actualStats\
+us.stats.hp.current,     # taken from actualStats\
+us.stats.hp.max,\
 us.stats.attack,\
 us.stats.defense,\
 us.stats.special-attack,\

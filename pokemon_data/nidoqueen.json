@@ -1,0 +1,37 @@
+{
+    "pokedexNumber": 31,
+    "types": [
+        "poison",
+        "ground"
+    ],
+    "captureRate": 45,
+    "stats": {
+        "special-attack": 75,
+        "defense": 87,
+        "attack": 92,
+        "hp": 90,
+        "special-defense": 85,
+        "speed": 76
+    },
+    "moves": {
+        "22": "body-slam",
+        "1": "poison-sting",
+        "43": "superpower"
+    },
+    "growthRate": "medium-slow",
+    "name": "nidoqueen",
+    "weight": 600,
+    "abilites": [
+        "poison-point",
+        "rivalry",
+        "sheer-force"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

@@ -1,0 +1,43 @@
+{
+    "pokedexNumber": 140,
+    "types": [
+        "rock",
+        "water"
+    ],
+    "captureRate": 45,
+    "stats": {
+        "special-attack": 55,
+        "defense": 90,
+        "attack": 80,
+        "hp": 30,
+        "special-defense": 45,
+        "speed": 55
+    },
+    "moves": {
+        "55": "ancient-power",
+        "1": "harden",
+        "13": "absorb",
+        "25": "mud-shot",
+        "37": "endure",
+        "49": "mega-drain",
+        "19": "leer",
+        "31": "sand-attack",
+        "43": "metal-sound"
+    },
+    "growthRate": "medium",
+    "name": "kabuto",
+    "weight": 115,
+    "abilites": [
+        "swift-swim",
+        "battle-armor",
+        "weak-armor"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

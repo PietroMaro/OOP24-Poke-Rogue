@@ -1,0 +1,36 @@
+{
+    "pokedexNumber": 103,
+    "types": [
+        "grass",
+        "psychic"
+    ],
+    "captureRate": 45,
+    "stats": {
+        "special-attack": 125,
+        "defense": 85,
+        "attack": 95,
+        "hp": 95,
+        "special-defense": 75,
+        "speed": 55
+    },
+    "moves": {
+        "1": "barrage",
+        "19": "stomp",
+        "31": "egg-bomb"
+    },
+    "growthRate": "slow",
+    "name": "exeggutor",
+    "weight": 1200,
+    "abilites": [
+        "chlorophyll",
+        "harvest"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

@@ -1,0 +1,43 @@
+{
+    "pokedexNumber": 111,
+    "types": [
+        "ground",
+        "rock"
+    ],
+    "captureRate": 120,
+    "stats": {
+        "special-attack": 30,
+        "defense": 95,
+        "attack": 85,
+        "hp": 80,
+        "special-defense": 30,
+        "speed": 25
+    },
+    "moves": {
+        "1": "tail-whip",
+        "24": "scary-face",
+        "57": "megahorn",
+        "15": "fury-attack",
+        "38": "horn-drill",
+        "29": "rock-blast",
+        "52": "earthquake",
+        "10": "stomp",
+        "43": "take-down"
+    },
+    "growthRate": "slow",
+    "name": "rhyhorn",
+    "weight": 1150,
+    "abilites": [
+        "lightning-rod",
+        "rock-head",
+        "reckless"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

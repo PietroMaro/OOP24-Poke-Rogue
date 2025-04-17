@@ -1,0 +1,42 @@
+{
+    "pokedexNumber": 114,
+    "types": ["grass"],
+    "captureRate": 45,
+    "stats": {
+        "special-attack": 100,
+        "defense": 115,
+        "attack": 55,
+        "hp": 65,
+        "special-defense": 40,
+        "speed": 60
+    },
+    "moves": {
+        "22": "vine-whip",
+        "1": "ingrain",
+        "13": "growth",
+        "46": "tickle",
+        "37": "stun-spore",
+        "4": "sleep-powder",
+        "28": "bind",
+        "19": "poison-powder",
+        "40": "slam",
+        "31": "mega-drain",
+        "10": "absorb"
+    },
+    "growthRate": "medium",
+    "name": "tangela",
+    "weight": 350,
+    "abilites": [
+        "chlorophyll",
+        "leaf-guard",
+        "regenerator"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}
