@@ -1,0 +1,12 @@
+{
+  "situationChecks": "attacked",
+  "effect": {
+    "checks": [
+      ["us.stats.hp.current", "==", "0"],
+      ["attackEnemy.isPhysical", "==", "true"]
+    ],
+    "activation": [
+      ["attackEnemy.damage","us.stats.hp.max * 0.25"]
+    ]
+  }
+}

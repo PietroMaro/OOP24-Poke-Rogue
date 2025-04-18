@@ -1,0 +1,39 @@
+{
+    "pokedexNumber": 119,
+    "types": ["water"],
+    "captureRate": 60,
+    "stats": {
+        "special-attack": 65,
+        "defense": 65,
+        "attack": 92,
+        "hp": 80,
+        "special-defense": 80,
+        "speed": 68
+    },
+    "moves": {
+        "1": "water-sport",
+        "24": "flail",
+        "69": "megahorn",
+        "15": "horn-attack",
+        "49": "horn-drill",
+        "29": "fury-attack",
+        "61": "agility",
+        "41": "waterfall"
+    },
+    "growthRate": "medium",
+    "name": "seaking",
+    "weight": 390,
+    "abilites": [
+        "swift-swim",
+        "water-veil",
+        "lightning-rod"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

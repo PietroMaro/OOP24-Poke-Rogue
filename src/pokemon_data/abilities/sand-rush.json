@@ -1,0 +1,11 @@
+{
+    "situationChecks": "neutral",
+    "effect": {
+      "checks": [
+        ["weather", "==", "'sandstorm'"]
+      ],
+      "activation": [
+        ["us.stats.speed", "us.stats.speed * 2"]
+      ]
+    }
+  }

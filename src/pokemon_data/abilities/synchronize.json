@@ -1,0 +1,11 @@
+{
+  "situationChecks": "attacked",
+  "effect": {
+    "checks": [
+      ["us.statusCondition", "!=" , "null"]
+    ],
+    "activation": [
+      ["attackEnemy.statusCondition", "us.statusCondition"]
+    ]
+  }
+}

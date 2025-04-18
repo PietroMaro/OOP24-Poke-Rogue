@@ -1,7 +1,19 @@
 {
     "pp": 25,
     "isPhysical": false,
-    "effect": "Prevents all\nstatus problems. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.statusCondition",
+                "''"
+            ],
+            [
+                "enemy.statusCondition",
+                "''"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

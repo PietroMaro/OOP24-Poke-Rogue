@@ -1,0 +1,18 @@
+{
+  "situationChecks": "switchIn",
+  "effect": {
+    "checks": [],
+    "activation": [
+      ["us.type1", "enemy.type1"],
+      ["us.type2", "enemy.type2"],
+      ["us.nature", "enemy.nature"],
+      ["us.stats.hp.current", "enemy.stats.hp.current"],
+      ["us.stats.hp.max", "enemy.stats.hp.max"],
+      ["us.stats.attack", "enemy.stats.attack"],
+      ["us.stats.defense", "enemy.stats.defense"],
+      ["us.stats.special-attack", "enemy.stats.special-attack"],
+      ["us.stats.special-defense", "enemy.stats.special-defense"],
+      ["us.stats.speed", "enemy.stats.speed"]
+    ]
+  }
+}

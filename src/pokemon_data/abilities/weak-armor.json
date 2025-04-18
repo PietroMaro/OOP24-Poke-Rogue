@@ -1,0 +1,12 @@
+{
+  "situationChecks": "attacked",
+  "effect": {
+    "checks": [
+      ["attackEnemy.isPhysical", "==", "true"]
+    ],
+    "activation": [
+      ["us.stats.defense", "=", "us.stats.defense - 1"],
+      ["us.stats.speed", "=", "us.stats.speed + 2"]
+    ]
+  }
+}

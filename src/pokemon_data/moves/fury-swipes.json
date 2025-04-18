@@ -1,7 +1,15 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "Quickly scratches\n2-5 times. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "attackUs.damage",
+                "attackUs.baseDamage * RANDOM"
+            ]
+        ]
+    },
     "accuracy": 80,
     "critRate": 0,
     "baseDamage": 18,

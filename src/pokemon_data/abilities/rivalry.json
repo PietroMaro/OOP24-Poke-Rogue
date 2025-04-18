@@ -1,0 +1,11 @@
+{
+  "situationChecks": "attack",
+  "effect": {
+    "checks": [
+      ["us.gender", "==", "enemy.gender"]
+    ],
+    "activation": [
+      ["us.stats.attack", "us.stats.attack * 1.25"]
+    ]
+  }
+}

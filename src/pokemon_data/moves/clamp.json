@@ -1,10 +1,18 @@
 {
-    "pp": 15,
+    "pp": 20,
     "isPhysical": false,
-    "effect": "Traps the foe for\n2-5 turns. TODO Create effect and link it here",
-    "accuracy": 85,
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "'trapped'"
+            ]
+        ]
+    },
+    "accuracy": 100,
     "critRate": 0,
-    "baseDamage": 35,
-    "type": "water",
+    "baseDamage": 0,
+    "type": "normal",
     "priority": 0
 }

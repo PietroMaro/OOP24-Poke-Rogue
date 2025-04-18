@@ -1,0 +1,11 @@
+{
+        "situationChecks": "attacked",
+        "effect": {
+          "checks": [
+            ["attackEnemy.type", "==", "'electric'"]
+          ],
+          "activation": [
+            ["us.tempStatsBonus.special-attack", "us.tempStatsBonus.special-attack + 1"]
+          ]
+        }
+}

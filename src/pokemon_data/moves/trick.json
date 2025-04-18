@@ -1,7 +1,10 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "Tricks the foe into trading\nheld items. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

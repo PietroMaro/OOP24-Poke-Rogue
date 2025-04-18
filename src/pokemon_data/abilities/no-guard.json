@@ -1,0 +1,10 @@
+{
+  "situationChecks": "neutral",
+  "effect": {
+    "checks": [],
+    "activation": [
+      ["attackUs.accuracy", "attackUs.accuracy + 100"],
+      ["attackEnemy.accuracy", "attackEnemy.accuracy + 100"]
+    ]
+  }
+}

@@ -1,7 +1,19 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "Raises DEFENSE and SP. DEF\nwith a mystic power. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.tempStatsBonus.defense",
+                "us.tempStatsBonus.defense + 1"
+            ],
+            [
+                "us.tempStatsBonus.special-defense",
+                "us.tempStatsBonus.special-defense + 1"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

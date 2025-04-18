@@ -1,8 +1,15 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "An attack that\nalways paralyzes. TODO Create effect and link it here",
-    "accuracy": 50,
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "'paralysis'"
+            ]
+        ]
+    },    "accuracy": 50,
     "critRate": 0,
     "baseDamage": 120,
     "type": "electric",

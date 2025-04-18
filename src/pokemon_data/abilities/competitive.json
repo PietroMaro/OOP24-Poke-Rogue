@@ -1,0 +1,15 @@
+{
+  "situationChecks": "neutral",
+  "effect": {
+    "checks": [
+      ["us.tempStatsBonus.attack", "<", "0"],
+      ["us.tempStatsBonus.defense", "<", "0"],
+      ["us.tempStatsBonus.specialAttack", "<", "0"],
+      ["us.tempStatsBonus.specialDefense", "<", "0"],
+      ["us.tempStatsBonus.speed", "<", "0"]
+    ],
+    "activation": [
+      ["us.tempStatsBonus.specialAttack", "us.tempStatsBonus.specialAttack + 2"]
+    ]
+  }
+}
