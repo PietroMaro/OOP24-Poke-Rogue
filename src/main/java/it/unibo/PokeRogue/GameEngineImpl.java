@@ -2,6 +2,7 @@ package it.unibo.PokeRogue;
 
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.scene.SceneBox;
+import it.unibo.PokeRogue.scene.SceneFight;
 import it.unibo.PokeRogue.scene.SceneMenu;
 
 /**
@@ -41,14 +42,14 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
         switch (newScene) {
             case "main":
                 currentScene = new SceneMenu();
-
+                //currentScene = new SceneFight();
                 break;
             case "box":
                 currentScene = new SceneBox(this.fileToLoadName);
 
                 break;
             case "fight":
-                System.out.println("fightScene");
+                currentScene = new SceneFight();
                 break;
 
             default:
