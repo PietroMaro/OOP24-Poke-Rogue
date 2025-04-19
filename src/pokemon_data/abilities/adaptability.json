@@ -6,7 +6,7 @@
       ["attackUs.type", "==", "enemy.type2"]
     ],
     "activation": [
-      ["attack.baseDamage", "=", "attack.baseDamage * 2"]
+      ["attack.baseDamage","attack.baseDamage * 2"]
     ]
   }
 }

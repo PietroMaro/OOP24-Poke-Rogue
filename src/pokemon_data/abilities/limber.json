@@ -5,7 +5,7 @@
       ["us.statusCondition", "==", "'paralyze'"]
     ],
     "activation": [
-      ["us.statusCondition", "null"]
+      ["us.statusCondition", "''"]
     ]
   }
 }

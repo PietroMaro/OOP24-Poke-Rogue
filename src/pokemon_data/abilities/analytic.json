@@ -2,7 +2,7 @@
   "situationChecks": "attack",
   "effect": {
     "checks": [
-      ["us.stats.speed", "<", "enemy.stats.speed"]
+      ["us.stats.speed", "<=", "enemy.stats.speed"]
     ],
     "activation": [
       ["attackUs.baseDamage", "attackUs.baseDamage + (attackUs.baseDamage * 0.3)"]

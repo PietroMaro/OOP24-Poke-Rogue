@@ -5,7 +5,7 @@
       ["attackEnemy.isPhysical", "==", "true"]
     ],
     "activation": [
-      ["enemy.statusCondition", "==", "'burn'"]
+      ["enemy.statusCondition","'burn'"]
     ]
   }
 }

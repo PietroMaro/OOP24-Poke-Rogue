@@ -3,7 +3,7 @@
   "effect": {
     "checks": ["us.statusCondition", "==", "'confused'"],
     "activation": [
-      ["us.statusCondition", ""]
+      ["us.statusCondition", "''"]
     ]
   }
 }

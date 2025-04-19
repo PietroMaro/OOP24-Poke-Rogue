@@ -7,7 +7,7 @@
       ["attackEnemy.type", "==", "'dark'"]
     ],
     "activation": [
-      ["us.stats.speed", "=", "us.stats.speed + 1"]
+      ["us.tempStatsBonus.speed","us.tempStatsBonus.speed + 1"]
     ]
   }
 }

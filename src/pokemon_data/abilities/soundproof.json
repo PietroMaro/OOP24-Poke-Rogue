@@ -5,7 +5,7 @@
       ["attackEnemy.type", "==", "'sound'"]
     ],
     "activation": [
-      ["attackEnemy.damage", "=", "0"]
+      ["attackEnemy.damage", "0"]
     ]
   }
 }

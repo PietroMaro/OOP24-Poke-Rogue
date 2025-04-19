@@ -6,7 +6,7 @@
     ],
     "activation": [
       ["us.stats.hp.current","us.stats.hp.current * 1.25"],
-      ["attackEnemy.damege",0]
+      ["attackEnemy.damege","0"]
     ]
   }
 }

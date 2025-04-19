@@ -5,7 +5,7 @@
       []
     ],
     "activation": [
-      ["attackEnemy.critRate", 0]
+      ["attackEnemy.critRate", "0"]
     ]
   }
 }

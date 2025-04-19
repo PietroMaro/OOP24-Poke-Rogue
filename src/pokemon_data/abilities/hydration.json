@@ -3,10 +3,10 @@
   "effect": {
     "checks": [
       ["weather", "==", "'rain'"],
-      ["us.statusCondition", "!=", "null"]
+      ["us.statusCondition", "!=", "''"]
     ],
     "activation": [
-      ["us.statusCondition", "null"]
+      ["us.statusCondition", "''"]
     ]
   }
 }

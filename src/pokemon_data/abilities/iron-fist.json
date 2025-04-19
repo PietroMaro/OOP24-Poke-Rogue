@@ -5,7 +5,7 @@
       ["attackUs.moveType", "==", "'fighting'"]
     ],
     "activation": [
-      ["attackUs.baseDamage", "=", "attackUs.baseDamage * 1.2"]
+      ["attackUs.baseDamage","attackUs.baseDamage * 1.2"]
     ]
   }
 }

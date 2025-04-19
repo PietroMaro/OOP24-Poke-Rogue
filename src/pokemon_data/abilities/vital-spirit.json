@@ -5,7 +5,7 @@
       ["us.statusCondition", "==", "'sleep'"]
     ],
     "activation": [
-      ["us.statusCondition", "null"]
+      ["us.statusCondition", "''"]
     ]
   }
 }
