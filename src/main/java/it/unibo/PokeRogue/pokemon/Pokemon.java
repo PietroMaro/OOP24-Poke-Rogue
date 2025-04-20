@@ -34,4 +34,7 @@ public interface Pokemon {
 	//if exp+amount = max of the level it will trigger level up
 	void increaseExp(int amount,boolean isPlayerPokemon);
 	void increaseEV(Map<String,Integer> increaseEV);
+
+	Map<String, Range<Integer>> getActualStats();
+
 }
