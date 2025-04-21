@@ -1,6 +1,9 @@
-package it.unibo.PokeRogue;
+package it.unibo.PokeRogue.savingSystem;
 
 import java.util.List;
+
+import it.unibo.PokeRogue.Singleton;
+import it.unibo.PokeRogue.pokemon.Pokemon;
 
 public interface SavingSystem extends Singleton {
 

@@ -1,5 +1,6 @@
-package it.unibo.PokeRogue;
+package it.unibo.PokeRogue.pokemon;
 
+import it.unibo.PokeRogue.SingletonImpl;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 
@@ -11,13 +12,15 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.Optional;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.File;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
+import java.awt.Image;
+import javax.imageio.ImageIO;
 
 public class PokemonFactoryImpl extends SingletonImpl implements PokemonFactory{
 	
@@ -26,6 +29,11 @@ public class PokemonFactoryImpl extends SingletonImpl implements PokemonFactory{
 	final private Random random = new Random();
 	final private Set<String> allPokemonSet = new HashSet<String>();
 	final private Map<String,PokemonBlueprint> pokemonBlueprints = new HashMap<String,PokemonBlueprint>();
+	
+	public PokemonFactoryImpl(){
+		init();
+	}
+	
 	@Override
     public void init(){
 		JSONArray allPokemonJson;
@@ -49,7 +57,15 @@ public class PokemonFactoryImpl extends SingletonImpl implements PokemonFactory{
 		int weight = pokemonJson.getInt("weight");
 		List<String> possibleAbilities = jsonArrayToList(pokemonJson.getJSONArray("abilites"));
 		Map<String,Integer> givesEV = jsonObjectToMap(pokemonJson.getJSONObject("givesEV"));
-
+		Optional<Image> newPokemonSpriteFront = Optional.empty();
+		Optional<Image> newPokemonSpriteBack = Optional.empty();
+		try {
+			newPokemonSpriteFront =  Optional.of(ImageIO.read(new File(Paths.get("src","pokemon_data","pokemon","sprites",pokemonName+"_front.png").toString())));
+			newPokemonSpriteBack  =  Optional.of(ImageIO.read(new File(Paths.get("src","pokemon_data","pokemon","sprites",pokemonName+"_back.png").toString())));
+		} catch (IOException e) {
+            System.out.println("error pokemon sprites "+pokemonName+" not found");
+            e.printStackTrace();
+        }
 		final PokemonBlueprint newPokemon = new PokemonBlueprint(
 			pokedexNumber,
 			types,	
@@ -61,7 +77,9 @@ public class PokemonFactoryImpl extends SingletonImpl implements PokemonFactory{
 			name,
 			weight,
 			possibleAbilities,
-			givesEV);
+			givesEV,
+			newPokemonSpriteFront.get(),
+			newPokemonSpriteBack.get());
 
 		this.pokemonBlueprints.put(pokemonName,newPokemon);
 		this.allPokemonSet.add(pokemonName);

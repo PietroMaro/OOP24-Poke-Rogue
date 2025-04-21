@@ -1,13 +1,12 @@
-package it.unibo.PokeRogue;
+package it.unibo.PokeRogue.savingSystem;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
 import org.json.JSONArray;
-
 import java.io.File;
 
+import it.unibo.PokeRogue.SingletonImpl;
+import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 
@@ -19,11 +18,11 @@ public class SavingSystemImpl extends SingletonImpl implements SavingSystem{
     @Override
     public void savePokemon(Pokemon pokemon) {
 		for(int pokemonIndex = 0; pokemonIndex < this.savedPokemon.length(); pokemonIndex+=1){
-			if(pokemon.name().equals(this.savedPokemon.getString(pokemonIndex))){
+			if(pokemon.getName().equals(this.savedPokemon.getString(pokemonIndex))){
 				return;
 			}
 		}
-		savedPokemon.put(pokemon.name());
+		savedPokemon.put(pokemon.getName());
 	}
 
     @Override

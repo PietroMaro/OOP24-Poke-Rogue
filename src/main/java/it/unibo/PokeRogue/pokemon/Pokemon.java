@@ -1,9 +1,10 @@
-package it.unibo.PokeRogue;
+package it.unibo.PokeRogue.pokemon;
 
 import it.unibo.PokeRogue.utilities.Range;
 import java.util.Map;
 import java.util.Optional;
 import java.util.List;
+import java.awt.Image;
 
 public interface Pokemon {
 	//When you call level up with isPlayerPokemon. if the pokemon learns a new move it will set up a flag inside the 
@@ -20,7 +21,15 @@ public interface Pokemon {
 	int getStat(String statName);
 	List<Type> getTypes();
 	Map<String,Integer> getGivesEV();
-	String name();
+	Image getSpriteFront();
+	Image getSpriteBack();
+	String getName();
+
+	String getGender();
+	String getLevelUpCurve();
+	List<String> getActualMoves();
+	Nature getNature();
+	String getAbilityName();
 
 	//if exp+amount = max of the level it will trigger level up
 	void increaseExp(int amount,boolean isPlayerPokemon);

@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue;
+package it.unibo.PokeRogue.pokemon;
 
 import it.unibo.PokeRogue.utilities.Range;
 import it.unibo.PokeRogue.utilities.RangeImpl;
@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Random;
+
+import edu.umd.cs.findbugs.annotations.OverrideMustInvoke;
+
+import java.awt.Image;
 
 public final class PokemonImpl implements Pokemon {
 	final private Random random = new Random();
@@ -40,6 +44,9 @@ public final class PokemonImpl implements Pokemon {
 	private boolean hasToLearnMove = false;
 	private Optional<String> newMoveToLearn = Optional.empty(); 
 
+	private Image spriteFront;
+	private Image spriteBack;
+
 	public PokemonImpl(final PokemonBlueprint pokemonBlueprint){
 		this.baseStats = pokemonBlueprint.stats();	
 		generateIVs();
@@ -61,6 +68,8 @@ public final class PokemonImpl implements Pokemon {
 		this.holdingObject = Optional.empty();
 		initAbility(pokemonBlueprint.possibleAbilities());
 		this.statusCondition = Optional.empty();
+		this.spriteFront = pokemonBlueprint.spriteFront();
+		this.spriteBack = pokemonBlueprint.spriteBack();
 	}
 
 	private void generateIVs() {
@@ -78,7 +87,7 @@ public final class PokemonImpl implements Pokemon {
 	}
 
 	private void initGender(){
-		if(random.nextInt(2) == 1){
+		if(random.nextInt(100)%2 == 1){
 			this.gender = "male";
 		}
 		else{
@@ -257,8 +266,25 @@ public final class PokemonImpl implements Pokemon {
 	}
 
 	@Override
-	public String name(){
+	public String getName(){
 		return this.name;
+	}
+
+	@Override
+	public String getGender(){
+		return this.gender;
+	}
+	@Override
+	public String getLevelUpCurve(){
+		return this.levelUpCurve;
+	}
+	@Override
+	public List<String> getActualMoves(){
+		return this.actualMoves;
+	}
+	@Override
+	public Nature getNature(){
+		return this.nature;
 	}
 
 	@Override
@@ -277,4 +303,48 @@ public final class PokemonImpl implements Pokemon {
 			}		
 		}	
 	}
-}
+
+	@Override
+public String toString() {
+    String result = "Pokemon {" +
+            "\n  Name = '" + name + '\'' +
+            ",\n  Pokedex Number = " + pokedexNumber +
+            ",\n  Type1 = " + type1;
+			if(type2.isPresent()){
+				result += ",\n  Type2 = " + type2.get();
+			}
+			result +=
+            ",\n  Ability = '" + abilityName + '\'' +
+            ",\n  Gender = '" + gender + '\'' +
+            ",\n  Weight = " + weight +
+            ",\n  Capture Rate = " + captureRate +
+            ",\n  Level Range = " + level +
+            ",\n  EXP Range = " + exp +
+            ",\n  Level-Up Curve = '" + levelUpCurve + '\'' +
+            ",\n  Total Used EV = " + totalUsedEV +
+            ",\n  Base Stats = " + baseStats +
+            ",\n  Nature = " + nature +
+            ",\n  IVs = " + IV +
+            ",\n  EVs = " + EV +
+            ",\n  Actual Stats = " + actualStats +
+            ",\n  Level Moves Learn = " + levelMovesLearn +
+            ",\n  Actual Moves = " + actualMoves +
+            ",\n  Gives EV = " + givesEV +
+            "\n}";
+		return result;
+		}
+
+		@Override
+		public Image getSpriteFront(){
+			return this.spriteFront;
+		}
+		@Override
+		public Image getSpriteBack(){
+			return this.spriteBack;
+		}
+
+		@Override
+		public String getAbilityName(){
+			return this.abilityName;
+		}
+	}

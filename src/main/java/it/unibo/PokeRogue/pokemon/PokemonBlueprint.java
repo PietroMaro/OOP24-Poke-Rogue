@@ -1,6 +1,7 @@
-package it.unibo.PokeRogue;
+package it.unibo.PokeRogue.pokemon;
 import java.util.List;
 import java.util.Map;
+import java.awt.Image;
 public record PokemonBlueprint(
 		int pokedexNumber,
 		List<String> types,	
@@ -12,4 +13,6 @@ public record PokemonBlueprint(
 		String name,
 		int weight,
 		List<String> possibleAbilities,
-		Map<String,Integer> givesEV){}
+		Map<String,Integer> givesEV,
+		Image spriteFront,
+		Image spriteBack){}

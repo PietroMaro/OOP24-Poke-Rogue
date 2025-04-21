@@ -19,4 +19,5 @@ public interface GameEngine extends Singleton {
      */
     void setScene(String newScene);
     void keyPressedToScene(int keyCode);
+    void setGraphicEngine(GraphicEngine graphicEngine);
 }

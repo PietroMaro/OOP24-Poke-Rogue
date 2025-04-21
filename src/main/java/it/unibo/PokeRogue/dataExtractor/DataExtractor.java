@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue;
+package it.unibo.PokeRogue.dataExtractor;
 
 public interface DataExtractor{
 	void extractPokemon(int apiIndex);

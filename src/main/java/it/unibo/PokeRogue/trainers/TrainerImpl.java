@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import it.unibo.PokeRogue.Pokemon;
+import it.unibo.PokeRogue.pokemon.Pokemon;
+
 
 public class TrainerImpl implements Trainer {
     private List<Optional<Pokemon>> pokemonSquad;
@@ -28,6 +29,7 @@ public class TrainerImpl implements Trainer {
 
     @Override
     public Optional<Pokemon> getPokemon(int pos) {
+        
         return pokemonSquad.get(pos);
     }
 

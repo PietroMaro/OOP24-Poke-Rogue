@@ -12,14 +12,15 @@ public class TextElementImpl extends GraphicElementImpl {
     private double leftX;
     private double leftY;
     private Color textColor;
-    private Font textFont;
+    private double textFont;
 
-    public TextElementImpl(String panelName, String text, Color textColor, Font textFont, double leftX, double leftY) {
+    public TextElementImpl(String panelName, String text, Color textColor, double textDimension, double leftX,
+            double leftY) {
         super(panelName);
         this.text = text;
         this.leftX = leftX;
         this.leftY = leftY;
-        this.textFont = textFont;
+        this.textFont = textDimension;
         this.textColor = textColor;
 
     }
@@ -28,8 +29,12 @@ public class TextElementImpl extends GraphicElementImpl {
     protected void paintComponent(Graphics drawEngine) {
         super.paintComponent(drawEngine);
         drawEngine.setColor(this.textColor);
-        drawEngine.setFont(this.textFont);
+        drawEngine.setFont(new Font("Default", Font.PLAIN, Math.min((int) (getWidth() * this.textFont)/3, (int) (getHeight() * this.textFont))));
         drawEngine.drawString(this.text, (int) (getWidth() * this.leftX), (int) (getHeight() * this.leftY));
     }
 
+    public String getText() {
+
+        return this.text;
+    }
 }

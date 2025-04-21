@@ -45,6 +45,11 @@ public class BoxElementImpl extends GraphicElementImpl implements BoxElement{
         
 	}
 
+    public void setBorderThickness(int thickness) {
+        this.borderThickness = thickness;
+        
+    }
+
    
 
    
