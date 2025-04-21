@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.HashMap;
 import org.json.JSONArray;
 
+import java.io.File;
+
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 
@@ -51,4 +53,26 @@ public class SavingSystemImpl extends SingletonImpl implements SavingSystem{
 		return result;
     }
 
+	@Override
+	public List<String> getSaveFilesName(String dirPath) {
+	    List<String> jsonFiles = new ArrayList<>();
+	    File directory = new File(dirPath);
+	
+	    if (directory.exists() && directory.isDirectory()) {
+	        File[] files = directory.listFiles((dir, name) -> name.toLowerCase().endsWith(".json"));
+	        if (files != null) {
+	            for (File file : files) {
+	                jsonFiles.add(file.getName());
+	            }
+	        }
+	    }
+	
+	    return jsonFiles;
+	}
+
+	@Override
+	public int howManyPokemonInSave(String path){
+		JSONArray boxPokemons = jsonReader.readJsonArray(path); 				
+		return boxPokemons.length();
+	}
 }
