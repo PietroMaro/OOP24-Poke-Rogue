@@ -1,6 +1,6 @@
 package it.unibo.PokeRogue.scene;
 
-public enum sceneGraphicEnum {
+public enum sceneBoxGraphicEnum {
 
         UP_ARROW_BUTTON(0),
         DOWN_ARROW_BUTTON(1),
@@ -42,7 +42,7 @@ public enum sceneGraphicEnum {
 
         private final int code;
 
-        sceneGraphicEnum(int code) {
+        sceneBoxGraphicEnum(int code) {
                 this.code = code;
         }
 
