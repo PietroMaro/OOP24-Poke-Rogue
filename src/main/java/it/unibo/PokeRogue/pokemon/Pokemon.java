@@ -7,34 +7,53 @@ import java.util.List;
 import java.awt.Image;
 
 public interface Pokemon {
-	//When you call level up with isPlayerPokemon. if the pokemon learns a new move it will set up a flag inside the 
-	//logic the scene will get this flag and if true it will call (learnNewMove) where it will choose if It want to delete
-	//an old move or not
+	// When you call level up with isPlayerPokemon. if the pokemon learns a new move
+	// it will set up a flag inside the
+	// logic the scene will get this flag and if true it will call (learnNewMove)
+	// where it will choose if It want to delete
+	// an old move or not
 	void levelUp(boolean isPlayerPokemon);
+
 	boolean hasToLearnMove();
+
 	void learnNewMove(Optional<Integer> indexMoveToReplace);
+
 	void inflictDamage(int amount);
 
 	Optional<StatusCondition> statusCondition();
+
 	void setStatusCondition(String newStatus);
 
 	int getStat(String statName);
+
 	List<Type> getTypes();
-	Map<String,Integer> getGivesEV();
+
+	Map<String, Integer> getGivesEV();
+
 	Image getSpriteFront();
+
 	Image getSpriteBack();
+
 	String getName();
+
 	String getAbilityName();
 
 	String getGender();
+
 	String getLevelUpCurve();
+
 	List<String> getActualMoves();
+
 	Nature getNature();
 
-	//if exp+amount = max of the level it will trigger level up
-	void increaseExp(int amount,boolean isPlayerPokemon);
-	void increaseEV(Map<String,Integer> increaseEV);
+	// if exp+amount = max of the level it will trigger level up
+	void increaseExp(int amount, boolean isPlayerPokemon);
 
-	Map<String, Range<Integer>> getActualStats();
+	void increaseEV(Map<String, Integer> increaseEV);
 
+	Range<Integer> getHpRange();
+
+	Range<Integer> getExpRange();
+
+	int getCurrentLevel();
 }
