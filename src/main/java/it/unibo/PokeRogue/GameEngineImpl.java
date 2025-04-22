@@ -42,7 +42,6 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
         switch (newScene) {
             case "main":
                 currentScene = new SceneMenu();
-                //currentScene = new SceneFight();
                 break;
             case "box":
                 currentScene = new SceneBox(this.fileToLoadName);
