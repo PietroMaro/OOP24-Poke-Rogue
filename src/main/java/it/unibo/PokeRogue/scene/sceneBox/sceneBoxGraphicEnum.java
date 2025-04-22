@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene;
+package it.unibo.PokeRogue.scene.sceneBox;
 
 public enum sceneBoxGraphicEnum {
 

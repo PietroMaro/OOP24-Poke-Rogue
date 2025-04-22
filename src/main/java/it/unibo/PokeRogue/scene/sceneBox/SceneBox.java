@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene;
+package it.unibo.PokeRogue.scene.sceneBox;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -25,8 +25,8 @@ import it.unibo.PokeRogue.pokemon.PokemonFactory;
 import it.unibo.PokeRogue.pokemon.PokemonFactoryImpl;
 import it.unibo.PokeRogue.savingSystem.SavingSystem;
 import it.unibo.PokeRogue.savingSystem.SavingSystemImpl;
+import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.pokemon.Nature;
-
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.ColorTypeConversion;
 
@@ -340,19 +340,19 @@ public class SceneBox implements Scene {
                                         new BoxElementImpl("pokemonPanel",
                                                         ColorTypeConversion.getColorForType(
                                                                         selectedPokemon.getTypes().get(0)),
-                                                        Color.BLACK, 1, 0.09, 0.635, 0.066, 0.03));
+                                                        Color.BLACK, 1, 0.09, 0.635, 0.068, 0.03));
 
                         if (selectedPokemon.getTypes().size() > 1) {
                                 this.sceneGraphicElements.put(sceneBoxGraphicEnum.POKEMON_TYPE_2.value(),
                                                 new TextElementImpl("pokemonPanel",
                                                                 (selectedPokemon.getTypes().get(1)).typeName()
                                                                                 .toUpperCase(),
-                                                                Color.WHITE, 0.04, 0.16, 0.66));
+                                                                Color.WHITE, 0.04, 0.161, 0.66));
                                 this.sceneGraphicElements.put(sceneBoxGraphicEnum.POKEMON_BOX_TYPE_2.value(),
                                                 new BoxElementImpl("pokemonPanel",
                                                                 ColorTypeConversion.getColorForType(
                                                                                 selectedPokemon.getTypes().get(1)),
-                                                                Color.BLACK, 1, 0.156, 0.635, 0.066, 0.03));
+                                                                Color.BLACK, 1, 0.159, 0.635, 0.066, 0.03));
 
                         }
 

@@ -1,8 +1,9 @@
 package it.unibo.PokeRogue;
 
 import it.unibo.PokeRogue.scene.Scene;
-import it.unibo.PokeRogue.scene.SceneBox;
 import it.unibo.PokeRogue.scene.SceneMenu;
+import it.unibo.PokeRogue.scene.sceneBox.SceneBox;
+import it.unibo.PokeRogue.scene.sceneLoad.SceneLoad;
 
 /**
  * Implementation of the {@link GameEngine} interface.
@@ -42,6 +43,9 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
             case "main":
                 currentScene = new SceneMenu();
 
+                break;
+            case "load":
+                currentScene = new SceneLoad();
                 break;
             case "box":
                 currentScene = new SceneBox(this.fileToLoadName);

@@ -17,8 +17,11 @@ public class testBox {
             save.savePokemon(pokfa.randomPokemon(1));
         }
 
+        for(int x = 15;x<24;x++){
+            save.saveData(Paths.get("src", "saves").toString(), "prova"+x+".json");
 
-        save.saveData(Paths.get("src", "saves").toString(), "prova1.json");
+        }
+
     }
     
 
