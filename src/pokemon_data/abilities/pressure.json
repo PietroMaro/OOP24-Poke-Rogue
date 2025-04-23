@@ -1,0 +1,10 @@
+{
+  "situationChecks": "attacked",
+  "effect": {
+    "checks": [
+    ],
+    "activation": [
+      ["attackEnemy.pp", "attackEnemy.pp /2"]
+    ]
+  }
+}

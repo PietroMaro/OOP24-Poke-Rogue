@@ -1,7 +1,10 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "Tough but useless\nvs. flying foes. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 100,

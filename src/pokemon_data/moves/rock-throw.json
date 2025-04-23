@@ -1,7 +1,10 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "Drops rocks on the\nenemy. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 90,
     "critRate": 0,
     "baseDamage": 50,

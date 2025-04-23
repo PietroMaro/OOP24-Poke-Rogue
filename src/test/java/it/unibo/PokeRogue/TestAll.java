@@ -10,6 +10,9 @@ import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.pokemon.PokemonFactoryImpl;
 import it.unibo.PokeRogue.pokemon.PokemonImpl;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
+import it.unibo.PokeRogue.move.Move;
+import it.unibo.PokeRogue.move.MoveFactory;
+import it.unibo.PokeRogue.move.MoveFactoryImpl;
 
 
 
@@ -43,11 +46,17 @@ public class TestAll {
         assertEquals(Optional.of(bulbasaur), p1.getPokemon(0));
         assertEquals(Optional.of(bulbasaur), p2.getPokemon(0));
 
-
-
-
-
     }
+
+	@Test
+	public void testMoveFactory(){
+		MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
+		Move moveTest = moveFactory.moveFromName("absorb");
+		assertEquals(moveTest.pp(),25);
+		assertEquals(moveTest.isPhysical(),false);
+		assertEquals(moveTest.accuracy(),100);
+		assertEquals(moveTest.critRate(),0);
+	}
 
 
     

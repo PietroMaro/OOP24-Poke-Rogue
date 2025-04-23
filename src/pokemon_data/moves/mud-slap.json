@@ -1,7 +1,15 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "Reduces the foe's\naccuracy. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "attackEnemy.accuracy",
+                "attackEnemy.accuracy - 1"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 20,

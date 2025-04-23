@@ -1,7 +1,19 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "Causes confusion\nand raises ATTACK. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "'confusion'"
+            ],
+            [
+                "us.stats.attack",
+                "us.stats.attack + 10"
+            ]
+        ]
+    },
     "accuracy": 85,
     "critRate": 0,
     "baseDamage": 0,

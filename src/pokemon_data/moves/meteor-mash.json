@@ -1,7 +1,21 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "Fires a meteor-like punch.\nMay raise ATTACK. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "RANDOM",
+                "<",
+                "0.20" 
+            ]
+        ],
+        "activation": [
+            [
+                "us.stats.attack",
+                "us.stats.attack + 1"
+            ]
+        ]
+    },
     "accuracy": 90,
     "critRate": 0,
     "baseDamage": 90,

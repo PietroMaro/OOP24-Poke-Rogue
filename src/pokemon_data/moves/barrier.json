@@ -1,7 +1,15 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "Sharply increases\nuser's DEFENSE. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.tempStatsBonus.defense",
+                "us.tempStatsBonus.defense + 2"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

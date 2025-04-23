@@ -1,0 +1,41 @@
+{
+    "pokedexNumber": 77,
+    "types": ["fire"],
+    "captureRate": 190,
+    "stats": {
+        "special-attack": 65,
+        "defense": 55,
+        "attack": 85,
+        "hp": 50,
+        "special-defense": 65,
+        "speed": 90
+    },
+    "moves": {
+        "1": "quick-attack",
+        "45": "bounce",
+        "14": "ember",
+        "25": "fire-spin",
+        "5": "growl",
+        "38": "agility",
+        "19": "stomp",
+        "9": "tail-whip",
+        "31": "take-down",
+        "53": "fire-blast"
+    },
+    "growthRate": "medium",
+    "name": "ponyta",
+    "weight": 300,
+    "abilites": [
+        "run-away",
+        "flash-fire",
+        "flame-body"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

@@ -1,0 +1,41 @@
+{
+    "pokedexNumber": 7,
+    "types": ["water"],
+    "captureRate": 45,
+    "stats": {
+        "special-attack": 50,
+        "defense": 65,
+        "attack": 48,
+        "hp": 44,
+        "special-defense": 64,
+        "speed": 43
+    },
+    "moves": {
+        "33": "rain-dance",
+        "1": "tackle",
+        "23": "rapid-spin",
+        "13": "water-gun",
+        "47": "hydro-pump",
+        "4": "tail-whip",
+        "28": "protect",
+        "18": "bite",
+        "7": "bubble",
+        "40": "skull-bash",
+        "10": "withdraw"
+    },
+    "growthRate": "medium-slow",
+    "name": "squirtle",
+    "weight": 90,
+    "abilites": [
+        "torrent",
+        "rain-dish"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

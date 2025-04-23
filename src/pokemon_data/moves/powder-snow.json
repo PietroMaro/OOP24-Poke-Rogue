@@ -1,7 +1,21 @@
 {
     "pp": 25,
     "isPhysical": false,
-    "effect": "An attack that may\ncause freezing. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "RANDOM",
+                "<",
+                "0.10"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "'frozen'"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 40,

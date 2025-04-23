@@ -1,7 +1,15 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "An attack that al­\nso hurts the user. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.stats.hp.current",
+                "us.stats.hp.current - (attackUs.damage / 5)"
+            ]
+        ]
+    },
     "accuracy": 80,
     "critRate": 0,
     "baseDamage": 80,

@@ -7,6 +7,8 @@ import it.unibo.PokeRogue.pokemon.Pokemon;
 
 public interface SavingSystem extends Singleton {
 
+	List<String> getSaveFilesName(String dirPath);
+	int howManyPokemonInSave(String path);
     void savePokemon(Pokemon pokemon);
     void loadData(String path);
     void saveData(String path, String fileName);

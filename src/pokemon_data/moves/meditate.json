@@ -1,7 +1,15 @@
 {
     "pp": 40,
     "isPhysical": false,
-    "effect": "Raises the user's\nATTACK. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.stats.attack",
+                "us.stats.attack + 1"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

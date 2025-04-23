@@ -1,0 +1,11 @@
+{
+  "situationChecks": "neutral",
+  "effect": {
+    "checks": [
+      ["us.stats.hp.current", "==", "us.stats.hp.max"]
+    ],
+    "activation": [
+      ["attackEnemy.damage","attackEnemy.damage / 2"]
+    ]
+  }
+}

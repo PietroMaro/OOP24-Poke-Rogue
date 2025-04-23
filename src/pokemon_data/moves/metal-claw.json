@@ -1,7 +1,21 @@
 {
     "pp": 35,
     "isPhysical": false,
-    "effect": "An attack that may\nup user's ATTACK. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "RANDOM",
+                "<",
+                "0.30" 
+            ]
+        ],
+        "activation": [
+            [
+                "us.stats.attack",
+                "us.stats.attack + 1"
+            ]
+        ]
+    },
     "accuracy": 95,
     "critRate": 0,
     "baseDamage": 50,

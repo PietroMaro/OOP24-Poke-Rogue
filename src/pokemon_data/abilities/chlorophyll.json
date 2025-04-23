@@ -1,0 +1,7 @@
+{
+    "situationChecks": "passive",
+    "effect": {
+        "checks": [["weather", "==", "'sunny'"]],
+        "activation": [["us.stats.speed", "us.stats.speed * 2"]]
+    }
+}

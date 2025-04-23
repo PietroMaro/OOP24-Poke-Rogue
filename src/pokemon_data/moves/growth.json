@@ -1,7 +1,15 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "Raises the SPCL.\nATK rating. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.tempStatsBonus.special-attack",
+                "us.tempStatsBonus.special-attack + 1"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

@@ -1,0 +1,13 @@
+{
+  "situationChecks": "attacked",
+  "effect": {
+    "checks": [
+      ["attackEnemy.type", "==", "'bug'"],
+      ["attackEnemy.type", "==", "'ghost'"],
+      ["attackEnemy.type", "==", "'dark'"]
+    ],
+    "activation": [
+      ["us.tempStatsBonus.speed","us.tempStatsBonus.speed + 1"]
+    ]
+  }
+}

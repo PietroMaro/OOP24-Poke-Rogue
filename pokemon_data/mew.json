@@ -1,0 +1,33 @@
+{
+    "pokedexNumber": 151,
+    "types": ["psychic"],
+    "captureRate": 45,
+    "stats": {
+        "special-attack": 100,
+        "defense": 100,
+        "attack": 100,
+        "hp": 100,
+        "special-defense": 100,
+        "speed": 100
+    },
+    "moves": {
+        "1": "pound",
+        "50": "ancient-power",
+        "40": "psychic",
+        "30": "metronome",
+        "20": "mega-punch",
+        "10": "transform"
+    },
+    "growthRate": "medium-slow",
+    "name": "mew",
+    "weight": 40,
+    "abilites": ["synchronize"],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

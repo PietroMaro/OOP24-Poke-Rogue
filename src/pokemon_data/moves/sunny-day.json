@@ -1,7 +1,10 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "Boosts fire-type\nmoves for 5 turns. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,
