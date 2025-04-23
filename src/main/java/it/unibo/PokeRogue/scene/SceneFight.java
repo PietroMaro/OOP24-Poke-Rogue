@@ -174,12 +174,14 @@ public class SceneFight implements Scene {
         @Override
         public void updateGraphic() {
                 this.updateSelectedButton();
-                this.mainMenu();
                 this.updateMoves();
+                this.mainMenu();
         }
 
         private void mainMenu() {
                 if (currentSelectedButton < 100) {
+                        sceneGraphicElements.clear();
+                        allPanelsElements.clear();
                         this.initGraphicElements();
                 }
         }
@@ -197,7 +199,6 @@ public class SceneFight implements Scene {
                         this.sceneGraphicElements.remove(SceneFightGraphicEnum.DETAILS_CONTAINER_TEXT.value());
                         this.initMoveText();
                         this.initMoveButton();
-                        this.updateMoveInfo(currentSelectedButton);
                         this.setButtonStatus(this.currentSelectedButton, true);
                 }
         }
@@ -220,41 +221,6 @@ public class SceneFight implements Scene {
                                                 0.2, 0.1));
 
         }
-
-        private void clearMoveInfo() {
-                this.sceneGraphicElements.remove(SceneFightGraphicEnum.MOVE_TYPE_TEXT.value());
-                this.sceneGraphicElements.remove(SceneFightGraphicEnum.MOVE_PP_TEXT.value());
-                this.sceneGraphicElements.remove(SceneFightGraphicEnum.MOVE_POWER_TEXT.value());
-        }
-
-        private void updateMoveInfo(int currentSelectedButton) {
-                clearMoveInfo();
-            
-                int moveIndex = switch (currentSelectedButton) {
-                    case 100 -> 0;
-                    case 101 -> 1;
-                    case 102 -> 2;
-                    case 103 -> 3;
-                    default -> -1;
-                };
-            
-                if (moveIndex == -1) return;
-            
-                String move = playerTrainerInstance.getPokemon(FIRST_POSITION).get().getActualMoves().get(moveIndex);
-            
-                if (move == null) return;
-            
-                this.sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_PP_TEXT.value(),
-                    new TextElementImpl("firstPanel", "PP: " + move.getCurrentPP() + " / " + move.getMaxPP(),
-                                        Color.WHITE, 0.035, 0.5, 0.7));
-                this.sceneGraphicElements.put(MOVE_INFO_TYPE,
-                    new TextElementImpl("firstPanel", "Type: " + move.getType().name(),
-                                        Color.WHITE, 0.035, 0.5, 0.75));
-                this.sceneGraphicElements.put(MOVE_INFO_POWER,
-                    new TextElementImpl("firstPanel", "Power: " + move.getPower(),
-                                        Color.WHITE, 0.035, 0.5, 0.8));
-            }
-            
 
         private void initMoveText() {
 
