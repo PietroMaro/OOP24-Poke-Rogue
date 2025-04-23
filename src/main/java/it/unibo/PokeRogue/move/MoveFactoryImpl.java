@@ -62,7 +62,7 @@ public class MoveFactoryImpl extends SingletonImpl implements MoveFactory{
 	public Move moveFromName(final String moveName){
 		Move move = this.movesBlueprints.get(moveName);
 		if(move== null){
-			throw new UnsupportedOperationException("The move"+moveName+" blueprint was not found. Is not present in moveList / Factory not initialized");
+			throw new UnsupportedOperationException("The move "+moveName+" blueprint was not found. Is not present in moveList / Factory not initialized");
 
 		}
 		return move;

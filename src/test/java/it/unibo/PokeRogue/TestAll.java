@@ -2,6 +2,7 @@ package it.unibo.PokeRogue;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.*;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.move.MoveFactory;
 import it.unibo.PokeRogue.move.MoveFactoryImpl;
 
+import it.unibo.PokeRogue.pokemon.Type;
 
 
 public class TestAll {
@@ -24,8 +26,6 @@ public class TestAll {
         PlayerTrainerImpl p1 = PlayerTrainerImpl.getTrainerInstance();
         PlayerTrainerImpl p2 = PlayerTrainerImpl.getTrainerInstance();
         PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
-
-        
 
         Pokemon bulbasaur = pokeFactory.randomPokemon(3);
 		Pokemon ivysaur = pokeFactory.randomPokemon(3);
@@ -52,10 +52,16 @@ public class TestAll {
 	public void testMoveFactory(){
 		MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
 		Move moveTest = moveFactory.moveFromName("absorb");
+		UnsupportedOperationException ex = assertThrows(UnsupportedOperationException.class, () -> {
+			moveFactory.moveFromName("nonExisting");
+    	});
+		assertEquals(ex.getMessage(),"The move nonExisting blueprint was not found. Is not present in moveList / Factory not initialized");
 		assertEquals(moveTest.pp(),25);
 		assertEquals(moveTest.isPhysical(),false);
 		assertEquals(moveTest.accuracy(),100);
 		assertEquals(moveTest.critRate(),0);
+		assertEquals(moveTest.type(),Type.fromString("grass"));
+		assertEquals(moveTest.priority(),0);
 	}
 
 
