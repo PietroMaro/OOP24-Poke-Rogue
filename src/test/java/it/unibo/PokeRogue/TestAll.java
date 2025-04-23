@@ -14,6 +14,10 @@ import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.move.MoveFactory;
 import it.unibo.PokeRogue.move.MoveFactoryImpl;
+import it.unibo.PokeRogue.ability.Ability;
+import it.unibo.PokeRogue.ability.AbilityFactory;
+import it.unibo.PokeRogue.ability.AbilityFactoryImpl;
+import it.unibo.PokeRogue.ability.AbilitySituationChecks;
 
 import it.unibo.PokeRogue.pokemon.Type;
 
@@ -64,8 +68,16 @@ public class TestAll {
 		assertEquals(moveTest.priority(),0);
 	}
 
-
-    
+	@Test
+	public void testAbilityFactory(){
+		AbilityFactory abilityFactory = AbilityFactoryImpl.getInstance(AbilityFactoryImpl.class);
+		Ability abilityTest = abilityFactory.abilityFromName("adaptability");
+		UnsupportedOperationException ex = assertThrows(UnsupportedOperationException.class, () -> {
+			abilityFactory.abilityFromName("nonExisting");
+    	});
+		assertEquals(ex.getMessage(),"The ability nonExisting blueprint was not found. Is not present in abilityList / Factory not initialized");
+		assertEquals(abilityTest.situationChecks(),AbilitySituationChecks.fromString("attack"));
+	}
 
 	
 }
