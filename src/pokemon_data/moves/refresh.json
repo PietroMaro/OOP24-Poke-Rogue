@@ -1,7 +1,31 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "Heals poisoning, paralysis,\nor a burn. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "us.statusCondition",
+                "==",
+                "'poisoned'"
+            ],
+            [
+                "us.statusCondition",
+                "==",
+                "'paralyzed'"
+            ],
+            [
+                "us.statusCondition",
+                "==",
+                "'burned'"
+            ]
+        ],
+        "activation": [
+            [
+                "us.statusCondition",
+                "''"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

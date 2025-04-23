@@ -1,7 +1,21 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "An attack that may\nlower SPEED. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "RANDOM",
+                "<",
+                "0.3"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.tempStatsBonus.speed",
+                "enemy.tempStatsBonus.speed - 1"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 65,

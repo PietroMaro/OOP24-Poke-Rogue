@@ -1,0 +1,19 @@
+{
+  "situationChecks": "attack",
+  "effect": {
+    "checks": [
+      ["enemy.tempStatsBonus.attack", ">", "0"],
+      ["enemy.tempStatsBonus.defense", ">", "0"],
+      ["enemy.tempStatsBonus.specialAttack", ">", "0"],
+      ["enemy.tempStatsBonus.specialDefense", ">", "0"],
+      ["enemy.tempStatsBonus.speed", ">", "0"]
+    ],
+    "activation": [
+      ["enemy.tempStatsBonus.attack", "0"],
+      ["enemy.tempStatsBonus.defense", "0"],
+      ["enemy.tempStatsBonus.specialAttack", "0"],
+      ["enemy.tempStatsBonus.specialDefense", "0"],
+      ["enemy.tempStatsBonus.speed", "0"]
+    ]
+  }
+}

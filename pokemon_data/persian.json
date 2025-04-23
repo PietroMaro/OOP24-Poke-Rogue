@@ -1,0 +1,39 @@
+{
+    "pokedexNumber": 53,
+    "types": ["normal"],
+    "captureRate": 90,
+    "stats": {
+        "special-attack": 65,
+        "defense": 60,
+        "attack": 70,
+        "hp": 65,
+        "special-defense": 65,
+        "speed": 115
+    },
+    "moves": {
+        "55": "fake-out",
+        "1": "growl",
+        "34": "screech",
+        "25": "feint-attack",
+        "49": "slash",
+        "18": "pay-day",
+        "61": "swagger",
+        "42": "fury-swipes"
+    },
+    "growthRate": "medium",
+    "name": "persian",
+    "weight": 320,
+    "abilites": [
+        "limber",
+        "technician",
+        "unnerve"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

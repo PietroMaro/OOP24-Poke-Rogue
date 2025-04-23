@@ -1,0 +1,43 @@
+{
+    "pokedexNumber": 104,
+    "types": ["ground"],
+    "captureRate": 190,
+    "stats": {
+        "special-attack": 40,
+        "defense": 95,
+        "attack": 50,
+        "hp": 50,
+        "special-defense": 50,
+        "speed": 35
+    },
+    "moves": {
+        "33": "false-swipe",
+        "45": "double-edge",
+        "1": "growl",
+        "13": "headbutt",
+        "25": "bonemerang",
+        "37": "thrash",
+        "5": "tail-whip",
+        "17": "leer",
+        "29": "rage",
+        "9": "bone-club",
+        "41": "bone-rush",
+        "21": "focus-energy"
+    },
+    "growthRate": "medium",
+    "name": "cubone",
+    "weight": 65,
+    "abilites": [
+        "rock-head",
+        "lightning-rod",
+        "battle-armor"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

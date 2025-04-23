@@ -1,10 +1,13 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "The user's level\nequals damage HP. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 100,
     "critRate": 0,
-    "baseDamage": 0,
+    "baseDamage": 100,
     "type": "ghost",
     "priority": 0
 }

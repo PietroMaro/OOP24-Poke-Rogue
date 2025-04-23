@@ -1,0 +1,9 @@
+{
+    "situationChecks": "switchIn",
+    "effect": {
+      "checks": [],
+      "activation": [
+        ["enemy.tempStatsBonus.attack", "enemy.tempStatsBonus.attack - 1"]
+      ]
+    }
+  }

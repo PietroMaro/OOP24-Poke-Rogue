@@ -1,7 +1,10 @@
 {
     "pp": 25,
     "isPhysical": false,
-    "effect": "An attack using a\nhorn to jab. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 65,

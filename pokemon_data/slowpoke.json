@@ -1,0 +1,43 @@
+{
+    "pokedexNumber": 79,
+    "types": [
+        "water",
+        "psychic"
+    ],
+    "captureRate": 190,
+    "stats": {
+        "special-attack": 40,
+        "defense": 65,
+        "attack": 65,
+        "hp": 90,
+        "special-defense": 40,
+        "speed": 15
+    },
+    "moves": {
+        "1": "yawn",
+        "24": "disable",
+        "13": "water-gun",
+        "36": "amnesia",
+        "47": "psych-up",
+        "6": "growl",
+        "17": "confusion",
+        "29": "headbutt",
+        "40": "psychic"
+    },
+    "growthRate": "medium",
+    "name": "slowpoke",
+    "weight": 360,
+    "abilites": [
+        "oblivious",
+        "own-tempo",
+        "regenerator"
+    ],
+    "givesEV": {
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0,
+        "special-defense": 0,
+        "speed": 0
+    }
+}

@@ -1,7 +1,10 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "Knocks down the foe\u2019s held\nitem to prevent its use. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 65,

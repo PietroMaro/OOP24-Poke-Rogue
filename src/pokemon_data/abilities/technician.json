@@ -1,0 +1,11 @@
+{
+  "situationChecks": "attack",
+  "effect": {
+    "checks": [
+      ["attackUs.baseDamage", "<=", "60"]
+    ],
+    "activation": [
+      ["attackUs.baseDamage", "attackUs.baseDamage * 1.5"]
+    ]
+  }
+}

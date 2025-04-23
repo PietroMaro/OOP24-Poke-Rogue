@@ -1,0 +1,11 @@
+{
+  "situationChecks": "attack",
+  "effect": {
+    "checks": [
+      ["enemy.stats.hp.current", "==", "0"]
+    ],
+    "activation": [
+      ["us.stats.attack","us.stats.attack + 1"]
+    ]
+  }
+}

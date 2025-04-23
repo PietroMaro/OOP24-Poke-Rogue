@@ -1,7 +1,10 @@
 {
     "pp": 30,
     "isPhysical": false,
-    "effect": "Change user's type\nto a move's type. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

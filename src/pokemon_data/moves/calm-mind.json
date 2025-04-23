@@ -1,7 +1,19 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "Raises SP. ATK and SP. DEF\nby focusing the mind. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.tempStatsBonus.special-attack",
+                "us.tempStatsBonus.special-attack + 1"
+            ],
+            [
+                "us.tempStatsBonus.special-defense",
+                "us.tempStatsBonus.special-defense + 1"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

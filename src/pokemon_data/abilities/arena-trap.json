@@ -1,0 +1,13 @@
+{
+  "situationChecks": "switchOut",
+  "effect": {
+    "checks": [
+      ["enemy.type1", "!=" , "'flying'"],
+      ["enemy.type2", "!=" , "'flying'"],
+      ["enemy.ability", "!=" , "'levitate'"]
+    ],
+    "activation": [
+      ["enemy.statusCondition", "==", "'trapped'"]
+    ]
+  }
+}
