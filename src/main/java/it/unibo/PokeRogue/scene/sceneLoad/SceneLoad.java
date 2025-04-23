@@ -20,6 +20,33 @@ import it.unibo.PokeRogue.savingSystem.SavingSystem;
 import it.unibo.PokeRogue.savingSystem.SavingSystemImpl;
 import it.unibo.PokeRogue.scene.Scene;
 
+/**
+ * The {@code SceneLoad} class represents the loading scene in the game,
+ * allowing users
+ * to browse and select save files. It implements the {@link Scene} interface
+ * and is
+ * responsible for displaying save file information and handling user input to
+ * navigate through saves or load a selected save.
+ * 
+ * This scene includes buttons for up to 10 save files at a time, with
+ * scrollable
+ * functionality to view more saves if present. It retrieves save file data
+ * using
+ * {@link SavingSystem} and sets up the scene graphics using various graphic
+ * components.
+ * 
+ * Key features:
+ * Displays save files with associated metadata (like box size).
+ * Handles keyboard input (arrow keys and Enter).
+ * Interacts with the game engine to load the selected save and switch
+ * scenes.
+ * 
+ *
+ * @see it.unibo.PokeRogue.scene.Scene
+ * @see it.unibo.PokeRogue.graphic.GraphicElementImpl
+ * @see it.unibo.PokeRogue.graphic.button.ButtonElementImpl
+ * @see it.unibo.PokeRogue.savingSystem.SavingSystem
+ */
 public class SceneLoad implements Scene {
 
     private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
@@ -31,6 +58,10 @@ public class SceneLoad implements Scene {
     private int newSelectedSave;
     private int selectedSave;
 
+    /**
+     * Constructs a new {@code SceneLoad} object, initializing internal structures
+     * and retrieving the list of saves.
+     */
     public SceneLoad() {
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
@@ -41,6 +72,17 @@ public class SceneLoad implements Scene {
         this.initGraphicElements();
     }
 
+    /**
+     * Updates the graphic elements of the scene when navigating through the save
+     * list.
+     * It manages visual selection and pagination based on the difference between
+     * {@code selectedSave} and {@code newSelectedSave}.
+     * 
+     * When moving across pages (every 10 saves), this method triggers re-rendering
+     * of the visible saves. It also updates the visual state of the selected
+     * button.
+     * 
+     */
     @Override
     public void updateGraphic() {
         this.setButtonStatus(this.selectedSave % 10, false);
@@ -64,6 +106,14 @@ public class SceneLoad implements Scene {
 
     }
 
+    /**
+     * Updates the internal state of the scene in response to keyboard input.
+     * Handles navigation (UP/DOWN arrows) through the save list and triggers
+     * loading of a selected save when ENTER is pressed.
+     *
+     * @param inputKey the key event received from the user
+     *            
+     */
     @Override
     public void updateStatus(final int inputKey) {
 
@@ -76,7 +126,7 @@ public class SceneLoad implements Scene {
                 break;
 
             case KeyEvent.VK_DOWN:
-                if (this.selectedSave < Math.max(9, savesList.size() - 1)) {
+                if (this.selectedSave <  savesList.size() - 1) {
                     this.newSelectedSave += 1;
                 }
                 break;
@@ -111,12 +161,20 @@ public class SceneLoad implements Scene {
         return new LinkedHashMap<>(this.allPanelsElements);
     }
 
+    /**
+     * Initializes the selection status by setting both {@code selectedSave} and
+     * {@code newSelectedSave} to zero.
+     */
     private void initStatus() {
         this.selectedSave = 0;
         this.newSelectedSave = this.selectedSave;
 
     }
 
+    /*
+     * Initializes all graphical components for the scene, including background,
+     * panels, save buttons, and texts.
+     */
     private void initGraphicElements() {
         this.allPanelsElements.put("firstPanel", new PanelElementImpl("", new OverlayLayout(null)));
         this.allPanelsElements.put("savesPanel", new PanelElementImpl("firstPanel", new OverlayLayout(null)));
@@ -129,6 +187,13 @@ public class SceneLoad implements Scene {
 
     }
 
+    /**
+     * Displays a paginated list of 10 save files starting from the given index.
+     * Each save is represented with a button and a text label indicating its name 
+     * and the number of Pokémon in the box.
+     *
+     * @param savesListStart the starting index in the save file list to display.
+     */
     private void showSaves(final int savesListStart) {
         String savesName;
 
@@ -140,7 +205,7 @@ public class SceneLoad implements Scene {
                 boxPokemonNumber = this.savingSystemInstance
                         .howManyPokemonInSave(Paths.get("src", "saves", savesName).toString());
 
-                savesName = savesName.substring(0, savesName.length() - 5); //removing the extension
+                savesName = savesName.substring(0, savesName.length() - 5); // removing the extension
 
                 this.sceneGraphicElements.put(x + 10,
                         new TextElementImpl("savesPanel",
