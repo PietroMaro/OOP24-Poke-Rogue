@@ -1,8 +1,15 @@
 {
     "pp": 40,
     "isPhysical": false,
-    "effect": "Heightens the\nuser's DEFENSE. TODO Create effect and link it here",
-    "accuracy": 100,
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.stats.defense",
+                "us.stats.defense + 3"
+            ]
+        ]
+    },    "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,
     "type": "water",

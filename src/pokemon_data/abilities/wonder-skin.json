@@ -1,0 +1,11 @@
+{
+  "situationChecks": "attacked",
+  "effect": {
+    "checks": [
+      ["attackEnemy.statusCondition", "in", "['paralyze', 'poison', 'sleep', 'burn', 'freeze']"]
+    ],
+    "activation": [
+      ["attackUs.accuracy", "attackUs.accuracy * 0.5"]
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "situationChecks": "switchOut",
+  "effect": {
+    "checks": [],
+    "activation": [
+      ["us.stats.hp.current", "us.stats.hp.current + (us.stats.hp.max / 3)"]
+    ]
+  }
+}

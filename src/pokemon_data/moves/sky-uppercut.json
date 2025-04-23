@@ -1,7 +1,10 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "An uppercut thrown as if\nleaping into the sky. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 90,
     "critRate": 0,
     "baseDamage": 85,

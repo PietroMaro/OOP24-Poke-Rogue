@@ -1,7 +1,21 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "Exhales a hot breath on the\nfoe. May inflict a burn. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "RANDOM",
+                "<",
+                "0.10"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "'burn'"
+            ]
+        ]
+    },
     "accuracy": 90,
     "critRate": 0,
     "baseDamage": 95,

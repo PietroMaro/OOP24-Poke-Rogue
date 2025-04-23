@@ -1,7 +1,21 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "An electric punch.\nIt may paralyze. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "RANDOM",
+                "<",
+                "0.1" 
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "'paralysis'"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 75,

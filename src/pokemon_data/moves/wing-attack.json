@@ -1,7 +1,10 @@
 {
     "pp": 35,
     "isPhysical": false,
-    "effect": "Strikes the target\nwith wings. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 60,

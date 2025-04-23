@@ -1,7 +1,10 @@
 {
     "pp": 25,
     "isPhysical": false,
-    "effect": "Whips the foe with\nslender vines. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 45,

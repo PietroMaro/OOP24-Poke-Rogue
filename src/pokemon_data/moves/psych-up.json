@@ -1,7 +1,31 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "Copies the foe's\nstat changes. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.tempStatsBonus.attack",
+                "enemy.tempStatsBonus.attack"
+            ],
+            [
+                "us.tempStatsBonus.defense",
+                "enemy.tempStatsBonus.defense"
+            ],
+            [
+                "us.tempStatsBonus.special-attack",
+                "enemy.tempStatsBonus.special-attack"
+            ],
+            [
+                "us.tempStatsBonus.special-defense",
+                "enemy.tempStatsBonus.special-defense"
+            ],
+            [
+                "us.tempStatsBonus.speed",
+                "enemy.tempStatsBonus.speed"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

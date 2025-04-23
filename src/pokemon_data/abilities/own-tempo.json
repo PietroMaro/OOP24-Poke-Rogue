@@ -1,0 +1,9 @@
+{
+  "situationChecks": "neutral",
+  "effect": {
+    "checks": ["us.statusCondition", "==", "'confused'"],
+    "activation": [
+      ["us.statusCondition", "''"]
+    ]
+  }
+}

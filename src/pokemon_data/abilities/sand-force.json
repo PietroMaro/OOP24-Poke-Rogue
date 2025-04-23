@@ -1,0 +1,12 @@
+{
+  "situationChecks": "attack",
+  "effect": {
+    "checks": [
+      ["weather", "==", "'sandstorm'"],
+      ["attackUs.type", "in", "['ground', 'steel', 'rock']"]
+    ],
+    "activation": [
+      ["attackUs.baseDamage", "attackUs.baseDamage * 1.3"]
+    ]
+  }
+}

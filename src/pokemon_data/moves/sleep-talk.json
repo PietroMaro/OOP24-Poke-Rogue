@@ -1,7 +1,21 @@
 {
     "pp": 10,
-    "isPhysical": false,
-    "effect": "Randomly attacks\nwhile asleep. TODO Create effect and link it here",
+    "isPhysical": true,
+    "effect": {
+        "checks": [
+            [
+                "us.statusCondition",
+                "==",
+                "'sleep'"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.stats.hp.current",
+                "enemy.stats.hp.current-100"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

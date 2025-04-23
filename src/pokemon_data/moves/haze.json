@@ -1,7 +1,63 @@
 {
     "pp": 30,
     "isPhysical": false,
-    "effect": "Eliminates all\nstat changes. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.tempStatsBonus.hp",
+                "0"
+            ],
+            [
+                "us.tempStatsBonus.attack",
+                "0"
+            ],
+            [
+                "us.tempStatsBonus.defense",
+                "0"
+            ],
+            [
+                "us.tempStatsBonus.special-attack",
+                "0"
+            ],
+            [
+                "us.tempStatsBonus.special-defense",
+                "0"
+            ],
+            [
+                "us.tempStatsBonus.speed",
+                "0"
+            ],
+            [
+                "us.tempStatsBonus.accuracy",
+                "0"
+            ],
+            [
+                "enemy.tempStatsBonus.hp",
+                "0"
+            ],
+            [
+                "enemy.tempStatsBonus.attack",
+                "0"
+            ],
+            [
+                "enemy.tempStatsBonus.defense",
+                "0"
+            ],
+            [
+                "enemy.tempStatsBonus.special-attack",
+                "0"
+            ],
+            [
+                "enemy.tempStatsBonus.special-defense",
+                "0"
+            ],
+            [
+                "enemy.tempStatsBonus.speed",
+                "0"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

@@ -1,7 +1,10 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "Mimics the target and\ncopies its special ability. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,
