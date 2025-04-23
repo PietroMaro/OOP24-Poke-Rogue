@@ -2,7 +2,7 @@ package it.unibo.PokeRogue;
 
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.scene.SceneBox;
-import it.unibo.PokeRogue.scene.SceneMenu;
+import it.unibo.PokeRogue.scene.SceneShop;
 
 /**
  * Implementation of the {@link GameEngine} interface.
@@ -40,7 +40,8 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
     public void setScene(final String newScene) {
         switch (newScene) {
             case "main":
-                currentScene = new SceneMenu();
+                //currentScene = new SceneMenu();
+                currentScene = new SceneShop();
 
                 break;
             case "box":
