@@ -175,7 +175,65 @@ public class SceneFight implements Scene {
         public void updateGraphic() {
                 this.updateSelectedButton();
                 this.updateMoves();
+                this.updateBall();
                 this.mainMenu();
+        }
+
+        // TO FIX MISSING TRAINER INFO
+        private void updateBall() {
+                if (currentSelectedButton >= 300 && currentSelectedButton < 400) {
+                        this.allPanelsElements.put("ballPanel",
+                                        new PanelElementImpl("firstPanel", new OverlayLayout(null)));
+                        // TEXT TO FIX
+                        this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEBALL_TEXT.value(),
+                                        new TextElementImpl("ballPanel", " x Poke Ball", Color.WHITE, 0.04, 0.62,
+                                                        0.34));
+                        this.sceneGraphicElements.put(SceneFightGraphicEnum.MEGABALL_TEXT.value(),
+                                        new TextElementImpl("ballPanel", " x Mega Ball", Color.WHITE, 0.04, 0.62,
+                                                        0.39));
+                        this.sceneGraphicElements.put(SceneFightGraphicEnum.ULTRABALL_TEXT.value(),
+                                        new TextElementImpl("ballPanel", " x Ulta Ball", Color.WHITE, 0.04, 0.62,
+                                                        0.44));
+                        this.sceneGraphicElements.put(SceneFightGraphicEnum.MASTERBALL_TEXT.value(),
+                                        new TextElementImpl("ballPanel", " x Master Ball", Color.WHITE, 0.04, 0.62,
+                                                        0.49));
+                        this.sceneGraphicElements.put(SceneFightGraphicEnum.CANCEL_TEXT.value(),
+                                        new TextElementImpl("ballPanel", " x CANCEL", Color.WHITE, 0.04, 0.62,
+                                                        0.54));
+                        // BUTTON
+                        this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEBALL_BUTTON.value(),
+                                        new ButtonElementImpl("ballPanel", new Color(38, 102, 102), Color.WHITE, 0,
+                                                        0.62,
+                                                        0.31,
+                                                        0.35, 0.05));
+                        this.sceneGraphicElements.put(SceneFightGraphicEnum.MEGABALL_BUTTON.value(),
+                                        new ButtonElementImpl("ballPanel", new Color(38, 102, 102), Color.WHITE, 0,
+                                                        0.62,
+                                                        0.36,
+                                                        0.35, 0.05));
+                        this.sceneGraphicElements.put(SceneFightGraphicEnum.ULTRABALL_BUTTON.value(),
+                                        new ButtonElementImpl("ballPanel", new Color(38, 102, 102), Color.WHITE, 0,
+                                                        0.62,
+                                                        0.41,
+                                                        0.35, 0.05));
+                        this.sceneGraphicElements.put(SceneFightGraphicEnum.MASTERBALL_BUTTON.value(),
+                                        new ButtonElementImpl("ballPanel", new Color(38, 102, 102), Color.WHITE, 0,
+                                                        0.62,
+                                                        0.46,
+                                                        0.35, 0.05));
+                        this.sceneGraphicElements.put(SceneFightGraphicEnum.CANCEL_BUTTON.value(),
+                                        new ButtonElementImpl("ballPanel", new Color(38, 102, 102), Color.WHITE, 0,
+                                                        0.62,
+                                                        0.51,
+                                                        0.35, 0.05));
+                        this.sceneGraphicElements.put(SceneFightGraphicEnum.BALL_BOX.value(),
+                                        new BoxElementImpl("ballPanel", new Color(38, 102, 102), Color.WHITE, 0, 0.62,
+                                                        0.31, 0.35,
+                                                        0.4));
+
+                        this.setButtonStatus(this.currentSelectedButton, true);
+
+                }
         }
 
         private void mainMenu() {
