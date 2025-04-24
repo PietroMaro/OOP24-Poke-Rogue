@@ -25,6 +25,7 @@ import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
 import it.unibo.PokeRogue.trainers.TrainerImpl;
+import it.unibo.PokeRogue.utilities.ColorTypeConversion;
 import it.unibo.PokeRogue.utilities.Range;
 
 public class SceneFight implements Scene {
@@ -313,6 +314,7 @@ public class SceneFight implements Scene {
                 this.sceneGraphicElements.remove(SceneFightGraphicEnum.MOVE_PP_TEXT.value());
                 this.sceneGraphicElements.remove(SceneFightGraphicEnum.MOVE_TYPE_TEXT.value());
                 this.sceneGraphicElements.remove(SceneFightGraphicEnum.MOVE_POWER_TEXT.value());
+                this.sceneGraphicElements.remove(SceneFightGraphicEnum.MOVE_TYPE.value());
         }
 
         private void updateMoveInfo(int currentSelectedButton) {
@@ -357,6 +359,13 @@ public class SceneFight implements Scene {
                                 new TextElementImpl("movePanel",
                                                 "Power: " + power,
                                                 Color.WHITE, 0.06, 0.6, 0.94));
+                if (move != "") {
+                        this.sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_TYPE.value(),
+                                        new BoxElementImpl("movePanel",
+                                                        ColorTypeConversion.getColorForType(
+                                                                        moveFactoryInstance.moveFromName(move).type()),
+                                                        Color.BLACK, 1, 0.65, 0.82, 0.15, 0.06));
+                }
         }
 
         @Override

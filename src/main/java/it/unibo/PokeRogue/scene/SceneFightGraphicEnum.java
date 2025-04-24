@@ -64,6 +64,7 @@ public enum SceneFightGraphicEnum {
     MOVE_PP_VALUE_MAX_TEXT(432), //nop
     MOVE_POWER_TEXT(433),
     MOVE_POWER_VALUE_TEXT(434), //nop
+    MOVE_TYPE(481),
 
     POKEMON_1_STATS_BOX(435),
     POKEMON_1_NAME_TEXT(436),
