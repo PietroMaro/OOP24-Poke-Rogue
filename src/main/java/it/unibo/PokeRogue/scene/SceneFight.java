@@ -3,7 +3,9 @@ package it.unibo.PokeRogue.scene;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.OverlayLayout;
@@ -17,6 +19,8 @@ import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
+import it.unibo.PokeRogue.move.Move;
+import it.unibo.PokeRogue.move.MoveFactoryImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
@@ -28,6 +32,7 @@ public class SceneFight implements Scene {
         private int currentSelectedButton;
         private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
         private final Map<String, PanelElementImpl> allPanelsElements;
+        private final Map<String, Integer> ppCounterMap;
         private final GameEngine gameEngineInstance;
         private final PlayerTrainerImpl playerTrainerInstance;
         private final TrainerImpl enemyTrainerInstance;
@@ -36,6 +41,7 @@ public class SceneFight implements Scene {
         private final static Integer THIRD_POSITION = 2;
         private final static Integer FOURTH_POSITION = 3;
         private int newSelectedButton;
+        private MoveFactoryImpl moveFactoryInstance;
 
         public SceneFight() {
                 this.sceneGraphicElements = new LinkedHashMap<>();
@@ -43,9 +49,10 @@ public class SceneFight implements Scene {
                 this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
                 this.enemyTrainerInstance = PlayerTrainerImpl.getTrainerInstance(); // da modificare con istanza enemy
+                this.moveFactoryInstance = new MoveFactoryImpl();
+                this.ppCounterMap = new HashMap<>();
                 this.initStatus();
                 this.initGraphicElements();
-
         }
 
         private void initStatus() {
@@ -257,6 +264,7 @@ public class SceneFight implements Scene {
                         this.sceneGraphicElements.remove(SceneFightGraphicEnum.DETAILS_CONTAINER_TEXT.value());
                         this.initMoveText();
                         this.initMoveButton();
+                        this.updateMoveInfo(this.currentSelectedButton);
                         this.setButtonStatus(this.currentSelectedButton, true);
                 }
         }
@@ -299,6 +307,56 @@ public class SceneFight implements Scene {
                                 new TextElementImpl("movePanel", getMoveNameOrPlaceholder(FOURTH_POSITION), Color.WHITE,
                                                 0.06, 0.27,
                                                 0.93));
+        }
+
+        private void clearMoveInfo() {
+                this.sceneGraphicElements.remove(SceneFightGraphicEnum.MOVE_PP_TEXT.value());
+                this.sceneGraphicElements.remove(SceneFightGraphicEnum.MOVE_TYPE_TEXT.value());
+                this.sceneGraphicElements.remove(SceneFightGraphicEnum.MOVE_POWER_TEXT.value());
+        }
+
+        private void updateMoveInfo(int currentSelectedButton) {
+                clearMoveInfo();
+
+                int moveIndex = switch (currentSelectedButton) {
+                        case 100 -> 0;
+                        case 101 -> 1;
+                        case 102 -> 2;
+                        case 103 -> 3;
+                        default -> -1;
+                };
+
+                if (moveIndex == -1)
+                        return;
+
+                String move = playerTrainerInstance.getPokemon(FIRST_POSITION)
+                                .map(p -> {
+                                        List<String> moves = p.getActualMoves();
+                                        return (moveIndex >= 0 && moveIndex < moves.size()) ? moves.get(moveIndex) : "";
+                                })
+                                .orElse("");
+
+                String pp = "???";
+                String type = "???";
+                String power = "???";
+
+                if (move != "") {
+                        pp = String.valueOf(moveFactoryInstance.moveFromName(move).pp());
+                        type = String.valueOf(moveFactoryInstance.moveFromName(move).type());
+                        power = String.valueOf(moveFactoryInstance.moveFromName(move).baseDamage());
+                }
+
+                this.sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_PP_TEXT.value(),
+                                new TextElementImpl("movePanel", "PP: " + pp,
+                                                Color.WHITE, 0.06, 0.6, 0.79));
+                this.sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_TYPE_TEXT.value(),
+                                new TextElementImpl("movePanel",
+                                                "Type: " + type,
+                                                Color.WHITE, 0.06, 0.6, 0.86));
+                this.sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_POWER_TEXT.value(),
+                                new TextElementImpl("movePanel",
+                                                "Power: " + power,
+                                                Color.WHITE, 0.06, 0.6, 0.94));
         }
 
         @Override
@@ -381,7 +439,7 @@ public class SceneFight implements Scene {
                 if (selectedButton != null) {
                         selectedButton.setSelected(status);
                 } else {
-                        // Aggiungi un log per il debug se il bottone non esiste
+                        // log per il debug se il bottone non esiste
                         System.out.println("Button with code " + buttonCode + " not found in sceneGraphicElements.");
                 }
         }
