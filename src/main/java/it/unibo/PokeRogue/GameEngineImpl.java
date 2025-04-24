@@ -2,6 +2,7 @@ package it.unibo.PokeRogue;
 
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.scene.SceneBox;
+import it.unibo.PokeRogue.scene.SceneFight;
 import it.unibo.PokeRogue.scene.SceneShop;
 
 /**
@@ -49,7 +50,7 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
 
                 break;
             case "fight":
-                System.out.println("fightScene");
+                currentScene = new SceneFight();
                 break;
 
             default:
