@@ -1,8 +1,5 @@
 package it.unibo.PokeRogue.trainers;
 
-import java.util.Optional;
-
-
 /**
  * Implementation of the {@link PlayerTrainer} interface.
  * This class represents the player's trainer and ensures a singleton instance
@@ -26,7 +23,7 @@ public class PlayerTrainerImpl extends TrainerImpl implements PlayerTrainer {
         return instanceOfTrainer;
     }
 
-    public PlayerTrainerImpl(){
+    public PlayerTrainerImpl() {
         super();
     }
 }
