@@ -9,13 +9,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Random;
-
-import edu.umd.cs.findbugs.annotations.OverrideMustInvoke;
-
+import lombok.Getter;
+import lombok.Setter;
+import lombok.AccessLevel;
 import java.awt.Image;
 
+@Getter
+@Setter
 public final class PokemonImpl implements Pokemon {
+	@Getter(AccessLevel.NONE)
 	final private Random random = new Random();
+	@Getter(AccessLevel.NONE)
 	final private List<String> statNames = new ArrayList<>(Arrays.asList("hp", "attack", "defense", "special-attack", "special-defense", "speed"));
 	private int totalUsedEV = 0;
 	
@@ -33,7 +37,9 @@ public final class PokemonImpl implements Pokemon {
 	private int pokedexNumber;
 	private int weight; 
 	private String name; 
+	@Getter(AccessLevel.NONE)
 	private Type type1; 
+	@Getter(AccessLevel.NONE)
 	private Optional<Type> type2; 
 	private int captureRate; 
 	private String gender; 
@@ -209,12 +215,6 @@ public final class PokemonImpl implements Pokemon {
 			}
 		}
 	}
-
-	@Override
-	public boolean hasToLearnMove(){
-		return this.hasToLearnMove;
-	}
-
 	@Override
 	public void learnNewMove(Optional<Integer> indexMoveToReplace){
 		if(!(this.hasToLearnMove && !this.newMoveToLearn.isEmpty())){
@@ -233,64 +233,6 @@ public final class PokemonImpl implements Pokemon {
 	}
 
 	@Override
-	public Optional<StatusCondition> statusCondition(){
-		return this.statusCondition;
-	}
-
-	@Override
-	public void setStatusCondition(String newStatus){
-		this.statusCondition = Optional.of(StatusCondition.fromString(newStatus));
-	}
-
-	@Override
-	public int getStat(String statName){
-		if(!this.statNames.contains(statName)){
-			throw new UnsupportedOperationException(statName+" is not a legal stats");
-		}
-		return this.actualStats.get(statName).getCurrentValue();
-	}
-
-	@Override
-	public List<Type> getTypes(){
-		List<Type> result = new ArrayList<Type>();		
-		result.add(this.type1);
-		if(!this.type2.isEmpty()){
-			result.add(this.type2.get());
-		}
-		return result;
-	}
-	
-	@Override
-	public Map<String,Integer> getGivesEV(){
-		return this.givesEV;
-	}
-
-	@Override
-	public String getName(){
-		return this.name;
-	}
-
-	@Override
-	public String getGender(){
-		return this.gender;
-	}
-	@Override
-	public String getLevelUpCurve(){
-		return this.levelUpCurve;
-	}
-	@Override
-	public List<String> getActualMoves(){
-		return this.actualMoves;
-	}
-	@Override
-	public Nature getNature(){
-		return this.nature;
-	}
-
-	
-
-
-	@Override
 	public void increaseExp(int amount,boolean isPlayerPokemon){
 		this.exp.increment(amount);
 		if(this.exp.getCurrentValue() == this.exp.getCurrentMax()){
@@ -307,50 +249,13 @@ public final class PokemonImpl implements Pokemon {
 		}	
 	}
 
-
-	
-
 	@Override
-public String toString() {
-    String result = "Pokemon {" +
-            "\n  Name = '" + name + '\'' +
-            ",\n  Pokedex Number = " + pokedexNumber +
-            ",\n  Type1 = " + type1;
-			if(type2.isPresent()){
-				result += ",\n  Type2 = " + type2.get();
-			}
-			result +=
-            ",\n  Ability = '" + abilityName + '\'' +
-            ",\n  Gender = '" + gender + '\'' +
-            ",\n  Weight = " + weight +
-            ",\n  Capture Rate = " + captureRate +
-            ",\n  Level Range = " + level +
-            ",\n  EXP Range = " + exp +
-            ",\n  Level-Up Curve = '" + levelUpCurve + '\'' +
-            ",\n  Total Used EV = " + totalUsedEV +
-            ",\n  Base Stats = " + baseStats +
-            ",\n  Nature = " + nature +
-            ",\n  IVs = " + IV +
-            ",\n  EVs = " + EV +
-            ",\n  Actual Stats = " + actualStats +
-            ",\n  Level Moves Learn = " + levelMovesLearn +
-            ",\n  Actual Moves = " + actualMoves +
-            ",\n  Gives EV = " + givesEV +
-            "\n}";
+	public List<Type> getTypes(){
+		List<Type> result = new ArrayList<Type>();
+		result.add(this.type1);
+		if(!this.type2.isEmpty()){
+			result.add(this.type2.get());
+		}
 		return result;
-		}
-
-		@Override
-		public Image getSpriteFront(){
-			return this.spriteFront;
-		}
-		@Override
-		public Image getSpriteBack(){
-			return this.spriteBack;
-		}
-
-		@Override
-		public String getAbilityName(){
-			return this.abilityName;
-		}
 	}
+}

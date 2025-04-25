@@ -60,12 +60,12 @@ public class TestAll {
 			moveFactory.moveFromName("nonExisting");
     	});
 		assertEquals(ex.getMessage(),"The move nonExisting blueprint was not found. Is not present in moveList / Factory not initialized");
-		assertEquals(moveTest.pp(),25);
+		assertEquals(moveTest.getPp(),25);
 		assertEquals(moveTest.isPhysical(),false);
-		assertEquals(moveTest.accuracy(),100);
-		assertEquals(moveTest.critRate(),0);
-		assertEquals(moveTest.type(),Type.fromString("grass"));
-		assertEquals(moveTest.priority(),0);
+		assertEquals(moveTest.getAccuracy(),100);
+		assertEquals(moveTest.getCritRate(),0);
+		assertEquals(moveTest.getType(),Type.fromString("grass"));
+		assertEquals(moveTest.getPriority(),0);
 	}
 
 	@Test

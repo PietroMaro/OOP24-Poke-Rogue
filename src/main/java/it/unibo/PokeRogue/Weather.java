@@ -1,3 +1,5 @@
+package it.unibo.PokeRogue;
+
 public enum Weather{
 	SUNLIGHT("sunlight"),
 	RAIN("rain"),
