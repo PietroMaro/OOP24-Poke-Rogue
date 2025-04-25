@@ -134,10 +134,10 @@ public class SceneMenu implements Scene {
                 new TextElementImpl("firstPanel", "Continua", Color.BLACK, 0.06, 0.45, 0.24));
 
         this.sceneGraphicElements.put(SceneMenuGraphicEnum.NEW_GAME_BUTTON_TEXT.value(),
-                new TextElementImpl("firstPanel", "Nuova Partita", Color.BLACK, 0.06, 0.45, 0.44));
+                new TextElementImpl("firstPanel", "Nuova Partita", Color.BLACK, 0.06, 0.44, 0.44));
 
         this.sceneGraphicElements.put(SceneMenuGraphicEnum.OPTIONS_GAME_BUTTON_TEXT.value(),
-                new TextElementImpl("firstPanel", "Opzioni", Color.BLACK, 0.06, 0.45, 0.64));
+                new TextElementImpl("firstPanel", "Opzioni", Color.BLACK, 0.06, 0.455, 0.64));
 
         // Buttons
         this.sceneGraphicElements.put(SceneMenuGraphicEnum.LOAD_BUTTON.value(),
