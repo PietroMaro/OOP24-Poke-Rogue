@@ -1,15 +1,17 @@
 package it.unibo.PokeRogue.pokemon;
 
-import it.unibo.PokeRogue.utilities.Range;
 import java.util.Map;
 import java.util.Optional;
 import java.util.List;
 import java.awt.Image;
+import it.unibo.PokeRogue.utilities.Range;
 
 public interface Pokemon {
-	//When you call level up with isPlayerPokemon. if the pokemon learns a new move it will set up a flag inside the 
-	//logic the scene will get this flag and if true it will call (learnNewMove) where it will choose if It want to delete
-	//an old move or not
+	// When you call level up with isPlayerPokemon. if the pokemon learns a new move
+	// it will set up a flag inside the
+	// logic the scene will get this flag and if true it will call (learnNewMove)
+	// where it will choose if It want to delete
+	// an old move or not
 	void levelUp(boolean isPlayerPokemon);
 	void learnNewMove(Optional<Integer> indexMoveToReplace);
 	void inflictDamage(int amount);
@@ -72,5 +74,4 @@ public interface Pokemon {
 	void setSpriteBack(Image newVal);
 
 	//if exp+amount = max of the level it will trigger level up
-	
 }

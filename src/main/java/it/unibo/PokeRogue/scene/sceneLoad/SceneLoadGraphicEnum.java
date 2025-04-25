@@ -1,6 +1,6 @@
 package it.unibo.PokeRogue.scene.sceneLoad;
 
-public enum sceneLoadGraphicEnum {
+public enum SceneLoadGraphicEnum {
     FIRST_SAVE_BUTTON(0),
 
     SECOND_SAVE_BUTTON(1),
@@ -47,7 +47,7 @@ public enum sceneLoadGraphicEnum {
 
     private final int code;
 
-    sceneLoadGraphicEnum(int code) {
+    SceneLoadGraphicEnum(int code) {
         this.code = code;
     }
 
