@@ -44,6 +44,9 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
                 currentScene = new SceneMenu();
 
                 break;
+            case "load":
+                currentScene = new SceneLoad();
+                break;
             case "box":
                 currentScene = new SceneBox(this.fileToLoadName);
 
