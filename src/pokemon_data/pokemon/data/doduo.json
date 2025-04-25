@@ -28,8 +28,6 @@
     "name": "doduo",
     "weight": 392,
     "abilites": [
-        "run-away",
-        "early-bird",
         "tangled-feet"
     ],
     "givesEV": {

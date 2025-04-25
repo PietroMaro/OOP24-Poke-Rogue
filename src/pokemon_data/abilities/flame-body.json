@@ -2,11 +2,6 @@
     "situationChecks": "attacked",
     "effect": {
         "checks": [
-            [
-                "attackEnemy.isPhysical",
-                "==",
-                "true"
-            ]
         ],
         "activation": [
             [

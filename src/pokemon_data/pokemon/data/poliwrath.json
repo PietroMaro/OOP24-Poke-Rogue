@@ -23,7 +23,6 @@
     "weight": 540,
     "abilites": [
         "water-absorb",
-        "damp",
         "swift-swim"
     ],
     "givesEV": {

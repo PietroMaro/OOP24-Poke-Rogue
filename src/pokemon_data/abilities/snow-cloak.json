@@ -5,13 +5,13 @@
             [
                 "weather",
                 "==",
-                "'snow'"
+                "Weather.HAIL"
             ]
         ],
         "activation": [
             [
                 "attackEnemy.accuracy",
-                "attackEnemy.accuracy*0.75"
+                "MATH.round(attackEnemy.accuracy*0.75).intValue()"
             ]
         ]
     }

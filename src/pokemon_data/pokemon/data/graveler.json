@@ -28,9 +28,7 @@
     "name": "graveler",
     "weight": 1050,
     "abilites": [
-        "rock-head",
-        "sturdy",
-        "sand-veil"
+        "sturdy"
     ],
     "givesEV": {
         "defense": 2,

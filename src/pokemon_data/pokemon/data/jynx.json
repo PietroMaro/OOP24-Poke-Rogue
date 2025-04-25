@@ -29,7 +29,6 @@
     "weight": 406,
     "abilites": [
         "oblivious",
-        "forewarn",
         "dry-skin"
     ],
     "givesEV": {

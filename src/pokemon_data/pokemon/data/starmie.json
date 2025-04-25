@@ -22,7 +22,6 @@
     "name": "starmie",
     "weight": 800,
     "abilites": [
-        "illuminate",
         "natural-cure",
         "analytic"
     ],

@@ -28,7 +28,6 @@
     "name": "porygon",
     "weight": 365,
     "abilites": [
-        "trace",
         "download",
         "analytic"
     ],

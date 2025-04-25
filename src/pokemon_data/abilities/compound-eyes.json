@@ -2,12 +2,11 @@
     "situationChecks": "passive",
     "effect": {
         "checks": [
-            []
         ],
         "activation": [
             [
                 "attackUs.accuracy",
-                "attackUs.accuracy * 1.3"
+                "MATH.round(attackUs.accuracy * 1.3).intValue()"
             ]
         ]
     }

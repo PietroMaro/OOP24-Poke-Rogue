@@ -26,7 +26,6 @@
     "name": "sandslash",
     "weight": 295,
     "abilites": [
-        "sand-veil",
         "sand-rush"
     ],
     "givesEV": {

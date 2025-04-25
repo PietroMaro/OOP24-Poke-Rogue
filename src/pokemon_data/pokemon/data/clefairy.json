@@ -31,9 +31,7 @@
     "name": "clefairy",
     "weight": 75,
     "abilites": [
-        "cute-charm",
-        "magic-guard",
-        "friend-guard"
+        "cute-charm"
     ],
     "givesEV": {
         "defense": 0,

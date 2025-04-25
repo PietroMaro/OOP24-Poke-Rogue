@@ -21,8 +21,7 @@
     "name": "victreebel",
     "weight": 155,
     "abilites": [
-        "chlorophyll",
-        "gluttony"
+        "chlorophyll"
     ],
     "givesEV": {
         "defense": 0,

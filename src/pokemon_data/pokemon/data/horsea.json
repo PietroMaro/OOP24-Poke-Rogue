@@ -28,8 +28,7 @@
     "weight": 80,
     "abilites": [
         "swift-swim",
-        "sniper",
-        "damp"
+        "sniper"
     ],
     "givesEV": {
         "defense": 0,

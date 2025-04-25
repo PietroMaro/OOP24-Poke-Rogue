@@ -25,7 +25,6 @@
     "name": "raticate",
     "weight": 185,
     "abilites": [
-        "run-away",
         "guts",
         "hustle"
     ],

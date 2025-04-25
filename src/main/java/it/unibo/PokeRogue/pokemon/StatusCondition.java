@@ -10,6 +10,7 @@ public enum StatusCondition{
 	CONFUSION("confusion"),	
 	FLINCH("flinch"),	
 	TRAPPED("trapped"),
+	CHARMED("charmed"),
 	SEEDED("seeded");	
 
 	private final String statusName;

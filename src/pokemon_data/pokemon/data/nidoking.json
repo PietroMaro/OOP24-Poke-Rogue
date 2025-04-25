@@ -24,8 +24,7 @@
     "weight": 620,
     "abilites": [
         "poison-point",
-        "rivalry",
-        "sheer-force"
+        "rivalry"
     ],
     "givesEV": {
         "defense": 0,

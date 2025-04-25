@@ -30,8 +30,7 @@
     "weight": 655,
     "abilites": [
         "own-tempo",
-        "oblivious",
-        "cloud-nine"
+        "oblivious"
     ],
     "givesEV": {
         "defense": 0,

@@ -28,9 +28,7 @@
     "name": "aerodactyl",
     "weight": 590,
     "abilites": [
-        "rock-head",
-        "pressure",
-        "unnerve"
+        "pressure"
     ],
     "givesEV": {
         "defense": 0,

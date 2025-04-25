@@ -28,9 +28,7 @@
     "name": "meowth",
     "weight": 42,
     "abilites": [
-        "pickup",
-        "technician",
-        "unnerve"
+        "technician"
     ],
     "givesEV": {
         "defense": 0,

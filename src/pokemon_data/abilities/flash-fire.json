@@ -5,23 +5,13 @@
             [
                 "attackEnemy.type",
                 "==",
-                "'fire'"
+                "Type.FIRE"
             ]
         ],
         "activation": [
             [
-                "us.type1",
-                "==",
-                "'fire'"
-            ],
-            [
-                "us.type2",
-                "==",
-                "'fire'"
-            ],
-            [
                 "attackUs.baseDamage",
-                "attackUs.baseDamage * 1.5"
+                "MATH.floor(attackUs.baseDamage * 1.5).intValue()"
             ]
         ]
     }

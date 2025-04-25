@@ -29,8 +29,7 @@
     "weight": 884,
     "abilites": [
         "intimidate",
-        "anger-point",
-        "sheer-force"
+        "anger-point"
     ],
     "givesEV": {
         "defense": 0,

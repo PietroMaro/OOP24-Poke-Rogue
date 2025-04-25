@@ -27,9 +27,7 @@
     "name": "rhydon",
     "weight": 1200,
     "abilites": [
-        "lightning-rod",
-        "rock-head",
-        "reckless"
+        "lightning-rod"
     ],
     "givesEV": {
         "defense": 0,

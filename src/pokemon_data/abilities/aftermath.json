@@ -16,7 +16,7 @@
         "activation": [
             [
                 "attackEnemy.calculatedDamage",
-                "us.actualStats.hp.currentMax * 0.25"
+                "MATH.floor(us.actualStats.hp.currentMax * 0.25).intValue()"
             ]
         ]
     }

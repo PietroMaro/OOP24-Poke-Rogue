@@ -28,7 +28,6 @@
     "weight": 300,
     "abilites": [
         "stench",
-        "sticky-hold",
         "poison-touch"
     ],
     "givesEV": {

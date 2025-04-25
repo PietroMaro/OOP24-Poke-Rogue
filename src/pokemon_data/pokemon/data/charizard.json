@@ -28,8 +28,7 @@
     "name": "charizard",
     "weight": 905,
     "abilites": [
-        "blaze",
-        "solar-baseDamage"
+        "blaze"
     ],
     "givesEV": {
         "defense": 0,

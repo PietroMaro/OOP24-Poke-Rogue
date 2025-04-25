@@ -3,9 +3,9 @@
     "effect": {
         "checks": [
             [
-                "enemy.actualStats.attack",
+                "enemy.actualStats.attack.currentValue",
                 "<",
-                "enemy.actualStats.defense"
+                "enemy.actualStats.defense.currentValue"
             ]
         ],
         "activation": [

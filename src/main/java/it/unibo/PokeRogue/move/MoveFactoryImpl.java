@@ -35,7 +35,6 @@ public class MoveFactoryImpl extends SingletonImpl implements MoveFactory{
 
 	private void addMoveToBlueprints(final String moveName){
 		JSONObject moveJson;
-		System.out.println(moveName);
         moveJson = jsonReader.readJsonObject(Paths.get("src","pokemon_data","moves",moveName +".json").toString());
 		int pp = moveJson.getInt("pp");
 		boolean isPhysical = moveJson.getBoolean("isPhysical");
@@ -53,6 +52,8 @@ public class MoveFactoryImpl extends SingletonImpl implements MoveFactory{
 				critRate,
 				baseDamage,
 				0,
+				1.5,
+				false,
 				type,
 				priority
 			);

@@ -27,7 +27,6 @@
     "weight": 95,
     "abilites": [
         "levitate",
-        "neutralizing-gas",
         "stench"
     ],
     "givesEV": {

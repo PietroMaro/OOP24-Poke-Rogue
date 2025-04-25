@@ -5,13 +5,13 @@
             [
                 "attackEnemy.type",
                 "==",
-                "'ground'"
+                "Type.GROUND"
             ]
         ],
         "activation": [
             [
                 "attackEnemy.calculatedDamage",
-                0
+                "0"
             ]
         ]
     }

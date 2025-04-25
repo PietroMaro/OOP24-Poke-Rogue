@@ -29,8 +29,7 @@
     "name": "mewtwo",
     "weight": 1220,
     "abilites": [
-        "pressure",
-        "unnerve"
+        "pressure"
     ],
     "givesEV": {
         "defense": 0,

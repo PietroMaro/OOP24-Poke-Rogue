@@ -28,8 +28,7 @@
     "name": "exeggcute",
     "weight": 25,
     "abilites": [
-        "chlorophyll",
-        "harvest"
+        "chlorophyll"
     ],
     "givesEV": {
         "defense": 1,

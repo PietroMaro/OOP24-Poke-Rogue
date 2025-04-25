@@ -28,9 +28,7 @@
     "name": "kadabra",
     "weight": 565,
     "abilites": [
-        "synchronize",
-        "inner-focus",
-        "magic-guard"
+        "synchronize"
     ],
     "givesEV": {
         "defense": 0,

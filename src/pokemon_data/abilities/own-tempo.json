@@ -1,15 +1,15 @@
 {
     "situationChecks": "neutral",
     "effect": {
-        "checks": [
+        "checks": [[
             "us.statusCondition",
             "==",
             "Optional.of(StatusCondition.CONFUSION)"
-        ],
+        ]],
         "activation": [
             [
                 "us.statusCondition",
-                "Optional.empty()"
+                "EMPTY"
             ]
         ]
     }

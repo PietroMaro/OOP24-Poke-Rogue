@@ -5,7 +5,7 @@
             [
                 "us.statusCondition",
                 "!=",
-                "Optional.empty()"
+                "EMPTY"
             ]
         ],
         "activation": [

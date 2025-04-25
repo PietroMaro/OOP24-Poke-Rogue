@@ -27,7 +27,6 @@
     "name": "rapidash",
     "weight": 950,
     "abilites": [
-        "run-away",
         "flash-fire",
         "flame-body"
     ],

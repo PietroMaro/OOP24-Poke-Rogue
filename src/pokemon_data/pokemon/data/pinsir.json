@@ -28,8 +28,6 @@
     "name": "pinsir",
     "weight": 550,
     "abilites": [
-        "hyper-cutter",
-        "mold-breaker",
         "moxie"
     ],
     "givesEV": {

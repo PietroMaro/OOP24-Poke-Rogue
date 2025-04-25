@@ -2,18 +2,15 @@
     "situationChecks": "attack",
     "effect": {
         "checks": [
-            "attackUs.isPhysical",
-            "==",
-            "true"
         ],
         "activation": [
             [
                 "us.actualStats.attack.currentValue",
-                "us.actualStats.attack.currentValue * 1.5"
+                "MATH.round(us.actualStats.attack.currentValue * 1.5).intValue()"
             ],
             [
                 "attackUs.accuracy",
-                "attackUs.accuracy * 0.8"
+                "MATH.round(attackUs.accuracy * 0.8).intValue()"
             ]
         ]
     }

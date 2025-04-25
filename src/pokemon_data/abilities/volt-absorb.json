@@ -3,18 +3,18 @@
     "effect": {
         "checks": [
             [
-                "attack.type",
+                "attackEnemy.type",
                 "==",
-                "'electric'"
+                "Type.ELECTRIC"
             ]
         ],
         "activation": [
             [
                 "us.actualStats.hp.currentValue",
-                "us.actualStats.hp.currentValue * 1.25"
+                "MATH.floor(us.actualStats.hp.currentValue * 1.25).intValue()"
             ],
             [
-                "attackEnemy.damege",
+                "attackEnemy.calculatedDamage",
                 "0"
             ]
         ]

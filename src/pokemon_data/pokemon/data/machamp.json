@@ -30,8 +30,7 @@
     "weight": 1300,
     "abilites": [
         "guts",
-        "no-guard",
-        "steadfast"
+        "no-guard"
     ],
     "givesEV": {
         "defense": 0,

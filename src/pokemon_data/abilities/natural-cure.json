@@ -2,12 +2,11 @@
     "situationChecks": "switchIn",
     "effect": {
         "checks": [
-            []
         ],
         "activation": [
             [
                 "us.statusCondition",
-                "Optional.empty()"
+                "EMPTY"
             ]
         ]
     }

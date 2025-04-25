@@ -30,8 +30,7 @@
     "name": "butterfree",
     "weight": 320,
     "abilites": [
-        "compound-eyes",
-        "tinted-lens"
+        "compound-eyes"
     ],
     "givesEV": {
         "defense": 0,

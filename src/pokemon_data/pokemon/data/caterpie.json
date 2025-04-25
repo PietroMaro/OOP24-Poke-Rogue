@@ -20,8 +20,7 @@
     "name": "caterpie",
     "weight": 29,
     "abilites": [
-        "shield-dust",
-        "run-away"
+        "chlorophyll"
     ],
     "givesEV": {
         "defense": 0,

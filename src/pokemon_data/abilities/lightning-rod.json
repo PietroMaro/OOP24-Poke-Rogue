@@ -5,7 +5,7 @@
             [
                 "attackEnemy.type",
                 "==",
-                "'electric'"
+                "Type.ELECTRIC"
             ]
         ],
         "activation": [

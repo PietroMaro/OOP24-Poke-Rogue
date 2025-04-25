@@ -28,7 +28,6 @@
     "name": "diglett",
     "weight": 8,
     "abilites": [
-        "sand-veil",
         "arena-trap",
         "sand-force"
     ],

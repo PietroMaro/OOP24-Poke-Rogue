@@ -26,7 +26,6 @@
     "name": "rattata",
     "weight": 35,
     "abilites": [
-        "run-away",
         "guts",
         "hustle"
     ],

@@ -3,11 +3,6 @@
     "effect": {
         "checks": [
             [
-                "attackUs.isPhysical",
-                "==",
-                "true"
-            ],
-            [
                 "MATH.random()",
                 "<=",
                 "0.3"
@@ -16,7 +11,7 @@
         "activation": [
             [
                 "enemy.statusCondition",
-                "'poison'"
+                "Optional.of(StatusCondition.POISON)"
             ]
         ]
     }

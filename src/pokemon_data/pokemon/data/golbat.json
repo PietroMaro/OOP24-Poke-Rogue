@@ -28,8 +28,7 @@
     "name": "golbat",
     "weight": 550,
     "abilites": [
-        "inner-focus",
-        "infiltrator"
+        "no-guard"
     ],
     "givesEV": {
         "defense": 0,

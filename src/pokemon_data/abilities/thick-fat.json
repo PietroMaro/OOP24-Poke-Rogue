@@ -5,7 +5,7 @@
             [
                 "attackEnemy.type",
                 "==",
-                "'fire'"
+                "Type.FIRE"
             ]
         ],
         "activation": [

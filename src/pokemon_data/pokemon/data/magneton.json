@@ -28,7 +28,6 @@
     "name": "magneton",
     "weight": 600,
     "abilites": [
-        "magnet-pull",
         "sturdy",
         "analytic"
     ],
