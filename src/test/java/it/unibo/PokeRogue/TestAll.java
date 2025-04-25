@@ -1,6 +1,7 @@
 package it.unibo.PokeRogue;
 
 
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -18,6 +19,9 @@ import it.unibo.PokeRogue.ability.Ability;
 import it.unibo.PokeRogue.ability.AbilityFactory;
 import it.unibo.PokeRogue.ability.AbilityFactoryImpl;
 import it.unibo.PokeRogue.ability.AbilitySituationChecks;
+import it.unibo.PokeRogue.effectParser.EffectParser;
+import it.unibo.PokeRogue.effectParser.EffectParserImpl;
+import org.json.JSONObject;
 
 import it.unibo.PokeRogue.pokemon.Type;
 
@@ -79,5 +83,28 @@ public class TestAll {
 		assertEquals(abilityTest.situationChecks(),AbilitySituationChecks.fromString("attack"));
 	}
 
-	
+	@Test
+	public void testMoveCopy(){
+		MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
+		Move moveTest1 = moveFactory.moveFromName("absorb");
+		Move moveTest2 = moveFactory.moveFromName("absorb");
+		moveTest1.setPp(0);
+		assertNotSame(moveTest1,moveTest2);
+		assertNotSame(moveTest2.getPp(),0);
+		assertEquals(moveTest1.getPp(),0);
+	}
+
+
+	@Test
+	public void testEffectParser(){
+		EffectParser effectParser= EffectParserImpl.getInstance(EffectParserImpl.class);
+		PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+		Pokemon pok = pokeFactory.randomPokemon(3);
+		String jsonString = "{\"checks\":[[\"us.statusCondition\",\">=\",\"0\"]],\"activation\":[]}";
+		effectParser.parseEffect(
+			new JSONObject(jsonString),
+			pok	
+				);
+		System.out.println(pok);
+	}
 }

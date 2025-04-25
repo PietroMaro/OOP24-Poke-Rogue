@@ -65,6 +65,7 @@ public class MoveFactoryImpl extends SingletonImpl implements MoveFactory{
 			throw new UnsupportedOperationException("The move "+moveName+" blueprint was not found. Is not present in moveList / Factory not initialized");
 
 		}
+		move = move.deepCopy();
 		return move;
 	}
 }

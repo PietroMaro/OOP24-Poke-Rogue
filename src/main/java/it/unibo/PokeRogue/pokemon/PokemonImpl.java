@@ -12,10 +12,12 @@ import java.util.Random;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AccessLevel;
+import lombok.ToString;
 import java.awt.Image;
 
 @Getter
 @Setter
+@ToString
 public final class PokemonImpl implements Pokemon {
 	@Getter(AccessLevel.NONE)
 	final private Random random = new Random();
@@ -58,7 +60,7 @@ public final class PokemonImpl implements Pokemon {
 		generateIVs();
 		generateEVs();
 		this.nature = Nature.getRandomNature();
-		this.level = new RangeImpl<Integer>(1,100,1, (x, y) -> x + y, (x, y) -> x - y);
+		this.level = new RangeImpl<Integer>(1,100,1);
 		calculateActualStats();
 		initLevelMovesLearn(pokemonBlueprint.learnableMoves());
 		initActualMoves();
@@ -88,7 +90,7 @@ public final class PokemonImpl implements Pokemon {
 	private void generateEVs() {
 		this.EV = new HashMap<String, Range<Integer>>();
 		for (String stat : statNames) {
-			this.EV.put(stat, new RangeImpl<>(0, 252, 0, (x, y) -> x + y, (x, y) -> x - y));
+			this.EV.put(stat, new RangeImpl<>(0, 252, 0));
 		}
 	}
 
@@ -136,7 +138,7 @@ public final class PokemonImpl implements Pokemon {
 		+ (this.EV.get("hp").getCurrentValue() / 4)) * this.level.getCurrentValue()) / 100)
 		+ this.level.getCurrentValue() + 10;
 
-		Range<Integer> rangeHp = new RangeImpl<Integer>(0,maxLife,maxLife,(x, y) -> x + y, (x, y) -> x - y);
+		Range<Integer> rangeHp = new RangeImpl<Integer>(0,maxLife,maxLife);
 		
 		actualStats.put("hp",rangeHp);
 	
@@ -155,7 +157,7 @@ public final class PokemonImpl implements Pokemon {
 				statValue*=0.9;
 			}
 
-			Range<Integer> rangeStat = new RangeImpl<Integer>(0,255,statValue,(x, y) -> x + y, (x, y) -> x - y);
+			Range<Integer> rangeStat = new RangeImpl<Integer>(0,255,statValue);
 			actualStats.put(stat,rangeStat);
 		}
 		
@@ -176,7 +178,7 @@ public final class PokemonImpl implements Pokemon {
 		else if(this.levelUpCurve == "slow"){
 			newRequiredExp = (int)((5*Math.pow(currentLevel,3))/4);
 		}
-		this.exp = new RangeImpl<Integer>(0,newRequiredExp ,0,(x, y) -> x + y, (x, y) -> x - y);
+		this.exp = new RangeImpl<Integer>(0,newRequiredExp ,0);
 	}
 
 	private void levelUpStats() {

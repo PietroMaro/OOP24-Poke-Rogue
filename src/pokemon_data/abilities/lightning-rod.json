@@ -5,7 +5,7 @@
             ["attackEnemy.type", "==", "'electric'"]
           ],
           "activation": [
-            ["us.tempStatsBonus.special-attack", "us.tempStatsBonus.special-attack + 1"]
+            ["us.tempStatsBonus.specialAttack", "us.tempStatsBonus.specialAttack + 1"]
           ]
         }
 }

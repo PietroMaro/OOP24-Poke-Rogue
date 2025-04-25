@@ -15,4 +15,17 @@ public class Move{
 	private int baseDamage;
 	private Type type;
 	private int priority;
+
+	public Move deepCopy() {
+	    return new Move(
+	        this.pp,
+	        this.isPhysical,
+	        new JSONObject(this.effect.toString()), // Deep copy of JSONObject
+	        this.accuracy,
+	        this.critRate,
+	        this.baseDamage,
+	        this.type,
+	        this.priority
+	    );
+	}
 }

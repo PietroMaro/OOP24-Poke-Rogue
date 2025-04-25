@@ -7,6 +7,7 @@ import it.unibo.PokeRogue.move.Move;
 import org.json.JSONObject;
 
 public interface EffectParser extends Singleton {
+	//In battle
     void parseEffect(
 		JSONObject effect,
 		Pokemon us,
@@ -14,5 +15,10 @@ public interface EffectParser extends Singleton {
 		Move attackUs,
 		Move attackEnemy,
 		Weather weather
+			);
+	//For pokeObjects
+	void parseEffect(
+		JSONObject effect,
+		Pokemon pokemon
 			);
 }
