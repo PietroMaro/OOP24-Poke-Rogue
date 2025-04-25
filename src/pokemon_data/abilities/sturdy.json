@@ -1,12 +1,23 @@
 {
-  "situationChecks": "attacked",
-  "effect": {
-    "checks": [
-      ["us.stats.hp.current", "==", "us.stats.hp.max"],
-      ["attackEnemy.damage", ">=", "us.stats.hp.max"]
-    ],
-    "activation": [
-      ["us.stats.hp.current", "1"]
-    ]
-  }
+    "situationChecks": "attacked",
+    "effect": {
+        "checks": [
+            [
+                "us.actualStats.hp.currentValue",
+                "==",
+                "us.actualStats.hp.currentMax"
+            ],
+            [
+                "attackEnemy.calculatedDamage",
+                ">=",
+                "us.actualStats.hp.currentMax"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.hp.currentValue",
+                "1"
+            ]
+        ]
+    }
 }

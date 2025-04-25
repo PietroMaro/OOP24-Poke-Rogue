@@ -7,15 +7,15 @@
     "captureRate": 45,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 55,
         "defense": 90,
         "attack": 80,
         "hp": 30,
-        "special-defense": 45,
-        "speed": 55
+        "speed": 55,
+        "specialDefense": 45,
+        "specialAttack": 55
     },
     "moves": {
-        "55": "ancient-power",
+        "55": "ancient-baseDamage",
         "1": "harden",
         "13": "absorb",
         "25": "mud-shot",
@@ -34,11 +34,11 @@
         "weak-armor"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 1,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 0
     }
 }

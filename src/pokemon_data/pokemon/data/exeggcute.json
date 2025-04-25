@@ -7,12 +7,12 @@
     "captureRate": 90,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 60,
         "defense": 80,
         "attack": 40,
         "hp": 60,
-        "special-defense": 45,
-        "speed": 40
+        "speed": 40,
+        "specialDefense": 45,
+        "specialAttack": 60
     },
     "moves": {
         "1": "uproar",
@@ -32,11 +32,11 @@
         "harvest"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 1,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 0
     }
 }

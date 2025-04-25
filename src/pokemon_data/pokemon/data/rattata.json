@@ -1,15 +1,17 @@
 {
     "pokedexNumber": 19,
-    "types": ["normal"],
+    "types": [
+        "normal"
+    ],
     "captureRate": 255,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 25,
         "defense": 35,
         "attack": 56,
         "hp": 30,
-        "special-defense": 35,
-        "speed": 72
+        "speed": 72,
+        "specialDefense": 35,
+        "specialAttack": 25
     },
     "moves": {
         "1": "tail-whip",
@@ -29,11 +31,11 @@
         "hustle"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 1
+        "speed": 1,
+        "specialDefense": 0,
+        "specialAttack": 0
     }
 }

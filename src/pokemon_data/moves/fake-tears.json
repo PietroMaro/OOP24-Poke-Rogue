@@ -5,8 +5,8 @@
         "checks": [],
         "activation": [
             [
-                "enemy.tempStatsBonus.special-defense",
-                "enemy.tempStatsBonus.special-defense - 2"
+                "enemy.tempStatsBonus.specialDefense.currentValue",
+                "enemy.tempStatsBonus.specialDefense.currentValue - 2"
             ]
         ]
     },

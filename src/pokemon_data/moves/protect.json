@@ -4,14 +4,14 @@
     "effect": {
         "checks": [
             [
-                "RANDOM",
+                "MATH.random()",
                 "<=",
-                "2" 
+                "2"
             ]
         ],
         "activation": [
             [
-                "attackEnemy.damage",
+                "attackEnemy.calculatedDamage",
                 "0"
             ]
         ]

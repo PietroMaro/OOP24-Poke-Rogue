@@ -1,7 +1,14 @@
 {
-    "situationChecks" : "passive",
-    "effect" : {
-            "checks" : [["RANDOM","<","0.33"]],
-            "activation" : [["us.statusCondition","''"]]
-        }
+    "situationChecks": "passive",
+    "effect": {
+        "checks": [
+            [
+                "MATH.random()",
+                "<",
+                "0.33"
+            ]
+        ],
+        "activation": [
+        ]
+    }
 }

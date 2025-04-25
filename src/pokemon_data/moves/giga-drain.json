@@ -5,12 +5,8 @@
         "checks": [],
         "activation": [
             [
-                "enemy.stats.hp.current",
-                "enemy.stats.hp.current - calculatedDamage"
-            ],
-            [
-                "us.stats.hp.current",
-                "min(us.stats.hp.max, us.stats.hp.current + (calculatedDamage / 2))"
+                "us.actualStats.hp.currentValue",
+                "us.actualStats.hp.currentValue + (attackUs.calculatedDamage / 2)"
             ]
         ]
     },

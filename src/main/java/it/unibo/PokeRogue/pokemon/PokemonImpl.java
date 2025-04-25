@@ -9,15 +9,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Random;
-
-import edu.umd.cs.findbugs.annotations.OverrideMustInvoke;
-
+import lombok.Getter;
+import lombok.Setter;
+import lombok.AccessLevel;
+import lombok.ToString;
 import java.awt.Image;
 
+@Getter
+@Setter
+@ToString
 public final class PokemonImpl implements Pokemon {
+	@Getter(AccessLevel.NONE)
 	final private Random random = new Random();
-	final private List<String> statNames = new ArrayList<>(
-			Arrays.asList("hp", "attack", "defense", "special-attack", "special-defense", "speed"));
+	@Getter(AccessLevel.NONE)
+	final private List<String> statNames = new ArrayList<>(Arrays.asList("hp", "attack", "defense", "specialAttack", "specialDefense", "speed"));
 	private int totalUsedEV = 0;
 
 	private Map<String, Integer> baseStats;
@@ -26,20 +31,23 @@ public final class PokemonImpl implements Pokemon {
 	private Map<String, Range<Integer>> EV; // 0-255 the pokemon can have a total of 510
 	private Range<Integer> level;
 	private Map<String, Range<Integer>> actualStats;
+	private Map<String,Range<Integer>> tempStatsBonus;
 	private Map<Integer, String> levelMovesLearn;
 	private List<String> actualMoves = new ArrayList<String>();
 	private String levelUpCurve; // https://m.bulbapedia.bulbagarden.net/wiki/Experience
 	private Map<String, Integer> givesEV;
 	private Range<Integer> exp;
 	private int pokedexNumber;
-	private int weight;
-	private String name;
-	private Type type1;
-	private Optional<Type> type2;
-	private int captureRate;
-	private String gender;
-	private Optional<String> holdingObject;
-	private String abilityName;
+	private int weight; 
+	private String name; 
+	@Getter(AccessLevel.NONE)
+	private Type type1; 
+	@Getter(AccessLevel.NONE)
+	private Optional<Type> type2; 
+	private int captureRate; 
+	private String gender; 
+	private Optional<String> holdingObject; 
+	private String abilityName; 
 	private Optional<StatusCondition> statusCondition;
 
 	private boolean hasToLearnMove = false;
@@ -53,8 +61,9 @@ public final class PokemonImpl implements Pokemon {
 		generateIVs();
 		generateEVs();
 		this.nature = Nature.getRandomNature();
-		this.level = new RangeImpl<Integer>(1, 100, 1, (x, y) -> x + y, (x, y) -> x - y);
+		this.level = new RangeImpl<Integer>(1,100,1);
 		calculateActualStats();
+		initTempStatsBonus();
 		initLevelMovesLearn(pokemonBlueprint.learnableMoves());
 		initActualMoves();
 		this.levelUpCurve = pokemonBlueprint.growthRate();
@@ -83,7 +92,7 @@ public final class PokemonImpl implements Pokemon {
 	private void generateEVs() {
 		this.EV = new HashMap<String, Range<Integer>>();
 		for (String stat : statNames) {
-			this.EV.put(stat, new RangeImpl<>(0, 252, 0, (x, y) -> x + y, (x, y) -> x - y));
+			this.EV.put(stat, new RangeImpl<>(0, 252, 0));
 		}
 	}
 
@@ -99,8 +108,16 @@ public final class PokemonImpl implements Pokemon {
 		this.abilityName = possibleAbilities.get(random.nextInt(possibleAbilities.size()));
 	}
 
-	private void initTypes(List<String> types) {
-		this.type1 = Type.fromString(types.get(0));
+	private void initTempStatsBonus(){
+		this.tempStatsBonus = new HashMap<String, Range<Integer>>();
+		for(String stat : statNames){
+			this.tempStatsBonus.put(stat,new RangeImpl<>(-6,6,0));
+		}
+		this.tempStatsBonus.put("critRate",new RangeImpl<>(-6,6,0));
+		this.tempStatsBonus.put("accuracy",new RangeImpl<>(-6,6,0));
+	}
+	private void initTypes(List<String> types){
+		this.type1 = Type.fromString(types.get(0));	
 		this.type2 = Optional.empty();
 		if (types.size() > 1) {
 			this.type2 = Optional.of(Type.fromString(types.get(1)));
@@ -129,10 +146,11 @@ public final class PokemonImpl implements Pokemon {
 				+ (this.EV.get("hp").getCurrentValue() / 4)) * this.level.getCurrentValue()) / 100)
 				+ this.level.getCurrentValue() + 10;
 
-		Range<Integer> rangeHp = new RangeImpl<Integer>(0, maxLife, maxLife, (x, y) -> x + y, (x, y) -> x - y);
-
-		actualStats.put("hp", rangeHp);
-
+		Range<Integer> rangeHp = new RangeImpl<Integer>(0,maxLife,maxLife);
+		
+		actualStats.put("hp",rangeHp);
+	
+		
 		for (String stat : statNames) {
 
 			int statValue = (int) Math.round(
@@ -147,8 +165,8 @@ public final class PokemonImpl implements Pokemon {
 				statValue *= 0.9;
 			}
 
-			Range<Integer> rangeStat = new RangeImpl<Integer>(0, 255, statValue, (x, y) -> x + y, (x, y) -> x - y);
-			actualStats.put(stat, rangeStat);
+			Range<Integer> rangeStat = new RangeImpl<Integer>(0,255,statValue);
+			actualStats.put(stat,rangeStat);
 		}
 
 	}
@@ -166,7 +184,7 @@ public final class PokemonImpl implements Pokemon {
 		} else if (this.levelUpCurve == "slow") {
 			newRequiredExp = (int) ((5 * Math.pow(currentLevel, 3)) / 4);
 		}
-		this.exp = new RangeImpl<Integer>(0, newRequiredExp, 0, (x, y) -> x + y, (x, y) -> x - y);
+		this.exp = new RangeImpl<Integer>(0,newRequiredExp ,0);
 	}
 
 	private void levelUpStats() {
@@ -202,12 +220,6 @@ public final class PokemonImpl implements Pokemon {
 			}
 		}
 	}
-
-	@Override
-	public boolean hasToLearnMove() {
-		return this.hasToLearnMove;
-	}
-
 	@Override
 	public void learnNewMove(Optional<Integer> indexMoveToReplace) {
 		if (!(this.hasToLearnMove && !this.newMoveToLearn.isEmpty())) {
@@ -223,64 +235,6 @@ public final class PokemonImpl implements Pokemon {
 	@Override
 	public void inflictDamage(int amount) {
 		this.actualStats.get("hp").decrement(amount);
-	}
-
-	@Override
-	public Optional<StatusCondition> statusCondition() {
-		return this.statusCondition;
-	}
-
-	@Override
-	public void setStatusCondition(String newStatus) {
-		this.statusCondition = Optional.of(StatusCondition.fromString(newStatus));
-	}
-
-	@Override
-	public int getStat(String statName) {
-		if (!this.statNames.contains(statName)) {
-			throw new UnsupportedOperationException(statName + " is not a legal stats");
-		}
-		return this.actualStats.get(statName).getCurrentValue();
-	}
-
-	@Override
-	public List<Type> getTypes() {
-		List<Type> result = new ArrayList<Type>();
-		result.add(this.type1);
-		if (!this.type2.isEmpty()) {
-			result.add(this.type2.get());
-		}
-		return result;
-	}
-
-	@Override
-	public Map<String, Integer> getGivesEV() {
-		return this.givesEV;
-	}
-
-	@Override
-	public String getName() {
-		return this.name;
-	}
-
-	@Override
-	public String getGender() {
-		return this.gender;
-	}
-
-	@Override
-	public String getLevelUpCurve() {
-		return this.levelUpCurve;
-	}
-
-	@Override
-	public List<String> getActualMoves() {
-		return this.actualMoves;
-	}
-
-	@Override
-	public Nature getNature() {
-		return this.nature;
 	}
 
 	@Override
@@ -301,62 +255,12 @@ public final class PokemonImpl implements Pokemon {
 	}
 
 	@Override
-	public String toString() {
-		String result = "Pokemon {" +
-				"\n  Name = '" + name + '\'' +
-				",\n  Pokedex Number = " + pokedexNumber +
-				",\n  Type1 = " + type1;
-		if (type2.isPresent()) {
-			result += ",\n  Type2 = " + type2.get();
+	public List<Type> getTypes(){
+		List<Type> result = new ArrayList<Type>();
+		result.add(this.type1);
+		if(!this.type2.isEmpty()){
+			result.add(this.type2.get());
 		}
-		result += ",\n  Ability = '" + abilityName + '\'' +
-				",\n  Gender = '" + gender + '\'' +
-				",\n  Weight = " + weight +
-				",\n  Capture Rate = " + captureRate +
-				",\n  Level Range = " + level +
-				",\n  EXP Range = " + exp +
-				",\n  Level-Up Curve = '" + levelUpCurve + '\'' +
-				",\n  Total Used EV = " + totalUsedEV +
-				",\n  Base Stats = " + baseStats +
-				",\n  Nature = " + nature +
-				",\n  IVs = " + IV +
-				",\n  EVs = " + EV +
-				",\n  Actual Stats = " + actualStats +
-				",\n  Level Moves Learn = " + levelMovesLearn +
-				",\n  Actual Moves = " + actualMoves +
-				",\n  Gives EV = " + givesEV +
-				"\n}";
 		return result;
 	}
-
-	@Override
-	public Image getSpriteFront() {
-		return this.spriteFront;
-	}
-
-	@Override
-	public Image getSpriteBack() {
-		return this.spriteBack;
-	}
-
-	@Override
-	public String getAbilityName() {
-		return this.abilityName;
-	}
-
-	@Override
-	public Range<Integer> getHpRange() {
-		return this.actualStats.get("hp");
-	}
-
-	@Override
-	public Range<Integer> getExpRange() {
-		return this.exp;
-	}
-
-	@Override
-	public int getCurrentLevel() {
-		return this.level.getCurrentValue();
-	}
-	
 }

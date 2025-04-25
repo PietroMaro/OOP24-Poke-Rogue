@@ -1,10 +1,20 @@
 {
-    "situationChecks" : "attack",
-        "effect": {
-          "checks": ["attackUs.isPhysical", "==", "true"],
-          "activation": [
-            ["us.stats.attack", "us.stats.attack * 1.5"],
-            ["attackUs.accuracy", "attackUs.accuracy * 0.8"]
-          ]
-        }
+    "situationChecks": "attack",
+    "effect": {
+        "checks": [
+            "attackUs.isPhysical",
+            "==",
+            "true"
+        ],
+        "activation": [
+            [
+                "us.actualStats.attack.currentValue",
+                "us.actualStats.attack.currentValue * 1.5"
+            ],
+            [
+                "attackUs.accuracy",
+                "attackUs.accuracy * 0.8"
+            ]
+        ]
+    }
 }

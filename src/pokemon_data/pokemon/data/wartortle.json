@@ -1,15 +1,17 @@
 {
     "pokedexNumber": 8,
-    "types": ["water"],
+    "types": [
+        "water"
+    ],
     "captureRate": 45,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 65,
         "defense": 80,
         "attack": 63,
         "hp": 59,
-        "special-defense": 80,
-        "speed": 58
+        "speed": 58,
+        "specialDefense": 80,
+        "specialAttack": 65
     },
     "moves": {
         "1": "bubble",
@@ -30,11 +32,11 @@
         "rain-dish"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 1,
         "attack": 0,
         "hp": 0,
-        "special-defense": 1,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 1,
+        "specialAttack": 0
     }
 }

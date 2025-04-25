@@ -1,9 +1,7 @@
 {
     "situationChecks": "neutral",
     "effect": {
-      "checks": [
-      ],
-      "activation": [
-      ]
+        "checks": [],
+        "activation": []
     }
-  }
+}

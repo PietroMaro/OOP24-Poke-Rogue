@@ -4,7 +4,7 @@
     "effect": {
         "checks": [
             [
-                "RANDOM",
+                "MATH.random()",
                 "<",
                 "0.10"
             ]
@@ -12,7 +12,7 @@
         "activation": [
             [
                 "enemy.statusCondition",
-                "'burn'"
+                "Optional.of(StatusCondition.BURN)"
             ]
         ]
     },

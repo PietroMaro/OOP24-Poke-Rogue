@@ -35,6 +35,7 @@ public class MoveFactoryImpl extends SingletonImpl implements MoveFactory{
 
 	private void addMoveToBlueprints(final String moveName){
 		JSONObject moveJson;
+		System.out.println(moveName);
         moveJson = jsonReader.readJsonObject(Paths.get("src","pokemon_data","moves",moveName +".json").toString());
 		int pp = moveJson.getInt("pp");
 		boolean isPhysical = moveJson.getBoolean("isPhysical");
@@ -51,6 +52,7 @@ public class MoveFactoryImpl extends SingletonImpl implements MoveFactory{
 				accuracy,
 				critRate,
 				baseDamage,
+				0,
 				type,
 				priority
 			);
@@ -62,9 +64,10 @@ public class MoveFactoryImpl extends SingletonImpl implements MoveFactory{
 	public Move moveFromName(final String moveName){
 		Move move = this.movesBlueprints.get(moveName);
 		if(move== null){
-			throw new UnsupportedOperationException("The move"+moveName+" blueprint was not found. Is not present in moveList / Factory not initialized");
+			throw new UnsupportedOperationException("The move "+moveName+" blueprint was not found. Is not present in moveList / Factory not initialized");
 
 		}
+		move = move.deepCopy();
 		return move;
 	}
 }

@@ -1,7 +1,9 @@
 {
-    "situationChecks" : "attack",
-    "effect" : {
-            "checks" : [[]],
-            "activation" : [[]]
-        }
+    "situationChecks": "attack",
+    "effect": {
+        "checks": [
+        ],
+        "activation": [
+        ]
+    }
 }

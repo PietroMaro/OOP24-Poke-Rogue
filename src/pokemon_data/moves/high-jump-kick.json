@@ -4,7 +4,7 @@
     "effect": {
         "checks": [],
         "activation": []
-    },    
+    },
     "accuracy": 90,
     "critRate": 0,
     "baseDamage": 130,

@@ -1,12 +1,22 @@
 {
-  "situationChecks": "attacked",
-  "effect": {
-    "checks": [
-      ["attackEnemy.isPhysical", "==", "true"]
-    ],
-    "activation": [
-      ["us.stats.defense", "us.stats.defense - 1"],
-      ["us.stats.speed", "us.stats.speed + 2"]
-    ]
-  }
+    "situationChecks": "attacked",
+    "effect": {
+        "checks": [
+            [
+                "attackEnemy.isPhysical",
+                "==",
+                "true"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.defense.currentValue",
+                "us.actualStats.defense.currentValue - 1"
+            ],
+            [
+                "us.actualStats.speed.currentValue",
+                "us.actualStats.speed.currentValue + 2"
+            ]
+        ]
+    }
 }

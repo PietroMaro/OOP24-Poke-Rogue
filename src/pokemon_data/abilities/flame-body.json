@@ -1,11 +1,18 @@
 {
-  "situationChecks": "attacked",
-  "effect": {
-    "checks": [
-      ["attackEnemy.isPhysical", "==", "true"]
-    ],
-    "activation": [
-      ["enemy.statusCondition","'burn'"]
-    ]
-  }
+    "situationChecks": "attacked",
+    "effect": {
+        "checks": [
+            [
+                "attackEnemy.isPhysical",
+                "==",
+                "true"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "Optional.of(StatusCondition.BURN)"
+            ]
+        ]
+    }
 }

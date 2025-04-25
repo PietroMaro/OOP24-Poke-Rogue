@@ -1,11 +1,18 @@
 {
-        "situationChecks": "attacked",
-        "effect": {
-          "checks": [
-            ["attackEnemy.type", "==", "'electric'"]
-          ],
-          "activation": [
-            ["us.tempStatsBonus.special-attack", "us.tempStatsBonus.special-attack + 1"]
-          ]
-        }
+    "situationChecks": "attacked",
+    "effect": {
+        "checks": [
+            [
+                "attackEnemy.type",
+                "==",
+                "'electric'"
+            ]
+        ],
+        "activation": [
+            [
+                "us.tempStatsBonus.specialAttack.currentValue",
+                "us.tempStatsBonus.specialAttack.currentValue + 1"
+            ]
+        ]
+    }
 }

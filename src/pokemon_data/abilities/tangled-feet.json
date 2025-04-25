@@ -1,7 +1,18 @@
 {
-    "situationChecks" : "attacked",
-    "effect" : {
-            "checks" : [["us.statusCondition" , "==" , "'confused'"]],
-            "activation" : [["attackEnemy.accuracy","attackEnemy.accuracy * 0.5"]]
-        }
+    "situationChecks": "attacked",
+    "effect": {
+        "checks": [
+            [
+                "us.statusCondition",
+                "==",
+                "Optional.of(StatusCondition.CONFUSION)"
+            ]
+        ],
+        "activation": [
+            [
+                "attackEnemy.accuracy",
+                "attackEnemy.accuracy - 10"
+            ]
+        ]
+    }
 }

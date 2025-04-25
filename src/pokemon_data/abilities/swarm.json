@@ -1,8 +1,23 @@
 {
-    "situationChecks" : "attack",
-    "effect" : {
-            "checks" : [["attackUs.type", "==" , "'bug'"],
-                        ["us.stats.hp.current","<=","us.stats.hp.max / 3"]],
-            "activation" : [["us.stats.attack","us.stats.attack * 1.3"]]
-        }
+    "situationChecks": "attack",
+    "effect": {
+        "checks": [
+            [
+                "attackUs.type",
+                "==",
+                "'bug'"
+            ],
+            [
+                "us.actualStats.hp.currentValue",
+                "<=",
+                "us.actualStats.hp.currentMax / 3"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.attack.currentValue",
+                "us.actualStats.attack.currentValue * 1.3"
+            ]
+        ]
+    }
 }

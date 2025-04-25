@@ -6,7 +6,7 @@
         "activation": [
             [
                 "us.statusCondition",
-                "'confusion'"
+                "Optional.of(StatusCondition.CONFUSION)"
             ]
         ]
     },

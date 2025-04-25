@@ -4,15 +4,15 @@
     "effect": {
         "checks": [
             [
-                "RANDOM",
+                "MATH.random()",
                 "<",
-                "0.20" 
+                "0.20"
             ]
         ],
         "activation": [
             [
-                "us.stats.attack",
-                "us.stats.attack + 1"
+                "us.actualStats.attack.currentValue",
+                "us.actualStats.attack.currentValue + 1"
             ]
         ]
     },

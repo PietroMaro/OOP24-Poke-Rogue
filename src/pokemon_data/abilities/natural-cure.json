@@ -1,11 +1,14 @@
 {
-  "situationChecks": "switchIn",
-  "effect": {
-    "checks": [
-      []
-    ],
-    "activation": [
-      ["us.statusCondition","''"]
-    ]
-  }
+    "situationChecks": "switchIn",
+    "effect": {
+        "checks": [
+            []
+        ],
+        "activation": [
+            [
+                "us.statusCondition",
+                "Optional.empty()"
+            ]
+        ]
+    }
 }

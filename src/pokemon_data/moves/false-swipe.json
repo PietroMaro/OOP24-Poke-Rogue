@@ -3,13 +3,15 @@
     "isPhysical": false,
     "effect": {
         "checks": [
-            "enemy.stats.hp.current",
+            [
+            "enemy.actualStats.hp.currentValue",
             "==",
             "0"
+            ]
         ],
         "activation": [
             [
-                "enemy.stats.hp.current",
+                "enemy.actualStats.hp.currentValue",
                 "1"
             ]
         ]

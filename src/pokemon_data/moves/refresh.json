@@ -2,29 +2,8 @@
     "pp": 20,
     "isPhysical": false,
     "effect": {
-        "checks": [
-            [
-                "us.statusCondition",
-                "==",
-                "'poisoned'"
-            ],
-            [
-                "us.statusCondition",
-                "==",
-                "'paralyzed'"
-            ],
-            [
-                "us.statusCondition",
-                "==",
-                "'burned'"
-            ]
-        ],
-        "activation": [
-            [
-                "us.statusCondition",
-                "''"
-            ]
-        ]
+        "checks": [],
+        "activation": []
     },
     "accuracy": 100,
     "critRate": 0,

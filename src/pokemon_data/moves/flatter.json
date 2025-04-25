@@ -6,11 +6,11 @@
         "activation": [
             [
                 "enemy.statusCondition",
-                "'confused'"
+                "Optional.of(StatusCondition.CONFUSION)"
             ],
             [
-                "enemy.tempStatsBonus.special-attack",
-                "enemy.tempStatsBonus.special-attack + 1"
+                "enemy.tempStatsBonus.specialAttack.currentValue",
+                "enemy.tempStatsBonus.specialAttack.currentValue + 1"
             ]
         ]
     },

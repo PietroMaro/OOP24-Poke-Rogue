@@ -1,11 +1,18 @@
 {
-  "situationChecks": "attacked",
-  "effect": {
-    "checks": [
-      ["attackEnemy.type", "==", "'dark'"]
-    ],
-    "activation": [
-      ["us.stats.attack", "us.stats.attack + 1"]
-    ]
-  }
+    "situationChecks": "attacked",
+    "effect": {
+        "checks": [
+            [
+                "attackEnemy.type",
+                "==",
+                "'dark'"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.attack.currentValue",
+                "us.actualStats.attack.currentValue + 1"
+            ]
+        ]
+    }
 }

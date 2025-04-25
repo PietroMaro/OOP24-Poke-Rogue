@@ -1,0 +1,57 @@
+package it.unibo.PokeRogue.scene.sceneLoad;
+
+public enum sceneLoadGraphicEnum {
+    FIRST_SAVE_BUTTON(0),
+
+    SECOND_SAVE_BUTTON(1),
+
+    THIRD_SAVE_BUTTON(2),
+
+    FOURTH_SAVE_BUTTON(3),
+
+    FIFTH_SAVE_BUTTON(4),
+
+    SIXTH_SAVE_BUTTON(5),
+
+    SEVENTH_SAVE_BUTTON(6),
+
+    EIGHTH_SAVE_BUTTON(7),
+
+    NINTH_SAVE_BUTTON(8),
+
+    TENTH_SAVE_BUTTON(9),
+
+    FIRST_SAVE_TEXT(10),
+
+    SECOND_SAVE_TEXT(11),
+
+    THIRD_SAVE_TEXT(12),
+
+    FOURTH_SAVE_TEXT(13),
+
+    FIFTH_SAVE_TEXT(14),
+
+    SIXTH_SAVE_TEXT(15),
+
+    SEVENTH_SAVE_TEXT(16),
+
+    EIGHTH_SAVE_TEXT(17),
+
+    NINTH_SAVE_TEXT(18),
+
+    TENTH_SAVE_TEXT(19),
+
+    
+
+    BACKGROUND(100);
+
+    private final int code;
+
+    sceneLoadGraphicEnum(int code) {
+        this.code = code;
+    }
+
+    public int value() {
+        return code;
+    }
+}

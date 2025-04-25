@@ -7,12 +7,12 @@
     "captureRate": 90,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 115,
         "defense": 45,
         "attack": 50,
         "hp": 45,
-        "special-defense": 55,
-        "speed": 95
+        "speed": 95,
+        "specialDefense": 55,
+        "specialAttack": 115
     },
     "moves": {
         "1": "spite",
@@ -29,13 +29,15 @@
     "growthRate": "medium-slow",
     "name": "haunter",
     "weight": 1,
-    "abilites": ["levitate"],
+    "abilites": [
+        "levitate"
+    ],
     "givesEV": {
-        "special-attack": 2,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 2
     }
 }

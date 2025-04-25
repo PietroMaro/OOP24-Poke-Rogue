@@ -1,11 +1,18 @@
 {
-  "situationChecks": "attacked",
-  "effect": {
-    "checks": [
-      ["attackEnemy.statusCondition", "in", "['paralyze', 'poison', 'sleep', 'burn', 'freeze']"]
-    ],
-    "activation": [
-      ["attackUs.accuracy", "attackUs.accuracy * 0.5"]
-    ]
-  }
+    "situationChecks": "attacked",
+    "effect": {
+        "checks": [
+            [
+                "enemy.statusCondition",
+                "==",
+                "Optional.of(StatusCondition.PARALYSIS)"
+            ]
+        ],
+        "activation": [
+            [
+                "attackUs.accuracy",
+                "attackUs.accuracy + 40"
+            ]
+        ]
+    }
 }

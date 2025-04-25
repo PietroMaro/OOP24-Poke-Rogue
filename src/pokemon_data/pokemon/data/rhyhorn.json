@@ -7,12 +7,12 @@
     "captureRate": 120,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 30,
         "defense": 95,
         "attack": 85,
         "hp": 80,
-        "special-defense": 30,
-        "speed": 25
+        "speed": 25,
+        "specialDefense": 30,
+        "specialAttack": 30
     },
     "moves": {
         "1": "tail-whip",
@@ -34,11 +34,11 @@
         "reckless"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 1,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 0
     }
 }

@@ -9,6 +9,7 @@ public enum StatusCondition{
 	BOUND("bound"),	
 	CONFUSION("confusion"),	
 	FLINCH("flinch"),	
+	TRAPPED("trapped"),
 	SEEDED("seeded");	
 
 	private final String statusName;

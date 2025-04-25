@@ -7,12 +7,12 @@
     "captureRate": 45,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 90,
         "defense": 50,
         "attack": 45,
         "hp": 60,
-        "special-defense": 80,
-        "speed": 70
+        "speed": 70,
+        "specialDefense": 80,
+        "specialAttack": 90
     },
     "moves": {
         "23": "whirlwind",
@@ -34,11 +34,11 @@
         "tinted-lens"
     ],
     "givesEV": {
-        "special-attack": 2,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 1,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 1,
+        "specialAttack": 2
     }
 }

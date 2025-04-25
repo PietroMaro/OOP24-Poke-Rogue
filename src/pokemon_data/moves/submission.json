@@ -5,8 +5,8 @@
         "checks": [],
         "activation": [
             [
-                "us.stats.hp.current",
-                "us.stats.hp.current - (attackUs.damage / 5)"
+                "us.actualStats.hp.currentValue",
+                "us.actualStats.hp.currentValue - (attackUs.calculatedDamage / 5)"
             ]
         ]
     },

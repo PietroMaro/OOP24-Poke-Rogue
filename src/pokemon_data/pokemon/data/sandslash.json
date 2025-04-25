@@ -1,15 +1,17 @@
 {
     "pokedexNumber": 28,
-    "types": ["ground"],
+    "types": [
+        "ground"
+    ],
     "captureRate": 90,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 45,
         "defense": 110,
         "attack": 100,
         "hp": 75,
-        "special-defense": 55,
-        "speed": 65
+        "speed": 65,
+        "specialDefense": 55,
+        "specialAttack": 45
     },
     "moves": {
         "33": "swift",
@@ -28,11 +30,11 @@
         "sand-rush"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 2,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 0
     }
 }

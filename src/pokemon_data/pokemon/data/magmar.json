@@ -1,15 +1,17 @@
 {
     "pokedexNumber": 126,
-    "types": ["fire"],
+    "types": [
+        "fire"
+    ],
     "captureRate": 45,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 100,
         "defense": 57,
         "attack": 95,
         "hp": 65,
-        "special-defense": 85,
-        "speed": 93
+        "speed": 93,
+        "specialDefense": 85,
+        "specialAttack": 100
     },
     "moves": {
         "33": "sunny-day",
@@ -27,11 +29,11 @@
         "vital-spirit"
     ],
     "givesEV": {
-        "special-attack": 2,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 2
     }
 }

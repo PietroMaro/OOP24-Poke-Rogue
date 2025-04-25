@@ -5,8 +5,8 @@
         "checks": [],
         "activation": [
             [
-                "enemy.stats.hp.current",
-                "enemy.stats.hp.current * 0.5"
+                "enemy.actualStats.hp.currentValue",
+                "enemy.actualStats.hp.currentValue * 0.5"
             ]
         ]
     },

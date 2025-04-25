@@ -1,12 +1,23 @@
 {
-  "situationChecks": "passive",
-  "effect": {
-    "checks": [
-      ["weather", "==", "'hail'"],
-      ["weather", "==", "'sandstorm'"]
-    ],
-    "activation": [
-      ["us.stats.hp.current","us.stats.hp.current"]
-    ]
-  }
+    "situationChecks": "passive",
+    "effect": {
+        "checks": [
+            [
+                "weather",
+                "==",
+                "'hail'"
+            ],
+            [
+                "weather",
+                "==",
+                "'sandstorm'"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.hp.currentValue",
+                "us.actualStats.hp.currentValue"
+            ]
+        ]
+    }
 }

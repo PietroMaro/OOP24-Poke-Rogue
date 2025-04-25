@@ -6,11 +6,11 @@
         "activation": [
             [
                 "us.statusCondition",
-                "'sleep'"
+                "Optional.of(StatusCondition.SLEEP)"
             ],
             [
-                "us.stats.hp.current",
-                "us.stats.hp.max"
+                "us.actualStats.hp.currentValue",
+                "us.actualStats.hp.currentMax"
             ]
         ]
     },

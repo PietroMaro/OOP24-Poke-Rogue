@@ -1,11 +1,18 @@
 {
-  "situationChecks": "attacked",
-  "effect": {
-    "checks": [
-      ["attackEnemy.isPhysical", "==", "true"]
-    ],
-    "activation": [
-      ["enemy.statusCondition", "random(['poison', 'paralyze', 'sleep'])"]
-    ]
-  }
+    "situationChecks": "attacked",
+    "effect": {
+        "checks": [
+            [
+                "attackEnemy.isPhysical",
+                "==",
+                "true"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "random(['poison', 'paralyze', Optional.of(StatusCondition.SLEEP)])"
+            ]
+        ]
+    }
 }

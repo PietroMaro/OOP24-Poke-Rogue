@@ -4,15 +4,15 @@
     "effect": {
         "checks": [
             [
-                "RANDOM",
+                "MATH.random()",
                 "<",
                 "0.50"
             ]
         ],
         "activation": [
             [
-                "attackEnemy.statusCondition",
-                "'sleep'"
+                "enemy.statusCondition",
+                "Optional.of(StatusCondition.SLEEP)"
             ]
         ]
     },

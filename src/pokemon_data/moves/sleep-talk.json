@@ -6,13 +6,13 @@
             [
                 "us.statusCondition",
                 "==",
-                "'sleep'"
+                "Optional.of(StatusCondition.SLEEP)"
             ]
         ],
         "activation": [
             [
-                "enemy.stats.hp.current",
-                "enemy.stats.hp.current-100"
+                "enemy.actualStats.hp.currentValue",
+                "enemy.actualStats.hp.currentValue-100"
             ]
         ]
     },

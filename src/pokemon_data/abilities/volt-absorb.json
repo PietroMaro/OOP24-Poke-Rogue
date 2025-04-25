@@ -1,12 +1,22 @@
 {
-  "situationChecks": "attacked",
-  "effect": {
-    "checks": [
-      ["attack.type", "==", "'electric'"]
-    ],
-    "activation": [
-      ["us.stats.hp.current","us.stats.hp.current * 1.25"],
-      ["attackEnemy.damege","0"]
-    ]
-  }
+    "situationChecks": "attacked",
+    "effect": {
+        "checks": [
+            [
+                "attack.type",
+                "==",
+                "'electric'"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.hp.currentValue",
+                "us.actualStats.hp.currentValue * 1.25"
+            ],
+            [
+                "attackEnemy.damege",
+                "0"
+            ]
+        ]
+    }
 }

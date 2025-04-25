@@ -1,15 +1,17 @@
 {
     "pokedexNumber": 55,
-    "types": ["water"],
+    "types": [
+        "water"
+    ],
     "captureRate": 75,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 95,
         "defense": 78,
         "attack": 82,
         "hp": 80,
-        "special-defense": 80,
-        "speed": 85
+        "speed": 85,
+        "specialDefense": 80,
+        "specialAttack": 95
     },
     "moves": {
         "44": "fury-swipes",
@@ -28,11 +30,11 @@
         "swift-swim"
     ],
     "givesEV": {
-        "special-attack": 2,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 2
     }
 }

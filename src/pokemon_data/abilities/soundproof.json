@@ -1,11 +1,18 @@
 {
-  "situationChecks": "attacked",
-  "effect": {
-    "checks": [
-      ["attackEnemy.type", "==", "'sound'"]
-    ],
-    "activation": [
-      ["attackEnemy.damage", "0"]
-    ]
-  }
+    "situationChecks": "attacked",
+    "effect": {
+        "checks": [
+            [
+                "attackEnemy.type",
+                "==",
+                "'sound'"
+            ]
+        ],
+        "activation": [
+            [
+                "attackEnemy.calculatedDamage",
+                "0"
+            ]
+        ]
+    }
 }

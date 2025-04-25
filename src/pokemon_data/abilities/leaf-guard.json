@@ -1,11 +1,18 @@
 {
-  "situationChecks": "neutral",
-  "effect": {
-    "checks": [
-      ["weather", "==", "'sunny'"]
-    ],
-    "activation": [
-      ["us.statusCondition","''"]
-    ]
-  }
+    "situationChecks": "neutral",
+    "effect": {
+        "checks": [
+            [
+                "weather",
+                "==",
+                "'sunny'"
+            ]
+        ],
+        "activation": [
+            [
+                "us.statusCondition",
+                "Optional.empty()"
+            ]
+        ]
+    }
 }

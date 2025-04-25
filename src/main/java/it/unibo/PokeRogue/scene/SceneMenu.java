@@ -134,6 +134,7 @@ public class SceneMenu implements Scene {
             case KeyEvent.VK_ENTER:
                 switch (this.currentSelectedButton) {
                     case LOAD_BUTTON:
+                    this.gameEngineInstance.setScene("load");
 
                         break;
                     case NEW_GAME_BUTTON:

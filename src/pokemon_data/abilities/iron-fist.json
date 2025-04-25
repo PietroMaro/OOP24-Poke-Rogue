@@ -1,11 +1,18 @@
 {
-  "situationChecks": "attack",
-  "effect": {
-    "checks": [
-      ["attackUs.moveType", "==", "'fighting'"]
-    ],
-    "activation": [
-      ["attackUs.baseDamage","attackUs.baseDamage * 1.2"]
-    ]
-  }
+    "situationChecks": "attack",
+    "effect": {
+        "checks": [
+            [
+                "attackUs.type",
+                "==",
+                "Type.FIGHTING"
+            ]
+        ],
+        "activation": [
+            [
+                "attackUs.baseDamage",
+                "attackUs.baseDamage + 10"
+            ]
+        ]
+    }
 }

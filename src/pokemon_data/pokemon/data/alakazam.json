@@ -1,15 +1,17 @@
 {
     "pokedexNumber": 65,
-    "types": ["psychic"],
+    "types": [
+        "psychic"
+    ],
     "captureRate": 50,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 135,
         "defense": 45,
         "attack": 50,
         "hp": 55,
-        "special-defense": 95,
-        "speed": 120
+        "speed": 120,
+        "specialDefense": 95,
+        "specialAttack": 135
     },
     "moves": {
         "33": "calm-mind",
@@ -31,11 +33,11 @@
         "magic-guard"
     ],
     "givesEV": {
-        "special-attack": 3,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 3
     }
 }

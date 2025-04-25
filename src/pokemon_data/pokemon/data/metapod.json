@@ -1,27 +1,33 @@
 {
     "pokedexNumber": 11,
-    "types": ["bug"],
+    "types": [
+        "bug"
+    ],
     "captureRate": 120,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 25,
         "defense": 55,
         "attack": 20,
         "hp": 50,
-        "special-defense": 25,
-        "speed": 30
+        "speed": 30,
+        "specialDefense": 25,
+        "specialAttack": 25
     },
-    "moves": {"1": "harden"},
+    "moves": {
+        "1": "harden"
+    },
     "growthRate": "medium",
     "name": "metapod",
     "weight": 99,
-    "abilites": ["shed-skin"],
+    "abilites": [
+        "shed-skin"
+    ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 2,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 0
     }
 }

@@ -1,18 +1,20 @@
 {
     "pokedexNumber": 35,
-    "types": ["fairy"],
+    "types": [
+        "fairy"
+    ],
     "captureRate": 150,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 60,
         "defense": 48,
         "attack": 45,
         "hp": 70,
-        "special-defense": 65,
-        "speed": 35
+        "speed": 35,
+        "specialDefense": 65,
+        "specialAttack": 60
     },
     "moves": {
-        "33": "cosmic-power",
+        "33": "cosmic-baseDamage",
         "1": "growl",
         "45": "meteor-mash",
         "13": "double-slap",
@@ -34,11 +36,11 @@
         "friend-guard"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 0,
         "attack": 0,
         "hp": 2,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 0
     }
 }

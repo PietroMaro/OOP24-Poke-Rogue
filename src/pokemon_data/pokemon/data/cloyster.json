@@ -7,12 +7,12 @@
     "captureRate": 60,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 85,
         "defense": 180,
         "attack": 95,
         "hp": 50,
-        "special-defense": 45,
-        "speed": 70
+        "speed": 70,
+        "specialDefense": 45,
+        "specialAttack": 85
     },
     "moves": {
         "1": "protect",
@@ -28,11 +28,11 @@
         "overcoat"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 2,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 0
     }
 }

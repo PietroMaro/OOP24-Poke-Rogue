@@ -4,14 +4,6 @@
     "effect": {
         "checks": [],
         "activation": [
-            [
-                "us.statusCondition",
-                "''"
-            ],
-            [
-                "enemy.statusCondition",
-                "''"
-            ]
         ]
     },
     "accuracy": 100,

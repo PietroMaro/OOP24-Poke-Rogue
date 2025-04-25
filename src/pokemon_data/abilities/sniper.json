@@ -1,7 +1,12 @@
 {
-    "situationChecks" : "passive",
-    "effect" : {
-            "checks" : [],
-            "activation" : [["attackUs.critRate","attackUs.critRate + (attackUs.critRate / 2)"]]
-        }
+    "situationChecks": "passive",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "attackUs.critRate",
+                "attackUs.critRate + (attackUs.critRate / 2)"
+            ]
+        ]
+    }
 }

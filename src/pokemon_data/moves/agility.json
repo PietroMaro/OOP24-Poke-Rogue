@@ -5,8 +5,8 @@
         "checks": [],
         "activation": [
             [
-                "us.tempStatsBonus.speed",
-                "us.tempStatsBonus.speed + 2"
+                "us.tempStatsBonus.speed.currentValue",
+                "us.tempStatsBonus.speed.currentValue + 2"
             ]
         ]
     },

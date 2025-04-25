@@ -1,7 +1,18 @@
 {
-    "situationChecks" : "passive",
-    "effect" : {
-            "checks" : [["us.statusCondition","!=","''"]],
-            "activation" : [["us.stats.attack","us.stats.attack * 1.5"]]
-        }
+    "situationChecks": "passive",
+    "effect": {
+        "checks": [
+            [
+                "us.statusCondition",
+                "!=",
+                "Optional.empty()"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.attack.currentValue",
+                "us.actualStats.attack.currentValue * 1.5"
+            ]
+        ]
+    }
 }

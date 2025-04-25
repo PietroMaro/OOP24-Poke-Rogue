@@ -4,15 +4,15 @@
     "effect": {
         "checks": [
             [
-                "RANDOM",
+                "MATH.random()",
                 "<",
-                "0.5"  
+                "0.5"
             ]
         ],
         "activation": [
             [
                 "enemy.statusCondition",
-                "'paralysis'"
+                "Optional.of(StatusCondition.PARALYSIS)"
             ]
         ]
     },
