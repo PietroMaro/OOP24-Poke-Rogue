@@ -10,54 +10,53 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Random;
 
-import edu.umd.cs.findbugs.annotations.OverrideMustInvoke;
-
 import java.awt.Image;
 
 public final class PokemonImpl implements Pokemon {
 	final private Random random = new Random();
-	final private List<String> statNames = new ArrayList<>(Arrays.asList("hp", "attack", "defense", "special-attack", "special-defense", "speed"));
+	final private List<String> statNames = new ArrayList<>(
+			Arrays.asList("hp", "attack", "defense", "special-attack", "special-defense", "speed"));
 	private int totalUsedEV = 0;
-	
+
 	private Map<String, Integer> baseStats;
 	private Nature nature;
-	private Map<String, Integer> IV; // 0-31 random when spawned 
-	private Map<String, Range<Integer>> EV; // 0-255 the pokemon can have a total of 510 
+	private Map<String, Integer> IV; // 0-31 random when spawned
+	private Map<String, Range<Integer>> EV; // 0-255 the pokemon can have a total of 510
 	private Range<Integer> level;
 	private Map<String, Range<Integer>> actualStats;
 	private Map<Integer, String> levelMovesLearn;
-	private List<String> actualMoves = new ArrayList<String>(); 
-	private String levelUpCurve; //https://m.bulbapedia.bulbagarden.net/wiki/Experience
-	private Map<String,Integer> givesEV; 
+	private List<String> actualMoves = new ArrayList<String>();
+	private String levelUpCurve; // https://m.bulbapedia.bulbagarden.net/wiki/Experience
+	private Map<String, Integer> givesEV;
 	private Range<Integer> exp;
 	private int pokedexNumber;
-	private int weight; 
-	private String name; 
-	private Type type1; 
-	private Optional<Type> type2; 
-	private int captureRate; 
-	private String gender; 
-	private Optional<String> holdingObject; 
-	private String abilityName; 
+	private int weight;
+	private String name;
+	private Type type1;
+	private Optional<Type> type2;
+	private int captureRate;
+	private String gender;
+	private Optional<String> holdingObject;
+	private String abilityName;
 	private Optional<StatusCondition> statusCondition;
 
 	private boolean hasToLearnMove = false;
-	private Optional<String> newMoveToLearn = Optional.empty(); 
+	private Optional<String> newMoveToLearn = Optional.empty();
 
 	private Image spriteFront;
 	private Image spriteBack;
 
-	public PokemonImpl(final PokemonBlueprint pokemonBlueprint){
-		this.baseStats = pokemonBlueprint.stats();	
+	public PokemonImpl(final PokemonBlueprint pokemonBlueprint) {
+		this.baseStats = pokemonBlueprint.stats();
 		generateIVs();
 		generateEVs();
 		this.nature = Nature.getRandomNature();
-		this.level = new RangeImpl<Integer>(1,100,1, (x, y) -> x + y, (x, y) -> x - y);
+		this.level = new RangeImpl<Integer>(1, 100, 1, (x, y) -> x + y, (x, y) -> x - y);
 		calculateActualStats();
 		initLevelMovesLearn(pokemonBlueprint.learnableMoves());
 		initActualMoves();
 		this.levelUpCurve = pokemonBlueprint.growthRate();
-		this.givesEV = pokemonBlueprint.givesEV(); 
+		this.givesEV = pokemonBlueprint.givesEV();
 		calculateNewExpRange();
 		this.pokedexNumber = pokemonBlueprint.pokedexNumber();
 		this.weight = pokemonBlueprint.weight();
@@ -74,7 +73,7 @@ public final class PokemonImpl implements Pokemon {
 
 	private void generateIVs() {
 		this.IV = new HashMap<String, Integer>();
-		for (String stat : statNames) { 
+		for (String stat : statNames) {
 			this.IV.put(stat, random.nextInt(32)); // IV tra 0 e 31
 		}
 	}
@@ -86,91 +85,86 @@ public final class PokemonImpl implements Pokemon {
 		}
 	}
 
-	private void initGender(){
-		if(random.nextInt(100)%2 == 1){
+	private void initGender() {
+		if (random.nextInt(100) % 2 == 1) {
 			this.gender = "male";
-		}
-		else{
+		} else {
 			this.gender = "female";
 		}
 	}
 
-	private void initAbility(List<String> possibleAbilities){
+	private void initAbility(List<String> possibleAbilities) {
 		this.abilityName = possibleAbilities.get(random.nextInt(possibleAbilities.size()));
 	}
 
-	private void initTypes(List<String> types){
-		this.type1 = Type.fromString(types.get(0));	
+	private void initTypes(List<String> types) {
+		this.type1 = Type.fromString(types.get(0));
 		this.type2 = Optional.empty();
-		if(types.size() > 1){
+		if (types.size() > 1) {
 			this.type2 = Optional.of(Type.fromString(types.get(1)));
 		}
 	}
 
-	private void initLevelMovesLearn(Map<String,String> learnableMoves){
-		this.levelMovesLearn = new HashMap<Integer,String>();
-		for(String key : learnableMoves.keySet()){
-			this.levelMovesLearn.put(Integer.parseInt(key),learnableMoves.get(key));
+	private void initLevelMovesLearn(Map<String, String> learnableMoves) {
+		this.levelMovesLearn = new HashMap<Integer, String>();
+		for (String key : learnableMoves.keySet()) {
+			this.levelMovesLearn.put(Integer.parseInt(key), learnableMoves.get(key));
 		}
 	}
 
-	private void initActualMoves(){
-		for(int key : this.levelMovesLearn.keySet()){
-			if(key == 1){
+	private void initActualMoves() {
+		for (int key : this.levelMovesLearn.keySet()) {
+			if (key == 1) {
 				this.actualMoves.add(this.levelMovesLearn.get(key));
 			}
 		}
 	}
-			
 
 	private void calculateActualStats() {
 		actualStats = new HashMap<String, Range<Integer>>();
 
-		int maxLife = (int) Math.floor(((2 * this.baseStats.get("hp") + this.IV.get("hp") 
-		+ (this.EV.get("hp").getCurrentValue() / 4)) * this.level.getCurrentValue()) / 100)
-		+ this.level.getCurrentValue() + 10;
+		int maxLife = (int) Math.floor(((2 * this.baseStats.get("hp") + this.IV.get("hp")
+				+ (this.EV.get("hp").getCurrentValue() / 4)) * this.level.getCurrentValue()) / 100)
+				+ this.level.getCurrentValue() + 10;
 
-		Range<Integer> rangeHp = new RangeImpl<Integer>(0,maxLife,maxLife,(x, y) -> x + y, (x, y) -> x - y);
-		
-		actualStats.put("hp",rangeHp);
-	
-		
+		Range<Integer> rangeHp = new RangeImpl<Integer>(0, maxLife, maxLife, (x, y) -> x + y, (x, y) -> x - y);
+
+		actualStats.put("hp", rangeHp);
+
 		for (String stat : statNames) {
 
 			int statValue = (int) Math.round(
-                Math.floor(
-                    ((2 * baseStats.get(stat) + IV.get(stat) + (double) EV.get(stat).getCurrentValue() / 4) * level.getCurrentValue()) / 100.0)
-                ) + 5;
+					Math.floor(
+							((2 * baseStats.get(stat) + IV.get(stat) + (double) EV.get(stat).getCurrentValue() / 4)
+									* level.getCurrentValue()) / 100.0))
+					+ 5;
 
-			if(Nature.checkStatIncrease(this.nature,stat)){
-				statValue*=1.1;
-			}
-			else if(Nature.checkStatDecrease(this.nature,stat)){
-				statValue*=0.9;
+			if (Nature.checkStatIncrease(this.nature, stat)) {
+				statValue *= 1.1;
+			} else if (Nature.checkStatDecrease(this.nature, stat)) {
+				statValue *= 0.9;
 			}
 
-			Range<Integer> rangeStat = new RangeImpl<Integer>(0,255,statValue,(x, y) -> x + y, (x, y) -> x - y);
-			actualStats.put(stat,rangeStat);
+			Range<Integer> rangeStat = new RangeImpl<Integer>(0, 255, statValue, (x, y) -> x + y, (x, y) -> x - y);
+			actualStats.put(stat, rangeStat);
 		}
-		
+
 	}
 
-	private void calculateNewExpRange(){
+	private void calculateNewExpRange() {
 		int newRequiredExp = 0;
 		int currentLevel = this.level.getCurrentValue();
-		if(this.levelUpCurve == "fast"){
-			newRequiredExp = (int)((4*Math.pow(currentLevel,3))/5);
+		if (this.levelUpCurve == "fast") {
+			newRequiredExp = (int) ((4 * Math.pow(currentLevel, 3)) / 5);
+		} else if (this.levelUpCurve == "medium") {
+			newRequiredExp = (int) Math.pow(currentLevel, 3);
+		} else if (this.levelUpCurve == "medium-slow") {
+			newRequiredExp = (int) ((6 / 5 * Math.pow(currentLevel, 3)) - 15 * Math.pow(currentLevel, 2)
+					+ 100 * currentLevel - 140);
+		} else if (this.levelUpCurve == "slow") {
+			newRequiredExp = (int) ((5 * Math.pow(currentLevel, 3)) / 4);
 		}
-		else if(this.levelUpCurve == "medium"){
-			newRequiredExp = (int)Math.pow(currentLevel,3);
-		}
-		else if(this.levelUpCurve == "medium-slow"){
-			newRequiredExp = (int)( (6/5*Math.pow(currentLevel,3)) - 15*Math.pow(currentLevel,2) + 100*currentLevel - 140 );
-		}
-		else if(this.levelUpCurve == "slow"){
-			newRequiredExp = (int)((5*Math.pow(currentLevel,3))/4);
-		}
-		this.exp = new RangeImpl<Integer>(0,newRequiredExp ,0,(x, y) -> x + y, (x, y) -> x - y);
+		this.exp = new RangeImpl<Integer>(0, newRequiredExp, 0, (x, y) -> x + y, (x, y) -> x - y);
 	}
 
 	private void levelUpStats() {
@@ -178,31 +172,28 @@ public final class PokemonImpl implements Pokemon {
 			int base = baseStats.get(stat);
 			int iv = IV.get(stat);
 			int ev = EV.get(stat).getCurrentValue();
-	
+
 			int increase = (int) Math.floor(base / 50.0 + (iv + ev) / 100.0);
-	
+
 			Range<Integer> actualStat = actualStats.get(stat);
-			actualStat.increment(increase);  
+			actualStat.increment(increase);
 		}
 	}
 
-	
 	@Override
-	public void levelUp(boolean isPlayerPokemon){
-		this.level.increment(1);		
-		levelUpStats();	
+	public void levelUp(boolean isPlayerPokemon) {
+		this.level.increment(1);
+		levelUpStats();
 		calculateNewExpRange();
 
-		if(this.levelMovesLearn.keySet().contains(this.level.getCurrentValue())){
+		if (this.levelMovesLearn.keySet().contains(this.level.getCurrentValue())) {
 			String moveToLearn = this.levelMovesLearn.get(this.level.getCurrentValue());
-			if(this.actualMoves.size() < 4){
-				this.actualMoves.add(moveToLearn);	
-			}
-			else{
-				if(!isPlayerPokemon){
-					this.actualMoves.set(random.nextInt(4),moveToLearn);
-				}	
-				else{
+			if (this.actualMoves.size() < 4) {
+				this.actualMoves.add(moveToLearn);
+			} else {
+				if (!isPlayerPokemon) {
+					this.actualMoves.set(random.nextInt(4), moveToLearn);
+				} else {
 					this.hasToLearnMove = true;
 					this.newMoveToLearn = Optional.of(moveToLearn);
 				}
@@ -211,146 +202,143 @@ public final class PokemonImpl implements Pokemon {
 	}
 
 	@Override
-	public boolean hasToLearnMove(){
+	public boolean hasToLearnMove() {
 		return this.hasToLearnMove;
 	}
 
 	@Override
-	public void learnNewMove(Optional<Integer> indexMoveToReplace){
-		if(!(this.hasToLearnMove && !this.newMoveToLearn.isEmpty())){
-			throw new UnsupportedOperationException("The pokemon "+this.name+" doesn't have to learn a move");	
+	public void learnNewMove(Optional<Integer> indexMoveToReplace) {
+		if (!(this.hasToLearnMove && !this.newMoveToLearn.isEmpty())) {
+			throw new UnsupportedOperationException("The pokemon " + this.name + " doesn't have to learn a move");
 		}
-		if(!indexMoveToReplace.isEmpty()){
-			this.actualMoves.set(indexMoveToReplace.get(),this.newMoveToLearn.get());
+		if (!indexMoveToReplace.isEmpty()) {
+			this.actualMoves.set(indexMoveToReplace.get(), this.newMoveToLearn.get());
 		}
 		this.hasToLearnMove = false;
 		this.newMoveToLearn = Optional.empty();
 	}
 
 	@Override
-	public void inflictDamage(int amount){
+	public void inflictDamage(int amount) {
 		this.actualStats.get("hp").decrement(amount);
 	}
 
 	@Override
-	public Optional<StatusCondition> statusCondition(){
+	public Optional<StatusCondition> statusCondition() {
 		return this.statusCondition;
 	}
 
 	@Override
-	public void setStatusCondition(String newStatus){
+	public void setStatusCondition(String newStatus) {
 		this.statusCondition = Optional.of(StatusCondition.fromString(newStatus));
 	}
 
 	@Override
-	public int getStat(String statName){
-		if(!this.statNames.contains(statName)){
-			throw new UnsupportedOperationException(statName+" is not a legal stats");
+	public int getStat(String statName) {
+		if (!this.statNames.contains(statName)) {
+			throw new UnsupportedOperationException(statName + " is not a legal stats");
 		}
 		return this.actualStats.get(statName).getCurrentValue();
 	}
 
 	@Override
-	public List<Type> getTypes(){
-		List<Type> result = new ArrayList<Type>();		
+	public List<Type> getTypes() {
+		List<Type> result = new ArrayList<Type>();
 		result.add(this.type1);
-		if(!this.type2.isEmpty()){
+		if (!this.type2.isEmpty()) {
 			result.add(this.type2.get());
 		}
 		return result;
 	}
-	
+
 	@Override
-	public Map<String,Integer> getGivesEV(){
+	public Map<String, Integer> getGivesEV() {
 		return this.givesEV;
 	}
 
 	@Override
-	public String getName(){
+	public String getName() {
 		return this.name;
 	}
 
 	@Override
-	public String getGender(){
+	public String getGender() {
 		return this.gender;
 	}
+
 	@Override
-	public String getLevelUpCurve(){
+	public String getLevelUpCurve() {
 		return this.levelUpCurve;
 	}
+
 	@Override
-	public List<String> getActualMoves(){
+	public List<String> getActualMoves() {
 		return this.actualMoves;
 	}
+
 	@Override
-	public Nature getNature(){
+	public Nature getNature() {
 		return this.nature;
 	}
 
-	
-
-
 	@Override
-	public void increaseExp(int amount,boolean isPlayerPokemon){
+	public void increaseExp(int amount, boolean isPlayerPokemon) {
 		this.exp.increment(amount);
-		if(this.exp.getCurrentValue() == this.exp.getCurrentMax()){
+		if (this.exp.getCurrentValue() == this.exp.getCurrentMax()) {
 			levelUp(isPlayerPokemon);
 		}
 	}
 
 	@Override
-	public void increaseEV(Map<String,Integer> increaseEV){
-		for(String key : increaseEV.keySet()){
-			if(this.totalUsedEV + increaseEV.get(key) < 510){
+	public void increaseEV(Map<String, Integer> increaseEV) {
+		for (String key : increaseEV.keySet()) {
+			if (this.totalUsedEV + increaseEV.get(key) < 510) {
 				this.EV.get(key).increment(increaseEV.get(key));
-			}		
-		}	
+			}
+		}
 	}
-
-
-	
 
 	@Override
-public String toString() {
-    String result = "Pokemon {" +
-            "\n  Name = '" + name + '\'' +
-            ",\n  Pokedex Number = " + pokedexNumber +
-            ",\n  Type1 = " + type1;
-			if(type2.isPresent()){
-				result += ",\n  Type2 = " + type2.get();
-			}
-			result +=
-            ",\n  Ability = '" + abilityName + '\'' +
-            ",\n  Gender = '" + gender + '\'' +
-            ",\n  Weight = " + weight +
-            ",\n  Capture Rate = " + captureRate +
-            ",\n  Level Range = " + level +
-            ",\n  EXP Range = " + exp +
-            ",\n  Level-Up Curve = '" + levelUpCurve + '\'' +
-            ",\n  Total Used EV = " + totalUsedEV +
-            ",\n  Base Stats = " + baseStats +
-            ",\n  Nature = " + nature +
-            ",\n  IVs = " + IV +
-            ",\n  EVs = " + EV +
-            ",\n  Actual Stats = " + actualStats +
-            ",\n  Level Moves Learn = " + levelMovesLearn +
-            ",\n  Actual Moves = " + actualMoves +
-            ",\n  Gives EV = " + givesEV +
-            "\n}";
+	public String toString() {
+		String result = "Pokemon {" +
+				"\n  Name = '" + name + '\'' +
+				",\n  Pokedex Number = " + pokedexNumber +
+				",\n  Type1 = " + type1;
+		if (type2.isPresent()) {
+			result += ",\n  Type2 = " + type2.get();
+		}
+		result += ",\n  Ability = '" + abilityName + '\'' +
+				",\n  Gender = '" + gender + '\'' +
+				",\n  Weight = " + weight +
+				",\n  Capture Rate = " + captureRate +
+				",\n  Level Range = " + level +
+				",\n  EXP Range = " + exp +
+				",\n  Level-Up Curve = '" + levelUpCurve + '\'' +
+				",\n  Total Used EV = " + totalUsedEV +
+				",\n  Base Stats = " + baseStats +
+				",\n  Nature = " + nature +
+				",\n  IVs = " + IV +
+				",\n  EVs = " + EV +
+				",\n  Actual Stats = " + actualStats +
+				",\n  Level Moves Learn = " + levelMovesLearn +
+				",\n  Actual Moves = " + actualMoves +
+				",\n  Gives EV = " + givesEV +
+				"\n}";
 		return result;
-		}
-
-		@Override
-		public Image getSpriteFront(){
-			return this.spriteFront;
-		}
-		@Override
-		public Image getSpriteBack(){
-			return this.spriteBack;
-		}
-
-		@Override
-		public String getAbilityName(){
-			return this.abilityName;
-		}
 	}
+
+	@Override
+	public Image getSpriteFront() {
+		return this.spriteFront;
+	}
+
+	@Override
+	public Image getSpriteBack() {
+		return this.spriteBack;
+	}
+
+	@Override
+	public String getAbilityName() {
+		return this.abilityName;
+	}
+}

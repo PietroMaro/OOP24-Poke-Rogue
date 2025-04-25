@@ -3,7 +3,6 @@ package it.unibo.PokeRogue.graphic;
 import java.awt.Graphics;
 
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 
 public class GraphicElementImpl extends JLayeredPane implements GraphicElement {
 
@@ -22,7 +21,5 @@ public class GraphicElementImpl extends JLayeredPane implements GraphicElement {
     public String getPanelName() {
         return this.panelName;
     }
-
-   
 
 }
