@@ -31,6 +31,8 @@ public interface Pokemon {
 	void setLevel(Range<Integer> newVal);
 	Map<String,Range<Integer>> getActualStats();
 	void setActualStats(Map<String,Range<Integer>> newVal);
+	Map<String,Range<Integer>> getTempStatsBonus();
+	void setTempStatsBonus(Map<String,Range<Integer>> newVal);
 	Map<Integer,String> getLevelMovesLearn();
 	void setLevelMovesLearn(Map<Integer,String> newVal);
 	List<String> getActualMoves();

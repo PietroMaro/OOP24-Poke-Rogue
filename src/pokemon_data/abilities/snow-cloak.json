@@ -1,11 +1,18 @@
 {
-  "situationChecks": "neutral",
-  "effect": {
-    "checks": [
-      ["weather", "==", "'snow'"]
-    ],
-    "activation": [
-      ["attackEnemy.accuracy","attackEnemy.accuracy*0.75"]
-    ]
-  }
+    "situationChecks": "neutral",
+    "effect": {
+        "checks": [
+            [
+                "weather",
+                "==",
+                "'snow'"
+            ]
+        ],
+        "activation": [
+            [
+                "attackEnemy.accuracy",
+                "attackEnemy.accuracy*0.75"
+            ]
+        ]
+    }
 }

@@ -6,10 +6,11 @@
         "activation": [
             [
                 "enemy.statusCondition",
-                "'paralysis'"
+                "Optional.of(StatusCondition.PARALYSIS)"
             ]
         ]
-    },    "accuracy": 50,
+    },
+    "accuracy": 50,
     "critRate": 0,
     "baseDamage": 120,
     "type": "electric",

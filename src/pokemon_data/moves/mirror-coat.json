@@ -5,12 +5,12 @@
         "checks": [],
         "activation": [
             [
-                "enemy.stats.special-attack",
-                "enemy.stats.special-attack - 1"
+                "enemy.actualStats.specialAttack.currentValue",
+                "enemy.actualStats.specialAttack.currentValue - 1"
             ],
             [
-                "enemy.stats.attack",
-                "enemy.stats.attack - 1"
+                "enemy.actualStats.attack.currentValue",
+                "enemy.actualStats.attack.currentValue - 1"
             ]
         ]
     },

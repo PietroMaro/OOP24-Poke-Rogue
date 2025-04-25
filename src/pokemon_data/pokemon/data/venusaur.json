@@ -7,12 +7,12 @@
     "captureRate": 45,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 100,
         "defense": 83,
         "attack": 82,
         "hp": 80,
-        "special-defense": 100,
-        "speed": 80
+        "speed": 80,
+        "specialDefense": 100,
+        "specialAttack": 100
     },
     "moves": {
         "22": "razor-leaf",
@@ -31,11 +31,11 @@
         "chlorophyll"
     ],
     "givesEV": {
-        "special-attack": 2,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 1,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 1,
+        "specialAttack": 2
     }
 }

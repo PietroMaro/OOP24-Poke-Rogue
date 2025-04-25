@@ -5,28 +5,28 @@
         "checks": [],
         "activation": [
             [
-                "us.stats.hp.current",
+                "us.actualStats.hp.currentValue",
                 "0"
             ],
             [
-                "enemy.stats.attack",
-                "enemy.stats.attack - 1"
+                "enemy.tempStatsBonus.attack.currentValue",
+                "enemy.tempStatsBonus.attack.currentValue - 1"
             ],
             [
-                "enemy.stats.defense",
-                "enemy.stats.defense - 1"
+                "enemy.tempStatsBonus.defense.currentValue",
+                "enemy.tempStatsBonus.defense.currentValue - 1"
             ],
             [
-                "enemy.stats.special-attack",
-                "enemy.stats.special-attack - 1"
+                "enemy.tempStatsBonus.specialAttack.currentValue",
+                "enemy.tempStatsBonus.specialAttack.currentValue - 1"
             ],
             [
-                "enemy.stats.special-defense",
-                "enemy.stats.special-defense - 1"
+                "enemy.tempStatsBonus.specialDefense.currentValue",
+                "enemy.tempStatsBonus.specialDefense.currentValue - 1"
             ],
             [
-                "enemy.stats.speed",
-                "enemy.stats.speed - 1"
+                "enemy.tempStatsBonus.speed.currentValue",
+                "enemy.tempStatsBonus.speed.currentValue - 1"
             ]
         ]
     },

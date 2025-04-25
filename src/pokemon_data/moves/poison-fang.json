@@ -4,15 +4,15 @@
     "effect": {
         "checks": [
             [
-                "RANDOM",
+                "MATH.random()",
                 "<",
-                "0.30" 
+                "0.30"
             ]
         ],
         "activation": [
             [
                 "enemy.statusCondition",
-                "'poisoned'"
+                "Optional.of(StatusCondition.POISON)"
             ]
         ]
     },

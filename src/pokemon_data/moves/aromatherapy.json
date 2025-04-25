@@ -4,10 +4,6 @@
     "effect": {
         "checks": [],
         "activation": [
-            [
-                "us.statusCondition",
-                "''"
-            ]
         ]
     },
     "accuracy": 100,

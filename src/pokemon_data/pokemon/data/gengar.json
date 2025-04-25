@@ -7,12 +7,12 @@
     "captureRate": 45,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 130,
         "defense": 60,
         "attack": 65,
         "hp": 60,
-        "special-defense": 75,
-        "speed": 110
+        "speed": 110,
+        "specialDefense": 75,
+        "specialAttack": 130
     },
     "moves": {
         "1": "spite",
@@ -29,13 +29,15 @@
     "growthRate": "medium-slow",
     "name": "gengar",
     "weight": 405,
-    "abilites": ["cursed-body"],
+    "abilites": [
+        "cursed-body"
+    ],
     "givesEV": {
-        "special-attack": 3,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 3
     }
 }

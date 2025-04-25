@@ -7,12 +7,12 @@
     "captureRate": 45,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 110,
         "defense": 85,
         "attack": 80,
         "hp": 75,
-        "special-defense": 90,
-        "speed": 50
+        "speed": 50,
+        "specialDefense": 90,
+        "specialAttack": 110
     },
     "moves": {
         "44": "petal-dance",
@@ -26,11 +26,11 @@
         "effect-spore"
     ],
     "givesEV": {
-        "special-attack": 3,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 3
     }
 }

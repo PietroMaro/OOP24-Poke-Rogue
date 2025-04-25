@@ -5,8 +5,8 @@
         "checks": [],
         "activation": [
             [
-                "attackUs.damage",
-                "attackUs.baseDamage * RANDOM"
+                "attackUs.calculatedDamage",
+                "attackUs.baseDamage -10"
             ]
         ]
     },

@@ -7,12 +7,12 @@
     "captureRate": 3,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 125,
         "defense": 90,
         "attack": 100,
         "hp": 90,
-        "special-defense": 85,
-        "speed": 90
+        "speed": 90,
+        "specialDefense": 85,
+        "specialAttack": 125
     },
     "moves": {
         "1": "ember",
@@ -32,11 +32,11 @@
         "flame-body"
     ],
     "givesEV": {
-        "special-attack": 3,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 3
     }
 }

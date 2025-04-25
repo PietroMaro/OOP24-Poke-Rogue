@@ -3,12 +3,7 @@
     "isPhysical": false,
     "effect": {
         "checks": [],
-        "activation": [
-            [
-                "attackUs.baseDamage",
-                "RANDOM * 0.5 + 0.75"
-            ]
-        ]
+        "activation": []
     },
     "accuracy": 100,
     "critRate": 0,

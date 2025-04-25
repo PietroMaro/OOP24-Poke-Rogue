@@ -1,15 +1,17 @@
 {
     "pokedexNumber": 117,
-    "types": ["water"],
+    "types": [
+        "water"
+    ],
     "captureRate": 75,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 95,
         "defense": 95,
         "attack": 65,
         "hp": 55,
-        "special-defense": 45,
-        "speed": 85
+        "speed": 85,
+        "specialDefense": 45,
+        "specialAttack": 95
     },
     "moves": {
         "1": "bubble",
@@ -27,11 +29,11 @@
         "damp"
     ],
     "givesEV": {
-        "special-attack": 1,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 1,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 1,
+        "specialAttack": 1
     }
 }

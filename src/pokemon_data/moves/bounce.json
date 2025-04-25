@@ -6,7 +6,7 @@
         "activation": [
             [
                 "enemy.statusCondition",
-                "'paralysis'"
+                "Optional.of(StatusCondition.PARALYSIS)"
             ]
         ]
     },

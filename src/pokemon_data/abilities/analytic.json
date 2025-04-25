@@ -1,11 +1,18 @@
 {
-  "situationChecks": "attack",
-  "effect": {
-    "checks": [
-      ["us.stats.speed", "<=", "enemy.stats.speed"]
-    ],
-    "activation": [
-      ["attackUs.baseDamage", "attackUs.baseDamage + (attackUs.baseDamage * 0.3)"]
-    ]
-  }
+    "situationChecks": "attack",
+    "effect": {
+        "checks": [
+            [
+                "us.actualStats.speed.currentValue",
+                "<=",
+                "enemy.actualStats.speed.currentValue"
+            ]
+        ],
+        "activation": [
+            [
+                "attackUs.baseDamage",
+                "attackUs.baseDamage + (attackUs.baseDamage * 0.3)"
+            ]
+        ]
+    }
 }

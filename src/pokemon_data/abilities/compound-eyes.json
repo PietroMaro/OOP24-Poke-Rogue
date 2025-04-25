@@ -1,7 +1,14 @@
 {
-    "situationChecks" : "passive",
-    "effect" : {
-            "checks" : [[]],
-            "activation" : [["attackUs.accuracy","attackUs.accuracy * 1.3"]]
-        }
+    "situationChecks": "passive",
+    "effect": {
+        "checks": [
+            []
+        ],
+        "activation": [
+            [
+                "attackUs.accuracy",
+                "attackUs.accuracy * 1.3"
+            ]
+        ]
+    }
 }

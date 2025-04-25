@@ -4,21 +4,21 @@
     "effect": {
         "checks": [
             [
-                "enemy.type1",
+                "enemy.types.get(0)",
                 "==",
-                "'ghost'"
+                "Type.GHOST"
             ]
         ],
         "activation": [
             [
-                "enemy.stats.defense",
-                "enemy.stats.defense - 20"
+                "enemy.actualStats.defense.currentValue",
+                "enemy.actualStats.defense.currentValue - 20"
             ]
         ],
         "else_activation": [
             [
-                "us.stats.attack",
-                "us.stats.attack + 20"
+                "us.actualStats.attack.currentValue",
+                "us.actualStats.attack.currentValue + 20"
             ]
         ]
     },

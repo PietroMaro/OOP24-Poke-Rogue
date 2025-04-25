@@ -5,7 +5,7 @@
         "checks": [],
         "activation": [
             [
-                "us.stats.hp.current",
+                "us.actualStats.hp.currentValue",
                 "0"
             ]
         ]

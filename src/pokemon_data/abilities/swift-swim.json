@@ -1,11 +1,18 @@
 {
-  "situationChecks": "neutral",
-  "effect": {
-    "checks": [
-      ["weather", "==", "'rain'"]
-    ],
-    "activation": [
-      ["us.stats.speed", "us.stats.speed * 2"]
-    ]
-  }
+    "situationChecks": "neutral",
+    "effect": {
+        "checks": [
+            [
+                "weather",
+                "==",
+                "'rain'"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.speed.currentValue",
+                "us.actualStats.speed.currentValue * 2"
+            ]
+        ]
+    }
 }

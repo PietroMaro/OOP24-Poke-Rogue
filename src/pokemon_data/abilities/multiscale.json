@@ -1,11 +1,18 @@
 {
-  "situationChecks": "neutral",
-  "effect": {
-    "checks": [
-      ["us.stats.hp.current", "==", "us.stats.hp.max"]
-    ],
-    "activation": [
-      ["attackEnemy.damage","attackEnemy.damage / 2"]
-    ]
-  }
+    "situationChecks": "neutral",
+    "effect": {
+        "checks": [
+            [
+                "us.actualStats.hp.currentValue",
+                "==",
+                "us.actualStats.hp.currentMax"
+            ]
+        ],
+        "activation": [
+            [
+                "attackEnemy.calculatedDamage",
+                "attackEnemy.calculatedDamage / 2"
+            ]
+        ]
+    }
 }

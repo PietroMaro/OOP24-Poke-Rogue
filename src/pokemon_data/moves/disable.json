@@ -3,12 +3,7 @@
     "isPhysical": false,
     "effect": {
         "checks": [],
-        "activation": [
-        [
-            "us.statusCondition",
-            "''"
-        ]
-    ]
+        "activation": []
     },
     "accuracy": 100,
     "critRate": 0,

@@ -1,7 +1,14 @@
 {
     "situationChecks": "passive",
     "effect": {
-      "checks": ["us.statusCondition","==", "'charmed'"],
-      "activation": ["us.statusCondition", "''"]
+        "checks": [
+            "us.statusCondition",
+            "==",
+            "'charmed'"
+        ],
+        "activation": [
+            "us.statusCondition",
+            "Optional.empty()"
+        ]
     }
-  }
+}

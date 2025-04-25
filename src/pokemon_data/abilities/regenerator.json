@@ -1,9 +1,12 @@
 {
-  "situationChecks": "switchOut",
-  "effect": {
-    "checks": [],
-    "activation": [
-      ["us.stats.hp.current", "us.stats.hp.current + (us.stats.hp.max / 3)"]
-    ]
-  }
+    "situationChecks": "switchOut",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.actualStats.hp.currentValue",
+                "us.actualStats.hp.currentValue + (us.actualStats.hp.currentMax / 3)"
+            ]
+        ]
+    }
 }

@@ -7,12 +7,12 @@
     "captureRate": 90,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 61,
         "defense": 65,
         "attack": 90,
         "hp": 65,
-        "special-defense": 61,
-        "speed": 100
+        "speed": 100,
+        "specialDefense": 61,
+        "specialAttack": 61
     },
     "moves": {
         "1": "peck",
@@ -29,11 +29,11 @@
         "sniper"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 2
+        "speed": 2,
+        "specialDefense": 0,
+        "specialAttack": 0
     }
 }

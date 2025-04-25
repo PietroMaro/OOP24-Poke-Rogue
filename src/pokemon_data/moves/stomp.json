@@ -4,15 +4,15 @@
     "effect": {
         "checks": [
             [
-                "RANDOM",
+                "MATH.random()",
                 "<",
-                "0.3"  
+                "0.3"
             ]
         ],
         "activation": [
             [
                 "enemy.statusCondition",
-                "'flinch'"
+                "Optional.of(StatusCondition.FLINCH)"
             ]
         ]
     },

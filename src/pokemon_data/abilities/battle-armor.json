@@ -1,11 +1,19 @@
 {
-  "situationChecks": "attacked",
-  "effect": {
-    "checks": [
-      ["attackEnemy.critRate", ">", "0"]
-    ],
-    "activation": [
-      ["attackEnemy.critRate", "=", "0"]
-    ]
-  }
+    "situationChecks": "attacked",
+    "effect": {
+        "checks": [
+            [
+                "attackEnemy.critRate",
+                ">",
+                "0"
+            ]
+        ],
+        "activation": [
+            [
+                "attackEnemy.critRate",
+                "=",
+                "0"
+            ]
+        ]
+    }
 }

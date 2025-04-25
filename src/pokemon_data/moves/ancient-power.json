@@ -4,31 +4,31 @@
     "effect": {
         "checks": [
             [
-                "RANDOM",
+                "MATH.random()",
                 "<",
                 "0.1"
             ]
         ],
         "activation": [
             [
-                "us.tempStatsBonus.attack",
-                "us.tempStatsBonus.attack + 1"
+                "us.tempStatsBonus.attack.currentValue",
+                "us.tempStatsBonus.attack.currentValue + 1"
             ],
             [
-                "us.tempStatsBonus.defense",
-                "us.tempStatsBonus.defense + 1"
+                "us.tempStatsBonus.defense.currentValue",
+                "us.tempStatsBonus.defense.currentValue + 1"
             ],
             [
-                "us.tempStatsBonus.special-attack",
-                "us.tempStatsBonus.special-attack + 1"
+                "us.tempStatsBonus.specialAttack.currentValue",
+                "us.tempStatsBonus.specialAttack.currentValue + 1"
             ],
             [
-                "us.tempStatsBonus.special-defense",
-                "us.tempStatsBonus.special-defense + 1"
+                "us.tempStatsBonus.specialDefense.currentValue",
+                "us.tempStatsBonus.specialDefense.currentValue + 1"
             ],
             [
-                "us.tempStatsBonus.speed",
-                "us.tempStatsBonus.speed + 1"
+                "us.tempStatsBonus.speed.currentValue",
+                "us.tempStatsBonus.speed.currentValue + 1"
             ]
         ]
     },

@@ -1,9 +1,12 @@
 {
     "situationChecks": "switchIn",
     "effect": {
-      "checks": [],
-      "activation": [
-        ["weather", "'sun'"]
-      ]
+        "checks": [],
+        "activation": [
+            [
+                "weather",
+                "'sun'"
+            ]
+        ]
     }
-  }
+}

@@ -1,15 +1,17 @@
 {
     "pokedexNumber": 110,
-    "types": ["poison"],
+    "types": [
+        "poison"
+    ],
     "captureRate": 60,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 85,
         "defense": 120,
         "attack": 90,
         "hp": 65,
-        "special-defense": 70,
-        "speed": 60
+        "speed": 60,
+        "specialDefense": 70,
+        "specialAttack": 85
     },
     "moves": {
         "33": "haze",
@@ -29,11 +31,11 @@
         "stench"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 2,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 0
     }
 }

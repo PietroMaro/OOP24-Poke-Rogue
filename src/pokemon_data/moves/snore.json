@@ -6,7 +6,7 @@
             [
                 "us.statusCondition",
                 "==",
-                "'sleep'"
+                "Optional.of(StatusCondition.SLEEP)"
             ]
         ],
         "activation": []

@@ -22,7 +22,7 @@ public final class PokemonImpl implements Pokemon {
 	@Getter(AccessLevel.NONE)
 	final private Random random = new Random();
 	@Getter(AccessLevel.NONE)
-	final private List<String> statNames = new ArrayList<>(Arrays.asList("hp", "attack", "defense", "special-attack", "special-defense", "speed"));
+	final private List<String> statNames = new ArrayList<>(Arrays.asList("hp", "attack", "defense", "specialAttack", "specialDefense", "speed"));
 	private int totalUsedEV = 0;
 	
 	private Map<String, Integer> baseStats;
@@ -31,6 +31,7 @@ public final class PokemonImpl implements Pokemon {
 	private Map<String, Range<Integer>> EV; // 0-255 the pokemon can have a total of 510 
 	private Range<Integer> level;
 	private Map<String, Range<Integer>> actualStats;
+	private Map<String,Range<Integer>> tempStatsBonus;
 	private Map<Integer, String> levelMovesLearn;
 	private List<String> actualMoves = new ArrayList<String>(); 
 	private String levelUpCurve; //https://m.bulbapedia.bulbagarden.net/wiki/Experience
@@ -62,6 +63,7 @@ public final class PokemonImpl implements Pokemon {
 		this.nature = Nature.getRandomNature();
 		this.level = new RangeImpl<Integer>(1,100,1);
 		calculateActualStats();
+		initTempStatsBonus();
 		initLevelMovesLearn(pokemonBlueprint.learnableMoves());
 		initActualMoves();
 		this.levelUpCurve = pokemonBlueprint.growthRate();
@@ -107,6 +109,14 @@ public final class PokemonImpl implements Pokemon {
 		this.abilityName = possibleAbilities.get(random.nextInt(possibleAbilities.size()));
 	}
 
+	private void initTempStatsBonus(){
+		this.tempStatsBonus = new HashMap<String, Range<Integer>>();
+		for(String stat : statNames){
+			this.tempStatsBonus.put(stat,new RangeImpl<>(-6,6,0));
+		}
+		this.tempStatsBonus.put("critRate",new RangeImpl<>(-6,6,0));
+		this.tempStatsBonus.put("accuracy",new RangeImpl<>(-6,6,0));
+	}
 	private void initTypes(List<String> types){
 		this.type1 = Type.fromString(types.get(0));	
 		this.type2 = Optional.empty();

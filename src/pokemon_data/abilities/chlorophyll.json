@@ -1,7 +1,18 @@
 {
     "situationChecks": "passive",
     "effect": {
-        "checks": [["weather", "==", "'sunny'"]],
-        "activation": [["us.stats.speed", "us.stats.speed * 2"]]
+        "checks": [
+            [
+                "weather",
+                "==",
+                "'sunny'"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.speed.currentValue",
+                "us.actualStats.speed.currentValue * 2"
+            ]
+        ]
     }
 }

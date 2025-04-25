@@ -6,7 +6,7 @@
         "activation": [
             [
                 "enemy.statusCondition",
-                "'bound'"
+                "Optional.of(StatusCondition.BOUND)"
             ]
         ]
     },

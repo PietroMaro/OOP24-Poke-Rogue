@@ -1,11 +1,18 @@
 {
-  "situationChecks": "passive",
-  "effect": {
-    "checks": [
-      ["us.statusCondition", "==", "'paralyze'"]
-    ],
-    "activation": [
-      ["us.statusCondition", "''"]
-    ]
-  }
+    "situationChecks": "passive",
+    "effect": {
+        "checks": [
+            [
+                "us.statusCondition",
+                "==",
+                "'paralyze'"
+            ]
+        ],
+        "activation": [
+            [
+                "us.statusCondition",
+                "Optional.empty()"
+            ]
+        ]
+    }
 }

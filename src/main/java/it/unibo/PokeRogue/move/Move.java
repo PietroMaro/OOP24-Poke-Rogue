@@ -13,6 +13,7 @@ public class Move{
 	private int accuracy;
 	private int critRate;
 	private int baseDamage;
+	private int calculatedDamage;
 	private Type type;
 	private int priority;
 
@@ -24,6 +25,7 @@ public class Move{
 	        this.accuracy,
 	        this.critRate,
 	        this.baseDamage,
+			this.calculatedDamage,
 	        this.type,
 	        this.priority
 	    );

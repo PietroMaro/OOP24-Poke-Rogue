@@ -5,8 +5,8 @@
         "checks": [],
         "activation": [
             [
-                "us.tempStatsBonus.special-defense",
-                "us.tempStatsBonus.special-defense + (us.stats.special-defense * 0.5)"
+                "us.tempStatsBonus.specialDefense.currentValue",
+                "us.tempStatsBonus.specialDefense.currentValue + (us.actualStats.specialDefense.currentValue * 0.5)"
             ]
         ]
     },

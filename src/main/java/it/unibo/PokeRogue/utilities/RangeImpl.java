@@ -12,7 +12,7 @@ public class RangeImpl<T extends Number> implements Range<T>{
     private T currentMin;
 	@Getter @Setter
     private T currentMax;
-	@Getter @Setter
+	@Getter 
     private T currentValue;
 
 
@@ -39,10 +39,10 @@ public class RangeImpl<T extends Number> implements Range<T>{
     @Override
     public void decrement(T x) {
         double newValue = this.currentValue.doubleValue() - x.doubleValue();
-        if (newValue <= this.currentMax.doubleValue()) {
+        if (newValue > this.currentMin.doubleValue()) {
             this.currentValue = convertToType(newValue);
         } else {
-            this.currentValue = currentMax;
+            this.currentValue = currentMin;
         }
     }
 
@@ -58,4 +58,15 @@ public class RangeImpl<T extends Number> implements Range<T>{
         }
         throw new UnsupportedOperationException("Unsupported Number type");
     }
+
+	@Override
+	public void setCurrentValue(T newValue){
+		this.currentValue = newValue;
+		if(newValue.doubleValue()> this.currentMax.doubleValue()){
+			this.currentValue = currentMax;
+		}
+		if(newValue.doubleValue() < this.currentMin.doubleValue()){
+			this.currentValue = currentMin;
+		}
+	}
 }

@@ -4,15 +4,15 @@
     "effect": {
         "checks": [
             [
-                "RANDOM",
+                "MATH.random()",
                 "<",
                 "0.1"
             ]
         ],
         "activation": [
             [
-                "attackEnemy.tempStatsBonus.attack",
-                "attackEnemy.tempStatsBonus.attack - 1"
+                "enemy.tempStatsBonus.attack.currentValue",
+                "enemy.tempStatsBonus.attack.currentValue - 1"
             ]
         ]
     },

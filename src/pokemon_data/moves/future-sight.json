@@ -4,15 +4,15 @@
     "effect": {
         "checks": [
             [
-                "RANDOM",
+                "MATH.random()",
                 "<",
                 "0.3"
             ]
         ],
         "activation": [
             [
-                "enemy.stats.hp.current",
-                "enemy.stats.hp.current - calculatedDamage"
+                "enemy.actualStats.hp.currentValue",
+                "enemy.actualStats.hp.currentValue - attackEnemy.calculatedDamage"
             ]
         ]
     },

@@ -1,15 +1,17 @@
 {
     "pokedexNumber": 33,
-    "types": ["poison"],
+    "types": [
+        "poison"
+    ],
     "captureRate": 120,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 55,
         "defense": 57,
         "attack": 72,
         "hp": 61,
-        "special-defense": 55,
-        "speed": 65
+        "speed": 65,
+        "specialDefense": 55,
+        "specialAttack": 55
     },
     "moves": {
         "22": "horn-attack",
@@ -31,11 +33,11 @@
         "hustle"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 0,
         "attack": 2,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 0
     }
 }

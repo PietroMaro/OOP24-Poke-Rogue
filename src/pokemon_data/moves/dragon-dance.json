@@ -5,12 +5,12 @@
         "checks": [],
         "activation": [
             [
-                "us.tempStatsBonus.attack",
-                "us.tempStatsBonus.attack + 1"
+                "us.tempStatsBonus.attack.currentValue",
+                "us.tempStatsBonus.attack.currentValue + 1"
             ],
             [
-                "us.tempStatsBonus.speed",
-                "us.tempStatsBonus.speed + 1"
+                "us.tempStatsBonus.speed.currentValue",
+                "us.tempStatsBonus.speed.currentValue + 1"
             ]
         ]
     },

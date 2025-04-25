@@ -6,13 +6,13 @@
             [
                 "enemy.statusCondition",
                 "==",
-                "'sleep'"
+                "Optional.of(StatusCondition.SLEEP)"
             ]
         ],
         "activation": [
             [
-                "enemy.stats.hp.current",
-                "enemy.stats.hp.current - (enemy.stats.hp.current / 4)"
+                "enemy.actualStats.hp.currentValue",
+                "enemy.actualStats.hp.currentValue - (enemy.actualStats.hp.currentValue / 4)"
             ]
         ]
     },

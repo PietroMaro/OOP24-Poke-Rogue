@@ -4,14 +4,14 @@
     "effect": {
         "checks": [
             [
-                "enemy.stats.speed",
+                "enemy.actualStats.speed.currentValue",
                 "<",
-                "us.stats.speed"
+                "us.actualStats.speed.currentValue"
             ]
         ],
         "activation": [
             [
-                "enemy.stats.hp.current",
+                "enemy.actualStats.hp.currentValue",
                 "0"
             ]
         ]

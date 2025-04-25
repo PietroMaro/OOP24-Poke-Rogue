@@ -1,8 +1,23 @@
 {
-    "situationChecks" : "attack",
-    "effect" : {
-            "checks" : [["attackUs.type", "==" , "'fire'"],
-                    ["us.stats.hp.current","<=","us.stats.hp.max / 3"]],
-            "activation" : [["attackUs.power","attackUs.power + (attackUs.power / 2)"]]
-        }
+    "situationChecks": "attack",
+    "effect": {
+        "checks": [
+            [
+                "attackUs.type",
+                "==",
+                "'fire'"
+            ],
+            [
+                "us.actualStats.hp.currentValue",
+                "<=",
+                "us.actualStats.hp.currentMax / 3"
+            ]
+        ],
+        "activation": [
+            [
+                "attackUs.baseDamage",
+                "attackUs.baseDamage + (attackUs.baseDamage / 2)"
+            ]
+        ]
+    }
 }

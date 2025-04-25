@@ -5,7 +5,7 @@
         "checks": [],
         "activation": [
             [
-                "attackUs.damage",
+                "attackUs.calculatedDamage",
                 "attackUs.baseDamage * 2"
             ]
         ]

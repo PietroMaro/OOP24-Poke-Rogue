@@ -3,6 +3,8 @@ package it.unibo.PokeRogue.effectParser;
 import org.apache.commons.jexl3.*;
 import it.unibo.PokeRogue.SingletonImpl;
 import it.unibo.PokeRogue.Weather;
+import it.unibo.PokeRogue.pokemon.StatusCondition;
+import it.unibo.PokeRogue.pokemon.Type;
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.move.Move;
 import org.json.JSONObject;
@@ -10,6 +12,7 @@ import org.json.JSONArray;
 import java.util.Optional;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Optional;
 
 public class EffectParserImpl extends SingletonImpl implements EffectParser{
 
@@ -20,15 +23,22 @@ public class EffectParserImpl extends SingletonImpl implements EffectParser{
 	private	Optional<Weather> weather;
 
 	private void parseEffect(JSONObject effect){
-		JSONArray checks = effect.getJSONArray("checks");	
-		JSONArray activation = effect.getJSONArray("activation");
-		if(computeChecks(checks)){
+		JSONArray checks = new JSONArray("[]");
+		JSONArray activation = new JSONArray("[]") ;
+		try{
+			checks = effect.getJSONArray("checks");	
+			activation = effect.getJSONArray("activation");
+		}catch(Exception ex){
+			System.out.println("ERROR IN READING EFFECT JSON " + ex);
+		}
+		if(computeChecks(checks) || true){
 			activateActivations(activation);
 		}
 	}
 
 	private boolean computeChecks(JSONArray checks){
 		boolean result = true;
+
 		for(int checkIndex = 0; checkIndex < checks.length(); checkIndex++){
 			result = result && computeSingleCheck(checks.getJSONArray(checkIndex));
 		}
@@ -39,22 +49,30 @@ public class EffectParserImpl extends SingletonImpl implements EffectParser{
 		if(check.length() != 3){
 			 throw new IllegalArgumentException("CHECKS length have to be 3, but got: " + check.length()); 
 		}
-		String checkString = check.getString(0)+" "+check.getString(1)+" "+check.getString(2);
+		String firstOperand = check.getString(0);
+		String secondOperand = check.getString(2);
+
+		String checkString = firstOperand+" "+check.getString(1)+" "+secondOperand;
 		boolean result = false;
 		try{
 			result = (boolean)parseSingleExpression(checkString);
 		}catch(Exception ex){
 			System.out.println("ERROR in");
 			System.out.println("The check " +checkString);
-			System.out.println(ex);
+			throw ex;
 		}
-		System.out.println(result);
 		return result;
 	}
 
 	private Object parseSingleExpression(String expression){
 		JexlEngine jexl = new JexlBuilder().create();
-        JexlContext context = new MapContext();
+		JexlExpression expr = jexl.createExpression(expression);
+		Object result = expr.evaluate(createContext());
+		return result;
+	}
+
+	private JexlContext createContext(){
+		JexlContext context = new MapContext();
 		if(!this.us.isEmpty()){
 			context.set("us",this.us.get());
 		}
@@ -70,14 +88,20 @@ public class EffectParserImpl extends SingletonImpl implements EffectParser{
 		if(!this.weather.isEmpty()){
 			context.set("weather",this.weather.get());
 		}
-
-		JexlExpression expr = jexl.createExpression(expression);
-		Object result = expr.evaluate(context);
-		return result;
+		context.set("Optional",Optional.class);
+		context.set("StatusCondition",StatusCondition.class);
+		context.set("Type",Type.class);
+		context.set("MATH",Math.class);
+		return context;
 	}
 
 	private void activateActivations(JSONArray activation){
-		return ;
+		for(int actIndex = 0; actIndex < activation.length(); actIndex++){
+			parseSingleExpression(
+					activation.getJSONArray(actIndex).getString(0)
+					+" = "+
+					activation.getJSONArray(actIndex).getString(1));
+		}
 	}
 	
 	@Override

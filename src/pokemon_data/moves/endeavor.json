@@ -4,15 +4,15 @@
     "effect": {
         "checks": [
             [
-                "us.stats.hp",
+                "us.actualStats.hp.currentValue",
                 "<",
-                "enemy.stats.hp"
+                "enemy.actualStats.hp.currentValue"
             ]
         ],
         "activation": [
             [
-                "us.tempStatsBonus.attack",
-                "us.tempStatsBonus.attack + 2"
+                "us.tempStatsBonus.attack.currentValue",
+                "us.tempStatsBonus.attack.currentValue + 2"
             ]
         ]
     },

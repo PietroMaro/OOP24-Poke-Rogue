@@ -4,9 +4,9 @@
     "effect": {
         "checks": [
             [
-                "us.stats.hp.current",
+                "us.actualStats.hp.currentValue",
                 "<",
-                "us.stats.hp.max * 0.25"
+                "us.actualStats.hp.currentMax * 0.25"
             ]
         ],
         "activation": [

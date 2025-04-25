@@ -1,18 +1,40 @@
 {
-  "situationChecks": "switchIn",
-  "effect": {
-    "checks": [],
-    "activation": [
-      ["us.type1", "enemy.type1"],
-      ["us.type2", "enemy.type2"],
-      ["us.nature", "enemy.nature"],
-      ["us.stats.hp.current", "enemy.stats.hp.current"],
-      ["us.stats.hp.max", "enemy.stats.hp.max"],
-      ["us.stats.attack", "enemy.stats.attack"],
-      ["us.stats.defense", "enemy.stats.defense"],
-      ["us.stats.special-attack", "enemy.stats.special-attack"],
-      ["us.stats.special-defense", "enemy.stats.special-defense"],
-      ["us.stats.speed", "enemy.stats.speed"]
-    ]
-  }
+    "situationChecks": "switchIn",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.nature",
+                "enemy.nature"
+            ],
+            [
+                "us.actualStats.hp.currentValue",
+                "enemy.actualStats.hp.currentValue"
+            ],
+            [
+                "us.actualStats.hp.currentMax",
+                "enemy.actualStats.hp.currentMax"
+            ],
+            [
+                "us.actualStats.attack.currentValue",
+                "enemy.actualStats.attack.currentValue"
+            ],
+            [
+                "us.actualStats.defense.currentValue",
+                "enemy.actualStats.defense.currentValue"
+            ],
+            [
+                "us.actualStats.specialAttack.currentValue",
+                "enemy.actualStats.specialAttack.currentValue"
+            ],
+            [
+                "us.actualStats.specialDefense.currentValue",
+                "enemy.actualStats.specialDefense.currentValue"
+            ],
+            [
+                "us.actualStats.speed.currentValue",
+                "enemy.actualStats.speed.currentValue"
+            ]
+        ]
+    }
 }

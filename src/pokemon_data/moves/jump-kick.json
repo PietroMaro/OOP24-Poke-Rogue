@@ -4,15 +4,15 @@
     "effect": {
         "checks": [
             [
-                "RANDOM",
+                "MATH.random()",
                 "<",
                 "0.95"
             ]
         ],
         "activation": [
             [
-                "us.stats.hp.current",
-                "us.stats.hp.current - 25"
+                "us.actualStats.hp.currentValue",
+                "us.actualStats.hp.currentValue - 25"
             ]
         ]
     },

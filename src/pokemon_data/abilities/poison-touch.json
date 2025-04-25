@@ -1,12 +1,23 @@
 {
-  "situationChecks": "attack",
-  "effect": {
-    "checks": [
-      ["attackUs.isPhysical", "==", "true"],
-      ["RANDOM","<=","0.3"]
-    ],
-    "activation": [
-      ["enemy.statusCondition","'poison'"]
-    ]
-  }
+    "situationChecks": "attack",
+    "effect": {
+        "checks": [
+            [
+                "attackUs.isPhysical",
+                "==",
+                "true"
+            ],
+            [
+                "MATH.random()",
+                "<=",
+                "0.3"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "'poison'"
+            ]
+        ]
+    }
 }

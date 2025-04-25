@@ -8,6 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.*;
 import org.junit.jupiter.api.Test;
 
+import org.json.JSONObject;
+import java.nio.file.*;
+import java.io.IOException;
+
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.pokemon.PokemonFactoryImpl;
 import it.unibo.PokeRogue.pokemon.PokemonImpl;
@@ -21,9 +25,10 @@ import it.unibo.PokeRogue.ability.AbilityFactoryImpl;
 import it.unibo.PokeRogue.ability.AbilitySituationChecks;
 import it.unibo.PokeRogue.effectParser.EffectParser;
 import it.unibo.PokeRogue.effectParser.EffectParserImpl;
-import org.json.JSONObject;
-
 import it.unibo.PokeRogue.pokemon.Type;
+import it.unibo.PokeRogue.utilities.JsonReader;
+import it.unibo.PokeRogue.utilities.JsonReaderImpl;
+
 
 
 public class TestAll {
@@ -96,15 +101,56 @@ public class TestAll {
 
 
 	@Test
-	public void testEffectParser(){
-		EffectParser effectParser= EffectParserImpl.getInstance(EffectParserImpl.class);
+	public void testAllMovesEffect() throws IOException{
+		MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
 		PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
-		Pokemon pok = pokeFactory.randomPokemon(3);
-		String jsonString = "{\"checks\":[[\"us.statusCondition\",\">=\",\"0\"]],\"activation\":[]}";
-		effectParser.parseEffect(
-			new JSONObject(jsonString),
-			pok	
-				);
-		System.out.println(pok);
+		EffectParserImpl effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
+
+		Move moveTest1 = moveFactory.moveFromName("absorb");
+		Move moveTest2 = moveFactory.moveFromName("absorb");
+        Pokemon pok1 = pokeFactory.randomPokemon(3);
+		Pokemon pok2 = pokeFactory.randomPokemon(3);
+		Weather weather = Weather.SUNLIGHT;
+
+		JsonReader jsonReader = new JsonReaderImpl();
+
+		Path dirPath = Paths.get("src","pokemon_data","moves");
+		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
+            for (Path entry : stream) {
+                if (Files.isRegularFile(entry)) {  
+					JSONObject moveJson = jsonReader.readJsonObject(entry.toString());
+					JSONObject effect = moveJson.getJSONObject("effect");
+					effectParser.parseEffect(effect,pok1,pok2,moveTest1,moveTest2,weather);
+                }
+            }
+        }
+	}
+
+	@Test
+	public void testAllAbilityEffect() throws IOException{
+		MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
+		PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+		EffectParserImpl effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
+
+		Move moveTest1 = moveFactory.moveFromName("absorb");
+		Move moveTest2 = moveFactory.moveFromName("absorb");
+        Pokemon pok1 = pokeFactory.randomPokemon(3);
+		Pokemon pok2 = pokeFactory.randomPokemon(3);
+		Weather weather = Weather.SUNLIGHT;
+
+		JsonReader jsonReader = new JsonReaderImpl();
+
+		Path dirPath = Paths.get("src","pokemon_data","abilities");
+		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
+            for (Path entry : stream) {
+                if (Files.isRegularFile(entry)) {  
+					System.out.println(entry.toString());
+					JSONObject moveJson = jsonReader.readJsonObject(entry.toString());
+					JSONObject effect = moveJson.getJSONObject("effect");
+					System.out.println(effect);
+					effectParser.parseEffect(effect,pok1,pok2,moveTest1,moveTest2,weather);
+                }
+            }
+        }
 	}
 }

@@ -1,12 +1,23 @@
 {
     "situationChecks": "attacked",
     "effect": {
-      "checks": [
-        ["enemy.statusCondition", "==", "null"],
-        ["RANDOM", "<", "0.3"]
-      ],
-      "activation": [
-        ["enemy.statusCondition", "'charmed'"]
-      ]
+        "checks": [
+            [
+                "enemy.statusCondition",
+                "==",
+                "null"
+            ],
+            [
+                "MATH.random()",
+                "<",
+                "0.3"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "'charmed'"
+            ]
+        ]
     }
-  }
+}
