@@ -1,9 +1,10 @@
 package it.unibo.PokeRogue.scene;
 
+import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.awt.event.KeyEvent;
 
 import javax.swing.OverlayLayout;
 
@@ -11,8 +12,10 @@ import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl;
+import it.unibo.PokeRogue.graphic.box.BoxElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
+import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 
 public class SceneShop implements Scene {
@@ -99,16 +102,102 @@ public class SceneShop implements Scene {
     }
 
     private void initGraphicElements() {
-        // Panels
+        
         this.allPanelsElements.put("firstPanel", new PanelElementImpl("", new OverlayLayout(null)));
 
+        this.initTextElements();
+
+        this.initButtonElements(); 
+
+        this.initSpriteElements(); 
+
+        this.initBoxElements();
+
         this.sceneGraphicElements.put(sceneGraphicEnum.BACKGROUND.value(),
-                new BackgroundElementImpl("firstPanel", this.getPathString("images", "sceneShopBg.png")));
+                new BackgroundElementImpl("firstPanel", this.getPathString("images", "sceneShopBgBar.png")));
+
+        // Set the first button as selected
+        this.setButtonStatus(this.currentSelectedButton, true);
+
     }
+
+    private void initTextElements() {
+        this.sceneGraphicElements.put(SceneShopEnum.PLAYER_MONEY_TEXT.value(),
+            new TextElementImpl("firstPanel", "MONEY: " + 50 /*playerTrainerInstance.getMoney()*/, Color.BLACK, 0.04, 0.85, 0.02));
+    
+        this.sceneGraphicElements.put(SceneShopEnum.REROL_TEXT.value(),
+            new TextElementImpl("firstPanel", "REROLL: " + 50 /*CalculateRerolCost()*/, Color.BLACK, 0.03, 0.01, 0.83));//costo rerol da aggiungere
+    
+        this.sceneGraphicElements.put(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value(),
+            new TextElementImpl("firstPanel", "*item description* / *button description*", Color.BLACK, 0.035, 0.05, 0.72));
+    }
+
+    private void initButtonElements() {
+        // Pulsanti degli item acquistabili (sopra)
+        this.sceneGraphicElements.put(SceneShopEnum.PRICY_ITEM_1_BUTTON.value(),
+            new ButtonElementImpl("firstPanel", Color.CYAN, Color.BLACK, 0, 0.25, 0.10, 0.15, 0.1));
+        this.sceneGraphicElements.put(SceneShopEnum.PRICY_ITEM_2_BUTTON.value(),
+            new ButtonElementImpl("firstPanel", Color.CYAN, Color.BLACK, 0, 0.50, 0.10, 0.15, 0.1));
+        this.sceneGraphicElements.put(SceneShopEnum.PRICY_ITEM_3_BUTTON.value(),
+            new ButtonElementImpl("firstPanel", Color.CYAN, Color.BLACK, 0, 0.75, 0.10, 0.15, 0.1));
+    
+        // Pulsanti reward gratuiti (sotto)
+        this.sceneGraphicElements.put(SceneShopEnum.FREE_ITEM_1_BUTTON.value(),
+            new ButtonElementImpl("firstPanel", Color.CYAN, Color.BLACK, 0, 0.25, 0.30, 0.15, 0.1));
+        this.sceneGraphicElements.put(SceneShopEnum.FREE_ITEM_2_BUTTON.value(),
+            new ButtonElementImpl("firstPanel", Color.CYAN, Color.BLACK, 0, 0.50, 0.30, 0.15, 0.1));
+        this.sceneGraphicElements.put(SceneShopEnum.FREE_ITEM_3_BUTTON.value(),
+            new ButtonElementImpl("firstPanel", Color.CYAN, Color.BLACK, 0, 0.75, 0.30, 0.15, 0.1));
+    
+        // Pulsanti utility (reroll + team)
+        this.sceneGraphicElements.put(SceneShopEnum.REROL_BUTTON.value(),
+            new ButtonElementImpl("firstPanel", Color.LIGHT_GRAY, Color.BLACK, 0, 0.01, 0.85, 0.15, 0.07));
+        this.sceneGraphicElements.put(SceneShopEnum.TEAM_BUTTON.value(),
+            new ButtonElementImpl("firstPanel", Color.LIGHT_GRAY, Color.BLACK, 0, 0.85, 0.85, 0.12, 0.07));
+    }
+
+    private void initSpriteElements() {
+
+    }
+
+    private void initBoxElements() {
+    // BOX sopra: item a pagamento
+    this.sceneGraphicElements.put(SceneShopEnum.PRICY_ITEM_1_BOX.value(),
+        new BoxElementImpl("firstPanel",Color.GRAY, Color.CYAN, 2, 0.10, 0.15,0.31, 0.1));
+    this.sceneGraphicElements.put(SceneShopEnum.PRICY_ITEM_2_BOX.value(),
+        new BoxElementImpl("firstPanel",Color.GRAY, Color.CYAN, 2, 0.10, 0.15,0.31, 0.1));
+    this.sceneGraphicElements.put(SceneShopEnum.PRICY_ITEM_3_BOX.value(),
+        new BoxElementImpl("firstPanel",Color.GRAY, Color.CYAN, 2, 0.10, 0.15,0.31, 0.1));
+
+    // BOX sotto: item reward
+    this.sceneGraphicElements.put(SceneShopEnum.FREE_ITEM_1_BOX.value(),
+        new BoxElementImpl("firstPanel",Color.GRAY, Color.CYAN, 2, 0.30, 0.15,0.31, 0.1));
+    this.sceneGraphicElements.put(SceneShopEnum.FREE_ITEM_2_BOX.value(),
+        new BoxElementImpl("firstPanel",Color.GRAY, Color.CYAN, 2, 0.30, 0.15,0.31, 0.1));
+    this.sceneGraphicElements.put(SceneShopEnum.FREE_ITEM_3_BOX.value(),
+        new BoxElementImpl("firstPanel",Color.GRAY, Color.CYAN, 2, 0.30, 0.15,0.31, 0.1));
+
+    // BOX pulsanti utility
+    this.sceneGraphicElements.put(SceneShopEnum.REROL_BOX.value(),
+        new BoxElementImpl("firstPanel",Color.GRAY, Color.LIGHT_GRAY, 2, 0.85, 0.15,0.31, 0.07));
+    this.sceneGraphicElements.put(SceneShopEnum.PLAYER_MONEY_BOX.value(),
+        new BoxElementImpl("firstPanel",Color.GRAY, Color.LIGHT_GRAY, 2, 0.85, 0.12,0.31, 0.07));
+
+    // BOX descrizione (parte bassa)
+    this.sceneGraphicElements.put(SceneShopEnum.DETAIL_BOX.value(),
+        new BoxElementImpl("firstPanel",Color.GRAY, Color.CYAN, 2, 0.7, 1.0,0.31, 0.3));
+}
 
     @Override
     public void updateGraphic() {
         this.updateSelectedButton();
+
+        this.updateShopItems();
+    }
+
+    private void updateShopItems() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateShopItems'");
     }
 
     @Override
@@ -149,6 +238,10 @@ public class SceneShop implements Scene {
             // Aggiungi un log per il debug se il bottone non esiste
             System.out.println("Button with code " + buttonCode + " not found in sceneGraphicElements.");
         }
+    }
+
+    private int CalculateRerolCost(){
+        return 1;
     }
 
 }
