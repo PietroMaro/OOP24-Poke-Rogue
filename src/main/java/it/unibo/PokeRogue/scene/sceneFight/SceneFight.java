@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene;
+package it.unibo.PokeRogue.scene.sceneFight;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -22,6 +22,7 @@ import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.move.MoveFactoryImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
 import it.unibo.PokeRogue.trainers.TrainerImpl;
@@ -107,13 +108,13 @@ public class SceneFight implements Scene {
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.MY_POKEMON_LEVEL_TEXT.value(),
                                 new TextElementImpl("firstPanel",
                                                 String.valueOf(playerTrainerInstance.getPokemon(FIRST_POSITION).get()
-                                                                .getCurrentLevel()),
+                                                                .getLevel().getCurrentValue()),
                                                 Color.WHITE,
                                                 0.04, 0.79, 0.64));
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.ENEMY_POKEMON_LEVEL_TEXT.value(),
                                 new TextElementImpl("firstPanel",
                                                 String.valueOf(enemyTrainerInstance.getPokemon(FIRST_POSITION).get()
-                                                                .getCurrentLevel()),
+                                                                .getLevel().getCurrentValue()),
                                                 Color.WHITE,
                                                 0.04, 0.1, 0.06));
 
@@ -142,11 +143,11 @@ public class SceneFight implements Scene {
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.MY_POKEMON_ACTUAL_EXP_TEXT.value(),
                                 new TextElementImpl("firstPanel", "exp. " +
                                                 String.valueOf(playerTrainerInstance.getPokemon(FIRST_POSITION).get()
-                                                                .getExpRange().getCurrentValue())
+                                                                .getExp().getCurrentValue())
                                                 + " / "
                                                 + String.valueOf(playerTrainerInstance
                                                                 .getPokemon(FIRST_POSITION).get()
-                                                                .getExpRange().getCurrentMax()),
+                                                                .getExp().getCurrentMax()),
                                                 Color.WHITE,
                                                 0.04, 0.69, 0.67));
         }
@@ -343,9 +344,9 @@ public class SceneFight implements Scene {
                 String power = "???";
 
                 if (move != "") {
-                        pp = String.valueOf(moveFactoryInstance.moveFromName(move).pp());
-                        type = String.valueOf(moveFactoryInstance.moveFromName(move).type());
-                        power = String.valueOf(moveFactoryInstance.moveFromName(move).baseDamage());
+                        pp = String.valueOf(moveFactoryInstance.moveFromName(move).getPp());
+                        type = String.valueOf(moveFactoryInstance.moveFromName(move).getType());
+                        power = String.valueOf(moveFactoryInstance.moveFromName(move).getBaseDamage());
                 }
 
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_PP_TEXT.value(),
@@ -363,7 +364,7 @@ public class SceneFight implements Scene {
                         this.sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_TYPE.value(),
                                         new BoxElementImpl("movePanel",
                                                         ColorTypeConversion.getColorForType(
-                                                                        moveFactoryInstance.moveFromName(move).type()),
+                                                                        moveFactoryInstance.moveFromName(move).getType()),
                                                         Color.BLACK, 1, 0.65, 0.82, 0.15, 0.06));
                 }
         }

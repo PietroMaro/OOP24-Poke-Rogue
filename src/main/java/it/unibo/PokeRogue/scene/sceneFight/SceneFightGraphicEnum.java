@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene;
+package it.unibo.PokeRogue.scene.sceneFight;
 
 public enum SceneFightGraphicEnum {
 

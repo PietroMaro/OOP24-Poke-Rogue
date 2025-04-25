@@ -263,4 +263,9 @@ public final class PokemonImpl implements Pokemon {
 		}
 		return result;
 	}
+
+	@Override
+	public Range<Integer> getHpRange() {
+		return this.actualStats.get("hp");
+	}
 }
