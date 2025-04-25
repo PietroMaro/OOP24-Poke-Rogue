@@ -1,6 +1,6 @@
 package it.unibo.PokeRogue.scene.sceneMenu;
 
-public enum sceneMenuGraphicEnum {
+public enum SceneMenuGraphicEnum {
 
     LOAD_BUTTON(0),
     NEW_GAME_BUTTON(1),
@@ -13,7 +13,7 @@ public enum sceneMenuGraphicEnum {
 
     private final int code;
 
-    sceneMenuGraphicEnum(int code) {
+    SceneMenuGraphicEnum(int code) {
         this.code = code;
     }
 
@@ -27,7 +27,7 @@ public enum sceneMenuGraphicEnum {
      * @param currentSelectedButton the currently selected button.
      * @return the next button.
      */
-    public static sceneMenuGraphicEnum nextButtonsNames(sceneMenuGraphicEnum currentSelectedButton) {
+    public static SceneMenuGraphicEnum nextButtonsNames(SceneMenuGraphicEnum currentSelectedButton) {
         if (currentSelectedButton.ordinal() == 0) {
             return values()[2];
         }
@@ -41,7 +41,7 @@ public enum sceneMenuGraphicEnum {
      * @param currentSelectedButton the currently selected button.
      * @return the previous button.
      */
-    public static sceneMenuGraphicEnum previousButtonsNames(sceneMenuGraphicEnum currentSelectedButton) {
+    public static SceneMenuGraphicEnum previousButtonsNames(SceneMenuGraphicEnum currentSelectedButton) {
 
         if (currentSelectedButton.ordinal() == 2) {
             return values()[0];

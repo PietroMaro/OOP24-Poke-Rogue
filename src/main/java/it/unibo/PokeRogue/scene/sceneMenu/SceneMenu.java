@@ -26,13 +26,11 @@ import it.unibo.PokeRogue.scene.Scene;
  */
 public class SceneMenu implements Scene {
 
-    private sceneMenuGraphicEnum currentSelectedButton;
+    private SceneMenuGraphicEnum currentSelectedButton;
     private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GameEngine gameEngineInstance;
 
-   
-    
     /**
      * Constructs a new SceneMenu object, initializing necessary data structures and
      * components.
@@ -73,16 +71,16 @@ public class SceneMenu implements Scene {
 
         switch (inputKey) {
             case KeyEvent.VK_UP:
-                this.currentSelectedButton = sceneMenuGraphicEnum.nextButtonsNames(this.currentSelectedButton);
+                this.currentSelectedButton = SceneMenuGraphicEnum.nextButtonsNames(this.currentSelectedButton);
 
                 break;
             case KeyEvent.VK_DOWN:
-                this.currentSelectedButton = sceneMenuGraphicEnum.previousButtonsNames(this.currentSelectedButton);
+                this.currentSelectedButton = SceneMenuGraphicEnum.previousButtonsNames(this.currentSelectedButton);
                 break;
             case KeyEvent.VK_ENTER:
                 switch (this.currentSelectedButton) {
                     case LOAD_BUTTON:
-                    this.gameEngineInstance.setScene("load");
+                        this.gameEngineInstance.setScene("load");
 
                         break;
                     case NEW_GAME_BUTTON:
@@ -132,25 +130,25 @@ public class SceneMenu implements Scene {
         this.allPanelsElements.put("firstPanel", new PanelElementImpl("", new OverlayLayout(null)));
 
         // Texts
-        this.sceneGraphicElements.put(sceneMenuGraphicEnum.LOAD_GAME_BUTTON_TEXT.value(),
+        this.sceneGraphicElements.put(SceneMenuGraphicEnum.LOAD_GAME_BUTTON_TEXT.value(),
                 new TextElementImpl("firstPanel", "Continua", Color.BLACK, 0.06, 0.45, 0.24));
 
-        this.sceneGraphicElements.put(sceneMenuGraphicEnum.NEW_GAME_BUTTON_TEXT.value(),
+        this.sceneGraphicElements.put(SceneMenuGraphicEnum.NEW_GAME_BUTTON_TEXT.value(),
                 new TextElementImpl("firstPanel", "Nuova Partita", Color.BLACK, 0.06, 0.45, 0.44));
 
-        this.sceneGraphicElements.put(sceneMenuGraphicEnum.OPTIONS_GAME_BUTTON_TEXT.value(),
+        this.sceneGraphicElements.put(SceneMenuGraphicEnum.OPTIONS_GAME_BUTTON_TEXT.value(),
                 new TextElementImpl("firstPanel", "Opzioni", Color.BLACK, 0.06, 0.45, 0.64));
 
         // Buttons
-        this.sceneGraphicElements.put(sceneMenuGraphicEnum.LOAD_BUTTON.value(),
+        this.sceneGraphicElements.put(SceneMenuGraphicEnum.LOAD_BUTTON.value(),
                 new ButtonElementImpl("firstPanel", Color.GREEN, Color.BLACK, 1, 0.3, 0.2, 0.4, 0.05));
-        this.sceneGraphicElements.put(sceneMenuGraphicEnum.NEW_GAME_BUTTON.value(),
+        this.sceneGraphicElements.put(SceneMenuGraphicEnum.NEW_GAME_BUTTON.value(),
                 new ButtonElementImpl("firstPanel", Color.GREEN, Color.BLACK, 1, 0.3, 0.4, 0.4, 0.05));
-        this.sceneGraphicElements.put(sceneMenuGraphicEnum.OPTIONS_BUTTON.value(),
+        this.sceneGraphicElements.put(SceneMenuGraphicEnum.OPTIONS_BUTTON.value(),
                 new ButtonElementImpl("firstPanel", Color.GREEN, Color.BLACK, 1, 0.3, 0.6, 0.4, 0.05));
 
         // Background
-        this.sceneGraphicElements.put(sceneMenuGraphicEnum.BACKGROUND.value(),
+        this.sceneGraphicElements.put(SceneMenuGraphicEnum.BACKGROUND.value(),
                 new BackgroundElementImpl("firstPanel", this.getPathString("images", "sceneMenuBg.png")));
 
         this.setButtonStatus(this.currentSelectedButton.value(), true);
@@ -161,7 +159,7 @@ public class SceneMenu implements Scene {
      * button.
      */
     private void initStatus() {
-        this.currentSelectedButton = sceneMenuGraphicEnum.LOAD_BUTTON;
+        this.currentSelectedButton = SceneMenuGraphicEnum.LOAD_BUTTON;
 
     }
 
