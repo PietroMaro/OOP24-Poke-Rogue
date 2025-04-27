@@ -135,8 +135,10 @@ public class SceneLoad implements Scene {
                 break;
 
             case KeyEvent.VK_ENTER:
-                this.gameEngineInstance.setFileToLoad(this.savesList.get(this.selectedSave));
-                this.gameEngineInstance.setScene("box");
+                if (this.savesList.size() != 0) {
+                    this.gameEngineInstance.setFileToLoad(this.savesList.get(this.selectedSave));
+                    this.gameEngineInstance.setScene("box");
+                }
                 break;
             case KeyEvent.VK_BACK_SPACE:
                 this.gameEngineInstance.setScene("main");
