@@ -22,7 +22,8 @@ public final class PokemonImpl implements Pokemon {
 	@Getter(AccessLevel.NONE)
 	final private Random random = new Random();
 	@Getter(AccessLevel.NONE)
-	final private List<String> statNames = new ArrayList<>(Arrays.asList("hp", "attack", "defense", "specialAttack","specialDefense","speed"));
+	final private List<String> statNames = new ArrayList<>(
+			Arrays.asList("hp", "attack", "defense", "specialAttack", "specialDefense", "speed"));
 	private int totalUsedEV = 0;
 
 	private Map<String, Integer> baseStats;
@@ -31,23 +32,23 @@ public final class PokemonImpl implements Pokemon {
 	private Map<String, Range<Integer>> EV; // 0-255 the pokemon can have a total of 510
 	private Range<Integer> level;
 	private Map<String, Range<Integer>> actualStats;
-	private Map<String,Range<Integer>> tempStatsBonus;
+	private Map<String, Range<Integer>> tempStatsBonus;
 	private Map<Integer, String> levelMovesLearn;
 	private List<String> actualMoves = new ArrayList<String>();
 	private String levelUpCurve; // https://m.bulbapedia.bulbagarden.net/wiki/Experience
 	private Map<String, Integer> givesEV;
 	private Range<Integer> exp;
 	private int pokedexNumber;
-	private int weight; 
-	private String name; 
+	private int weight;
+	private String name;
 	@Getter(AccessLevel.NONE)
-	private Type type1; 
+	private Type type1;
 	@Getter(AccessLevel.NONE)
-	private Optional<Type> type2; 
-	private int captureRate; 
-	private String gender; 
-	private Optional<String> holdingObject; 
-	private String abilityName; 
+	private Optional<Type> type2;
+	private int captureRate;
+	private String gender;
+	private Optional<String> holdingObject;
+	private String abilityName;
 	private Optional<StatusCondition> statusCondition;
 
 	private boolean hasToLearnMove = false;
@@ -61,7 +62,7 @@ public final class PokemonImpl implements Pokemon {
 		generateIVs();
 		generateEVs();
 		this.nature = Nature.getRandomNature();
-		this.level = new RangeImpl<Integer>(1,100,1);
+		this.level = new RangeImpl<Integer>(1, 100, 1);
 		calculateActualStats();
 		initTempStatsBonus();
 		initLevelMovesLearn(pokemonBlueprint.learnableMoves());
@@ -108,14 +109,15 @@ public final class PokemonImpl implements Pokemon {
 		this.abilityName = possibleAbilities.get(random.nextInt(possibleAbilities.size()));
 	}
 
-	private void initTempStatsBonus(){
+	private void initTempStatsBonus() {
 		this.tempStatsBonus = new HashMap<String, Range<Integer>>();
-		for(String stat : statNames){
-			this.tempStatsBonus.put(stat,new RangeImpl<>(-6,6,0));
+		for (String stat : statNames) {
+			this.tempStatsBonus.put(stat, new RangeImpl<>(-6, 6, 0));
 		}
-		this.tempStatsBonus.put("critRate",new RangeImpl<>(-6,6,0));
-		this.tempStatsBonus.put("accuracy",new RangeImpl<>(-6,6,0));
+		this.tempStatsBonus.put("critRate", new RangeImpl<>(-6, 6, 0));
+		this.tempStatsBonus.put("accuracy", new RangeImpl<>(-6, 6, 0));
 	}
+
 	private void initTypes(List<String> types) {
 		this.type1 = Type.fromString(types.get(0));
 		this.type2 = Optional.empty();
@@ -146,9 +148,14 @@ public final class PokemonImpl implements Pokemon {
 				+ (this.EV.get("hp").getCurrentValue() / 4)) * this.level.getCurrentValue()) / 100)
 				+ this.level.getCurrentValue() + 10;
 
-		Range<Integer> rangeHp = new RangeImpl<Integer>(0,maxLife,maxLife);
-		actualStats.put("hp",rangeHp);
+		Range<Integer> rangeHp = new RangeImpl<Integer>(0, maxLife, maxLife);
+		actualStats.put("hp", rangeHp);
 		for (String stat : statNames) {
+
+			System.out.println(stat);
+			System.out.println(baseStats.get(stat));
+			System.out.println(IV.get(stat));
+			System.out.println(EV.get(stat));
 
 			int statValue = (int) Math.round(
 					Math.floor(
@@ -162,7 +169,7 @@ public final class PokemonImpl implements Pokemon {
 				statValue *= 0.9;
 			}
 
-			Range<Integer> rangeStat = new RangeImpl<Integer>(0,255,statValue);
+			Range<Integer> rangeStat = new RangeImpl<Integer>(0, 255, statValue);
 			actualStats.put(stat, rangeStat);
 		}
 
@@ -181,7 +188,7 @@ public final class PokemonImpl implements Pokemon {
 		} else if (this.levelUpCurve == "slow") {
 			newRequiredExp = (int) ((5 * Math.pow(currentLevel, 3)) / 4);
 		}
-		this.exp = new RangeImpl<Integer>(0,newRequiredExp ,0);
+		this.exp = new RangeImpl<Integer>(0, newRequiredExp, 0);
 	}
 
 	private void levelUpStats() {
@@ -217,6 +224,7 @@ public final class PokemonImpl implements Pokemon {
 			}
 		}
 	}
+
 	@Override
 	public void learnNewMove(Optional<Integer> indexMoveToReplace) {
 		if (!(this.hasToLearnMove && !this.newMoveToLearn.isEmpty())) {
@@ -233,6 +241,7 @@ public final class PokemonImpl implements Pokemon {
 	public void inflictDamage(int amount) {
 		this.actualStats.get("hp").decrement(amount);
 	}
+
 	@Override
 	public void increaseExp(int amount, boolean isPlayerPokemon) {
 		this.exp.increment(amount);
@@ -249,11 +258,12 @@ public final class PokemonImpl implements Pokemon {
 			}
 		}
 	}
+
 	@Override
-	public List<Type> getTypes(){
+	public List<Type> getTypes() {
 		List<Type> res = new ArrayList<>();
 		res.add(this.type1);
-		if(this.type2.isPresent()){
+		if (this.type2.isPresent()) {
 			res.add(this.type2.get());
 		}
 		return res;

@@ -19,6 +19,7 @@ import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.savingSystem.SavingSystem;
 import it.unibo.PokeRogue.savingSystem.SavingSystemImpl;
 import it.unibo.PokeRogue.scene.Scene;
+import lombok.Getter;
 
 /**
  * The {@code SceneLoad} class represents the loading scene in the game,
@@ -50,6 +51,7 @@ import it.unibo.PokeRogue.scene.Scene;
 
 public class SceneLoad implements Scene {
 
+    @Getter
     private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GameEngine gameEngineInstance;
@@ -145,17 +147,6 @@ public class SceneLoad implements Scene {
                 break;
         }
 
-    }
-
-    /**
-     * Returns a copy of all the graphic elements in the scene.
-     *
-     * @return a map of all the scene graphic elements.
-     */
-
-    @Override
-    public Map<Integer, GraphicElementImpl> getSceneGraphicElements() {
-        return new LinkedHashMap<>(this.sceneGraphicElements);
     }
 
     /**
