@@ -53,6 +53,7 @@ public class SceneLoad implements Scene {
 
     @Getter
     private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+    @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GameEngine gameEngineInstance;
     private final SavingSystem savingSystemInstance;
@@ -147,16 +148,6 @@ public class SceneLoad implements Scene {
                 break;
         }
 
-    }
-
-    /**
-     * Returns a copy of all the panel elements in the scene.
-     *
-     * @return a map of all the scene panel elements.
-     */
-    @Override
-    public Map<String, PanelElementImpl> getAllPanelsElements() {
-        return new LinkedHashMap<>(this.allPanelsElements);
     }
 
     /**

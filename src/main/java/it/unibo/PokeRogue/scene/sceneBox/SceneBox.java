@@ -29,6 +29,7 @@ import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.pokemon.Nature;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.ColorTypeConversion;
+import lombok.Getter;
 
 /**
  * The {@code SceneBox} class represents the graphical and interactive
@@ -54,7 +55,9 @@ import it.unibo.PokeRogue.utilities.ColorTypeConversion;
  */
 public class SceneBox implements Scene {
 
+        @Getter
         private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+        @Getter
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final GameEngine gameEngineInstance;
         private final SavingSystem savingSystemInstance;
@@ -259,27 +262,6 @@ public class SceneBox implements Scene {
 
                 // Update the current pokemon detail box
                 this.updateDetailedPokemon();
-        }
-
-        /**
-         * Returns a copy of all the graphic elements in the scene.
-         *
-         * @return a map of all the scene graphic elements.
-         */
-
-        @Override
-        public Map<Integer, GraphicElementImpl> getSceneGraphicElements() {
-                return new LinkedHashMap<>(this.sceneGraphicElements);
-        }
-
-        /**
-         * Returns a copy of all the panel elements in the scene.
-         *
-         * @return a map of all the scene panel elements.
-         */
-        @Override
-        public Map<String, PanelElementImpl> getAllPanelsElements() {
-                return new LinkedHashMap<>(this.allPanelsElements);
         }
 
         /**

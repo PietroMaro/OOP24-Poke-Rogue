@@ -152,11 +152,6 @@ public final class PokemonImpl implements Pokemon {
 		actualStats.put("hp", rangeHp);
 		for (String stat : statNames) {
 
-			System.out.println(stat);
-			System.out.println(baseStats.get(stat));
-			System.out.println(IV.get(stat));
-			System.out.println(EV.get(stat));
-
 			int statValue = (int) Math.round(
 					Math.floor(
 							((2 * baseStats.get(stat) + IV.get(stat) + (double) EV.get(stat).getCurrentValue() / 4)

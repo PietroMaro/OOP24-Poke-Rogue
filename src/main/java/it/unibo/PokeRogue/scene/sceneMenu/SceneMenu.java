@@ -16,6 +16,7 @@ import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.scene.Scene;
+import lombok.Getter;
 
 /**
  * The {@code SceneMenu} class implements the main menu scene of the game.
@@ -27,7 +28,9 @@ import it.unibo.PokeRogue.scene.Scene;
 public class SceneMenu implements Scene {
 
     private SceneMenuGraphicEnum currentSelectedButton;
+    @Getter
     private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+    @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GameEngine gameEngineInstance;
 
@@ -97,27 +100,6 @@ public class SceneMenu implements Scene {
                 break;
         }
 
-    }
-
-    /**
-     * Returns a copy of all the graphic elements in the scene.
-     *
-     * @return a map of all the scene graphic elements.
-     */
-
-    @Override
-    public Map<Integer, GraphicElementImpl> getSceneGraphicElements() {
-        return new LinkedHashMap<>(this.sceneGraphicElements);
-    }
-
-    /**
-     * Returns a copy of all the panel elements in the scene.
-     *
-     * @return a map of all the scene panel elements.
-     */
-    @Override
-    public Map<String, PanelElementImpl> getAllPanelsElements() {
-        return new LinkedHashMap<>(this.allPanelsElements);
     }
 
     /**
