@@ -4,6 +4,9 @@ import java.awt.Graphics;
 
 import javax.swing.JLayeredPane;
 
+import lombok.Getter;
+
+@Getter
 public class GraphicElementImpl extends JLayeredPane implements GraphicElement {
 
     private String panelName;
@@ -16,10 +19,6 @@ public class GraphicElementImpl extends JLayeredPane implements GraphicElement {
     protected void paintComponent(Graphics drawEngine) {
         super.paintComponent(drawEngine);
 
-    }
-
-    public String getPanelName() {
-        return this.panelName;
     }
 
 }

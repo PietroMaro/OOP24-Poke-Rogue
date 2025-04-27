@@ -47,6 +47,7 @@ import it.unibo.PokeRogue.scene.Scene;
  * @see it.unibo.PokeRogue.graphic.button.ButtonElementImpl
  * @see it.unibo.PokeRogue.savingSystem.SavingSystem
  */
+
 public class SceneLoad implements Scene {
 
     private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
@@ -137,7 +138,9 @@ public class SceneLoad implements Scene {
                 this.gameEngineInstance.setFileToLoad(this.savesList.get(this.selectedSave));
                 this.gameEngineInstance.setScene("box");
                 break;
-
+            case KeyEvent.VK_BACK_SPACE:
+                this.gameEngineInstance.setScene("main");
+                break;
         }
 
     }
