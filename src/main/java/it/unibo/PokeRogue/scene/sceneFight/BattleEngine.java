@@ -2,7 +2,7 @@ package it.unibo.PokeRogue.scene.sceneFight;
 
 import it.unibo.PokeRogue.trainers.Trainer;
 
-public interface FightEngine {
+public interface BattleEngine {
 
     void abilityActivation(String abilityName);
     void checkActivation(String abilityName, String situation);

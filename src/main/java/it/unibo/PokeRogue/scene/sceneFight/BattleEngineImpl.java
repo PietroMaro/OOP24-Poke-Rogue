@@ -4,7 +4,7 @@ import it.unibo.PokeRogue.trainers.PlayerTrainer;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
 
-public class BattleEngineImpl implements FightEngine {
+public class BattleEngineImpl implements BattleEngine {
 
     PlayerTrainer playerTrainerIstance;
     PlayerTrainer enemyTrainerIstance;
