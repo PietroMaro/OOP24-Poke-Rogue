@@ -19,6 +19,7 @@ import java.awt.Image;
 @Setter
 @ToString
 public final class PokemonImpl implements Pokemon {
+	private Range<Integer> hp;
 	@Getter(AccessLevel.NONE)
 	final private Random random = new Random();
 	@Getter(AccessLevel.NONE)
@@ -262,5 +263,18 @@ public final class PokemonImpl implements Pokemon {
 			res.add(this.type2.get());
 		}
 		return res;
+	}
+
+	@Override
+	public void calculateHp(Integer actualStat, Integer iv, Integer ev, Integer level) {
+		Integer hpMax = (((2 * actualStat + iv + (ev / 4)) * level) / 100) + level + 10;
+		if (this.hp == null) {
+			this.hp = new RangeImpl<Integer>(0, hpMax, hpMax);
+		} else {
+			this.hp.setCurrentMax(hpMax);
+			if (this.hp.getCurrentValue() > hpMax) {
+				this.hp.setCurrentValue(hpMax);
+			}
+		}
 	}
 }

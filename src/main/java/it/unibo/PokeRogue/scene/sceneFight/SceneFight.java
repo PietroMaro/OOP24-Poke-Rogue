@@ -3,10 +3,10 @@ package it.unibo.PokeRogue.scene.sceneFight;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.swing.OverlayLayout;
 
@@ -43,6 +43,7 @@ public class SceneFight implements Scene {
         private final static Integer SIXTH_POSITION = 5;
         private int newSelectedButton;
         private MoveFactoryImpl moveFactoryInstance;
+        private BattleEngineImpl battleEngineInstance;
 
         public SceneFight() {
                 this.sceneGraphicElements = new LinkedHashMap<>();
@@ -53,12 +54,14 @@ public class SceneFight implements Scene {
                 this.moveFactoryInstance = new MoveFactoryImpl();
                 this.initStatus();
                 this.initGraphicElements();
+                this.battleEngineInstance = new BattleEngineImpl();
         }
 
         private void initStatus() {
                 this.currentSelectedButton = SceneFightGraphicEnum.FIGHT_BUTTON.value();
                 this.newSelectedButton = SceneFightGraphicEnum.FIGHT_BUTTON.value();
-
+                this.updatingLifeStats(enemyTrainerInstance);
+                this.updatingLifeStats(playerTrainerInstance);
         }
 
         private void initGraphicElements() {
@@ -116,27 +119,25 @@ public class SceneFight implements Scene {
                                                 Color.WHITE,
                                                 0.04, 0.1, 0.06));
 
-                // TEXT hp TO FIX MAX
+                // TEXT hp TO FIX MA
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.MY_POKEMON_ACTUAL_LIFE_TEXT.value(),
                                 new TextElementImpl("firstPanel",
                                                 String.valueOf(playerTrainerInstance.getPokemon(FIRST_POSITION).get()
-                                                                .getActualStats().get("hp").getCurrentValue())
+                                                                .getHp().getCurrentValue())
                                                                 + " / "
                                                                 + String.valueOf(playerTrainerInstance
                                                                                 .getPokemon(FIRST_POSITION).get()
-                                                                                .getActualStats().get("hp")
-                                                                                .getCurrentMax()),
+                                                                                .getHp().getCurrentMax()),
                                                 Color.WHITE,
                                                 0.04, 0.81, 0.64));
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.ENEMY_POKEMON_ACTUAL_LIFE_TEXT.value(),
                                 new TextElementImpl("firstPanel",
                                                 String.valueOf(enemyTrainerInstance.getPokemon(FIRST_POSITION).get()
-                                                                .getActualStats().get("hp").getCurrentValue())
+                                                                .getHp().getCurrentValue())
                                                                 + " / "
                                                                 + String.valueOf(enemyTrainerInstance
                                                                                 .getPokemon(FIRST_POSITION).get()
-                                                                                .getActualStats().get("hp")
-                                                                                .getCurrentMax()),
+                                                                                .getHp().getCurrentMax()),
                                                 Color.WHITE,
                                                 0.04, 0.12, 0.06));
                 // TEXT EXP
@@ -215,33 +216,49 @@ public class SceneFight implements Scene {
                 // POKEMON STATS TEXT
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_0_NAME_TEXT.value(),
                                 new TextElementImpl("changePanel",
-                                                getPokemonNameAt(playerTrainerInstance, FIRST_POSITION), Color.WHITE,
+                                                getPokemonNameAt(playerTrainerInstance, FIRST_POSITION)
+                                                                + " " + getPokemonLifeText(FIRST_POSITION),
+                                                Color.WHITE,
                                                 0.06, 0.1,
                                                 0.51));
 
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_1_NAME_TEXT.value(),
                                 new TextElementImpl("changePanel",
-                                                getPokemonNameAt(playerTrainerInstance, SECOND_POSITION), Color.WHITE,
+                                                getPokemonNameAt(playerTrainerInstance, SECOND_POSITION)
+                                                                + " " + getPokemonLifeText(SECOND_POSITION),
+                                                Color.WHITE,
                                                 0.06, 0.5,
                                                 0.11));
+
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_2_NAME_TEXT.value(),
                                 new TextElementImpl("changePanel",
-                                                getPokemonNameAt(playerTrainerInstance, THIRD_POSITION), Color.WHITE,
+                                                getPokemonNameAt(playerTrainerInstance, THIRD_POSITION)
+                                                                + " " + getPokemonLifeText(THIRD_POSITION),
+                                                Color.WHITE,
                                                 0.06, 0.5,
                                                 0.31));
+
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_3_NAME_TEXT.value(),
                                 new TextElementImpl("changePanel",
-                                                getPokemonNameAt(playerTrainerInstance, FOURTH_POSITION), Color.WHITE,
+                                                getPokemonNameAt(playerTrainerInstance, FOURTH_POSITION)
+                                                                + " " + getPokemonLifeText(FOURTH_POSITION),
+                                                Color.WHITE,
                                                 0.06, 0.5,
                                                 0.51));
+
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_4_NAME_TEXT.value(),
                                 new TextElementImpl("changePanel",
-                                                getPokemonNameAt(playerTrainerInstance, FIFTH_POSITION), Color.WHITE,
+                                                getPokemonNameAt(playerTrainerInstance, FIFTH_POSITION)
+                                                                + " " + getPokemonLifeText(FIFTH_POSITION),
+                                                Color.WHITE,
                                                 0.06, 0.5,
                                                 0.71));
+
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_5_NAME_TEXT.value(),
                                 new TextElementImpl("changePanel",
-                                                getPokemonNameAt(playerTrainerInstance, SIXTH_POSITION), Color.WHITE,
+                                                getPokemonNameAt(playerTrainerInstance, SIXTH_POSITION)
+                                                                + " " + getPokemonLifeText(SIXTH_POSITION),
+                                                Color.WHITE,
                                                 0.06, 0.5,
                                                 0.91));
 
@@ -504,11 +521,73 @@ public class SceneFight implements Scene {
                                 break;
 
                         case KeyEvent.VK_ENTER:
+                                switch (newSelectedButton) {
+                                        case 100:
+                                                fightLoop("Attack", "First");
+                                                break;
+
+                                        case 101:
+                                                fightLoop("Attack", "Third");
+                                                break;
+
+                                        case 102:
+                                                fightLoop("Attack", "Second");
+                                                break;
+
+                                        case 103:
+                                                fightLoop("Attack", "Fourth");
+                                                break;
+
+                                        case 200:
+                                                fightLoop("SwitchIn", "pokemon2");
+                                                break;
+
+                                        case 201:
+                                                fightLoop("SwitchIn", "pokemon3");
+                                                break;
+
+                                        case 202:
+                                                fightLoop("SwitchIn", "pokemon4");
+                                                break;
+
+                                        case 203:
+                                                fightLoop("SwitchIn", "pokemon5");
+                                                break;
+
+                                        case 204:
+                                                fightLoop("SwitchIn", "pokemon6");
+                                                break;
+                                        case 205:
+                                                fightLoop("SwitchIn", "back");
+                                                break;
+                                        case 300:
+                                                fightLoop("Pokeball", "pokeball");
+                                                break;
+
+                                        case 301:
+                                                fightLoop("Pokeball", "megaball");
+                                                break;
+
+                                        case 302:
+                                                fightLoop("Pokeball", "ultraball");
+                                                break;
+
+                                        case 303:
+                                                fightLoop("Pokeball", "masterball");
+                                                break;
+                                        case 304:
+                                                fightLoop("Pokeball", "cancel");
+                                                break;
+                                        default:
+                                                break;
+                                }
                                 if (isButtonInRange(newSelectedButton, 1, 4)) {
                                         newSelectedButton = newSelectedButton * 100;
                                 } else {
                                         newSelectedButton = newSelectedButton / 100;
                                 }
+
+                        default:
                                 break;
                 }
         }
@@ -567,6 +646,43 @@ public class SceneFight implements Scene {
                                         .getActualMoves().get(movePosition);
                 } else {
                         return "???";
+                }
+        }
+
+        public String getPokemonLifeText(int position) {
+                Optional<Pokemon> pokemonOpt = playerTrainerInstance.getPokemon(position);
+
+                // Se il Pokémon non esiste nella posizione specificata, ritorna "??? / ???"
+                if (!pokemonOpt.isPresent()) {
+                        return "??? / ???";
+                }
+
+                // Se il Pokémon esiste, calcola e ritorna la vita
+                Pokemon pokemon = pokemonOpt.get();
+                Integer currentHp = pokemon.getHp().getCurrentValue();
+                Integer maxHp = pokemon.getHp().getCurrentMax();
+
+                return currentHp + " / " + maxHp;
+        }
+
+        public void fightLoop(String playerMoveType, String playerMove) {
+                this.updatingLifeStats(enemyTrainerInstance);
+                this.updatingLifeStats(playerTrainerInstance);
+                // TO FIX ENEMY
+                this.battleEngineInstance.movesPriorityCalculator(playerMoveType, playerMove,
+                                enemyTrainerInstance.toString());
+        }
+
+        private void updatingLifeStats(Trainer trainer) {
+                List<Optional<Pokemon>> pokemonSquad = trainer.getSquad();
+                for (Optional<Pokemon> optionalPokemon : pokemonSquad) {
+                        optionalPokemon.ifPresent(pokemon -> {
+                                pokemon.calculateHp(
+                                                pokemon.getActualStats().get("hp").getCurrentMax(),
+                                                pokemon.getIV().get("hp"),
+                                                pokemon.getEV().get("hp").getCurrentValue(),
+                                                pokemon.getLevel().getCurrentValue());
+                        });
                 }
         }
 
