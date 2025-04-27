@@ -16,7 +16,7 @@
         "activation": [
             [
                 "enemy.statusCondition",
-                "'charmed'"
+                "Optional.of(StatusCondition.CHARMED)"
             ]
         ]
     }

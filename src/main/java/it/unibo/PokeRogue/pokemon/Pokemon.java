@@ -1,10 +1,10 @@
 package it.unibo.PokeRogue.pokemon;
 
-import it.unibo.PokeRogue.utilities.Range;
 import java.util.Map;
 import java.util.Optional;
 import java.util.List;
 import java.awt.Image;
+import it.unibo.PokeRogue.utilities.Range;
 
 public interface Pokemon {
 	// When you call level up with isPlayerPokemon. if the pokemon learns a new move
@@ -75,5 +75,4 @@ public interface Pokemon {
 	void setSpriteBack(Image newVal);
 	Range<Integer> getHpRange();
 	//if exp+amount = max of the level it will trigger level up
-	
 }

@@ -23,8 +23,7 @@
     "name": "exeggutor",
     "weight": 1200,
     "abilites": [
-        "chlorophyll",
-        "harvest"
+        "chlorophyll"
     ],
     "givesEV": {
         "defense": 0,

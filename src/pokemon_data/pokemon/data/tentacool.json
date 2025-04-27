@@ -29,8 +29,6 @@
     "name": "tentacool",
     "weight": 455,
     "abilites": [
-        "clear-body",
-        "liquid-ooze",
         "rain-dish"
     ],
     "givesEV": {

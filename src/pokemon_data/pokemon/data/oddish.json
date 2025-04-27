@@ -28,8 +28,7 @@
     "name": "oddish",
     "weight": 54,
     "abilites": [
-        "chlorophyll",
-        "run-away"
+        "chlorophyll"
     ],
     "givesEV": {
         "defense": 0,

@@ -30,9 +30,7 @@
     "name": "farfetchd",
     "weight": 150,
     "abilites": [
-        "keen-eye",
-        "inner-focus",
-        "defiant"
+        "keen-eye"
     ],
     "givesEV": {
         "defense": 0,

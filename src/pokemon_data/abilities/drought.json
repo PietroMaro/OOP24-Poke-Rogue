@@ -5,7 +5,7 @@
         "activation": [
             [
                 "weather",
-                "'sun'"
+                "Weather.SUNLIGHT"
             ]
         ]
     }

@@ -28,8 +28,7 @@
     "name": "charmander",
     "weight": 85,
     "abilites": [
-        "blaze",
-        "solar-baseDamage"
+        "blaze"
     ],
     "givesEV": {
         "defense": 0,

@@ -28,8 +28,7 @@
     "weight": 300,
     "abilites": [
         "keen-eye",
-        "tangled-feet",
-        "big-pecks"
+        "tangled-feet"
     ],
     "givesEV": {
         "defense": 0,

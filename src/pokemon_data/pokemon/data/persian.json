@@ -28,8 +28,7 @@
     "weight": 320,
     "abilites": [
         "limber",
-        "technician",
-        "unnerve"
+        "technician"
     ],
     "givesEV": {
         "defense": 0,

@@ -28,9 +28,7 @@
     "name": "golem",
     "weight": 3000,
     "abilites": [
-        "rock-head",
-        "sturdy",
-        "sand-veil"
+        "sturdy"
     ],
     "givesEV": {
         "defense": 3,

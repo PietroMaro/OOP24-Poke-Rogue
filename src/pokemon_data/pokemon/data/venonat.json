@@ -29,9 +29,7 @@
     "name": "venonat",
     "weight": 300,
     "abilites": [
-        "compound-eyes",
-        "tinted-lens",
-        "run-away"
+        "compound-eyes"
     ],
     "givesEV": {
         "defense": 0,

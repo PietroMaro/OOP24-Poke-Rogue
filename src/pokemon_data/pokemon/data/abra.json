@@ -20,9 +20,7 @@
     "name": "abra",
     "weight": 195,
     "abilites": [
-        "synchronize",
-        "inner-focus",
-        "magic-guard"
+        "synchronize"
     ],
     "givesEV": {
         "defense": 0,

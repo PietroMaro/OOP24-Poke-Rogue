@@ -30,7 +30,6 @@
     "name": "magnemite",
     "weight": 60,
     "abilites": [
-        "magnet-pull",
         "sturdy",
         "analytic"
     ],

@@ -5,7 +5,7 @@
             [
                 "attackUs.type",
                 "==",
-                "'fire'"
+                "Type.FIRE"
             ],
             [
                 "us.actualStats.hp.currentValue",

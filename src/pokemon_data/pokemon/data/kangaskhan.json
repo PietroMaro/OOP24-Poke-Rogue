@@ -28,9 +28,7 @@
     "name": "kangaskhan",
     "weight": 800,
     "abilites": [
-        "early-bird",
-        "scrappy",
-        "inner-focus"
+        "unaware"
     ],
     "givesEV": {
         "defense": 0,

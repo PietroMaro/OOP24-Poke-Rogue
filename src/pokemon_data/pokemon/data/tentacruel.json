@@ -27,8 +27,6 @@
     "name": "tentacruel",
     "weight": 550,
     "abilites": [
-        "clear-body",
-        "liquid-ooze",
         "rain-dish"
     ],
     "givesEV": {

@@ -31,7 +31,6 @@
     "name": "onix",
     "weight": 2100,
     "abilites": [
-        "rock-head",
         "sturdy",
         "weak-armor"
     ],

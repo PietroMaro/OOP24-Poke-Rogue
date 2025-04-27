@@ -28,7 +28,6 @@
     "name": "sandshrew",
     "weight": 120,
     "abilites": [
-        "sand-veil",
         "sand-rush"
     ],
     "givesEV": {

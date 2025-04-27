@@ -31,7 +31,7 @@ public class EffectParserImpl extends SingletonImpl implements EffectParser{
 		}catch(Exception ex){
 			System.out.println("ERROR IN READING EFFECT JSON " + ex);
 		}
-		if(computeChecks(checks) || true){
+		if(computeChecks(checks)){
 			activateActivations(activation);
 		}
 	}
@@ -91,7 +91,9 @@ public class EffectParserImpl extends SingletonImpl implements EffectParser{
 		context.set("Optional",Optional.class);
 		context.set("StatusCondition",StatusCondition.class);
 		context.set("Type",Type.class);
+		context.set("Weather",Weather.class);
 		context.set("MATH",Math.class);
+		context.set("EMPTY", Optional.empty());
 		return context;
 	}
 

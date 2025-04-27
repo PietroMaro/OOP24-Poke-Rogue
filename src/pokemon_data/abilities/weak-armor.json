@@ -2,20 +2,15 @@
     "situationChecks": "attacked",
     "effect": {
         "checks": [
-            [
-                "attackEnemy.isPhysical",
-                "==",
-                "true"
-            ]
         ],
         "activation": [
             [
-                "us.actualStats.defense.currentValue",
-                "us.actualStats.defense.currentValue - 1"
+                "us.tempStatsBonus.defense.currentValue",
+                "us.tempStatsBonus.defense.currentValue - 1"
             ],
             [
-                "us.actualStats.speed.currentValue",
-                "us.actualStats.speed.currentValue + 2"
+                "us.tempStatsBonus.speed.currentValue",
+                "us.tempStatsBonus.speed.currentValue + 2"
             ]
         ]
     }

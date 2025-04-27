@@ -26,9 +26,7 @@
     "name": "eevee",
     "weight": 65,
     "abilites": [
-        "run-away",
-        "adaptability",
-        "anticipation"
+        "adaptability"
     ],
     "givesEV": {
         "defense": 0,

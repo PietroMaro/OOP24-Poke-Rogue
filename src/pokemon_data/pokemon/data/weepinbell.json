@@ -28,8 +28,7 @@
     "name": "weepinbell",
     "weight": 64,
     "abilites": [
-        "chlorophyll",
-        "gluttony"
+        "chlorophyll"
     ],
     "givesEV": {
         "defense": 0,

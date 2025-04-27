@@ -21,8 +21,7 @@
     "name": "weedle",
     "weight": 32,
     "abilites": [
-        "shield-dust",
-        "run-away"
+        "chlorophyll"
     ],
     "givesEV": {
         "defense": 0,

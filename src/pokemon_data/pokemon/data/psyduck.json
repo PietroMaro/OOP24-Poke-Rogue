@@ -27,8 +27,6 @@
     "name": "psyduck",
     "weight": 196,
     "abilites": [
-        "damp",
-        "cloud-nine",
         "swift-swim"
     ],
     "givesEV": {

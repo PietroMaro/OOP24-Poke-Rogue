@@ -30,8 +30,7 @@
     "weight": 280,
     "abilites": [
         "vital-spirit",
-        "anger-point",
-        "defiant"
+        "anger-point"
     ],
     "givesEV": {
         "defense": 0,

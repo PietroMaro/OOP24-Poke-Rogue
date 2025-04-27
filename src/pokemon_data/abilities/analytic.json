@@ -11,7 +11,7 @@
         "activation": [
             [
                 "attackUs.baseDamage",
-                "attackUs.baseDamage + (attackUs.baseDamage * 0.3)"
+                "MATH.floor(attackUs.baseDamage + (attackUs.baseDamage * 0.3)).intValue()"
             ]
         ]
     }

@@ -28,8 +28,7 @@
     "weight": 295,
     "abilites": [
         "effect-spore",
-        "dry-skin",
-        "damp"
+        "dry-skin"
     ],
     "givesEV": {
         "defense": 1,

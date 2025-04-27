@@ -22,8 +22,7 @@
     "weight": 120,
     "abilites": [
         "cute-charm",
-        "competitive",
-        "frisk"
+        "competitive"
     ],
     "givesEV": {
         "defense": 0,

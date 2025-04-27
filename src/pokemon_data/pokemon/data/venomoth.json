@@ -29,8 +29,6 @@
     "name": "venomoth",
     "weight": 125,
     "abilites": [
-        "shield-dust",
-        "tinted-lens",
         "wonder-skin"
     ],
     "givesEV": {

@@ -144,10 +144,8 @@ public class TestAll {
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
             for (Path entry : stream) {
                 if (Files.isRegularFile(entry)) {  
-					System.out.println(entry.toString());
 					JSONObject moveJson = jsonReader.readJsonObject(entry.toString());
 					JSONObject effect = moveJson.getJSONObject("effect");
-					System.out.println(effect);
 					effectParser.parseEffect(effect,pok1,pok2,moveTest1,moveTest2,weather);
                 }
             }

@@ -29,9 +29,7 @@
     "name": "rhyhorn",
     "weight": 1150,
     "abilites": [
-        "lightning-rod",
-        "rock-head",
-        "reckless"
+        "lightning-rod"
     ],
     "givesEV": {
         "defense": 1,

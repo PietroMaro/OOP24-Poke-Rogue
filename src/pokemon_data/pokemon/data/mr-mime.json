@@ -36,7 +36,6 @@
     "weight": 545,
     "abilites": [
         "soundproof",
-        "filter",
         "technician"
     ],
     "givesEV": {

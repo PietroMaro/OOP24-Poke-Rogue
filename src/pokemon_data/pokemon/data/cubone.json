@@ -31,7 +31,6 @@
     "name": "cubone",
     "weight": 65,
     "abilites": [
-        "rock-head",
         "lightning-rod",
         "battle-armor"
     ],

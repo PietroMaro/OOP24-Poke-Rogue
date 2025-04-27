@@ -11,7 +11,7 @@
         "activation": [
             [
                 "us.statusCondition",
-                "Optional.empty()"
+                "EMPTY"
             ]
         ]
     }

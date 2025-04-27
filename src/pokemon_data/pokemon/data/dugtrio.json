@@ -28,7 +28,6 @@
     "name": "dugtrio",
     "weight": 333,
     "abilites": [
-        "sand-veil",
         "arena-trap",
         "sand-force"
     ],

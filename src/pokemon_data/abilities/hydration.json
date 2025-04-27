@@ -10,13 +10,13 @@
             [
                 "us.statusCondition",
                 "!=",
-                "Optional.empty()"
+                "EMPTY"
             ]
         ],
         "activation": [
             [
                 "us.statusCondition",
-                "Optional.empty()"
+                "EMPTY"
             ]
         ]
     }

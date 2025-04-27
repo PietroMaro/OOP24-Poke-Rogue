@@ -26,8 +26,7 @@
     "weight": 650,
     "abilites": [
         "intimidate",
-        "shed-skin",
-        "unnerve"
+        "shed-skin"
     ],
     "givesEV": {
         "defense": 0,

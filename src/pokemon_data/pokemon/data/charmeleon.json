@@ -27,8 +27,7 @@
     "name": "charmeleon",
     "weight": 190,
     "abilites": [
-        "blaze",
-        "solar-baseDamage"
+        "blaze"
     ],
     "givesEV": {
         "defense": 0,

@@ -29,8 +29,7 @@
     "weight": 502,
     "abilites": [
         "keen-eye",
-        "iron-fist",
-        "inner-focus"
+        "iron-fist"
     ],
     "givesEV": {
         "defense": 0,

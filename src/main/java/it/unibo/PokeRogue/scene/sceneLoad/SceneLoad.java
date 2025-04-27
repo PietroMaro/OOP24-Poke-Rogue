@@ -19,6 +19,7 @@ import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.savingSystem.SavingSystem;
 import it.unibo.PokeRogue.savingSystem.SavingSystemImpl;
 import it.unibo.PokeRogue.scene.Scene;
+import lombok.Getter;
 
 /**
  * The {@code SceneLoad} class represents the loading scene in the game,
@@ -47,9 +48,12 @@ import it.unibo.PokeRogue.scene.Scene;
  * @see it.unibo.PokeRogue.graphic.button.ButtonElementImpl
  * @see it.unibo.PokeRogue.savingSystem.SavingSystem
  */
+
 public class SceneLoad implements Scene {
 
+    @Getter
     private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+    @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GameEngine gameEngineInstance;
     private final SavingSystem savingSystemInstance;
@@ -85,24 +89,26 @@ public class SceneLoad implements Scene {
      */
     @Override
     public void updateGraphic() {
-        this.setButtonStatus(this.selectedSave % 10, false);
+        this.setButtonStatus(this.selectedSave % SceneLoadStatusValuesEnum.NUMBER_OF_SAVE_SHOWED.value(), false);
 
         // Going down the saves list
-        if (this.selectedSave < this.newSelectedSave && this.newSelectedSave % 10 == 0) {
+        if (this.selectedSave < this.newSelectedSave
+                && this.newSelectedSave % SceneLoadStatusValuesEnum.NUMBER_OF_SAVE_SHOWED.value() == 0) {
             this.showSaves(this.newSelectedSave);
 
         }
 
         // Going up the saves list
-
-        if (this.selectedSave > this.newSelectedSave && this.newSelectedSave % 10 == 9) {
-            this.showSaves(this.newSelectedSave - 9);
+        if (this.selectedSave > this.newSelectedSave
+                && this.newSelectedSave % SceneLoadStatusValuesEnum.NUMBER_OF_SAVE_SHOWED
+                        .value() == SceneLoadStatusValuesEnum.LAST_SAVE_POSITION.value()) {
+            this.showSaves(this.newSelectedSave - SceneLoadStatusValuesEnum.LAST_SAVE_POSITION.value());
 
         }
 
         this.selectedSave = this.newSelectedSave;
 
-        this.setButtonStatus(this.selectedSave % 10, true);
+        this.setButtonStatus(this.selectedSave % SceneLoadStatusValuesEnum.NUMBER_OF_SAVE_SHOWED.value(), true);
 
     }
 
@@ -112,53 +118,36 @@ public class SceneLoad implements Scene {
      * loading of a selected save when ENTER is pressed.
      *
      * @param inputKey the key event received from the user
-     *            
+     * 
      */
     @Override
     public void updateStatus(final int inputKey) {
 
         switch (inputKey) {
             case KeyEvent.VK_UP:
-                if (this.selectedSave > 0) {
+                if (this.selectedSave > SceneLoadStatusValuesEnum.ABSOLUTE_FIRST_SAVE_POSITION.value()) {
                     this.newSelectedSave -= 1;
                 }
 
                 break;
 
             case KeyEvent.VK_DOWN:
-                if (this.selectedSave <  savesList.size() - 1) {
+                if (this.selectedSave < savesList.size() - 1) {
                     this.newSelectedSave += 1;
                 }
                 break;
 
             case KeyEvent.VK_ENTER:
-                this.gameEngineInstance.setFileToLoad(this.savesList.get(this.selectedSave));
-                this.gameEngineInstance.setScene("box");
+                if (this.savesList.size() != 0) {
+                    this.gameEngineInstance.setFileToLoad(this.savesList.get(this.selectedSave));
+                    this.gameEngineInstance.setScene("box");
+                }
                 break;
-
+            case KeyEvent.VK_BACK_SPACE:
+                this.gameEngineInstance.setScene("main");
+                break;
         }
 
-    }
-
-    /**
-     * Returns a copy of all the graphic elements in the scene.
-     *
-     * @return a map of all the scene graphic elements.
-     */
-
-    @Override
-    public Map<Integer, GraphicElementImpl> getSceneGraphicElements() {
-        return new LinkedHashMap<>(this.sceneGraphicElements);
-    }
-
-    /**
-     * Returns a copy of all the panel elements in the scene.
-     *
-     * @return a map of all the scene panel elements.
-     */
-    @Override
-    public Map<String, PanelElementImpl> getAllPanelsElements() {
-        return new LinkedHashMap<>(this.allPanelsElements);
     }
 
     /**
@@ -179,7 +168,7 @@ public class SceneLoad implements Scene {
         this.allPanelsElements.put("firstPanel", new PanelElementImpl("", new OverlayLayout(null)));
         this.allPanelsElements.put("savesPanel", new PanelElementImpl("firstPanel", new OverlayLayout(null)));
 
-        this.sceneGraphicElements.put(sceneLoadGraphicEnum.BACKGROUND.value(),
+        this.sceneGraphicElements.put(SceneLoadGraphicEnum.BACKGROUND.value(),
                 new BackgroundElementImpl("firstPanel", this.getPathString("images", "sceneLoadBg.png")));
 
         this.showSaves(this.selectedSave);
@@ -189,7 +178,7 @@ public class SceneLoad implements Scene {
 
     /**
      * Displays a paginated list of 10 save files starting from the given index.
-     * Each save is represented with a button and a text label indicating its name 
+     * Each save is represented with a button and a text label indicating its name
      * and the number of Pokémon in the box.
      *
      * @param savesListStart the starting index in the save file list to display.

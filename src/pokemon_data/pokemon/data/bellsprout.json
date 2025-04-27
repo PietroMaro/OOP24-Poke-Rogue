@@ -30,8 +30,7 @@
     "name": "bellsprout",
     "weight": 40,
     "abilites": [
-        "chlorophyll",
-        "gluttony"
+        "chlorophyll"
     ],
     "givesEV": {
         "defense": 0,

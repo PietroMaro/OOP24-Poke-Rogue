@@ -28,7 +28,6 @@
     "name": "marowak",
     "weight": 450,
     "abilites": [
-        "rock-head",
         "lightning-rod",
         "battle-armor"
     ],

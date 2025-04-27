@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene;
+package it.unibo.PokeRogue.scene.sceneMenu;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -15,6 +15,8 @@ import it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
+import it.unibo.PokeRogue.scene.Scene;
+import lombok.Getter;
 
 /**
  * The {@code SceneMenu} class implements the main menu scene of the game.
@@ -25,65 +27,12 @@ import it.unibo.PokeRogue.graphic.text.TextElementImpl;
  */
 public class SceneMenu implements Scene {
 
-    private sceneMenuGraphicEnum currentSelectedButton;
+    private SceneMenuGraphicEnum currentSelectedButton;
+    @Getter
     private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+    @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GameEngine gameEngineInstance;
-
-    /**
-     * Enumeration for identifying the various graphical elements within the menu
-     * scene.
-     */
-    private enum sceneMenuGraphicEnum {
-
-        LOAD_BUTTON(0),
-        NEW_GAME_BUTTON(1),
-        OPTIONS_BUTTON(2),
-        BACKGROUND(100),
-        LOAD_GAME_BUTTON_TEXT(101),
-        NEW_GAME_BUTTON_TEXT(102),
-
-        OPTIONS_GAME_BUTTON_TEXT(103);
-
-        private final int code;
-
-        sceneMenuGraphicEnum(int code) {
-            this.code = code;
-        }
-
-        public int value() {
-            return code;
-        }
-
-        /**
-         * Returns the next button in the visual navigation order (cyclical).
-         *
-         * @param currentSelectedButton the currently selected button.
-         * @return the next button.
-         */
-        public static sceneMenuGraphicEnum nextButtonsNames(sceneMenuGraphicEnum currentSelectedButton) {
-            if (currentSelectedButton.ordinal() == 0) {
-                return values()[2];
-            }
-            int nextOrdinal = (currentSelectedButton.ordinal() - 1);
-            return values()[nextOrdinal];
-        }
-
-        /**
-         * Returns the previous button in the visual navigation order (cyclical).
-         *
-         * @param currentSelectedButton the currently selected button.
-         * @return the previous button.
-         */
-        public static sceneMenuGraphicEnum previousButtonsNames(sceneMenuGraphicEnum currentSelectedButton) {
-
-            if (currentSelectedButton.ordinal() == 2) {
-                return values()[0];
-            }
-            int nextOrdinal = (currentSelectedButton.ordinal() + 1);
-            return values()[nextOrdinal];
-        }
-    }
 
     /**
      * Constructs a new SceneMenu object, initializing necessary data structures and
@@ -125,16 +74,16 @@ public class SceneMenu implements Scene {
 
         switch (inputKey) {
             case KeyEvent.VK_UP:
-                this.currentSelectedButton = sceneMenuGraphicEnum.nextButtonsNames(this.currentSelectedButton);
+                this.currentSelectedButton = SceneMenuGraphicEnum.nextButtonsNames(this.currentSelectedButton);
 
                 break;
             case KeyEvent.VK_DOWN:
-                this.currentSelectedButton = sceneMenuGraphicEnum.previousButtonsNames(this.currentSelectedButton);
+                this.currentSelectedButton = SceneMenuGraphicEnum.previousButtonsNames(this.currentSelectedButton);
                 break;
             case KeyEvent.VK_ENTER:
                 switch (this.currentSelectedButton) {
                     case LOAD_BUTTON:
-                    this.gameEngineInstance.setScene("load");
+                        this.gameEngineInstance.setScene("load");
 
                         break;
                     case NEW_GAME_BUTTON:
@@ -154,27 +103,6 @@ public class SceneMenu implements Scene {
     }
 
     /**
-     * Returns a copy of all the graphic elements in the scene.
-     *
-     * @return a map of all the scene graphic elements.
-     */
-
-    @Override
-    public Map<Integer, GraphicElementImpl> getSceneGraphicElements() {
-        return new LinkedHashMap<>(this.sceneGraphicElements);
-    }
-
-    /**
-     * Returns a copy of all the panel elements in the scene.
-     *
-     * @return a map of all the scene panel elements.
-     */
-    @Override
-    public Map<String, PanelElementImpl> getAllPanelsElements() {
-        return new LinkedHashMap<>(this.allPanelsElements);
-    }
-
-    /**
      * Initializes the panel and graphic elements of the scene, including buttons,
      * texts, and background.
      */
@@ -184,25 +112,25 @@ public class SceneMenu implements Scene {
         this.allPanelsElements.put("firstPanel", new PanelElementImpl("", new OverlayLayout(null)));
 
         // Texts
-        this.sceneGraphicElements.put(sceneMenuGraphicEnum.LOAD_GAME_BUTTON_TEXT.value(),
+        this.sceneGraphicElements.put(SceneMenuGraphicEnum.LOAD_GAME_BUTTON_TEXT.value(),
                 new TextElementImpl("firstPanel", "Continua", Color.BLACK, 0.06, 0.45, 0.24));
 
-        this.sceneGraphicElements.put(sceneMenuGraphicEnum.NEW_GAME_BUTTON_TEXT.value(),
-                new TextElementImpl("firstPanel", "Nuova Partita", Color.BLACK, 0.06, 0.45, 0.44));
+        this.sceneGraphicElements.put(SceneMenuGraphicEnum.NEW_GAME_BUTTON_TEXT.value(),
+                new TextElementImpl("firstPanel", "Nuova Partita", Color.BLACK, 0.06, 0.44, 0.44));
 
-        this.sceneGraphicElements.put(sceneMenuGraphicEnum.OPTIONS_GAME_BUTTON_TEXT.value(),
-                new TextElementImpl("firstPanel", "Opzioni", Color.BLACK, 0.06, 0.45, 0.64));
+        this.sceneGraphicElements.put(SceneMenuGraphicEnum.OPTIONS_GAME_BUTTON_TEXT.value(),
+                new TextElementImpl("firstPanel", "Opzioni", Color.BLACK, 0.06, 0.455, 0.64));
 
         // Buttons
-        this.sceneGraphicElements.put(sceneMenuGraphicEnum.LOAD_BUTTON.value(),
+        this.sceneGraphicElements.put(SceneMenuGraphicEnum.LOAD_BUTTON.value(),
                 new ButtonElementImpl("firstPanel", Color.GREEN, Color.BLACK, 1, 0.3, 0.2, 0.4, 0.05));
-        this.sceneGraphicElements.put(sceneMenuGraphicEnum.NEW_GAME_BUTTON.value(),
+        this.sceneGraphicElements.put(SceneMenuGraphicEnum.NEW_GAME_BUTTON.value(),
                 new ButtonElementImpl("firstPanel", Color.GREEN, Color.BLACK, 1, 0.3, 0.4, 0.4, 0.05));
-        this.sceneGraphicElements.put(sceneMenuGraphicEnum.OPTIONS_BUTTON.value(),
+        this.sceneGraphicElements.put(SceneMenuGraphicEnum.OPTIONS_BUTTON.value(),
                 new ButtonElementImpl("firstPanel", Color.GREEN, Color.BLACK, 1, 0.3, 0.6, 0.4, 0.05));
 
         // Background
-        this.sceneGraphicElements.put(sceneMenuGraphicEnum.BACKGROUND.value(),
+        this.sceneGraphicElements.put(SceneMenuGraphicEnum.BACKGROUND.value(),
                 new BackgroundElementImpl("firstPanel", this.getPathString("images", "sceneMenuBg.png")));
 
         this.setButtonStatus(this.currentSelectedButton.value(), true);
@@ -213,7 +141,7 @@ public class SceneMenu implements Scene {
      * button.
      */
     private void initStatus() {
-        this.currentSelectedButton = sceneMenuGraphicEnum.LOAD_BUTTON;
+        this.currentSelectedButton = SceneMenuGraphicEnum.LOAD_BUTTON;
 
     }
 

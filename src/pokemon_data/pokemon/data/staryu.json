@@ -30,7 +30,6 @@
     "name": "staryu",
     "weight": 345,
     "abilites": [
-        "illuminate",
         "natural-cure",
         "analytic"
     ],

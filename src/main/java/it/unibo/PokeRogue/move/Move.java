@@ -14,6 +14,8 @@ public class Move{
 	private int critRate;
 	private int baseDamage;
 	private int calculatedDamage;
+	private double STAB;
+	private boolean isCrit;
 	private Type type;
 	private int priority;
 
@@ -21,11 +23,13 @@ public class Move{
 	    return new Move(
 	        this.pp,
 	        this.isPhysical,
-	        new JSONObject(this.effect.toString()), // Deep copy of JSONObject
-	        this.accuracy,
+	        new JSONObject(this.effect.toString()), 
+			this.accuracy,
 	        this.critRate,
 	        this.baseDamage,
 			this.calculatedDamage,
+			this.STAB,
+			this.isCrit,
 	        this.type,
 	        this.priority
 	    );

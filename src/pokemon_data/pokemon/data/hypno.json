@@ -27,9 +27,7 @@
     "name": "hypno",
     "weight": 756,
     "abilites": [
-        "insomnia",
-        "forewarn",
-        "inner-focus"
+        "insomnia"
     ],
     "givesEV": {
         "defense": 0,

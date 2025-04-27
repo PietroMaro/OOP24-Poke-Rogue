@@ -26,8 +26,6 @@
     "name": "dodrio",
     "weight": 852,
     "abilites": [
-        "run-away",
-        "early-bird",
         "tangled-feet"
     ],
     "givesEV": {

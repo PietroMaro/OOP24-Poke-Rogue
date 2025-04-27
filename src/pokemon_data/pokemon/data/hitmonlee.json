@@ -31,9 +31,7 @@
     "name": "hitmonlee",
     "weight": 498,
     "abilites": [
-        "limber",
-        "reckless",
-        "unburden"
+        "limber"
     ],
     "givesEV": {
         "defense": 0,

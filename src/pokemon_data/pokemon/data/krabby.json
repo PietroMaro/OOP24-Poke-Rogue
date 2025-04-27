@@ -29,9 +29,7 @@
     "name": "krabby",
     "weight": 65,
     "abilites": [
-        "hyper-cutter",
-        "shell-armor",
-        "sheer-force"
+        "shell-armor"
     ],
     "givesEV": {
         "defense": 0,

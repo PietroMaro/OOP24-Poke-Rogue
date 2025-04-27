@@ -31,8 +31,7 @@
     "weight": 560,
     "abilites": [
         "swarm",
-        "technician",
-        "steadfast"
+        "technician"
     ],
     "givesEV": {
         "defense": 0,

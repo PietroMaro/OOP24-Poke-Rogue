@@ -21,7 +21,6 @@
     "weight": 400,
     "abilites": [
         "cute-charm",
-        "magic-guard",
         "unaware"
     ],
     "givesEV": {

@@ -30,9 +30,7 @@
     "name": "geodude",
     "weight": 200,
     "abilites": [
-        "rock-head",
-        "sturdy",
-        "sand-veil"
+        "sturdy"
     ],
     "givesEV": {
         "defense": 1,

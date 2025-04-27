@@ -34,8 +34,7 @@
     "weight": 4600,
     "abilites": [
         "immunity",
-        "thick-fat",
-        "gluttony"
+        "thick-fat"
     ],
     "givesEV": {
         "defense": 0,

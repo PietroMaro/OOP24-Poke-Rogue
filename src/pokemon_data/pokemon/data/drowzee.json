@@ -29,9 +29,7 @@
     "name": "drowzee",
     "weight": 324,
     "abilites": [
-        "insomnia",
-        "forewarn",
-        "inner-focus"
+        "insomnia"
     ],
     "givesEV": {
         "defense": 0,

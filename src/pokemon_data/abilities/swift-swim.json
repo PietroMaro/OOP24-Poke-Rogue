@@ -5,7 +5,7 @@
             [
                 "weather",
                 "==",
-                "'rain'"
+                "Weather.RAIN"
             ]
         ],
         "activation": [
