@@ -19,7 +19,6 @@ import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
-import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.move.MoveFactoryImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.scene.Scene;
@@ -27,14 +26,12 @@ import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
 import it.unibo.PokeRogue.trainers.TrainerImpl;
 import it.unibo.PokeRogue.utilities.ColorTypeConversion;
-import it.unibo.PokeRogue.utilities.Range;
 
 public class SceneFight implements Scene {
 
         private int currentSelectedButton;
         private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
         private final Map<String, PanelElementImpl> allPanelsElements;
-        private final Map<String, Integer> ppCounterMap;
         private final GameEngine gameEngineInstance;
         private final PlayerTrainerImpl playerTrainerInstance;
         private final TrainerImpl enemyTrainerInstance;
@@ -42,6 +39,8 @@ public class SceneFight implements Scene {
         private final static Integer SECOND_POSITION = 1;
         private final static Integer THIRD_POSITION = 2;
         private final static Integer FOURTH_POSITION = 3;
+        private final static Integer FIFTH_POSITION = 4;
+        private final static Integer SIXTH_POSITION = 5;
         private int newSelectedButton;
         private MoveFactoryImpl moveFactoryInstance;
 
@@ -52,7 +51,6 @@ public class SceneFight implements Scene {
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
                 this.enemyTrainerInstance = PlayerTrainerImpl.getTrainerInstance(); // da modificare con istanza enemy
                 this.moveFactoryInstance = new MoveFactoryImpl();
-                this.ppCounterMap = new HashMap<>();
                 this.initStatus();
                 this.initGraphicElements();
         }
@@ -122,21 +120,23 @@ public class SceneFight implements Scene {
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.MY_POKEMON_ACTUAL_LIFE_TEXT.value(),
                                 new TextElementImpl("firstPanel",
                                                 String.valueOf(playerTrainerInstance.getPokemon(FIRST_POSITION).get()
-                                                                .getHpRange().getCurrentValue())
+                                                                .getActualStats().get("hp").getCurrentValue())
                                                                 + " / "
                                                                 + String.valueOf(playerTrainerInstance
                                                                                 .getPokemon(FIRST_POSITION).get()
-                                                                                .getHpRange().getCurrentMax()),
+                                                                                .getActualStats().get("hp")
+                                                                                .getCurrentMax()),
                                                 Color.WHITE,
                                                 0.04, 0.81, 0.64));
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.ENEMY_POKEMON_ACTUAL_LIFE_TEXT.value(),
                                 new TextElementImpl("firstPanel",
                                                 String.valueOf(enemyTrainerInstance.getPokemon(FIRST_POSITION).get()
-                                                                .getHpRange().getCurrentValue())
+                                                                .getActualStats().get("hp").getCurrentValue())
                                                                 + " / "
                                                                 + String.valueOf(enemyTrainerInstance
                                                                                 .getPokemon(FIRST_POSITION).get()
-                                                                                .getHpRange().getCurrentMax()),
+                                                                                .getActualStats().get("hp")
+                                                                                .getCurrentMax()),
                                                 Color.WHITE,
                                                 0.04, 0.12, 0.06));
                 // TEXT EXP
@@ -185,12 +185,105 @@ public class SceneFight implements Scene {
                 this.updateSelectedButton();
                 this.updateMoves();
                 this.updateBall();
+                this.pokemonChange();
                 this.mainMenu();
+        }
+
+        private void pokemonChange() {
+                if (currentSelectedButton >= SceneFightGraphicEnum.CHANGE_POKEMON_1.value()
+                                && currentSelectedButton < SceneFightGraphicEnum.POKEBALL_BUTTON.value()) {
+                        sceneGraphicElements.clear();
+                        this.allPanelsElements.put("changePanel",
+                                        new PanelElementImpl("firstPanel", new OverlayLayout(null)));
+                        this.initChangeText();
+                        this.initChangeButton();
+                        this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_0_STATS_BOX.value(),
+                                        new BoxElementImpl("changePanel", Color.GRAY, Color.WHITE, 0, 0.1,
+                                                        0.45,
+                                                        0.3, 0.1));
+                        this.sceneGraphicElements.put(SceneFightGraphicEnum.BACKGROUND.value(),
+                                        new BackgroundElementImpl("changePanel",
+                                                        this.getPathString("images", "bg.png")));
+                        this.setButtonStatus(this.currentSelectedButton, true);
+
+                }
+        }
+
+        private void initChangeText() {
+                this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_BUTTON_TEXT.value(),
+                                new TextElementImpl("changePanel", "BACK", Color.WHITE, 0.06, 0.86, 0.98));
+                // POKEMON STATS TEXT
+                this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_0_NAME_TEXT.value(),
+                                new TextElementImpl("changePanel",
+                                                getPokemonNameAt(playerTrainerInstance, FIRST_POSITION), Color.WHITE,
+                                                0.06, 0.1,
+                                                0.51));
+
+                this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_1_NAME_TEXT.value(),
+                                new TextElementImpl("changePanel",
+                                                getPokemonNameAt(playerTrainerInstance, SECOND_POSITION), Color.WHITE,
+                                                0.06, 0.5,
+                                                0.11));
+                this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_2_NAME_TEXT.value(),
+                                new TextElementImpl("changePanel",
+                                                getPokemonNameAt(playerTrainerInstance, THIRD_POSITION), Color.WHITE,
+                                                0.06, 0.5,
+                                                0.31));
+                this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_3_NAME_TEXT.value(),
+                                new TextElementImpl("changePanel",
+                                                getPokemonNameAt(playerTrainerInstance, FOURTH_POSITION), Color.WHITE,
+                                                0.06, 0.5,
+                                                0.51));
+                this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_4_NAME_TEXT.value(),
+                                new TextElementImpl("changePanel",
+                                                getPokemonNameAt(playerTrainerInstance, FIFTH_POSITION), Color.WHITE,
+                                                0.06, 0.5,
+                                                0.71));
+                this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_5_NAME_TEXT.value(),
+                                new TextElementImpl("changePanel",
+                                                getPokemonNameAt(playerTrainerInstance, SIXTH_POSITION), Color.WHITE,
+                                                0.06, 0.5,
+                                                0.91));
+
+        }
+
+        private void initChangeButton() {
+                this.sceneGraphicElements.put(SceneFightGraphicEnum.CHANGE_POKEMON_1.value(),
+                                new ButtonElementImpl("changePanel", Color.GRAY, Color.WHITE, 0,
+                                                0.5,
+                                                0.05,
+                                                0.3, 0.1));
+                this.sceneGraphicElements.put(SceneFightGraphicEnum.CHANGE_POKEMON_2.value(),
+                                new ButtonElementImpl("changePanel", Color.GRAY, Color.WHITE, 0,
+                                                0.5,
+                                                0.25,
+                                                0.3, 0.1));
+                this.sceneGraphicElements.put(SceneFightGraphicEnum.CHANGE_POKEMON_3.value(),
+                                new ButtonElementImpl("changePanel", Color.GRAY, Color.WHITE, 0,
+                                                0.5,
+                                                0.45,
+                                                0.3, 0.1));
+                this.sceneGraphicElements.put(SceneFightGraphicEnum.CHANGE_POKEMON_4.value(),
+                                new ButtonElementImpl("changePanel", Color.GRAY, Color.WHITE, 0,
+                                                0.5,
+                                                0.65,
+                                                0.3, 0.1));
+                this.sceneGraphicElements.put(SceneFightGraphicEnum.CHANGE_POKEMON_5.value(),
+                                new ButtonElementImpl("changePanel", Color.GRAY, Color.WHITE, 0,
+                                                0.5,
+                                                0.85,
+                                                0.3, 0.1));
+                this.sceneGraphicElements.put(SceneFightGraphicEnum.CHANGE_POKEMON_BACK.value(),
+                                new ButtonElementImpl("changePanel", Color.GRAY, Color.WHITE, 0,
+                                                0.85,
+                                                0.93,
+                                                0.15, 0.07));
         }
 
         // TO FIX MISSING TRAINER INFO
         private void updateBall() {
-                if (currentSelectedButton >= 300 && currentSelectedButton < 400) {
+                if (currentSelectedButton >= SceneFightGraphicEnum.POKEBALL_BUTTON.value()
+                                && currentSelectedButton < SceneFightGraphicEnum.BACKGROUND.value()) {
                         this.allPanelsElements.put("ballPanel",
                                         new PanelElementImpl("firstPanel", new OverlayLayout(null)));
                         // TEXT TO FIX
@@ -246,7 +339,7 @@ public class SceneFight implements Scene {
         }
 
         private void mainMenu() {
-                if (currentSelectedButton < 100) {
+                if (currentSelectedButton < SceneFightGraphicEnum.MOVE_BUTTON_1.value()) {
                         sceneGraphicElements.clear();
                         allPanelsElements.clear();
                         this.initGraphicElements();
@@ -254,7 +347,8 @@ public class SceneFight implements Scene {
         }
 
         private void updateMoves() {
-                if (currentSelectedButton >= 100 && currentSelectedButton < 200) {
+                if (currentSelectedButton >= SceneFightGraphicEnum.MOVE_BUTTON_1.value()
+                                && currentSelectedButton < SceneFightGraphicEnum.CHANGE_POKEMON_1.value()) {
                         this.sceneGraphicElements.remove(SceneFightGraphicEnum.RUN_BUTTON.value());
                         this.sceneGraphicElements.remove(SceneFightGraphicEnum.POKEMON_BUTTON.value());
                         this.sceneGraphicElements.remove(SceneFightGraphicEnum.FIGHT_BUTTON.value());
@@ -364,7 +458,8 @@ public class SceneFight implements Scene {
                         this.sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_TYPE.value(),
                                         new BoxElementImpl("movePanel",
                                                         ColorTypeConversion.getColorForType(
-                                                                        moveFactoryInstance.moveFromName(move).getType()),
+                                                                        moveFactoryInstance.moveFromName(move)
+                                                                                        .getType()),
                                                         Color.BLACK, 1, 0.65, 0.82, 0.15, 0.06));
                 }
         }

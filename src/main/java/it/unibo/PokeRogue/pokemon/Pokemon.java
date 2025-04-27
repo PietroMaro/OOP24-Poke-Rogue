@@ -73,6 +73,5 @@ public interface Pokemon {
 	void setSpriteFront(Image newVal);
 	Image getSpriteBack();
 	void setSpriteBack(Image newVal);
-	Range<Integer> getHpRange();
 	//if exp+amount = max of the level it will trigger level up
 }
