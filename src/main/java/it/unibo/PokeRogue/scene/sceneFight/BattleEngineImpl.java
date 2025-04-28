@@ -1,19 +1,18 @@
 package it.unibo.PokeRogue.scene.sceneFight;
 
-import it.unibo.PokeRogue.trainers.PlayerTrainer;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
-import it.unibo.PokeRogue.trainers.Trainer;
 
 public class BattleEngineImpl implements BattleEngine {
 
-    PlayerTrainer playerTrainerIstance;
-    PlayerTrainer enemyTrainerIstance;
+    private final PlayerTrainerImpl playerTrainerInstance;
+    private final PlayerTrainerImpl enemyTrainerInstance;
 
     public BattleEngineImpl() {
-        this.playerTrainerIstance = PlayerTrainerImpl.getTrainerInstance();
-        this.enemyTrainerIstance = PlayerTrainerImpl.getTrainerInstance();
+        this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
+        this.enemyTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
 
     }
+
     @Override
     public void abilityActivation(String abilityName) {
         // TODO Auto-generated method stub
@@ -40,14 +39,26 @@ public class BattleEngineImpl implements BattleEngine {
 
     @Override
     public void movesPriorityCalculator(String type, String move, String enemyMove) {
-        System.out.println(move);
-        System.out.println(type);
+        switch (type) {
+            case "Attack":
+                // esegui mossa
+                break;
+            case "Pokeball":
+                // esegui oggetto
+                break;
+            case "SwitchIn":
+                switchIn(move);
+            break;
+            default:
+                break;
+        }
+        
     }
-
-    @Override
-    public void switchIn(Trainer trainer, int pokemonToBeSwtiched) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'switchIn'");
+    
+    private void switchIn(String move){
+        this.playerTrainerInstance.switchPokemonPosition(0, Integer.parseInt(move));
     }
+        
 
+    
 }

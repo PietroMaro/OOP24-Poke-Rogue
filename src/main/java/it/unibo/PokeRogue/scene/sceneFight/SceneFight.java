@@ -539,23 +539,23 @@ public class SceneFight implements Scene {
                                                 break;
 
                                         case 200:
-                                                fightLoop("SwitchIn", "pokemon2");
+                                                fightLoop("SwitchIn", "1");
                                                 break;
 
                                         case 201:
-                                                fightLoop("SwitchIn", "pokemon3");
+                                                fightLoop("SwitchIn", "2");
                                                 break;
 
                                         case 202:
-                                                fightLoop("SwitchIn", "pokemon4");
+                                                fightLoop("SwitchIn", "3");
                                                 break;
 
                                         case 203:
-                                                fightLoop("SwitchIn", "pokemon5");
+                                                fightLoop("SwitchIn", "4");
                                                 break;
 
                                         case 204:
-                                                fightLoop("SwitchIn", "pokemon6");
+                                                fightLoop("SwitchIn", "5");
                                                 break;
                                         case 205:
                                                 fightLoop("SwitchIn", "back");

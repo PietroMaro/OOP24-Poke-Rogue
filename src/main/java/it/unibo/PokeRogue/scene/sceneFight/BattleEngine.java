@@ -9,5 +9,4 @@ public interface BattleEngine {
     void executeMoves(String moveName);
     void executeObject(String objectName);
     void movesPriorityCalculator(String type, String move, String enemyMove);
-    void switchIn(Trainer trainer , int pokemonToBeSwtiched);
 }
