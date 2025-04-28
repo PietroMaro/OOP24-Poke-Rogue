@@ -19,6 +19,8 @@ import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.savingSystem.SavingSystem;
 import it.unibo.PokeRogue.savingSystem.SavingSystemImpl;
 import it.unibo.PokeRogue.scene.Scene;
+import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
+import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
 import lombok.Getter;
 
 /**
@@ -58,6 +60,7 @@ public class SceneLoad implements Scene {
     private final GameEngine gameEngineInstance;
     private final SavingSystem savingSystemInstance;
     private final List<String> savesList;
+    private final UtilitiesForScenes utilityClass;
 
     private int newSelectedSave;
     private int selectedSave;
@@ -72,6 +75,7 @@ public class SceneLoad implements Scene {
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.savingSystemInstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
         this.savesList = savingSystemInstance.getSaveFilesName(Paths.get("src", "saves").toString());
+        this.utilityClass = new UtilitiesForScenesImpl("load", sceneGraphicElements);
         this.initStatus();
         this.initGraphicElements();
     }
@@ -89,7 +93,8 @@ public class SceneLoad implements Scene {
      */
     @Override
     public void updateGraphic() {
-        this.setButtonStatus(this.selectedSave % SceneLoadStatusValuesEnum.NUMBER_OF_SAVE_SHOWED.value(), false);
+        this.utilityClass.setButtonStatus(this.selectedSave % SceneLoadStatusValuesEnum.NUMBER_OF_SAVE_SHOWED.value(),
+                false);
 
         // Going down the saves list
         if (this.selectedSave < this.newSelectedSave
@@ -108,7 +113,8 @@ public class SceneLoad implements Scene {
 
         this.selectedSave = this.newSelectedSave;
 
-        this.setButtonStatus(this.selectedSave % SceneLoadStatusValuesEnum.NUMBER_OF_SAVE_SHOWED.value(), true);
+        this.utilityClass.setButtonStatus(this.selectedSave % SceneLoadStatusValuesEnum.NUMBER_OF_SAVE_SHOWED.value(),
+                true);
 
     }
 
@@ -169,10 +175,10 @@ public class SceneLoad implements Scene {
         this.allPanelsElements.put("savesPanel", new PanelElementImpl("firstPanel", new OverlayLayout(null)));
 
         this.sceneGraphicElements.put(SceneLoadGraphicEnum.BACKGROUND.value(),
-                new BackgroundElementImpl("firstPanel", this.getPathString("images", "sceneLoadBg.png")));
+                new BackgroundElementImpl("firstPanel", this.utilityClass.getPathString("images", "sceneLoadBg.png")));
 
         this.showSaves(this.selectedSave);
-        this.setButtonStatus(this.selectedSave, true);
+        this.utilityClass.setButtonStatus(this.selectedSave, true);
 
     }
 
@@ -214,34 +220,6 @@ public class SceneLoad implements Scene {
 
             }
         }
-
-    }
-
-    /**
-     * Builds a relative path string for a resource located in the box scene image
-     * directory.
-     *
-     * @param directory the subdirectory inside "box".
-     * @param fileName  the name of the file.
-     * @return the full relative path to the file as a string.
-     */
-    private String getPathString(final String directory, final String fileName) {
-
-        return Paths.get("src", "sceneImages", "load", directory, fileName).toString();
-
-    }
-
-    /**
-     * Sets the selection state of a button based on its code.
-     *
-     * @param buttonCode the unique identifier for the button element.
-     * @param status     {@code true} to mark the button as selected, {@code false}
-     *                   to deselect it.
-     */
-    private void setButtonStatus(final int buttonCode, final boolean status) {
-
-        ButtonElementImpl selectedButton = (ButtonElementImpl) sceneGraphicElements.get(buttonCode);
-        selectedButton.setSelected(status);
 
     }
 

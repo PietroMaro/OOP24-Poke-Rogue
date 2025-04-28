@@ -29,6 +29,8 @@ import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.pokemon.Nature;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.ColorTypeConversion;
+import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
+import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
 import lombok.Getter;
 
 /**
@@ -66,6 +68,7 @@ public class SceneBox implements Scene {
         private final PlayerTrainerImpl playerTrainerInstance;
         private final List<List<Pokemon>> boxes;
         private final PokemonFactory pokemonFactoryInstance;
+        private final UtilitiesForScenes utilityClass;
         private int currentBoxLength;
         private int newSelectedButton;
         private int newBoxIndex;
@@ -86,6 +89,7 @@ public class SceneBox implements Scene {
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
                 this.savingSystemInstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
                 this.pokemonFactoryInstance = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+                this.utilityClass = new UtilitiesForScenesImpl("box", sceneGraphicElements);
                 this.setUpSave(savePath);
                 this.initStatus();
                 this.initGraphicElements();
@@ -270,8 +274,8 @@ public class SceneBox implements Scene {
          * selected button.
          */
         private void updateSelectedButton() {
-                this.setButtonStatus(this.currentSelectedButton, false);
-                this.setButtonStatus(this.newSelectedButton, true);
+                this.utilityClass.setButtonStatus(this.currentSelectedButton, false);
+                this.utilityClass.setButtonStatus(this.newSelectedButton, true);
                 this.currentSelectedButton = newSelectedButton;
         }
 
@@ -306,7 +310,8 @@ public class SceneBox implements Scene {
                                                         - SceneBoxGraphicEnum.POKEMON_SPRITE_SELECTED_0.value());
                         if (pokemon.isEmpty()) {
                                 this.sceneGraphicElements.put(squadPosition, new SpriteElementImpl(
-                                                "pokemonPanel", this.getPathString("sprites", "pokeSquadEmpty.png"),
+                                                "pokemonPanel",
+                                                this.utilityClass.getPathString("sprites", "pokeSquadEmpty.png"),
                                                 0.39,
                                                 0.1 * squadPosition - 10.4, 0.065,
                                                 0.09));
@@ -348,12 +353,13 @@ public class SceneBox implements Scene {
                                                         Color.WHITE, 0.11, 0.14, 0.16));
                         this.sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_NAME.value(),
                                         new TextElementImpl("pokemonPanel",
-                                                        this.capitalizeFirst(selectedPokemon.getName()), Color.WHITE,
+                                                        this.utilityClass.capitalizeFirst(selectedPokemon.getName()),
+                                                        Color.WHITE,
                                                         0.1,
                                                         0.095, 0.77));
                         this.sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_ABILITY.value(),
                                         new TextElementImpl("pokemonPanel",
-                                                        "Ability: " + this.capitalizeFirst(
+                                                        "Ability: " + this.utilityClass.capitalizeFirst(
                                                                         selectedPokemon.getAbilityName()),
                                                         Color.GRAY,
                                                         0.05, 0.095, 0.84));
@@ -393,7 +399,7 @@ public class SceneBox implements Scene {
                         this.sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_GROWTH_RATE.value(),
                                         new TextElementImpl(
                                                         "pokemonPanel",
-                                                        "Growth Rate: " + this.capitalizeFirst(
+                                                        "Growth Rate: " + this.utilityClass.capitalizeFirst(
                                                                         selectedPokemon.getLevelUpCurve()),
                                                         Color.GRAY,
                                                         0.05, 0.1, 0.69));
@@ -401,13 +407,15 @@ public class SceneBox implements Scene {
                         if (selectedPokemon.getGender().equals("male")) {
                                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_GENDER.value(),
                                                 new SpriteElementImpl("pokemonPanel",
-                                                                this.getPathString("sprites", "maleSymbolSprite.png"),
+                                                                this.utilityClass.getPathString("sprites",
+                                                                                "maleSymbolSprite.png"),
                                                                 0.35,
                                                                 0.75, 0.02, 0.03));
                         } else {
                                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_GENDER.value(),
                                                 new SpriteElementImpl("pokemonPanel",
-                                                                this.getPathString("sprites", "femaleSymbolSprite.png"),
+                                                                this.utilityClass.getPathString("sprites",
+                                                                                "femaleSymbolSprite.png"),
                                                                 0.35,
                                                                 0.75, 0.02, 0.03));
                         }
@@ -415,7 +423,8 @@ public class SceneBox implements Scene {
                         this.sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_MOVE_1.value(),
 
                                         new TextElementImpl("pokemonPanel",
-                                                        this.capitalizeFirst(selectedPokemon.getActualMoves().get(0)),
+                                                        this.utilityClass.capitalizeFirst(
+                                                                        selectedPokemon.getActualMoves().get(0)),
                                                         Color.WHITE, 0.06, 0.252, 0.207));
 
                         this.sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_MOVE_BOX_1.value(),
@@ -465,10 +474,10 @@ public class SceneBox implements Scene {
                 // Bg
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.BACKGROUND.value(),
                                 new BackgroundElementImpl("firstPanel",
-                                                this.getPathString("images", "sceneBoxBg.png")));
+                                                this.utilityClass.getPathString("images", "sceneBoxBg.png")));
 
                 // Set the first button as selected
-                this.setButtonStatus(this.currentSelectedButton, true);
+                this.utilityClass.setButtonStatus(this.currentSelectedButton, true);
 
                 // Draw Pokemon sprites
                 this.initPokemonSprites();
@@ -559,47 +568,56 @@ public class SceneBox implements Scene {
                 // Sprites in foreground
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.DOWN_ARROW_SPRITE.value(),
                                 new SpriteElementImpl("firstPanel",
-                                                this.getPathString("sprites", "downArrowSprite.png"), 0.4, 0.2, 0.04,
+                                                this.utilityClass.getPathString("sprites", "downArrowSprite.png"), 0.4,
+                                                0.2, 0.04,
                                                 0.06));
 
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.UP_ARROW_SPRITE.value(),
                                 new SpriteElementImpl("firstPanel",
-                                                this.getPathString("sprites", "upArrowSprite.png"), 0.4, 0.105, 0.04,
+                                                this.utilityClass.getPathString("sprites", "upArrowSprite.png"), 0.4,
+                                                0.105, 0.04,
                                                 0.06));
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_SPRITE_SELECTED_0.value(),
                                 new SpriteElementImpl(
-                                                "pokemonPanel", this.getPathString("sprites", "pokeSquadEmpty.png"),
+                                                "pokemonPanel",
+                                                this.utilityClass.getPathString("sprites", "pokeSquadEmpty.png"),
                                                 0.39, 0.3, 0.065,
                                                 0.09));
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_SPRITE_SELECTED_1.value(),
                                 new SpriteElementImpl(
-                                                "pokemonPanel", this.getPathString("sprites", "pokeSquadEmpty.png"),
+                                                "pokemonPanel",
+                                                this.utilityClass.getPathString("sprites", "pokeSquadEmpty.png"),
                                                 0.39, 0.4, 0.065,
                                                 0.09));
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_SPRITE_SELECTED_2.value(),
                                 new SpriteElementImpl(
-                                                "pokemonPanel", this.getPathString("sprites", "pokeSquadEmpty.png"),
+                                                "pokemonPanel",
+                                                this.utilityClass.getPathString("sprites", "pokeSquadEmpty.png"),
                                                 0.39, 0.5, 0.065,
                                                 0.09));
 
                 // Sprites in background
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.SELECTED_POKEMON_CONTAINER_SPRITE.value(),
                                 new SpriteElementImpl(
-                                                "firstPanel", this.getPathString("sprites", "changeBoxSprite.png"),
+                                                "firstPanel",
+                                                this.utilityClass.getPathString("sprites", "changeBoxSprite.png"),
                                                 0.372, 0.06, 0.1, 0.25));
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.ARROWS_CONTAINER_SPRITE.value(),
                                 new SpriteElementImpl(
-                                                "firstPanel", this.getPathString("sprites", "selectedSquadSprite.png"),
+                                                "firstPanel",
+                                                this.utilityClass.getPathString("sprites", "selectedSquadSprite.png"),
                                                 0.375, 0.244,
                                                 0.09, 0.4));
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.START_BUTTON_CONTAINER_SPRITE.value(),
                                 new SpriteElementImpl(
-                                                "firstPanel", this.getPathString("sprites", "startSpriteBg.png"), 0.395,
+                                                "firstPanel",
+                                                this.utilityClass.getPathString("sprites", "startSpriteBg.png"), 0.395,
                                                 0.613, 0.055, 0.1));
 
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_CONTAINER_SPRITE.value(),
                                 new SpriteElementImpl(
-                                                "firstPanel", this.getPathString("sprites", "singleBoxSprite.png"),
+                                                "firstPanel",
+                                                this.utilityClass.getPathString("sprites", "singleBoxSprite.png"),
                                                 0.45, 0.1, 0.45,
                                                 0.85));
 
@@ -658,48 +676,6 @@ public class SceneBox implements Scene {
                 }
 
                 this.boxes.get(currentBoxLength - 1).add(pokemon);
-
-        }
-
-        /**
-         * Capitalizes the first letter of a string, ensuring the rest of the string
-         * remains unchanged.
-         * 
-         * @param str The string to capitalize.
-         * @return The string with the first letter capitalized, or the original string
-         *         if it is null or empty.
-         */
-        private String capitalizeFirst(final String str) {
-                if (str == null || str.isEmpty())
-                        return str;
-                return str.substring(0, 1).toUpperCase() + str.substring(1);
-        }
-
-        /**
-         * Builds a relative path string for a resource located in the box scene image
-         * directory.
-         *
-         * @param directory the subdirectory inside "box".
-         * @param fileName  the name of the file.
-         * @return the full relative path to the file as a string.
-         */
-        private String getPathString(final String directory, final String fileName) {
-
-                return Paths.get("src", "sceneImages", "box", directory, fileName).toString();
-
-        }
-
-        /**
-         * Sets the selection state of a button based on its code.
-         *
-         * @param buttonCode the unique identifier for the button element.
-         * @param status     {@code true} to mark the button as selected, {@code false}
-         *                   to deselect it.
-         */
-        private void setButtonStatus(final int buttonCode, final boolean status) {
-
-                ButtonElementImpl selectedButton = (ButtonElementImpl) sceneGraphicElements.get(buttonCode);
-                selectedButton.setSelected(status);
 
         }
 

@@ -2,7 +2,6 @@ package it.unibo.PokeRogue.scene.sceneMenu;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
-import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -16,6 +15,8 @@ import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.scene.Scene;
+import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
+import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
 import lombok.Getter;
 
 /**
@@ -33,6 +34,7 @@ public class SceneMenu implements Scene {
     @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GameEngine gameEngineInstance;
+    private final UtilitiesForScenes utilityClass;
 
     /**
      * Constructs a new SceneMenu object, initializing necessary data structures and
@@ -44,6 +46,7 @@ public class SceneMenu implements Scene {
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
+        this.utilityClass = new UtilitiesForScenesImpl("menu", sceneGraphicElements);
         this.initStatus();
         this.initGraphicElements();
 
@@ -57,10 +60,10 @@ public class SceneMenu implements Scene {
     public void updateGraphic() {
 
         for (int i = 0; i < 3; i++) {
-            this.setButtonStatus(i, false);
+            this.utilityClass.setButtonStatus(i, false);
         }
 
-        this.setButtonStatus(this.currentSelectedButton.value(), true);
+        this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true);
 
     }
 
@@ -131,9 +134,9 @@ public class SceneMenu implements Scene {
 
         // Background
         this.sceneGraphicElements.put(SceneMenuGraphicEnum.BACKGROUND.value(),
-                new BackgroundElementImpl("firstPanel", this.getPathString("images", "sceneMenuBg.png")));
+                new BackgroundElementImpl("firstPanel", this.utilityClass.getPathString("images", "sceneMenuBg.png")));
 
-        this.setButtonStatus(this.currentSelectedButton.value(), true);
+        this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true);
     }
 
     /**
@@ -142,34 +145,6 @@ public class SceneMenu implements Scene {
      */
     private void initStatus() {
         this.currentSelectedButton = SceneMenuGraphicEnum.LOAD_BUTTON;
-
-    }
-
-    /**
-     * Builds a relative path string for a resource located in the menu scene image
-     * directory.
-     *
-     * @param directory the subdirectory inside "menu".
-     * @param fileName  the name of the file.
-     * @return the full relative path to the file as a string.
-     */
-    private String getPathString(final String directory, final String fileName) {
-
-        return Paths.get("src", "sceneImages", "menu", directory, fileName).toString();
-
-    }
-
-    /**
-     * Sets the selection state of a button based on its code.
-     *
-     * @param buttonCode the unique identifier for the button element.
-     * @param status     {@code true} to mark the button as selected, {@code false}
-     *                   to deselect it.
-     */
-    private void setButtonStatus(final int buttonCode, final boolean status) {
-
-        ButtonElementImpl selectedButton = (ButtonElementImpl) sceneGraphicElements.get(buttonCode);
-        selectedButton.setSelected(status);
 
     }
 
