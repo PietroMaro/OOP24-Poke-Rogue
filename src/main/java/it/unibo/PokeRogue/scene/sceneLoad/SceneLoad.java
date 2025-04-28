@@ -198,7 +198,7 @@ public class SceneLoad implements Scene {
 
                 this.sceneGraphicElements.put(x + 10,
                         new TextElementImpl("savesPanel",
-                                "Salvataggio: " + savesName + ", Grandezza Box: " + boxPokemonNumber, Color.BLACK, 0.06,
+                                "Salvataggio: " + savesName + ", Grandezza Box: " + boxPokemonNumber, Color.BLACK, 0.08,
                                 0.282, x * 0.1 + 0.06));
 
                 this.sceneGraphicElements.put(x, new ButtonElementImpl("savesPanel", Color.GREEN, Color.BLACK, 2, 0.28,
@@ -207,7 +207,7 @@ public class SceneLoad implements Scene {
             } else {
 
                 this.sceneGraphicElements.put(x + 10, new TextElementImpl("savesPanel",
-                        "Salvataggio: Nessuno, Grandezza Box: 0 ", Color.BLACK, 0.06, 0.282, x * 0.1 + 0.06));
+                        "Salvataggio: Nessuno, Grandezza Box: 0 ", Color.BLACK, 0.08, 0.282, x * 0.1 + 0.06));
 
                 this.sceneGraphicElements.put(x, new ButtonElementImpl("savesPanel", Color.GREEN, Color.BLACK, 2, 0.28,
                         x * 0.1 + 0.01, 0.5, 0.08));
