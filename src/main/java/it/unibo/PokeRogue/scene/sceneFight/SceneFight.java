@@ -305,16 +305,28 @@ public class SceneFight implements Scene {
                                         new PanelElementImpl("firstPanel", new OverlayLayout(null)));
                         // TEXT TO FIX
                         this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEBALL_TEXT.value(),
-                                        new TextElementImpl("ballPanel", " x Poke Ball", Color.WHITE, 0.04, 0.62,
+                                        new TextElementImpl("ballPanel",
+                                                        String.valueOf(playerTrainerInstance.getBall().get("pokeball"))
+                                                                        + " x Poke Ball",
+                                                        Color.WHITE, 0.04, 0.62,
                                                         0.34));
                         this.sceneGraphicElements.put(SceneFightGraphicEnum.MEGABALL_TEXT.value(),
-                                        new TextElementImpl("ballPanel", " x Mega Ball", Color.WHITE, 0.04, 0.62,
+                                        new TextElementImpl("ballPanel",
+                                                        String.valueOf(playerTrainerInstance.getBall().get("megaball"))
+                                                                        + " x Mega Ball",
+                                                        Color.WHITE, 0.04, 0.62,
                                                         0.39));
                         this.sceneGraphicElements.put(SceneFightGraphicEnum.ULTRABALL_TEXT.value(),
-                                        new TextElementImpl("ballPanel", " x Ulta Ball", Color.WHITE, 0.04, 0.62,
+                                        new TextElementImpl("ballPanel",
+                                                        String.valueOf(playerTrainerInstance.getBall().get("ultraball"))
+                                                                        + " x Ulta Ball",
+                                                        Color.WHITE, 0.04, 0.62,
                                                         0.44));
                         this.sceneGraphicElements.put(SceneFightGraphicEnum.MASTERBALL_TEXT.value(),
-                                        new TextElementImpl("ballPanel", " x Master Ball", Color.WHITE, 0.04, 0.62,
+                                        new TextElementImpl("ballPanel",
+                                                        String.valueOf(playerTrainerInstance.getBall()
+                                                                        .get("masterball")) + " x Master Ball",
+                                                        Color.WHITE, 0.04, 0.62,
                                                         0.49));
                         this.sceneGraphicElements.put(SceneFightGraphicEnum.CANCEL_TEXT.value(),
                                         new TextElementImpl("ballPanel", " x CANCEL", Color.WHITE, 0.04, 0.62,
@@ -557,9 +569,6 @@ public class SceneFight implements Scene {
                                         case 204:
                                                 fightLoop("SwitchIn", "5");
                                                 break;
-                                        case 205:
-                                                fightLoop("SwitchIn", "back");
-                                                break;
                                         case 300:
                                                 fightLoop("Pokeball", "pokeball");
                                                 break;
@@ -574,9 +583,6 @@ public class SceneFight implements Scene {
 
                                         case 303:
                                                 fightLoop("Pokeball", "masterball");
-                                                break;
-                                        case 304:
-                                                fightLoop("Pokeball", "cancel");
                                                 break;
                                         default:
                                                 break;

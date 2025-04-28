@@ -1,6 +1,7 @@
 package it.unibo.PokeRogue.trainers;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import it.unibo.PokeRogue.pokemon.Pokemon;
@@ -20,5 +21,6 @@ public interface Trainer {
 
 	Boolean addPokemon(Pokemon pokemon,int limits);
 
+	Map<String, Integer> getBall();
 
 }
