@@ -24,7 +24,6 @@ import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
-import it.unibo.PokeRogue.trainers.TrainerImpl;
 import it.unibo.PokeRogue.utilities.ColorTypeConversion;
 
 public class SceneFight implements Scene {
@@ -34,7 +33,7 @@ public class SceneFight implements Scene {
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final GameEngine gameEngineInstance;
         private final PlayerTrainerImpl playerTrainerInstance;
-        private final TrainerImpl enemyTrainerInstance;
+        private final PlayerTrainerImpl enemyTrainerInstance;
         private final static Integer FIRST_POSITION = 0;
         private final static Integer SECOND_POSITION = 1;
         private final static Integer THIRD_POSITION = 2;
@@ -47,14 +46,15 @@ public class SceneFight implements Scene {
 
         public SceneFight() {
                 this.sceneGraphicElements = new LinkedHashMap<>();
-                this.allPanelsElements = new LinkedHashMap<>();
+                this.allPanelsElements = new LinkedHashMap<>();                
+                this.moveFactoryInstance = new MoveFactoryImpl();
+                this.battleEngineInstance = new BattleEngineImpl(0, moveFactoryInstance);
                 this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-                this.enemyTrainerInstance = PlayerTrainerImpl.getTrainerInstance(); // da modificare con istanza enemy
-                this.moveFactoryInstance = new MoveFactoryImpl();
+                this.enemyTrainerInstance = battleEngineInstance.getEnemyTrainerInstance(); 
+
                 this.initStatus();
                 this.initGraphicElements();
-                this.battleEngineInstance = new BattleEngineImpl();
         }
 
         private void initStatus() {
@@ -535,19 +535,19 @@ public class SceneFight implements Scene {
                         case KeyEvent.VK_ENTER:
                                 switch (newSelectedButton) {
                                         case 100:
-                                                fightLoop("Attack", "First");
+                                                fightLoop("Attack", "0");
                                                 break;
 
                                         case 101:
-                                                fightLoop("Attack", "Third");
+                                                fightLoop("Attack", "2");
                                                 break;
 
                                         case 102:
-                                                fightLoop("Attack", "Second");
+                                                fightLoop("Attack", "1");
                                                 break;
 
                                         case 103:
-                                                fightLoop("Attack", "Fourth");
+                                                fightLoop("Attack", "3");
                                                 break;
 
                                         case 200:
@@ -676,7 +676,7 @@ public class SceneFight implements Scene {
                 this.updatingLifeStats(playerTrainerInstance);
                 // TO FIX ENEMY
                 this.battleEngineInstance.movesPriorityCalculator(playerMoveType, playerMove,
-                                enemyTrainerInstance.toString());
+                                "absorb");
         }
 
         private void updatingLifeStats(Trainer trainer) {

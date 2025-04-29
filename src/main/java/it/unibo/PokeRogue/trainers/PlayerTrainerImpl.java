@@ -14,7 +14,7 @@ package it.unibo.PokeRogue.trainers;
 public class PlayerTrainerImpl extends TrainerImpl implements PlayerTrainer {
 
     private static PlayerTrainerImpl instanceOfTrainer = null;
-
+    
     public static PlayerTrainerImpl getTrainerInstance() {
         if (instanceOfTrainer == null) {
             instanceOfTrainer = new PlayerTrainerImpl();

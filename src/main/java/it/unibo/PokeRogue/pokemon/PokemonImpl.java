@@ -277,4 +277,9 @@ public final class PokemonImpl implements Pokemon {
 			}
 		}
 	}
+
+	@Override
+	public void setHp(int newVal) {
+		this.hp.setCurrentValue(newVal);
+	}
 }
