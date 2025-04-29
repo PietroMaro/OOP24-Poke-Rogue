@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene.sceneLoad;
+package it.unibo.PokeRogue.scene.sceneLoad.enums;
 
 public enum SceneLoadGraphicEnum {
     FIRST_SAVE_BUTTON(0),
@@ -40,8 +40,6 @@ public enum SceneLoadGraphicEnum {
     NINTH_SAVE_TEXT(18),
 
     TENTH_SAVE_TEXT(19),
-
-    
 
     BACKGROUND(100);
 

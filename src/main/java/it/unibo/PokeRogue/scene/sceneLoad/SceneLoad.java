@@ -1,56 +1,49 @@
 package it.unibo.PokeRogue.scene.sceneLoad;
 
-import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.OverlayLayout;
-
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
-import it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl;
-import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
-import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.savingSystem.SavingSystem;
 import it.unibo.PokeRogue.savingSystem.SavingSystemImpl;
 import it.unibo.PokeRogue.scene.Scene;
+import it.unibo.PokeRogue.scene.sceneLoad.enums.SceneLoadStatusValuesEnum;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
 import lombok.Getter;
 
 /**
- * The {@code SceneLoad} class represents the loading scene in the game,
- * allowing users
- * to browse and select save files. It implements the {@link Scene} interface
- * and is
- * responsible for displaying save file information and handling user input to
- * navigate through saves or load a selected save.
+ * {@code SceneLoad} represents the scene responsible for displaying and
+ * managing the list of save files in the game.
  * 
- * This scene includes buttons for up to 10 save files at a time, with
- * scrollable
- * functionality to view more saves if present. It retrieves save file data
- * using
- * {@link SavingSystem} and sets up the scene graphics using various graphic
- * components.
+ * This scene allows the user to navigate through available saves, load a
+ * selected save,
+ * or return to the main menu. It supports pagination to handle a large number
+ * of saves, showing up to 10 saves per page.
  * 
- * Key features:
- * Displays save files with associated metadata (like box size).
- * Handles keyboard input (arrow keys and Enter).
- * Interacts with the game engine to load the selected save and switch
- * scenes.
+ * Internally, the class manages graphical elements (buttons, texts,
+ * backgrounds) using
+ * {@link it.unibo.PokeRogue.graphic} components and delegates the creation of
+ * visual elements
+ * to {@link SceneLoadView}. It also handles user input (keyboard navigation and
+ * selection)
+ * to update the scene status and visuals accordingly.
  * 
- *
- * @see it.unibo.PokeRogue.scene.Scene
- * @see it.unibo.PokeRogue.graphic.GraphicElementImpl
- * @see it.unibo.PokeRogue.graphic.button.ButtonElementImpl
+ * Main Responsibilities:
+ * Initialize and render save file entries and associated UI elements</li>
+ * Handle navigation through saves via keyboard input</li>
+ * Allow selection and loading of a save, or returning to the main menu</li>
+ * 
+ * @see SceneLoadView
  * @see it.unibo.PokeRogue.savingSystem.SavingSystem
+ * @see it.unibo.PokeRogue.utilities.UtilitiesForScenes
  */
-
 public class SceneLoad implements Scene {
 
     @Getter
@@ -61,6 +54,7 @@ public class SceneLoad implements Scene {
     private final SavingSystem savingSystemInstance;
     private final List<String> savesList;
     private final UtilitiesForScenes utilityClass;
+    private final SceneLoadView sceneLoadView;
 
     private int newSelectedSave;
     private int selectedSave;
@@ -76,6 +70,7 @@ public class SceneLoad implements Scene {
         this.savingSystemInstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
         this.savesList = savingSystemInstance.getSaveFilesName(Paths.get("src", "saves").toString());
         this.utilityClass = new UtilitiesForScenesImpl("load", sceneGraphicElements);
+        this.sceneLoadView = new SceneLoadView(sceneGraphicElements, allPanelsElements);
         this.initStatus();
         this.initGraphicElements();
     }
@@ -166,16 +161,19 @@ public class SceneLoad implements Scene {
 
     }
 
-    /*
-     * Initializes all graphical components for the scene, including background,
-     * panels, save buttons, and texts.
+    /**
+     * Initializes all graphical components for the Load Scene, including the
+     * background,
+     * panels, save file buttons, and associated text labels.
+     * This method first delegates the creation of basic elements to
+     * {@code SceneLoadView},
+     * then displays the current page of save files and highlights the selected
+     * save.
+     * 
      */
     private void initGraphicElements() {
-        this.allPanelsElements.put("firstPanel", new PanelElementImpl("", new OverlayLayout(null)));
-        this.allPanelsElements.put("savesPanel", new PanelElementImpl("firstPanel", new OverlayLayout(null)));
 
-        this.sceneGraphicElements.put(SceneLoadGraphicEnum.BACKGROUND.value(),
-                new BackgroundElementImpl("firstPanel", this.utilityClass.getPathString("images", "sceneLoadBg.png")));
+        this.sceneLoadView.initGraphicElements();
 
         this.showSaves(this.selectedSave);
         this.utilityClass.setButtonStatus(this.selectedSave, true);
@@ -183,44 +181,19 @@ public class SceneLoad implements Scene {
     }
 
     /**
-     * Displays a paginated list of 10 save files starting from the given index.
+     * Displays a paginated list of up to 10 save files starting from the given
+     * index.
+     * 
      * Each save is represented with a button and a text label indicating its name
-     * and the number of Pokémon in the box.
-     *
-     * @param savesListStart the starting index in the save file list to display.
+     * and the number of Pokémon stored in the save file's box.
+     * This method delegates the creation and rendering of the graphical elements
+     * to the {@link SceneLoadView} class.
+     * 
+     * @param savesListStart the starting index in the list of save files to
+     *                       display.
      */
     private void showSaves(final int savesListStart) {
-        String savesName;
-
-        int boxPokemonNumber;
-        for (int x = 0; x < 10; x++) {
-
-            if (savesList.size() > x + savesListStart) {
-                savesName = savesList.get(x + savesListStart);
-                boxPokemonNumber = this.savingSystemInstance
-                        .howManyPokemonInSave(Paths.get("src", "saves", savesName).toString());
-
-                savesName = savesName.substring(0, savesName.length() - 5); // removing the extension
-
-                this.sceneGraphicElements.put(x + 10,
-                        new TextElementImpl("savesPanel",
-                                "Salvataggio: " + savesName + ", Grandezza Box: " + boxPokemonNumber, Color.BLACK, 0.08,
-                                0.282, x * 0.1 + 0.06));
-
-                this.sceneGraphicElements.put(x, new ButtonElementImpl("savesPanel", Color.GREEN, Color.BLACK, 2, 0.28,
-                        x * 0.1 + 0.01, 0.5, 0.08));
-
-            } else {
-
-                this.sceneGraphicElements.put(x + 10, new TextElementImpl("savesPanel",
-                        "Salvataggio: Nessuno, Grandezza Box: 0 ", Color.BLACK, 0.08, 0.282, x * 0.1 + 0.06));
-
-                this.sceneGraphicElements.put(x, new ButtonElementImpl("savesPanel", Color.GREEN, Color.BLACK, 2, 0.28,
-                        x * 0.1 + 0.01, 0.5, 0.08));
-
-            }
-        }
-
+        this.sceneLoadView.showSaves(savesListStart, savesList, savingSystemInstance);
     }
 
 }
