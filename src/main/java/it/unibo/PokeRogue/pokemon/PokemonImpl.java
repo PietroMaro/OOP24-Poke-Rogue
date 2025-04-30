@@ -149,7 +149,7 @@ public final class PokemonImpl implements Pokemon {
 				+ this.level.getCurrentValue() + 10;
 		Range<Integer> rangeHp = new RangeImpl<Integer>(0, maxLife, maxLife);
 		actualStats.put("hp", rangeHp);
-		for (String stat : statNames.subList(1,statNames.size()-1)) {
+		for (String stat : statNames.subList(1,statNames.size())) {
 
 			int statValue = (int) Math.round(
 					Math.floor(
