@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.pokemon.Type;
 
@@ -15,11 +16,11 @@ public class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
 
     public PokeEffectivenessCalcImpl() {
         this.effectivenessValueCalculator.put(4.0, 160);
-        this.effectivenessValueCalculator.put(2.0, 160);
-        this.effectivenessValueCalculator.put(1.0, 160);
-        this.effectivenessValueCalculator.put(0.5, 160);
-        this.effectivenessValueCalculator.put(0.25, 160);
-        this.effectivenessValueCalculator.put(0.0, 160);
+        this.effectivenessValueCalculator.put(2.0, 80);
+        this.effectivenessValueCalculator.put(1.0, 40);
+        this.effectivenessValueCalculator.put(0.5, 20);
+        this.effectivenessValueCalculator.put(0.25, 10);
+        this.effectivenessValueCalculator.put(0.0, 0);
 
         for (Type attackType : Type.values()) {
             effectiveness.put(attackType, new EnumMap<>(Type.class));
@@ -165,13 +166,26 @@ public class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
 
     }
 
-    public double calculateTypeMultiplier(final Type myPokemonType, final Type enemyPokemonType) {
+    private double calculateTypeMultiplier(final Type myPokemonType, final Type enemyPokemonType) {
 
-        if (this.effectiveness.get(myPokemonType).get(enemyPokemonType).equals(null)) {
+        if (this.effectiveness.get(myPokemonType).get(enemyPokemonType) == null) {
             return 1.0;
         }
         return this.effectiveness.get(myPokemonType).get(enemyPokemonType);
 
+    }
+
+    public double calculateAttackEffectiveness(final Move move, final Pokemon enemyPokemon) {
+
+        double effectiveness = 1;
+        final Type moveType = move.getType();
+        final List<Type> enemyPokemonTypes = enemyPokemon.getTypes();
+
+        for (Type enemyType : enemyPokemonTypes) {
+            effectiveness = effectiveness * this.calculateTypeMultiplier(moveType, enemyType);
+        }
+
+        return effectiveness;
     }
 
     @Override
@@ -179,16 +193,22 @@ public class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
         double effectiveness;
         int effectivenessValue = 0;
 
-        List<Type> myPokemonTypes = myPokemon.getTypes();
-        List<Type> enemyPokemonTypes = enemyPokemon.getTypes();
+        final List<Type> myPokemonTypes = myPokemon.getTypes();
+        final List<Type> enemyPokemonTypes = enemyPokemon.getTypes();
 
         for (Type myPokemonType : myPokemonTypes) {
             effectiveness = 1;
+
             for (Type enemyPokemonType : enemyPokemonTypes) {
-                effectiveness = effectiveness * calculateTypeMultiplier(myPokemonType, enemyPokemonType);
+
+                effectiveness = effectiveness * this.calculateTypeMultiplier(myPokemonType, enemyPokemonType);
             }
 
             effectivenessValue = effectivenessValue + this.effectivenessValueCalculator.get(effectiveness);
+        }
+
+        if (myPokemonTypes.size() == 1 && enemyPokemonTypes.size() == 2) {
+            effectivenessValue = effectivenessValue * 2;
         }
 
         return effectivenessValue;

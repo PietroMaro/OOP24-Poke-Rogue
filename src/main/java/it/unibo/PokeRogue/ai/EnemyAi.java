@@ -1,6 +1,8 @@
 package it.unibo.PokeRogue.ai;
 
+import java.util.List;
+
 public interface EnemyAi {
-    
-    public String nextMove();
+
+    List<String> nextMove();
 }
