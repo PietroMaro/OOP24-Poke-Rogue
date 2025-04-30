@@ -26,7 +26,7 @@ public class TestAi {
         enemyTrainer.addPokemon(pFactory.pokemonFromName("wigglytuff"), 6);
         enemyTrainer.addPokemon(pFactory.pokemonFromName("golduck"), 6);
 
-        ai = new EnemyAiImpl(enemyTrainer, 20);
+        ai = new EnemyAiImpl(enemyTrainer, 45);
         // enemyTrainer.getPokemon(0).get().getActualStats().get("hp").setCurrentValue(0);
         // enemyTrainer.getPokemon(1).get().getActualStats().get("hp").setCurrentValue(0);
 
