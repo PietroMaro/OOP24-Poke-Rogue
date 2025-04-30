@@ -12,14 +12,15 @@ public class EnemyAiImpl {
     private final int battleLvl;
     private final PlayerTrainerImpl playTrainerInstance;
 
+    private String switchPosition;
+
     // Flags
     private boolean predictMoveFailure = false;
-    private boolean scoreMoves = false;;
-    private boolean hpAware = false;;
-    private boolean preferMultiTargetMoves = false;;
-    private boolean usePokemonInOrder = false;;
-    private boolean considerSwitching = false;;
-    private boolean reserveLastPokemon = false;;
+    private boolean scoreMoves = false;
+    private boolean hpAware = false;
+    private boolean usePokemonInOrder = true;
+    private boolean considerSwitching = false;
+    private boolean reserveLastPokemon = false;
 
     public EnemyAiImpl(final Trainer enemyTrainer, final int battleLvl) {
         this.playTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
@@ -34,8 +35,7 @@ public class EnemyAiImpl {
         if (battleLvl >= 15) {
             this.predictMoveFailure = true;
             this.scoreMoves = true;
-            this.preferMultiTargetMoves = true;
-            this.usePokemonInOrder = true;
+            this.usePokemonInOrder = false;
 
         }
 
@@ -81,15 +81,36 @@ public class EnemyAiImpl {
         return canSwitch;
     }
 
+    private void orderSwitchIn() {
+        for (int pokePos = 1; pokePos < 7; pokePos++) {
+            if (enemyTrainer.getPokemon(0).get().getActualStats().get("hp").getCurrentValue() > 0) {
+                switchPosition = String.valueOf(pokePos);
+                break;
+            }
+        }
+    }
+
+    private void typeBasedSwitchIn() {
+
+    }
+
     private boolean shouldSwitch() {
         Pokemon currentPokemon = enemyTrainer.getPokemon(0).get();
         int currentPokemonHp = currentPokemon.getActualStats().get("hp").getCurrentValue();
 
         if (currentPokemonHp <= 0) {
+
+            if (this.usePokemonInOrder) {
+                this.orderSwitchIn();
+            } else {
+                this.typeBasedSwitchIn();
+            }
+
             return true;
         }
 
         if (canSwitch(currentPokemon)) {
+            // Setta una varibile globale con il pokemon da switchare
 
         }
 
@@ -99,8 +120,8 @@ public class EnemyAiImpl {
 
     public List<String> nextMove() {
 
-        if(shouldSwitch()){
-            return
+        if(enemyTrainer.getPokemon(1).isPresent() && shouldSwitch()){
+            return ["Switch",this.switchPosition];
         }
 
     }
