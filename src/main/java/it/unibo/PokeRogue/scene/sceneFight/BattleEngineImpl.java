@@ -18,7 +18,7 @@ public class BattleEngineImpl implements BattleEngine {
     private final MoveFactoryImpl moveFactoryInstance;
     private final static Integer FIRST_POSITION = 0;
     private final PokemonFactory pokemonFactory;
-    private final Pokemon pokemonGenerated;
+    private Pokemon pokemonGenerated;
     private final int enemyLevel;
 
     public BattleEngineImpl(int enemyLevel, MoveFactoryImpl moveFactoryInstance) {
@@ -85,8 +85,8 @@ public class BattleEngineImpl implements BattleEngine {
         playerMove.setPp(playerMove.getPp() - 1);
 
         int finalDamage = (int) damageBase;
-        int newHp = defenderPokemon.getHp().getCurrentValue() - finalDamage;
-        defenderPokemon.setHp(newHp);
+        int newHp = defenderPokemon.getActualStats().get("hp").getCurrentValue() - finalDamage;
+        defenderPokemon.getActualStats().get("hp").setCurrentValue(newHp);
 
     }
 
@@ -108,6 +108,7 @@ public class BattleEngineImpl implements BattleEngine {
                 break;
             case "Pokeball":
                 executeObject(movePosition);
+                this.newEnemyCheck();
                 break;
             case "Attack":
                 String move = playerTrainerInstance.getPokemon(FIRST_POSITION).get().getActualMoves()
@@ -116,9 +117,11 @@ public class BattleEngineImpl implements BattleEngine {
                 if (this.calculatePriority(move, enemyMove)) {
                     this.executeMoves(move, playerTrainerInstance, enemyTrainerInstance);
                     this.executeMoves(enemyMove, enemyTrainerInstance, playerTrainerInstance);
+                    this.newEnemyCheck();
                 } else {
                     this.executeMoves(enemyMove, enemyTrainerInstance, playerTrainerInstance);
                     this.executeMoves(move, playerTrainerInstance, enemyTrainerInstance);
+                    this.newEnemyCheck();
                 }
                 break;
 
@@ -128,15 +131,35 @@ public class BattleEngineImpl implements BattleEngine {
 
     }
 
+    private void newEnemyCheck() {
+        if (enemyTrainerInstance.getPokemon(FIRST_POSITION).get().getActualStats().get("hp").getCurrentValue() <= 0) {
+            this.pokemonGenerated = pokemonFactory.randomPokemon(enemyLevel);
+            this.enemyTrainerInstance.removePokemon(FIRST_POSITION);
+            this.enemyTrainerInstance.addPokemon(pokemonGenerated, 1);
+        }
+        else if (playerTrainerInstance.getPokemon(FIRST_POSITION).get().getActualStats().get("hp").getCurrentValue() <= 0) {
+            for (int i = 1; i < playerTrainerInstance.getSquad().size(); i++) {
+                if (playerTrainerInstance.getPokemon(i).isPresent() &&
+                    playerTrainerInstance.getPokemon(i).get().getActualStats().get("hp").getCurrentValue() > 0) {
+                    this.switchIn(String.valueOf(i));
+                    break;
+                }
+                else {
+                    System.out.println("dead --> TO DO");
+                }
+            }
+        }
+    }
+
     private Boolean calculatePriority(String moveString, String enemyMoveString) {
         Move playerMove = moveFactoryInstance.moveFromName(moveString);
         Move enemyMove = moveFactoryInstance.moveFromName(enemyMoveString);
         if (playerMove.getPriority() > enemyMove.getPriority()) {
             return true;
         }
-        // else if(playerTrainerInstance.getPokemon(FIRST_POSITION).get()) {
-        // check della speed
-        // }
+        else if(playerTrainerInstance.getPokemon(FIRST_POSITION).get().getActualStats().get("speed").getCurrentValue() > enemyTrainerInstance.getPokemon(FIRST_POSITION).get().getActualStats().get("speed").getCurrentValue()) {
+            return true;
+        }
         else {
             return false;
         }

@@ -60,8 +60,6 @@ public class SceneFight implements Scene {
         private void initStatus() {
                 this.currentSelectedButton = SceneFightGraphicEnum.FIGHT_BUTTON.value();
                 this.newSelectedButton = SceneFightGraphicEnum.FIGHT_BUTTON.value();
-                this.updatingLifeStats(enemyTrainerInstance);
-                this.updatingLifeStats(playerTrainerInstance);
         }
 
         private void initGraphicElements() {
@@ -123,21 +121,21 @@ public class SceneFight implements Scene {
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.MY_POKEMON_ACTUAL_LIFE_TEXT.value(),
                                 new TextElementImpl("firstPanel",
                                                 String.valueOf(playerTrainerInstance.getPokemon(FIRST_POSITION).get()
-                                                                .getHp().getCurrentValue())
+                                                                .getActualStats().get("hp").getCurrentValue())
                                                                 + " / "
                                                                 + String.valueOf(playerTrainerInstance
                                                                                 .getPokemon(FIRST_POSITION).get()
-                                                                                .getHp().getCurrentMax()),
+                                                                                .getActualStats().get("hp").getCurrentMax()),
                                                 Color.WHITE,
                                                 0.04, 0.81, 0.64));
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.ENEMY_POKEMON_ACTUAL_LIFE_TEXT.value(),
                                 new TextElementImpl("firstPanel",
                                                 String.valueOf(enemyTrainerInstance.getPokemon(FIRST_POSITION).get()
-                                                                .getHp().getCurrentValue())
+                                                                .getActualStats().get("hp").getCurrentValue())
                                                                 + " / "
                                                                 + String.valueOf(enemyTrainerInstance
                                                                                 .getPokemon(FIRST_POSITION).get()
-                                                                                .getHp().getCurrentMax()),
+                                                                                .getActualStats().get("hp").getCurrentMax()),
                                                 Color.WHITE,
                                                 0.04, 0.12, 0.06));
                 // TEXT EXP
@@ -665,31 +663,16 @@ public class SceneFight implements Scene {
 
                 // Se il Pokémon esiste, calcola e ritorna la vita
                 Pokemon pokemon = pokemonOpt.get();
-                Integer currentHp = pokemon.getHp().getCurrentValue();
-                Integer maxHp = pokemon.getHp().getCurrentMax();
+                Integer currentHp = pokemon.getActualStats().get("hp").getCurrentValue();
+                Integer maxHp = pokemon.getActualStats().get("hp").getCurrentMax();
 
                 return currentHp + " / " + maxHp;
         }
 
         public void fightLoop(String playerMoveType, String playerMove) {
-                this.updatingLifeStats(enemyTrainerInstance);
-                this.updatingLifeStats(playerTrainerInstance);
                 // TO FIX ENEMY
                 this.battleEngineInstance.movesPriorityCalculator(playerMoveType, playerMove,
                                 "absorb");
-        }
-
-        private void updatingLifeStats(Trainer trainer) {
-                List<Optional<Pokemon>> pokemonSquad = trainer.getSquad();
-                for (Optional<Pokemon> optionalPokemon : pokemonSquad) {
-                        optionalPokemon.ifPresent(pokemon -> {
-                                pokemon.calculateHp(
-                                                pokemon.getActualStats().get("hp").getCurrentMax(),
-                                                pokemon.getIV().get("hp"),
-                                                pokemon.getEV().get("hp").getCurrentValue(),
-                                                pokemon.getLevel().getCurrentValue());
-                        });
-                }
         }
 
 }

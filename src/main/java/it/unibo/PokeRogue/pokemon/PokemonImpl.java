@@ -19,7 +19,6 @@ import java.awt.Image;
 @Setter
 @ToString
 public final class PokemonImpl implements Pokemon {
-	private Range<Integer> hp;
 	@Getter(AccessLevel.NONE)
 	final private Random random = new Random();
 	@Getter(AccessLevel.NONE)
@@ -148,10 +147,9 @@ public final class PokemonImpl implements Pokemon {
 		int maxLife = (int) Math.floor(((2 * this.baseStats.get("hp") + this.IV.get("hp")
 				+ (this.EV.get("hp").getCurrentValue() / 4)) * this.level.getCurrentValue()) / 100)
 				+ this.level.getCurrentValue() + 10;
-
 		Range<Integer> rangeHp = new RangeImpl<Integer>(0, maxLife, maxLife);
 		actualStats.put("hp", rangeHp);
-		for (String stat : statNames) {
+		for (String stat : statNames.subList(1,statNames.size()-1)) {
 
 			int statValue = (int) Math.round(
 					Math.floor(
@@ -168,7 +166,6 @@ public final class PokemonImpl implements Pokemon {
 			Range<Integer> rangeStat = new RangeImpl<Integer>(0, 255, statValue);
 			actualStats.put(stat, rangeStat);
 		}
-
 	}
 
 	private void calculateNewExpRange() {
@@ -263,23 +260,5 @@ public final class PokemonImpl implements Pokemon {
 			res.add(this.type2.get());
 		}
 		return res;
-	}
-
-	@Override
-	public void calculateHp(Integer actualStat, Integer iv, Integer ev, Integer level) {
-		Integer hpMax = (((2 * actualStat + iv + (ev / 4)) * level) / 100) + level + 10;
-		if (this.hp == null) {
-			this.hp = new RangeImpl<Integer>(0, hpMax, hpMax);
-		} else {
-			this.hp.setCurrentMax(hpMax);
-			if (this.hp.getCurrentValue() > hpMax) {
-				this.hp.setCurrentValue(hpMax);
-			}
-		}
-	}
-
-	@Override
-	public void setHp(int newVal) {
-		this.hp.setCurrentValue(newVal);
 	}
 }
