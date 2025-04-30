@@ -1,0 +1,17 @@
+{
+    "id": 20,
+    "name": "X Accuracy",
+    "type": "boost",
+    "description": "Raises the user's accuracy for 5 battles.",
+    "price": 500,
+    "rarity": "Common",
+    "category": "Consumable",
+    "captureRate": 0,
+    "effect": {
+        "statBoost": {
+            "stat": "accuracy",
+            "stages": 1
+        },
+        "duration": 5
+    }
+}

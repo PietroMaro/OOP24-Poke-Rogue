@@ -1,0 +1,17 @@
+{
+    "id": 18,
+    "name": "X Sp. Atk",
+    "type": "boost",
+    "description": "Raises the user's Special Attack stat for 5 battles.",
+    "price": 500,
+    "rarity": "Common",
+    "category": "Consumable",
+    "captureRate": 0,
+    "effect": {
+        "statBoost": {
+            "stat": "special-attack",
+            "stages": 1
+        },
+        "duration": 5
+    }
+}

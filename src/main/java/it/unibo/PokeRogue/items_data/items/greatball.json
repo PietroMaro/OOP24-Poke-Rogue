@@ -1,0 +1,13 @@
+{
+    "id": 1,
+    "name": "Great Ball",
+    "type": "capture",
+    "description": "A Poké Ball with a refined capture rate.",
+    "price": 600,
+    "rarity": "Great",
+    "category": "Consumable",
+    "captureRate": 1.5,
+    "effect": {
+        "bonus": null
+    }
+}

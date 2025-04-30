@@ -1,0 +1,13 @@
+{
+    "id": 3,
+    "name": "Poké Ball",
+    "type": "capture",
+    "description": "A standard Poké Ball.",
+    "price": 200,
+    "rarity": "Common",
+    "category": "Consumable",
+    "captureRate": 1.0,
+    "effect": {
+        "bonus": null
+    }
+}

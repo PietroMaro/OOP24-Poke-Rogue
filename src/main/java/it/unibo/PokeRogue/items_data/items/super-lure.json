@@ -1,0 +1,14 @@
+{
+    "id": 24,
+    "name": "Super Lure",
+    "type": "boost",
+    "description": "Significantly increases the chances of encountering a double battle.",
+    "price": 5000,
+    "rarity": "Rare",
+    "category": "Consumable",
+    "captureRate": 0,
+    "effect": {
+        "DoubleBattleModificator": 4.0,
+        "duration": 15
+    }
+}

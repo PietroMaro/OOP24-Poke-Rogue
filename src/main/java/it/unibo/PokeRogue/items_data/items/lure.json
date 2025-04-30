@@ -1,0 +1,14 @@
+{
+    "id": 23,
+    "name": "Lure",
+    "type": "boost",
+    "description": "Increases the chances of encountering a double battle.",
+    "price": 2000,
+    "rarity": "Common",
+    "category": "Consumable",
+    "captureRate": 0,
+    "effect": {
+        "DoubleBattleModificator": 4.0,
+        "duration": 10
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "id": 16,
+    "name": "X Defense",
+    "type": "boost",
+    "description": "Raises the user's Defense stat for 5 battles.",
+    "price": 500,
+    "rarity": "Common",
+    "category": "Consumable",
+    "captureRate": 0,
+    "effect": {
+        "statBoost": {
+            "stat": "defense",
+            "stages": 1
+        },
+        "duration": 5
+    }
+}

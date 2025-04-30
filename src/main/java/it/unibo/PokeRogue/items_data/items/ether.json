@@ -1,0 +1,14 @@
+{
+    "id": 11,
+    "name": "Ether",
+    "type": "PPRestore",
+    "description": "Restores 10 PP to a single move of a Pokémon.",
+    "price": 1200,
+    "rarity": "Uncommon",
+    "category": "Consumable",
+    "captureRate": 0,
+    "effect": {
+        "restorePP": 10,
+        "target": "singleMove"
+    }
+}

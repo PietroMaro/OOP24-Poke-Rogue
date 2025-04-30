@@ -1,0 +1,14 @@
+{
+    "id": 12,
+    "name": "Max Ether",
+    "type": "PPRestore",
+    "description": "Fully restores the PP of a single move of a Pokémon.",
+    "price": 2000,
+    "rarity": "Rare",
+    "category": "Consumable",
+    "captureRate": 0,
+    "effect": {
+        "restorePP": "full",
+        "target": "singleMove"
+    }
+}

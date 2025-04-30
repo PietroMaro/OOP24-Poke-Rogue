@@ -1,0 +1,17 @@
+{
+    "id": 15,
+    "name": "X Attack",
+    "type": "boost",
+    "description": "Raises the user's Attack stat for 5 battles.",
+    "price": 500,
+    "rarity": "Common",
+    "category": "Consumable",
+    "captureRate": 0,
+    "effect": {
+        "statBoost": {
+            "stat": "attack",
+            "stages": 1
+        },
+        "duration": 5
+    }
+}
