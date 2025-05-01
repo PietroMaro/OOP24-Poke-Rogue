@@ -14,14 +14,13 @@
         "specialAttack": 80
     },
     "moves": {
-        "1": "charge",
+        "1": "spark",
         "34": "rollout",
         "48": "swift",
         "59": "mirror-coat",
         "27": "self-destruct",
         "41": "light-screen",
-        "54": "explosion",
-        "21": "spark"
+        "54": "explosion"
     },
     "growthRate": "medium",
     "name": "electrode",
