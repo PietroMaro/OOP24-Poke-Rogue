@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene.sceneBox;
+package it.unibo.PokeRogue.scene.sceneBox.enums;
 
 public enum SceneBoxStatusValuesEnum {
 
