@@ -1,7 +1,7 @@
 {
     "id": 2,
     "name": "Master Ball",
-    "type": "capture",
+    "type": "Capture",
     "description": "the definitive Poké Ball.",
     "price": 5000,
     "rarity": "Master",

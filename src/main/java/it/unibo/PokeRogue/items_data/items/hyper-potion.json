@@ -1,10 +1,10 @@
 {
     "id": 7,
     "name": "Hyper Potion",
-    "type": "healing",
+    "type": "Healing",
     "description": "Restores 120 HP to a single Pokémon.",
     "price": 1200,
-    "rarity": "Uncommon",
+    "rarity": "Great",
     "category": "Consumable",
     "captureRate": 0.0,
     "effect": {

@@ -1,0 +1,17 @@
+{
+    "id": 29,
+    "name": "Vitamins",
+    "type": "Equipment",
+    "description": "Increases the holder's base stat by 10%.",
+    "price": 7500,
+    "rarity": "Great",
+    "category": "Equipable",
+    "captureRate": 0,
+    "effect": {
+        "statBoost": {
+            "stat": "all",
+            "stages": 1
+        },
+        "duration": "whileEquiped"
+    }
+}

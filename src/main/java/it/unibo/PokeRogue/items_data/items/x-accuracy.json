@@ -1,7 +1,7 @@
 {
     "id": 20,
     "name": "X Accuracy",
-    "type": "boost",
+    "type": "Boost",
     "description": "Raises the user's accuracy for 5 battles.",
     "price": 500,
     "rarity": "Common",

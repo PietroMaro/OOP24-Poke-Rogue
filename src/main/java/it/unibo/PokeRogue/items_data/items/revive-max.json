@@ -1,14 +1,14 @@
 {
     "id": 10,
     "name": "Max Revive",
-    "type": "healing",
+    "type": "Healing",
     "description": "Revives a Pokémon with full HP.",
     "price": 4000,
-    "rarity": "Rare",
+    "rarity": "Great",
     "category": "Consumable",
     "captureRate": 0,
     "effect": {
         "revive": true,
-        "hpRestore": "full"
+        "hpRestore": "max"
     }
 }

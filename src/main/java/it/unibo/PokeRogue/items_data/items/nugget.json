@@ -1,0 +1,13 @@
+{
+    "id": 25,
+    "name": "Nugget",
+    "type": "Valuable",
+    "description": "A nugget of pure gold that gives the player 2500 money.",
+    "price": 0,
+    "rarity": "Great",
+    "category": "Treasure",
+    "captureRate": 0,
+    "effect": {
+      "giveMoney": 2500
+    }
+  }

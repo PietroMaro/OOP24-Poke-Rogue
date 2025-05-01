@@ -1,0 +1,14 @@
+{
+    "id": 24,
+    "name": "PP Max",
+    "type": "Boost",
+    "description": "Acts like 3 PP Ups",
+    "price": 7500,
+    "rarity": "Ultra",
+    "category": "Consumable",
+    "captureRate": 0,
+    "effect": {
+      "boostPP": 0.60,
+      "target": "singleMove"
+    }
+  }

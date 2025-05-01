@@ -1,7 +1,7 @@
 {
     "id": 3,
     "name": "Poké Ball",
-    "type": "capture",
+    "type": "Capture",
     "description": "A standard Poké Ball.",
     "price": 200,
     "rarity": "Common",

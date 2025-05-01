@@ -4,7 +4,7 @@
     "type": "PPRestore",
     "description": "Restores 10 PP to each of a Pokémon's moves.",
     "price": 3000,
-    "rarity": "Rare",
+    "rarity": "Great",
     "category": "Consumable",
     "captureRate": 0,
     "effect": {

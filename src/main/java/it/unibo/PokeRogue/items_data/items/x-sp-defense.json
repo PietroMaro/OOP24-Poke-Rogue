@@ -1,7 +1,7 @@
 {
     "id": 19,
     "name": "X Sp. Def",
-    "type": "boost",
+    "type": "Boost",
     "description": "Raises the user's Special Defense stat for 5 battles.",
     "price": 500,
     "rarity": "Common",

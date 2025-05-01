@@ -1,10 +1,10 @@
 {
     "id": 22,
     "name": "Rareer Candy",
-    "type": "boost",
+    "type": "Boost",
     "description": "A rare candy that  increases the level of all Pokémon in your squad by 1.",
     "price": 10000,
-    "rarity": "Rare",
+    "rarity": "Ultra",
     "category": "Consumable",
     "captureRate": 0,
     "effect": {

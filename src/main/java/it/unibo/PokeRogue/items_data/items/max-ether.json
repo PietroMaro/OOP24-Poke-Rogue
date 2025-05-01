@@ -4,11 +4,11 @@
     "type": "PPRestore",
     "description": "Fully restores the PP of a single move of a Pokémon.",
     "price": 2000,
-    "rarity": "Rare",
+    "rarity": "Common",
     "category": "Consumable",
     "captureRate": 0,
     "effect": {
-        "restorePP": "full",
+        "restorePP": "max",
         "target": "singleMove"
     }
 }

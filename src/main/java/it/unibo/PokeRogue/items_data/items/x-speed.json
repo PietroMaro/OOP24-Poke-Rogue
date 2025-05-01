@@ -1,7 +1,7 @@
 {
     "id": 17,
     "name": "X Speed",
-    "type": "boost",
+    "type": "Boost",
     "description": "Raises the user's Speed stat for 5 battles.",
     "price": 500,
     "rarity": "Common",

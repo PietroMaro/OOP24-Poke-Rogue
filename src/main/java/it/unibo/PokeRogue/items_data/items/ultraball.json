@@ -1,7 +1,7 @@
 {
     "id": 6,
     "name": "Ultra Ball",
-    "type": "capture",
+    "type": "Capture",
     "description": "A Poké Ball with high capture rate.",
     "price": 1200,
     "rarity": "Ultra",

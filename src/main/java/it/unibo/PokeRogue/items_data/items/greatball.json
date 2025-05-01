@@ -1,7 +1,7 @@
 {
     "id": 1,
     "name": "Great Ball",
-    "type": "capture",
+    "type": "Capture",
     "description": "A Poké Ball with a refined capture rate.",
     "price": 600,
     "rarity": "Great",

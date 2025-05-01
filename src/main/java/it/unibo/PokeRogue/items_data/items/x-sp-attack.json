@@ -1,7 +1,7 @@
 {
     "id": 18,
     "name": "X Sp. Atk",
-    "type": "boost",
+    "type": "Boost",
     "description": "Raises the user's Special Attack stat for 5 battles.",
     "price": 500,
     "rarity": "Common",

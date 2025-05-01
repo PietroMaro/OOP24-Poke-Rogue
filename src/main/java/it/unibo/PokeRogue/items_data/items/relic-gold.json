@@ -1,0 +1,13 @@
+{
+    "id": 28,
+    "name": "Relic gold",
+    "type": "Valuable",
+    "description": "A relic of pure gold that gives the player 10000 money.",
+    "price": 0,
+    "rarity": "Master",
+    "category": "Treasure",
+    "captureRate": 0,
+    "effect": {
+        "giveMoney": 12000
+    }
+}

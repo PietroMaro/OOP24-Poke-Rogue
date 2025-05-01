@@ -1,7 +1,7 @@
 {
     "id": 16,
     "name": "X Defense",
-    "type": "boost",
+    "type": "Boost",
     "description": "Raises the user's Defense stat for 5 battles.",
     "price": 500,
     "rarity": "Common",

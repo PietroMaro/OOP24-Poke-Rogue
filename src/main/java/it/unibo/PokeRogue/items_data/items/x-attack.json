@@ -1,7 +1,7 @@
 {
     "id": 15,
     "name": "X Attack",
-    "type": "boost",
+    "type": "Boost",
     "description": "Raises the user's Attack stat for 5 battles.",
     "price": 500,
     "rarity": "Common",
