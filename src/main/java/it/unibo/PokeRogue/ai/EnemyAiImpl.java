@@ -11,7 +11,6 @@ public class EnemyAiImpl implements EnemyAi {
     private final EnemyAiSwitchIn aiOfSwitchIn;
 
     // Flags
-    private boolean predictMoveFailure = false;
     private boolean scoreMoves = false;
     private boolean hpAware = false;
     private boolean usePokemonInOrder = true;
@@ -41,7 +40,6 @@ public class EnemyAiImpl implements EnemyAi {
     private void initFlags() {
 
         if (battleLvl >= 15) {
-            this.predictMoveFailure = true;
             this.scoreMoves = true;
             this.usePokemonInOrder = false;
 
