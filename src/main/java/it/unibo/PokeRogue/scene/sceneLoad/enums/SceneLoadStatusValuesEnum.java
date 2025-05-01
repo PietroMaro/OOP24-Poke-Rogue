@@ -1,13 +1,12 @@
-package it.unibo.PokeRogue.scene.sceneLoad;
+package it.unibo.PokeRogue.scene.sceneLoad.enums;
 
 public enum SceneLoadStatusValuesEnum {
-    
+
     ABSOLUTE_FIRST_SAVE_POSITION(0),
 
     LAST_SAVE_POSITION(9),
 
     NUMBER_OF_SAVE_SHOWED(10);
-
 
     private final int code;
 

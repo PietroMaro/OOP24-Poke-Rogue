@@ -6,13 +6,13 @@ import it.unibo.PokeRogue.pokemon.Type;
 import it.unibo.PokeRogue.pokemon.TypeColors;
 
 public class ColorTypeConversion {
-     public static Color getColorForType(Type type) {
+    public static Color getColorForType(Type type) {
         try {
-            // Cerca l'enum in TypeColors con lo stesso nome
+
             return TypeColors.valueOf(type.name()).typeColor();
         } catch (IllegalArgumentException e) {
             // Se non c'è corrispondenza
-            return Color.BLACK; // fallback o throw se preferisci
+            return Color.BLACK;
         }
     }
 }

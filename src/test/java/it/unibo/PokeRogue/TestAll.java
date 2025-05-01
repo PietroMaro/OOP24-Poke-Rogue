@@ -93,10 +93,10 @@ public class TestAll {
 		MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
 		Move moveTest1 = moveFactory.moveFromName("absorb");
 		Move moveTest2 = moveFactory.moveFromName("absorb");
-		moveTest1.setPp(0);
+		moveTest1.getPp().setCurrentValue(0);;
 		assertNotSame(moveTest1,moveTest2);
-		assertNotSame(moveTest2.getPp(),0);
-		assertEquals(moveTest1.getPp(),0);
+		assertNotSame(moveTest2.getPp().getCurrentValue(),0);
+		assertEquals(moveTest1.getPp().getCurrentValue(),0);
 	}
 
 
