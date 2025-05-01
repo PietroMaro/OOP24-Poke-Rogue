@@ -1,6 +1,4 @@
 package it.unibo.PokeRogue.move;
-import it.unibo.PokeRogue.utilities.Range;
-
 import org.json.JSONObject;
 import it.unibo.PokeRogue.pokemon.Type;
 import lombok.Data;
@@ -9,8 +7,7 @@ import lombok.AllArgsConstructor;
 @Data
 @AllArgsConstructor
 public class Move{
-	private String name;
-	private Range<Integer> pp;
+	private int pp;
 	private boolean isPhysical;	
 	private JSONObject effect;
 	private int accuracy;
@@ -24,7 +21,6 @@ public class Move{
 
 	public Move deepCopy() {
 	    return new Move(
-			this.name,
 	        this.pp,
 	        this.isPhysical,
 	        new JSONObject(this.effect.toString()), 
