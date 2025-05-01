@@ -102,6 +102,7 @@ public class BattleEngineImpl implements BattleEngine {
 
     @Override
     public void movesPriorityCalculator(String type, String movePosition, String enemyMove) {
+        this.newEnemyCheck();
         switch (type) {
             case "SwitchIn":
                 switchIn(movePosition);
@@ -117,17 +118,17 @@ public class BattleEngineImpl implements BattleEngine {
                 if (this.calculatePriority(move, enemyMove)) {
                     this.executeMoves(move, playerTrainerInstance, enemyTrainerInstance);
                     this.executeMoves(enemyMove, enemyTrainerInstance, playerTrainerInstance);
-                    this.newEnemyCheck();
                 } else {
                     this.executeMoves(enemyMove, enemyTrainerInstance, playerTrainerInstance);
                     this.executeMoves(move, playerTrainerInstance, enemyTrainerInstance);
-                    this.newEnemyCheck();
                 }
                 break;
 
             default:
                 break;
         }
+        this.newEnemyCheck();
+
 
     }
 

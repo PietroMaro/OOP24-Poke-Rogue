@@ -1,7 +1,5 @@
 package it.unibo.PokeRogue.pokemon;
 
-import it.unibo.PokeRogue.move.Move;
-import it.unibo.PokeRogue.move.MoveFactoryImpl;
 import it.unibo.PokeRogue.utilities.Range;
 import it.unibo.PokeRogue.utilities.RangeImpl;
 import java.util.Optional;
@@ -22,13 +20,12 @@ import java.awt.Image;
 @ToString
 public final class PokemonImpl implements Pokemon {
 	@Getter(AccessLevel.NONE)
-	private MoveFactoryImpl moveFactoryInstance;
-	@Getter(AccessLevel.NONE)
 	final private Random random = new Random();
 	@Getter(AccessLevel.NONE)
 	final private List<String> statNames = new ArrayList<>(
 			Arrays.asList("hp", "attack", "defense", "specialAttack", "specialDefense", "speed"));
 	private int totalUsedEV = 0;
+
 	private Map<String, Integer> baseStats;
 	private Nature nature;
 	private Map<String, Integer> IV; // 0-31 random when spawned
@@ -37,7 +34,7 @@ public final class PokemonImpl implements Pokemon {
 	private Map<String, Range<Integer>> actualStats;
 	private Map<String, Range<Integer>> tempStatsBonus;
 	private Map<Integer, String> levelMovesLearn;
-	private List<Move> actualMoves = new ArrayList<Move>();
+	private List<String> actualMoves = new ArrayList<String>();
 	private String levelUpCurve; // https://m.bulbapedia.bulbagarden.net/wiki/Experience
 	private Map<String, Integer> givesEV;
 	private Range<Integer> exp;
@@ -55,7 +52,7 @@ public final class PokemonImpl implements Pokemon {
 	private Optional<StatusCondition> statusCondition;
 
 	private boolean hasToLearnMove = false;
-	private Optional<Move> newMoveToLearn = Optional.empty();
+	private Optional<String> newMoveToLearn = Optional.empty();
 
 	private Image spriteFront;
 	private Image spriteBack;
@@ -139,7 +136,7 @@ public final class PokemonImpl implements Pokemon {
 	private void initActualMoves() {
 		for (int key : this.levelMovesLearn.keySet()) {
 			if (key == 1) {
-				this.actualMoves.add(moveFactoryInstance.moveFromName(this.levelMovesLearn.get(key)));
+				this.actualMoves.add(this.levelMovesLearn.get(key));
 			}
 		}
 	}
@@ -209,13 +206,13 @@ public final class PokemonImpl implements Pokemon {
 		if (this.levelMovesLearn.keySet().contains(this.level.getCurrentValue())) {
 			String moveToLearn = this.levelMovesLearn.get(this.level.getCurrentValue());
 			if (this.actualMoves.size() < 4) {
-				this.actualMoves.add(moveFactoryInstance.moveFromName(moveToLearn));
+				this.actualMoves.add(moveToLearn);
 			} else {
 				if (!isPlayerPokemon) {
-					this.actualMoves.set(random.nextInt(4), moveFactoryInstance.moveFromName(moveToLearn));
+					this.actualMoves.set(random.nextInt(4), moveToLearn);
 				} else {
 					this.hasToLearnMove = true;
-					this.newMoveToLearn = Optional.of(moveFactoryInstance.moveFromName(moveToLearn));
+					this.newMoveToLearn = Optional.of(moveToLearn);
 				}
 			}
 		}
