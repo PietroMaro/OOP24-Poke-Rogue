@@ -46,12 +46,12 @@ public class SceneFight implements Scene {
 
         public SceneFight() {
                 this.sceneGraphicElements = new LinkedHashMap<>();
-                this.allPanelsElements = new LinkedHashMap<>();                
+                this.allPanelsElements = new LinkedHashMap<>();
                 this.moveFactoryInstance = new MoveFactoryImpl();
                 this.battleEngineInstance = new BattleEngineImpl(0, moveFactoryInstance);
                 this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-                this.enemyTrainerInstance = battleEngineInstance.getEnemyTrainerInstance(); 
+                this.enemyTrainerInstance = battleEngineInstance.getEnemyTrainerInstance();
 
                 this.initStatus();
                 this.initGraphicElements();
@@ -125,7 +125,8 @@ public class SceneFight implements Scene {
                                                                 + " / "
                                                                 + String.valueOf(playerTrainerInstance
                                                                                 .getPokemon(FIRST_POSITION).get()
-                                                                                .getActualStats().get("hp").getCurrentMax()),
+                                                                                .getActualStats().get("hp")
+                                                                                .getCurrentMax()),
                                                 Color.WHITE,
                                                 0.04, 0.81, 0.64));
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.ENEMY_POKEMON_ACTUAL_LIFE_TEXT.value(),
@@ -135,7 +136,8 @@ public class SceneFight implements Scene {
                                                                 + " / "
                                                                 + String.valueOf(enemyTrainerInstance
                                                                                 .getPokemon(FIRST_POSITION).get()
-                                                                                .getActualStats().get("hp").getCurrentMax()),
+                                                                                .getActualStats().get("hp")
+                                                                                .getCurrentMax()),
                                                 Color.WHITE,
                                                 0.04, 0.12, 0.06));
                 // TEXT EXP
@@ -672,7 +674,7 @@ public class SceneFight implements Scene {
         public void fightLoop(String playerMoveType, String playerMove) {
                 // TO FIX ENEMY
                 this.battleEngineInstance.movesPriorityCalculator(playerMoveType, playerMove,
-                                "absorb");
+                                "Attack", "absorb");
         }
 
 }
