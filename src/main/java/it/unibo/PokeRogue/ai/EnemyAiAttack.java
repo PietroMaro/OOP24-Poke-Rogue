@@ -23,7 +23,7 @@ public class EnemyAiAttack {
     private Pokemon currentPokemon;
     private Random random;
     private Map<Integer, Integer> scoresOfAttacks;
-    List<String> currentPokemonMoves;
+    List<Move> currentPokemonMoves;
     private final MoveFactory moveFactory;
     private final PokeEffectivenessCalc pokeEffectivenessCalculator;
 
@@ -75,7 +75,7 @@ public class EnemyAiAttack {
 
         for (int movePos = 0; movePos < this.currentPokemonMoves.size(); movePos++) {
 
-            moveToBeScored = moveFactory.moveFromName(this.currentPokemonMoves.get(movePos));
+            moveToBeScored = this.currentPokemonMoves.get(movePos);
 
             if (moveToBeScored.isPhysical()) {
                 effectiveness = this.pokeEffectivenessCalculator.calculateAttackEffectiveness(moveToBeScored,

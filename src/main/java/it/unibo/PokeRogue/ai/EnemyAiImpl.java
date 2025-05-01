@@ -33,7 +33,7 @@ public class EnemyAiImpl implements EnemyAi {
     public List<String> nextMove() {
         List<String> decision = this.aiOfSwitchIn.willSwitchIn();
 
-        if (decision.get(0).equals("Switch")) {
+        if (decision.get(0).equals("SwitchIn")) {
             return decision;
         }
 

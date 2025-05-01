@@ -5,7 +5,7 @@ import it.unibo.PokeRogue.pokemon.Pokemon;
 
 public interface PokeEffectivenessCalc {
 
-    int calculateEffectiveness(final Pokemon myPokemon, final Pokemon enemyPokemon);
+    int calculateEffectiveness(final Pokemon attackingPokemon , final Pokemon defendingPokemon);
 
     public double calculateAttackEffectiveness(final Move move, final Pokemon enemyPokemon);
 }
