@@ -26,7 +26,6 @@ public class TextElementImpl extends GraphicElementImpl {
         this.leftY = leftY;
         this.textFont = textDimension;
         this.textColor = textColor;
-
     }
 
     @Override

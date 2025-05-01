@@ -22,7 +22,7 @@ import java.awt.Image;
 @ToString
 public final class PokemonImpl implements Pokemon {
 	@Getter(AccessLevel.NONE)
-	private MoveFactoryImpl moveFactoryInstance;
+	private MoveFactoryImpl moveFactoryInstance = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
 	@Getter(AccessLevel.NONE)
 	final private Random random = new Random();
 	@Getter(AccessLevel.NONE)
