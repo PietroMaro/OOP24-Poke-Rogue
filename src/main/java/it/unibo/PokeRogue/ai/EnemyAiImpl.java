@@ -9,6 +9,7 @@ public class EnemyAiImpl implements EnemyAi {
     private final Trainer enemyTrainer;
     private final int battleLvl;
     private final EnemyAiSwitchIn aiOfSwitchIn;
+    private final EnemyAiAttack aiOfAttack;
 
     // Flags
     private boolean scoreMoves = false;
@@ -25,12 +26,20 @@ public class EnemyAiImpl implements EnemyAi {
         this.aiOfSwitchIn = new EnemyAiSwitchIn(this.usePokemonInOrder, this.considerSwitching, this.switchFirstRate,
                 this.enemyTrainer);
 
+        this.aiOfAttack = new EnemyAiAttack(scoreMoves, hpAware, enemyTrainer);
+
     }
 
     public List<String> nextMove() {
         List<String> decision = this.aiOfSwitchIn.willSwitchIn();
 
         if (decision.get(0).equals("Switch")) {
+            return decision;
+        }
+
+        decision = this.aiOfAttack.whatAttackWillDo();
+
+        if(decision.get(0).equals("Attack")){
             return decision;
         }
 

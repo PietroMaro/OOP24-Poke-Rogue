@@ -96,6 +96,10 @@ public class EnemyAiAttack {
 
     }
 
+    private void scoreForDamage(){
+
+    }
+
     private void chooseAttack() {
 
         if (!this.scoreMoves) {
@@ -105,7 +109,7 @@ public class EnemyAiAttack {
             this.scoreForEffectiveness();
 
             if (this.hpAware) {
-
+                this.scoreForDamage();
             }
 
             // Prendi l'index del valore maggiore in this.scoresOfAttacks e mettilo come
