@@ -215,7 +215,7 @@ public class SceneBoxUpdateView {
 
                     new TextElementImpl("pokemonPanel",
                             this.utilityClass.capitalizeFirst(
-                                    selectedPokemon.getActualMoves().get(0)),
+                                    selectedPokemon.getActualMoves().get(0).getName()),
                             Color.WHITE, 0.06, 0.252, 0.207));
 
             this.sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_MOVE_BOX_1.value(),
