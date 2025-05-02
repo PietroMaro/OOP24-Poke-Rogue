@@ -28,6 +28,7 @@ import it.unibo.PokeRogue.effectParser.EffectParserImpl;
 import it.unibo.PokeRogue.pokemon.Type;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
+import it.unibo.PokeRogue.utilities.RangeImpl;
 
 
 
@@ -69,7 +70,9 @@ public class TestAll {
 			moveFactory.moveFromName("nonExisting");
     	});
 		assertEquals(ex.getMessage(),"The move nonExisting blueprint was not found. Is not present in moveList / Factory not initialized");
-		assertEquals(moveTest.getPp(),25);
+		assertEquals(moveTest.getPp().getCurrentMax(),25);
+		assertEquals(moveTest.getPp().getCurrentMin(),0);
+		assertEquals(moveTest.getPp().getCurrentValue(),25);
 		assertEquals(moveTest.isPhysical(),false);
 		assertEquals(moveTest.getAccuracy(),100);
 		assertEquals(moveTest.getCritRate(),0);
@@ -93,7 +96,7 @@ public class TestAll {
 		MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
 		Move moveTest1 = moveFactory.moveFromName("absorb");
 		Move moveTest2 = moveFactory.moveFromName("absorb");
-		moveTest1.getPp().setCurrentValue(0);;
+		moveTest1.getPp().setCurrentValue(0);
 		assertNotSame(moveTest1,moveTest2);
 		assertNotSame(moveTest2.getPp().getCurrentValue(),0);
 		assertEquals(moveTest1.getPp().getCurrentValue(),0);
