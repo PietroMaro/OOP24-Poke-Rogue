@@ -1,7 +1,21 @@
 {
     "pp": 25,
     "isPhysical": false,
-    "effect": "The foe is attacked\nwith small flames.\nThe foe may suffer\na burn. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "MATH.random()",
+                "<",
+                "0.1"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "Optional.of(StatusCondition.BURN)"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 40,

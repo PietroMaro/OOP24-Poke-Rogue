@@ -1,7 +1,35 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "The user faints and lowers\nthe foe\u2019s abilities. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.actualStats.hp.currentValue",
+                "0"
+            ],
+            [
+                "enemy.tempStatsBonus.attack.currentValue",
+                "enemy.tempStatsBonus.attack.currentValue - 1"
+            ],
+            [
+                "enemy.tempStatsBonus.defense.currentValue",
+                "enemy.tempStatsBonus.defense.currentValue - 1"
+            ],
+            [
+                "enemy.tempStatsBonus.specialAttack.currentValue",
+                "enemy.tempStatsBonus.specialAttack.currentValue - 1"
+            ],
+            [
+                "enemy.tempStatsBonus.specialDefense.currentValue",
+                "enemy.tempStatsBonus.specialDefense.currentValue - 1"
+            ],
+            [
+                "enemy.tempStatsBonus.speed.currentValue",
+                "enemy.tempStatsBonus.speed.currentValue - 1"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

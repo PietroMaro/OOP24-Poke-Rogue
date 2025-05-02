@@ -1,0 +1,18 @@
+{
+    "situationChecks": "attacked",
+    "effect": {
+        "checks": [
+            [
+                "attackEnemy.type",
+                "==",
+                "Type.GROUND"
+            ]
+        ],
+        "activation": [
+            [
+                "attackEnemy.calculatedDamage",
+                "0"
+            ]
+        ]
+    }
+}

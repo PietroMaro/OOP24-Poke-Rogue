@@ -1,7 +1,15 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "Jabs the foe twice\nusing stingers. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "attackUs.calculatedDamage",
+                "(attackUs.baseDamage * 2)"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 25,

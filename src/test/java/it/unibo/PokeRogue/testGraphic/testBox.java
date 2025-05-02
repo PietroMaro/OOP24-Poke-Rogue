@@ -11,17 +11,17 @@ public class testBox {
 
     public static void main(String[] args) {
         SavingSystem save = SavingSystemImpl.getInstance(SavingSystemImpl.class);
-    PokemonFactory pokfa = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
-    
-        for(int x = 0;x<100;x++){
-            save.savePokemon(pokfa.randomPokemon(1));
+        PokemonFactory pokfa = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+
+        for (int y = 1; y < 12; y++) {
+            for (int x = 0; x < 100; x++) {
+
+                save.savePokemon(pokfa.randomPokemon(1));
+            }
+
+            save.saveData(Paths.get("src", "saves").toString(), "prova" + y + ".json");
+
         }
 
-
-        save.saveData(Paths.get("src", "saves").toString(), "prova1.json");
     }
-    
-
-    
-
 }

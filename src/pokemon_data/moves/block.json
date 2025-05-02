@@ -1,7 +1,15 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "Blocks the foe\u2019s way to\nprevent escape. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "Optional.of(StatusCondition.TRAPPED)"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

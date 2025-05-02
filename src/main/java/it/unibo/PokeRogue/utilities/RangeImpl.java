@@ -1,79 +1,72 @@
 package it.unibo.PokeRogue.utilities;
 
 import java.util.function.BiFunction;
+import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
 
-public class RangeImpl<T extends Comparable<T>> implements Range<T>{
+@ToString
+public class RangeImpl<T extends Number> implements Range<T>{
 
+	@Getter @Setter
     private T currentMin;
+	@Getter @Setter
     private T currentMax;
+	@Getter 
     private T currentValue;
-    private BiFunction<T,T,T> incrementFunc;
-    private BiFunction<T,T,T> decrementFunc;
 
 
 
-    public RangeImpl(T currentMin,T currentMax,T currentValue,BiFunction<T,T,T> incrementFunc,BiFunction<T,T,T> decrementFunc){
+    public RangeImpl(T currentMin,T currentMax,T currentValue){
 
         this.currentMin = currentMin;
         
         this.currentMax = currentMax;
         
         this.currentValue = currentValue;
-        
-        this.incrementFunc = incrementFunc;
-        
-        this.decrementFunc = decrementFunc;
-        
     }
 
     @Override
     public void increment(T x) {
-        T newValue = this.incrementFunc.apply(currentValue, x);
-        if (newValue.compareTo(currentMax) <= 0) {
-            currentValue = newValue;
+        double newValue = this.currentValue.doubleValue() + x.doubleValue();
+        if (newValue <= this.currentMax.doubleValue()) {
+            this.currentValue = convertToType(newValue);
         } else {
-            currentValue = currentMax;
+            this.currentValue = currentMax;
         }
     }
 
     @Override
     public void decrement(T x) {
-        T newValue = this.decrementFunc.apply(currentValue, x);
-        if (newValue.compareTo(currentMin) >= 0) {
-            currentValue = newValue;
+        double newValue = this.currentValue.doubleValue() - x.doubleValue();
+        if (newValue > this.currentMin.doubleValue()) {
+            this.currentValue = convertToType(newValue);
         } else {
-            currentValue = currentMin;
+            this.currentValue = currentMin;
         }
     }
 
-    @Override
-    public T getCurrentMin() {
-        return currentMin;
+	private T convertToType(double value) {
+        if (currentValue instanceof Integer) {
+            return (T) Integer.valueOf((int) value);
+        } else if (currentValue instanceof Double) {
+            return (T) Double.valueOf(value);
+        } else if (currentValue instanceof Long) {
+            return (T) Long.valueOf((long) value);
+        } else if (currentValue instanceof Float) {
+            return (T) Float.valueOf((float) value);
+        }
+        throw new UnsupportedOperationException("Unsupported Number type");
     }
 
-    @Override
-    public T getCurrentMax() {
-        return currentMax;
-    }
-
-    @Override
-    public T getCurrentValue() {
-        return currentValue;
-    }
-
-    @Override
-    public void setCurrentMin(T x) {
-        currentMin = x;
-    }
-
-    @Override
-    public void setCurrentMax(T x) {
-        currentMax = x;
-    }
-
-    @Override
-    public void setCurrentValue(T x) {
-        currentValue = x;
-    }
-
+	@Override
+	public void setCurrentValue(T newValue){
+		this.currentValue = newValue;
+		if(newValue.doubleValue()> this.currentMax.doubleValue()){
+			this.currentValue = currentMax;
+		}
+		if(newValue.doubleValue() < this.currentMin.doubleValue()){
+			this.currentValue = currentMin;
+		}
+	}
 }

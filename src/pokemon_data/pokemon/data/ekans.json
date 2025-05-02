@@ -1,15 +1,17 @@
 {
     "pokedexNumber": 23,
-    "types": ["poison"],
+    "types": [
+        "poison"
+    ],
     "captureRate": 255,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 40,
         "defense": 44,
         "attack": 60,
         "hp": 35,
-        "special-defense": 54,
-        "speed": 55
+        "speed": 55,
+        "specialDefense": 54,
+        "specialAttack": 40
     },
     "moves": {
         "44": "haze",
@@ -26,15 +28,14 @@
     "weight": 69,
     "abilites": [
         "intimidate",
-        "shed-skin",
-        "unnerve"
+        "shed-skin"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 0,
         "attack": 1,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 0
     }
 }

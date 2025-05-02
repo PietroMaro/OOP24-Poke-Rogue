@@ -1,7 +1,15 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "A move that\ninduces sleep. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "Optional.of(StatusCondition.SLEEP)"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

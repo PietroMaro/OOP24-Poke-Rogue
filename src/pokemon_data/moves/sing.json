@@ -1,7 +1,21 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "May cause the foe\nto fall asleep. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "MATH.random()",
+                "<",
+                "0.15"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "Optional.of(StatusCondition.SLEEP)"
+            ]
+        ]
+    },
     "accuracy": 55,
     "critRate": 0,
     "baseDamage": 0,

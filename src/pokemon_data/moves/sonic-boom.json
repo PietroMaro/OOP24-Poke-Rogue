@@ -1,7 +1,15 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "Always inflicts\n20HP damage. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "enemy.actualStats.hp.currentValue",
+                "enemy.actualStats.hp.currentValue - 20"
+            ]
+        ]
+    },
     "accuracy": 90,
     "critRate": 0,
     "baseDamage": 0,

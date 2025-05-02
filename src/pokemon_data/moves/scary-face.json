@@ -1,7 +1,15 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "Sharply reduces\nthe foe's SPEED. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "enemy.tempStatsBonus.speed.currentValue",
+                "enemy.tempStatsBonus.speed.currentValue - 2"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

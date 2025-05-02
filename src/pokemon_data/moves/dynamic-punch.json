@@ -1,7 +1,15 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "An attack that\nalways confuses. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "Optional.of(StatusCondition.CONFUSION)"
+            ]
+        ]
+    },
     "accuracy": 50,
     "critRate": 0,
     "baseDamage": 100,

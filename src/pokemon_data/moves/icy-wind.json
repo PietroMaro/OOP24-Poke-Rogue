@@ -1,7 +1,15 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "An icy attack that\nlowers SPEED. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "enemy.tempStatsBonus.speed.currentValue",
+                "enemy.tempStatsBonus.speed.currentValue - 1"
+            ]
+        ]
+    },
     "accuracy": 95,
     "critRate": 0,
     "baseDamage": 55,

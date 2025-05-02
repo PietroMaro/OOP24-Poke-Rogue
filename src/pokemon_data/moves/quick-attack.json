@@ -1,7 +1,15 @@
 {
     "pp": 30,
     "isPhysical": false,
-    "effect": "Lets the user get\nin the first hit. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "attackUs.priority",
+                "1"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 40,

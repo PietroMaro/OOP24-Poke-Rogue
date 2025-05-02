@@ -1,7 +1,19 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "Always leaves at\nleast 1HP. TODO Create effect and link it here",
+    "effect": {
+        "checks": [[
+            "enemy.actualStats.hp.currentValue",
+            "==",
+            "0"]
+        ],
+        "activation": [
+            [
+                "enemy.actualStats.hp.currentValue",
+                "1"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

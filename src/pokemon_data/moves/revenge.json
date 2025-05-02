@@ -1,7 +1,21 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "An attack that gains power\nif injured by the foe. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "us.actualStats.hp.currentValue",
+                "<",
+                "us.actualStats.hp.currentMax / 2"
+            ]
+        ],
+        "activation": [
+            [
+                "attackUs.baseDamage",
+                "attackUs.baseDamage + 20"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 60,

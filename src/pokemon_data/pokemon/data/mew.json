@@ -4,11 +4,11 @@
     "captureRate": 45,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 100,
+        "specialAttack": 100,
         "defense": 100,
         "attack": 100,
         "hp": 100,
-        "special-defense": 100,
+        "specialDefense": 100,
         "speed": 100
     },
     "moves": {
@@ -24,11 +24,11 @@
     "weight": 40,
     "abilites": ["synchronize"],
     "givesEV": {
-        "special-attack": 0,
+        "specialAttack": 0,
         "defense": 0,
         "attack": 0,
-        "hp": 3,
-        "special-defense": 0,
-        "speed": 0
+        "hp": 0,
+        "specialDefense": 0,
+        "speed": 1
     }
 }

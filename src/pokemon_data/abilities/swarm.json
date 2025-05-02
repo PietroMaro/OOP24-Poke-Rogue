@@ -1,0 +1,23 @@
+{
+    "situationChecks": "attack",
+    "effect": {
+        "checks": [
+            [
+                "attackUs.type",
+                "==",
+                "'bug'"
+            ],
+            [
+                "us.actualStats.hp.currentValue",
+                "<=",
+                "us.actualStats.hp.currentMax / 3"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.attack.currentValue",
+                "us.actualStats.attack.currentValue * 1.3"
+            ]
+        ]
+    }
+}

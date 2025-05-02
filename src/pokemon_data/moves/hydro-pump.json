@@ -1,7 +1,10 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "A powerful water-\ntype attack. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 80,
     "critRate": 0,
     "baseDamage": 110,

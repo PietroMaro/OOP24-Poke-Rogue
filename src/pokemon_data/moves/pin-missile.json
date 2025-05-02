@@ -1,7 +1,15 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "Fires pins that\nstrike 2-5 times. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "attackUs.calculatedDamage",
+                "attackUs.baseDamage - 20"
+            ]
+        ]
+    },
     "accuracy": 95,
     "critRate": 0,
     "baseDamage": 25,

@@ -1,7 +1,21 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "Stronger if the\nuser's HP is low. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "us.actualStats.hp.currentValue",
+                "<",
+                "us.actualStats.hp.currentMax * 0.25"
+            ]
+        ],
+        "activation": [
+            [
+                "attackUs.baseDamage",
+                "attackUs.baseDamage * 2"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

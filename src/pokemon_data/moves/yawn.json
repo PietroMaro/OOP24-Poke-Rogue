@@ -1,7 +1,15 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "Lulls the foe into yawning,\nthen sleeping next turn. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "Optional.of(StatusCondition.SLEEP)"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

@@ -1,7 +1,16 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "Powerful but makes\nthe user faint. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [],
+        "selfEffect": [
+            [
+                "us.actualStats.hp.currentValue",
+                "0"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 200,

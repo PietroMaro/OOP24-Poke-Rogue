@@ -1,15 +1,17 @@
 {
     "pokedexNumber": 107,
-    "types": ["fighting"],
+    "types": [
+        "fighting"
+    ],
     "captureRate": 45,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 35,
         "defense": 79,
         "attack": 105,
         "hp": 50,
-        "special-defense": 110,
-        "speed": 76
+        "speed": 76,
+        "specialDefense": 110,
+        "specialAttack": 35
     },
     "moves": {
         "44": "detect",
@@ -27,15 +29,14 @@
     "weight": 502,
     "abilites": [
         "keen-eye",
-        "iron-fist",
-        "inner-focus"
+        "iron-fist"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 2,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 2,
+        "specialAttack": 0
     }
 }

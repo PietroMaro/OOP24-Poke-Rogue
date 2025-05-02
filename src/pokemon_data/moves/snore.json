@@ -1,7 +1,16 @@
 {
     "pp": 15,
-    "isPhysical": false,
-    "effect": "An attack useable\nonly while asleep. TODO Create effect and link it here",
+    "isPhysical": true,
+    "effect": {
+        "checks": [
+            [
+                "us.statusCondition",
+                "==",
+                "Optional.of(StatusCondition.SLEEP)"
+            ]
+        ],
+        "activation": []
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 50,

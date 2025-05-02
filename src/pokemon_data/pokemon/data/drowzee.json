@@ -1,15 +1,17 @@
 {
     "pokedexNumber": 96,
-    "types": ["psychic"],
+    "types": [
+        "psychic"
+    ],
     "captureRate": 190,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 43,
         "defense": 45,
         "attack": 48,
         "hp": 60,
-        "special-defense": 90,
-        "speed": 42
+        "speed": 42,
+        "specialDefense": 90,
+        "specialAttack": 43
     },
     "moves": {
         "11": "confusion",
@@ -27,16 +29,14 @@
     "name": "drowzee",
     "weight": 324,
     "abilites": [
-        "insomnia",
-        "forewarn",
-        "inner-focus"
+        "insomnia"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 1,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 1,
+        "specialAttack": 0
     }
 }

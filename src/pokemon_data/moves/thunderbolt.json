@@ -1,7 +1,21 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "An attack that may\ncause paralysis. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "MATH.random()",
+                "<",
+                "0.2"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "Optional.of(StatusCondition.PARALYSIS)"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 90,

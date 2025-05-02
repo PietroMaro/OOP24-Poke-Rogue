@@ -1,0 +1,23 @@
+{
+    "situationChecks": "attacked",
+    "effect": {
+        "checks": [
+            [
+                "attackEnemy.type",
+                "==",
+                "'normal'"
+            ],
+            [
+                "attackEnemy.type",
+                "==",
+                "Type.FIGHTING"
+            ]
+        ],
+        "activation": [
+            [
+                "attackUs.calculatedDamage",
+                "0"
+            ]
+        ]
+    }
+}

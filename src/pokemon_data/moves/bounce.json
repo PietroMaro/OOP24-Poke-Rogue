@@ -1,7 +1,15 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "Bounces up, then down the\nnext turn. May paralyze. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "Optional.of(StatusCondition.PARALYSIS)"
+            ]
+        ]
+    },
     "accuracy": 85,
     "critRate": 0,
     "baseDamage": 85,

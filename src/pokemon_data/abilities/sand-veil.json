@@ -1,0 +1,9 @@
+{
+    "situationChecks": "passive",
+    "effect": {
+        "checks": [
+        ],
+        "activation": [
+        ]
+    }
+}

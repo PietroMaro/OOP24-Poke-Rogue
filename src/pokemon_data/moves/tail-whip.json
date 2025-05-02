@@ -1,7 +1,15 @@
 {
     "pp": 30,
     "isPhysical": false,
-    "effect": "Lowers the foe's\nDEFENSE. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "enemy.tempStatsBonus.defense.currentValue",
+                "enemy.tempStatsBonus.defense.currentValue - 2"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

@@ -1,7 +1,15 @@
 {
     "pp": 40,
     "isPhysical": false,
-    "effect": "Heightens the\nuser's DEFENSE. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.actualStats.defense.currentValue",
+                "us.actualStats.defense.currentValue + 3"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

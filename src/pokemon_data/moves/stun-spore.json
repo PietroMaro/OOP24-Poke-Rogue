@@ -1,7 +1,21 @@
 {
     "pp": 30,
     "isPhysical": false,
-    "effect": "A move that may\nparalyze the foe. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "MATH.random()",
+                "<",
+                "0.5"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "Optional.of(StatusCondition.PARALYSIS)"
+            ]
+        ]
+    },
     "accuracy": 75,
     "critRate": 0,
     "baseDamage": 0,

@@ -1,7 +1,19 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "Counters a SPCL.\nATK. move double. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "enemy.actualStats.specialAttack.currentValue",
+                "enemy.actualStats.specialAttack.currentValue - 1"
+            ],
+            [
+                "enemy.actualStats.attack.currentValue",
+                "enemy.actualStats.attack.currentValue - 1"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

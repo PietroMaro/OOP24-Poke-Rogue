@@ -1,7 +1,15 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "Sharply raises the\nuser's SPCL.DEF. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.tempStatsBonus.specialDefense.currentValue",
+                "us.tempStatsBonus.specialDefense.currentValue + 2"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

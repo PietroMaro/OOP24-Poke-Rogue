@@ -1,7 +1,15 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "Covers the user in mud to\nraise electrical resistance. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.tempStatsBonus.specialDefense.currentValue",
+                "us.tempStatsBonus.specialDefense.currentValue + 1"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

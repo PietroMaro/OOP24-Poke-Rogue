@@ -1,31 +1,34 @@
 {
     "pokedexNumber": 36,
-    "types": ["fairy"],
+    "types": [
+        "fairy"
+    ],
     "captureRate": 25,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 95,
         "defense": 73,
         "attack": 70,
         "hp": 95,
-        "special-defense": 90,
-        "speed": 60
+        "speed": 60,
+        "specialDefense": 90,
+        "specialAttack": 95
     },
-    "moves": {"1": "metronome"},
+    "moves": {
+        "1": "metronome"
+    },
     "growthRate": "fast",
     "name": "clefable",
     "weight": 400,
     "abilites": [
         "cute-charm",
-        "magic-guard",
         "unaware"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 0,
         "attack": 0,
         "hp": 3,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 0
     }
 }

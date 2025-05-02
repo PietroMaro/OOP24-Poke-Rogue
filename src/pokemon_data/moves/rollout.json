@@ -1,7 +1,21 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "Attacks 5 turns\nwith rising power. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "MATH.random()",
+                "<",
+                "0.5"
+            ]
+        ],
+        "activation": [
+            [
+                "attackUs.baseDamage",
+                "attackUs.baseDamage * 2"
+            ]
+        ]
+    },
     "accuracy": 90,
     "critRate": 0,
     "baseDamage": 30,

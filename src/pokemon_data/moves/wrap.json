@@ -1,7 +1,15 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "Squeezes the foe\nfor 2-5 turns. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "attackEnemy.calculatedDamage",
+                "attackEnemy.baseDamage * 3"
+            ]
+        ]
+    },
     "accuracy": 90,
     "critRate": 0,
     "baseDamage": 15,

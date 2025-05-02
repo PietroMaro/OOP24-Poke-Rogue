@@ -1,0 +1,18 @@
+{
+    "situationChecks": "neutral",
+    "effect": {
+        "checks": [
+            [
+                "us.statusCondition",
+                "==",
+                "Optional.of(StatusCondition.PARALYSIS)"
+            ]
+        ],
+        "activation": [
+            [
+                "us.statusCondition",
+                "EMPTY"
+            ]
+        ]
+    }
+}

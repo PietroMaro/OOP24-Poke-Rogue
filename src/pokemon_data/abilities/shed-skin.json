@@ -1,0 +1,14 @@
+{
+    "situationChecks": "passive",
+    "effect": {
+        "checks": [
+            [
+                "MATH.random()",
+                "<",
+                "0.33"
+            ]
+        ],
+        "activation": [
+        ]
+    }
+}

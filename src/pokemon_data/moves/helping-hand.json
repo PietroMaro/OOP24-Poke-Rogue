@@ -1,7 +1,10 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "A move that boosts\nthe power of the\nally\u2019s attack in a\nDouble Battle.\n TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

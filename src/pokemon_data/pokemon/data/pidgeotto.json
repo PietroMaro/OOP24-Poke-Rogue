@@ -7,12 +7,12 @@
     "captureRate": 120,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 50,
         "defense": 55,
         "attack": 60,
         "hp": 63,
-        "special-defense": 50,
-        "speed": 71
+        "speed": 71,
+        "specialDefense": 50,
+        "specialAttack": 50
     },
     "moves": {
         "1": "tackle",
@@ -28,15 +28,14 @@
     "weight": 300,
     "abilites": [
         "keen-eye",
-        "tangled-feet",
-        "big-pecks"
+        "tangled-feet"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 2
+        "speed": 2,
+        "specialDefense": 0,
+        "specialAttack": 0
     }
 }

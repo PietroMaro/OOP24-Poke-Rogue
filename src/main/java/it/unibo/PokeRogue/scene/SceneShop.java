@@ -119,7 +119,7 @@ public class SceneShop implements Scene {
 
         this.initBoxElements();
 
-        this.sceneGraphicElements.put(sceneGraphicEnum.BACKGROUND.value(),
+        this.sceneGraphicElements.put(SceneShopEnum.BACKGROUND.value(),
                 new BackgroundElementImpl("firstPanel", this.getPathString("images", "sceneShopBgBar.png")));
 
         // Set the first button as selected
@@ -267,7 +267,7 @@ public class SceneShop implements Scene {
             this.initChangePokemonButtons();
             this.initChangePokemonSprites();
             System.out.println(this.sceneGraphicElements);
-            this.sceneGraphicElements.put(sceneGraphicEnum.BACKGROUND.value(),
+            this.sceneGraphicElements.put(SceneShopEnum.BACKGROUND.value(),
                     new BackgroundElementImpl("secondPanel", this.getPathString("images", "sceneShopBg.png")));
 
             // Set the first button as selected

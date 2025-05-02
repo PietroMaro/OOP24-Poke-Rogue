@@ -1,7 +1,15 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "Boosts the power of WATER-\ntype moves for 5 turns. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.tempStatsBonus.specialAttack.currentValue",
+                "us.tempStatsBonus.specialAttack.currentValue + 1"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

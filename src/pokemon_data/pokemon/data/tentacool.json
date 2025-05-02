@@ -7,12 +7,12 @@
     "captureRate": 190,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 50,
         "defense": 35,
         "attack": 40,
         "hp": 40,
-        "special-defense": 100,
-        "speed": 70
+        "speed": 70,
+        "specialDefense": 100,
+        "specialAttack": 50
     },
     "moves": {
         "1": "poison-sting",
@@ -29,16 +29,14 @@
     "name": "tentacool",
     "weight": 455,
     "abilites": [
-        "clear-body",
-        "liquid-ooze",
         "rain-dish"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 1,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 1,
+        "specialAttack": 0
     }
 }

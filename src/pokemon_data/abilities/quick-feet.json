@@ -1,0 +1,18 @@
+{
+    "situationChecks": "neutral",
+    "effect": {
+        "checks": [
+            [
+                "us.statusCondition",
+                "!=",
+                "EMPTY"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.speed.currentValue",
+                "us.actualStats.speed.currentValue * 1.5"
+            ]
+        ]
+    }
+}

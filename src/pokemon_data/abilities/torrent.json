@@ -1,0 +1,23 @@
+{
+    "situationChecks": "attack",
+    "effect": {
+        "checks": [
+            [
+                "attackUs.type",
+                "==",
+                "Type.WATER"
+            ],
+            [
+                "us.actualStats.hp.currentValue",
+                "<=",
+                "us.actualStats.hp.currentMax / 3"
+            ]
+        ],
+        "activation": [
+            [
+                "attackUs.baseDamage",
+                "attackUs.baseDamage + (attackUs.baseDamage / 2)"
+            ]
+        ]
+    }
+}

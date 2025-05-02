@@ -1,7 +1,15 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "Repeatedly slaps\n2-5 times. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "attackUs.calculatedDamage",
+                "attackUs.baseDamage * 4"
+            ]
+        ]
+    },
     "accuracy": 85,
     "critRate": 0,
     "baseDamage": 15,

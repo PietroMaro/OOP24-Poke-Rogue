@@ -7,12 +7,12 @@
     "captureRate": 45,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 65,
         "defense": 105,
         "attack": 115,
         "hp": 60,
-        "special-defense": 70,
-        "speed": 80
+        "speed": 80,
+        "specialDefense": 70,
+        "specialAttack": 65
     },
     "moves": {
         "55": "mega-drain",
@@ -33,11 +33,11 @@
         "weak-armor"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 0,
         "attack": 2,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 0
     }
 }

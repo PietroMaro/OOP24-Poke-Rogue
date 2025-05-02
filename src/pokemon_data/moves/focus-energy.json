@@ -1,7 +1,15 @@
 {
     "pp": 30,
     "isPhysical": false,
-    "effect": "Raises the criti­\ncal hit ratio. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.tempStatsBonus.critRate.currentValue",
+                "us.tempStatsBonus.critRate.currentValue + 1"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

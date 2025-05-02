@@ -1,0 +1,13 @@
+{
+    "situationChecks": "attacked",
+    "effect": {
+        "checks": [
+        ],
+        "activation": [
+            [
+                "attackEnemy.critRate",
+                "0"
+            ]
+        ]
+    }
+}

@@ -1,7 +1,15 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "A tackle that also\nhurts the user. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.actualStats.hp.currentValue",
+                "us.actualStats.hp.currentValue - (attackUs.baseDamage * 0.25)"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 120,

@@ -1,7 +1,15 @@
 {
     "pp": 30,
     "isPhysical": false,
-    "effect": "Attacks the foe by firing\n2 to 5 icicles in a row. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "attackUs.calculatedDamage",
+                "attackUs.baseDamage - 5"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 25,

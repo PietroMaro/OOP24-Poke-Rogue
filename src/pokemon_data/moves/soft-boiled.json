@@ -1,7 +1,15 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "Restores HP by 1/2\nthe user's max HP. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.actualStats.hp.currentValue",
+                "us.actualStats.hp.currentValue + (us.actualStats.hp.currentMax * 0.5)"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

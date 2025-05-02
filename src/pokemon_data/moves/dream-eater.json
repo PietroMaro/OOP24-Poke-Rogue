@@ -1,7 +1,25 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "Steals HP from a\nsleeping victim. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "enemy.statusCondition",
+                "==",
+                "Optional.of(StatusCondition.SLEEP)"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.actualStats.hp.currentValue",
+                "enemy.actualStats.hp.currentValue - (attackUs.baseDamage -5)"
+            ],
+            [
+                "us.actualStats.hp.currentValue",
+                "us.actualStats.hp.currentValue + (attackUs.baseDamage - 5)"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 100,

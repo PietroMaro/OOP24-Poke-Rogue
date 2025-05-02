@@ -1,15 +1,17 @@
 {
     "pokedexNumber": 127,
-    "types": ["bug"],
+    "types": [
+        "bug"
+    ],
     "captureRate": 45,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 55,
         "defense": 100,
         "attack": 125,
         "hp": 65,
-        "special-defense": 70,
-        "speed": 85
+        "speed": 85,
+        "specialDefense": 70,
+        "specialAttack": 55
     },
     "moves": {
         "1": "focus-energy",
@@ -26,16 +28,14 @@
     "name": "pinsir",
     "weight": 550,
     "abilites": [
-        "hyper-cutter",
-        "mold-breaker",
         "moxie"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 0,
         "attack": 2,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 0
     }
 }

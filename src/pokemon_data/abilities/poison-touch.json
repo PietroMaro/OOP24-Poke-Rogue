@@ -1,0 +1,18 @@
+{
+    "situationChecks": "attack",
+    "effect": {
+        "checks": [
+            [
+                "MATH.random()",
+                "<=",
+                "0.3"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "Optional.of(StatusCondition.POISON)"
+            ]
+        ]
+    }
+}

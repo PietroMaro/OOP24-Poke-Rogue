@@ -1,0 +1,18 @@
+{
+    "situationChecks": "switchIn",
+    "effect": {
+        "checks": [
+            [
+                "enemy.actualStats.attack.currentValue",
+                "<",
+                "enemy.actualStats.defense.currentValue"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.defense.currentValue",
+                "us.actualStats.defense.currentValue + 1"
+            ]
+        ]
+    }
+}

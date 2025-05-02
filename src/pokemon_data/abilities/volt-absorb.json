@@ -1,0 +1,22 @@
+{
+    "situationChecks": "attacked",
+    "effect": {
+        "checks": [
+            [
+                "attackEnemy.type",
+                "==",
+                "Type.ELECTRIC"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.hp.currentValue",
+                "MATH.floor(us.actualStats.hp.currentValue * 1.25).intValue()"
+            ],
+            [
+                "attackEnemy.calculatedDamage",
+                "0"
+            ]
+        ]
+    }
+}

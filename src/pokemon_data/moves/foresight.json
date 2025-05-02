@@ -1,7 +1,10 @@
 {
     "pp": 40,
     "isPhysical": false,
-    "effect": "Negates accuracy\nreduction moves. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

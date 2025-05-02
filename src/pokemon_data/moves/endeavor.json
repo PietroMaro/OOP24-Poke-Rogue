@@ -1,7 +1,21 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "Gains power if the user\u2019s HP\nis lower than the foe\u2019s HP. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "us.actualStats.hp.currentValue",
+                "<",
+                "enemy.actualStats.hp.currentValue"
+            ]
+        ],
+        "activation": [
+            [
+                "us.tempStatsBonus.attack.currentValue",
+                "us.tempStatsBonus.attack.currentValue + 2"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

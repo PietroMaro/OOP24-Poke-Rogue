@@ -1,0 +1,18 @@
+{
+    "situationChecks": "attack",
+    "effect": {
+        "checks": [
+            [
+                "us.actualStats.speed.currentValue",
+                "<=",
+                "enemy.actualStats.speed.currentValue"
+            ]
+        ],
+        "activation": [
+            [
+                "attackUs.baseDamage",
+                "MATH.floor(attackUs.baseDamage + (attackUs.baseDamage * 0.3)).intValue()"
+            ]
+        ]
+    }
+}

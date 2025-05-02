@@ -1,0 +1,18 @@
+{
+    "situationChecks": "passive",
+    "effect": {
+        "checks": [
+            [
+                "weather",
+                "==",
+                "Weather.SUNLIGHT"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.speed.currentValue",
+                "us.actualStats.speed.currentValue * 2"
+            ]
+        ]
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "situationChecks": "switchIn",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "weather",
+                "Weather.SUNLIGHT"
+            ]
+        ]
+    }
+}

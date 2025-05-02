@@ -1,7 +1,19 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "Confuses the foe, but\nraises its SP. ATK. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "Optional.of(StatusCondition.CONFUSION)"
+            ],
+            [
+                "enemy.tempStatsBonus.specialAttack.currentValue",
+                "enemy.tempStatsBonus.specialAttack.currentValue + 1"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

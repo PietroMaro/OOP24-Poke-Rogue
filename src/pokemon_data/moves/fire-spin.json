@@ -1,7 +1,21 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "Traps foe in fire\nfor 2-5 turns. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "MATH.random()",
+                "<",
+                "0.10"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "Optional.of(StatusCondition.BURN)"
+            ]
+        ]
+    },
     "accuracy": 85,
     "critRate": 0,
     "baseDamage": 35,

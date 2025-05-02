@@ -1,7 +1,21 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "May miss, damaging\nthe user. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "MATH.random()",
+                "<",
+                "0.95"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.hp.currentValue",
+                "us.actualStats.hp.currentValue - 25"
+            ]
+        ]
+    },
     "accuracy": 95,
     "critRate": 0,
     "baseDamage": 100,

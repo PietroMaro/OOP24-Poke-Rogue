@@ -1,7 +1,21 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "An attack that may\nfreeze the foe. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "MATH.random()",
+                "<",
+                "0.1"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "Optional.of(StatusCondition.FREEZE)"
+            ]
+        ]
+    },
     "accuracy": 70,
     "critRate": 0,
     "baseDamage": 110,

@@ -1,0 +1,18 @@
+{
+    "situationChecks": "neutral",
+    "effect": {
+        "checks": [
+            [
+                "weather",
+                "==",
+                "Weather.HAIL"
+            ]
+        ],
+        "activation": [
+            [
+                "attackEnemy.accuracy",
+                "MATH.round(attackEnemy.accuracy*0.75).intValue()"
+            ]
+        ]
+    }
+}

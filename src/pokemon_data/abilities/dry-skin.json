@@ -1,0 +1,18 @@
+{
+    "situationChecks": "attacked",
+    "effect": {
+        "checks": [
+            [
+                "attackEnemy.type",
+                "==",
+                "Type.FIRE"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.hp.currentValue",
+                "us.actualStats.hp.currentValue - (attackEnemy.baseDamage * 0.5).intValue()"
+            ]
+        ]
+    }
+}

@@ -1,7 +1,15 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "Heightens evasive­\nness. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.tempStatsBonus.speed.currentValue",
+                "us.tempStatsBonus.speed.currentValue + 1"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

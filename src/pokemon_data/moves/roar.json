@@ -1,7 +1,10 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "Scares wild foes\nto end battle. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

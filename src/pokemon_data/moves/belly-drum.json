@@ -1,7 +1,25 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "Reduces own HP to\nmaximize ATTACK. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "us.actualStats.hp.currentValue",
+                ">",
+                "1"
+            ]
+        ],
+        "activation": [
+            [
+                "us.tempStatsBonus.attack.currentValue",
+                "us.tempStatsBonus.attack.currentValue + 6"
+            ],
+            [
+                "us.actualStats.hp.currentValue",
+                "1"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

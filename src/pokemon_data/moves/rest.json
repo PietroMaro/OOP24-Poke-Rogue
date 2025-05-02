@@ -1,7 +1,19 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "Sleep for 2 turns\nto fully recover. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.statusCondition",
+                "Optional.of(StatusCondition.SLEEP)"
+            ],
+            [
+                "us.actualStats.hp.currentValue",
+                "us.actualStats.hp.currentMax"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

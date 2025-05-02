@@ -1,0 +1,23 @@
+{
+    "situationChecks": "attacked",
+    "effect": {
+        "checks": [
+            [
+                "us.actualStats.hp.currentValue",
+                "==",
+                "0"
+            ],
+            [
+                "attackEnemy.isPhysical",
+                "==",
+                "true"
+            ]
+        ],
+        "activation": [
+            [
+                "attackEnemy.calculatedDamage",
+                "MATH.floor(us.actualStats.hp.currentMax * 0.25).intValue()"
+            ]
+        ]
+    }
+}

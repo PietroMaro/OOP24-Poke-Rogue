@@ -1,0 +1,7 @@
+{
+    "situationChecks": "attacked",
+    "effect": {
+        "checks": [],
+        "activation": [["us.tempStatsBonus.attack.currentValue","6"]]
+    }
+}

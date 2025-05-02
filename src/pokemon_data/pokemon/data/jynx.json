@@ -7,12 +7,12 @@
     "captureRate": 45,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 115,
         "defense": 35,
         "attack": 50,
         "hp": 65,
-        "special-defense": 95,
-        "speed": 95
+        "speed": 95,
+        "specialDefense": 95,
+        "specialAttack": 115
     },
     "moves": {
         "1": "powder-snow",
@@ -29,15 +29,14 @@
     "weight": 406,
     "abilites": [
         "oblivious",
-        "forewarn",
         "dry-skin"
     ],
     "givesEV": {
-        "special-attack": 2,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 2
     }
 }

@@ -1,0 +1,18 @@
+{
+    "situationChecks": "neutral",
+    "effect": {
+        "checks": [
+            [
+                "us.statusCondition",
+                "!=",
+                "EMPTY"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.defense.currentValue",
+                "us.actualStats.defense.currentValue * 1.5"
+            ]
+        ]
+    }
+}

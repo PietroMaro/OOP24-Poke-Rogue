@@ -1,0 +1,22 @@
+{
+    "situationChecks": "passive",
+    "effect": {
+        "checks": [
+            [
+                "weather",
+                "==",
+                "'harshSunlight'"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.hp.currentValue",
+                "us.actualStats.hp.currentValue - us.actualStats.hp.currentValue / 8"
+            ],
+            [
+                "us.actualStats.specialAttack.currentValue",
+                "us.actualStats.specialAttack.currentValue + (us.actualStats.specialAttack.currentValue / 2)"
+            ]
+        ]
+    }
+}

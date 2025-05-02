@@ -1,7 +1,21 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "An attack that may\nlower SPCL.DEF. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "MATH.random()",
+                "<",
+                "0.2"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.tempStatsBonus.specialDefense.currentValue",
+                "enemy.tempStatsBonus.specialDefense.currentValue - 1"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 80,

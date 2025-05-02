@@ -1,7 +1,11 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "Heals all status problems\nwith a soothing scent. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

@@ -7,12 +7,12 @@
     "captureRate": 120,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 85,
         "defense": 50,
         "attack": 90,
         "hp": 65,
-        "special-defense": 45,
-        "speed": 55
+        "speed": 55,
+        "specialDefense": 45,
+        "specialAttack": 85
     },
     "moves": {
         "33": "sweet-scent",
@@ -28,15 +28,14 @@
     "name": "weepinbell",
     "weight": 64,
     "abilites": [
-        "chlorophyll",
-        "gluttony"
+        "chlorophyll"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 0,
         "attack": 2,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 0
     }
 }

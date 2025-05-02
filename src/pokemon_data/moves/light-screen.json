@@ -1,7 +1,15 @@
 {
     "pp": 30,
     "isPhysical": false,
-    "effect": "Ups SPCL.DEF with\na wall of light. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.tempStatsBonus.specialDefense.currentValue",
+                "us.tempStatsBonus.specialDefense.currentValue + (us.actualStats.specialDefense.currentValue * 0.5)"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

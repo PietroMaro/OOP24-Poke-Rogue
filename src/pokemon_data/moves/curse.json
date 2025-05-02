@@ -1,7 +1,27 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "Works differently\nfor ghost-types. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "enemy.types.get(0)",
+                "==",
+                "Type.GHOST"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.actualStats.defense.currentValue",
+                "enemy.actualStats.defense.currentValue - 20"
+            ]
+        ],
+        "else_activation": [
+            [
+                "us.actualStats.attack.currentValue",
+                "us.actualStats.attack.currentValue + 20"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

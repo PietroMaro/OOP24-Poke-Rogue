@@ -1,0 +1,17 @@
+{
+    "situationChecks": "attack",
+    "effect": {
+        "checks": [
+        ],
+        "activation": [
+            [
+                "us.actualStats.attack.currentValue",
+                "MATH.round(us.actualStats.attack.currentValue * 1.5).intValue()"
+            ],
+            [
+                "attackUs.accuracy",
+                "MATH.round(attackUs.accuracy * 0.8).intValue()"
+            ]
+        ]
+    }
+}

@@ -1,7 +1,11 @@
 {
     "pp": 20,
     "isPhysical": false,
-    "effect": "An unavoidable punch that\nis thrown from shadows. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [],
+        "selfEffect": []
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 60,

@@ -1,10 +1,22 @@
 {
     "pp": 10,
     "isPhysical": false,
-    "effect": "Steals HP from the\nfoe on every turn. TODO Create effect and link it here",
-    "accuracy": 90,
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.actualStats.hp.currentValue",
+                "us.actualStats.hp.currentValue + ((enemy.actualStats.hp.currentValue) / 10)"
+            ],
+            [
+                "enemy.actualStats.hp.currentValue",
+                "enemy.actualStats.hp.currentValue - ((enemy.actualStats.hp.currentValue) / 10)"
+            ]
+        ]
+    },
+    "accuracy": 100,
     "critRate": 0,
-    "baseDamage": 0,
-    "type": "grass",
+    "baseDamage": 80,
+    "type": "bug",
     "priority": 0
 }

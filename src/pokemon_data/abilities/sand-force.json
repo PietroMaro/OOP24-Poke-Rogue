@@ -1,0 +1,23 @@
+{
+    "situationChecks": "attack",
+    "effect": {
+        "checks": [
+            [
+                "weather",
+                "==",
+                "Weather.SANDSTORM"
+            ],
+            [
+                "attackUs.type",
+                "==",
+                "Type.GROUND"
+            ]
+        ],
+        "activation": [
+            [
+                "attackUs.baseDamage",
+                "MATH.floor(attackUs.baseDamage * 1.3).intValue()"
+            ]
+        ]
+    }
+}

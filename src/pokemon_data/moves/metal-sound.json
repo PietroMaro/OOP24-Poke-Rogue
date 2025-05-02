@@ -1,7 +1,15 @@
 {
     "pp": 40,
     "isPhysical": false,
-    "effect": "Emits a horrible screech\nthat sharply lowers SP. DEF. TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "enemy.actualStats.specialDefense.currentValue",
+                "enemy.actualStats.specialDefense.currentValue - 2"
+            ]
+        ]
+    },
     "accuracy": 85,
     "critRate": 0,
     "baseDamage": 0,

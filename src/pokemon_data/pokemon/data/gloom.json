@@ -7,12 +7,12 @@
     "captureRate": 120,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 85,
         "defense": 70,
         "attack": 65,
         "hp": 60,
-        "special-defense": 75,
-        "speed": 40
+        "speed": 40,
+        "specialDefense": 75,
+        "specialAttack": 85
     },
     "moves": {
         "44": "petal-dance",
@@ -30,11 +30,11 @@
         "stench"
     ],
     "givesEV": {
-        "special-attack": 2,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 2
     }
 }

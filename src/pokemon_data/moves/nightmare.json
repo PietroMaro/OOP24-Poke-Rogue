@@ -1,7 +1,21 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "A sleeper loses\n1/4 HP every turn. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "enemy.statusCondition",
+                "==",
+                "Optional.of(StatusCondition.SLEEP)"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.actualStats.hp.currentValue",
+                "enemy.actualStats.hp.currentValue - (enemy.actualStats.hp.currentValue / 4)"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 0,

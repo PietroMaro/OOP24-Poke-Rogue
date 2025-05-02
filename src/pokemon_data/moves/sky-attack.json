@@ -1,7 +1,10 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "1st turn: Prepare\n2nd turn: Attack TODO Create effect and link it here",
+    "effect": {
+        "checks": [],
+        "activation": []
+    },
     "accuracy": 90,
     "critRate": 1,
     "baseDamage": 140,

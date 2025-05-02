@@ -1,15 +1,17 @@
 {
     "pokedexNumber": 150,
-    "types": ["psychic"],
+    "types": [
+        "psychic"
+    ],
     "captureRate": 3,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 154,
         "defense": 90,
         "attack": 110,
         "hp": 106,
-        "special-defense": 90,
-        "speed": 130
+        "speed": 130,
+        "specialDefense": 90,
+        "specialAttack": 154
     },
     "moves": {
         "22": "mist",
@@ -27,15 +29,14 @@
     "name": "mewtwo",
     "weight": 1220,
     "abilites": [
-        "pressure",
-        "unnerve"
+        "pressure"
     ],
     "givesEV": {
-        "special-attack": 3,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 0,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 0,
+        "specialAttack": 3
     }
 }

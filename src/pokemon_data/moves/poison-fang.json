@@ -1,7 +1,21 @@
 {
     "pp": 15,
-    "isPhysical": false,
-    "effect": "A sharp-fanged attack.\nMay badly poison the foe. TODO Create effect and link it here",
+    "isPhysical": true,
+    "effect": {
+        "checks": [
+            [
+                "MATH.random()",
+                "<",
+                "0.30"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "Optional.of(StatusCondition.POISON)"
+            ]
+        ]
+    },
     "accuracy": 100,
     "critRate": 0,
     "baseDamage": 50,

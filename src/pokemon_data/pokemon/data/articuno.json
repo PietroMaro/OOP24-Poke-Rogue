@@ -7,12 +7,12 @@
     "captureRate": 3,
     "minLevelForEncounter": 1,
     "stats": {
-        "special-attack": 95,
         "defense": 100,
         "attack": 85,
         "hp": 90,
-        "special-defense": 125,
-        "speed": 85
+        "speed": 85,
+        "specialDefense": 125,
+        "specialAttack": 95
     },
     "moves": {
         "1": "powder-snow",
@@ -32,11 +32,11 @@
         "snow-cloak"
     ],
     "givesEV": {
-        "special-attack": 0,
         "defense": 0,
         "attack": 0,
         "hp": 0,
-        "special-defense": 3,
-        "speed": 0
+        "speed": 0,
+        "specialDefense": 3,
+        "specialAttack": 0
     }
 }

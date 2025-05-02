@@ -1,7 +1,21 @@
 {
     "pp": 15,
     "isPhysical": false,
-    "effect": "An attack that may\nreduce DEFENSE. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "MATH.random()",
+                "<",
+                "0.40"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.tempStatsBonus.defense.currentValue",
+                "enemy.tempStatsBonus.defense.currentValue - 1"
+            ]
+        ]
+    },
     "accuracy": 75,
     "critRate": 0,
     "baseDamage": 100,

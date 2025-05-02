@@ -1,0 +1,23 @@
+{
+    "situationChecks": "switchOut",
+    "effect": {
+        "checks": [
+            [
+                "enemy.types.get(0)",
+                "!=",
+                "Type.FLYING"
+            ],
+            [
+                "enemy.abilityName",
+                "!=",
+                "'levitate'"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.statusCondition",
+                "Optional.of(StatusCondition.TRAPPED)"
+            ]
+        ]
+    }
+}

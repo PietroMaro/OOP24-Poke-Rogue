@@ -1,7 +1,21 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": "A ground-type,\none-hit KO attack. TODO Create effect and link it here",
+    "effect": {
+        "checks": [
+            [
+                "enemy.actualStats.speed.currentValue",
+                "<",
+                "us.actualStats.speed.currentValue"
+            ]
+        ],
+        "activation": [
+            [
+                "enemy.actualStats.hp.currentValue",
+                "0"
+            ]
+        ]
+    },
     "accuracy": 30,
     "critRate": 0,
     "baseDamage": 0,

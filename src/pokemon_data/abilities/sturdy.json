@@ -1,0 +1,23 @@
+{
+    "situationChecks": "attacked",
+    "effect": {
+        "checks": [
+            [
+                "us.actualStats.hp.currentValue",
+                "==",
+                "us.actualStats.hp.currentMax"
+            ],
+            [
+                "attackEnemy.calculatedDamage",
+                ">=",
+                "us.actualStats.hp.currentMax"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.hp.currentValue",
+                "1"
+            ]
+        ]
+    }
+}
