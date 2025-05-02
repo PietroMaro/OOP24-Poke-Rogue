@@ -1,5 +1,6 @@
 package it.unibo.PokeRogue.utilities;
 
+import java.util.Optional;
 import java.util.Random;
 
 import it.unibo.PokeRogue.Weather;
@@ -43,7 +44,7 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
      */
     @Override
     public double calculateDamage(final Pokemon attackingPokemon, final Pokemon defendingPokemon,
-            final Move attackChosen, final Weather currentWeather) {
+            final Move attackChosen, final Optional<Weather> currentWeather) {
 
         double baseDamage;
         double damageWithEnvironment;
@@ -119,25 +120,29 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
      * Returns a weather-based multiplier (e.g. fire in sunlight: 1.5x,
      * fire in rain: 0.5x, etc.).
      */
-    private double calculateWeatherEffect(final Move attackChosen, final Weather currentWeather) {
+    private double calculateWeatherEffect(final Move attackChosen, final Optional<Weather> currentWeather) {
 
-        String attackType = attackChosen.getType().typeName();
-        String weather = currentWeather.weatherName();
+        if (currentWeather.isPresent()) {
 
-        if ("fire".equals(attackType)) {
-            if ("rain".equals(weather)) {
-                return 0.5;
-            } else if ("sunlight".equals(weather)) {
-                return 1.5;
+            String attackType = attackChosen.getType().typeName();
+            String weather = currentWeather.get().weatherName();
+
+            if ("fire".equals(attackType)) {
+                if ("rain".equals(weather)) {
+                    return 0.5;
+                } else if ("sunlight".equals(weather)) {
+                    return 1.5;
+                }
             }
-        }
 
-        if ("water".equals(attackType)) {
-            if ("rain".equals(weather)) {
-                return 1.5;
-            } else if ("sunlight".equals(weather)) {
-                return 0.5;
+            if ("water".equals(attackType)) {
+                if ("rain".equals(weather)) {
+                    return 1.5;
+                } else if ("sunlight".equals(weather)) {
+                    return 0.5;
+                }
             }
+
         }
 
         return 1.0;
