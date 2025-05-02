@@ -10,7 +10,8 @@ import lombok.AllArgsConstructor;
 @Data
 @AllArgsConstructor
 public class Move{
-	private int pp;
+	private String name;
+	private Range<Integer> pp;
 	private boolean isPhysical;	
 	private JSONObject effect;
 	private int accuracy;

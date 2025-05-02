@@ -12,6 +12,9 @@ import javax.swing.OverlayLayout;
 
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
+import it.unibo.PokeRogue.Weather;
+import it.unibo.PokeRogue.ai.EnemyAi;
+import it.unibo.PokeRogue.ai.EnemyAiImpl;
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl;
 import it.unibo.PokeRogue.graphic.box.BoxElementImpl;
@@ -19,6 +22,7 @@ import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
+import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.move.MoveFactoryImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.scene.Scene;
@@ -34,6 +38,7 @@ public class SceneFight implements Scene {
         private final GameEngine gameEngineInstance;
         private final PlayerTrainerImpl playerTrainerInstance;
         private final PlayerTrainerImpl enemyTrainerInstance;
+        private final EnemyAi enemyAiInstance;
         private final static Integer FIRST_POSITION = 0;
         private final static Integer SECOND_POSITION = 1;
         private final static Integer THIRD_POSITION = 2;
@@ -44,14 +49,15 @@ public class SceneFight implements Scene {
         private MoveFactoryImpl moveFactoryInstance;
         private BattleEngineImpl battleEngineInstance;
 
-        public SceneFight() {
+        public SceneFight(Integer battleLevel) {
+                this.enemyTrainerInstance = new PlayerTrainerImpl();
                 this.sceneGraphicElements = new LinkedHashMap<>();
                 this.allPanelsElements = new LinkedHashMap<>();
                 this.moveFactoryInstance = new MoveFactoryImpl();
-                this.battleEngineInstance = new BattleEngineImpl(0, moveFactoryInstance);
+                this.battleEngineInstance = new BattleEngineImpl(0, moveFactoryInstance, enemyTrainerInstance);
                 this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-                this.enemyTrainerInstance = battleEngineInstance.getEnemyTrainerInstance();
+                this.enemyAiInstance = new EnemyAiImpl(enemyTrainerInstance, battleLevel);
 
                 this.initStatus();
                 this.initGraphicElements();
@@ -455,21 +461,22 @@ public class SceneFight implements Scene {
                 if (moveIndex == -1)
                         return;
 
-                String move = playerTrainerInstance.getPokemon(FIRST_POSITION)
+                Move move = playerTrainerInstance.getPokemon(FIRST_POSITION)
                                 .map(p -> {
-                                        List<String> moves = p.getActualMoves();
-                                        return (moveIndex >= 0 && moveIndex < moves.size()) ? moves.get(moveIndex) : "";
+                                        List<Move> moves = p.getActualMoves();
+                                        return (moveIndex >= 0 && moveIndex < moves.size()) ? moves.get(moveIndex)
+                                                        : null;
                                 })
-                                .orElse("");
+                                .orElse(null);
 
                 String pp = "???";
                 String type = "???";
                 String power = "???";
 
-                if (move != "") {
-                        pp = String.valueOf(moveFactoryInstance.moveFromName(move).getPp());
-                        type = String.valueOf(moveFactoryInstance.moveFromName(move).getType());
-                        power = String.valueOf(moveFactoryInstance.moveFromName(move).getBaseDamage());
+                if (move != null) {
+                        pp = String.valueOf(move.getPp().getCurrentValue() + " / " + move.getPp().getCurrentMax());
+                        type = String.valueOf(move.getType());
+                        power = String.valueOf(move.getBaseDamage());
                 }
 
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_PP_TEXT.value(),
@@ -483,12 +490,11 @@ public class SceneFight implements Scene {
                                 new TextElementImpl("movePanel",
                                                 "Power: " + power,
                                                 Color.WHITE, 0.06, 0.6, 0.94));
-                if (move != "") {
+                if (move != null) {
                         this.sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_TYPE.value(),
                                         new BoxElementImpl("movePanel",
                                                         ColorTypeConversion.getColorForType(
-                                                                        moveFactoryInstance.moveFromName(move)
-                                                                                        .getType()),
+                                                                        move.getType()),
                                                         Color.BLACK, 1, 0.65, 0.82, 0.15, 0.06));
                 }
         }
@@ -649,7 +655,7 @@ public class SceneFight implements Scene {
                                 playerTrainerInstance.getPokemon(FIRST_POSITION).get().getActualMoves()
                                                 .get(movePosition) != null) {
                         return playerTrainerInstance.getPokemon(FIRST_POSITION).get()
-                                        .getActualMoves().get(movePosition);
+                                        .getActualMoves().get(movePosition).getName();
                 } else {
                         return "???";
                 }
@@ -658,12 +664,10 @@ public class SceneFight implements Scene {
         public String getPokemonLifeText(int position) {
                 Optional<Pokemon> pokemonOpt = playerTrainerInstance.getPokemon(position);
 
-                // Se il Pokémon non esiste nella posizione specificata, ritorna "??? / ???"
                 if (!pokemonOpt.isPresent()) {
                         return "??? / ???";
                 }
 
-                // Se il Pokémon esiste, calcola e ritorna la vita
                 Pokemon pokemon = pokemonOpt.get();
                 Integer currentHp = pokemon.getActualStats().get("hp").getCurrentValue();
                 Integer maxHp = pokemon.getActualStats().get("hp").getCurrentMax();
@@ -672,9 +676,14 @@ public class SceneFight implements Scene {
         }
 
         public void fightLoop(String playerMoveType, String playerMove) {
+                List<String> enemyChoose = enemyAiInstance.nextMove(Weather.SUNLIGHT);
                 // TO FIX ENEMY
+                System.out.println(enemyChoose);
                 this.battleEngineInstance.movesPriorityCalculator(playerMoveType, playerMove,
-                                "Attack", "absorb");
+                enemyChoose.getFirst(), enemyChoose.getLast());
         }
 
+        public PlayerTrainerImpl getEnemyTrainerImpl() {
+                return this.enemyTrainerInstance;
+        }
 }

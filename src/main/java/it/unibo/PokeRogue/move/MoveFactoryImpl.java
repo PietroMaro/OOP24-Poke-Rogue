@@ -1,8 +1,9 @@
 package it.unibo.PokeRogue.move;
-
+import it.unibo.PokeRogue.utilities.Range;
 import it.unibo.PokeRogue.SingletonImpl;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
+import it.unibo.PokeRogue.utilities.RangeImpl;
 import it.unibo.PokeRogue.pokemon.Type;
 
 import java.util.Map;
@@ -36,7 +37,8 @@ public class MoveFactoryImpl extends SingletonImpl implements MoveFactory{
 	private void addMoveToBlueprints(final String moveName){
 		JSONObject moveJson;
         moveJson = jsonReader.readJsonObject(Paths.get("src","pokemon_data","moves",moveName +".json").toString());
-		int pp = moveJson.getInt("pp");
+		String name = moveName;
+		Range<Integer> pp = new RangeImpl<Integer>(0, moveJson.getInt("pp"), moveJson.getInt("pp")); 
 		boolean isPhysical = moveJson.getBoolean("isPhysical");
 		JSONObject effect = moveJson.getJSONObject("effect");
 		int accuracy = moveJson.getInt("accuracy");
@@ -45,6 +47,7 @@ public class MoveFactoryImpl extends SingletonImpl implements MoveFactory{
 		Type type = Type.fromString(moveJson.getString("type"));
 		int priority = moveJson.getInt("priority");
 		final Move newMove = new Move(
+				name,
 				pp,
 				isPhysical,
 				effect,

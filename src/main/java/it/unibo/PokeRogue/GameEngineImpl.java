@@ -23,6 +23,7 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
     private GraphicEngine graphicEngineInstance;
     private Scene currentScene;
     private String fileToLoadName;
+    private Integer fightLevel = 75;
 
     public GameEngineImpl() {
 
@@ -53,7 +54,12 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
 
                 break;
             case "fight":
-                currentScene = new SceneFight();
+                if (fightLevel == null) {
+                    fightLevel = 1;
+                } else {
+                    fightLevel++;
+                }
+                currentScene = new SceneFight(fightLevel);
                 break;
 
             default:

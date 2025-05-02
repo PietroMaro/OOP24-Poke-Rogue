@@ -1,6 +1,8 @@
 package it.unibo.PokeRogue.scene.sceneFight;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
 import it.unibo.PokeRogue.Weather;
@@ -24,12 +26,13 @@ public class BattleEngineImpl implements BattleEngine {
     private Pokemon pokemonGenerated;
     private final int enemyLevel;
     private final EffectParser effectParserInstance;
-    private Weather currentWeather;
+    private Optional<Weather> currentWeather;
 
-    public BattleEngineImpl(int enemyLevel, MoveFactoryImpl moveFactoryInstance) {
+    public BattleEngineImpl(int enemyLevel, MoveFactoryImpl moveFactoryInstance,
+            PlayerTrainerImpl enemyTrainerInstance) {
         // this.pokemonFactory = PokemonFactory.getInstance(PokemonFactory.class);
         this.pokemonFactory = new PokemonFactoryImpl();
-        this.enemyTrainerInstance = new PlayerTrainerImpl();
+        this.enemyTrainerInstance = enemyTrainerInstance;
         this.moveFactoryInstance = moveFactoryInstance;
         this.enemyLevel = enemyLevel;
         this.pokemonGenerated = pokemonFactory.randomPokemon(enemyLevel);
@@ -37,7 +40,7 @@ public class BattleEngineImpl implements BattleEngine {
         this.enemyTrainerInstance.addPokemon(pokemonGenerated, 1);
         // this.effectParserInstance = EffectParser.getInstance(EffectParser.class);
         this.effectParserInstance = new EffectParserImpl();
-        this.currentWeather = null;
+        this.currentWeather = Optional.of(Weather.SUNLIGHT);
 
     }
 
@@ -54,15 +57,17 @@ public class BattleEngineImpl implements BattleEngine {
     }
 
     private void executeMoves(String moveName, PlayerTrainerImpl attacker, PlayerTrainerImpl defender) {
-        Move playerMove = moveFactoryInstance.moveFromName(moveName);
         Pokemon attackerPokemon = attacker.getPokemon(FIRST_POSITION).get();
         Pokemon defenderPokemon = defender.getPokemon(FIRST_POSITION).get();
-        
-        if (playerMove.getPp() <= 0) {
+        Move playerMove = attackerPokemon.getActualMoves().get(Integer.parseInt(moveName));
+        attackerPokemon.getActualMoves().get(enemyLevel);
+        if (attackerPokemon.getActualMoves().get(Integer.parseInt(moveName)).getPp().getCurrentValue() <= 0) {
             return;
         }
-        //effect 
-        //this.effectParserInstance.parseEffect(playerMove.getEffect(), attackerPokemon, defenderPokemon, playerMove, null, currentWeather);
+        attackerPokemon.getActualMoves().get(Integer.parseInt(moveName)).getPp().decrement(1);
+        // effect
+        // this.effectParserInstance.parseEffect(playerMove.getEffect(),
+        //  attackerPokemon, defenderPokemon, playerMove, playerMove, currentWeather);
 
         Random rng = new Random();
         int chance = rng.nextInt(100) + 1;
@@ -94,8 +99,6 @@ public class BattleEngineImpl implements BattleEngine {
         int randomPercent = 85 + rng.nextInt(16);
         damageBase *= randomPercent / 100.0;
 
-        playerMove.setPp(playerMove.getPp() - 1);
-
         int finalDamage = (int) damageBase;
         int newHp = defenderPokemon.getActualStats().get("hp").getCurrentValue() - finalDamage;
         defenderPokemon.getActualStats().get("hp").setCurrentValue(newHp);
@@ -115,33 +118,43 @@ public class BattleEngineImpl implements BattleEngine {
     @Override
     public void movesPriorityCalculator(String type, String movePosition, String typeEnemy, String enemyMove) {
         this.newEnemyCheck();
-        switch (type) {
-            case "SwitchIn":
-                switchIn(movePosition);
-                break;
-            case "Pokeball":
-                executeObject(movePosition);
-                this.newEnemyCheck();
-                break;
-            case "Attack":
-                String move = playerTrainerInstance.getPokemon(FIRST_POSITION).get().getActualMoves()
-                        .get(Integer.parseInt(movePosition));
-
-                if (this.calculatePriority(move, enemyMove)) {
-                    this.executeMoves(move, playerTrainerInstance, enemyTrainerInstance);
-                    this.executeMoves(enemyMove, enemyTrainerInstance, playerTrainerInstance);
-                } else {
-                    this.executeMoves(enemyMove, enemyTrainerInstance, playerTrainerInstance);
-                    this.executeMoves(move, playerTrainerInstance, enemyTrainerInstance);
-                }
-                break;
-
-            default:
-                break;
+        String move = playerTrainerInstance.getPokemon(FIRST_POSITION).get().getActualMoves()
+                .get(Integer.parseInt(movePosition)).getName();
+        if (type == "SwitchIn") {
+            this.switchIn(movePosition);
         }
-        this.newEnemyCheck();
+        if (typeEnemy == "SwitchIn") {
+            this.switchIn(enemyMove);
+        }
+        if (type == "Pokeball") {
+            this.executeObject(movePosition);
+        }
+        if (type == "Attack" && typeEnemy == "Attack") {
+            if (this.calculatePriority(movePosition, enemyMove)) {
+                this.executeMoves(movePosition, playerTrainerInstance, enemyTrainerInstance);
+                this.newEnemyCheck();
+                this.executeMoves(enemyMove, enemyTrainerInstance, playerTrainerInstance);
+                this.newEnemyCheck();
+            } else {
+                this.executeMoves(enemyMove, enemyTrainerInstance, playerTrainerInstance);
+                this.newEnemyCheck();
+                this.executeMoves(movePosition, playerTrainerInstance, enemyTrainerInstance);
+                this.newEnemyCheck();
+            }
+        }
+        else if (type == "Attack") {
+            this.executeMoves(movePosition, playerTrainerInstance, enemyTrainerInstance);
+            this.newEnemyCheck();
+
+        }
+        else if (typeEnemy == "Attack") {
+            this.executeMoves(enemyMove, enemyTrainerInstance, playerTrainerInstance);
+            this.newEnemyCheck();
+        }
+                    this.newEnemyCheck();
 
     }
+    
 
     private void newEnemyCheck() {
         if (enemyTrainerInstance.getPokemon(FIRST_POSITION).get().getActualStats().get("hp").getCurrentValue() <= 0) {
@@ -163,8 +176,8 @@ public class BattleEngineImpl implements BattleEngine {
     }
 
     private Boolean calculatePriority(String moveString, String enemyMoveString) {
-        Move playerMove = moveFactoryInstance.moveFromName(moveString);
-        Move enemyMove = moveFactoryInstance.moveFromName(enemyMoveString);
+        Move playerMove = playerTrainerInstance.getPokemon(FIRST_POSITION).get().getActualMoves().get(Integer.parseInt(moveString));
+        Move enemyMove = enemyTrainerInstance.getPokemon(FIRST_POSITION).get().getActualMoves().get(Integer.parseInt(enemyMoveString));
         if (playerMove.getPriority() > enemyMove.getPriority()) {
             return true;
         } else if (playerTrainerInstance.getPokemon(FIRST_POSITION).get().getActualStats().get("speed")

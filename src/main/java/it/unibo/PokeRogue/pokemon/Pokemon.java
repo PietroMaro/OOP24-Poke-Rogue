@@ -4,6 +4,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.List;
 import java.awt.Image;
+
+import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.utilities.Range;
 
 public interface Pokemon {
@@ -14,7 +16,6 @@ public interface Pokemon {
 	// an old move or not
 	void levelUp(boolean isPlayerPokemon);
 	void learnNewMove(Optional<Integer> indexMoveToReplace);
-
 	void inflictDamage(int amount);
 
 	void increaseExp(int amount,boolean isPlayerPokemon);
@@ -38,8 +39,8 @@ public interface Pokemon {
 	void setTempStatsBonus(Map<String,Range<Integer>> newVal);
 	Map<Integer,String> getLevelMovesLearn();
 	void setLevelMovesLearn(Map<Integer,String> newVal);
-	List<String> getActualMoves();
-	void setActualMoves(List<String> newVal);
+	List<Move> getActualMoves();
+	void setActualMoves(List<Move> newVal);
 	String getLevelUpCurve();
 	void setLevelUpCurve(String newVal);
 	Map<String,Integer> getGivesEV();
@@ -67,11 +68,12 @@ public interface Pokemon {
 	void setStatusCondition(Optional<StatusCondition> newVal);
 	boolean isHasToLearnMove();
 	void setHasToLearnMove(boolean newVal);
-	Optional<String> getNewMoveToLearn();
-	void setNewMoveToLearn(Optional<String> newVal);
+	Optional<Move> getNewMoveToLearn();
+	void setNewMoveToLearn(Optional<Move> newVal);
 	Image getSpriteFront();
 	void setSpriteFront(Image newVal);
 	Image getSpriteBack();
 	void setSpriteBack(Image newVal);
+
 	//if exp+amount = max of the level it will trigger level up
 }
