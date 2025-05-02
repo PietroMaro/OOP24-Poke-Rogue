@@ -14,6 +14,8 @@ import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.pokemon.PokemonFactory;
 import it.unibo.PokeRogue.pokemon.PokemonFactoryImpl;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
+import it.unibo.PokeRogue.utilities.PokemonBattleUtil;
+import it.unibo.PokeRogue.utilities.PokemonBattleUtilImpl;
 import lombok.Getter;
 
 @Getter
@@ -27,19 +29,17 @@ public class BattleEngineImpl implements BattleEngine {
     private final int enemyLevel;
     private final EffectParser effectParserInstance;
     private Optional<Weather> currentWeather;
+    PokemonBattleUtil pokemonBattleUtilInstance;
 
-    public BattleEngineImpl(int enemyLevel, MoveFactoryImpl moveFactoryInstance,
+    public BattleEngineImpl(Integer enemyLevel, MoveFactoryImpl moveFactoryInstance,
             PlayerTrainerImpl enemyTrainerInstance) {
-        // this.pokemonFactory = PokemonFactory.getInstance(PokemonFactory.class);
         this.pokemonFactory = new PokemonFactoryImpl();
         this.enemyTrainerInstance = enemyTrainerInstance;
         this.moveFactoryInstance = moveFactoryInstance;
+        this.pokemonBattleUtilInstance = new PokemonBattleUtilImpl();
         this.enemyLevel = enemyLevel;
-        this.pokemonGenerated = pokemonFactory.randomPokemon(enemyLevel);
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-        this.enemyTrainerInstance.addPokemon(pokemonGenerated, 1);
-        // this.effectParserInstance = EffectParser.getInstance(EffectParser.class);
-        this.effectParserInstance = new EffectParserImpl();
+        this.effectParserInstance = EffectParserImpl.getInstance(EffectParserImpl.class);
         this.currentWeather = Optional.of(Weather.SUNLIGHT);
 
     }
@@ -67,39 +67,10 @@ public class BattleEngineImpl implements BattleEngine {
         attackerPokemon.getActualMoves().get(Integer.parseInt(moveName)).getPp().decrement(1);
         // effect
         // this.effectParserInstance.parseEffect(playerMove.getEffect(),
-        //  attackerPokemon, defenderPokemon, playerMove, playerMove, currentWeather);
+        //     attackerPokemon, defenderPokemon, Optional.of(playerMove), Optional.empty(), currentWeather);
 
-        Random rng = new Random();
-        int chance = rng.nextInt(100) + 1;
-        if (chance > playerMove.getAccuracy()) {
-            return;
-        }
-
-        int attackStat = playerMove.isPhysical()
-                ? attackerPokemon.getBaseStats().get("attack").intValue()
-                : attackerPokemon.getBaseStats().get("specialAttack").intValue();
-
-        int defenseStat = playerMove.isPhysical()
-                ? defenderPokemon.getBaseStats().get("defense").intValue()
-                : defenderPokemon.getBaseStats().get("specialDefense").intValue();
-
-        int level = attackerPokemon.getLevel().getCurrentValue();
-        int basePower = playerMove.getBaseDamage();
-
-        double damageBase = (((((2 * level) / 5.0) + 2) * basePower * (attackStat / (double) defenseStat)) / 50.0) + 2;
-
-        boolean hasSTAB = attackerPokemon.getTypes().contains(playerMove.getType());
-        if (hasSTAB) {
-            damageBase = damageBase * 1.5;
-        }
-        if (playerMove.isCrit()) {
-            damageBase = damageBase * 1.5;
-        }
-
-        int randomPercent = 85 + rng.nextInt(16);
-        damageBase *= randomPercent / 100.0;
-
-        int finalDamage = (int) damageBase;
+       
+        int finalDamage = (int)pokemonBattleUtilInstance.calculateDamage(attackerPokemon, defenderPokemon, playerMove, currentWeather);
         int newHp = defenderPokemon.getActualStats().get("hp").getCurrentValue() - finalDamage;
         defenderPokemon.getActualStats().get("hp").setCurrentValue(newHp);
 
@@ -118,8 +89,6 @@ public class BattleEngineImpl implements BattleEngine {
     @Override
     public void movesPriorityCalculator(String type, String movePosition, String typeEnemy, String enemyMove) {
         this.newEnemyCheck();
-        String move = playerTrainerInstance.getPokemon(FIRST_POSITION).get().getActualMoves()
-                .get(Integer.parseInt(movePosition)).getName();
         if (type == "SwitchIn") {
             this.switchIn(movePosition);
         }
@@ -190,6 +159,7 @@ public class BattleEngineImpl implements BattleEngine {
     }
 
     private void switchIn(String move) {
+        System.out.println(move);
         this.playerTrainerInstance.switchPokemonPosition(FIRST_POSITION, Integer.parseInt(move));
     }
 }

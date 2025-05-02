@@ -189,23 +189,11 @@ public final class PokemonImpl implements Pokemon {
 		this.exp = new RangeImpl<Integer>(0, newRequiredExp, 0);
 	}
 
-	private void levelUpStats() {
-		for (String stat : statNames) {
-			int base = baseStats.get(stat);
-			int iv = IV.get(stat);
-			int ev = EV.get(stat).getCurrentValue();
-
-			int increase = (int) Math.floor(base / 50.0 + (iv + ev) / 100.0);
-
-			Range<Integer> actualStat = actualStats.get(stat);
-			actualStat.increment(increase);
-		}
-	}
 
 	@Override
 	public void levelUp(boolean isPlayerPokemon) {
 		this.level.increment(1);
-		levelUpStats();
+		this.calculateActualStats();
 		calculateNewExpRange();
 
 		if (this.levelMovesLearn.keySet().contains(this.level.getCurrentValue())) {

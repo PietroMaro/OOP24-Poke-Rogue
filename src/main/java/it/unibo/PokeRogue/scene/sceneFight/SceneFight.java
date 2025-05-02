@@ -15,6 +15,7 @@ import it.unibo.PokeRogue.GameEngineImpl;
 import it.unibo.PokeRogue.Weather;
 import it.unibo.PokeRogue.ai.EnemyAi;
 import it.unibo.PokeRogue.ai.EnemyAiImpl;
+import it.unibo.PokeRogue.effectParser.EffectParserImpl;
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl;
 import it.unibo.PokeRogue.graphic.box.BoxElementImpl;
@@ -25,6 +26,8 @@ import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.move.MoveFactoryImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.pokemon.PokemonFactory;
+import it.unibo.PokeRogue.pokemon.PokemonFactoryImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
@@ -48,9 +51,11 @@ public class SceneFight implements Scene {
         private int newSelectedButton;
         private MoveFactoryImpl moveFactoryInstance;
         private BattleEngineImpl battleEngineInstance;
-
+        private PokemonFactory pokemonFactory;
         public SceneFight(Integer battleLevel) {
                 this.enemyTrainerInstance = new PlayerTrainerImpl();
+                this.pokemonFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+                this.enemyTrainerInstance.addPokemon(pokemonFactory.randomPokemon(battleLevel), 1);
                 this.sceneGraphicElements = new LinkedHashMap<>();
                 this.allPanelsElements = new LinkedHashMap<>();
                 this.moveFactoryInstance = new MoveFactoryImpl();
@@ -58,7 +63,6 @@ public class SceneFight implements Scene {
                 this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
                 this.enemyAiInstance = new EnemyAiImpl(enemyTrainerInstance, battleLevel);
-
                 this.initStatus();
                 this.initGraphicElements();
         }
@@ -634,9 +638,6 @@ public class SceneFight implements Scene {
                 ButtonElementImpl selectedButton = (ButtonElementImpl) sceneGraphicElements.get(buttonCode);
                 if (selectedButton != null) {
                         selectedButton.setSelected(status);
-                } else {
-                        // log per il debug se il bottone non esiste
-                        System.out.println("Button with code " + buttonCode + " not found in sceneGraphicElements.");
                 }
         }
 
@@ -676,7 +677,7 @@ public class SceneFight implements Scene {
         }
 
         public void fightLoop(String playerMoveType, String playerMove) {
-                List<String> enemyChoose = enemyAiInstance.nextMove(Weather.SUNLIGHT);
+                List<String> enemyChoose = enemyAiInstance.nextMove(Optional.of(Weather.SUNLIGHT));
                 // TO FIX ENEMY
                 System.out.println(enemyChoose);
                 this.battleEngineInstance.movesPriorityCalculator(playerMoveType, playerMove,
