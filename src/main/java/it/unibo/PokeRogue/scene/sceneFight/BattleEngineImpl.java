@@ -62,7 +62,7 @@ public class BattleEngineImpl implements BattleEngine {
             return;
         }
         //effect 
-        this.effectParserInstance.parseEffect(playerMove.getEffect(), attackerPokemon, defenderPokemon, playerMove, null, currentWeather);
+        //this.effectParserInstance.parseEffect(playerMove.getEffect(), attackerPokemon, defenderPokemon, playerMove, null, currentWeather);
 
         Random rng = new Random();
         int chance = rng.nextInt(100) + 1;
