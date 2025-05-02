@@ -1,9 +1,14 @@
 {
     "pp": 5,
     "isPhysical": false,
-    "effect": {
+     "effect": {
         "checks": [],
-        "activation": []
+        "activation": [
+            [
+                "weather",
+                "Weather.SUNLIGHT"
+            ]
+        ]
     },
     "accuracy": 100,
     "critRate": 0,

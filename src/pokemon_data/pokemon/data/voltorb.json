@@ -14,13 +14,12 @@
         "specialAttack": 55
     },
     "moves": {
-        "1": "charge",
+        "1": "screech",
         "46": "explosion",
         "15": "sonic-boom",
         "37": "light-screen",
         "27": "self-destruct",
         "49": "mirror-coat",
-        "8": "screech",
         "42": "swift",
         "32": "rollout",
         "21": "spark"

@@ -4,8 +4,8 @@
         "checks": [],
         "activation": [
             [
-                "attackEnemy.pp",
-                "attackEnemy.pp /2"
+                "attackEnemy.pp.currentValue",
+                "attackEnemy.pp.currentValue /2"
             ]
         ]
     }
