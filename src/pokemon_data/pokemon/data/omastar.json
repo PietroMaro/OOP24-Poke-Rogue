@@ -15,7 +15,7 @@
         "specialAttack": 115
     },
     "moves": {
-        "55": "ancient-baseDamage",
+        "55": "ancient-power",
         "1": "constrict",
         "46": "tickle",
         "25": "mud-shot",

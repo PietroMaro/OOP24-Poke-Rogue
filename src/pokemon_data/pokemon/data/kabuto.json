@@ -15,7 +15,7 @@
         "specialAttack": 55
     },
     "moves": {
-        "55": "ancient-baseDamage",
+        "55": "ancient-power",
         "1": "harden",
         "13": "absorb",
         "25": "mud-shot",

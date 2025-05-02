@@ -14,7 +14,7 @@
         "specialAttack": 60
     },
     "moves": {
-        "33": "cosmic-baseDamage",
+        "33": "cosmic-power",
         "1": "growl",
         "45": "meteor-mash",
         "13": "double-slap",
