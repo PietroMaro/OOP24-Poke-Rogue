@@ -212,7 +212,7 @@ public class EnemyAiAttack {
     private void scoreForDamage(final Optional<Weather> weather) {
         Move moveToBeScored;
         int actualMoveScore;
-        double moveDamage;
+        int moveDamage;
         int moveIndex;
         int bestMoveIndex = -1;
         double bestMoveDamage = Double.MIN_VALUE;
