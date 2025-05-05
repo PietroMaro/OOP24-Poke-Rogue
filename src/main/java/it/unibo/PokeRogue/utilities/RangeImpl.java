@@ -1,28 +1,27 @@
 package it.unibo.PokeRogue.utilities;
 
-import java.util.function.BiFunction;
 import lombok.ToString;
 import lombok.Getter;
 import lombok.Setter;
 
 @ToString
-public class RangeImpl<T extends Number> implements Range<T>{
+public class RangeImpl<T extends Number> implements Range<T> {
 
-	@Getter @Setter
+    @Getter
+    @Setter
     private T currentMin;
-	@Getter @Setter
+    @Getter
+    @Setter
     private T currentMax;
-	@Getter 
+    @Getter
     private T currentValue;
 
-
-
-    public RangeImpl(T currentMin,T currentMax,T currentValue){
+    public RangeImpl(T currentMin, T currentMax, T currentValue) {
 
         this.currentMin = currentMin;
-        
+
         this.currentMax = currentMax;
-        
+
         this.currentValue = currentValue;
     }
 
@@ -46,7 +45,7 @@ public class RangeImpl<T extends Number> implements Range<T>{
         }
     }
 
-	private T convertToType(double value) {
+    private T convertToType(double value) {
         if (currentValue instanceof Integer) {
             return (T) Integer.valueOf((int) value);
         } else if (currentValue instanceof Double) {
@@ -59,14 +58,14 @@ public class RangeImpl<T extends Number> implements Range<T>{
         throw new UnsupportedOperationException("Unsupported Number type");
     }
 
-	@Override
-	public void setCurrentValue(T newValue){
-		this.currentValue = newValue;
-		if(newValue.doubleValue()> this.currentMax.doubleValue()){
-			this.currentValue = currentMax;
-		}
-		if(newValue.doubleValue() < this.currentMin.doubleValue()){
-			this.currentValue = currentMin;
-		}
-	}
+    @Override
+    public void setCurrentValue(T newValue) {
+        this.currentValue = newValue;
+        if (newValue.doubleValue() > this.currentMax.doubleValue()) {
+            this.currentValue = currentMax;
+        }
+        if (newValue.doubleValue() < this.currentMin.doubleValue()) {
+            this.currentValue = currentMin;
+        }
+    }
 }

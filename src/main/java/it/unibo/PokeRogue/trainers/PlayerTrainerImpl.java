@@ -14,7 +14,12 @@ package it.unibo.PokeRogue.trainers;
 public class PlayerTrainerImpl extends TrainerImpl implements PlayerTrainer {
 
     private static PlayerTrainerImpl instanceOfTrainer = null;
-    
+
+    /**
+     * Returns the singleton instance of PlayerTrainerImpl.
+     *
+     * @return the singleton instance
+     */
     public static PlayerTrainerImpl getTrainerInstance() {
         if (instanceOfTrainer == null) {
             instanceOfTrainer = new PlayerTrainerImpl();
@@ -23,6 +28,16 @@ public class PlayerTrainerImpl extends TrainerImpl implements PlayerTrainer {
         return instanceOfTrainer;
     }
 
+    /**
+     * Resets the singleton instance (used for testing purposes only).
+     */
+    public static void resetInstance() {
+        instanceOfTrainer = null;
+    }
+
+    /**
+     * Constructs a new PlayerTrainerImpl.
+     */
     public PlayerTrainerImpl() {
         super();
     }

@@ -40,10 +40,10 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
      * @param defendingPokemon the target Pokémon
      * @param attackChosen     the move used
      * @param currentWeather   the current weather condition
-     * @return the final damage value as a double
+     * @return the final damage value as an int
      */
     @Override
-    public double calculateDamage(final Pokemon attackingPokemon, final Pokemon defendingPokemon,
+    public int calculateDamage(final Pokemon attackingPokemon, final Pokemon defendingPokemon,
             final Move attackChosen, final Optional<Weather> currentWeather) {
 
         double baseDamage;
@@ -74,7 +74,7 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
 
         totalDamage = damageWithEnvironment * criticalBonus * randomNumber * moveTypeBonus * stabBonus;
 
-        return totalDamage;
+        return (int) totalDamage;
 
     }
 
