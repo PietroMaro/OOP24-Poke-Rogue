@@ -98,39 +98,39 @@ public class BattleEngineImpl implements BattleEngine {
         Pokemon pokemonEnemy = this.enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
         Move playerMove = pokemonPlayer.getActualMoves().get(Integer.parseInt(playerMoveString));
         Move enemyMove = moveFactoryInstance.moveFromName("splash");
-        if (typeEnemy != "Nothing") {
+        if (!typeEnemy.equals("Nothing") && typeEnemy.equals("Attack")) {
             enemyMove = pokemonEnemy.getActualMoves().get(Integer.parseInt(enemyMoveString));
         }
-        if (abilityEnemy.situationChecks() == AbilitySituationChecks.PASSIVE) {
-            this.effectParserInstance.parseEffect(abilityEnemy.effect(), pokemonEnemy, pokemonPlayer,
-                    Optional.of(enemyMove), Optional.of(pokemonPlayer.getActualMoves().get(0)), this.currentWeather);
+        if (abilityEnemy.situationChecks() == AbilitySituationChecks.NEUTRAL
+                || abilityEnemy.situationChecks() == AbilitySituationChecks.PASSIVE) {
+            this.executeEffect(abilityEnemy.effect(), pokemonEnemy, pokemonPlayer,
+                    enemyMove, playerMove);
         }
-        if (abilityPlayer.situationChecks() == AbilitySituationChecks.PASSIVE) {
-            this.effectParserInstance.parseEffect(abilityPlayer.effect(), pokemonPlayer, pokemonEnemy,
-                    Optional.of(playerMove), Optional.of(pokemonEnemy.getActualMoves().get(0)), this.currentWeather);
+        if (abilityPlayer.situationChecks() == AbilitySituationChecks.NEUTRAL
+                || abilityPlayer.situationChecks() == AbilitySituationChecks.PASSIVE) {
+            this.executeEffect(abilityPlayer.effect(), pokemonPlayer, pokemonEnemy,
+                    playerMove, enemyMove);
         }
         if (type == "SwitchIn") {
             if (abilityPlayer.situationChecks() == AbilitySituationChecks.SWITCHOUT) {
-                this.effectParserInstance.parseEffect(abilityPlayer.effect(), pokemonPlayer, pokemonEnemy,
-                        Optional.of(playerMove), Optional.of(pokemonEnemy.getActualMoves().get(0)),
-                        this.currentWeather);
+                this.executeEffect(abilityPlayer.effect(), pokemonPlayer, pokemonEnemy,
+                        playerMove, enemyMove);
             }
             this.switchIn(playerMoveString);
             if (abilityPlayer.situationChecks() == AbilitySituationChecks.SWITCHIN) {
-                this.effectParserInstance.parseEffect(abilityPlayer.effect(), pokemonPlayer, pokemonEnemy,
-                        Optional.of(playerMove), Optional.of(pokemonEnemy.getActualMoves().get(0)),
-                        this.currentWeather);
+                this.executeEffect(abilityPlayer.effect(), pokemonPlayer, pokemonEnemy,
+                        playerMove, enemyMove);
             }
         }
         if (typeEnemy == "SwitchIn") {
             if (abilityEnemy.situationChecks() == AbilitySituationChecks.SWITCHOUT) {
                 this.executeEffect(abilityEnemy.effect(), pokemonEnemy, pokemonPlayer,
-                        enemyMove, pokemonPlayer.getActualMoves().get(0));
+                        enemyMove, playerMove);
             }
             this.switchIn(enemyMoveString);
             if (abilityEnemy.situationChecks() == AbilitySituationChecks.SWITCHIN) {
                 this.executeEffect(abilityEnemy.effect(), pokemonEnemy, pokemonPlayer,
-                        enemyMove, pokemonPlayer.getActualMoves().get(0));
+                        enemyMove, playerMove);
             }
         }
         if (type == "Pokeball") {
@@ -170,29 +170,29 @@ public class BattleEngineImpl implements BattleEngine {
 
             if (abilityPlayer.situationChecks() == AbilitySituationChecks.ATTACK) {
                 this.executeEffect(abilityPlayer.effect(), pokemonPlayer, pokemonEnemy,
-                        playerMove, pokemonEnemy.getActualMoves().get(0));
+                        playerMove, enemyMove);
             }
             if (abilityEnemy.situationChecks() == AbilitySituationChecks.ATTACKED) {
                 this.executeEffect(abilityEnemy.effect(), pokemonEnemy, pokemonPlayer,
-                        enemyMove, pokemonPlayer.getActualMoves().get(0));
+                        enemyMove, playerMove);
             }
             this.executeMoves(playerMoveString, this.playerTrainerInstance, this.enemyTrainerInstance);
             this.executeEffect(playerMove.getEffect(), pokemonPlayer,
-                    pokemonEnemy, playerMove, pokemonEnemy.getActualMoves().get(0));
+                    pokemonEnemy, playerMove, enemyMove);
             this.newEnemyCheck();
 
         } else if (typeEnemy == "Attack") {
             if (abilityEnemy.situationChecks() == AbilitySituationChecks.ATTACK) {
                 this.executeEffect(abilityEnemy.effect(), pokemonEnemy, pokemonPlayer,
-                        enemyMove, pokemonPlayer.getActualMoves().get(0));
+                        enemyMove, playerMove);
             }
             if (abilityPlayer.situationChecks() == AbilitySituationChecks.ATTACKED) {
                 this.executeEffect(abilityPlayer.effect(), pokemonPlayer, pokemonEnemy,
-                        playerMove, pokemonEnemy.getActualMoves().get(0));
+                        playerMove, enemyMove);
             }
             this.executeMoves(enemyMoveString, this.enemyTrainerInstance, this.playerTrainerInstance);
             this.executeEffect(enemyMove.getEffect(), pokemonEnemy,
-                    pokemonPlayer, enemyMove, pokemonPlayer.getActualMoves().get(0));
+                    pokemonPlayer, enemyMove, playerMove);
             this.newEnemyCheck();
         }
         this.newEnemyCheck();
