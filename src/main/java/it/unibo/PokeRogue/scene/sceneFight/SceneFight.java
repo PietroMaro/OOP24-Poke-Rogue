@@ -183,7 +183,7 @@ public class SceneFight implements Scene {
         private void initSpriteElements() {
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.MY_POKEMON_SPRITE.value(),
                                 new SpriteElementImpl("firstPanel", (playerTrainerInstance
-                                                .getPokemon(FIRST_POSITION).get().getSpriteBack()), 0.03, 0.3, 0.55,
+                                                .getPokemon(FIRST_POSITION).get().getSpriteBack()), 0.03, 0.23, 0.55,
                                                 0.55));
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.ENEMY_POKEMON_SPRITE.value(),
                                 new SpriteElementImpl("firstPanel", (enemyTrainerInstance
