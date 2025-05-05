@@ -79,20 +79,45 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
     }
 
     /**
-     * Calculates the ratio between the attacking and defending stats
-     * based on whether the move is physical or special.
+     * Calculates the ratio between the specified attack and defense stats of the
+     * given attacking and defending Pokémon.
+     * 
+     * If the defending Pokémon's stat is 0, the method returns the attacking
+     * Pokémon's stat value to avoid division by zero.
+     *
+     */
+    private int computeOffenseDefenseRatio(final Pokemon attackingPokemon, final Pokemon defendingPokemon,
+            String attackStatName, String defenseStatName) {
+
+        if (defendingPokemon.getActualStats().get(defenseStatName).getCurrentValue() == 0) {
+            return attackingPokemon.getActualStats().get(attackStatName).getCurrentValue();
+        } else {
+
+            return attackingPokemon.getActualStats().get(attackStatName).getCurrentValue()
+                    / defendingPokemon.getActualStats().get(defenseStatName).getCurrentValue();
+
+        }
+    }
+
+    /**
+     * Calculates the attack-defense ratio based on the nature of the chosen move.
+     * 
+     * If the move is physical, it uses the attacker's "attack" and the defender's
+     * "defense".
+     * If the move is special, it uses the attacker's "specialAttack" and the
+     * defender's "specialDefense".
      */
     private double calculateAttackDefenseDifference(final Pokemon attackingPokemon, final Pokemon defendingPokemon,
             final Move attackChosen) {
+                
         int attackDefenseDifference;
 
         if (attackChosen.isPhysical()) {
-            attackDefenseDifference = attackingPokemon.getActualStats().get("attack").getCurrentValue()
-                    / defendingPokemon.getActualStats().get("defense").getCurrentValue();
-
+            attackDefenseDifference = this.computeOffenseDefenseRatio(attackingPokemon, defendingPokemon, "attack",
+                    "defense");
         } else {
-            attackDefenseDifference = attackingPokemon.getActualStats().get("specialAttack").getCurrentValue()
-                    / defendingPokemon.getActualStats().get("specialDefense").getCurrentValue();
+            attackDefenseDifference = this.computeOffenseDefenseRatio(attackingPokemon, defendingPokemon, "specialAttack",
+                    "specialDefense");
 
         }
 
