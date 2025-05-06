@@ -53,7 +53,7 @@ public final class PokemonImpl implements Pokemon {
 	private Optional<String> holdingObject;
 	private String abilityName;
 	private Optional<StatusCondition> statusCondition;
-
+    private Map<StatusCondition,Integer> statusDuration;
 	private boolean hasToLearnMove = false;
 	private Optional<Move> newMoveToLearn = Optional.empty();
 

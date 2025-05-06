@@ -34,6 +34,7 @@ public class BattleEngineImpl implements BattleEngine {
     private Optional<Weather> currentWeather;
     private PokemonBattleUtil pokemonBattleUtilInstance;
     private AbilityFactory abilityFactoryInstance;
+    private StatusEffect statusEffectInstance;
 
     public BattleEngineImpl(Integer enemyLevel, MoveFactoryImpl moveFactoryInstance,
             PlayerTrainerImpl enemyTrainerInstance) {
@@ -46,18 +47,7 @@ public class BattleEngineImpl implements BattleEngine {
         this.effectParserInstance = EffectParserImpl.getInstance(EffectParserImpl.class);
         this.currentWeather = Optional.of(Weather.SUNLIGHT);
         this.abilityFactoryInstance = AbilityFactoryImpl.getInstance(AbilityFactoryImpl.class);
-    }
-
-    @Override
-    public void abilityActivation(String abilityName) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'abilityActivation'");
-    }
-
-    @Override
-    public void checkActivation(String abilityName, String situation) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'checkActivation'");
+        this.statusEffectInstance = new StatusEffectImpl();
     }
 
     private void executeMoves(Move attackerMove, Pokemon attackerPokemon, Pokemon defenderPokemon) {
@@ -98,16 +88,27 @@ public class BattleEngineImpl implements BattleEngine {
         Move playerMove = getSafeMove(pokemonPlayer, playerMoveString, type);
         Move enemyMove = getSafeMove(pokemonEnemy, enemyMoveString, typeEnemy);
 
-        handleAbilityEffects(abilityPlayer, pokemonPlayer, pokemonEnemy, playerMove, enemyMove, AbilitySituationChecks.NEUTRAL);
-        handleAbilityEffects(abilityEnemy, pokemonEnemy, pokemonPlayer, enemyMove, playerMove, AbilitySituationChecks.NEUTRAL);
-        handleAbilityEffects(abilityPlayer, pokemonPlayer, pokemonEnemy, playerMove, enemyMove, AbilitySituationChecks.PASSIVE);
-        handleAbilityEffects(abilityEnemy, pokemonEnemy, pokemonPlayer, enemyMove, playerMove, AbilitySituationChecks.PASSIVE);
+        handleAbilityEffects(abilityPlayer, pokemonPlayer, pokemonEnemy, playerMove, enemyMove,
+                
+                AbilitySituationChecks.NEUTRAL);
+                
+        handleAbilityEffects(abilityEnemy, pokemonEnemy, pokemonPlayer, enemyMove, playerMove,
+                
+                AbilitySituationChecks.NEUTRAL);
+                
+        handleAbilityEffects(abilityPlayer, pokemonPlayer, pokemonEnemy, playerMove, enemyMove,
+                AbilitySituationChecks.PASSIVE);
+        handleAbilityEffects(abilityEnemy, pokemonEnemy, pokemonPlayer, enemyMove, playerMove,
+                AbilitySituationChecks.PASSIVE);
 
-        if (type.equals("SwitchIn")) {
+        if (type.equals("SwitchIn") && statusEffectInstance.checkStatusSwitch(pokemonPlayer)) {
             handleSwitch(pokemonPlayer, pokemonEnemy, playerMove, enemyMove, abilityPlayer, playerMoveString);
+            pokemonPlayer = this.playerTrainerInstance.getPokemon(FIRST_POSITION).get();
+
         }
         if (typeEnemy.equals("SwitchIn")) {
-            handleSwitch(pokemonEnemy, pokemonPlayer, enemyMove, playerMove, abilityEnemy, enemyMoveString);
+            handleSwitch(pokemonEnemy, pokemonPlayer, enemyMove, playerMove, abilityEnemy, enemyMoveString);            
+            pokemonEnemy = this.enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
         }
         if (type.equals("Pokeball")) {
             this.executeObject(playerMoveString);
@@ -161,26 +162,33 @@ public class BattleEngineImpl implements BattleEngine {
             handleAbilityEffects(abilityEnemy, enemy, player, enemyMove, playerMove,
                     AbilitySituationChecks.ATTACKED);
             if (this.calculatePriority(playerMove, enemyMove)) {
+                if (statusEffectInstance.checkStatusAttack(player)){
                 this.executeMoves(playerMove, player, enemy);
                 this.executeEffect(playerMove.getEffect(), player,
                         enemy, playerMove, enemyMove);
+                }
                 this.newEnemyCheck();
+                if (statusEffectInstance.checkStatusAttack(enemy)){
                 this.executeMoves(enemyMove, enemy, player);
                 this.executeEffect(enemyMove.getEffect(), enemy,
                         player, enemyMove, playerMove);
+                }
                 this.newEnemyCheck();
             } else {
+                if (statusEffectInstance.checkStatusAttack(enemy)){
                 this.executeMoves(enemyMove, enemy, player);
                 this.executeEffect(enemyMove.getEffect(), enemy,
                         player, enemyMove, playerMove);
+                }
+                if (statusEffectInstance.checkStatusAttack(player)){
                 this.newEnemyCheck();
                 this.executeMoves(playerMove, player, enemy);
                 this.executeEffect(playerMove.getEffect(), player,
                         enemy, playerMove, enemyMove);
                 this.newEnemyCheck();
+                }
             }
         } else if (type.equals("Attack")) {
-            player = this.playerTrainerInstance.getPokemon(FIRST_POSITION).get();
             handleAbilityEffects(abilityPlayer, player, enemy, playerMove, enemyMove,
                     AbilitySituationChecks.ATTACK);
             handleAbilityEffects(abilityEnemy, enemy, player, enemyMove, playerMove,
@@ -189,8 +197,7 @@ public class BattleEngineImpl implements BattleEngine {
             this.executeMoves(playerMove, player, enemy);
             this.executeEffect(playerMove.getEffect(), player,
                     enemy, playerMove, enemyMove);
-        } else if (typeEnemy.equals("Attack")) {
-            enemy = this.enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
+        } else if (typeEnemy.equals("Attack")) {            
             handleAbilityEffects(abilityEnemy, enemy, player, enemyMove, playerMove,
                     AbilitySituationChecks.ATTACK);
             handleAbilityEffects(abilityPlayer, player, enemy, playerMove, enemyMove,

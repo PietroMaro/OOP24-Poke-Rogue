@@ -52,6 +52,7 @@ public class SceneFight implements Scene {
         private MoveFactoryImpl moveFactoryInstance;
         private BattleEngineImpl battleEngineInstance;
         private PokemonFactory pokemonFactory;
+
         public SceneFight(Integer battleLevel) {
                 this.enemyTrainerInstance = new PlayerTrainerImpl();
                 this.pokemonFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
@@ -161,6 +162,21 @@ public class SceneFight implements Scene {
                                                                 .getExp().getCurrentMax()),
                                                 Color.WHITE,
                                                 0.04, 0.69, 0.67));
+                // TEXT STATUS
+                this.sceneGraphicElements.put(SceneFightGraphicEnum.ENEMY_POKEMON_STATUS_TEXT.value(),
+                                new TextElementImpl("firstPanel", "Status: " +
+                                                String.valueOf(enemyTrainerInstance.getPokemon(FIRST_POSITION).get()
+                                                .getStatusCondition().isPresent() ? enemyTrainerInstance.getPokemon(FIRST_POSITION).get()
+                                                .getStatusCondition() : "NONE"),
+                                                Color.WHITE,
+                                                0.04, 0, 0.03));
+                this.sceneGraphicElements.put(SceneFightGraphicEnum.MY_POKEMON_STATUS_TEXT.value(),
+                                new TextElementImpl("firstPanel", "Status: " +
+                                                String.valueOf(playerTrainerInstance.getPokemon(FIRST_POSITION).get()
+                                                                .getStatusCondition().isPresent() ? playerTrainerInstance.getPokemon(FIRST_POSITION).get()
+                                                                .getStatusCondition() : "NONE"),
+                                                Color.WHITE,
+                                                0.04, 0.69, 0.61));
         }
 
         private void initButtonElements() {
@@ -681,7 +697,7 @@ public class SceneFight implements Scene {
                 // TO FIX ENEMY
                 System.out.println(enemyChoose);
                 this.battleEngineInstance.movesPriorityCalculator(playerMoveType, playerMove,
-                enemyChoose.getFirst(), enemyChoose.getLast());
+                                enemyChoose.getFirst(), enemyChoose.getLast());
         }
 
         public PlayerTrainerImpl getEnemyTrainerImpl() {
