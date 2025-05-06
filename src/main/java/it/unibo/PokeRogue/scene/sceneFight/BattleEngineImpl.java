@@ -1,5 +1,6 @@
 package it.unibo.PokeRogue.scene.sceneFight;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.json.JSONObject;
@@ -59,15 +60,12 @@ public class BattleEngineImpl implements BattleEngine {
         int finalDamage = (int) pokemonBattleUtilInstance.calculateDamage(attackerPokemon, defenderPokemon,
                 attackerMove,
                 this.currentWeather);
-        //Why don't you use just decrement here?
-        int newHp = defenderPokemon.getActualStats().get("hp").getCurrentValue() - finalDamage;
-        defenderPokemon.getActualStats().get("hp").setCurrentValue(newHp);
+        System.out.println(finalDamage);
+        defenderPokemon.getActualStats().get("hp").decrement(finalDamage);
 
     }
 
-    //pokeObject would be a better name
-    @Override
-    public void executeObject(String pokeballName) {
+    private void pokeObject(String pokeballName) {
         int countBall = playerTrainerInstance.getBall().get(pokeballName);
         if (countBall > 0) {
             playerTrainerInstance.getBall().put(pokeballName, countBall - 1);
@@ -89,29 +87,30 @@ public class BattleEngineImpl implements BattleEngine {
         Move enemyMove = getSafeMove(pokemonEnemy, enemyMoveString, typeEnemy);
 
         handleAbilityEffects(abilityPlayer, pokemonPlayer, pokemonEnemy, playerMove, enemyMove,
-                
+
                 AbilitySituationChecks.NEUTRAL);
-                
+
         handleAbilityEffects(abilityEnemy, pokemonEnemy, pokemonPlayer, enemyMove, playerMove,
-                
+
                 AbilitySituationChecks.NEUTRAL);
-                
+
         handleAbilityEffects(abilityPlayer, pokemonPlayer, pokemonEnemy, playerMove, enemyMove,
                 AbilitySituationChecks.PASSIVE);
         handleAbilityEffects(abilityEnemy, pokemonEnemy, pokemonPlayer, enemyMove, playerMove,
                 AbilitySituationChecks.PASSIVE);
-
+        this.applyStatusForAllPokemon(playerTrainerInstance.getSquad(), pokemonEnemy);
+        this.applyStatusForAllPokemon(enemyTrainerInstance.getSquad(), pokemonPlayer);
         if (type.equals("SwitchIn") && statusEffectInstance.checkStatusSwitch(pokemonPlayer)) {
             handleSwitch(pokemonPlayer, pokemonEnemy, playerMove, enemyMove, abilityPlayer, playerMoveString);
             pokemonPlayer = this.playerTrainerInstance.getPokemon(FIRST_POSITION).get();
 
         }
         if (typeEnemy.equals("SwitchIn")) {
-            handleSwitch(pokemonEnemy, pokemonPlayer, enemyMove, playerMove, abilityEnemy, enemyMoveString);            
+            handleSwitch(pokemonEnemy, pokemonPlayer, enemyMove, playerMove, abilityEnemy, enemyMoveString);
             pokemonEnemy = this.enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
         }
         if (type.equals("Pokeball")) {
-            this.executeObject(playerMoveString);
+            this.pokeObject(playerMoveString);
         }
 
         handleAttackPhases(type, typeEnemy, pokemonPlayer, pokemonEnemy, playerMove, enemyMove, abilityPlayer,
@@ -120,15 +119,22 @@ public class BattleEngineImpl implements BattleEngine {
         this.newEnemyCheck();
     }
 
-    // this is usually considered a bad pattern. search a better way to avoid a try with an exmpty catch. 
-    // is it really necessary. I mean you already check if the "type" (which btw I don't understand what it is)
+    private void applyStatusForAllPokemon(List<Optional<Pokemon>> squad, Pokemon enemy) {
+        for (Optional<Pokemon> optionalPokemon : squad) {
+            if (optionalPokemon.isPresent()) {
+                statusEffectInstance.applyStatus(optionalPokemon.get(), enemy);
+            }
+        }
+    }
+
+    // this is usually considered a bad pattern. search a better way to avoid a try
+    // with an exmpty catch.
+    // is it really necessary. I mean you already check if the "type" (which btw I
+    // don't understand what it is)
     // is attack
     private Move getSafeMove(Pokemon pokemon, String moveIndex, String type) {
-        try {
-            if (type.equals("Attack")) {
-                return pokemon.getActualMoves().get(Integer.parseInt(moveIndex));
-            }
-        } catch (Exception ignored) {
+        if (type.equals("Attack")) {
+            return pokemon.getActualMoves().get(Integer.parseInt(moveIndex));
         }
         return moveFactoryInstance.moveFromName("splash"); // Default fallback move
     }
@@ -147,12 +153,11 @@ public class BattleEngineImpl implements BattleEngine {
         handleAbilityEffects(ability, user, target, moveUser, moveTarget, AbilitySituationChecks.SWITCHIN);
     }
 
-    // I mean man this really sucks. You can clearly make it better, even if just putting a couple of stuff in a private functions
+    // I mean man this really sucks. You can clearly make it better, even if just
+    // putting a couple of stuff in a private functions
     private void handleAttackPhases(String type, String typeEnemy, Pokemon player, Pokemon enemy, Move playerMove,
             Move enemyMove, Ability abilityPlayer, Ability abilityEnemy) {
-        boolean bothAttack = type.equals("Attack") && typeEnemy.equals("Attack");
-
-        if (bothAttack) {
+        if (type.equals("Attack") && typeEnemy.equals("Attack")) {
             handleAbilityEffects(abilityPlayer, player, enemy, playerMove, enemyMove,
                     AbilitySituationChecks.ATTACK);
             handleAbilityEffects(abilityEnemy, enemy, player, enemyMove, playerMove,
@@ -162,33 +167,33 @@ public class BattleEngineImpl implements BattleEngine {
             handleAbilityEffects(abilityEnemy, enemy, player, enemyMove, playerMove,
                     AbilitySituationChecks.ATTACKED);
             if (this.calculatePriority(playerMove, enemyMove)) {
-                if (statusEffectInstance.checkStatusAttack(player)){
-                this.executeMoves(playerMove, player, enemy);
-                this.executeEffect(playerMove.getEffect(), player,
-                        enemy, playerMove, enemyMove);
+                if (statusEffectInstance.checkStatusAttack(player)) {
+                    this.executeMoves(playerMove, player, enemy);
+                    this.executeEffect(playerMove.getEffect(), player,
+                            enemy, playerMove, enemyMove);
                 }
                 this.newEnemyCheck();
-                if (statusEffectInstance.checkStatusAttack(enemy)){
-                this.executeMoves(enemyMove, enemy, player);
-                this.executeEffect(enemyMove.getEffect(), enemy,
-                        player, enemyMove, playerMove);
+                if (statusEffectInstance.checkStatusAttack(enemy)) {
+                    this.executeMoves(enemyMove, enemy, player);
+                    this.executeEffect(enemyMove.getEffect(), enemy,
+                            player, enemyMove, playerMove);
                 }
                 this.newEnemyCheck();
             } else {
-                if (statusEffectInstance.checkStatusAttack(enemy)){
-                this.executeMoves(enemyMove, enemy, player);
-                this.executeEffect(enemyMove.getEffect(), enemy,
-                        player, enemyMove, playerMove);
+                if (statusEffectInstance.checkStatusAttack(enemy)) {
+                    this.executeMoves(enemyMove, enemy, player);
+                    this.executeEffect(enemyMove.getEffect(), enemy,
+                            player, enemyMove, playerMove);
                 }
-                if (statusEffectInstance.checkStatusAttack(player)){
                 this.newEnemyCheck();
-                this.executeMoves(playerMove, player, enemy);
-                this.executeEffect(playerMove.getEffect(), player,
-                        enemy, playerMove, enemyMove);
-                this.newEnemyCheck();
+                if (statusEffectInstance.checkStatusAttack(player)) {
+                    this.executeMoves(playerMove, player, enemy);
+                    this.executeEffect(playerMove.getEffect(), player,
+                            enemy, playerMove, enemyMove);
+                    this.newEnemyCheck();
                 }
             }
-        } else if (type.equals("Attack")) {
+        } else if (type.equals("Attack") && statusEffectInstance.checkStatusAttack(player)) {
             handleAbilityEffects(abilityPlayer, player, enemy, playerMove, enemyMove,
                     AbilitySituationChecks.ATTACK);
             handleAbilityEffects(abilityEnemy, enemy, player, enemyMove, playerMove,
@@ -197,7 +202,7 @@ public class BattleEngineImpl implements BattleEngine {
             this.executeMoves(playerMove, player, enemy);
             this.executeEffect(playerMove.getEffect(), player,
                     enemy, playerMove, enemyMove);
-        } else if (typeEnemy.equals("Attack")) {            
+        } else if (typeEnemy.equals("Attack") && statusEffectInstance.checkStatusAttack(enemy)) {
             handleAbilityEffects(abilityEnemy, enemy, player, enemyMove, playerMove,
                     AbilitySituationChecks.ATTACK);
             handleAbilityEffects(abilityPlayer, player, enemy, playerMove, enemyMove,

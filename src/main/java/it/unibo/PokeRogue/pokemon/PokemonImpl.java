@@ -84,6 +84,7 @@ public final class PokemonImpl implements Pokemon {
 		this.statusCondition = Optional.empty();
 		this.spriteFront = pokemonBlueprint.spriteFront();
 		this.spriteBack = pokemonBlueprint.spriteBack();
+		this.statusDuration = new HashMap<>();
 	}
 
 	private void generateIVs() {

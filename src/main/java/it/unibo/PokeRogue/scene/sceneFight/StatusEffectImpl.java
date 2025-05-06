@@ -16,10 +16,10 @@ public class StatusEffectImpl implements StatusEffect {
     }
 
     private void generateStatusMap() {
-        statusMap.put(StatusCondition.BURN, Integer.MAX_VALUE);
-        statusMap.put(StatusCondition.FREEZE, Integer.MAX_VALUE);
-        statusMap.put(StatusCondition.PARALYSIS, Integer.MAX_VALUE);
-        statusMap.put(StatusCondition.POISON, Integer.MAX_VALUE);
+        statusMap.put(StatusCondition.BURN, 5);
+        statusMap.put(StatusCondition.FREEZE, 6);
+        statusMap.put(StatusCondition.PARALYSIS, 8);
+        statusMap.put(StatusCondition.POISON, 8);
         statusMap.put(StatusCondition.SLEEP, 5);
         statusMap.put(StatusCondition.BOUND, 3);
         statusMap.put(StatusCondition.CONFUSION, 3);
@@ -85,7 +85,10 @@ public class StatusEffectImpl implements StatusEffect {
     public void applyStatus(Pokemon pokemon, Pokemon enemy) {
         Optional<StatusCondition> status = pokemon.getStatusCondition();
         if (status.isPresent()) {
-            switch (status.get()) {
+            StatusCondition currentStatus = status.get();
+            this.setTimeDuration(pokemon, status.get());
+            this.decrementTimeDuration(pokemon, status.get());
+            switch (currentStatus) {
                 case StatusCondition.BURN:
                     int burnDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 16;
                     calculateDamage(pokemon, burnDamage);
@@ -121,7 +124,7 @@ public class StatusEffectImpl implements StatusEffect {
                 case StatusCondition.SEEDED:
                     int seededDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 16;
                     calculateDamage(pokemon, seededDamage);
-                    calculateDamage(enemy, -seededDamage);
+                    enemy.getActualStats().get("hp").increment(seededDamage);
                     break;
                 default:
                     break;
@@ -129,8 +132,23 @@ public class StatusEffectImpl implements StatusEffect {
         }
     }
 
+    private void setTimeDuration(Pokemon pokemon, StatusCondition status) {
+        if (pokemon.getStatusDuration().isEmpty() || !pokemon.getStatusDuration().containsKey(status)) {
+            pokemon.getStatusDuration().clear();
+            pokemon.getStatusDuration().put(status, statusMap.get(status));
+        }
+    }
+
+    private void decrementTimeDuration(Pokemon pokemon, StatusCondition status) {
+        int turnLeft = pokemon.getStatusDuration().get(status) - 1;
+        pokemon.getStatusDuration().put(status, turnLeft);
+        if (pokemon.getStatusDuration().get(status).equals(0)) {
+            pokemon.getStatusDuration().clear();
+            pokemon.setStatusCondition(Optional.empty());
+        }
+    }
+
     private void calculateDamage(Pokemon pokemon, int damage) {
-        pokemon.getActualStats().get("hp")
-                .setCurrentValue(Math.max(0, pokemon.getActualStats().get("hp").getCurrentValue() - damage));
+        pokemon.getActualStats().get("hp").decrement(damage);
     }
 }
