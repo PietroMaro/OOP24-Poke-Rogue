@@ -3,7 +3,15 @@ package it.unibo.PokeRogue.move;
 import it.unibo.PokeRogue.Singleton;
 
 public interface MoveFactory extends Singleton {
-   	//make the access in memory and saves the information of all moves in local
+	/**
+	* Make the access in memory and saves the information of all moves in local 
+	* (this method gets automatically called by the constructor)
+	*/
     void init();
+	/**
+	* Create a {@link Move} making a deep copy of the Move saved in local 
+	* @param moveName 
+	* @see Move
+	*/
 	Move moveFromName(String moveName);
 }

@@ -5,7 +5,10 @@ import java.util.Set;
 import it.unibo.PokeRogue.Singleton;
 
 public interface PokemonFactory extends Singleton {
-   	//make the access in memory and saves the information of all pokemon in local
+	/**
+	* Make the access in memory and saves the information of all pokemons in local 
+	* (this method gets automatically called by the constructor)
+	*/
     void init();
 	Pokemon pokemonFromName(String pokemonName);
 	Pokemon randomPokemon(int level);
