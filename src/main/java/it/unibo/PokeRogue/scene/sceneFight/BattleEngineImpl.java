@@ -69,11 +69,13 @@ public class BattleEngineImpl implements BattleEngine {
         int finalDamage = (int) pokemonBattleUtilInstance.calculateDamage(attackerPokemon, defenderPokemon,
                 attackerMove,
                 this.currentWeather);
+        //Why don't you use just decrement here?
         int newHp = defenderPokemon.getActualStats().get("hp").getCurrentValue() - finalDamage;
         defenderPokemon.getActualStats().get("hp").setCurrentValue(newHp);
 
     }
 
+    //pokeObject would be a better name
     @Override
     public void executeObject(String pokeballName) {
         int countBall = playerTrainerInstance.getBall().get(pokeballName);
@@ -117,6 +119,9 @@ public class BattleEngineImpl implements BattleEngine {
         this.newEnemyCheck();
     }
 
+    // this is usually considered a bad pattern. search a better way to avoid a try with an exmpty catch. 
+    // is it really necessary. I mean you already check if the "type" (which btw I don't understand what it is)
+    // is attack
     private Move getSafeMove(Pokemon pokemon, String moveIndex, String type) {
         try {
             if (type.equals("Attack")) {
@@ -141,6 +146,7 @@ public class BattleEngineImpl implements BattleEngine {
         handleAbilityEffects(ability, user, target, moveUser, moveTarget, AbilitySituationChecks.SWITCHIN);
     }
 
+    // I mean man this really sucks. You can clearly make it better, even if just putting a couple of stuff in a private functions
     private void handleAttackPhases(String type, String typeEnemy, Pokemon player, Pokemon enemy, Move playerMove,
             Move enemyMove, Ability abilityPlayer, Ability abilityEnemy) {
         boolean bothAttack = type.equals("Attack") && typeEnemy.equals("Attack");
