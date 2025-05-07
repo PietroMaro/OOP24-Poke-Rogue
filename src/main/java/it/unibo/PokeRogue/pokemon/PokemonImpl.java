@@ -176,15 +176,15 @@ public final class PokemonImpl implements Pokemon {
 
 	private void calculateNewExpRange() {
 		int newRequiredExp = 0;
-		int currentLevel = this.level.getCurrentValue();
-		if (this.levelUpCurve == "fast") {
+		int currentLevel = this.level.getCurrentValue() + 1;
+		if (this.levelUpCurve.equals("fast")) {
 			newRequiredExp = (int) ((4 * Math.pow(currentLevel, 3)) / 5);
-		} else if (this.levelUpCurve == "medium") {
+		} else if (this.levelUpCurve.equals("medium")) {
 			newRequiredExp = (int) Math.pow(currentLevel, 3);
-		} else if (this.levelUpCurve == "medium-slow") {
+		} else if (this.levelUpCurve.equals("medium-slow")) {
 			newRequiredExp = (int) ((6 / 5 * Math.pow(currentLevel, 3)) - 15 * Math.pow(currentLevel, 2)
 					+ 100 * currentLevel - 140);
-		} else if (this.levelUpCurve == "slow") {
+		} else if (this.levelUpCurve.equals("slow")) {
 			newRequiredExp = (int) ((5 * Math.pow(currentLevel, 3)) / 4);
 		}
 		this.exp = new RangeImpl<Integer>(0, newRequiredExp, 0);

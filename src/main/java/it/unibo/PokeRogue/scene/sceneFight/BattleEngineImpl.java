@@ -36,7 +36,7 @@ public class BattleEngineImpl implements BattleEngine {
     private PokemonBattleUtil pokemonBattleUtilInstance;
     private AbilityFactory abilityFactoryInstance;
     private StatusEffect statusEffectInstance;
-
+    private BattleRewards battleRewardsInstance;
     public BattleEngineImpl(Integer enemyLevel, MoveFactoryImpl moveFactoryInstance,
             PlayerTrainerImpl enemyTrainerInstance) {
         this.pokemonFactory = new PokemonFactoryImpl();
@@ -49,6 +49,7 @@ public class BattleEngineImpl implements BattleEngine {
         this.currentWeather = Optional.of(Weather.SUNLIGHT);
         this.abilityFactoryInstance = AbilityFactoryImpl.getInstance(AbilityFactoryImpl.class);
         this.statusEffectInstance = new StatusEffectImpl();
+        this.battleRewardsInstance = new BattleRewardsImpl();
     }
 
     private void executeMoves(Move attackerMove, Pokemon attackerPokemon, Pokemon defenderPokemon) {
@@ -222,11 +223,14 @@ public class BattleEngineImpl implements BattleEngine {
     }
 
     private void newEnemyCheck() {
-        if (enemyTrainerInstance.getPokemon(FIRST_POSITION).get().getActualStats().get("hp").getCurrentValue() <= 0) {
+        Pokemon enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
+        Pokemon playerPokemon = playerTrainerInstance.getPokemon(FIRST_POSITION).get();
+        if (enemyPokemon.getActualStats().get("hp").getCurrentValue() <= 0) {
+            this.battleRewardsInstance.awardBattleRewards(playerPokemon,enemyPokemon);
             this.pokemonGenerated = pokemonFactory.randomPokemon(enemyLevel);
             this.enemyTrainerInstance.removePokemon(FIRST_POSITION);
             this.enemyTrainerInstance.addPokemon(pokemonGenerated, 1);
-        } else if (playerTrainerInstance.getPokemon(FIRST_POSITION).get().getActualStats().get("hp")
+        } else if (playerPokemon.getActualStats().get("hp")
                 .getCurrentValue() <= 0) {
             for (int i = 1; i < playerTrainerInstance.getSquad().size(); i++) {
                 if (playerTrainerInstance.getPokemon(i).isPresent() &&

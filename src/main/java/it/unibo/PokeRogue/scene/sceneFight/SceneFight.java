@@ -472,8 +472,8 @@ public class SceneFight implements Scene {
 
                 int moveIndex = switch (currentSelectedButton) {
                         case 100 -> 0;
-                        case 101 -> 1;
-                        case 102 -> 2;
+                        case 101 -> 2;
+                        case 102 -> 1;
                         case 103 -> 3;
                         default -> -1;
                 };
