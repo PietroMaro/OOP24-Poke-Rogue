@@ -44,7 +44,7 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
     public void setScene(final String newScene) {
         switch (newScene) {
             case "main":
-                currentScene = new SceneShop();
+                currentScene = new SceneFight();
 
                 break;
             case "load":

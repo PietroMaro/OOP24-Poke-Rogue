@@ -301,7 +301,7 @@ public class SceneShop implements Scene {
                 }
         }
 
-    private void initChangePokemonText() {/* 
+    private void initChangePokemonText() { 
         this.sceneGraphicElements.put(SceneShopEnum.POKEMON_1_NAME_TEXT.value(),
                 new TextElementImpl("secondPanel",
                         getPokemonNameAt(playerTrainerInstance, FIRST_POSITION), Color.WHITE,
@@ -325,7 +325,7 @@ public class SceneShop implements Scene {
                                 .getCurrentMax()),
                         Color.WHITE,
                         0.04, 0.81, 0.64));
-        
+        /* 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         this.sceneGraphicElements.put(SceneShopEnum.POKEMON_2_NAME_TEXT.value(),
