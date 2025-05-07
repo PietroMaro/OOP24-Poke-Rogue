@@ -14,8 +14,8 @@ public interface EffectParser extends Singleton {
  	* @param effect      the json object representing the effect.
  	* @param us          the pokémon using the ability or move.
  	* @param enemy       the opposing pokémon.
- 	* @param attackus    the move used by our pokémon.
- 	* @param attackenemy the move used by the enemy pokémon.
+ 	* @param attackUs    the move used by our pokémon.
+ 	* @param attackEnemy the move used by the enemy pokémon.
  	* @param weather     the current weather condition.
  	*/
     void parseEffect(

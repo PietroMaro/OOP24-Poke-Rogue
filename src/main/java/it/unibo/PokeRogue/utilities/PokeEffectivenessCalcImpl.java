@@ -18,8 +18,7 @@ import it.unibo.PokeRogue.pokemon.Type;
  *
  * This class provides methods to:
  * Evaluate the effectiveness of a move against a Pokémon
- * Compute an integer score representing effectiveness for ranking or
- * decision-making purposes</li>
+ * Compute an integer score representing effectiveness for ranking or decision-making purposes
  * 
  *
  * The effectiveness data is read from a JSON file located at:

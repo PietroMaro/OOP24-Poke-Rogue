@@ -19,27 +19,24 @@ public interface SavingSystem extends Singleton {
 	*/
 	int howManyPokemonInSave(String path);
 	/**
-	* Create a {@link Move} making a deep copy of the Move saved in local 
-	* @param moveName 
-	* @return the move with the name specified
-	* @see Move
+	* saves the pokemon in the class state
+	* @param pokemon the pokemon to save
 	*/
     void savePokemon(Pokemon pokemon);
 	/**
 	* Load the save file json in the state of the class
-	* @params path 
+	* @param path 
 	*/
     void loadData(String path);
 	/**
 	* Dumps the state of the class in path/fileName
-	* @params path 
-	* @params fileName
+	* @param path 
+	* @param fileName
 	*/
     void saveData(String path, String fileName);
 	/**
 	* simple getter 
-	* @see SceneBox 
-	* @return it divide the pokemons in groups of 81 [{@link SceneBox} size]
+	* @return it divide the pokemons in groups of 81 [box size]
 	*/
     List<List<String>> getSavedPokemon();
 }

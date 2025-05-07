@@ -36,9 +36,9 @@ import lombok.Getter;
  * to update the scene status and visuals accordingly.
  * 
  * Main Responsibilities:
- * Initialize and render save file entries and associated UI elements</li>
- * Handle navigation through saves via keyboard input</li>
- * Allow selection and loading of a save, or returning to the main menu</li>
+ * Initialize and render save file entries and associated UI elements
+ * Handle navigation through saves via keyboard input
+ * Allow selection and loading of a save, or returning to the main menu
  * 
  * @see SceneLoadView
  * @see it.unibo.PokeRogue.savingSystem.SavingSystem

@@ -6,14 +6,14 @@ import org.json.JSONArray;
 public interface JsonReader{
 	/**
 	* Dumps a JSON file into memory creating the destionationFolder if it doesn't exist
-	* @param finalPath 
+	* @param filePath 
 	* @param destionationFolder 
 	* @param jsonFile
 	*/
 	void dumpJsonToFile(final String filePath, final String destionationFolder, final Object jsonFile);
 	/**
 	* Dumps a JSON file into memory
-	* @param finalPath 
+	* @param filePath 
 	* @param jsonFile
 	*/
 	void dumpJsonToFile(final String filePath, final Object jsonFile);
