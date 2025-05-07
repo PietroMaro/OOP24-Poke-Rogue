@@ -3,7 +3,16 @@ package it.unibo.PokeRogue.ability;
 import it.unibo.PokeRogue.Singleton;
 
 public interface AbilityFactory extends Singleton {
-   	//make the access in memory and saves the information of all abilities in local
+    /**
+	* Make the access in memory and saves the information of all abilities in local 
+	* (this method gets automatically called by the constructor)
+	*/
     void init();
+	/**
+	* gives an {@link Ability} taking it from the ones saved in memory
+	* @param abilityName 
+	* @return the ability with the name specified
+	* @see Ability
+	*/
 	Ability abilityFromName(String abilityName);
 }

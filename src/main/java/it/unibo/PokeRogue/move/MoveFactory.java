@@ -11,6 +11,7 @@ public interface MoveFactory extends Singleton {
 	/**
 	* Create a {@link Move} making a deep copy of the Move saved in local 
 	* @param moveName 
+	* @return the move with the name specified
 	* @see Move
 	*/
 	Move moveFromName(String moveName);

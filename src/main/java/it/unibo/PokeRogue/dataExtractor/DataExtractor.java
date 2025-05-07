@@ -29,6 +29,7 @@ public interface DataExtractor{
 	void setDestinationFolder(String newPath);
 	/**
 	* simple getter 
+	* @return the destination folder path 
 	*/
 	String getDestinationFolder();
 }
