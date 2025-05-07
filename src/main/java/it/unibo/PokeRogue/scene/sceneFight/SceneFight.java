@@ -167,14 +167,14 @@ public class SceneFight implements Scene {
                                 new TextElementImpl("firstPanel", "Status: " +
                                                 String.valueOf(enemyTrainerInstance.getPokemon(FIRST_POSITION).get()
                                                 .getStatusCondition().isPresent() ? enemyTrainerInstance.getPokemon(FIRST_POSITION).get()
-                                                .getStatusCondition() : "NONE"),
+                                                .getStatusCondition().get() : "NONE"),
                                                 Color.WHITE,
                                                 0.04, 0, 0.03));
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.MY_POKEMON_STATUS_TEXT.value(),
                                 new TextElementImpl("firstPanel", "Status: " +
                                                 String.valueOf(playerTrainerInstance.getPokemon(FIRST_POSITION).get()
                                                                 .getStatusCondition().isPresent() ? playerTrainerInstance.getPokemon(FIRST_POSITION).get()
-                                                                .getStatusCondition() : "NONE"),
+                                                                .getStatusCondition().get() : "NONE"),
                                                 Color.WHITE,
                                                 0.04, 0.69, 0.61));
         }
