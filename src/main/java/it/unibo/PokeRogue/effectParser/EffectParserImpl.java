@@ -106,30 +106,6 @@ public class EffectParserImpl extends SingletonImpl implements EffectParser {
 		}
 	}
 
-	/*
-	 * private void activateActivations(JSONArray activation, Integer duration,
-	 * String onUse) {
-	 * for (int actIndex = 0; actIndex < activation.length(); actIndex++) {
-	 * String attribute = activation.getJSONArray(actIndex).getString(0);
-	 * String value = activation.getJSONArray(actIndex).getString(1);
-	 * parseSingleExpression(attribute + " = " + value);
-	 * 
-	 * if (duration != null && duration > 0) {
-	 * // Memorizza la durata e l'attributo modificato da qualche parte
-	 * if (this.us.isPresent()) {
-	 * this.us.get().addActiveEffect(attribute, duration); // Esempio: aggiungi a
-	 * una lista di effetti attivi nel Pokémon
-	 * }
-	 * }
-	 * if (onUse != null && onUse.equals("applyBattleCounter")) {
-	 * // Inizializza un contatore di battaglie per questo effetto
-	 * if (this.us.isPresent()) {
-	 * this.us.get().setActiveEffectCounter(attribute, duration); // Esempio
-	 * }
-	 * }
-	 * }
-	 */
-
 	@Override
     public void parseEffect(
 		JSONObject effect,
