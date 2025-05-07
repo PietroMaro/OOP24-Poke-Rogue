@@ -8,6 +8,15 @@
     "category": "Equipable",
     "captureRate": 0,
     "effect": {
-      "prizeBoost": 0.20
-    }
+    "checks": [
+      [
+      ]
+    ],
+    "activation": [
+      [
+        "us.money",
+        "MATH.floor(us.money * 1.2).intValue()"
+      ]
+    ]
+  }
   }

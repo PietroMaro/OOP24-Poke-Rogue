@@ -8,10 +8,16 @@
     "category": "Consumable",
     "captureRate": 0,
     "effect": {
-        "statBoost": {
-            "stat": "special-defense",
-            "stages": 1
-        },
-        "duration": 5
+        "checks": [
+            []
+        ],
+        "activation": [
+            [
+                "us.tempStatsBonus.specialDefense",
+                "us.tempStatsBonus.specialDefense + 1"
+            ]
+        ],
+        "duration": 5,
+        "onUse": "applyBattleCounter"
     }
 }

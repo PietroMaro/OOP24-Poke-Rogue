@@ -8,6 +8,11 @@
     "category": "Consumable",
     "captureRateModifier": 2.0,
     "effect": {
-        "bonus": null
+        "checks": [
+            []
+        ],
+        "activation": [
+            []
+        ]
     }
 }

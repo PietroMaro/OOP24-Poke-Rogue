@@ -8,6 +8,14 @@
     "category": "Equipable",
     "captureRate": 0,
     "effect": {
-        "moneyFromDamage": 0.5
+        "checks": [
+            []
+        ],
+        "activation": [
+            [
+                "enemy.money",
+                "MATH.floor(enemy.money + (attackUs.damage * 0.5)).intValue()"
+            ]
+        ]
     }
 }

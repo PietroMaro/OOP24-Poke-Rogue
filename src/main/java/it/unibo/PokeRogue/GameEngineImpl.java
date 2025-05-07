@@ -1,6 +1,7 @@
 package it.unibo.PokeRogue;
 
 import it.unibo.PokeRogue.scene.Scene;
+import it.unibo.PokeRogue.scene.SceneShop;
 import it.unibo.PokeRogue.scene.sceneBox.SceneBox;
 import it.unibo.PokeRogue.scene.sceneLoad.SceneLoad;
 import it.unibo.PokeRogue.scene.sceneMenu.SceneMenu;
@@ -41,7 +42,7 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
     public void setScene(final String newScene) {
         switch (newScene) {
             case "main":
-                currentScene = new SceneMenu();
+                currentScene = new SceneShop();
 
                 break;
             case "load":

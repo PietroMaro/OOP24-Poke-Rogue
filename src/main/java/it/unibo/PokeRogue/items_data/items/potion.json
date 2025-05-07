@@ -8,6 +8,12 @@
     "category": "Consumable",
     "captureRate": 0,
     "effect": {
-        "hpRestore": 20
+        "checks": [],
+        "activation": [
+            [
+                "us.stats.hp.current",
+                "MATH.min(us.stats.hp.max, us.stats.hp.current + 20)"
+            ]
+        ]
     }
 }

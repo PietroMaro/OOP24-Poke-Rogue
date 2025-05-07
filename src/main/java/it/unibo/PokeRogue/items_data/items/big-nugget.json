@@ -8,6 +8,14 @@
     "category": "Treasure",
     "captureRate": 0,
     "effect": {
-        "giveMoney": 5000
+        "checks": [
+            []
+        ],
+        "activation": [
+            [
+                "us.money",
+                "us.money + 5000"
+            ]
+        ]
     }
 }

@@ -8,7 +8,22 @@
     "category": "Consumable",
     "captureRate": 0,
     "effect": {
-        "revive": true,
-        "hpRestore": "half"
+        "checks": [
+            [
+                "us.stats.hp.current",
+                "<=",
+                "0"
+            ]
+        ],
+        "activation": [
+            [
+                "us.stats.hp.current",
+                "MATH.floor(us.stats.hp.max * 0.5).intValue()"
+            ],
+            [
+                "us.statusCondition",
+                "''"
+            ]
+        ]
     }
 }

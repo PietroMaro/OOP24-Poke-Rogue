@@ -8,7 +8,12 @@
     "category": "Consumable",
     "captureRate": 0,
     "effect": {
-        "levelUp": 1,
-        "target": 1
+        "checks": [],
+        "activation": [
+            [
+                "currentPokemon.level",
+                "currentPokemon.level + 1"
+            ]
+        ]
     }
 }

@@ -8,9 +8,16 @@
     "category": "Equipable",
     "captureRate": 0,
     "effect": {
-        "revive": true,
-        "hpRestore": "half",
-        "autoUseOnFaint": true,
-        "remainingUsages": 1
+        "checks": [],
+        "activation": [
+            [
+                "us.stats.hp.current",
+                "MATH.floor(us.stats.hp.max / 2).intValue()"
+            ],
+            [
+                "us.statusCondition",
+                "''"
+            ]
+        ]
     }
 }

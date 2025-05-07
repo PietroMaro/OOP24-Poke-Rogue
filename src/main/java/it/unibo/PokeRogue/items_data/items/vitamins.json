@@ -8,10 +8,32 @@
     "category": "Equipable",
     "captureRate": 0,
     "effect": {
-        "statBoost": {
-            "stat": "all",
-            "stages": 1
-        },
-        "duration": "whileEquiped"
+        "checks": [],
+        "activation": [
+            [
+                "us.stats.hp",
+                "MATH.floor(us.stats.hp * 1.1).intValue()"
+            ],
+            [
+                "us.stats.attack",
+                "MATH.floor(us.stats.attack * 1.1).intValue()"
+            ],
+            [
+                "us.stats.defense",
+                "MATH.floor(us.stats.defense * 1.1).intValue()"
+            ],
+            [
+                "us.stats.specialAttack",
+                "MATH.floor(us.stats.specialAttack * 1.1).intValue()"
+            ],
+            [
+                "us.stats.specialDefense",
+                "MATH.floor(us.stats.specialDefense * 1.1).intValue()"
+            ],
+            [
+                "us.stats.speed",
+                "MATH.floor(us.stats.speed * 1.1).intValue()"
+            ]
+        ]
     }
 }

@@ -8,7 +8,12 @@
     "category": "Consumable",
     "captureRate": 0,
     "effect": {
-      "boostPP": 0.2,
-      "target": "singleMove"
+      "checks": [],
+    "activation": [
+      [
+        "us.moves[selectedMoveIndex].maxPp",
+        "MATH.floor(us.moves[selectedMoveIndex].maxPp * 1.2).intValue()"
+      ]
+    ]
     }
   }

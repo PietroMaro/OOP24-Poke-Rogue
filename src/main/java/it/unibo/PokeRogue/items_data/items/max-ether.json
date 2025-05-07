@@ -8,7 +8,12 @@
     "category": "Consumable",
     "captureRate": 0,
     "effect": {
-        "restorePP": "max",
-        "target": "singleMove"
+        "checks": [],
+        "activation": [
+            [
+                "us.moves[selectedMoveIndex].currentPp",
+                "us.moves[selectedMoveIndex].maxPp"
+            ]
+        ]
     }
 }
