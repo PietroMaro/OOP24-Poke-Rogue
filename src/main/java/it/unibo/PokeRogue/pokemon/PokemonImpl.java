@@ -53,7 +53,7 @@ public final class PokemonImpl implements Pokemon {
 	private Optional<String> holdingObject;
 	private String abilityName;
 	private Optional<StatusCondition> statusCondition;
-
+    private Map<StatusCondition,Integer> statusDuration;
 	private boolean hasToLearnMove = false;
 	private Optional<Move> newMoveToLearn = Optional.empty();
 
@@ -84,6 +84,7 @@ public final class PokemonImpl implements Pokemon {
 		this.statusCondition = Optional.empty();
 		this.spriteFront = pokemonBlueprint.spriteFront();
 		this.spriteBack = pokemonBlueprint.spriteBack();
+		this.statusDuration = new HashMap<>();
 	}
 
 	private void generateIVs() {
@@ -153,7 +154,7 @@ public final class PokemonImpl implements Pokemon {
 
 		Range<Integer> rangeHp = new RangeImpl<Integer>(0, maxLife, maxLife);
 		actualStats.put("hp", rangeHp);
-		for (String stat : statNames) {
+		for (String stat : statNames.subList(1, statNames.size())) {
 
 			int statValue = (int) Math.round(
 					Math.floor(
@@ -189,23 +190,11 @@ public final class PokemonImpl implements Pokemon {
 		this.exp = new RangeImpl<Integer>(0, newRequiredExp, 0);
 	}
 
-	private void levelUpStats() {
-		for (String stat : statNames) {
-			int base = baseStats.get(stat);
-			int iv = IV.get(stat);
-			int ev = EV.get(stat).getCurrentValue();
-
-			int increase = (int) Math.floor(base / 50.0 + (iv + ev) / 100.0);
-
-			Range<Integer> actualStat = actualStats.get(stat);
-			actualStat.increment(increase);
-		}
-	}
 
 	@Override
 	public void levelUp(boolean isPlayerPokemon) {
 		this.level.increment(1);
-		levelUpStats();
+		this.calculateActualStats();
 		calculateNewExpRange();
 
 		if (this.levelMovesLearn.keySet().contains(this.level.getCurrentValue())) {

@@ -2,6 +2,7 @@ package it.unibo.PokeRogue.pokemon;
 
 import java.util.Map;
 import java.util.Optional;
+
 import java.util.List;
 import java.awt.Image;
 
@@ -74,6 +75,7 @@ public interface Pokemon {
 	void setSpriteFront(Image newVal);
 	Image getSpriteBack();
 	void setSpriteBack(Image newVal);
-
+	Map<StatusCondition,Integer> getStatusDuration();
+	void setStatusDuration(Map<StatusCondition,Integer> newVal);
 	//if exp+amount = max of the level it will trigger level up
 }

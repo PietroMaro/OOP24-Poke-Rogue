@@ -131,19 +131,20 @@ public class EffectParserImpl extends SingletonImpl implements EffectParser {
 	 */
 
 	@Override
-	public void parseEffect(
-			JSONObject effect,
-			Pokemon us,
-			Pokemon enemy,
-			Move attackUs,
-			Move attackEnemy,
-			Weather weather) {
+    public void parseEffect(
+		JSONObject effect,
+		Pokemon us,
+		Pokemon enemy,
+		Optional<Move> attackUs,
+		Optional<Move> attackEnemy,
+		Optional<Weather> weather
+			){
 		this.us = Optional.of(us);
 		this.enemy = Optional.of(enemy);
-		this.attackUs = Optional.of(attackUs);
-		this.attackEnemy = Optional.of(attackEnemy);
-		this.weather = Optional.of(weather);
-		parseEffect(effect);
+		this.attackUs = attackUs;
+		this.attackEnemy = attackEnemy;
+		this.weather = weather;
+		parseEffect(effect);	
 	}
 
 	@Override
@@ -155,5 +156,4 @@ public class EffectParserImpl extends SingletonImpl implements EffectParser {
 		this.weather = Optional.empty();
 		parseEffect(effect);
 	}
-
 }

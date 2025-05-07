@@ -1,19 +1,40 @@
 package it.unibo.PokeRogue.utilities;
 
+import java.nio.file.Paths;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.json.JSONObject;
 
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.pokemon.Type;
 
+/**
+ * Implementation of {@link PokeEffectivenessCalc} that calculates the
+ * effectiveness
+ * of Pokémon type matchups based on data loaded from a JSON file.
+ *
+ * This class provides methods to:
+ * Evaluate the effectiveness of a move against a Pokémon
+ * Compute an integer score representing effectiveness for ranking or
+ * decision-making purposes</li>
+ * 
+ *
+ * The effectiveness data is read from a JSON file located at:
+ * {@code src/pokemon_data/pokemonEffectiveness.json}
+ *
+ * 
+ */
 public class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
 
     private final Map<Type, Map<Type, Double>> effectiveness = new EnumMap<>(Type.class);
     private final Map<Double, Integer> effectivenessValueCalculator = new HashMap<>();
 
+    /**
+     * Constructs the effectiveness calculator and loads data from the JSON file.
+     */
     public PokeEffectivenessCalcImpl() {
         this.effectivenessValueCalculator.put(4.0, 160);
         this.effectivenessValueCalculator.put(2.0, 80);
@@ -22,150 +43,29 @@ public class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
         this.effectivenessValueCalculator.put(0.25, 10);
         this.effectivenessValueCalculator.put(0.0, 0);
 
-        for (Type attackType : Type.values()) {
-            effectiveness.put(attackType, new EnumMap<>(Type.class));
+        final JsonReader jsonReader = new JsonReaderImpl();
+        final JSONObject root = jsonReader
+                .readJsonObject(Paths.get("src", "pokemon_data", "pokemonEffectiveness.json").toString());
+
+        for (String attacker : root.keySet()) {
+            JSONObject inner = root.getJSONObject(attacker);
+            Map<Type, Double> innerMap = new HashMap<>();
+            for (String defender : inner.keySet()) {
+                innerMap.put(Type.valueOf(defender), inner.getDouble(defender));
+            }
+            this.effectiveness.put(Type.valueOf(attacker), innerMap);
         }
-
-        this.effectiveness.get(Type.NORMAL).put(Type.ROCK, 0.5);
-        this.effectiveness.get(Type.NORMAL).put(Type.GHOST, 0.0);
-        this.effectiveness.get(Type.NORMAL).put(Type.STEEL, 0.5);
-
-        this.effectiveness.get(Type.FIRE).put(Type.GRASS, 2.0);
-        this.effectiveness.get(Type.FIRE).put(Type.ICE, 2.0);
-        this.effectiveness.get(Type.FIRE).put(Type.BUG, 2.0);
-        this.effectiveness.get(Type.FIRE).put(Type.STEEL, 2.0);
-        this.effectiveness.get(Type.FIRE).put(Type.FIRE, 0.5);
-        this.effectiveness.get(Type.FIRE).put(Type.WATER, 0.5);
-        this.effectiveness.get(Type.FIRE).put(Type.ROCK, 0.5);
-        this.effectiveness.get(Type.FIRE).put(Type.DRAGON, 0.5);
-
-        this.effectiveness.get(Type.WATER).put(Type.FIRE, 2.0);
-        this.effectiveness.get(Type.WATER).put(Type.GROUND, 2.0);
-        this.effectiveness.get(Type.WATER).put(Type.ROCK, 2.0);
-        this.effectiveness.get(Type.WATER).put(Type.WATER, 0.5);
-        this.effectiveness.get(Type.WATER).put(Type.GRASS, 0.5);
-        this.effectiveness.get(Type.WATER).put(Type.DRAGON, 0.5);
-
-        this.effectiveness.get(Type.ELECTRIC).put(Type.WATER, 2.0);
-        this.effectiveness.get(Type.ELECTRIC).put(Type.FLYING, 2.0);
-        this.effectiveness.get(Type.ELECTRIC).put(Type.ELECTRIC, 0.5);
-        this.effectiveness.get(Type.ELECTRIC).put(Type.GRASS, 0.5);
-        this.effectiveness.get(Type.ELECTRIC).put(Type.DRAGON, 0.5);
-        this.effectiveness.get(Type.ELECTRIC).put(Type.GROUND, 0.0);
-
-        this.effectiveness.get(Type.GRASS).put(Type.WATER, 2.0);
-        this.effectiveness.get(Type.GRASS).put(Type.GROUND, 2.0);
-        this.effectiveness.get(Type.GRASS).put(Type.ROCK, 2.0);
-        this.effectiveness.get(Type.GRASS).put(Type.FIRE, 0.5);
-        this.effectiveness.get(Type.GRASS).put(Type.GRASS, 0.5);
-        this.effectiveness.get(Type.GRASS).put(Type.POISON, 0.5);
-        this.effectiveness.get(Type.GRASS).put(Type.FLYING, 0.5);
-        this.effectiveness.get(Type.GRASS).put(Type.BUG, 0.5);
-        this.effectiveness.get(Type.GRASS).put(Type.DRAGON, 0.5);
-        this.effectiveness.get(Type.GRASS).put(Type.STEEL, 0.5);
-
-        this.effectiveness.get(Type.ICE).put(Type.GRASS, 2.0);
-        this.effectiveness.get(Type.ICE).put(Type.GROUND, 2.0);
-        this.effectiveness.get(Type.ICE).put(Type.FLYING, 2.0);
-        this.effectiveness.get(Type.ICE).put(Type.DRAGON, 2.0);
-        this.effectiveness.get(Type.ICE).put(Type.FIRE, 0.5);
-        this.effectiveness.get(Type.ICE).put(Type.WATER, 0.5);
-        this.effectiveness.get(Type.ICE).put(Type.ICE, 0.5);
-        this.effectiveness.get(Type.ICE).put(Type.STEEL, 0.5);
-
-        this.effectiveness.get(Type.FIGHTING).put(Type.NORMAL, 2.0);
-        this.effectiveness.get(Type.FIGHTING).put(Type.ICE, 2.0);
-        this.effectiveness.get(Type.FIGHTING).put(Type.ROCK, 2.0);
-        this.effectiveness.get(Type.FIGHTING).put(Type.DARK, 2.0);
-        this.effectiveness.get(Type.FIGHTING).put(Type.STEEL, 2.0);
-        this.effectiveness.get(Type.FIGHTING).put(Type.POISON, 0.5);
-        this.effectiveness.get(Type.FIGHTING).put(Type.FLYING, 0.5);
-        this.effectiveness.get(Type.FIGHTING).put(Type.PSYCHIC, 0.5);
-        this.effectiveness.get(Type.FIGHTING).put(Type.BUG, 0.5);
-        this.effectiveness.get(Type.FIGHTING).put(Type.FAIRY, 0.5);
-        this.effectiveness.get(Type.FIGHTING).put(Type.GHOST, 0.0);
-
-        this.effectiveness.get(Type.POISON).put(Type.GRASS, 2.0);
-        this.effectiveness.get(Type.POISON).put(Type.FAIRY, 2.0);
-        this.effectiveness.get(Type.POISON).put(Type.POISON, 0.5);
-        this.effectiveness.get(Type.POISON).put(Type.GROUND, 0.5);
-        this.effectiveness.get(Type.POISON).put(Type.ROCK, 0.5);
-        this.effectiveness.get(Type.POISON).put(Type.GHOST, 0.5);
-        this.effectiveness.get(Type.POISON).put(Type.STEEL, 0.0);
-
-        this.effectiveness.get(Type.GROUND).put(Type.FIRE, 2.0);
-        this.effectiveness.get(Type.GROUND).put(Type.ELECTRIC, 2.0);
-        this.effectiveness.get(Type.GROUND).put(Type.POISON, 2.0);
-        this.effectiveness.get(Type.GROUND).put(Type.ROCK, 2.0);
-        this.effectiveness.get(Type.GROUND).put(Type.STEEL, 2.0);
-        this.effectiveness.get(Type.GROUND).put(Type.GRASS, 0.5);
-        this.effectiveness.get(Type.GROUND).put(Type.BUG, 0.5);
-        this.effectiveness.get(Type.GROUND).put(Type.FLYING, 0.0);
-
-        this.effectiveness.get(Type.FLYING).put(Type.GRASS, 2.0);
-        this.effectiveness.get(Type.FLYING).put(Type.FIGHTING, 2.0);
-        this.effectiveness.get(Type.FLYING).put(Type.BUG, 2.0);
-        this.effectiveness.get(Type.FLYING).put(Type.ELECTRIC, 0.5);
-        this.effectiveness.get(Type.FLYING).put(Type.ROCK, 0.5);
-        this.effectiveness.get(Type.FLYING).put(Type.STEEL, 0.5);
-
-        this.effectiveness.get(Type.PSYCHIC).put(Type.FIGHTING, 2.0);
-        this.effectiveness.get(Type.PSYCHIC).put(Type.POISON, 2.0);
-        this.effectiveness.get(Type.PSYCHIC).put(Type.PSYCHIC, 0.5);
-        this.effectiveness.get(Type.PSYCHIC).put(Type.STEEL, 0.5);
-        this.effectiveness.get(Type.PSYCHIC).put(Type.DARK, 0.0);
-
-        this.effectiveness.get(Type.BUG).put(Type.GRASS, 2.0);
-        this.effectiveness.get(Type.BUG).put(Type.PSYCHIC, 2.0);
-        this.effectiveness.get(Type.BUG).put(Type.DARK, 2.0);
-        this.effectiveness.get(Type.BUG).put(Type.FIRE, 0.5);
-        this.effectiveness.get(Type.BUG).put(Type.FIGHTING, 0.5);
-        this.effectiveness.get(Type.BUG).put(Type.POISON, 0.5);
-        this.effectiveness.get(Type.BUG).put(Type.FLYING, 0.5);
-        this.effectiveness.get(Type.BUG).put(Type.GHOST, 0.5);
-        this.effectiveness.get(Type.BUG).put(Type.STEEL, 0.5);
-        this.effectiveness.get(Type.BUG).put(Type.FAIRY, 0.5);
-
-        this.effectiveness.get(Type.ROCK).put(Type.FIRE, 2.0);
-        this.effectiveness.get(Type.ROCK).put(Type.ICE, 2.0);
-        this.effectiveness.get(Type.ROCK).put(Type.FLYING, 2.0);
-        this.effectiveness.get(Type.ROCK).put(Type.BUG, 2.0);
-        this.effectiveness.get(Type.ROCK).put(Type.FIGHTING, 0.5);
-        this.effectiveness.get(Type.ROCK).put(Type.GROUND, 0.5);
-        this.effectiveness.get(Type.ROCK).put(Type.STEEL, 0.5);
-
-        this.effectiveness.get(Type.GHOST).put(Type.GHOST, 2.0);
-        this.effectiveness.get(Type.GHOST).put(Type.PSYCHIC, 2.0);
-        this.effectiveness.get(Type.GHOST).put(Type.DARK, 0.5);
-        this.effectiveness.get(Type.GHOST).put(Type.NORMAL, 0.0);
-
-        this.effectiveness.get(Type.DRAGON).put(Type.DRAGON, 2.0);
-        this.effectiveness.get(Type.DRAGON).put(Type.STEEL, 0.5);
-        this.effectiveness.get(Type.DRAGON).put(Type.FAIRY, 0.0);
-
-        this.effectiveness.get(Type.DARK).put(Type.GHOST, 2.0);
-        this.effectiveness.get(Type.DARK).put(Type.PSYCHIC, 2.0);
-        this.effectiveness.get(Type.DARK).put(Type.FIGHTING, 0.5);
-        this.effectiveness.get(Type.DARK).put(Type.DARK, 0.5);
-        this.effectiveness.get(Type.DARK).put(Type.FAIRY, 0.5);
-
-        this.effectiveness.get(Type.STEEL).put(Type.ICE, 2.0);
-        this.effectiveness.get(Type.STEEL).put(Type.ROCK, 2.0);
-        this.effectiveness.get(Type.STEEL).put(Type.FAIRY, 2.0);
-        this.effectiveness.get(Type.STEEL).put(Type.FIRE, 0.5);
-        this.effectiveness.get(Type.STEEL).put(Type.WATER, 0.5);
-        this.effectiveness.get(Type.STEEL).put(Type.ELECTRIC, 0.5);
-        this.effectiveness.get(Type.STEEL).put(Type.STEEL, 0.5);
-
-        this.effectiveness.get(Type.FAIRY).put(Type.FIGHTING, 2.0);
-        this.effectiveness.get(Type.FAIRY).put(Type.DRAGON, 2.0);
-        this.effectiveness.get(Type.FAIRY).put(Type.DARK, 2.0);
-        this.effectiveness.get(Type.FAIRY).put(Type.FIRE, 0.5);
-        this.effectiveness.get(Type.FAIRY).put(Type.POISON, 0.5);
-        this.effectiveness.get(Type.FAIRY).put(Type.STEEL, 0.5);
 
     }
 
+    /**
+     * Returns the type effectiveness multiplier from the attacker's type to the
+     * defender's type.
+     *
+     * @param myPokemonType    The attacking type
+     * @param enemyPokemonType The defending type
+     * @return The effectiveness multiplier (e.g., 2.0, 0.5, 1.0)
+     */
     private double calculateTypeMultiplier(final Type myPokemonType, final Type enemyPokemonType) {
 
         if (this.effectiveness.get(myPokemonType).get(enemyPokemonType) == null) {
@@ -175,6 +75,14 @@ public class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
 
     }
 
+    /**
+     * Calculates the total effectiveness multiplier of a move against an enemy
+     * Pokémon.
+     *
+     * @param move         The move being used
+     * @param enemyPokemon The target Pokémon
+     * @return The cumulative effectiveness multiplier (e.g., 4.0, 0.5)
+     */
     public double calculateAttackEffectiveness(final Move move, final Pokemon enemyPokemon) {
 
         double effectiveness = 1;
@@ -188,6 +96,17 @@ public class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
         return effectiveness;
     }
 
+    /**
+     * Calculates an integer score representing the effectiveness of a Pokémon
+     * against another.
+     *
+     * The score is based on effectiveness multipliers and normalized to discrete
+     * values.
+     *
+     * @param myPokemon    The attacking Pokémon
+     * @param enemyPokemon The defending Pokémon
+     * @return An integer score representing type matchup effectiveness
+     */
     @Override
     public int calculateEffectiveness(final Pokemon myPokemon, final Pokemon enemyPokemon) {
         double effectiveness;

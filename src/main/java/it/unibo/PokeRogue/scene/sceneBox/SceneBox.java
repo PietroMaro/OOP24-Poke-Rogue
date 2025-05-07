@@ -202,7 +202,6 @@ public class SceneBox implements Scene {
 
                                 if (this.currentSelectedButton > SceneBoxStatusValuesEnum.START_BUTTON_POSITION
                                                 .value()) {
-
                                         this.playerTrainerInstance.addPokemon(
                                                         this.boxes.get(boxIndex).get(this.currentSelectedButton - 6),
                                                         3);

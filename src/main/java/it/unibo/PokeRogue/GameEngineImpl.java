@@ -3,6 +3,7 @@ package it.unibo.PokeRogue;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.scene.SceneShop;
 import it.unibo.PokeRogue.scene.sceneBox.SceneBox;
+import it.unibo.PokeRogue.scene.sceneFight.SceneFight;
 import it.unibo.PokeRogue.scene.sceneLoad.SceneLoad;
 import it.unibo.PokeRogue.scene.sceneMenu.SceneMenu;
 
@@ -23,6 +24,7 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
     private GraphicEngine graphicEngineInstance;
     private Scene currentScene;
     private String fileToLoadName;
+    private Integer fightLevel;
 
     public GameEngineImpl() {
 

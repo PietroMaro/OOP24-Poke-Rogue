@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
 import it.unibo.PokeRogue.Weather;
@@ -64,11 +65,11 @@ public class EnemyAiAttack {
      * If attacking is possible, returns the index of the chosen move.
      * Otherwise, returns a fallback action.
      *
-     * @param weather current weather condition in battle
+     * @param weather an optional of the current weather condition in battle
      * @return a List with the format ["Attack", moveIndex] or ["Nothing",
      *         "Nothing"]
      */
-    protected List<String> whatAttackWillDo(final Weather weather) {
+    protected List<String> whatAttackWillDo(final Optional<Weather> weather) {
         this.currentEnemyPokemon = this.enemyTrainer.getPokemon(0).get();
         this.currentEnemyPokemonMoves = this.currentEnemyPokemon.getActualMoves();
         this.currentPlayerPokemon = this.playerTrainerInstance.getPokemon(0).get();
@@ -124,10 +125,10 @@ public class EnemyAiAttack {
     /**
      * Chooses the move to use based on current AI configuration flags.
      *
-     * @param weather current weather condition in battle
+     * @param weather an optional of the current weather condition in battle
      */
 
-    private void chooseMove(final Weather weather) {
+    private void chooseMove(final Optional<Weather> weather) {
 
         if (!this.scoreMoves) {
             this.attackChosen = this.randomMove();
@@ -206,12 +207,12 @@ public class EnemyAiAttack {
      * Increases the score of moves based on their estimated damage
      * and ability to knock out the opponent.
      *
-     * @param weather current weather condition in battle
+     * @param weather an optional current weather condition in battle
      */
-    private void scoreForDamage(final Weather weather) {
+    private void scoreForDamage(final Optional<Weather> weather) {
         Move moveToBeScored;
         int actualMoveScore;
-        double moveDamage;
+        int moveDamage;
         int moveIndex;
         int bestMoveIndex = -1;
         double bestMoveDamage = Double.MIN_VALUE;

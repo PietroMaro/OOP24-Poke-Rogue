@@ -1,6 +1,7 @@
 package it.unibo.PokeRogue.ai;
 
 import java.util.List;
+import java.util.Optional;
 
 import it.unibo.PokeRogue.Weather;
 import it.unibo.PokeRogue.trainers.Trainer;
@@ -54,10 +55,10 @@ public class EnemyAiImpl implements EnemyAi {
      * attacking,
      * based on internal strategy and the current weather.
      *
-     * @param weather the current battle weather
+     * @param weather an optional of the current battle weather
      * @return a list of strings representing the chosen action and related data
      */
-    public List<String> nextMove(final Weather weather) {
+    public List<String> nextMove(final Optional<Weather> weather) {
         List<String> decision = this.aiOfSwitchIn.willSwitchIn();
 
         if ("SwitchIn".equals(decision.get(0))) {
