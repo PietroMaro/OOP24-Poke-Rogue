@@ -23,4 +23,8 @@ public interface Trainer {
 
 	Map<String, Integer> getBall();
 
+	int getMoney();
+
+    void addMoney(int amount);
+
 }

@@ -12,6 +12,8 @@ import it.unibo.PokeRogue.pokemon.Pokemon;
 public class TrainerImpl implements Trainer {
     private List<Optional<Pokemon>> pokemonSquad;
     private Map<String, Integer> ball;
+    private int money;
+
     public TrainerImpl() {
         this.pokemonSquad = new ArrayList<>();
         this.ball = new HashMap<>();
@@ -22,6 +24,7 @@ public class TrainerImpl implements Trainer {
         for (int pokeSquadPosition = 0; pokeSquadPosition < 6; pokeSquadPosition++) {
             pokemonSquad.add(Optional.empty());
         }
+        this.money = 1000;
     }
 
     @Override
@@ -68,5 +71,15 @@ public class TrainerImpl implements Trainer {
     @Override
     public Map<String, Integer> getBall() {
         return this.ball;
+    }
+
+    @Override
+    public int getMoney() {
+        return this.money;
+    }
+
+    @Override
+    public void addMoney(final int amount) {
+        this.money += amount;
     }
 }

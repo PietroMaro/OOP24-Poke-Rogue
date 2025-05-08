@@ -44,7 +44,7 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
     public void setScene(final String newScene) {
         switch (newScene) {
             case "main":
-                currentScene = new SceneFight();
+                currentScene = new SceneMenu();
 
                 break;
             case "load":
@@ -55,8 +55,9 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
 
                 break;
             case "fight":
-                System.out.println("fightScene");
+                currentScene = new SceneShop();
                 break;
+            
 
             default:
                 break;
