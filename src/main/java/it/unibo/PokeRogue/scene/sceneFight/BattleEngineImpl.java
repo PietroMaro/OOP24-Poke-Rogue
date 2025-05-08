@@ -37,6 +37,7 @@ public class BattleEngineImpl implements BattleEngine {
     private AbilityFactory abilityFactoryInstance;
     private StatusEffect statusEffectInstance;
     private BattleRewards battleRewardsInstance;
+
     public BattleEngineImpl(Integer enemyLevel, MoveFactoryImpl moveFactoryInstance,
             PlayerTrainerImpl enemyTrainerInstance) {
         this.pokemonFactory = new PokemonFactoryImpl();
@@ -102,15 +103,17 @@ public class BattleEngineImpl implements BattleEngine {
         this.applyStatusForAllPokemon(playerTrainerInstance.getSquad(), pokemonEnemy);
         this.applyStatusForAllPokemon(enemyTrainerInstance.getSquad(), pokemonPlayer);
         if (type.equals("SwitchIn") && statusEffectInstance.checkStatusSwitch(pokemonPlayer)) {
-            handleSwitch(pokemonPlayer, pokemonEnemy, playerMove, enemyMove, abilityPlayer, playerMoveString);
+            handleSwitch(pokemonPlayer, pokemonEnemy, playerMove, enemyMove, abilityPlayer, playerMoveString,
+                    playerTrainerInstance);
             pokemonPlayer = this.playerTrainerInstance.getPokemon(FIRST_POSITION).get();
 
         }
         if (typeEnemy.equals("SwitchIn")) {
-            handleSwitch(pokemonEnemy, pokemonPlayer, enemyMove, playerMove, abilityEnemy, enemyMoveString);
+            handleSwitch(pokemonEnemy, pokemonPlayer, enemyMove, playerMove, abilityEnemy, enemyMoveString,
+                    enemyTrainerInstance);
             pokemonEnemy = this.enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
         }
-        if (type.equals("Pokeball")) {
+        if (type.equals("Pokeball") && enemyTrainerInstance.isWild()) {
             this.pokeObject(playerMoveString);
         }
 
@@ -128,16 +131,11 @@ public class BattleEngineImpl implements BattleEngine {
         }
     }
 
-    // this is usually considered a bad pattern. search a better way to avoid a try
-    // with an exmpty catch.
-    // is it really necessary. I mean you already check if the "type" (which btw I
-    // don't understand what it is)
-    // is attack
     private Move getSafeMove(Pokemon pokemon, String moveIndex, String type) {
         if (type.equals("Attack")) {
             return pokemon.getActualMoves().get(Integer.parseInt(moveIndex));
         }
-        return moveFactoryInstance.moveFromName("splash"); // Default fallback move
+        return moveFactoryInstance.moveFromName("splash");
     }
 
     private void executeEffect(JSONObject effect, Pokemon attackerPokemon, Pokemon defenderPokemon, Move atteckerMove,
@@ -148,9 +146,9 @@ public class BattleEngineImpl implements BattleEngine {
     }
 
     private void handleSwitch(Pokemon user, Pokemon target, Move moveUser, Move moveTarget, Ability ability,
-            String moveIndex) {
+            String moveIndex, PlayerTrainerImpl trainer) {
         this.handleAbilityEffects(ability, user, target, moveUser, moveTarget, AbilitySituationChecks.SWITCHOUT);
-        this.switchIn(moveIndex);
+        this.switchIn(moveIndex, trainer);
         handleAbilityEffects(ability, user, target, moveUser, moveTarget, AbilitySituationChecks.SWITCHIN);
     }
 
@@ -223,23 +221,27 @@ public class BattleEngineImpl implements BattleEngine {
     }
 
     private void newEnemyCheck() {
+        Boolean foundReplacement = false;
         Pokemon enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
         Pokemon playerPokemon = playerTrainerInstance.getPokemon(FIRST_POSITION).get();
         if (enemyPokemon.getActualStats().get("hp").getCurrentValue() <= 0) {
-            this.battleRewardsInstance.awardBattleRewards(playerPokemon,enemyPokemon);
-            this.pokemonGenerated = pokemonFactory.randomPokemon(enemyLevel);
+            this.battleRewardsInstance.awardBattleRewards(playerPokemon, enemyPokemon);
+            // TODO: GESTIRE IL TEAM VUOTO
             this.enemyTrainerInstance.removePokemon(FIRST_POSITION);
-            this.enemyTrainerInstance.addPokemon(pokemonGenerated, 1);
+            // CALL A SCENE SHOP
         } else if (playerPokemon.getActualStats().get("hp")
                 .getCurrentValue() <= 0) {
             for (int i = 1; i < playerTrainerInstance.getSquad().size(); i++) {
                 if (playerTrainerInstance.getPokemon(i).isPresent() &&
                         playerTrainerInstance.getPokemon(i).get().getActualStats().get("hp").getCurrentValue() > 0) {
-                    this.switchIn(String.valueOf(i));
+                    this.switchIn(String.valueOf(i), playerTrainerInstance);
+                    foundReplacement = true;
                     break;
-                } else {
-                    System.out.println("dead --> TO DO");
                 }
+            }
+            if (!foundReplacement) {
+                System.out.println("Tutti i tuoi Pokémon sono esausti. Game Over!");
+                // handleLoss();
             }
         }
     }
@@ -256,7 +258,7 @@ public class BattleEngineImpl implements BattleEngine {
         }
     }
 
-    private void switchIn(String move) {
-        this.playerTrainerInstance.switchPokemonPosition(FIRST_POSITION, Integer.parseInt(move));
+    private void switchIn(String move, PlayerTrainerImpl trainer) {
+        trainer.switchPokemonPosition(FIRST_POSITION, Integer.parseInt(move));
     }
 }

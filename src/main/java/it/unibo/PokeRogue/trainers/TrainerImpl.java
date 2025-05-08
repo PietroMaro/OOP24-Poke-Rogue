@@ -8,10 +8,11 @@ import java.util.Optional;
 
 import it.unibo.PokeRogue.pokemon.Pokemon;
 
-
 public class TrainerImpl implements Trainer {
     private List<Optional<Pokemon>> pokemonSquad;
     private Map<String, Integer> ball;
+    private Boolean wild = false;
+
     public TrainerImpl() {
         this.pokemonSquad = new ArrayList<>();
         this.ball = new HashMap<>();
@@ -68,5 +69,15 @@ public class TrainerImpl implements Trainer {
     @Override
     public Map<String, Integer> getBall() {
         return this.ball;
+    }
+
+    @Override
+    public Boolean isWild() {
+        return this.wild;
+    }
+
+    @Override
+    public void setWild(Boolean wild) {
+        this.wild = wild;
     }
 }

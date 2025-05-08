@@ -23,4 +23,7 @@ public interface Trainer {
 
 	Map<String, Integer> getBall();
 
+	Boolean isWild();
+
+	void setWild(Boolean wild);
 }

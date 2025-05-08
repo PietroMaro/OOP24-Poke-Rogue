@@ -15,7 +15,6 @@ import it.unibo.PokeRogue.GameEngineImpl;
 import it.unibo.PokeRogue.Weather;
 import it.unibo.PokeRogue.ai.EnemyAi;
 import it.unibo.PokeRogue.ai.EnemyAiImpl;
-import it.unibo.PokeRogue.effectParser.EffectParserImpl;
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl;
 import it.unibo.PokeRogue.graphic.box.BoxElementImpl;
@@ -26,8 +25,6 @@ import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.move.MoveFactoryImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
-import it.unibo.PokeRogue.pokemon.PokemonFactory;
-import it.unibo.PokeRogue.pokemon.PokemonFactoryImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
@@ -50,20 +47,20 @@ public class SceneFight implements Scene {
         private final static Integer SIXTH_POSITION = 5;
         private int newSelectedButton;
         private MoveFactoryImpl moveFactoryInstance;
-        private BattleEngineImpl battleEngineInstance;
-        private PokemonFactory pokemonFactory;
+        private BattleEngine battleEngineInstance;
+        private GenerateEnemy generateEnemyInstance;
 
         public SceneFight(Integer battleLevel) {
                 this.enemyTrainerInstance = new PlayerTrainerImpl();
-                this.pokemonFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
-                this.enemyTrainerInstance.addPokemon(pokemonFactory.randomPokemon(battleLevel), 1);
                 this.sceneGraphicElements = new LinkedHashMap<>();
                 this.allPanelsElements = new LinkedHashMap<>();
                 this.moveFactoryInstance = new MoveFactoryImpl();
-                this.battleEngineInstance = new BattleEngineImpl(0, moveFactoryInstance, enemyTrainerInstance);
+                this.battleEngineInstance = new BattleEngineImpl(battleLevel, moveFactoryInstance, enemyTrainerInstance);
                 this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
                 this.enemyAiInstance = new EnemyAiImpl(enemyTrainerInstance, battleLevel);
+                this.generateEnemyInstance = new GenerateEnemyImpl(battleLevel, enemyTrainerInstance);
+                this.generateEnemyInstance.generateEnemy();
                 this.initStatus();
                 this.initGraphicElements();
         }
