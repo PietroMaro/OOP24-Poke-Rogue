@@ -109,7 +109,7 @@ public class SceneShop implements Scene {
                                                 || (this.currentSelectedButton >= 200
                                                                 && this.currentSelectedButton <= 205)) {
                                         this.newSelectedButton = SceneShopEnum.PRICY_ITEM_1_BUTTON.value();
-                                } else if (this.currentSelectedButton >= SceneShopEnum.PRICY_ITEM_1_BUTTON.value() &&
+                                /*}  else if (this.currentSelectedButton >= SceneShopEnum.PRICY_ITEM_1_BUTTON.value() &&
                                                 this.currentSelectedButton < SceneShopEnum.PRICY_ITEM_1_BUTTON.value()
                                                                 + SHOP_SIZE) {
                                         buyItem(this.shopItems.get(this.currentSelectedButton
@@ -118,7 +118,7 @@ public class SceneShop implements Scene {
                                                 this.currentSelectedButton < SceneShopEnum.FREE_ITEM_1_BUTTON.value()
                                                                 + FREE_ITEMS_SIZE) {
                                         getFreeItem(this.shopItems.get(SHOP_SIZE + (this.currentSelectedButton
-                                                        - SceneShopEnum.FREE_ITEM_1_BUTTON.value())));
+                                                        - SceneShopEnum.FREE_ITEM_1_BUTTON.value())));*/
                                 } else if (this.currentSelectedButton == SceneShopEnum.REROL_BUTTON.value()) {
                                         rerollShopItems();
                                 }
@@ -522,7 +522,7 @@ public class SceneShop implements Scene {
                 initShopItems();
                 updateShopGraphics();
         }
-
+        /* 
         private void buyItem(Item item) {
                 if (playerTrainerInstance.getMoney() >= item.getPrice()) {
                         playerTrainerInstance.removeItemFromWallet(item.getPrice());
@@ -539,7 +539,7 @@ public class SceneShop implements Scene {
                 ((TextElementImpl) this.sceneGraphicElements.get(SceneShopEnum.PLAYER_MONEY_TEXT.value()))
                                 .setText("MONEY: " + playerTrainerInstance.getMoney());
         }
-
+        */
         public String getPokemonLifeText(int position) {
                 Optional<Pokemon> pokemonOpt = playerTrainerInstance.getPokemon(position);
 
