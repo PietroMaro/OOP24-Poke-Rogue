@@ -135,7 +135,7 @@ public class SceneFight implements Scene {
                                                                                 .getPokemon(FIRST_POSITION).get()
                                                                                 .getActualStats().get("hp")
                                                                                 .getCurrentMax()),
-                                                Color.WHITE,
+                                                Color.GREEN,
                                                 0.04, 0.81, 0.64));
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.ENEMY_POKEMON_ACTUAL_LIFE_TEXT.value(),
                                 new TextElementImpl("firstPanel",
@@ -146,7 +146,7 @@ public class SceneFight implements Scene {
                                                                                 .getPokemon(FIRST_POSITION).get()
                                                                                 .getActualStats().get("hp")
                                                                                 .getCurrentMax()),
-                                                Color.WHITE,
+                                                Color.GREEN,
                                                 0.04, 0.12, 0.06));
                 // TEXT EXP
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.MY_POKEMON_ACTUAL_EXP_TEXT.value(),
@@ -157,7 +157,7 @@ public class SceneFight implements Scene {
                                                 + String.valueOf(playerTrainerInstance
                                                                 .getPokemon(FIRST_POSITION).get()
                                                                 .getExp().getCurrentMax()),
-                                                Color.WHITE,
+                                                Color.BLUE,
                                                 0.04, 0.69, 0.67));
                 // TEXT STATUS
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.ENEMY_POKEMON_STATUS_TEXT.value(),
