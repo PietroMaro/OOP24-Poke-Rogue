@@ -5,55 +5,55 @@ import java.util.Optional;
 
 import org.json.JSONObject;
 
+import it.unibo.PokeRogue.GameEngine;
+import it.unibo.PokeRogue.GameEngineImpl;
 import it.unibo.PokeRogue.Weather;
 import it.unibo.PokeRogue.ability.Ability;
 import it.unibo.PokeRogue.ability.AbilityFactory;
 import it.unibo.PokeRogue.ability.AbilityFactoryImpl;
 import it.unibo.PokeRogue.ability.AbilitySituationChecks;
+import it.unibo.PokeRogue.ai.EnemyAi;
 import it.unibo.PokeRogue.effectParser.EffectParser;
 import it.unibo.PokeRogue.effectParser.EffectParserImpl;
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.move.MoveFactoryImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
-import it.unibo.PokeRogue.pokemon.PokemonFactory;
-import it.unibo.PokeRogue.pokemon.PokemonFactoryImpl;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.PokemonBattleUtil;
 import it.unibo.PokeRogue.utilities.PokemonBattleUtilImpl;
 import lombok.Getter;
 
-@Getter
 public class BattleEngineImpl implements BattleEngine {
     private final PlayerTrainerImpl playerTrainerInstance;
     private PlayerTrainerImpl enemyTrainerInstance;
     private final MoveFactoryImpl moveFactoryInstance;
     private final static Integer FIRST_POSITION = 0;
-    private final PokemonFactory pokemonFactory;
-    private Pokemon pokemonGenerated;
-    private final int enemyLevel;
     private final EffectParser effectParserInstance;
+    @Getter
     private Optional<Weather> currentWeather;
     private PokemonBattleUtil pokemonBattleUtilInstance;
     private AbilityFactory abilityFactoryInstance;
     private StatusEffect statusEffectInstance;
-    private BattleRewards battleRewardsInstance;
+    private EnemyAi enemyAiInstance;
+    private final GameEngine gameEngineInstance;
 
-    public BattleEngineImpl(Integer enemyLevel, MoveFactoryImpl moveFactoryInstance,
-            PlayerTrainerImpl enemyTrainerInstance) {
-        this.pokemonFactory = new PokemonFactoryImpl();
+    public BattleEngineImpl(MoveFactoryImpl moveFactoryInstance,
+            PlayerTrainerImpl enemyTrainerInstance, EnemyAi enemyAiInstance) {
         this.enemyTrainerInstance = enemyTrainerInstance;
         this.moveFactoryInstance = moveFactoryInstance;
         this.pokemonBattleUtilInstance = new PokemonBattleUtilImpl();
-        this.enemyLevel = enemyLevel;
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
         this.effectParserInstance = EffectParserImpl.getInstance(EffectParserImpl.class);
         this.currentWeather = Optional.of(Weather.SUNLIGHT);
         this.abilityFactoryInstance = AbilityFactoryImpl.getInstance(AbilityFactoryImpl.class);
         this.statusEffectInstance = new StatusEffectImpl();
+        this.enemyAiInstance = enemyAiInstance;
+        this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
+
     }
 
     private void executeMoves(Move attackerMove, Pokemon attackerPokemon, Pokemon defenderPokemon) {
-        if (attackerMove.getPp().getCurrentValue() <= 0) {
+        if (attackerMove.getPp().getCurrentValue() <= 0 || attackerMove.getName().equals("splash")) {
             return;
         }
         attackerMove.getPp().decrement(1);
@@ -100,24 +100,27 @@ public class BattleEngineImpl implements BattleEngine {
                 AbilitySituationChecks.PASSIVE);
         this.applyStatusForAllPokemon(playerTrainerInstance.getSquad(), pokemonEnemy);
         this.applyStatusForAllPokemon(enemyTrainerInstance.getSquad(), pokemonPlayer);
-        if (type.equals("SwitchIn") && statusEffectInstance.checkStatusSwitch(pokemonPlayer) && BattleUtils.canSwitch(playerTrainerInstance, Integer.valueOf(playerMoveString))) {
+        if (type.equals("SwitchIn") && statusEffectInstance.checkStatusSwitch(pokemonPlayer)
+                && BattleUtils.canSwitch(this.playerTrainerInstance, Integer.valueOf(playerMoveString))) {
             handleSwitch(pokemonPlayer, pokemonEnemy, playerMove, enemyMove, abilityPlayer, playerMoveString,
                     playerTrainerInstance);
             pokemonPlayer = this.playerTrainerInstance.getPokemon(FIRST_POSITION).get();
 
         }
-        if (typeEnemy.equals("SwitchIn") && statusEffectInstance.checkStatusSwitch(pokemonEnemy)) {
+        if (typeEnemy.equals("SwitchIn") && statusEffectInstance.checkStatusSwitch(pokemonEnemy)
+                && BattleUtils.canSwitch(this.enemyTrainerInstance, Integer.valueOf(enemyMoveString))) {
             handleSwitch(pokemonEnemy, pokemonPlayer, enemyMove, playerMove, abilityEnemy, enemyMoveString,
                     enemyTrainerInstance);
             pokemonEnemy = this.enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
         }
         if (type.equals("Pokeball")) {
             this.pokeObject(playerMoveString);
-        } else {
-        handleAttackPhases(type, playerMoveString, typeEnemy, pokemonPlayer, pokemonEnemy, playerMove, enemyMove, abilityPlayer,
+        }
+        handleAttackPhases(type, playerMoveString, typeEnemy, pokemonPlayer, pokemonEnemy, playerMove, enemyMove,
+                abilityPlayer,
                 abilityEnemy);
         this.newEnemyCheck();
-        }
+
     }
 
     private void applyStatusForAllPokemon(List<Optional<Pokemon>> squad, Pokemon enemy) {
@@ -151,11 +154,9 @@ public class BattleEngineImpl implements BattleEngine {
 
     // I mean man this really sucks. You can clearly make it better, even if just
     // putting a couple of stuff in a private functions
-    private void handleAttackPhases(String type, String playerMoveString, String typeEnemy, Pokemon player, Pokemon enemy, Move playerMove,
+    private void handleAttackPhases(String type, String playerMoveString, String typeEnemy, Pokemon player,
+            Pokemon enemy, Move playerMove,
             Move enemyMove, Ability abilityPlayer, Ability abilityEnemy) {
-        if (!BattleUtils.knowsMove(player, Integer.parseInt(playerMoveString))) {
-            return;
-        }
         if (type.equals("Attack") && typeEnemy.equals("Attack")) {
             handleAbilityEffects(abilityPlayer, player, enemy, playerMove, enemyMove,
                     AbilitySituationChecks.ATTACK);
@@ -221,29 +222,22 @@ public class BattleEngineImpl implements BattleEngine {
     }
 
     private void newEnemyCheck() {
-        Boolean foundReplacement = false;
         Pokemon enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
         Pokemon playerPokemon = playerTrainerInstance.getPokemon(FIRST_POSITION).get();
-        if (enemyPokemon.getActualStats().get("hp").getCurrentValue() <= 0) {
+        if (BattleUtils.isTeamWipedOut(enemyTrainerInstance)) {
             BattleRewards.awardBattleRewards(playerPokemon, enemyPokemon);
-            // TODO: GESTIRE IL TEAM VUOTO
-            switchIn("1", enemyTrainerInstance);
-            // this.enemyTrainerInstance.removePokemon(FIRST_POSITION);
-            // CALL A SCENE SHOP
-        } else if (playerPokemon.getActualStats().get("hp")
-                .getCurrentValue() <= 0) {
-            for (int i = 1; i < playerTrainerInstance.getSquad().size(); i++) {
-                if (playerTrainerInstance.getPokemon(i).isPresent() &&
-                        playerTrainerInstance.getPokemon(i).get().getActualStats().get("hp").getCurrentValue() > 0) {
-                    this.switchIn(String.valueOf(i), playerTrainerInstance);
-                    foundReplacement = true;
-                    break;
-                }
-            }
-            if (!foundReplacement) {
-                System.out.println("Tutti i tuoi Pokémon sono esausti. Game Over!");
-                // handleLoss();
-            }
+            // TODO: SCENE SHOP CALL
+            System.out.println("SHOP");
+        } else if (enemyPokemon.getActualStats().get("hp").getCurrentValue() <= 0) {
+            this.movesPriorityCalculator("SwitchIn", "0", enemyAiInstance.nextMove(currentWeather).getFirst(),
+                    enemyAiInstance.nextMove(currentWeather).getLast());
+            BattleRewards.awardBattleRewards(playerPokemon, enemyPokemon);
+        }
+        if (BattleUtils.isTeamWipedOut(playerTrainerInstance)) {
+            this.gameEngineInstance.setScene("main");
+        } else if (playerPokemon.getActualStats().get("hp").getCurrentValue() <= 0) {
+            playerTrainerInstance.switchPokemonPosition(FIRST_POSITION,
+                    BattleUtils.findFirstUsablePokemon(playerTrainerInstance));
         }
     }
 

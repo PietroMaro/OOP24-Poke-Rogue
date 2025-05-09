@@ -55,10 +55,11 @@ public class SceneFight implements Scene {
                 this.sceneGraphicElements = new LinkedHashMap<>();
                 this.allPanelsElements = new LinkedHashMap<>();
                 this.moveFactoryInstance = new MoveFactoryImpl();
-                this.battleEngineInstance = new BattleEngineImpl(battleLevel, moveFactoryInstance, enemyTrainerInstance);
+                this.enemyAiInstance = new EnemyAiImpl(enemyTrainerInstance, battleLevel);
+                this.battleEngineInstance = new BattleEngineImpl(moveFactoryInstance, enemyTrainerInstance,
+                                enemyAiInstance);
                 this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-                this.enemyAiInstance = new EnemyAiImpl(enemyTrainerInstance, battleLevel);
                 this.generateEnemyInstance = new GenerateEnemyImpl(battleLevel, enemyTrainerInstance);
                 this.generateEnemyInstance.generateEnemy();
                 this.initStatus();
@@ -163,15 +164,23 @@ public class SceneFight implements Scene {
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.ENEMY_POKEMON_STATUS_TEXT.value(),
                                 new TextElementImpl("firstPanel", "Status: " +
                                                 String.valueOf(enemyTrainerInstance.getPokemon(FIRST_POSITION).get()
-                                                .getStatusCondition().isPresent() ? enemyTrainerInstance.getPokemon(FIRST_POSITION).get()
-                                                .getStatusCondition().get() : "NONE"),
+                                                                .getStatusCondition().isPresent()
+                                                                                ? enemyTrainerInstance.getPokemon(
+                                                                                                FIRST_POSITION).get()
+                                                                                                .getStatusCondition()
+                                                                                                .get()
+                                                                                : "NONE"),
                                                 Color.WHITE,
                                                 0.04, 0, 0.03));
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.MY_POKEMON_STATUS_TEXT.value(),
                                 new TextElementImpl("firstPanel", "Status: " +
                                                 String.valueOf(playerTrainerInstance.getPokemon(FIRST_POSITION).get()
-                                                                .getStatusCondition().isPresent() ? playerTrainerInstance.getPokemon(FIRST_POSITION).get()
-                                                                .getStatusCondition().get() : "NONE"),
+                                                                .getStatusCondition().isPresent()
+                                                                                ? playerTrainerInstance.getPokemon(
+                                                                                                FIRST_POSITION).get()
+                                                                                                .getStatusCondition()
+                                                                                                .get()
+                                                                                : "NONE"),
                                                 Color.WHITE,
                                                 0.04, 0.69, 0.61));
         }
@@ -607,12 +616,18 @@ public class SceneFight implements Scene {
                                         case 303:
                                                 fightLoop("Pokeball", "masterball");
                                                 break;
+                                        case 4:
+                                                fightLoop("Run", "");
+                                                break;
                                         default:
                                                 break;
                                 }
-                                if (isButtonInRange(newSelectedButton, 1, 4)) {
+                                if (isButtonInRange(newSelectedButton, 1, 3)) {
                                         newSelectedButton = newSelectedButton * 100;
-                                } else {
+                                } else if (newSelectedButton == 4) {
+                                        newSelectedButton = 4;
+                                }
+                                else {
                                         newSelectedButton = newSelectedButton / 100;
                                 }
 
@@ -690,8 +705,7 @@ public class SceneFight implements Scene {
         }
 
         public void fightLoop(String playerMoveType, String playerMove) {
-                List<String> enemyChoose = enemyAiInstance.nextMove(Optional.of(Weather.SUNLIGHT));
-                // TO FIX ENEMY
+                List<String> enemyChoose = enemyAiInstance.nextMove(battleEngineInstance.getCurrentWeather());
                 System.out.println(enemyChoose);
                 this.battleEngineInstance.movesPriorityCalculator(playerMoveType, playerMove,
                                 enemyChoose.getFirst(), enemyChoose.getLast());

@@ -28,20 +28,17 @@ public class BattleUtils {
         return true;
     }
 
-    public static Optional<Pokemon> findFirstUsablePokemon(Trainer trainer) {
-        if (trainer == null || trainer.getSquad() == null || trainer.getSquad().isEmpty()) {
-            return Optional.empty();
-        }
+    public static int findFirstUsablePokemon(Trainer trainer) {
         for (int i = 1; i < trainer.getSquad().size(); i++) {
              Optional<Pokemon> optionalPokemon = trainer.getPokemon(i); 
              if (optionalPokemon.isPresent()) {
                  Pokemon pokemon = optionalPokemon.get();
                  if (pokemon.getActualStats().get("hp").getCurrentValue() > 0) {
-                     return optionalPokemon;
+                     return i;
                  }
              }
          }
-        return Optional.empty();
+        return 0;
     }
 
     public static boolean canSwitch(PlayerTrainerImpl trainer, int switchPokemonPosition) {

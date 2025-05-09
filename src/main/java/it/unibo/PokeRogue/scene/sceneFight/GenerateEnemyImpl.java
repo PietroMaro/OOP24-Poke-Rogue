@@ -20,7 +20,6 @@ public class GenerateEnemyImpl implements GenerateEnemy {
         this.battleLevel = battleLevel;
         this.enemyTrainerInstance = enemyTrainerInstance;
         this.pokemonFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
-        this.enemyTrainerInstance.addPokemon(pokemonFactory.randomPokemon(battleLevel), 1);
     }
 
     @Override
