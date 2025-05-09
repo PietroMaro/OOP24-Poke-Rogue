@@ -11,6 +11,8 @@ import java.util.Optional;
 
 import javax.swing.OverlayLayout;
 
+import org.apache.commons.jexl3.JxltEngine;
+
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
@@ -44,6 +46,7 @@ public class SceneShop implements Scene {
         private final static Integer SIXTH_POSITION = 2;
         private final static int SHOP_SIZE = 3; // Numero di item pricy
         private final static int FREE_ITEMS_SIZE = 3; // Numero di item gratuiti
+        private Item selectedItemForUse = null;
 
         public SceneShop() {
                 this.sceneGraphicElements = new LinkedHashMap<>();
@@ -101,24 +104,23 @@ public class SceneShop implements Scene {
                                 break;
 
                         case KeyEvent.VK_ENTER:
-                                if (this.currentSelectedButton == SceneShopEnum.TEAM_BUTTON.value()
-                                                || isHealingOrBoostItem(this.currentSelectedButton)) {
+                                if (this.currentSelectedButton == SceneShopEnum.TEAM_BUTTON.value()) {
                                         this.newSelectedButton = SceneShopEnum.CHANGE_POKEMON_1_BUTTON.value();
                                 } else if (this.currentSelectedButton == SceneShopEnum.CHANGE_POKEMON_BACK_BUTTON
-                                                .value()
-                                                || (this.currentSelectedButton >= 200
-                                                                && this.currentSelectedButton <= 205)) {
+                                                .value()) {
                                         this.newSelectedButton = SceneShopEnum.PRICY_ITEM_1_BUTTON.value();
-                                /*}  else if (this.currentSelectedButton >= SceneShopEnum.PRICY_ITEM_1_BUTTON.value() &&
-                                                this.currentSelectedButton < SceneShopEnum.PRICY_ITEM_1_BUTTON.value()
-                                                                + SHOP_SIZE) {
-                                        buyItem(this.shopItems.get(this.currentSelectedButton
-                                                        - SceneShopEnum.PRICY_ITEM_1_BUTTON.value()));
+                                } else if ((this.currentSelectedButton >= 200
+                                                && this.currentSelectedButton <= 205) && selectedItemForUse != null) {
+                                                        applyItemToPokemon(this.currentSelectedButton - 200);
+                                } else if (this.currentSelectedButton >= SceneShopEnum.PRICY_ITEM_1_BUTTON.value() &&
+                                                this.currentSelectedButton <= SceneShopEnum.PRICY_ITEM_3_BUTTON
+                                                                .value()) {
+                                        buyItem(this.shopItems.get(this.currentSelectedButton - 1));
                                 } else if (this.currentSelectedButton >= SceneShopEnum.FREE_ITEM_1_BUTTON.value() &&
-                                                this.currentSelectedButton < SceneShopEnum.FREE_ITEM_1_BUTTON.value()
-                                                                + FREE_ITEMS_SIZE) {
-                                        getFreeItem(this.shopItems.get(SHOP_SIZE + (this.currentSelectedButton
-                                                        - SceneShopEnum.FREE_ITEM_1_BUTTON.value())));*/
+                                                this.currentSelectedButton <= SceneShopEnum.FREE_ITEM_3_BUTTON
+                                                                .value()) {
+                                        getFreeItem(this.shopItems.get(this.currentSelectedButton
+                                                        - 1));
                                 } else if (this.currentSelectedButton == SceneShopEnum.REROL_BUTTON.value()) {
                                         rerollShopItems();
                                 }
@@ -160,8 +162,8 @@ public class SceneShop implements Scene {
                 for (int i = 0; i < FREE_ITEMS_SIZE; i++) {
                         freeItems.add(itemFactory.randomItem());
                 }
-                this.shopItems.addAll(pricyItems);
                 this.shopItems.addAll(freeItems);
+                this.shopItems.addAll(pricyItems);
         }
 
         private void initStatus() {
@@ -497,35 +499,15 @@ public class SceneShop implements Scene {
 
         }
 
-        private boolean isHealingOrBoostItem(int buttonId) {
-                // Implementa la logica per verificare se l'item associato al bottone è curativo
-                // o di potenziamento
-                // Potrebbe basarsi sul tipo o sulla categoria dell'item
-                int itemIndex = -1;
-                if (buttonId >= SceneShopEnum.PRICY_ITEM_1_BUTTON.value()
-                                && buttonId < SceneShopEnum.PRICY_ITEM_1_BUTTON.value() + SHOP_SIZE) {
-                        itemIndex = buttonId - SceneShopEnum.PRICY_ITEM_1_BUTTON.value();
-                } else if (buttonId >= SceneShopEnum.FREE_ITEM_1_BUTTON.value()
-                                && buttonId < SceneShopEnum.FREE_ITEM_1_BUTTON.value() + FREE_ITEMS_SIZE) {
-                        itemIndex = SHOP_SIZE + (buttonId - SceneShopEnum.FREE_ITEM_1_BUTTON.value());
-                }
-
-                if (itemIndex >= 0 && itemIndex < shopItems.size()) {
-                        String itemType = shopItems.get(itemIndex).getType();
-                        return itemType.equalsIgnoreCase("Healing") || itemType.equalsIgnoreCase("Boost");
-                }
-                return false;
-        }
-
         private void rerollShopItems() {
                 this.shopItems.clear();
                 initShopItems();
                 updateShopGraphics();
         }
-        /* 
+
         private void buyItem(Item item) {
                 if (playerTrainerInstance.getMoney() >= item.getPrice()) {
-                        playerTrainerInstance.removeItemFromWallet(item.getPrice());
+                        playerTrainerInstance.addMoney(-item.getPrice());
                         updatePlayerMoneyText();
                         useOrHandleItem(item);
                 }
@@ -536,10 +518,51 @@ public class SceneShop implements Scene {
         }
 
         private void updatePlayerMoneyText() {
-                ((TextElementImpl) this.sceneGraphicElements.get(SceneShopEnum.PLAYER_MONEY_TEXT.value()))
-                                .setText("MONEY: " + playerTrainerInstance.getMoney());
+                this.sceneGraphicElements.remove(SceneShopEnum.PLAYER_MONEY_TEXT.value());
+                this.sceneGraphicElements.put(SceneShopEnum.PLAYER_MONEY_TEXT.value(),
+                                new TextElementImpl("firstPanel", "MONEY: " + playerTrainerInstance.getMoney(),
+                                                Color.BLACK,
+                                                0.04, 0.92, 0.04));
         }
-        */
+
+        public boolean useOrHandleItem(Item item) {
+                if (item.getCategory().equalsIgnoreCase("Pokeball")) {
+
+                        // da implementare immaghizamento pokeball
+                        return false;
+                } else if (item.getCategory().equalsIgnoreCase("Healing")
+                                || item.getCategory().equalsIgnoreCase("Boost")) {
+                        this.selectedItemForUse = item;
+                        return true;
+                } else {
+                        return false;
+                }
+        }
+
+        public void applyItemToPokemon(int pokemonIndex) {
+                if (this.selectedItemForUse != null) {
+                        Optional<it.unibo.PokeRogue.pokemon.Pokemon> selectedPokemon = playerTrainerInstance.getPokemon(pokemonIndex);
+                        if (selectedPokemon.isPresent()) {
+                                it.unibo.PokeRogue.pokemon.Pokemon pokemon = selectedPokemon.get();
+                                String itemType = this.selectedItemForUse.getType();
+                                if (itemType.equalsIgnoreCase("Healing")) {
+                                        
+                                        // Esempio: pokemon.heal(this.selectedItemForUse.getEffectValue());
+                                } else if (itemType.equalsIgnoreCase("Boost")) {
+                                        // Applica la logica di potenziamento al Pokémon
+                                        System.out.println(pokemon.getName() + " potenziato con "
+                                                        + this.selectedItemForUse.getName() + ".");
+                                        // Esempio: pokemon.boostStat(this.selectedItemForUse.getEffectType(),
+                                        // this.selectedItemForUse.getEffectValue());
+                                }
+                                this.selectedItemForUse = null; // Resetta l'item selezionato
+                                gameEngineInstance.setScene(SceneType.SHOP, null); // Ritorna al negozio
+                        } else {
+                                System.out.println("Nessun Pokémon trovato in questa posizione.");
+                        }
+                }
+        }
+
         public String getPokemonLifeText(int position) {
                 Optional<Pokemon> pokemonOpt = playerTrainerInstance.getPokemon(position);
 

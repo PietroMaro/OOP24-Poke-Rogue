@@ -4,18 +4,23 @@ import it.unibo.PokeRogue.SingletonImpl;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
-import java.nio.file.Paths;
+import java.util.Optional;
 
+import java.nio.file.Paths;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import java.io.File;
+import java.io.IOException;
+import java.awt.Image;
+import javax.imageio.ImageIO;
 
 public class ItemFactoryImpl extends SingletonImpl implements ItemFactory {
 
@@ -39,7 +44,7 @@ public class ItemFactoryImpl extends SingletonImpl implements ItemFactory {
 
     private void addItemToBlueprints(final String itemName) {
         JSONObject itemJson;
-        itemJson = jsonReader.readJsonObject(Paths.get("src", "item_data", "items", "data", itemName + ".json").toString());
+        itemJson = jsonReader.readJsonObject(Paths.get("src", "items_data", "items", "data", itemName + ".json").toString());
 
         int id = itemJson.getInt("id");
         String name = itemJson.getString("name");
