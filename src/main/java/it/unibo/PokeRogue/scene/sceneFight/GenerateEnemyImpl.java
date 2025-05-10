@@ -53,7 +53,7 @@ public class GenerateEnemyImpl implements GenerateEnemy {
 
     private int calculatePokemonLevel() {
         double scalingFactor = 1.2;
-        int baseLevel = (int) Math.floor(1 + Math.pow(battleLevel, 0.7) * scalingFactor);
+        int baseLevel = (int) Math.floor(1 + Math.pow(battleLevel, 0.2) * scalingFactor);
         return baseLevel;
     }
 }
