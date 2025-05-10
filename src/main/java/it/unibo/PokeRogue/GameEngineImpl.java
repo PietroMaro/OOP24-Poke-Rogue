@@ -5,6 +5,7 @@ import it.unibo.PokeRogue.scene.sceneBox.SceneBox;
 import it.unibo.PokeRogue.scene.sceneFight.SceneFight;
 import it.unibo.PokeRogue.scene.sceneLoad.SceneLoad;
 import it.unibo.PokeRogue.scene.sceneMenu.SceneMenu;
+import it.unibo.PokeRogue.scene.sceneMove.SceneMove;
 
 /**
  * Implementation of the {@link GameEngine} interface.
@@ -43,7 +44,9 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
     public void setScene(final String newScene) {
         switch (newScene) {
             case "main":
-                currentScene = new SceneMenu();
+                //currentScene = new SceneMenu();
+                currentScene = new SceneMove();
+
 
                 break;
             case "load":
@@ -61,7 +64,9 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
                 }
                 currentScene = new SceneFight(fightLevel);
                 break;
-
+            case "move":
+                currentScene = new SceneMove();
+                break;
             default:
                 break;
         }

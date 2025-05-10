@@ -232,6 +232,35 @@ public class BattleEngineImpl implements BattleEngine {
             this.movesPriorityCalculator("SwitchIn", "0", enemyAiInstance.nextMove(currentWeather).getFirst(),
                     enemyAiInstance.nextMove(currentWeather).getLast());
             BattleRewards.awardBattleRewards(playerPokemon, enemyPokemon);
+            playerPokemon.levelUp(true);
+            playerPokemon.levelUp(true);
+
+            playerPokemon.levelUp(true);
+
+            playerPokemon.levelUp(true);
+
+            playerPokemon.levelUp(true);
+            playerPokemon.levelUp(true);
+            playerPokemon.levelUp(true);
+            playerPokemon.levelUp(true);
+            playerPokemon.levelUp(true);
+            playerPokemon.levelUp(true);
+            playerPokemon.levelUp(true);
+            playerPokemon.levelUp(true);
+            playerPokemon.levelUp(true);
+            playerPokemon.levelUp(true);
+            playerPokemon.levelUp(true);
+            playerPokemon.levelUp(true);
+            playerPokemon.levelUp(true);
+            playerPokemon.levelUp(true);
+            playerPokemon.levelUp(true);
+            playerPokemon.levelUp(true);
+            playerPokemon.levelUp(true);
+            playerPokemon.levelUp(true);
+
+            if (playerPokemon.isHasToLearnMove()){
+                playerPokemon.getActualMoves().set(0, playerPokemon.getNewMoveToLearn().get());
+            }
         }
         if (BattleUtils.isTeamWipedOut(playerTrainerInstance)) {
             this.gameEngineInstance.setScene("main");
