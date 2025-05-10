@@ -58,23 +58,23 @@ public class SceneMove implements Scene {
                         && this.currentSelectedButton <= SceneMoveGraphicEnum.MOVE_5_BUTTON.value()) {
                     this.newSelectedButton += 1;
                 }
-                // case KeyEvent.VK_ENTER:
-                // switch (this.currentSelectedButton) {
-                // case 1:
-                // break;
-                // case 2:
-                // break;
-                // case 3:
-                // break;
-                // case 4:
-                // break;
-                // case 5:
-                // break;
-                // default:
-                // break;
-                // }
-                // default:
-                // break;
+            case KeyEvent.VK_ENTER:
+                switch (this.currentSelectedButton) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    default:
+                        break;
+                }
+            default:
+                break;
         }
 
     }

@@ -5,8 +5,8 @@ public enum SceneMoveGraphicEnum {
     MOVE_1_BUTTON(0),
     MOVE_2_BUTTON(1),
     MOVE_3_BUTTON(2),
-    MOVE_4_BUTTON(2),
-    MOVE_5_BUTTON(2),
+    MOVE_4_BUTTON(3),
+    MOVE_5_BUTTON(4),
     
     BACKGROUND(100),
     MOVE_1_BUTTON_TEXT(101),
