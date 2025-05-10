@@ -12,15 +12,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Iterator;
 import java.util.Random;
-import java.util.Optional;
 
 import java.nio.file.Paths;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import java.io.File;
-import java.io.IOException;
-import java.awt.Image;
-import javax.imageio.ImageIO;
 
 public class ItemFactoryImpl extends SingletonImpl implements ItemFactory {
 
@@ -36,13 +31,15 @@ public class ItemFactoryImpl extends SingletonImpl implements ItemFactory {
     @Override
     public void init() {
         JSONArray allItemJson;
-        allItemJson = jsonReader.readJsonArray(Paths.get("src", "items_data", "itemsList.json").toString());
+        System.out.println(Paths.get("src", "items_data", "itemsList.json").toString() + "sono stato qui");
+        allItemJson = jsonReader.readJsonArray("src\\main\\java\\it\\unibo\\PokeRogue\\items_data\\itemsList.json");
         for (int itemIndex = 0; itemIndex < allItemJson.length(); itemIndex += 1) {
             addItemToBlueprints(allItemJson.getString(itemIndex));
         }
     }
 
     private void addItemToBlueprints(final String itemName) {
+        System.out.println("passato da addBlue");
         JSONObject itemJson;
         itemJson = jsonReader.readJsonObject(Paths.get("src", "items_data", "items", "data", itemName + ".json").toString());
 
@@ -55,6 +52,7 @@ public class ItemFactoryImpl extends SingletonImpl implements ItemFactory {
         String category = itemJson.getString("category");
         double captureRate = itemJson.getDouble("captureRate");
         JSONObject effect = itemJson.getJSONObject("effect");
+        System.out.println(name);
 
         final ItemBlueprint newItem = new ItemBlueprint(
                 id,

@@ -11,8 +11,6 @@ import java.util.Optional;
 
 import javax.swing.OverlayLayout;
 
-import org.apache.commons.jexl3.JxltEngine;
-
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
@@ -21,10 +19,10 @@ import it.unibo.PokeRogue.graphic.box.BoxElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
-import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.items.Item;
 import it.unibo.PokeRogue.items.ItemFactory;
 import it.unibo.PokeRogue.items.ItemFactoryImpl;
+import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
 
@@ -556,7 +554,7 @@ public class SceneShop implements Scene {
                                         // this.selectedItemForUse.getEffectValue());
                                 }
                                 this.selectedItemForUse = null; // Resetta l'item selezionato
-                                gameEngineInstance.setScene(SceneType.SHOP, null); // Ritorna al negozio
+                                //gameEngineInstance.setScene(SceneType.SHOP, null); // Ritorna al negozio
                         } else {
                                 System.out.println("Nessun Pokémon trovato in questa posizione.");
                         }
