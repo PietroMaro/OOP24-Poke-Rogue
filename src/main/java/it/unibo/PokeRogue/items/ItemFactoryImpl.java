@@ -31,8 +31,7 @@ public class ItemFactoryImpl extends SingletonImpl implements ItemFactory {
     @Override
     public void init() {
         JSONArray allItemJson;
-        System.out.println(Paths.get("src", "items_data", "itemsList.json").toString() + "sono stato qui");
-        allItemJson = jsonReader.readJsonArray("src\\main\\java\\it\\unibo\\PokeRogue\\items_data\\itemsList.json");
+        allItemJson = jsonReader.readJsonArray(Paths.get("src", "items_data", "itemsList.json").toString());
         for (int itemIndex = 0; itemIndex < allItemJson.length(); itemIndex += 1) {
             addItemToBlueprints(allItemJson.getString(itemIndex));
         }

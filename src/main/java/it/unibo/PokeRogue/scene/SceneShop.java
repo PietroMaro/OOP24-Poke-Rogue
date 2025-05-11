@@ -103,22 +103,30 @@ public class SceneShop implements Scene {
 
                         case KeyEvent.VK_ENTER:
                                 if (this.currentSelectedButton == SceneShopEnum.TEAM_BUTTON.value()) {
+                                        this.updateChangePokemon();
                                         this.newSelectedButton = SceneShopEnum.CHANGE_POKEMON_1_BUTTON.value();
                                 } else if (this.currentSelectedButton == SceneShopEnum.CHANGE_POKEMON_BACK_BUTTON
                                                 .value()) {
+                                        this.initGraphicElements();
                                         this.newSelectedButton = SceneShopEnum.PRICY_ITEM_1_BUTTON.value();
                                 } else if ((this.currentSelectedButton >= 200
                                                 && this.currentSelectedButton <= 205) && selectedItemForUse != null) {
-                                                        applyItemToPokemon(this.currentSelectedButton - 200);
+                                        this.initGraphicElements();
+                                        applyItemToPokemon(this.currentSelectedButton - 200);
+                                        this.newSelectedButton = SceneShopEnum.PRICY_ITEM_1_BUTTON.value();
                                 } else if (this.currentSelectedButton >= SceneShopEnum.PRICY_ITEM_1_BUTTON.value() &&
                                                 this.currentSelectedButton <= SceneShopEnum.PRICY_ITEM_3_BUTTON
                                                                 .value()) {
                                         buyItem(this.shopItems.get(this.currentSelectedButton - 1));
+                                        this.updateChangePokemon();
+                                        this.newSelectedButton = SceneShopEnum.CHANGE_POKEMON_1_BUTTON.value();
                                 } else if (this.currentSelectedButton >= SceneShopEnum.FREE_ITEM_1_BUTTON.value() &&
                                                 this.currentSelectedButton <= SceneShopEnum.FREE_ITEM_3_BUTTON
                                                                 .value()) {
                                         getFreeItem(this.shopItems.get(this.currentSelectedButton
                                                         - 1));
+                                        this.updateChangePokemon();
+                                        this.newSelectedButton = SceneShopEnum.CHANGE_POKEMON_1_BUTTON.value();
                                 } else if (this.currentSelectedButton == SceneShopEnum.REROL_BUTTON.value()) {
                                         rerollShopItems();
                                 }
@@ -162,6 +170,7 @@ public class SceneShop implements Scene {
                 }
                 this.shopItems.addAll(freeItems);
                 this.shopItems.addAll(pricyItems);
+                System.out.println(shopItems.size());
         }
 
         private void initStatus() {
@@ -194,7 +203,7 @@ public class SceneShop implements Scene {
         }
 
         private void initTextElements() {
-                Item item = shopItems.get(currentSelectedButton);
+                Item item = shopItems.get(currentSelectedButton - 1);
                 this.sceneGraphicElements.put(SceneShopEnum.PLAYER_MONEY_TEXT.value(),
                                 new TextElementImpl("firstPanel", "MONEY: " + playerTrainerInstance.getMoney(),
                                                 Color.BLACK,
@@ -296,30 +305,28 @@ public class SceneShop implements Scene {
         @Override
         public void updateGraphic() {
                 this.updateSelectedButton();
-                this.updateShopItems();
-                this.updateChangePokemon();
+                this.updateItemsDescription();
         }
 
-        private void updateShopItems() {
-                if (currentSelectedButton < 100) {
+        private void updateItemsDescription() {
+                if (currentSelectedButton < 6) {
                         this.initGraphicElements();
                 }
         }
 
         private void updateChangePokemon() {
-                if (currentSelectedButton > 199 && currentSelectedButton < 300) {
-                        this.sceneGraphicElements.clear();
-                        this.initChangePokemonText();
-                        this.initChangePokemonButtons();
-                        this.initChangePokemonSprites();
-                        System.out.println(this.sceneGraphicElements);
-                        this.sceneGraphicElements.put(SceneShopEnum.BACKGROUND.value(),
-                                        new BackgroundElementImpl("secondPanel",
-                                                        this.getPathString("images", "sceneShopBg.png")));
+                this.sceneGraphicElements.clear();
+                this.initChangePokemonText();
+                this.initChangePokemonButtons();
+                this.initChangePokemonSprites();
+                System.out.println(this.sceneGraphicElements);
+                this.sceneGraphicElements.put(SceneShopEnum.BACKGROUND.value(),
+                                new BackgroundElementImpl("secondPanel",
+                                                this.getPathString("images", "sceneShopBg.png")));
 
-                        // Set the first button as selected
-                        this.setButtonStatus(this.currentSelectedButton, true);
-                }
+                // Set the first button as selected
+                this.setButtonStatus(this.currentSelectedButton, true);
+
         }
 
         private void initChangePokemonText() {
@@ -498,9 +505,13 @@ public class SceneShop implements Scene {
         }
 
         private void rerollShopItems() {
-                this.shopItems.clear();
-                initShopItems();
-                updateShopGraphics();
+                if (playerTrainerInstance.getMoney() >= 50) {
+                        playerTrainerInstance.addMoney(-50);
+                        updatePlayerMoneyText();
+                        this.shopItems.clear();
+                        initShopItems();
+                        updateShopGraphics();
+                }
         }
 
         private void buyItem(Item item) {
@@ -539,12 +550,13 @@ public class SceneShop implements Scene {
 
         public void applyItemToPokemon(int pokemonIndex) {
                 if (this.selectedItemForUse != null) {
-                        Optional<it.unibo.PokeRogue.pokemon.Pokemon> selectedPokemon = playerTrainerInstance.getPokemon(pokemonIndex);
+                        Optional<it.unibo.PokeRogue.pokemon.Pokemon> selectedPokemon = playerTrainerInstance
+                                        .getPokemon(pokemonIndex);
                         if (selectedPokemon.isPresent()) {
                                 it.unibo.PokeRogue.pokemon.Pokemon pokemon = selectedPokemon.get();
                                 String itemType = this.selectedItemForUse.getType();
                                 if (itemType.equalsIgnoreCase("Healing")) {
-                                        
+
                                         // Esempio: pokemon.heal(this.selectedItemForUse.getEffectValue());
                                 } else if (itemType.equalsIgnoreCase("Boost")) {
                                         // Applica la logica di potenziamento al Pokémon
@@ -554,7 +566,7 @@ public class SceneShop implements Scene {
                                         // this.selectedItemForUse.getEffectValue());
                                 }
                                 this.selectedItemForUse = null; // Resetta l'item selezionato
-                                //gameEngineInstance.setScene(SceneType.SHOP, null); // Ritorna al negozio
+                                // gameEngineInstance.setScene(SceneType.SHOP, null); // Ritorna al negozio
                         } else {
                                 System.out.println("Nessun Pokémon trovato in questa posizione.");
                         }
@@ -579,6 +591,7 @@ public class SceneShop implements Scene {
                 this.setButtonStatus(this.currentSelectedButton, false);
                 this.setButtonStatus(this.newSelectedButton, true);
                 this.currentSelectedButton = newSelectedButton;
+                System.out.println(newSelectedButton);
         }
 
         private void setButtonStatus(final int buttonCode, final boolean status) {

@@ -6,7 +6,7 @@
     "price": 1200,
     "rarity": "Ultra",
     "category": "Consumable",
-    "captureRateModifier": 2.0,
+    "captureRate": 2.0,
     "effect": {
         "checks": [
             []
