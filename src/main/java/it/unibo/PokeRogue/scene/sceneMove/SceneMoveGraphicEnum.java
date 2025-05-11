@@ -13,7 +13,8 @@ public enum SceneMoveGraphicEnum {
     MOVE_2_BUTTON_TEXT(102),
     MOVE_3_BUTTON_TEXT(103),
     MOVE_4_BUTTON_TEXT(104),
-    MOVE_5_BUTTON_TEXT(105);
+    MOVE_5_BUTTON_TEXT(105),
+    NEW_MOVE_TEXT(106);
 
     private final int code;
 

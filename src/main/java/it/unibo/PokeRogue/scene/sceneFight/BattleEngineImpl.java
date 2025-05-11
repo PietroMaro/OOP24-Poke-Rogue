@@ -226,41 +226,14 @@ public class BattleEngineImpl implements BattleEngine {
         Pokemon playerPokemon = playerTrainerInstance.getPokemon(FIRST_POSITION).get();
         if (BattleUtils.isTeamWipedOut(enemyTrainerInstance)) {
             BattleRewards.awardBattleRewards(playerPokemon, enemyPokemon);
+            this.newMoveToLearn(playerPokemon);
             // TODO: SCENE SHOP CALL
             System.out.println("SHOP");
         } else if (enemyPokemon.getActualStats().get("hp").getCurrentValue() <= 0) {
             this.movesPriorityCalculator("SwitchIn", "0", enemyAiInstance.nextMove(currentWeather).getFirst(),
                     enemyAiInstance.nextMove(currentWeather).getLast());
             BattleRewards.awardBattleRewards(playerPokemon, enemyPokemon);
-            playerPokemon.levelUp(true);
-            playerPokemon.levelUp(true);
-
-            playerPokemon.levelUp(true);
-
-            playerPokemon.levelUp(true);
-
-            playerPokemon.levelUp(true);
-            playerPokemon.levelUp(true);
-            playerPokemon.levelUp(true);
-            playerPokemon.levelUp(true);
-            playerPokemon.levelUp(true);
-            playerPokemon.levelUp(true);
-            playerPokemon.levelUp(true);
-            playerPokemon.levelUp(true);
-            playerPokemon.levelUp(true);
-            playerPokemon.levelUp(true);
-            playerPokemon.levelUp(true);
-            playerPokemon.levelUp(true);
-            playerPokemon.levelUp(true);
-            playerPokemon.levelUp(true);
-            playerPokemon.levelUp(true);
-            playerPokemon.levelUp(true);
-            playerPokemon.levelUp(true);
-            playerPokemon.levelUp(true);
-
-            if (playerPokemon.isHasToLearnMove()){
-                playerPokemon.getActualMoves().set(0, playerPokemon.getNewMoveToLearn().get());
-            }
+            this.newMoveToLearn(playerPokemon);
         }
         if (BattleUtils.isTeamWipedOut(playerTrainerInstance)) {
             this.gameEngineInstance.setScene("main");
@@ -284,5 +257,11 @@ public class BattleEngineImpl implements BattleEngine {
 
     private void switchIn(String move, PlayerTrainerImpl trainer) {
         trainer.switchPokemonPosition(FIRST_POSITION, Integer.parseInt(move));
+    }
+
+    private void newMoveToLearn(Pokemon playerPokemon) {
+        if (playerPokemon.isHasToLearnMove()) {
+            gameEngineInstance.setScene("move");
+        }
     }
 }

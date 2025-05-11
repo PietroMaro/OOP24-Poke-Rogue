@@ -217,7 +217,7 @@ public final class PokemonImpl implements Pokemon {
 		if (!(this.hasToLearnMove && !this.newMoveToLearn.isEmpty())) {
 			throw new UnsupportedOperationException("The pokemon " + this.name + " doesn't have to learn a move");
 		}
-		if (!indexMoveToReplace.isEmpty()) {
+		if (!indexMoveToReplace.isEmpty() && indexMoveToReplace.get()<this.actualMoves.size()) {
 			this.actualMoves.set(indexMoveToReplace.get(), this.newMoveToLearn.get());
 		}
 		this.hasToLearnMove = false;
