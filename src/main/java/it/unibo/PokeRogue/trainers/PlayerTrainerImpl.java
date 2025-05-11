@@ -29,7 +29,7 @@ public class PlayerTrainerImpl extends TrainerImpl implements PlayerTrainer {
     }
 
     /**
-     * Resets the singleton instance (used for testing purposes only).
+     * Resets the singleton instance.
      */
     public static void resetInstance() {
         instanceOfTrainer = null;

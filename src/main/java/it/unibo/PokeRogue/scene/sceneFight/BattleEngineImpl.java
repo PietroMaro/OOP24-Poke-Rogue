@@ -236,6 +236,8 @@ public class BattleEngineImpl implements BattleEngine {
             this.newMoveToLearn(playerPokemon);
         }
         if (BattleUtils.isTeamWipedOut(playerTrainerInstance)) {
+            PlayerTrainerImpl.resetInstance();
+            gameEngineInstance.setFightLevel(0);
             this.gameEngineInstance.setScene("main");
         } else if (playerPokemon.getActualStats().get("hp").getCurrentValue() <= 0) {
             playerTrainerInstance.switchPokemonPosition(FIRST_POSITION,

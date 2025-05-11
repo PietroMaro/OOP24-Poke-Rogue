@@ -21,4 +21,5 @@ public interface GameEngine extends Singleton {
     void keyPressedToScene(final int keyCode);
     void setGraphicEngine(final GraphicEngine graphicEngine);
     void setFileToLoad(final String fileName);
+    void setFightLevel(Integer newVal);
 }
