@@ -11,8 +11,12 @@ import java.util.Optional;
 
 import javax.swing.OverlayLayout;
 
+import org.json.JSONObject;
+
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
+import it.unibo.PokeRogue.effectParser.EffectParser;
+import it.unibo.PokeRogue.effectParser.EffectParserImpl;
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl;
 import it.unibo.PokeRogue.graphic.box.BoxElementImpl;
@@ -39,9 +43,9 @@ public class SceneShop implements Scene {
         private final static Integer FIRST_POSITION = 0;
         private final static Integer SECOND_POSITION = 1;
         private final static Integer THIRD_POSITION = 2;
-        private final static Integer FOURTH_POSITION = 0;
-        private final static Integer FIFTH_POSITION = 1;
-        private final static Integer SIXTH_POSITION = 2;
+        private final static Integer FOURTH_POSITION = 3;
+        private final static Integer FIFTH_POSITION = 4;
+        private final static Integer SIXTH_POSITION = 5;
         private final static int SHOP_SIZE = 3; // Numero di item pricy
         private final static int FREE_ITEMS_SIZE = 3; // Numero di item gratuiti
         private Item selectedItemForUse = null;
@@ -89,14 +93,16 @@ public class SceneShop implements Scene {
 
                         case KeyEvent.VK_LEFT:
                                 if (this.currentSelectedButton != 1 && this.currentSelectedButton != 4
-                                                && this.currentSelectedButton != 7) {
+                                                && this.currentSelectedButton != 7
+                                                && this.currentSelectedButton < 200) {
                                         this.newSelectedButton -= 1;
                                 }
                                 break;
 
                         case KeyEvent.VK_RIGHT:
                                 if (this.currentSelectedButton != 3 && this.currentSelectedButton != 6
-                                                && this.currentSelectedButton != 8) {
+                                                && this.currentSelectedButton != 8
+                                                && this.currentSelectedButton < 200) {
                                         this.newSelectedButton += 1;
                                 }
                                 break;
@@ -107,7 +113,16 @@ public class SceneShop implements Scene {
                                         this.newSelectedButton = SceneShopEnum.CHANGE_POKEMON_1_BUTTON.value();
                                 } else if (this.currentSelectedButton == SceneShopEnum.CHANGE_POKEMON_BACK_BUTTON
                                                 .value()) {
+                                        // Resetta lo stato dello shop alla visualizzazione iniziale
+                                        this.currentSelectedButton = SceneShopEnum.PRICY_ITEM_1_BUTTON.value();
+                                        this.selectedItemForUse = null;
+
+                                        // Reinizializza gli elementi grafici
+                                        this.sceneGraphicElements.clear();
                                         this.initGraphicElements();
+
+                                        // Imposta il pulsante selezionato su uno dei pulsanti degli oggetti
+                                        this.currentSelectedButton = SceneShopEnum.PRICY_ITEM_1_BUTTON.value();
                                         this.newSelectedButton = SceneShopEnum.PRICY_ITEM_1_BUTTON.value();
                                 } else if ((this.currentSelectedButton >= 200
                                                 && this.currentSelectedButton <= 205) && selectedItemForUse != null) {
@@ -117,14 +132,14 @@ public class SceneShop implements Scene {
                                 } else if (this.currentSelectedButton >= SceneShopEnum.PRICY_ITEM_1_BUTTON.value() &&
                                                 this.currentSelectedButton <= SceneShopEnum.PRICY_ITEM_3_BUTTON
                                                                 .value()) {
-                                        buyItem(this.shopItems.get(this.currentSelectedButton - 1));
+                                        buyItem(this.shopItems.get(this.currentSelectedButton - 4));
                                         this.updateChangePokemon();
                                         this.newSelectedButton = SceneShopEnum.CHANGE_POKEMON_1_BUTTON.value();
                                 } else if (this.currentSelectedButton >= SceneShopEnum.FREE_ITEM_1_BUTTON.value() &&
                                                 this.currentSelectedButton <= SceneShopEnum.FREE_ITEM_3_BUTTON
                                                                 .value()) {
                                         getFreeItem(this.shopItems.get(this.currentSelectedButton
-                                                        - 1));
+                                                        + 2));
                                         this.updateChangePokemon();
                                         this.newSelectedButton = SceneShopEnum.CHANGE_POKEMON_1_BUTTON.value();
                                 } else if (this.currentSelectedButton == SceneShopEnum.REROL_BUTTON.value()) {
@@ -137,25 +152,31 @@ public class SceneShop implements Scene {
         private void updateShopGraphics() {
                 for (int i = 0; i < SHOP_SIZE; i++) {
                         Item item = shopItems.get(i);
+                        // Calcola le posizioni x in base all'indice
+                        double xPosition = 0.14 + (i * 0.29); // Allineato con i pulsanti PRICY_ITEM
+
                         this.sceneGraphicElements.put(SceneShopEnum.PRICY_ITEM_1_NAME_TEXT.value() + i,
                                         new TextElementImpl("firstPanel",
                                                         item.getName(),
-                                                        Color.BLACK, 0.025,
-                                                        0.49, 0.17));
+                                                        Color.BLACK, 0.055,
+                                                        xPosition, 0.12));
                         this.sceneGraphicElements.put(SceneShopEnum.PRICY_ITEM_1_PRICE_TEXT.value() + i,
                                         new TextElementImpl("firstPanel",
                                                         String.valueOf(item.getPrice()),
-                                                        Color.BLACK, 0.025,
-                                                        0.59, 0.17));
+                                                        Color.BLACK, 0.05,
+                                                        xPosition, 0.17));
                 }
                 for (int i = 0; i < FREE_ITEMS_SIZE; i++) {
                         int startIndex = SHOP_SIZE;
                         Item item = shopItems.get(startIndex + i);
+                        // Calcola le posizioni x in base all'indice
+                        double xPosition = 0.14 + (i * 0.29); // Allineato con i pulsanti FREE_ITEM
+
                         this.sceneGraphicElements.put(SceneShopEnum.FREE_ITEM_1_NAME_TEXT.value() + i,
                                         new TextElementImpl("firstPanel",
                                                         item.getName(),
-                                                        Color.BLACK, 0.025,
-                                                        0.69, 0.17));
+                                                        Color.BLACK, 0.055,
+                                                        xPosition, 0.35));
                 }
         }
 
@@ -168,8 +189,10 @@ public class SceneShop implements Scene {
                 for (int i = 0; i < FREE_ITEMS_SIZE; i++) {
                         freeItems.add(itemFactory.randomItem());
                 }
-                this.shopItems.addAll(freeItems);
+                
                 this.shopItems.addAll(pricyItems);
+                this.shopItems.addAll(freeItems);
+                System.out.println(shopItems);
                 System.out.println(shopItems.size());
         }
 
@@ -193,6 +216,7 @@ public class SceneShop implements Scene {
 
                 this.initBoxElements();
 
+                this.sceneGraphicElements.remove(SceneShopEnum.BACKGROUND.value());
                 this.sceneGraphicElements.put(SceneShopEnum.BACKGROUND.value(),
                                 new BackgroundElementImpl("firstPanel",
                                                 this.getPathString("images", "sceneShopBgBar.png")));
@@ -203,29 +227,33 @@ public class SceneShop implements Scene {
         }
 
         private void initTextElements() {
-                Item item = shopItems.get(currentSelectedButton - 1);
-                this.sceneGraphicElements.put(SceneShopEnum.PLAYER_MONEY_TEXT.value(),
-                                new TextElementImpl("firstPanel", "MONEY: " + playerTrainerInstance.getMoney(),
-                                                Color.BLACK,
-                                                0.04, 0.92, 0.04));
+            // Usa un indice predefinito per evitare errori all'inizializzazione
+            int itemIndex = 0;
+            
+            this.sceneGraphicElements.put(SceneShopEnum.PLAYER_MONEY_TEXT.value(),
+                            new TextElementImpl("firstPanel", "MONEY: " + playerTrainerInstance.getMoney(),
+                                            Color.BLACK,
+                                            0.05, 0.92, 0.04));
 
-                this.sceneGraphicElements.put(SceneShopEnum.REROL_TEXT.value(),
-                                new TextElementImpl("firstPanel", "REROLL: " + 50,
-                                                Color.BLACK, 0.03, 0.01,
-                                                0.68));
+            this.sceneGraphicElements.put(SceneShopEnum.REROL_TEXT.value(),
+                            new TextElementImpl("firstPanel", "REROLL: " + 50,
+                                            Color.BLACK, 0.055, 0.01,
+                                            0.68));
 
-                this.sceneGraphicElements.put(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value(),
-                                new TextElementImpl("firstPanel",
-                                                "*item description* / *button description*" + item.getDescription(),
-                                                Color.BLACK, 0.05,
-                                                0.35,
-                                                0.85));
+            // Inizializza con la descrizione del primo oggetto
+            Item item = shopItems.get(itemIndex);
+            this.sceneGraphicElements.put(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value(),
+                            new TextElementImpl("firstPanel",
+                                            item.getDescription(),
+                                            Color.BLACK, 0.05,
+                                            0.35,
+                                            0.85));
 
-                this.sceneGraphicElements.put(SceneShopEnum.TEAM_TEXT.value(),
-                                new TextElementImpl("firstPanel",
-                                                "TEAM", Color.BLACK, 0.05,
-                                                0.93,
-                                                0.69));
+            this.sceneGraphicElements.put(SceneShopEnum.TEAM_TEXT.value(),
+                            new TextElementImpl("firstPanel",
+                                            "TEAM", Color.BLACK, 0.055,
+                                            0.93,
+                                            0.68));
         }
 
         private void initButtonElements() {
@@ -309,9 +337,52 @@ public class SceneShop implements Scene {
         }
 
         private void updateItemsDescription() {
-                if (currentSelectedButton < 6) {
-                        this.initGraphicElements();
+            // Verifica che il pulsante selezionato sia uno dei pulsanti degli oggetti
+            if (currentSelectedButton >= 1 && currentSelectedButton <= 6) {
+                int itemIndex;
+                
+                // Mappa il pulsante selezionato all'indice corretto dell'oggetto
+                switch (currentSelectedButton) {
+                    case 1: // PRICY_ITEM_1_BUTTON
+                        itemIndex = 0;
+                        break;
+                    case 2: // PRICY_ITEM_2_BUTTON
+                        itemIndex = 1;
+                        break;
+                    case 3: // PRICY_ITEM_3_BUTTON
+                        itemIndex = 2;
+                        break;
+                    case 4: // FREE_ITEM_1_BUTTON
+                        itemIndex = 3;
+                        break;
+                    case 5: // FREE_ITEM_2_BUTTON
+                        itemIndex = 4;
+                        break;
+                    case 6: // FREE_ITEM_3_BUTTON
+                        itemIndex = 5;
+                        break;
+                    default:
+                        itemIndex = 0;
+                        break;
                 }
+                
+                // Verifica che l'indice sia valido
+                if (itemIndex >= 0 && itemIndex < shopItems.size()) {
+                    Item item = shopItems.get(itemIndex);
+                    
+                    // Aggiorna la descrizione dell'oggetto
+                    this.sceneGraphicElements.remove(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value());
+                    this.sceneGraphicElements.put(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value(),
+                                    new TextElementImpl("firstPanel",
+                                                    item.getDescription(),
+                                                    Color.BLACK, 0.05,
+                                                    0.35,
+                                                    0.85));
+                    
+                    // Stampa di debug per verificare che la descrizione venga aggiornata
+                    System.out.println("Aggiornata descrizione per item: " + item.getName() + " - " + item.getDescription());
+                }
+            }
         }
 
         private void updateChangePokemon() {
@@ -330,127 +401,117 @@ public class SceneShop implements Scene {
         }
 
         private void initChangePokemonText() {
-
+                // Pokémon 1
                 this.sceneGraphicElements.put(SceneShopEnum.POKEMON_1_NAME_TEXT.value(),
                                 new TextElementImpl("secondPanel",
                                                 getPokemonNameAt(playerTrainerInstance, FIRST_POSITION), Color.WHITE,
-                                                0.04, 0.69, 0.64));
+                                                0.04, 0.425, 0.12));
 
                 this.sceneGraphicElements.put(SceneShopEnum.POKEMON_1_LIFE_TEXT.value(),
                                 new TextElementImpl("secondPanel",
                                                 getPokemonLifeText(FIRST_POSITION),
                                                 Color.WHITE,
-                                                0.04, 0.81, 0.64));
+                                                0.04, 0.425, 0.16));
 
-                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_1_NAME_TEXT.value(),
+                // Pokémon 2
+                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_2_NAME_TEXT.value(),
                                 new TextElementImpl("secondPanel",
                                                 getPokemonNameAt(playerTrainerInstance, SECOND_POSITION), Color.WHITE,
-                                                0.04, 0.69, 0.64));
+                                                0.04, 0.425, 0.22));
 
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_1_LIFE_TEXT.value(),
+                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_2_LIFE_TEXT.value(),
                                 new TextElementImpl("secondPanel",
                                                 getPokemonLifeText(SECOND_POSITION),
                                                 Color.WHITE,
-                                                0.04, 0.81, 0.64));
+                                                0.04, 0.425, 0.26));
 
-                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_1_NAME_TEXT.value(),
+                // Pokémon 3
+                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_3_NAME_TEXT.value(),
                                 new TextElementImpl("secondPanel",
                                                 getPokemonNameAt(playerTrainerInstance, THIRD_POSITION), Color.WHITE,
-                                                0.04, 0.69, 0.64));
+                                                0.04, 0.425, 0.32));
 
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_1_LIFE_TEXT.value(),
+                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_3_LIFE_TEXT.value(),
                                 new TextElementImpl("secondPanel",
                                                 getPokemonLifeText(THIRD_POSITION),
                                                 Color.WHITE,
-                                                0.04, 0.81, 0.64));
+                                                0.04, 0.425, 0.36));
 
-                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_1_NAME_TEXT.value(),
+                // Pokémon 4
+                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_4_NAME_TEXT.value(),
                                 new TextElementImpl("secondPanel",
                                                 getPokemonNameAt(playerTrainerInstance, FOURTH_POSITION), Color.WHITE,
-                                                0.04, 0.69, 0.64));
+                                                0.04, 0.425, 0.42));
 
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_1_LIFE_TEXT.value(),
+                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_4_LIFE_TEXT.value(),
                                 new TextElementImpl("secondPanel",
                                                 getPokemonLifeText(FOURTH_POSITION),
                                                 Color.WHITE,
-                                                0.04, 0.81, 0.64));
+                                                0.04, 0.425, 0.46));
 
-                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_1_NAME_TEXT.value(),
+                // Pokémon 5
+                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_5_NAME_TEXT.value(),
                                 new TextElementImpl("secondPanel",
                                                 getPokemonNameAt(playerTrainerInstance, FIFTH_POSITION), Color.WHITE,
-                                                0.04, 0.69, 0.64));
+                                                0.04, 0.425, 0.52));
 
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_1_LIFE_TEXT.value(),
+                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_5_LIFE_TEXT.value(),
                                 new TextElementImpl("secondPanel",
                                                 getPokemonLifeText(FIFTH_POSITION),
                                                 Color.WHITE,
-                                                0.04, 0.81, 0.64));
+                                                0.04, 0.425, 0.56));
 
-                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_1_NAME_TEXT.value(),
+                // Pokémon 6
+                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_6_NAME_TEXT.value(),
                                 new TextElementImpl("secondPanel",
                                                 getPokemonNameAt(playerTrainerInstance, SIXTH_POSITION), Color.WHITE,
-                                                0.04, 0.69, 0.64));
+                                                0.04, 0.425, 0.62));
 
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_1_LIFE_TEXT.value(),
+                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_6_LIFE_TEXT.value(),
                                 new TextElementImpl("secondPanel",
                                                 getPokemonLifeText(SIXTH_POSITION),
                                                 Color.WHITE,
-                                                0.04, 0.81, 0.64));
+                                                0.04, 0.425, 0.66));
 
-                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                this.sceneGraphicElements.put(SceneShopEnum.BACK_BUTTON_TEXT.value(),
-                                new TextElementImpl("secondPanel", "BACK", Color.BLACK, 0.03, 0.20,
-                                                0.35));
-
+                // Testo per il pulsante di ritorno (in basso a destra)
+                this.sceneGraphicElements.put(SceneShopEnum.CHANGE_POKEMON_BACK_TEXT.value(),
+                                new TextElementImpl("secondPanel",
+                                                "INDIETRO", Color.WHITE,
+                                                0.04, 0.80, 0.83));
         }
 
         private void initChangePokemonButtons() {
+                // Pulsanti dei Pokémon in colonna
                 this.sceneGraphicElements.put(SceneShopEnum.CHANGE_POKEMON_1_BUTTON.value(),
-                                new ButtonElementImpl("secondPanel", new Color(38, 102, 102), Color.WHITE, 0, 0.77,
-                                                0.0571,
-                                                0.2, 0.1));
-
+                                new ButtonElementImpl("secondPanel", new Color(38, 102, 102), Color.WHITE, 0, 0.425,
+                                                0.10,
+                                                0.25, 0.08));
                 this.sceneGraphicElements.put(SceneShopEnum.CHANGE_POKEMON_2_BUTTON.value(),
-                                new ButtonElementImpl("secondPanel", new Color(38, 102, 102), Color.WHITE, 0, 0.77,
-                                                0.2142,
-                                                0.2, 0.1));
-
+                                new ButtonElementImpl("secondPanel", new Color(38, 102, 102), Color.WHITE, 0, 0.425,
+                                                0.20,
+                                                0.25, 0.08));
                 this.sceneGraphicElements.put(SceneShopEnum.CHANGE_POKEMON_3_BUTTON.value(),
-                                new ButtonElementImpl("secondPanel", new Color(38, 102, 102), Color.WHITE, 0, 0.77,
-                                                0.3713,
-                                                0.2, 0.1));
-
+                                new ButtonElementImpl("secondPanel", new Color(38, 102, 102), Color.WHITE, 0, 0.425,
+                                                0.30,
+                                                0.25, 0.08));
                 this.sceneGraphicElements.put(SceneShopEnum.CHANGE_POKEMON_4_BUTTON.value(),
-                                new ButtonElementImpl("secondPanel", new Color(38, 102, 102), Color.WHITE, 0, 0.77,
-                                                0.5284,
-                                                0.2, 0.1));
-
+                                new ButtonElementImpl("secondPanel", new Color(38, 102, 102), Color.WHITE, 0, 0.425,
+                                                0.40,
+                                                0.25, 0.08));
                 this.sceneGraphicElements.put(SceneShopEnum.CHANGE_POKEMON_5_BUTTON.value(),
-                                new ButtonElementImpl("secondPanel", new Color(38, 102, 102), Color.WHITE, 0, 0.77,
-                                                0.6855,
-                                                0.2, 0.1));
-
+                                new ButtonElementImpl("secondPanel", new Color(38, 102, 102), Color.WHITE, 0, 0.425,
+                                                0.50,
+                                                0.25, 0.08));
                 this.sceneGraphicElements.put(SceneShopEnum.CHANGE_POKEMON_6_BUTTON.value(),
-                                new ButtonElementImpl("secondPanel", new Color(38, 102, 102), Color.WHITE, 0, 0.77,
-                                                0.8426,
-                                                0.2, 0.1));
+                                new ButtonElementImpl("secondPanel", new Color(38, 102, 102), Color.WHITE, 0, 0.425,
+                                                0.60,
+                                                0.25, 0.08));
 
+                // Pulsante "back" in basso a destra
                 this.sceneGraphicElements.put(SceneShopEnum.CHANGE_POKEMON_BACK_BUTTON.value(),
-                                new ButtonElementImpl("secondPanel", new Color(38, 102, 102), Color.WHITE, 0, 0.77,
-                                                0.74,
-                                                0.2, 0.1));
-
+                                new ButtonElementImpl("secondPanel", new Color(38, 102, 102), Color.WHITE, 0, 0.80,
+                                                0.80,
+                                                0.15, 0.1));
         }
 
         private void initChangePokemonSprites() {
@@ -554,17 +615,22 @@ public class SceneShop implements Scene {
                                         .getPokemon(pokemonIndex);
                         if (selectedPokemon.isPresent()) {
                                 it.unibo.PokeRogue.pokemon.Pokemon pokemon = selectedPokemon.get();
-                                String itemType = this.selectedItemForUse.getType();
-                                if (itemType.equalsIgnoreCase("Healing")) {
 
-                                        // Esempio: pokemon.heal(this.selectedItemForUse.getEffectValue());
-                                } else if (itemType.equalsIgnoreCase("Boost")) {
-                                        // Applica la logica di potenziamento al Pokémon
-                                        System.out.println(pokemon.getName() + " potenziato con "
+                                // Ottieni l'effetto dell'item
+                                Optional<JSONObject> itemEffect = this.selectedItemForUse.getEffect();
+
+                                if (itemEffect.isPresent()) {
+                                        // Ottieni l'istanza dell'EffectParser
+                                        EffectParser effectParser = EffectParserImpl
+                                                        .getInstance(EffectParserImpl.class);
+
+                                        // Applica l'effetto al Pokémon
+                                        effectParser.parseEffect(itemEffect.get(), pokemon);
+
+                                        System.out.println(pokemon.getName() + " ha usato "
                                                         + this.selectedItemForUse.getName() + ".");
-                                        // Esempio: pokemon.boostStat(this.selectedItemForUse.getEffectType(),
-                                        // this.selectedItemForUse.getEffectValue());
                                 }
+
                                 this.selectedItemForUse = null; // Resetta l'item selezionato
                                 // gameEngineInstance.setScene(SceneType.SHOP, null); // Ritorna al negozio
                         } else {

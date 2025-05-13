@@ -2,7 +2,7 @@
   "id": 5,
   "name": "Super potion",
   "type": "Healing",
-  "description": "Restores 20 HP to a single Pokémon.",
+  "description": "Restores 60 HP to a single Pokémon.",
   "price": 700,
   "rarity": "Common",
   "category": "Consumable",
