@@ -15,6 +15,13 @@ import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
 
+/**
+ * Represents the graphical view component for the SceneMove.
+ * This class is responsible for initializing and arranging the visual elements
+ * displayed to the user when the "Move" scene is active, such as buttons, text labels
+ * displaying move information, and the background. It works in conjunction with
+ * the SceneMove class to present the appropriate user interface.
+ */
 public class SceneMoveView {
 
         private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
@@ -23,6 +30,15 @@ public class SceneMoveView {
         private PlayerTrainerImpl playerTrainerInstance;
         private Pokemon playerPokemon;
 
+        /**
+         * Constructs a new SceneMoveView.
+         * Initializes the view with references to the maps where graphical and panel
+         * elements will be stored. It also initializes the utility class and fetches
+         * the player trainer and their first Pokemon.
+         *
+         * @param sceneGraphicElements The map to store scene's graphical elements.
+         * @param allPanelsElements    The map to store scene's panel elements.
+         */
         public SceneMoveView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements) {
                 this.utilityClass = new UtilitiesForScenesImpl("move", sceneGraphicElements);
@@ -32,6 +48,13 @@ public class SceneMoveView {
                 this.allPanelsElements = allPanelsElements;
         }
 
+        /**
+         * Initializes and populates the graphical elements and panels for the
+         * SceneMove.
+         * This includes creating and adding panels, text elements displaying Pokemon
+         * move names, PP, and damage, buttons for selecting moves, and the background.
+         * The elements are added to the maps provided during construction.
+         */
         protected void initGraphicElements() {
                 // Panels
                 this.allPanelsElements.put("firstPanel", new PanelElementImpl("", new OverlayLayout(null)));
