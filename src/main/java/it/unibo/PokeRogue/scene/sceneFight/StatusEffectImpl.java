@@ -7,14 +7,29 @@ import java.util.Optional;
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.pokemon.StatusCondition;
 
+/**
+ * Implementation of the {@link StatusEffect} interface.
+ * 
+ * This class manages the application and effects of various status conditions
+ * on Pokémon during a battle, including attack/switch restrictions, damage over
+ * time,
+ * and stat changes.
+ */
 public class StatusEffectImpl implements StatusEffect {
     private final Map<StatusCondition, Integer> statusMap;
 
+    /**
+     * Constructs a new StatusEffectImpl and initializes the default duration of
+     * each status.
+     */
     public StatusEffectImpl() {
         this.statusMap = new HashMap<>();
         this.generateStatusMap();
     }
 
+    /**
+     * Initializes the duration for each status condition.
+     */
     private void generateStatusMap() {
         statusMap.put(StatusCondition.BURN, 5);
         statusMap.put(StatusCondition.FREEZE, 6);
@@ -29,6 +44,12 @@ public class StatusEffectImpl implements StatusEffect {
         statusMap.put(StatusCondition.SEEDED, 3);
     }
 
+    /**
+     * Checks if the given Pokémon is allowed to attack based on its current status.
+     *
+     * @param pokemon the Pokémon attempting to attack
+     * @return {@code true} if it can attack; {@code false} otherwise
+     */
     @Override
     public Boolean checkStatusAttack(Pokemon pokemon) {
         Optional<StatusCondition> status = pokemon.getStatusCondition();
@@ -65,6 +86,13 @@ public class StatusEffectImpl implements StatusEffect {
 
     }
 
+    /**
+     * Checks if the given Pokémon is allowed to switch out based on its current
+     * status.
+     *
+     * @param pokemon the Pokémon attempting to switch
+     * @return {@code true} if it can switch; {@code false} otherwise
+     */
     @Override
     public Boolean checkStatusSwitch(Pokemon pokemon) {
         Optional<StatusCondition> status = pokemon.getStatusCondition();
@@ -81,6 +109,13 @@ public class StatusEffectImpl implements StatusEffect {
         return true;
     }
 
+    /**
+     * Applies the effect of the current status condition to the Pokémon.
+     * May also affect the enemy Pokémon (e.g., Leech Seed).
+     *
+     * @param pokemon the Pokémon affected by the status
+     * @param enemy   the opposing Pokémon (used for effects like Leech Seed)
+     */
     @Override
     public void applyStatus(Pokemon pokemon, Pokemon enemy) {
         Optional<StatusCondition> status = pokemon.getStatusCondition();
@@ -132,6 +167,12 @@ public class StatusEffectImpl implements StatusEffect {
         }
     }
 
+    /**
+     * Sets the duration of the status condition if not already set.
+     *
+     * @param pokemon the affected Pokémon
+     * @param status  the status condition being applied
+     */
     private void setTimeDuration(Pokemon pokemon, StatusCondition status) {
         if (pokemon.getStatusDuration().isEmpty() || !pokemon.getStatusDuration().containsKey(status)) {
             pokemon.getStatusDuration().clear();
@@ -139,6 +180,13 @@ public class StatusEffectImpl implements StatusEffect {
         }
     }
 
+    /**
+     * Decreases the duration of the status condition by one turn.
+     * Removes the status if the duration reaches zero.
+     *
+     * @param pokemon the affected Pokémon
+     * @param status  the status condition being updated
+     */
     private void decrementTimeDuration(Pokemon pokemon, StatusCondition status) {
         int turnLeft = pokemon.getStatusDuration().get(status) - 1;
         pokemon.getStatusDuration().put(status, turnLeft);
@@ -148,6 +196,12 @@ public class StatusEffectImpl implements StatusEffect {
         }
     }
 
+    /**
+     * Inflicts damage to the Pokémon by reducing its HP stat.
+     *
+     * @param pokemon the Pokémon receiving damage
+     * @param damage  the amount of damage to inflict
+     */
     private void calculateDamage(Pokemon pokemon, int damage) {
         pokemon.getActualStats().get("hp").decrement(damage);
     }

@@ -6,6 +6,8 @@ import it.unibo.PokeRogue.scene.sceneBox.SceneBox;
 import it.unibo.PokeRogue.scene.sceneFight.SceneFight;
 import it.unibo.PokeRogue.scene.sceneLoad.SceneLoad;
 import it.unibo.PokeRogue.scene.sceneMenu.SceneMenu;
+import it.unibo.PokeRogue.scene.sceneMove.SceneMove;
+import lombok.Setter;
 
 /**
  * Implementation of the {@link GameEngine} interface.
@@ -24,6 +26,7 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
     private GraphicEngine graphicEngineInstance;
     private Scene currentScene;
     private String fileToLoadName;
+    @Setter
     private Integer fightLevel;
 
     public GameEngineImpl() {
@@ -45,7 +48,6 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
         switch (newScene) {
             case "main":
                 currentScene = new SceneMenu();
-
                 break;
             case "load":
                 currentScene = new SceneLoad();
@@ -57,8 +59,9 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
             case "fight":
                 currentScene = new SceneShop();
                 break;
-            
-
+            case "move":
+                currentScene = new SceneMove();
+                break;
             default:
                 break;
         }
@@ -89,5 +92,4 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
     public void setFileToLoad(final String fileName) {
         this.fileToLoadName = fileName;
     }
-
 }

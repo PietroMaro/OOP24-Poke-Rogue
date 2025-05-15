@@ -53,10 +53,10 @@ public class UtilitiesForScenesImpl implements UtilitiesForScenes {
      *                   to deselect it.
      */
     public void setButtonStatus(final int buttonCode, final boolean status) {
-
         ButtonElementImpl selectedButton = (ButtonElementImpl) sceneGraphicElements.get(buttonCode);
-        selectedButton.setSelected(status);
-
+        if (selectedButton != null) {
+            selectedButton.setSelected(status);
+        }
     }
 
     /**

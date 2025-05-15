@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
 
@@ -112,8 +113,15 @@ public class EnemyAiSwitchIn {
      */
     private boolean canSwitch() {
         final Pokemon currentPokemon = this.enemyTrainer.getPokemon(0).get();
+        boolean canSwitch = false;
 
-        boolean canSwitch = true;
+        for(Optional<Pokemon> pokemon : enemyTrainer.getSquad().subList(1, 6)){
+            if(pokemon.isPresent() && pokemon.get().getActualStats().get("hp").getCurrentValue() > 0){
+                canSwitch = true;
+                break;
+            }
+
+        }
 
         canSwitch = canSwitch & this.considerSwitching;
 

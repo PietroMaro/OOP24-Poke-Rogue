@@ -48,6 +48,7 @@ public class SceneShop implements Scene {
         private final static Integer SIXTH_POSITION = 5;
         private final static int SHOP_SIZE = 3; // Numero di item pricy
         private final static int FREE_ITEMS_SIZE = 3; // Numero di item gratuiti
+        private final int itemIndex = 0;
         private Item selectedItemForUse = null;
 
         public SceneShop() {
@@ -216,7 +217,6 @@ public class SceneShop implements Scene {
 
                 this.initBoxElements();
 
-                this.sceneGraphicElements.remove(SceneShopEnum.BACKGROUND.value());
                 this.sceneGraphicElements.put(SceneShopEnum.BACKGROUND.value(),
                                 new BackgroundElementImpl("firstPanel",
                                                 this.getPathString("images", "sceneShopBgBar.png")));
@@ -228,7 +228,6 @@ public class SceneShop implements Scene {
 
         private void initTextElements() {
             // Usa un indice predefinito per evitare errori all'inizializzazione
-            int itemIndex = 0;
             
             this.sceneGraphicElements.put(SceneShopEnum.PLAYER_MONEY_TEXT.value(),
                             new TextElementImpl("firstPanel", "MONEY: " + playerTrainerInstance.getMoney(),
@@ -241,7 +240,7 @@ public class SceneShop implements Scene {
                                             0.68));
 
             // Inizializza con la descrizione del primo oggetto
-            Item item = shopItems.get(itemIndex);
+            Item item = shopItems.get(this.itemIndex);
             this.sceneGraphicElements.put(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value(),
                             new TextElementImpl("firstPanel",
                                             item.getDescription(),
@@ -337,51 +336,65 @@ public class SceneShop implements Scene {
         }
 
         private void updateItemsDescription() {
-            // Verifica che il pulsante selezionato sia uno dei pulsanti degli oggetti
-            if (currentSelectedButton >= 1 && currentSelectedButton <= 6) {
+            // IMPORTANTE: Verifica che i valori di currentSelectedButton per gli item
+            // (es. SceneShopEnum.PRICY_ITEM_1_BUTTON.value()) corrispondano ai case 1-6.
+            // Se i valori sono diversi (es. 10, 11, ... o 101, 102, ...),
+            // la condizione 'if' e lo 'switch' devono essere aggiornati.
+            System.out.println("DEBUG UPDATE: currentSelectedButton = " + currentSelectedButton);
+
+            if (currentSelectedButton >= 1 && currentSelectedButton <= 6) { // ATTENZIONE: Questa condizione dipende dai valori reali degli enum dei pulsanti
                 int itemIndex;
                 
-                // Mappa il pulsante selezionato all'indice corretto dell'oggetto
-                switch (currentSelectedButton) {
-                    case 1: // PRICY_ITEM_1_BUTTON
-                        itemIndex = 0;
-                        break;
-                    case 2: // PRICY_ITEM_2_BUTTON
-                        itemIndex = 1;
-                        break;
-                    case 3: // PRICY_ITEM_3_BUTTON
-                        itemIndex = 2;
-                        break;
-                    case 4: // FREE_ITEM_1_BUTTON
-                        itemIndex = 3;
-                        break;
-                    case 5: // FREE_ITEM_2_BUTTON
-                        itemIndex = 4;
-                        break;
-                    case 6: // FREE_ITEM_3_BUTTON
-                        itemIndex = 5;
-                        break;
+                switch (currentSelectedButton) { // ATTENZIONE: Anche i case dipendono dai valori reali
+                    case 1: itemIndex = 3; break; // Presumendo PRICY_ITEM_1_BUTTON.value() == 1
+                    case 2: itemIndex = 4; break; // Presumendo PRICY_ITEM_2_BUTTON.value() == 2
+                    case 3: itemIndex = 5; break; // Presumendo PRICY_ITEM_3_BUTTON.value() == 3
+                    case 4: itemIndex = 0; break; // Presumendo FREE_ITEM_1_BUTTON.value() == 4
+                    case 5: itemIndex = 1; break; // Presumendo FREE_ITEM_2_BUTTON.value() == 5
+                    case 6: itemIndex = 2; break; // Presumendo FREE_ITEM_3_BUTTON.value() == 6
                     default:
-                        itemIndex = 0;
+                        System.out.println("DEBUG UPDATE: currentSelectedButton (" + currentSelectedButton + ") non mappato a itemIndex, default a 0.");
+                        itemIndex = 0; 
                         break;
                 }
                 
-                // Verifica che l'indice sia valido
-                if (itemIndex >= 0 && itemIndex < shopItems.size()) {
+                if (shopItems != null && itemIndex >= 0 && itemIndex < shopItems.size()) {
                     Item item = shopItems.get(itemIndex);
+                    String descriptionToDisplay = "N/A";
+                    if (item != null && item.getDescription() != null && !item.getDescription().trim().isEmpty()) {
+                        descriptionToDisplay = item.getDescription();
+                    } else if (item == null) {
+                        descriptionToDisplay = "ITEM NULLO (indice " + itemIndex + ")";
+                    } else {
+                        descriptionToDisplay = "DESCRIZIONE VUOTA (item " + item.getName() + ")";
+                    }
                     
-                    // Aggiorna la descrizione dell'oggetto
                     this.sceneGraphicElements.remove(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value());
                     this.sceneGraphicElements.put(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value(),
                                     new TextElementImpl("firstPanel",
-                                                    item.getDescription(),
-                                                    Color.BLACK, 0.05,
-                                                    0.35,
-                                                    0.85));
-                    
-                    // Stampa di debug per verificare che la descrizione venga aggiornata
-                    System.out.println("Aggiornata descrizione per item: " + item.getName() + " - " + item.getDescription());
+                                                    "[DEBUG] " + descriptionToDisplay,
+                                                    Color.RED,        // Colore ROSSO brillante
+                                                    0.06,             // Dimensione font leggermente più grande
+                                                    0.35,             // Stessa X
+                                                    0.80));           // Y leggermente più in alto
+
+                    System.out.println("DEBUG UPDATE: Descrizione aggiornata a: " + descriptionToDisplay + " per pulsante " + currentSelectedButton + " (itemIndex " + itemIndex + ")");
+                } else {
+                    String reason = (shopItems == null) ? "shopItems è null" : "itemIndex (" + itemIndex + ") fuori range per shopItems size (" + (shopItems != null ? shopItems.size() : "null") + ")";
+                    System.out.println("DEBUG UPDATE: Impossibile ottenere item: " + reason);
+                     this.sceneGraphicElements.remove(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value());
+                    this.sceneGraphicElements.put(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value(),
+                                    new TextElementImpl("firstPanel",
+                                                    "[DEBUG] Errore itemIndex",
+                                                    Color.ORANGE, 0.06, 0.35, 0.80));
                 }
+            } else {
+                 System.out.println("DEBUG UPDATE: currentSelectedButton (" + currentSelectedButton + ") non è un pulsante oggetto gestito (1-6). La descrizione non viene aggiornata da questo blocco.");
+                 // Potresti voler lasciare la descrizione esistente o impostare un testo predefinito
+                 // Esempio:
+                 // this.sceneGraphicElements.remove(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value());
+                 // this.sceneGraphicElements.put(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value(),
+                 // new TextElementImpl("firstPanel", "[DEBUG] Nessun item selezionato", Color.GRAY, 0.05, 0.35, 0.80));
             }
         }
 

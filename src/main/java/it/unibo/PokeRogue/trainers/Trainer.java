@@ -27,4 +27,7 @@ public interface Trainer {
 
     void addMoney(int amount);
 
+	Boolean isWild();
+
+	void setWild(Boolean wild);
 }
