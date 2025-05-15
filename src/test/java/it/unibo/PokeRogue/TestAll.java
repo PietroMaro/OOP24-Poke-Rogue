@@ -259,7 +259,6 @@ public class TestAll {
 		battleEngine.movesPriorityCalculator("Run", "", "Attack", "0");
 		int afterLife = playerTrainer.getSquad().get(0).get().getActualStats().get("hp").getCurrentValue();
 		assertTrue(beforeLife > afterLife);
-
     }
 }
 

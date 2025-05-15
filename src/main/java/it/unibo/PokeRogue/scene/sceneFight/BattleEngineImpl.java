@@ -40,6 +40,7 @@ public class BattleEngineImpl implements BattleEngine {
     private EnemyAi enemyAiInstance;
     private final GameEngine gameEngineInstance;
     private final SavingSystem savingSystemInstance;
+    private Boolean isCaptured = false;
 
     /**
      * Constructor for the BattleEngineImpl class that initializes the battle engine
@@ -105,7 +106,8 @@ public class BattleEngineImpl implements BattleEngine {
                 enemyPokemon.getActualStats().get("hp")
                         .decrement(enemyPokemon.getActualStats().get("hp").getCurrentValue());
                 this.savingSystemInstance.savePokemon(enemyPokemon);
-
+                this.isCaptured = true;
+                this.newEnemyCheck();
             } else {
                 this.savingSystemInstance.savePokemon(enemyPokemon);
             }
@@ -347,7 +349,7 @@ public class BattleEngineImpl implements BattleEngine {
     private void newEnemyCheck() {
         Pokemon enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
         Pokemon playerPokemon = playerTrainerInstance.getPokemon(FIRST_POSITION).get();
-        if (BattleUtilities.isTeamWipedOut(enemyTrainerInstance)) {
+        if (BattleUtilities.isTeamWipedOut(enemyTrainerInstance) || this.isCaptured == true) {
             BattleRewards.awardBattleRewards(playerPokemon, enemyPokemon);
             this.newMoveToLearn(playerPokemon);
             // TODO: SCENE SHOP CALL
