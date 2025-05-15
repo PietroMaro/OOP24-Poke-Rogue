@@ -51,7 +51,6 @@ public class ItemFactoryImpl extends SingletonImpl implements ItemFactory {
         String category = itemJson.getString("category");
         double captureRate = itemJson.getDouble("captureRate");
         JSONObject effect = itemJson.getJSONObject("effect");
-        System.out.println(name);
 
         final ItemBlueprint newItem = new ItemBlueprint(
                 id,

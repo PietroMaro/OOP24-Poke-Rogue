@@ -1,6 +1,6 @@
 {
     "id": 6,
-    "name": "Ultra Ball",
+    "name": "ultraball",
     "type": "Capture",
     "description": "A Poké Ball with high capture rate.",
     "price": 1200,
@@ -9,10 +9,10 @@
     "captureRate": 2.0,
     "effect": {
         "checks": [
-            []
+            
         ],
         "activation": [
-            []
+            
         ]
     }
 }

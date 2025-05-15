@@ -9,12 +9,11 @@
     "captureRate": 0,
     "effect": {
         "checks": [
-            []
         ],
         "activation": [
             [
-                "enemy.money",
-                "MATH.floor(enemy.money + (attackUs.damage * 0.5)).intValue()"
+                "us.money",
+                "us.money + (attackUs.damage * 0.5)"
             ]
         ]
     }

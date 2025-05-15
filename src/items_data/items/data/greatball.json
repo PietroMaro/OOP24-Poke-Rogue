@@ -1,6 +1,6 @@
 {
     "id": 1,
-    "name": "Great Ball",
+    "name": "megaball",
     "type": "Capture",
     "description": "A Poké Ball with a refined capture rate.",
     "price": 600,
@@ -9,10 +9,8 @@
     "captureRate": 1.5,
     "effect": {
         "checks": [
-            []
         ],
         "activation": [
-            []
         ]
     }
 }

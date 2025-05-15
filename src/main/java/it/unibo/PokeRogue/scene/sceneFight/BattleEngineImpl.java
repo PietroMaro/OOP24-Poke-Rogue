@@ -350,8 +350,7 @@ public class BattleEngineImpl implements BattleEngine {
         if (BattleUtilities.isTeamWipedOut(enemyTrainerInstance)) {
             BattleRewards.awardBattleRewards(playerPokemon, enemyPokemon);
             this.newMoveToLearn(playerPokemon);
-            // TODO: SCENE SHOP CALL
-            System.out.println("SHOP");
+            this.gameEngineInstance.setScene("shop");
         } else if (enemyPokemon.getActualStats().get("hp").getCurrentValue() <= 0) {
             this.movesPriorityCalculator("SwitchIn", "0", enemyAiInstance.nextMove(currentWeather).getFirst(),
                     enemyAiInstance.nextMove(currentWeather).getLast());

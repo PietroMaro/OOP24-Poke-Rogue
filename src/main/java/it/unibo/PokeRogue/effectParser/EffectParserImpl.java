@@ -21,6 +21,7 @@ public class EffectParserImpl extends SingletonImpl implements EffectParser {
 	private Optional<Move> attackUs;
 	private Optional<Move> attackEnemy;
 	private Optional<Weather> weather;
+	
 
 	private void parseEffect(JSONObject effect) {
 		JSONArray checks = new JSONArray("[]");

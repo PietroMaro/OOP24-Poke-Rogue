@@ -1,6 +1,6 @@
 {
     "id": 3,
-    "name": "Poké Ball",
+    "name": "pokeball",
     "type": "Capture",
     "description": "A standard Poké Ball.",
     "price": 200,
@@ -9,10 +9,10 @@
     "captureRate": 1.0,
     "effect": {
         "checks": [
-            []
+            
         ],
         "activation": [
-            []
+            
         ]
     }
 }

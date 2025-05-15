@@ -9,15 +9,13 @@
     "captureRate": 0,
     "effect": {
         "checks": [
-            []
+            
         ],
         "activation": [
             [
                 "us.tempStatsBonus.specialAttack",
                 "us.tempStatsBonus.specialAttack + 1"
             ]
-        ],
-        "duration": 5,
-        "onUse": "applyBattleCounter"
+        ]
     }
 }

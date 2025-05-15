@@ -50,6 +50,7 @@ public class SceneShop implements Scene {
         private final static int FREE_ITEMS_SIZE = 3; // Numero di item gratuiti
         private final int itemIndex = 0;
         private Item selectedItemForUse = null;
+        private boolean BuyedItem = false;
 
         public SceneShop() {
                 this.sceneGraphicElements = new LinkedHashMap<>();
@@ -116,6 +117,7 @@ public class SceneShop implements Scene {
                                                 .value()) {
                                         // Resetta lo stato dello shop alla visualizzazione iniziale
                                         this.currentSelectedButton = SceneShopEnum.PRICY_ITEM_1_BUTTON.value();
+                                        // playerTrainerInstance.addMoney(selectedItemForUse.getPrice());
                                         this.selectedItemForUse = null;
 
                                         // Reinizializza gli elementi grafici
@@ -133,9 +135,12 @@ public class SceneShop implements Scene {
                                 } else if (this.currentSelectedButton >= SceneShopEnum.PRICY_ITEM_1_BUTTON.value() &&
                                                 this.currentSelectedButton <= SceneShopEnum.PRICY_ITEM_3_BUTTON
                                                                 .value()) {
-                                        buyItem(this.shopItems.get(this.currentSelectedButton - 4));
-                                        this.updateChangePokemon();
-                                        this.newSelectedButton = SceneShopEnum.CHANGE_POKEMON_1_BUTTON.value();
+                                        Item item = shopItems.get(this.currentSelectedButton - 4);
+                                        if (playerTrainerInstance.getMoney() >= item.getPrice()) {
+                                                buyItem(item);
+                                                this.updateChangePokemon();
+                                                this.newSelectedButton = SceneShopEnum.CHANGE_POKEMON_1_BUTTON.value();
+                                        }
                                 } else if (this.currentSelectedButton >= SceneShopEnum.FREE_ITEM_1_BUTTON.value() &&
                                                 this.currentSelectedButton <= SceneShopEnum.FREE_ITEM_3_BUTTON
                                                                 .value()) {
@@ -190,7 +195,7 @@ public class SceneShop implements Scene {
                 for (int i = 0; i < FREE_ITEMS_SIZE; i++) {
                         freeItems.add(itemFactory.randomItem());
                 }
-                
+
                 this.shopItems.addAll(pricyItems);
                 this.shopItems.addAll(freeItems);
                 System.out.println(shopItems);
@@ -227,32 +232,32 @@ public class SceneShop implements Scene {
         }
 
         private void initTextElements() {
-            // Usa un indice predefinito per evitare errori all'inizializzazione
-            
-            this.sceneGraphicElements.put(SceneShopEnum.PLAYER_MONEY_TEXT.value(),
-                            new TextElementImpl("firstPanel", "MONEY: " + playerTrainerInstance.getMoney(),
-                                            Color.BLACK,
-                                            0.05, 0.92, 0.04));
+                // Usa un indice predefinito per evitare errori all'inizializzazione
 
-            this.sceneGraphicElements.put(SceneShopEnum.REROL_TEXT.value(),
-                            new TextElementImpl("firstPanel", "REROLL: " + 50,
-                                            Color.BLACK, 0.055, 0.01,
-                                            0.68));
+                this.sceneGraphicElements.put(SceneShopEnum.PLAYER_MONEY_TEXT.value(),
+                                new TextElementImpl("firstPanel", "MONEY: " + playerTrainerInstance.getMoney(),
+                                                Color.BLACK,
+                                                0.05, 0.92, 0.04));
 
-            // Inizializza con la descrizione del primo oggetto
-            Item item = shopItems.get(this.itemIndex);
-            this.sceneGraphicElements.put(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value(),
-                            new TextElementImpl("firstPanel",
-                                            item.getDescription(),
-                                            Color.BLACK, 0.05,
-                                            0.35,
-                                            0.85));
+                this.sceneGraphicElements.put(SceneShopEnum.REROL_TEXT.value(),
+                                new TextElementImpl("firstPanel", "REROLL: " + 50,
+                                                Color.BLACK, 0.055, 0.01,
+                                                0.68));
 
-            this.sceneGraphicElements.put(SceneShopEnum.TEAM_TEXT.value(),
-                            new TextElementImpl("firstPanel",
-                                            "TEAM", Color.BLACK, 0.055,
-                                            0.93,
-                                            0.68));
+                // Inizializza con la descrizione del primo oggetto
+                Item item = shopItems.get(this.itemIndex);
+                this.sceneGraphicElements.put(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value(),
+                                new TextElementImpl("firstPanel",
+                                                item.getDescription(),
+                                                Color.BLACK, 0.05,
+                                                0.35,
+                                                0.85));
+
+                this.sceneGraphicElements.put(SceneShopEnum.TEAM_TEXT.value(),
+                                new TextElementImpl("firstPanel",
+                                                "TEAM", Color.BLACK, 0.055,
+                                                0.93,
+                                                0.68));
         }
 
         private void initButtonElements() {
@@ -336,66 +341,41 @@ public class SceneShop implements Scene {
         }
 
         private void updateItemsDescription() {
-            // IMPORTANTE: Verifica che i valori di currentSelectedButton per gli item
-            // (es. SceneShopEnum.PRICY_ITEM_1_BUTTON.value()) corrispondano ai case 1-6.
-            // Se i valori sono diversi (es. 10, 11, ... o 101, 102, ...),
-            // la condizione 'if' e lo 'switch' devono essere aggiornati.
-            System.out.println("DEBUG UPDATE: currentSelectedButton = " + currentSelectedButton);
+                // IMPORTANTE: Verifica che i valori di currentSelectedButton per gli item
+                // (es. SceneShopEnum.PRICY_ITEM_1_BUTTON.value()) corrispondano ai case 1-6.
+                // Se i valori sono diversi (es. 10, 11, ... o 101, 102, ...),
+                // la condizione 'if' e lo 'switch' devono essere aggiornati.
+                System.out.println("DEBUG UPDATE: currentSelectedButton = " + currentSelectedButton);
 
-            if (currentSelectedButton >= 1 && currentSelectedButton <= 6) { // ATTENZIONE: Questa condizione dipende dai valori reali degli enum dei pulsanti
-                int itemIndex;
-                
-                switch (currentSelectedButton) { // ATTENZIONE: Anche i case dipendono dai valori reali
-                    case 1: itemIndex = 3; break; // Presumendo PRICY_ITEM_1_BUTTON.value() == 1
-                    case 2: itemIndex = 4; break; // Presumendo PRICY_ITEM_2_BUTTON.value() == 2
-                    case 3: itemIndex = 5; break; // Presumendo PRICY_ITEM_3_BUTTON.value() == 3
-                    case 4: itemIndex = 0; break; // Presumendo FREE_ITEM_1_BUTTON.value() == 4
-                    case 5: itemIndex = 1; break; // Presumendo FREE_ITEM_2_BUTTON.value() == 5
-                    case 6: itemIndex = 2; break; // Presumendo FREE_ITEM_3_BUTTON.value() == 6
-                    default:
-                        System.out.println("DEBUG UPDATE: currentSelectedButton (" + currentSelectedButton + ") non mappato a itemIndex, default a 0.");
-                        itemIndex = 0; 
-                        break;
-                }
-                
-                if (shopItems != null && itemIndex >= 0 && itemIndex < shopItems.size()) {
-                    Item item = shopItems.get(itemIndex);
-                    String descriptionToDisplay = "N/A";
-                    if (item != null && item.getDescription() != null && !item.getDescription().trim().isEmpty()) {
-                        descriptionToDisplay = item.getDescription();
-                    } else if (item == null) {
-                        descriptionToDisplay = "ITEM NULLO (indice " + itemIndex + ")";
-                    } else {
-                        descriptionToDisplay = "DESCRIZIONE VUOTA (item " + item.getName() + ")";
-                    }
-                    
-                    this.sceneGraphicElements.remove(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value());
-                    this.sceneGraphicElements.put(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value(),
-                                    new TextElementImpl("firstPanel",
-                                                    "[DEBUG] " + descriptionToDisplay,
-                                                    Color.RED,        // Colore ROSSO brillante
-                                                    0.06,             // Dimensione font leggermente più grande
-                                                    0.35,             // Stessa X
-                                                    0.80));           // Y leggermente più in alto
+                if (currentSelectedButton >= 1 && currentSelectedButton <= 6) { // ATTENZIONE: Questa condizione dipende
+                                                                                // dai valori reali degli enum dei
+                                                                                // pulsanti
+                        int itemIndex;
 
-                    System.out.println("DEBUG UPDATE: Descrizione aggiornata a: " + descriptionToDisplay + " per pulsante " + currentSelectedButton + " (itemIndex " + itemIndex + ")");
-                } else {
-                    String reason = (shopItems == null) ? "shopItems è null" : "itemIndex (" + itemIndex + ") fuori range per shopItems size (" + (shopItems != null ? shopItems.size() : "null") + ")";
-                    System.out.println("DEBUG UPDATE: Impossibile ottenere item: " + reason);
-                     this.sceneGraphicElements.remove(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value());
-                    this.sceneGraphicElements.put(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value(),
-                                    new TextElementImpl("firstPanel",
-                                                    "[DEBUG] Errore itemIndex",
-                                                    Color.ORANGE, 0.06, 0.35, 0.80));
+                        switch (currentSelectedButton) { // ATTENZIONE: Anche i case dipendono dai valori reali
+                                case 1:
+                                        itemIndex = 3;
+                                        break; // Presumendo PRICY_ITEM_1_BUTTON.value() == 1
+                                case 2:
+                                        itemIndex = 4;
+                                        break; // Presumendo PRICY_ITEM_2_BUTTON.value() == 2
+                                case 3:
+                                        itemIndex = 5;
+                                        break; // Presumendo PRICY_ITEM_3_BUTTON.value() == 3
+                                case 4:
+                                        itemIndex = 0;
+                                        break; // Presumendo FREE_ITEM_1_BUTTON.value() == 4
+                                case 5:
+                                        itemIndex = 1;
+                                        break; // Presumendo FREE_ITEM_2_BUTTON.value() == 5
+                                case 6:
+                                        itemIndex = 2;
+                                        break; // Presumendo FREE_ITEM_3_BUTTON.value() == 6
+                                default:
+                                        itemIndex = 0;
+                                        break;
+                        }
                 }
-            } else {
-                 System.out.println("DEBUG UPDATE: currentSelectedButton (" + currentSelectedButton + ") non è un pulsante oggetto gestito (1-6). La descrizione non viene aggiornata da questo blocco.");
-                 // Potresti voler lasciare la descrizione esistente o impostare un testo predefinito
-                 // Esempio:
-                 // this.sceneGraphicElements.remove(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value());
-                 // this.sceneGraphicElements.put(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value(),
-                 // new TextElementImpl("firstPanel", "[DEBUG] Nessun item selezionato", Color.GRAY, 0.05, 0.35, 0.80));
-            }
         }
 
         private void updateChangePokemon() {
@@ -589,15 +569,17 @@ public class SceneShop implements Scene {
         }
 
         private void buyItem(Item item) {
-                if (playerTrainerInstance.getMoney() >= item.getPrice()) {
-                        playerTrainerInstance.addMoney(-item.getPrice());
-                        updatePlayerMoneyText();
-                        useOrHandleItem(item);
-                }
+
+                playerTrainerInstance.addMoney(-item.getPrice());
+                updatePlayerMoneyText();
+                useOrHandleItem(item);
+                BuyedItem = true;
+
         }
 
         private void getFreeItem(Item item) {
                 useOrHandleItem(item);
+                BuyedItem = false;
         }
 
         private void updatePlayerMoneyText() {
@@ -608,17 +590,17 @@ public class SceneShop implements Scene {
                                                 0.04, 0.92, 0.04));
         }
 
-        public boolean useOrHandleItem(Item item) {
-                if (item.getCategory().equalsIgnoreCase("Pokeball")) {
-
-                        // da implementare immaghizamento pokeball
-                        return false;
-                } else if (item.getCategory().equalsIgnoreCase("Healing")
-                                || item.getCategory().equalsIgnoreCase("Boost")) {
+        public void useOrHandleItem(Item item) {
+                if (item.getType().equalsIgnoreCase("Capture")) {
+                        int countBall = playerTrainerInstance.getBall().get(item.getName());
+                        playerTrainerInstance.getBall().put(item.getName(), countBall + 1);
+                        gameEngineInstance.setScene("fight");
+                }else if (item.getType().equalsIgnoreCase("Valuable")){
+                        gameEngineInstance.setScene("fight");
+                } else if (item.getType().equalsIgnoreCase("Healing")
+                                || item.getType().equalsIgnoreCase("Boost")||item.getType().equalsIgnoreCase("PPRestore")) {
                         this.selectedItemForUse = item;
-                        return true;
                 } else {
-                        return false;
                 }
         }
 
@@ -639,15 +621,10 @@ public class SceneShop implements Scene {
 
                                         // Applica l'effetto al Pokémon
                                         effectParser.parseEffect(itemEffect.get(), pokemon);
-
-                                        System.out.println(pokemon.getName() + " ha usato "
-                                                        + this.selectedItemForUse.getName() + ".");
                                 }
 
                                 this.selectedItemForUse = null; // Resetta l'item selezionato
-                                // gameEngineInstance.setScene(SceneType.SHOP, null); // Ritorna al negozio
-                        } else {
-                                System.out.println("Nessun Pokémon trovato in questa posizione.");
+                                gameEngineInstance.setScene("fight"); 
                         }
                 }
         }
@@ -677,9 +654,6 @@ public class SceneShop implements Scene {
                 ButtonElementImpl selectedButton = (ButtonElementImpl) sceneGraphicElements.get(buttonCode);
                 if (selectedButton != null) {
                         selectedButton.setSelected(status);
-                } else {
-                        // Aggiungi un log per il debug se il bottone non esiste
-                        System.out.println("Button with code " + buttonCode + " not found in sceneGraphicElements.");
                 }
         }
 

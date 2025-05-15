@@ -1,6 +1,6 @@
 {
     "id": 2,
-    "name": "Master Ball",
+    "name": "masterball",
     "type": "Capture",
     "description": "the definitive Poké Ball.",
     "price": 5000,
@@ -9,10 +9,10 @@
     "captureRate": 100.0,
     "effect": {
         "checks": [
-            []
+            
         ],
         "activation": [
-            []
+            
         ]
     }
 }
