@@ -11,28 +11,28 @@
         "checks": [],
         "activation": [
             [
-                "us.stats.hp",
-                "MATH.floor(us.stats.hp * 1.1).intValue()"
+                "us.actualStats.hp.currentMax",
+                "MATH.floor(us.actualStats.hp.currentMax * 1.1).intValue()"
             ],
             [
-                "us.stats.attack",
-                "MATH.floor(us.stats.attack * 1.1).intValue()"
+                "us.actualStats.attack.currentMax",
+                "MATH.floor(us.actualStats.attack.currentMax * 1.1).intValue()"
             ],
             [
-                "us.stats.defense",
-                "MATH.floor(us.stats.defense * 1.1).intValue()"
+                "us.actualStats.defense.currentMax",
+                "MATH.floor(us.actualStats.defense.currentMax * 1.1).intValue()"
             ],
             [
-                "us.stats.specialAttack",
-                "MATH.floor(us.stats.specialAttack * 1.1).intValue()"
+                "us.actualStats.specialAttack.currentMax",
+                "MATH.floor(us.actualStats.specialAttack.currentMax * 1.1).intValue()"
             ],
             [
-                "us.stats.specialDefense",
-                "MATH.floor(us.stats.specialDefense * 1.1).intValue()"
+                "us.actualStats.specialDefense.currentMax",
+                "MATH.floor(us.actualStats.specialDefense.currentMax * 1.1).intValue()"
             ],
             [
-                "us.stats.speed",
-                "MATH.floor(us.stats.speed * 1.1).intValue()"
+                "us.actualStats.speed.currentMax",
+                "MATH.floor(us.actualStats.speed.currentMax * 1.1).intValue()"
             ]
         ]
     }

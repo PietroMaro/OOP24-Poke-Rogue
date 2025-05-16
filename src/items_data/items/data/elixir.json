@@ -12,20 +12,20 @@
         ],
         "activation": [
             [
-                "us.moves[0].currentPp",
-                "MATH.min(us.moves[0].maxPp, us.moves[0].currentPp + 10)"
+                "us.actualMoves[0].currentValue",
+                "MATH.min(us.actualMoves[0].currentMax, us.actualMoves[0].currentValue + 10)"
             ],
             [
-                "us.moves[1].currentPp",
-                "MATH.min(us.moves[1].maxPp, us.moves[1].currentPp + 10)"
+                "us.actualMoves[1].currentValue",
+                "MATH.min(us.actualMoves[1].currentMax, us.actualMoves[1].currentValue + 10)"
             ],
             [
-                "us.moves[2].currentPp",
-                "MATH.min(us.moves[2].maxPp, us.moves[2].currentPp + 10)"
+                "us.actualMoves[2].currentValue",
+                "MATH.min(us.actualMoves[2].currentMax, us.actualMoves[2].currentValue + 10)"
             ],
             [
-                "us.moves[3].currentPp",
-                "MATH.min(us.moves[3].maxPp, us.moves[3].currentPp + 10)"
+                "us.actualMoves[3].currentValue",
+                "MATH.min(us.actualMoves[3].currentMax, us.actualMoves[3].currentValue + 10)"
             ]
         ]
     }

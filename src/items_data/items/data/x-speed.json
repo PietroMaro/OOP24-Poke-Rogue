@@ -13,8 +13,8 @@
         ],
         "activation": [
             [
-                "us.tempStatsBonus.speed",
-                "us.tempStatsBonus.speed + 1"
+                "us.actualStats.speed.currentValue",
+                "us.actualStats.speed.currentValue + 1"
             ]
         ]
     }

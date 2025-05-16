@@ -10,15 +10,15 @@
     "effect": {
         "checks": [
             [
-                "us.stats.hp.current",
+                "us.actualStats.hp.currentValue",
                 "<=",
                 "0"
             ]
         ],
         "activation": [
             [
-                "us.stats.hp.current",
-                "MATH.floor(us.stats.hp.max * 0.5).intValue()"
+                "us.actualStats.hp.currentValue",
+                "MATH.floor(us.actualStats.hp.currentMax * 0.5).intValue()"
             ],
             [
                 "us.statusCondition",

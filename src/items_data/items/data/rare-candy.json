@@ -11,8 +11,8 @@
         "checks": [],
         "activation": [
             [
-                "currentPokemon.level",
-                "currentPokemon.level + 1"
+                "us.level",
+                "us.level + 1"
             ]
         ]
     }

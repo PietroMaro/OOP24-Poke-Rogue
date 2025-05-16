@@ -13,8 +13,8 @@
     ],
     "activation": [
       [
-        "us.stats.hp.current",
-        "MATH.min(us.stats.hp.max, us.stats.hp.current + 60)"
+        "us.actualStats.hp.currentValue",
+        "MATH.min(us.actualStats.hp.currentMax, us.actualStats.hp.currentValue + 60)"
       ]
     ]
   }

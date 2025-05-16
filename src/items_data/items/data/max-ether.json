@@ -2,7 +2,7 @@
     "id": 12,
     "name": "Max Ether",
     "type": "PPRestore",
-    "description": "Fully restores the PP of a single move of a Pokémon.",
+    "description": "Restores 7 PP to all moves of a Pokémon.",
     "price": 2000,
     "rarity": "Common",
     "category": "Consumable",
@@ -11,8 +11,20 @@
         "checks": [],
         "activation": [
             [
-                "us.moves[selectedMoveIndex].currentPp",
-                "us.moves[selectedMoveIndex].maxPp"
+                "us.actualMoves[0].currentValue",
+                "MATH.min(us.actualMoves[0].currentMax, us.actualMoves[0].currentValue + 7)"
+            ],
+            [
+                "us.actualMoves[1].currentValue",
+                "MATH.min(us.actualMoves[1].currentMax, us.actualMoves[1].currentValue + 7)"
+            ],
+            [
+                "us.actualMoves[2].currentValue",
+                "MATH.min(us.actualMoves[2].currentMax, us.actualMoves[2].currentValue + 7)"
+            ],
+            [
+                "us.actualMoves[3].currentValue",
+                "MATH.min(us.actualMoves[3].currentMax, us.actualMoves[3].currentValue + 7)"
             ]
         ]
     }

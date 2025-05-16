@@ -13,20 +13,20 @@
         ],
         "activation": [
             [
-                "us.moves[0].currentPp",
-                "us.moves[0].maxPp"
+                "us.actualMoves[0].currentValue",
+                "us.actualMoves[0].currentMax"
             ],
             [
-                "us.moves[1].currentPp",
-                "us.moves[1].maxPp"
+                "us.actualMoves[1].currentValue",
+                "us.actualMoves[1].currentMax"
             ],
             [
-                "us.moves[2].currentPp",
-                "us.moves[2].maxPp"
+                "us.actualMoves[2].currentValue",
+                "us.actualMoves[2].currentMax"
             ],
             [
-                "us.moves[3].currentPp",
-                "us.moves[3].maxPp"
+                "us.actualMoves[3].currentValue",
+                "us.actualMoves[3].currentMax"
             ]
         ]
     }

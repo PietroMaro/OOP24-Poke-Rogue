@@ -232,7 +232,7 @@ public class SceneShop implements Scene {
         }
 
         private void initTextElements() {
-                // Usa un indice predefinito per evitare errori all'inizializzazione
+                
 
                 this.sceneGraphicElements.put(SceneShopEnum.PLAYER_MONEY_TEXT.value(),
                                 new TextElementImpl("firstPanel", "MONEY: " + playerTrainerInstance.getMoney(),
