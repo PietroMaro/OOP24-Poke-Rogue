@@ -19,7 +19,7 @@ import it.unibo.PokeRogue.pokemon.Type;
  * This class provides methods to:
  * Evaluate the effectiveness of a move against a Pokémon
  * Compute an integer score representing effectiveness for ranking or
- * decision-making purposes</li>
+ * decision-making purposes
  * 
  *
  * The effectiveness data is read from a JSON file located at:
@@ -49,7 +49,7 @@ public class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
 
         for (final String attacker : root.keySet()) {
             final JSONObject inner = root.getJSONObject(attacker);
-            final Map<Type, Double> innerMap = new HashMap<>();
+            final Map<Type, Double> innerMap = new EnumMap<>(Type.class);
             for (final String defender : inner.keySet()) {
                 innerMap.put(Type.valueOf(defender), inner.getDouble(defender));
             }
@@ -119,7 +119,7 @@ public class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
         for (final Type myPokemonType : myPokemonTypes) {
             effectiveness = 1;
 
-            for (Type enemyPokemonType : enemyPokemonTypes) {
+            for (final Type enemyPokemonType : enemyPokemonTypes) {
 
                 effectiveness = effectiveness * this.calculateTypeMultiplier(myPokemonType, enemyPokemonType);
             }

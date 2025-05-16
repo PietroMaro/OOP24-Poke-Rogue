@@ -5,46 +5,48 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import lombok.Getter;
 
+@Getter
 public class TrainerImpl implements Trainer {
-    private List<Optional<Pokemon>> pokemonSquad;
+    final private List<Optional<Pokemon>> squad;
 
     public TrainerImpl() {
-        this.pokemonSquad = new ArrayList<>();
+        this.squad = new ArrayList<>();
         for (int pokeSquadPosition = 0; pokeSquadPosition < 6; pokeSquadPosition++) {
-            pokemonSquad.add(Optional.empty());
+            squad.add(Optional.empty());
         }
     }
 
     @Override
-    public void switchPokemonPosition(int pokemonBattlePosition, int pokemonSquadPosition) {
-        Optional<Pokemon> tempPokemon = pokemonSquad.get(pokemonBattlePosition);
-        pokemonSquad.set(pokemonBattlePosition, pokemonSquad.get(pokemonSquadPosition));
-        pokemonSquad.set(pokemonSquadPosition, tempPokemon);
+    public void switchPokemonPosition(final int pokemonBattlePosition, final int squadPosition) {
+        final Optional<Pokemon> tempPokemon = squad.get(pokemonBattlePosition);
+        squad.set(pokemonBattlePosition, squad.get(squadPosition));
+        squad.set(squadPosition, tempPokemon);
     }
 
     @Override
-    public void removePokemon(int pos) {
-        pokemonSquad.set(pos, Optional.empty());
+    public void removePokemon(final int pos) {
+        squad.set(pos, Optional.empty());
     }
 
     @Override
-    public Optional<Pokemon> getPokemon(int pos) {
+    public Optional<Pokemon> getPokemon(final int pos) {
 
-        return pokemonSquad.get(pos);
+        return squad.get(pos);
     }
 
-    private Boolean isPokemonInSquad(Pokemon pokemon) {
-        return pokemonSquad.contains(Optional.of(pokemon));
+    private Boolean isPokemonInSquad(final Pokemon pokemon) {
+        return squad.contains(Optional.of(pokemon));
     }
 
     @Override
-    public Boolean addPokemon(Pokemon pokemon, int limits) {
+    public Boolean addPokemon(final Pokemon pokemon, final int limits) {
         if (!isPokemonInSquad(pokemon)) {
 
             for (int x = 0; x < limits; x++) {
-                if (pokemonSquad.get(x).isEmpty()) {
-                    pokemonSquad.set(x, Optional.of(pokemon));
+                if (squad.get(x).isEmpty()) {
+                    squad.set(x, Optional.of(pokemon));
                     return true;
                 }
             }
@@ -52,8 +54,4 @@ public class TrainerImpl implements Trainer {
         return false;
     }
 
-    @Override
-    public List<Optional<Pokemon>> getSquad() {
-        return pokemonSquad;
-    }
 }

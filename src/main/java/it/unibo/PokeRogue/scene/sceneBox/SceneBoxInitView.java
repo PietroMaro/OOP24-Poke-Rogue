@@ -87,8 +87,8 @@ public class SceneBoxInitView {
 
                         this.sceneGraphicElements.put(pokemonIndex + 6,
                                         new ButtonElementImpl("firstPanel", null, Color.WHITE, 0,
-                                                        0.465 + ((pokemonIndex % 9) * 0.049),
-                                                        0.125 + ((pokemonIndex / 9) * 0.09), 0.03, 0.05));
+                                                        0.465 + (pokemonIndex % 9 * 0.049),
+                                                        0.125 + (pokemonIndex / 9 * 0.09), 0.03, 0.05));
 
                 }
 

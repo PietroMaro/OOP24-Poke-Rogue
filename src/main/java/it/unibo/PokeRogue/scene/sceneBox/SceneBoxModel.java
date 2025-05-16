@@ -37,7 +37,7 @@ public class SceneBoxModel {
      *                 saved.
      */
     protected void setUpSave(final String savePath) {
-        if (savePath.equals("")) {
+        if ("".equals(savePath)) {
             this.savingSystemInstance.savePokemon(pokemonFactoryInstance.pokemonFromName("bulbasaur"));
             this.savingSystemInstance.savePokemon(pokemonFactoryInstance.pokemonFromName("charmander"));
             this.savingSystemInstance.savePokemon(pokemonFactoryInstance.pokemonFromName("squirtle"));
@@ -48,8 +48,8 @@ public class SceneBoxModel {
         } else {
             this.savingSystemInstance.loadData(Paths.get("src", "saves", savePath).toString());
 
-            for (var box : this.savingSystemInstance.getSavedPokemon()) {
-                for (String pokemonName : box) {
+            for (final var box : this.savingSystemInstance.getSavedPokemon()) {
+                for (final String pokemonName : box) {
                     this.addPokemonToBox(pokemonFactoryInstance.pokemonFromName(pokemonName));
 
                 }
@@ -67,7 +67,7 @@ public class SceneBoxModel {
      */
     private void addPokemonToBox(final Pokemon pokemon) {
 
-        if (this.boxes.size() == 0) {
+        if (this.boxes.isEmpty()) {
             this.boxes.add(new ArrayList<>());
         }
 

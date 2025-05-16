@@ -13,7 +13,6 @@ import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.savingSystem.SavingSystem;
 import it.unibo.PokeRogue.savingSystem.SavingSystemImpl;
 import it.unibo.PokeRogue.scene.Scene;
-import it.unibo.PokeRogue.scene.sceneLoad.enums.SceneLoadStatusValuesEnum;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
 import lombok.Getter;
@@ -36,9 +35,9 @@ import lombok.Getter;
  * to update the scene status and visuals accordingly.
  * 
  * Main Responsibilities:
- * Initialize and render save file entries and associated UI elements</li>
- * Handle navigation through saves via keyboard input</li>
- * Allow selection and loading of a save, or returning to the main menu</li>
+ * Initialize and render save file entries and associated UI elements
+ * Handle navigation through saves via keyboard input
+ * Allow selection and loading of a save, or returning to the main menu<
  * 
  * @see SceneLoadView
  * @see it.unibo.PokeRogue.savingSystem.SavingSystem
@@ -58,6 +57,12 @@ public class SceneLoad implements Scene {
 
     private int newSelectedSave;
     private int selectedSave;
+
+    final static int ABSOLUTE_FIRST_SAVE_POSITION = 0;
+
+    final static int LAST_SAVE_POSITION = 9;
+
+    final static int NUMBER_OF_SAVE_SHOWED = 10;
 
     /**
      * Constructs a new {@code SceneLoad} object, initializing internal structures
@@ -88,27 +93,25 @@ public class SceneLoad implements Scene {
      */
     @Override
     public void updateGraphic() {
-        this.utilityClass.setButtonStatus(this.selectedSave % SceneLoadStatusValuesEnum.NUMBER_OF_SAVE_SHOWED.value(),
-                false);
+        this.utilityClass.setButtonStatus(this.selectedSave % NUMBER_OF_SAVE_SHOWED, false);
 
         // Going down the saves list
         if (this.selectedSave < this.newSelectedSave
-                && this.newSelectedSave % SceneLoadStatusValuesEnum.NUMBER_OF_SAVE_SHOWED.value() == 0) {
+                && this.newSelectedSave % NUMBER_OF_SAVE_SHOWED == 0) {
             this.showSaves(this.newSelectedSave);
 
         }
 
         // Going up the saves list
         if (this.selectedSave > this.newSelectedSave
-                && this.newSelectedSave % SceneLoadStatusValuesEnum.NUMBER_OF_SAVE_SHOWED
-                        .value() == SceneLoadStatusValuesEnum.LAST_SAVE_POSITION.value()) {
-            this.showSaves(this.newSelectedSave - SceneLoadStatusValuesEnum.LAST_SAVE_POSITION.value());
+                && this.newSelectedSave % NUMBER_OF_SAVE_SHOWED == LAST_SAVE_POSITION) {
+            this.showSaves(this.newSelectedSave - LAST_SAVE_POSITION);
 
         }
 
         this.selectedSave = this.newSelectedSave;
 
-        this.utilityClass.setButtonStatus(this.selectedSave % SceneLoadStatusValuesEnum.NUMBER_OF_SAVE_SHOWED.value(),
+        this.utilityClass.setButtonStatus(this.selectedSave % NUMBER_OF_SAVE_SHOWED,
                 true);
 
     }
@@ -126,7 +129,7 @@ public class SceneLoad implements Scene {
 
         switch (inputKey) {
             case KeyEvent.VK_UP:
-                if (this.selectedSave > SceneLoadStatusValuesEnum.ABSOLUTE_FIRST_SAVE_POSITION.value()) {
+                if (this.selectedSave > ABSOLUTE_FIRST_SAVE_POSITION) {
                     this.newSelectedSave -= 1;
                 }
 
@@ -139,13 +142,16 @@ public class SceneLoad implements Scene {
                 break;
 
             case KeyEvent.VK_ENTER:
-                if (this.savesList.size() != 0) {
+                if (!this.savesList.isEmpty()) {
                     this.gameEngineInstance.setFileToLoad(this.savesList.get(this.selectedSave));
                     this.gameEngineInstance.setScene("box");
                 }
                 break;
             case KeyEvent.VK_BACK_SPACE:
                 this.gameEngineInstance.setScene("main");
+                break;
+
+            default:
                 break;
         }
 

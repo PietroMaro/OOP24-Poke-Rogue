@@ -70,7 +70,8 @@ public class SceneLoadView {
      * @param savingSystemInstance the instance of {@code SavingSystem} to retrieve
      *                             save details
      */
-    protected void showSaves(final int savesListStart, List<String> savesList, SavingSystem savingSystemInstance) {
+    protected void showSaves(final int savesListStart, final List<String> savesList,
+            final SavingSystem savingSystemInstance) {
         String savesName;
         int boxPokemonNumber;
         for (int x = 0; x < 10; x++) {

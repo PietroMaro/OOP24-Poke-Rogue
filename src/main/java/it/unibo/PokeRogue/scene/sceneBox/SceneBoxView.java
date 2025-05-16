@@ -7,7 +7,7 @@ import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
-import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;;
+import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 
 /**
  * {@code SceneBoxView} handles the graphical representation of the SceneBox.
@@ -77,7 +77,7 @@ public class SceneBoxView {
          */
         protected void updateGraphic(final int currentSelectedButton, final int newSelectedButton, final int boxIndex,
                         final int newBoxIndex, final List<List<Pokemon>> boxes,
-                        PlayerTrainerImpl playerTrainerInstance) {
+                        final PlayerTrainerImpl playerTrainerInstance) {
                 this.sceneBoxUpdateView.updateGraphic(currentSelectedButton, newSelectedButton, boxIndex, newBoxIndex,
                                 boxes, playerTrainerInstance);
         }
@@ -94,9 +94,8 @@ public class SceneBoxView {
          * @return the number of Pokémon in the current box
          */
         protected int loadPokemonSprites(final List<List<Pokemon>> boxes, final int boxIndex) {
-                int currentBoxLength;
-                currentBoxLength = boxes.get(boxIndex).size();
-                List<Pokemon> currentBox = boxes.get(boxIndex);
+                final int currentBoxLength = boxes.get(boxIndex).size();
+                final List<Pokemon> currentBox = boxes.get(boxIndex);
 
                 for (int pokemonIndex = 0; pokemonIndex < 81; pokemonIndex++) {
                         if (pokemonIndex < currentBoxLength) {
@@ -104,8 +103,8 @@ public class SceneBoxView {
                                                 new SpriteElementImpl("pokemonPanel",
                                                                 currentBox.get(pokemonIndex)
                                                                                 .getSpriteFront(),
-                                                                0.455 + ((pokemonIndex % 9) * 0.049),
-                                                                0.115 + ((pokemonIndex / 9) * 0.09), 0.05, 0.07));
+                                                                0.455 + (pokemonIndex % 9 * 0.049),
+                                                                0.115 + (pokemonIndex / 9 * 0.09), 0.05, 0.07));
 
                         } else {
                                 this.sceneGraphicElements.remove(pokemonIndex + 206);

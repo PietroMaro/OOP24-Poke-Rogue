@@ -42,7 +42,7 @@ public enum SceneBoxGraphicEnum {
 
         private final int code;
 
-        SceneBoxGraphicEnum(int code) {
+        SceneBoxGraphicEnum(final int code) {
                 this.code = code;
         }
 

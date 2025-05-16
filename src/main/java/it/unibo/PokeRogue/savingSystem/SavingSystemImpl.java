@@ -79,8 +79,8 @@ public class SavingSystemImpl extends SingletonImpl implements SavingSystem {
 	}
 
 	@Override
-	public int howManyPokemonInSave(String path) {
-		JSONArray boxPokemons = jsonReader.readJsonArray(path);
+	public int howManyPokemonInSave(final String path) {
+		final JSONArray boxPokemons = jsonReader.readJsonArray(path);
 		return boxPokemons.length();
 	}
 }

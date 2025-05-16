@@ -8,7 +8,7 @@ import it.unibo.PokeRogue.pokemon.Pokemon;
 
 public interface PokemonBattleUtil {
 
-    int calculateDamage(final Pokemon attackingPokemon, final Pokemon defendingPokemon, final Move attackChosen,
-            final Optional<Weather> currentWeather);
+    int calculateDamage(Pokemon attackingPokemon, Pokemon defendingPokemon, Move attackChosen,
+            Optional<Weather> currentWeather);
 
 }

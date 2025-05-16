@@ -7,11 +7,9 @@ import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 
 public interface Scene {
 
-    
-
     void updateGraphic();
 
-    void updateStatus(final int inputKey);
+    void updateStatus(int inputKey);
 
     Map<Integer, GraphicElementImpl> getSceneGraphicElements();
 

@@ -18,8 +18,8 @@ import it.unibo.PokeRogue.pokemon.Type;
  */
 public class PokemonBattleUtilImpl implements PokemonBattleUtil {
 
-    final Random random;
-    final PokeEffectivenessCalc pokeEffectivenessCalc;
+    final private Random random;
+    final private PokeEffectivenessCalc pokeEffectivenessCalc;
 
     /**
      * Constructs a new PokemonBattleUtilImpl with a default random generator
@@ -67,7 +67,7 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
         attackDefenseDifference = calculateAttackDefenseDifference(attackingPokemon, defendingPokemon,
                 attackChosen);
 
-        baseDamage = ((2 * attackingPokemon.getLevel().getCurrentValue()) / 5 + 2)
+        baseDamage = (2 * attackingPokemon.getLevel().getCurrentValue() / 5 + 2)
                 * attackChosen.getBaseDamage() * attackDefenseDifference / 50;
 
 

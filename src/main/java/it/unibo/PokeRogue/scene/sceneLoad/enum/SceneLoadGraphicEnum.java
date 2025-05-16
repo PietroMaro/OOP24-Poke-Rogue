@@ -45,7 +45,7 @@ public enum SceneLoadGraphicEnum {
 
     private final int code;
 
-    SceneLoadGraphicEnum(int code) {
+    SceneLoadGraphicEnum(final int code) {
         this.code = code;
     }
 
