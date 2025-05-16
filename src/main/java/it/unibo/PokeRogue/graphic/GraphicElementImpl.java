@@ -10,6 +10,7 @@ import lombok.Getter;
 public class GraphicElementImpl extends JLayeredPane implements GraphicElement {
 
     private String panelName;
+    private static final long serialVersionUID = 1L;
 
     public GraphicElementImpl(String panelName) {
         this.panelName = panelName;

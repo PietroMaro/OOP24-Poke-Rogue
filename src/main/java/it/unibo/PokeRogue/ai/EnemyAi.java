@@ -7,5 +7,5 @@ import it.unibo.PokeRogue.Weather;
 
 public interface EnemyAi {
 
-    List<String> nextMove(final Optional<Weather> weather);
+    List<String> nextMove( Optional<Weather> weather);
 }

@@ -31,7 +31,7 @@ public class EnemyAiAttack {
     private Pokemon currentEnemyPokemon;
     private Random random;
     private Map<Integer, Integer> scoresOfMoves;
-    List<Move> currentEnemyPokemonMoves;
+    private List<Move> currentEnemyPokemonMoves;
     private final PokeEffectivenessCalc pokeEffectivenessCalculator;
     private final PokemonBattleUtil damageCalculator;
 
@@ -49,12 +49,12 @@ public class EnemyAiAttack {
      * @param enemyTrainer the Trainer object representing the enemy's team
      */
     public EnemyAiAttack(final boolean scoreMoves, final boolean hpAware,
-            final Trainer enenmyTrainer) {
+            final Trainer enemyTrainer) {
         this.random = new Random();
         this.damageCalculator = new PokemonBattleUtilImpl();
         this.pokeEffectivenessCalculator = new PokeEffectivenessCalcImpl();
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-        this.enemyTrainer = enenmyTrainer;
+        this.enemyTrainer = enemyTrainer;
         this.scoreMoves = scoreMoves;
         this.hpAware = hpAware;
 
@@ -95,7 +95,7 @@ public class EnemyAiAttack {
         boolean canAttack = true;
         int totalPPs = 0;
 
-        for (Move move : currentEnemyPokemonMoves) {
+        for (final Move move : currentEnemyPokemonMoves) {
             totalPPs = totalPPs + move.getPp().getCurrentValue();
         }
 
@@ -188,7 +188,7 @@ public class EnemyAiAttack {
     private int randomMove() {
 
         Move moveToBeChecked;
-        List<Integer> possibleAttacks = new ArrayList<>();
+        final List<Integer> possibleAttacks = new ArrayList<>();
 
         for (int movePos = 0; movePos < this.currentEnemyPokemonMoves.size(); movePos++) {
 
@@ -217,7 +217,7 @@ public class EnemyAiAttack {
         int bestMoveIndex = -1;
         double bestMoveDamage = Double.MIN_VALUE;
 
-        for (Map.Entry<Integer, Integer> entry : this.scoresOfMoves.entrySet()) {
+        for (final Map.Entry<Integer, Integer> entry : this.scoresOfMoves.entrySet()) {
             moveIndex = entry.getKey();
             moveToBeScored = this.currentEnemyPokemonMoves.get(moveIndex);
             actualMoveScore = entry.getValue();
@@ -250,9 +250,9 @@ public class EnemyAiAttack {
         int bestMoveIndex = -1;
         int bestMoveScore = Integer.MIN_VALUE;
 
-        for (Map.Entry<Integer, Integer> entry : this.scoresOfMoves.entrySet()) {
-            int moveIndex = entry.getKey();
-            int score = entry.getValue();
+        for (final Map.Entry<Integer, Integer> entry : this.scoresOfMoves.entrySet()) {
+            final int moveIndex = entry.getKey();
+            final int score = entry.getValue();
 
             if (score > bestMoveScore) {
                 bestMoveScore = score;

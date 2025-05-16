@@ -41,6 +41,12 @@ import lombok.Getter;
  */
 public class SceneBox implements Scene {
 
+        private static final int START_BUTTON_POSITION = 5;
+        private static final int FIRST_POKEMON_BUTTON_POSITION = 6;
+        private static final int POKE_BOX_ROW_LENGTH = 9;
+        private static final int UP_ARROW_BUTTON_POSITION = 0;
+        private static final int DOWN_ARROW_BUTTON_POSITION = 1;
+
         @Getter
         private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
         @Getter
@@ -56,11 +62,6 @@ public class SceneBox implements Scene {
         private int currentBoxLength;
         private int newSelectedButton;
         private int newBoxIndex;
-        final static int START_BUTTON_POSITION = 5;
-        final static int FIRST_POKEMON_BUTTON_POSITION = 6;
-        final static int POKE_BOX_ROW_LENGTH = 9;
-        final static int UP_ARROW_BUTTON_POSITION = 0;
-        final static int DOWN_ARROW_BUTTON_POSITION = 1;
 
         /**
          * Constructs a new {@code SceneBox} instance, initializing all graphic

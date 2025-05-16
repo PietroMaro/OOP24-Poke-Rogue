@@ -37,13 +37,17 @@ import lombok.Getter;
  * Main Responsibilities:
  * Initialize and render save file entries and associated UI elements
  * Handle navigation through saves via keyboard input
- * Allow selection and loading of a save, or returning to the main menu<
+ * Allow selection and loading of a save, or returning to the main menu
  * 
  * @see SceneLoadView
  * @see it.unibo.PokeRogue.savingSystem.SavingSystem
  * @see it.unibo.PokeRogue.utilities.UtilitiesForScenes
  */
 public class SceneLoad implements Scene {
+
+    private static final int ABSOLUTE_FIRST_SAVE_POSITION = 0;
+    private static final int LAST_SAVE_POSITION = 9;
+    private static final int NUMBER_OF_SAVE_SHOWED = 10;
 
     @Getter
     private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
@@ -57,12 +61,6 @@ public class SceneLoad implements Scene {
 
     private int newSelectedSave;
     private int selectedSave;
-
-    final static int ABSOLUTE_FIRST_SAVE_POSITION = 0;
-
-    final static int LAST_SAVE_POSITION = 9;
-
-    final static int NUMBER_OF_SAVE_SHOWED = 10;
 
     /**
      * Constructs a new {@code SceneLoad} object, initializing internal structures

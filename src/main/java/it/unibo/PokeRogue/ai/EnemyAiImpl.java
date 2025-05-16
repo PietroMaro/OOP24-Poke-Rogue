@@ -16,21 +16,21 @@ import it.unibo.PokeRogue.trainers.Trainer;
  */
 public class EnemyAiImpl implements EnemyAi {
 
+    private static final int LOW_AI_THRESHOLD = 15;
+    private static final int MEDIUM_AI_THRESHOLD = 40;
+    private static final int HIGH_AI_THRESHOLD = 75;
+
     private final Trainer enemyTrainer;
     private final int battleLvl;
     private final EnemyAiSwitchIn aiOfSwitchIn;
     private final EnemyAiAttack aiOfAttack;
 
     // Flags
-    private boolean scoreMoves = false;
-    private boolean hpAware = false;
+    private boolean scoreMoves;
+    private boolean hpAware;
+    private boolean considerSwitching;
     private boolean usePokemonInOrder = true;
-    private boolean considerSwitching = false;
     private int switchFirstRate = 60;
-
-    private static final int lowAiThreshold = 15;
-    private static final int mediumAiThreshold = 40;
-    private static final int highAiThreshold = 75;
 
     /**
      * Constructs an EnemyAiImpl with behavior tailored to the given battle level.
@@ -80,19 +80,19 @@ public class EnemyAiImpl implements EnemyAi {
      */
     private void initFlags() {
 
-        if (battleLvl >= lowAiThreshold) {
+        if (battleLvl >= LOW_AI_THRESHOLD) {
             this.scoreMoves = true;
             this.usePokemonInOrder = false;
 
         }
 
-        if (battleLvl > mediumAiThreshold) {
+        if (battleLvl > MEDIUM_AI_THRESHOLD) {
             this.considerSwitching = true;
             this.hpAware = true;
 
         }
 
-        if (battleLvl > highAiThreshold) {
+        if (battleLvl > HIGH_AI_THRESHOLD) {
             this.switchFirstRate = 90;
 
         }
