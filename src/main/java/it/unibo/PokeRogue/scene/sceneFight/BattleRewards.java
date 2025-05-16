@@ -16,7 +16,7 @@ public class BattleRewards {
      * @param winnerPokemon   the Pokémon that won the battle
      * @param defeatedPokemon the Pokémon that was defeated in the battle
      */
-    public static void awardBattleRewards(Pokemon winnerPokemon, Pokemon defeatedPokemon) {
+    public static void awardBattleRewards(final Pokemon winnerPokemon, final Pokemon defeatedPokemon) {
         int baseExp = 150;
         int enemyLevel = defeatedPokemon.getLevel().getCurrentValue();
         int playerLevel = winnerPokemon.getLevel().getCurrentValue();

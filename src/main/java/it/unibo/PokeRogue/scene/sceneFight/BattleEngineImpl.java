@@ -34,10 +34,10 @@ public class BattleEngineImpl implements BattleEngine {
     private final EffectParser effectParserInstance;
     @Getter
     private Optional<Weather> currentWeather;
-    private PokemonBattleUtil pokemonBattleUtilInstance;
-    private AbilityFactory abilityFactoryInstance;
-    private StatusEffect statusEffectInstance;
-    private EnemyAi enemyAiInstance;
+    private final PokemonBattleUtil pokemonBattleUtilInstance;
+    private final AbilityFactory abilityFactoryInstance;
+    private final StatusEffect statusEffectInstance;
+    private final EnemyAi enemyAiInstance;
     private final GameEngine gameEngineInstance;
     private final SavingSystem savingSystemInstance;
     private Boolean isCaptured = false;
@@ -52,8 +52,8 @@ public class BattleEngineImpl implements BattleEngine {
      * @param enemyTrainerInstance the enemy trainer instance involved in the battle
      * @param enemyAiInstance      the AI instance controlling the enemy's strategy
      */
-    public BattleEngineImpl(MoveFactoryImpl moveFactoryInstance,
-            PlayerTrainerImpl enemyTrainerInstance, EnemyAi enemyAiInstance) {
+    public BattleEngineImpl(final MoveFactoryImpl moveFactoryInstance,
+            final PlayerTrainerImpl enemyTrainerInstance, final EnemyAi enemyAiInstance) {
         this.enemyTrainerInstance = enemyTrainerInstance;
         this.moveFactoryInstance = moveFactoryInstance;
         this.pokemonBattleUtilInstance = new PokemonBattleUtilImpl();
@@ -78,7 +78,7 @@ public class BattleEngineImpl implements BattleEngine {
      * @param attackerPokemon the Pokémon using the move
      * @param defenderPokemon the Pokémon receiving the attack
      */
-    private void executeMoves(Move attackerMove, Pokemon attackerPokemon, Pokemon defenderPokemon) {
+    private void executeMoves(final Move attackerMove, final Pokemon attackerPokemon, final Pokemon defenderPokemon) {
         if (attackerMove.getPp().getCurrentValue() <= 0 || attackerMove.getName().equals("splash")) {
             return;
         }
@@ -92,7 +92,7 @@ public class BattleEngineImpl implements BattleEngine {
 
     }
 
-    private void pokeObject(String pokeballName) {
+    private void pokeObject(final String pokeballName) {
         int countBall = playerTrainerInstance.getBall().get(pokeballName);
         Pokemon enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
         if (countBall > 0 && enemyTrainerInstance.isWild()) {
@@ -310,7 +310,7 @@ public class BattleEngineImpl implements BattleEngine {
      * @param move         the move being used by the attacker
      * @param opponentMove the move used by the opponent Pokémon
      */
-    private void doMove(Pokemon attacker, Pokemon defender, Move move, Move opponentMove) {
+    private void doMove(final Pokemon attacker, final Pokemon defender, final Move move, final Move opponentMove) {
         executeMoves(move, attacker, defender);
         executeEffect(move.getEffect(), attacker, defender, move, opponentMove);
     }
