@@ -1,6 +1,7 @@
 package it.unibo.PokeRogue.utilities;
 
 import java.nio.file.Paths;
+import java.util.Locale;
 import java.util.Map;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
@@ -39,6 +40,7 @@ public class UtilitiesForScenesImpl implements UtilitiesForScenes {
      * @param fileName  the name of the file.
      * @return the full relative path to the file as a string.
      */
+    @Override
     public String getPathString(final String directory, final String fileName) {
 
         return Paths.get("src", "sceneImages", this.sceneDirName, directory, fileName).toString();
@@ -52,9 +54,10 @@ public class UtilitiesForScenesImpl implements UtilitiesForScenes {
      * @param status     {@code true} to mark the button as selected, {@code false}
      *                   to deselect it.
      */
+    @Override
     public void setButtonStatus(final int buttonCode, final boolean status) {
 
-        ButtonElementImpl selectedButton = (ButtonElementImpl) sceneGraphicElements.get(buttonCode);
+        final ButtonElementImpl selectedButton = (ButtonElementImpl) sceneGraphicElements.get(buttonCode);
         selectedButton.setSelected(status);
 
     }
@@ -67,9 +70,11 @@ public class UtilitiesForScenesImpl implements UtilitiesForScenes {
      * @return The string with the first letter capitalized, or the original string
      *         if it is null or empty.
      */
+    @Override
     public String capitalizeFirst(final String str) {
-        if (str == null || str.isEmpty())
+        if (str == null || str.isEmpty()) {
             return str;
-        return str.substring(0, 1).toUpperCase() + str.substring(1);
+        }
+        return str.substring(0, 1).toUpperCase(Locale.ROOT) + str.substring(1);
     }
 }

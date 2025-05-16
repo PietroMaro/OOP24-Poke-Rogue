@@ -46,18 +46,18 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
     public int calculateDamage(final Pokemon attackingPokemon, final Pokemon defendingPokemon,
             final Move attackChosen, final Optional<Weather> currentWeather) {
 
-        double baseDamage;
-        double damageWithEnvironment;
-        double totalDamage;
-        double burn;
-        double attackDefenseDifference;
-        double weatherEffect;
-        int criticalBonus;
-        double randomNumber;
-        double moveTypeBonus;
-        double stabBonus;
+        final double baseDamage;
+        final double damageWithEnvironment;
+        final double totalDamage;
+        final double burn;
+        final double attackDefenseDifference;
+        final double weatherEffect;
+        final int criticalBonus;
+        final double randomNumber;
+        final double moveTypeBonus;
+        final double stabBonus;
 
-        stabBonus = this.hasStab(attackingPokemon, attackChosen);
+        stabBonus = this.stabMultiplier(attackingPokemon, attackChosen);
         moveTypeBonus = this.pokeEffectivenessCalc.calculateAttackEffectiveness(attackChosen, defendingPokemon);
         randomNumber = (this.random.nextInt(16) + 85) / 100.0;
         criticalBonus = this.criticalBonus(attackingPokemon, attackChosen);
@@ -67,8 +67,9 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
         attackDefenseDifference = calculateAttackDefenseDifference(attackingPokemon, defendingPokemon,
                 attackChosen);
 
-        baseDamage = (((2 * attackingPokemon.getLevel().getCurrentValue()) / 5 + 2) * attackChosen.getBaseDamage()
-                * attackDefenseDifference) / 50;
+        baseDamage = ((2 * attackingPokemon.getLevel().getCurrentValue()) / 5 + 2)
+                * attackChosen.getBaseDamage() * attackDefenseDifference / 50;
+
 
         damageWithEnvironment = baseDamage * burn * weatherEffect + 2;
 
@@ -87,7 +88,7 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
      *
      */
     private int computeOffenseDefenseRatio(final Pokemon attackingPokemon, final Pokemon defendingPokemon,
-            String attackStatName, String defenseStatName) {
+            final String attackStatName, final String defenseStatName) {
 
         if (defendingPokemon.getActualStats().get(defenseStatName).getCurrentValue() == 0) {
             return attackingPokemon.getActualStats().get(attackStatName).getCurrentValue();
@@ -109,14 +110,15 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
      */
     private double calculateAttackDefenseDifference(final Pokemon attackingPokemon, final Pokemon defendingPokemon,
             final Move attackChosen) {
-                
-        int attackDefenseDifference;
+
+        final int attackDefenseDifference;
 
         if (attackChosen.isPhysical()) {
             attackDefenseDifference = this.computeOffenseDefenseRatio(attackingPokemon, defendingPokemon, "attack",
                     "defense");
         } else {
-            attackDefenseDifference = this.computeOffenseDefenseRatio(attackingPokemon, defendingPokemon, "specialAttack",
+            attackDefenseDifference = this.computeOffenseDefenseRatio(attackingPokemon, defendingPokemon,
+                    "specialAttack",
                     "specialDefense");
 
         }
@@ -131,11 +133,12 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
      */
     private double checkBurn(final Pokemon attackingPokemon, final Move attackChosen) {
 
-        if (attackChosen.isPhysical() && attackingPokemon.getStatusCondition().isPresent()) {
-            if ("burn".equals(attackingPokemon.getStatusCondition().get().statusName())
-                    && !"guts".equals(attackingPokemon.getAbilityName())) {
-                return 0.5;
-            }
+        if (attackChosen.isPhysical() && attackingPokemon.getStatusCondition().isPresent()
+                && "burn".equals(attackingPokemon.getStatusCondition().get().statusName())
+                && !"guts".equals(attackingPokemon.getAbilityName())) {
+
+            return 0.5;
+
         }
 
         return 1;
@@ -149,8 +152,8 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
 
         if (currentWeather.isPresent()) {
 
-            String attackType = attackChosen.getType().typeName();
-            String weather = currentWeather.get().weatherName();
+            final String attackType = attackChosen.getType().typeName();
+            final String weather = currentWeather.get().weatherName();
 
             if ("fire".equals(attackType)) {
                 if ("rain".equals(weather)) {
@@ -179,8 +182,8 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
      */
     private int criticalBonus(final Pokemon attackingPokemon, final Move attackChosen) {
 
-        String attackingPokemonAbility = attackingPokemon.getAbilityName();
-        String moveName = attackChosen.getName();
+        final String attackingPokemonAbility = attackingPokemon.getAbilityName();
+        final String moveName = attackChosen.getName();
 
         if (attackChosen.isCrit() && !"future-sight".equals(moveName)) {
             if ("sniper".equals(attackingPokemonAbility)) {
@@ -197,9 +200,9 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
      * Returns the STAB multiplier (1.5 if the move type matches one of
      * the Pokémon's types, 1 otherwise).
      */
-    private double hasStab(final Pokemon attackingPokemon, final Move attackChosen) {
+    private double stabMultiplier(final Pokemon attackingPokemon, final Move attackChosen) {
 
-        for (Type type : attackingPokemon.getTypes()) {
+        for (final Type type : attackingPokemon.getTypes()) {
             if (attackChosen.getType().equals(type)) {
                 return 1.5;
             }

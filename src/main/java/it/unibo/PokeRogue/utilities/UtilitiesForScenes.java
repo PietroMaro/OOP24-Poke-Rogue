@@ -1,9 +1,9 @@
 package it.unibo.PokeRogue.utilities;
 
 public interface UtilitiesForScenes {
-    String getPathString(final String directory, final String fileName);
+    String getPathString(String directory, String fileName);
 
-    void setButtonStatus(final int buttonCode, final boolean status);
+    void setButtonStatus(int buttonCode, boolean status);
 
-    String capitalizeFirst(final String str);
+    String capitalizeFirst(String str);
 }

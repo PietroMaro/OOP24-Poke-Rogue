@@ -47,10 +47,10 @@ public class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
         final JSONObject root = jsonReader
                 .readJsonObject(Paths.get("src", "pokemon_data", "pokemonEffectiveness.json").toString());
 
-        for (String attacker : root.keySet()) {
-            JSONObject inner = root.getJSONObject(attacker);
-            Map<Type, Double> innerMap = new HashMap<>();
-            for (String defender : inner.keySet()) {
+        for (final String attacker : root.keySet()) {
+            final JSONObject inner = root.getJSONObject(attacker);
+            final Map<Type, Double> innerMap = new HashMap<>();
+            for (final String defender : inner.keySet()) {
                 innerMap.put(Type.valueOf(defender), inner.getDouble(defender));
             }
             this.effectiveness.put(Type.valueOf(attacker), innerMap);
@@ -83,13 +83,14 @@ public class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
      * @param enemyPokemon The target Pokémon
      * @return The cumulative effectiveness multiplier (e.g., 4.0, 0.5)
      */
+    @Override
     public double calculateAttackEffectiveness(final Move move, final Pokemon enemyPokemon) {
 
         double effectiveness = 1;
         final Type moveType = move.getType();
         final List<Type> enemyPokemonTypes = enemyPokemon.getTypes();
 
-        for (Type enemyType : enemyPokemonTypes) {
+        for (final Type enemyType : enemyPokemonTypes) {
             effectiveness = effectiveness * this.calculateTypeMultiplier(moveType, enemyType);
         }
 
@@ -115,7 +116,7 @@ public class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
         final List<Type> myPokemonTypes = myPokemon.getTypes();
         final List<Type> enemyPokemonTypes = enemyPokemon.getTypes();
 
-        for (Type myPokemonType : myPokemonTypes) {
+        for (final Type myPokemonType : myPokemonTypes) {
             effectiveness = 1;
 
             for (Type enemyPokemonType : enemyPokemonTypes) {
