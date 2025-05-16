@@ -1,6 +1,18 @@
 {
+<<<<<<< HEAD
+<<<<<<< HEAD
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.debug.settings.onBuildFailureProceed": true
+=======
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.format.settings.url": "eclipse-formatter.xml"
+>>>>>>> devel
+=======
     "java.configuration.updateBuildConfiguration": "automatic",
     "java.compile.nullAnalysis.mode": "automatic",
     "java.format.settings.url": "eclipse-formatter.xml",
     "java.debug.settings.onBuildFailureProceed": true
+>>>>>>> fightScene
 }

@@ -1,6 +1,7 @@
 package it.unibo.PokeRogue;
 
 import it.unibo.PokeRogue.scene.Scene;
+import it.unibo.PokeRogue.scene.SceneShop;
 import it.unibo.PokeRogue.scene.sceneBox.SceneBox;
 import it.unibo.PokeRogue.scene.sceneFight.SceneFight;
 import it.unibo.PokeRogue.scene.sceneLoad.SceneLoad;
@@ -28,6 +29,7 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
     @Setter
     private Integer fightLevel;
 
+
     public GameEngineImpl() {
 
     }
@@ -53,7 +55,6 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
                 break;
             case "box":
                 currentScene = new SceneBox(this.fileToLoadName);
-
                 break;
             case "fight":
                 if (fightLevel == null) {
@@ -62,6 +63,9 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
                     fightLevel++;
                 }
                 currentScene = new SceneFight(fightLevel);
+                break;
+            case "shop":
+                currentScene = new SceneShop();
                 break;
             case "move":
                 currentScene = new SceneMove();

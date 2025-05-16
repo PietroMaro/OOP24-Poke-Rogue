@@ -1,0 +1,21 @@
+{
+    "id": 19,
+    "name": "X Sp. Def",
+    "type": "Boost",
+    "description": "Raises the user's Special Defense stat for 5 battles.",
+    "price": 500,
+    "rarity": "Common",
+    "category": "Consumable",
+    "captureRate": 0,
+    "effect": {
+        "checks": [
+            
+        ],
+        "activation": [
+            [
+                "us.tempStatsBonus.specialDefense",
+                "us.tempStatsBonus.specialDefense + 1"
+            ]
+        ]
+    }
+}

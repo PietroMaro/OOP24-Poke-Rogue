@@ -1,0 +1,23 @@
+{
+    "id": 30,
+    "name": "Reviver Seed",
+    "type": "Equipment",
+    "description": "Revives a fainted Pokémon with half HP automatically the first time it faints for every battle.",
+    "price": 10000,
+    "rarity": "Ultra",
+    "category": "Equipable",
+    "captureRate": 0,
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.stats.hp.current",
+                "MATH.floor(us.stats.hp.max / 2).intValue()"
+            ],
+            [
+                "us.statusCondition",
+                "''"
+            ]
+        ]
+    }
+}

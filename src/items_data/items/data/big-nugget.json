@@ -1,0 +1,20 @@
+{
+    "id": 26,
+    "name": "Big nugget",
+    "type": "Valuable",
+    "description": "A big nugget of pure gold that gives the player 5000 money.",
+    "price": 0,
+    "rarity": "Ultra",
+    "category": "Treasure",
+    "captureRate": 0,
+    "effect": {
+        "checks": [
+        ],
+        "activation": [
+            [
+                "us.money",
+                "us.money + 5000"
+            ]
+        ]
+    }
+}
