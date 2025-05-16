@@ -52,7 +52,7 @@ public class GraphicEngineImpl extends SingletonImpl implements GraphicEngine {
      * {@link UnsupportedOperationException}
      * until the logic for rendering the elements is provided.
      * 
-     * @param allGraphicElement a map containing the identifiers and graphical
+     * @param allGraphicElements a map containing the identifiers and graphical
      *                          representations
      *                          of the elements to be drawn.
      */

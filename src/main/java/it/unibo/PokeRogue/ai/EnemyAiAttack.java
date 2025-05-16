@@ -46,7 +46,7 @@ public class EnemyAiAttack {
      *
      * @param scoreMoves   if true, the AI will evaluate move effectiveness
      * @param hpAware      if true, the AI will take into account potential damage
-     * @param enemyTrainer the Trainer object representing the enemy's team
+     * @param enenmyTrainer the Trainer object representing the enemy's team
      */
     public EnemyAiAttack(final boolean scoreMoves, final boolean hpAware,
             final Trainer enemyTrainer) {
