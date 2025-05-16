@@ -1,12 +1,13 @@
 package it.unibo.PokeRogue.inputHandling;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.KeyAdapter;
+
 
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
 
-public class InputHandlerImpl implements KeyListener {
+public class InputHandlerImpl extends KeyAdapter {
 
     private GameEngine gameEngine;
 
@@ -15,22 +16,7 @@ public class InputHandlerImpl implements KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public void keyPressed(KeyEvent e) {
-
         gameEngine.keyPressedToScene(e.getKeyCode());
-
     }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
 }

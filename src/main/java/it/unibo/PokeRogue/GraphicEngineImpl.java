@@ -82,20 +82,18 @@ public class GraphicEngineImpl extends SingletonImpl implements GraphicEngine {
         this.gameWindow.getContentPane().removeAll();
 
         this.allPanelElements = panelElements;
-       
-        for (String key : allPanelElements.keySet()) {
-            PanelElementImpl panel = allPanelElements.get(key);
+
+        for (Map.Entry<String, PanelElementImpl> entry : allPanelElements.entrySet()) {
+            PanelElementImpl panel = entry.getValue();
             panel.removeAll();
-          
-            if (panel.getPanelName() != "") {
+
+            if (!panel.getPanelName().isEmpty()) {
                 allPanelElements.get(panel.getPanelName()).add(panel);
             } else {
                 gameWindow.add(panel);
-
             }
-
         }
-      
+
     }
 
     private void drawBoxGraphicElement(BoxElementImpl boxToDraw) {

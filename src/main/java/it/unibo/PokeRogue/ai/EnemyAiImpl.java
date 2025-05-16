@@ -28,9 +28,9 @@ public class EnemyAiImpl implements EnemyAi {
     private boolean considerSwitching = false;
     private int switchFirstRate = 60;
 
-    private final int lowAiThreshold = 15;
-    private final int mediumAiThreshold = 40;
-    private final int highAiThreshold = 75;
+    private static final int lowAiThreshold = 15;
+    private static final int mediumAiThreshold = 40;
+    private static final int highAiThreshold = 75;
 
     /**
      * Constructs an EnemyAiImpl with behavior tailored to the given battle level.
