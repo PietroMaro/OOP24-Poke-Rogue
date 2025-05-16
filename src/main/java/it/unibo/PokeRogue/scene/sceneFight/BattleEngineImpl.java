@@ -329,8 +329,9 @@ public class BattleEngineImpl implements BattleEngine {
      * @param situation  the situation in which the ability is checked (e.g.,
      *                   attack, attacked)
      */
-    private void handleAbilityEffects(Ability ability, Pokemon user, Pokemon target, Move userMove,
-            Move targetMove, AbilitySituationChecks situation) {
+    private void handleAbilityEffects(final Ability ability, final Pokemon user, final Pokemon target,
+            final Move userMove,
+            final Move targetMove, final AbilitySituationChecks situation) {
         if (ability.situationChecks() == situation) {
             this.executeEffect(ability.effect(), user, target, userMove, targetMove);
         }
@@ -382,7 +383,7 @@ public class BattleEngineImpl implements BattleEngine {
      * @return true if the player's move has higher priority or if the player's
      *         Pokémon is faster; false otherwise
      */
-    private Boolean calculatePriority(Move playerMove, Move enemyMove) {
+    private Boolean calculatePriority(final Move playerMove, final Move enemyMove) {
         if (playerMove.getPriority() > enemyMove.getPriority()) {
             return true;
         } else if (playerTrainerInstance.getPokemon(FIRST_POSITION).get().getActualStats().get("speed")
@@ -403,7 +404,7 @@ public class BattleEngineImpl implements BattleEngine {
      * @param trainer the player trainer instance responsible for the Pokémon
      *                switching
      */
-    private void switchIn(String move, PlayerTrainerImpl trainer) {
+    private void switchIn(final String move, final PlayerTrainerImpl trainer) {
         trainer.switchPokemonPosition(FIRST_POSITION, Integer.parseInt(move));
     }
 
