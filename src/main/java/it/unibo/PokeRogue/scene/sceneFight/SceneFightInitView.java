@@ -45,8 +45,8 @@ public class SceneFightInitView {
          * @param currentSelectedButton The initial selected button in the UI.
          */
         public SceneFightInitView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
-                        final Map<String, PanelElementImpl> allPanelsElements, PlayerTrainerImpl enemyTrainerInstance,
-                        int currentSelectedButton) {
+                        final Map<String, PanelElementImpl> allPanelsElements, final PlayerTrainerImpl enemyTrainerInstance,
+                        final int currentSelectedButton) {
                 this.sceneGraphicElements = sceneGraphicElements;
                 this.allPanelsElements = allPanelsElements;
                 this.utilityClass = new UtilitiesForScenesImpl("fight", sceneGraphicElements);

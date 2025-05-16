@@ -28,7 +28,7 @@ public class BattleUtilities {
      * @param trainer the trainer whose team will be checked
      * @return true if the trainer's team is wiped out, false otherwise
      */
-    public static boolean isTeamWipedOut(Trainer trainer) {
+    public static boolean isTeamWipedOut(final Trainer trainer) {
         if (trainer == null || trainer.getSquad() == null || trainer.getSquad().isEmpty()) {
             return true;
         }
@@ -51,7 +51,7 @@ public class BattleUtilities {
      * @return the index of the first usable Pokémon, or 0 if no usable Pokémon is
      *         found
      */
-    public static int findFirstUsablePokemon(Trainer trainer) {
+    public static int findFirstUsablePokemon(final Trainer trainer) {
         for (int i = 1; i < trainer.getSquad().size(); i++) {
             Optional<Pokemon> optionalPokemon = trainer.getPokemon(i);
             if (optionalPokemon.isPresent()) {
@@ -73,7 +73,7 @@ public class BattleUtilities {
      * @return true if the Pokémon at the specified position can be switched in,
      *         false otherwise
      */
-    public static boolean canSwitch(PlayerTrainerImpl trainer, int switchPokemonPosition) {
+    public static boolean canSwitch(final PlayerTrainerImpl trainer, final int switchPokemonPosition) {
         if (switchPokemonPosition < trainer.getSquad().size()) {
             Optional<Pokemon> pokemonToSwitchInOptional = trainer.getPokemon(switchPokemonPosition);
             if (pokemonToSwitchInOptional.isPresent() &&
@@ -96,7 +96,7 @@ public class BattleUtilities {
      * @return true if the Pokémon knows the move at the specified index, false
      *         otherwise
      */
-    public static boolean knowsMove(Pokemon pokemon, int moveIndex) {
+    public static boolean knowsMove(final Pokemon pokemon, final int moveIndex) {
         if (pokemon == null) {
             return false;
         }

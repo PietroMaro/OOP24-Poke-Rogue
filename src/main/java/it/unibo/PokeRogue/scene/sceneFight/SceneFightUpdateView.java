@@ -35,7 +35,7 @@ public class SceneFightUpdateView {
         private final PlayerTrainerImpl playerTrainerInstance;
         private int currentSelectedButton;
         private int newSelectedButton;
-        private SceneFight sceneInstance;
+        private final SceneFight sceneInstance;
         private Boolean alreadyInMainMenu;
 
         /**
@@ -52,8 +52,8 @@ public class SceneFightUpdateView {
          *                                   to
          */
         public SceneFightUpdateView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
-                        Map<String, PanelElementImpl> allPanelsElements, SceneFightInitView sceneFightInitViewInstance,
-                        int currentSelectedButton, int newSelectedButton, SceneFight sceneInstance) {
+        final Map<String, PanelElementImpl> allPanelsElements, final SceneFightInitView sceneFightInitViewInstance,
+        final int currentSelectedButton, final int newSelectedButton, final SceneFight sceneInstance) {
                 this.currentSelectedButton = currentSelectedButton;
                 this.newSelectedButton = newSelectedButton;
                 this.sceneGraphicElements = sceneGraphicElements;

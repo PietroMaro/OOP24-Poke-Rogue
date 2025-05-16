@@ -36,9 +36,9 @@ public class SceneFight implements Scene {
     private final SceneFightView sceneFightView;
     private int newSelectedButton;
     private final EnemyAi enemyAiInstance;
-    private MoveFactoryImpl moveFactoryInstance;
-    private BattleEngine battleEngineInstance;
-    private GenerateEnemy generateEnemyInstance;
+    private final MoveFactoryImpl moveFactoryInstance;
+    private final BattleEngine battleEngineInstance;
+    private final GenerateEnemy generateEnemyInstance;
 
     /**
      * Constructor for SceneFight.
@@ -47,7 +47,7 @@ public class SceneFight implements Scene {
      * 
      * @param battleLevel the level of the battle
      */
-    public SceneFight(Integer battleLevel) {
+    public SceneFight(final Integer battleLevel) {
         this.enemyTrainerInstance = new PlayerTrainerImpl();
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
@@ -96,7 +96,7 @@ public class SceneFight implements Scene {
      * @param inputKey the key pressed by the user
      */
     @Override
-    public void updateStatus(int inputKey) {
+    public void updateStatus(final int inputKey) {
         switch (inputKey) {
             case KeyEvent.VK_UP:
                 if (SceneFightUtilities.isButtonInRange(newSelectedButton, 2, 4) ||
@@ -214,7 +214,7 @@ public class SceneFight implements Scene {
      * @param playerMoveType the type of the move (e.g., "Attack", "SwitchIn", etc.)
      * @param playerMove     the selected move from the player
      */
-    public void fightLoop(String playerMoveType, String playerMove) {
+    public void fightLoop(final String playerMoveType, final String playerMove) {
         List<String> enemyChoose = enemyAiInstance.nextMove(battleEngineInstance.getCurrentWeather());
         System.out.println(enemyChoose);
         this.battleEngineInstance.movesPriorityCalculator(playerMoveType, playerMove,
@@ -226,7 +226,7 @@ public class SceneFight implements Scene {
      * 
      * @param newVal the new selected button value
      */
-    public void setCurrentSelectedButton(int newVal) {
+    public void setCurrentSelectedButton(final int newVal) {
         this.currentSelectedButton = newVal;
     }
 }
