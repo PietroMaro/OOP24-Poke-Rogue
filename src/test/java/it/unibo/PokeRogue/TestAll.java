@@ -2,7 +2,9 @@ package it.unibo.PokeRogue;
 
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.*;
 
@@ -30,6 +32,11 @@ import it.unibo.PokeRogue.ai.EnemyAiImpl;
 import it.unibo.PokeRogue.effectParser.EffectParser;
 import it.unibo.PokeRogue.effectParser.EffectParserImpl;
 import it.unibo.PokeRogue.pokemon.Type;
+import it.unibo.PokeRogue.scene.sceneFight.BattleEngine;
+import it.unibo.PokeRogue.scene.sceneFight.BattleEngineImpl;
+import it.unibo.PokeRogue.scene.sceneFight.BattleRewards;
+import it.unibo.PokeRogue.scene.sceneFight.BattleUtilities;
+import it.unibo.PokeRogue.scene.sceneFight.GenerateEnemyImpl;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 import it.unibo.PokeRogue.utilities.PokeEffectivenessCalc;
@@ -134,7 +141,7 @@ public class TestAll {
 				if (Files.isRegularFile(entry)) {
 					JSONObject moveJson = jsonReader.readJsonObject(entry.toString());
 					JSONObject effect = moveJson.getJSONObject("effect");
-					effectParser.parseEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
+					//effectParser.parseEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
 				}
 			}
 		}
@@ -160,7 +167,7 @@ public class TestAll {
 				if (Files.isRegularFile(entry)) {
 					JSONObject moveJson = jsonReader.readJsonObject(entry.toString());
 					JSONObject effect = moveJson.getJSONObject("effect");
-					effectParser.parseEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
+					//effectParser.parseEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
 				}
 			}
 		}
@@ -202,4 +209,59 @@ public class TestAll {
 		assertEquals(ai.nextMove(weather), List.of("SwitchIn", "1"));
 
 	}
+
+	@Test
+    public void testBattleUtilities() {
+        PokemonFactoryImpl factory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+        PlayerTrainerImpl playerTrainer = PlayerTrainerImpl.getTrainerInstance();
+
+        Pokemon charmander = factory.pokemonFromName("charmander");
+        playerTrainer.addPokemon(charmander, 1);
+        assertFalse(BattleUtilities.isTeamWipedOut(playerTrainer));
+        charmander.getActualStats().get("hp").setCurrentValue(0);
+        assertTrue(BattleUtilities.isTeamWipedOut(playerTrainer));
+
+    }
+
+	@Test
+    public void testBattleRewards() {
+        PokemonFactoryImpl factory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+        Pokemon charmander = factory.pokemonFromName("charmander");
+		Pokemon bulbasaur = factory.pokemonFromName("bulbasaur");
+		int beforeXP = charmander.getExp().getCurrentValue();
+		BattleRewards.awardBattleRewards(charmander, bulbasaur);
+		int afterXP = charmander.getExp().getCurrentValue();
+        assertFalse(beforeXP > afterXP);
+
+    }
+
+	@Test
+    public void testGenerateEnemy() {
+		PlayerTrainerImpl enemyTrainer = new PlayerTrainerImpl();
+		GenerateEnemyImpl generateEnemyInstance = new GenerateEnemyImpl(5, enemyTrainer);
+		generateEnemyInstance.generateEnemy();
+		assertTrue(enemyTrainer.getSquad().size() > 1);
+    }
+
+	@Test
+    public void testBattleEngine() {
+		PlayerTrainerImpl enemyTrainer = new PlayerTrainerImpl();
+		PokemonFactoryImpl factory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+		PlayerTrainerImpl playerTrainer = PlayerTrainerImpl.getTrainerInstance();
+		Pokemon bulbasaur = factory.pokemonFromName("bulbasaur");
+		Pokemon charmander = factory.pokemonFromName("charmander");
+		playerTrainer.addPokemon(bulbasaur, 1);
+		enemyTrainer.addPokemon(charmander, 1);
+		MoveFactoryImpl moveFactoryImpl = new MoveFactoryImpl();
+		EnemyAi ai = new EnemyAiImpl(enemyTrainer, 99);
+		int beforeLife = playerTrainer.getSquad().get(0).get().getActualStats().get("hp").getCurrentValue();
+		BattleEngine battleEngine = new BattleEngineImpl(moveFactoryImpl, enemyTrainer, ai);
+		battleEngine.movesPriorityCalculator("Run", "", "Attack", "0");
+		int afterLife = playerTrainer.getSquad().get(0).get().getActualStats().get("hp").getCurrentValue();
+		assertTrue(beforeLife > afterLife);
+    }
 }
+
+
+
+

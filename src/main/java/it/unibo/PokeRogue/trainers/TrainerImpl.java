@@ -1,16 +1,25 @@
 package it.unibo.PokeRogue.trainers;
 
 import java.util.List;
+import java.util.Map;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Optional;
 
 import it.unibo.PokeRogue.pokemon.Pokemon;
 
 public class TrainerImpl implements Trainer {
     private List<Optional<Pokemon>> pokemonSquad;
+    private Map<String, Integer> ball;
+    private Boolean wild = false;
 
     public TrainerImpl() {
         this.pokemonSquad = new ArrayList<>();
+        this.ball = new HashMap<>();
+        this.ball.put("pokeball", 5);
+        this.ball.put("megaball", 0);
+        this.ball.put("ultraball", 0);
+        this.ball.put("masterball", 0);
         for (int pokeSquadPosition = 0; pokeSquadPosition < 6; pokeSquadPosition++) {
             pokemonSquad.add(Optional.empty());
         }
@@ -54,6 +63,21 @@ public class TrainerImpl implements Trainer {
 
     @Override
     public List<Optional<Pokemon>> getSquad() {
-        return pokemonSquad;
+        return this.pokemonSquad;
+    }
+
+    @Override
+    public Map<String, Integer> getBall() {
+        return this.ball;
+    }
+
+    @Override
+    public Boolean isWild() {
+        return this.wild;
+    }
+
+    @Override
+    public void setWild(Boolean wild) {
+        this.wild = wild;
     }
 }

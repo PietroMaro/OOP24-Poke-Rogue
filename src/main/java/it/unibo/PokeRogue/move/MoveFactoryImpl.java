@@ -1,4 +1,5 @@
 package it.unibo.PokeRogue.move;
+
 import it.unibo.PokeRogue.utilities.Range;
 import it.unibo.PokeRogue.SingletonImpl;
 import it.unibo.PokeRogue.utilities.JsonReader;
@@ -14,31 +15,30 @@ import java.nio.file.Paths;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
+public class MoveFactoryImpl extends SingletonImpl implements MoveFactory {
 
-public class MoveFactoryImpl extends SingletonImpl implements MoveFactory{
-	
-   	//make the access in memory and saves the information of all pokemon in local
+	// make the access in memory and saves the information of all pokemon in local
 	final private JsonReader jsonReader = new JsonReaderImpl();
-	final private Map<String,Move> movesBlueprints = new HashMap<String,Move>();
-	
-	public MoveFactoryImpl(){
+	final private Map<String, Move> movesBlueprints = new HashMap<String, Move>();
+
+	public MoveFactoryImpl() {
 		init();
 	}
-	
+
 	@Override
-    public void init(){
+	public void init() {
 		JSONArray allMoveJson;
-		allMoveJson = jsonReader.readJsonArray(Paths.get("src","pokemon_data","movesList.json").toString());
-		for(int moveIndex = 0; moveIndex < allMoveJson.length(); moveIndex +=1 ){
+		allMoveJson = jsonReader.readJsonArray(Paths.get("src", "pokemon_data", "movesList.json").toString());
+		for (int moveIndex = 0; moveIndex < allMoveJson.length(); moveIndex += 1) {
 			addMoveToBlueprints(allMoveJson.getString(moveIndex));
 		}
 	}
 
-	private void addMoveToBlueprints(final String moveName){
+	private void addMoveToBlueprints(final String moveName) {
 		JSONObject moveJson;
-        moveJson = jsonReader.readJsonObject(Paths.get("src","pokemon_data","moves",moveName +".json").toString());
+		moveJson = jsonReader.readJsonObject(Paths.get("src", "pokemon_data", "moves", moveName + ".json").toString());
 		String name = moveName;
-		Range<Integer> pp = new RangeImpl<Integer>(0, moveJson.getInt("pp"), moveJson.getInt("pp")); 
+		Range<Integer> pp = new RangeImpl<Integer>(0, moveJson.getInt("pp"), moveJson.getInt("pp"));
 		boolean isPhysical = moveJson.getBoolean("isPhysical");
 		JSONObject effect = moveJson.getJSONObject("effect");
 		int accuracy = moveJson.getInt("accuracy");
@@ -58,17 +58,17 @@ public class MoveFactoryImpl extends SingletonImpl implements MoveFactory{
 				1.5,
 				false,
 				type,
-				priority
-			);
+				priority);
 
-		this.movesBlueprints.put(moveName,newMove);
+		this.movesBlueprints.put(moveName, newMove);
 	}
 
 	@Override
-	public Move moveFromName(final String moveName){
+	public Move moveFromName(final String moveName) {
 		Move move = this.movesBlueprints.get(moveName);
-		if(move== null){
-			throw new UnsupportedOperationException("The move "+moveName+" blueprint was not found. Is not present in moveList / Factory not initialized");
+		if (move == null) {
+			throw new UnsupportedOperationException("The move " + moveName
+					+ " blueprint was not found. Is not present in moveList / Factory not initialized");
 
 		}
 		move = move.deepCopy();
