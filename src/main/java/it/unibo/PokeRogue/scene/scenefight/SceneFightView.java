@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene.sceneFight;
+package it.unibo.PokeRogue.scene.scenefight;
 
 import java.util.Map;
 
@@ -35,7 +35,7 @@ public class SceneFightView {
             final int currentSelectedButton, final int newSelectedButton, final SceneFight scene) {
         this.sceneGraphicElements = sceneGraphicElements;
         this.sceneFightInitView = new SceneFightInitView(this.sceneGraphicElements, allPanelsElements,
-                enemyTrainerInstance, currentSelectedButton);
+                enemyTrainerInstance);
         this.sceneFightUpdateView = new SceneFightUpdateView(this.sceneGraphicElements, allPanelsElements,
                 this.sceneFightInitView, currentSelectedButton, newSelectedButton, scene);
 

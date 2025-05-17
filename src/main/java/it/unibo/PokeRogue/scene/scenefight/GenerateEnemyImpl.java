@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene.sceneFight;
+package it.unibo.PokeRogue.scene.scenefight;
 
 import java.util.Random;
 
@@ -59,10 +59,10 @@ public class GenerateEnemyImpl implements GenerateEnemy {
      * The Pokémon is then added to the enemy trainer's team.
      */
     private void generateWildPokemon() {
-        int baseLevel = calculatePokemonLevel();
-        int variance = new Random().nextInt(5) - 2;
-        int level = Math.max(0, Math.min(baseLevel + variance < 1 ? 0 : baseLevel + variance, 100));
-        Pokemon wild = pokemonFactory.randomPokemon(level);
+        final int baseLevel = calculatePokemonLevel();
+        final int variance = new Random().nextInt(5) - 2;
+        final int level = Math.max(0, Math.min(baseLevel + variance < 1 ? 0 : baseLevel + variance, 100));
+        final Pokemon wild = pokemonFactory.randomPokemon(level);
         this.enemyTrainerInstance.addPokemon(wild, 1);
     }
 
@@ -72,12 +72,12 @@ public class GenerateEnemyImpl implements GenerateEnemy {
      * and each Pokémon's level is calculated with slight variance.
      */
     private void generateTrainerTeam() {
-        int teamSize = Math.min(3 + battleLevel / 10, 6);
-        int baseLevel = calculatePokemonLevel();
+        final int teamSize = Math.min(3 + battleLevel / 10, 6);
+        final int baseLevel = calculatePokemonLevel();
         for (int i = 1; i <= teamSize; i++) {
-            int variance = new Random().nextInt(5) - 2;
-            int level = Math.max(0, Math.min(baseLevel + variance < MIN_LEVEL ? 0 : baseLevel + variance, 100));
-            Pokemon teamPokemon = pokemonFactory.randomPokemon(level);
+            final int variance = new Random().nextInt(5) - 2;
+            final int level = Math.max(0, Math.min(baseLevel + variance < MIN_LEVEL ? 0 : baseLevel + variance, 100));
+            final Pokemon teamPokemon = pokemonFactory.randomPokemon(level);
             enemyTrainerInstance.addPokemon(teamPokemon, i);
         }
     }
@@ -89,8 +89,7 @@ public class GenerateEnemyImpl implements GenerateEnemy {
      * @return the calculated level for the generated Pokémon
      */
     private int calculatePokemonLevel() {
-        double scalingFactor = 0.2;
-        int baseLevel = (int) Math.floor(1 + Math.pow(battleLevel, 0.2) * scalingFactor);
-        return baseLevel;
+        final double scalingFactor = 0.2;
+        return (int) Math.floor(1 + Math.pow(battleLevel, 0.2) * scalingFactor);
     }
 }

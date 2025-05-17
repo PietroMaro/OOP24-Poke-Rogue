@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene.sceneFight;
+package it.unibo.PokeRogue.scene.scenefight;
 
 import it.unibo.PokeRogue.pokemon.Pokemon;
 

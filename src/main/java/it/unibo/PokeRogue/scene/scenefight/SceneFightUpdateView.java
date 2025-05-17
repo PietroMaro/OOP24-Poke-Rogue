@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene.sceneFight;
+package it.unibo.PokeRogue.scene.scenefight;
 
 import java.awt.Color;
 import java.util.Map;
@@ -10,9 +10,9 @@ import it.unibo.PokeRogue.graphic.box.BoxElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
-import it.unibo.PokeRogue.scene.sceneFight.enums.SceneFightGraphicEnum;
-import it.unibo.PokeRogue.scene.sceneFight.enums.SceneFightStatusValuesEnum;
-import it.unibo.PokeRogue.scene.sceneFight.enums.SceneFightUtilities;
+import it.unibo.PokeRogue.scene.scenefight.enums.SceneFightGraphicEnum;
+import it.unibo.PokeRogue.scene.scenefight.enums.SceneFightStatusValuesEnum;
+import it.unibo.PokeRogue.scene.scenefight.enums.SceneFightUtilities;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;

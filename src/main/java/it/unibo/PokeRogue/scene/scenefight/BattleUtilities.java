@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene.sceneFight;
+package it.unibo.PokeRogue.scene.scenefight;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,8 +16,12 @@ import it.unibo.PokeRogue.trainers.Trainer;
  * or knows a particular move.
  * It is not meant to be instantiated.
  */
-public class BattleUtilities {
+public final class BattleUtilities {
 
+    /**
+     * empty constructor
+     * 
+     */
     private BattleUtilities() {
     }
 
@@ -32,9 +36,9 @@ public class BattleUtilities {
         if (trainer == null || trainer.getSquad() == null || trainer.getSquad().isEmpty()) {
             return true;
         }
-        for (Optional<Pokemon> optionalPokemon : trainer.getSquad()) {
+        for (final Optional<Pokemon> optionalPokemon : trainer.getSquad()) {
             if (optionalPokemon.isPresent()) {
-                Pokemon pokemon = optionalPokemon.get();
+                final Pokemon pokemon = optionalPokemon.get();
                 if (pokemon.getActualStats().get("hp").getCurrentValue() > 0) {
                     return false;
                 }
@@ -53,9 +57,9 @@ public class BattleUtilities {
      */
     public static int findFirstUsablePokemon(final Trainer trainer) {
         for (int i = 1; i < trainer.getSquad().size(); i++) {
-            Optional<Pokemon> optionalPokemon = trainer.getPokemon(i);
+            final Optional<Pokemon> optionalPokemon = trainer.getPokemon(i);
             if (optionalPokemon.isPresent()) {
-                Pokemon pokemon = optionalPokemon.get();
+                final Pokemon pokemon = optionalPokemon.get();
                 if (pokemon.getActualStats().get("hp").getCurrentValue() > 0) {
                     return i;
                 }
@@ -74,17 +78,10 @@ public class BattleUtilities {
      *         false otherwise
      */
     public static boolean canSwitch(final PlayerTrainerImpl trainer, final int switchPokemonPosition) {
-        if (switchPokemonPosition < trainer.getSquad().size()) {
-            Optional<Pokemon> pokemonToSwitchInOptional = trainer.getPokemon(switchPokemonPosition);
-            if (pokemonToSwitchInOptional.isPresent() &&
-                    pokemonToSwitchInOptional.get().getActualStats().get("hp").getCurrentValue() > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
+        return switchPokemonPosition < trainer.getSquad().size()
+                && trainer.getPokemon(switchPokemonPosition)
+                        .map(pokemon -> pokemon.getActualStats().get("hp").getCurrentValue() > 0)
+                        .orElse(false);
     }
 
     /**
@@ -100,12 +97,12 @@ public class BattleUtilities {
         if (pokemon == null) {
             return false;
         }
-        List<Move> knownMoves = pokemon.getActualMoves();
+        final List<Move> knownMoves = pokemon.getActualMoves();
         if (knownMoves == null || knownMoves.isEmpty()) {
             return false;
         }
         if (moveIndex >= 0 && moveIndex < knownMoves.size()) {
-            Move moveAtIndex = knownMoves.get(moveIndex);
+            final Move moveAtIndex = knownMoves.get(moveIndex);
             return moveAtIndex != null;
         } else {
             return false;
