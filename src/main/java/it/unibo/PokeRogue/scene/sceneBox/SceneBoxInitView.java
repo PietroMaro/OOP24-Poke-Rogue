@@ -21,6 +21,10 @@ import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
  */
 public class SceneBoxInitView {
 
+        private static final String FIRST_PANEL_NAME = "firstPanel";
+        private static final String POKEMON_PANEL_NAME = "pokemonPanel";
+        private static final String SPRITES_DIR_NAME = "sprites";
+
         private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final UtilitiesForScenes utilityClass;
@@ -44,8 +48,9 @@ public class SceneBoxInitView {
          */
         protected void initGraphicElements() {
                 // Panels
-                this.allPanelsElements.put("firstPanel", new PanelElementImpl("", new OverlayLayout(null)));
-                this.allPanelsElements.put("pokemonPanel", new PanelElementImpl("firstPanel", new OverlayLayout(null)));
+                this.allPanelsElements.put(FIRST_PANEL_NAME, new PanelElementImpl("", new OverlayLayout(null)));
+                this.allPanelsElements.put(POKEMON_PANEL_NAME,
+                                new PanelElementImpl(FIRST_PANEL_NAME, new OverlayLayout(null)));
 
                 // Texts
                 this.initTextElements();
@@ -58,7 +63,7 @@ public class SceneBoxInitView {
 
                 // Bg
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.BACKGROUND.value(),
-                                new BackgroundElementImpl("firstPanel",
+                                new BackgroundElementImpl(FIRST_PANEL_NAME,
                                                 this.utilityClass.getPathString("images", "sceneBoxBg.png")));
 
         }
@@ -69,9 +74,9 @@ public class SceneBoxInitView {
          */
         private void initTextElements() {
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.START_GAME_TEXT.value(),
-                                new TextElementImpl("firstPanel", "Start", Color.WHITE, 0.06, 0.406, 0.675));
+                                new TextElementImpl(FIRST_PANEL_NAME, "Start", Color.WHITE, 0.06, 0.406, 0.675));
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.CURRENT_BOX_TEXT.value(),
-                                new TextElementImpl("firstPanel", "1", Color.WHITE, 0.09, 0.417, 0.197));
+                                new TextElementImpl(FIRST_PANEL_NAME, "1", Color.WHITE, 0.09, 0.417, 0.197));
 
         }
 
@@ -86,7 +91,7 @@ public class SceneBoxInitView {
                 for (int pokemonIndex = 0; pokemonIndex < 81; pokemonIndex++) {
 
                         this.sceneGraphicElements.put(pokemonIndex + 6,
-                                        new ButtonElementImpl("firstPanel", null, Color.WHITE, 0,
+                                        new ButtonElementImpl(FIRST_PANEL_NAME, null, Color.WHITE, 0,
                                                         0.465 + (pokemonIndex % 9 * 0.049),
                                                         0.125 + (pokemonIndex / 9 * 0.09), 0.03, 0.05));
 
@@ -95,19 +100,23 @@ public class SceneBoxInitView {
                 // Genereal Buttons
 
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.UP_ARROW_BUTTON.value(),
-                                new ButtonElementImpl("firstPanel", null, Color.WHITE, 0, 0.41, 0.115, 0.02, 0.04));
+                                new ButtonElementImpl(FIRST_PANEL_NAME, null, Color.WHITE, 0, 0.41, 0.115, 0.02, 0.04));
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.DOWN_ARROW_BUTTON.value(),
-                                new ButtonElementImpl("firstPanel", null, Color.WHITE, 0, 0.41, 0.21, 0.02, 0.04));
+                                new ButtonElementImpl(FIRST_PANEL_NAME, null, Color.WHITE, 0, 0.41, 0.21, 0.02, 0.04));
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.START_GAME_BUTTON.value(),
-                                new ButtonElementImpl("firstPanel", null, Color.WHITE, 0, 0.405, 0.65, 0.035, 0.03));
+                                new ButtonElementImpl(FIRST_PANEL_NAME, null, Color.WHITE, 0, 0.405, 0.65, 0.035,
+                                                0.03));
 
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.FIRST_POKEMON_BUTTON_SELECTED.value(),
-                                new ButtonElementImpl("firstPanel", null, Color.WHITE, 0, 0.405, 0.32, 0.036, 0.05));
+                                new ButtonElementImpl(FIRST_PANEL_NAME, null, Color.WHITE, 0, 0.405, 0.32, 0.036,
+                                                0.05));
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.SECOND_POKEMON_BUTTON_SELECTED.value(),
-                                new ButtonElementImpl("firstPanel", null, Color.WHITE, 0, 0.405, 0.42, 0.036, 0.05));
+                                new ButtonElementImpl(FIRST_PANEL_NAME, null, Color.WHITE, 0, 0.405, 0.42, 0.036,
+                                                0.05));
 
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.THIRD_POKEMON_BUTTON_SELECTED.value(),
-                                new ButtonElementImpl("firstPanel", null, Color.WHITE, 0, 0.405, 0.52, 0.036, 0.05));
+                                new ButtonElementImpl(FIRST_PANEL_NAME, null, Color.WHITE, 0, 0.405, 0.52, 0.036,
+                                                0.05));
 
         }
 
@@ -120,57 +129,64 @@ public class SceneBoxInitView {
 
                 // Sprites in foreground
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.DOWN_ARROW_SPRITE.value(),
-                                new SpriteElementImpl("firstPanel",
-                                                this.utilityClass.getPathString("sprites", "downArrowSprite.png"), 0.4,
+                                new SpriteElementImpl(FIRST_PANEL_NAME,
+                                                this.utilityClass.getPathString(SPRITES_DIR_NAME,
+                                                                "downArrowSprite.png"),
+                                                0.4,
                                                 0.2, 0.04,
                                                 0.06));
 
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.UP_ARROW_SPRITE.value(),
-                                new SpriteElementImpl("firstPanel",
-                                                this.utilityClass.getPathString("sprites", "upArrowSprite.png"), 0.4,
+                                new SpriteElementImpl(FIRST_PANEL_NAME,
+                                                this.utilityClass.getPathString(SPRITES_DIR_NAME, "upArrowSprite.png"),
+                                                0.4,
                                                 0.105, 0.04,
                                                 0.06));
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_SPRITE_SELECTED_0.value(),
                                 new SpriteElementImpl(
-                                                "pokemonPanel",
-                                                this.utilityClass.getPathString("sprites", "pokeSquadEmpty.png"),
+                                                POKEMON_PANEL_NAME,
+                                                this.utilityClass.getPathString(SPRITES_DIR_NAME, "pokeSquadEmpty.png"),
                                                 0.39, 0.3, 0.065,
                                                 0.09));
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_SPRITE_SELECTED_1.value(),
                                 new SpriteElementImpl(
-                                                "pokemonPanel",
-                                                this.utilityClass.getPathString("sprites", "pokeSquadEmpty.png"),
+                                                POKEMON_PANEL_NAME,
+                                                this.utilityClass.getPathString(SPRITES_DIR_NAME, "pokeSquadEmpty.png"),
                                                 0.39, 0.4, 0.065,
                                                 0.09));
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_SPRITE_SELECTED_2.value(),
                                 new SpriteElementImpl(
-                                                "pokemonPanel",
-                                                this.utilityClass.getPathString("sprites", "pokeSquadEmpty.png"),
+                                                POKEMON_PANEL_NAME,
+                                                this.utilityClass.getPathString(SPRITES_DIR_NAME, "pokeSquadEmpty.png"),
                                                 0.39, 0.5, 0.065,
                                                 0.09));
 
                 // Sprites in background
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.SELECTED_POKEMON_CONTAINER_SPRITE.value(),
                                 new SpriteElementImpl(
-                                                "firstPanel",
-                                                this.utilityClass.getPathString("sprites", "changeBoxSprite.png"),
+                                                FIRST_PANEL_NAME,
+                                                this.utilityClass.getPathString(SPRITES_DIR_NAME,
+                                                                "changeBoxSprite.png"),
                                                 0.372, 0.06, 0.1, 0.25));
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.ARROWS_CONTAINER_SPRITE.value(),
                                 new SpriteElementImpl(
-                                                "firstPanel",
-                                                this.utilityClass.getPathString("sprites", "selectedSquadSprite.png"),
+                                                FIRST_PANEL_NAME,
+                                                this.utilityClass.getPathString(SPRITES_DIR_NAME,
+                                                                "selectedSquadSprite.png"),
                                                 0.375, 0.244,
                                                 0.09, 0.4));
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.START_BUTTON_CONTAINER_SPRITE.value(),
                                 new SpriteElementImpl(
-                                                "firstPanel",
-                                                this.utilityClass.getPathString("sprites", "startSpriteBg.png"), 0.395,
+                                                FIRST_PANEL_NAME,
+                                                this.utilityClass.getPathString(SPRITES_DIR_NAME, "startSpriteBg.png"),
+                                                0.395,
                                                 0.613, 0.055, 0.1));
 
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_CONTAINER_SPRITE.value(),
                                 new SpriteElementImpl(
-                                                "firstPanel",
-                                                this.utilityClass.getPathString("sprites", "singleBoxSprite.png"),
+                                                FIRST_PANEL_NAME,
+                                                this.utilityClass.getPathString(SPRITES_DIR_NAME,
+                                                                "singleBoxSprite.png"),
                                                 0.45, 0.1, 0.45,
                                                 0.85));
 

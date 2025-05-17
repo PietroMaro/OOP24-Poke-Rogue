@@ -21,6 +21,8 @@ import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
  */
 public class SceneMenuView {
 
+        private static final String FIRST_PANEL_NAME = "firstPanel";
+
         private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final UtilitiesForScenes utilityClass;
@@ -50,29 +52,32 @@ public class SceneMenuView {
          */
         protected void initGraphicElements() {
                 // Panels
-                this.allPanelsElements.put("firstPanel", new PanelElementImpl("", new OverlayLayout(null)));
+                this.allPanelsElements.put(FIRST_PANEL_NAME, new PanelElementImpl("", new OverlayLayout(null)));
 
                 // Texts
                 this.sceneGraphicElements.put(SceneMenuGraphicEnum.LOAD_GAME_BUTTON_TEXT.value(),
-                                new TextElementImpl("firstPanel", "Continua", Color.BLACK, 0.08, 0.45, 0.24));
+                                new TextElementImpl(FIRST_PANEL_NAME, "Continua", Color.BLACK, 0.08, 0.45, 0.24));
 
                 this.sceneGraphicElements.put(SceneMenuGraphicEnum.NEW_GAME_BUTTON_TEXT.value(),
-                                new TextElementImpl("firstPanel", "Nuova Partita", Color.BLACK, 0.08, 0.44, 0.44));
+                                new TextElementImpl(FIRST_PANEL_NAME, "Nuova Partita", Color.BLACK, 0.08, 0.44, 0.44));
 
                 this.sceneGraphicElements.put(SceneMenuGraphicEnum.OPTIONS_GAME_BUTTON_TEXT.value(),
-                                new TextElementImpl("firstPanel", "Opzioni", Color.BLACK, 0.08, 0.455, 0.64));
+                                new TextElementImpl(FIRST_PANEL_NAME, "Opzioni", Color.BLACK, 0.08, 0.455, 0.64));
 
                 // Buttons
                 this.sceneGraphicElements.put(SceneMenuGraphicEnum.LOAD_BUTTON.value(),
-                                new ButtonElementImpl("firstPanel", Color.GREEN, Color.BLACK, 1, 0.3, 0.2, 0.4, 0.05));
+                                new ButtonElementImpl(FIRST_PANEL_NAME, Color.GREEN, Color.BLACK, 1, 0.3, 0.2, 0.4,
+                                                0.05));
                 this.sceneGraphicElements.put(SceneMenuGraphicEnum.NEW_GAME_BUTTON.value(),
-                                new ButtonElementImpl("firstPanel", Color.GREEN, Color.BLACK, 1, 0.3, 0.4, 0.4, 0.05));
+                                new ButtonElementImpl(FIRST_PANEL_NAME, Color.GREEN, Color.BLACK, 1, 0.3, 0.4, 0.4,
+                                                0.05));
                 this.sceneGraphicElements.put(SceneMenuGraphicEnum.OPTIONS_BUTTON.value(),
-                                new ButtonElementImpl("firstPanel", Color.GREEN, Color.BLACK, 1, 0.3, 0.6, 0.4, 0.05));
+                                new ButtonElementImpl(FIRST_PANEL_NAME, Color.GREEN, Color.BLACK, 1, 0.3, 0.6, 0.4,
+                                                0.05));
 
                 // Background
                 this.sceneGraphicElements.put(SceneMenuGraphicEnum.BACKGROUND.value(),
-                                new BackgroundElementImpl("firstPanel",
+                                new BackgroundElementImpl(FIRST_PANEL_NAME,
                                                 this.utilityClass.getPathString("images", "sceneMenuBg.png")));
 
         }

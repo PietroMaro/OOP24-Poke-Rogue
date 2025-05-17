@@ -9,6 +9,8 @@ import lombok.Getter;
 
 @Getter
 public final class ButtonElementImpl extends GraphicElementImpl implements ButtonElement {
+    
+    @Getter(AccessLevel.NONE)
     private static final long serialVersionUID = 1L;
 
     private final BoxElementImpl buttonBox;

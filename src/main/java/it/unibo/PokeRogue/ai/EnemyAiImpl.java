@@ -58,6 +58,7 @@ public final class EnemyAiImpl implements EnemyAi {
      * @param weather an optional of the current battle weather
      * @return a list of strings representing the chosen action and related data
      */
+    @Override
     public List<String> nextMove(final Optional<Weather> weather) {
         List<String> decision = this.aiOfSwitchIn.evaluateSwitchIn();
 

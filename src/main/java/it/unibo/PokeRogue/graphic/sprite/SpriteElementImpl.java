@@ -6,14 +6,11 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import java.util.logging.Logger;
-import java.util.logging.Level;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 
 public final class SpriteElementImpl extends GraphicElementImpl implements SpriteElement {
     private static final long serialVersionUID = 1L;
-    private static final Logger LOGGER = Logger.getLogger(SpriteElementImpl.class.getName());
 
     private Image spriteImage;
     private final double leftUpX;
@@ -23,15 +20,10 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
 
     public SpriteElementImpl(final String panelName, final String pathToImage, final double leftUpX,
             final double leftUpy, final double width,
-            final double height) {
+            final double height) throws IOException {
         super(panelName);
 
-        try {
-            this.spriteImage = ImageIO.read(new File(pathToImage));
-
-        } catch (final IOException e) {
-            LOGGER.log(Level.SEVERE, "Error in loading from", e);
-        }
+        this.spriteImage = ImageIO.read(new File(pathToImage));
 
         this.leftUpX = leftUpX;
         this.leftUpy = leftUpy;
