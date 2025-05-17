@@ -1,9 +1,10 @@
 package it.unibo.PokeRogue.ai;
 
-import java.util.List;
 import java.util.Optional;
 
 import it.unibo.PokeRogue.Weather;
+import it.unibo.PokeRogue.scene.scene_fight.Decision;
+import it.unibo.PokeRogue.scene.scene_fight.enums.DecisionTypeEnum;
 import it.unibo.PokeRogue.trainers.Trainer;
 
 /**
@@ -52,26 +53,26 @@ public class EnemyAiImpl implements EnemyAi {
 
     /**
      * Determines the next move the AI should take, either switching Pokémon or
-     * attacking,
-     * based on internal strategy and the current weather.
+     * attacking, based on internal strategy and the current weather.
      *
      * @param weather an optional of the current battle weather
-     * @return a list of strings representing the chosen action and related data
+     * @return a {@link Decision} object representing the chosen action and related
+     *         data
      */
-    public List<String> nextMove(final Optional<Weather> weather) {
-        List<String> decision = this.aiOfSwitchIn.willSwitchIn();
+    public Decision nextMove(final Optional<Weather> weather) {
+        Decision decision = this.aiOfSwitchIn.willSwitchIn();
 
-        if ("SwitchIn".equals(decision.get(0))) {
+        if (decision.moveType() == DecisionTypeEnum.SWITCH_IN) {
             return decision;
         }
 
         decision = this.aiOfAttack.whatAttackWillDo(weather);
 
-        if ("Attack".equals(decision.get(0))) {
+        if (decision.moveType() == DecisionTypeEnum.ATTACK) {
             return decision;
         }
 
-        return List.of("Nothing", "Nothing");
+        return decision;
     }
 
     /**

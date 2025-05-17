@@ -1,11 +1,11 @@
 package it.unibo.PokeRogue.ai;
 
-import java.util.List;
 import java.util.Optional;
 
 import it.unibo.PokeRogue.Weather;
+import it.unibo.PokeRogue.scene.scene_fight.Decision;
 
 public interface EnemyAi {
 
-    List<String> nextMove(final Optional<Weather> weather);
+    Decision nextMove(final Optional<Weather> weather);
 }

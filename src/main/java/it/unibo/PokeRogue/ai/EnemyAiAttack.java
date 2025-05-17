@@ -10,6 +10,8 @@ import java.util.Random;
 import it.unibo.PokeRogue.Weather;
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.scene.scene_fight.Decision;
+import it.unibo.PokeRogue.scene.scene_fight.enums.DecisionTypeEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
 import it.unibo.PokeRogue.utilities.PokeEffectivenessCalc;
@@ -62,14 +64,15 @@ public class EnemyAiAttack {
 
     /**
      * Determines the enemy AI's action during its turn.
-     * If attacking is possible, returns the index of the chosen move.
-     * Otherwise, returns a fallback action.
+     * If attacking is possible, returns a {@link Decision} containing the attack
+     * move index.
+     * Otherwise, returns a {@link Decision} indicating no action.
      *
      * @param weather an optional of the current weather condition in battle
-     * @return a List with the format ["Attack", moveIndex] or ["Nothing",
-     *         "Nothing"]
+     * @return a {@link Decision} representing either an attack with the selected
+     *         move index, or a fallback action indicating no move
      */
-    protected List<String> whatAttackWillDo(final Optional<Weather> weather) {
+    protected Decision whatAttackWillDo(final Optional<Weather> weather) {
         this.currentEnemyPokemon = this.enemyTrainer.getPokemon(0).get();
         this.currentEnemyPokemonMoves = this.currentEnemyPokemon.getActualMoves();
         this.currentPlayerPokemon = this.playerTrainerInstance.getPokemon(0).get();
@@ -78,11 +81,11 @@ public class EnemyAiAttack {
         if (canAttack()) {
 
             this.chooseMove(weather);
-            return List.of("Attack", String.valueOf(this.attackChosen));
+            return new Decision(DecisionTypeEnum.ATTACK, String.valueOf(this.attackChosen));
 
         }
 
-        return List.of("Nothing", "Nothing");
+        return new Decision(DecisionTypeEnum.NOTHING, "Nothing");
     }
 
     /**
