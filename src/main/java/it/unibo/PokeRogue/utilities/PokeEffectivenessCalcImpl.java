@@ -2,7 +2,6 @@ package it.unibo.PokeRogue.utilities;
 
 import java.nio.file.Paths;
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.json.JSONObject;
@@ -19,12 +18,8 @@ import it.unibo.PokeRogue.pokemon.Type;
  *
  * This class provides methods to:
  * Evaluate the effectiveness of a move against a Pokémon
-<<<<<<< HEAD
  * Compute an integer score representing effectiveness for ranking or
  * decision-making purposes
-=======
- * Compute an integer score representing effectiveness for ranking or decision-making purposes
->>>>>>> origin/javaDocComments
  * 
  *
  * The effectiveness data is read from a JSON file located at:
@@ -34,20 +29,13 @@ import it.unibo.PokeRogue.pokemon.Type;
  */
 public final class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
 
+    private static final int BASE_EFFECTIVENESS_VALUE = 40;
     private final Map<Type, Map<Type, Double>> effectiveness = new EnumMap<>(Type.class);
-    private final Map<Double, Integer> effectivenessValueCalculator = new HashMap<>();
 
     /**
      * Constructs the effectiveness calculator and loads data from the JSON file.
      */
     public PokeEffectivenessCalcImpl() throws IOException {
-        this.effectivenessValueCalculator.put(4.0, 160);
-        this.effectivenessValueCalculator.put(2.0, 80);
-        this.effectivenessValueCalculator.put(1.0, 40);
-        this.effectivenessValueCalculator.put(0.5, 20);
-        this.effectivenessValueCalculator.put(0.25, 10);
-        this.effectivenessValueCalculator.put(0.0, 0);
-
         final JsonReader jsonReader = new JsonReaderImpl();
         final JSONObject root = jsonReader
                 .readJsonObject(Paths.get("src", "pokemon_data", "pokemonEffectiveness.json").toString());
@@ -129,7 +117,7 @@ public final class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
                 effectiveness = effectiveness * this.calculateTypeMultiplier(myPokemonType, enemyPokemonType);
             }
 
-            effectivenessValue = effectivenessValue + this.effectivenessValueCalculator.get(effectiveness);
+            effectivenessValue = effectivenessValue + (int) (BASE_EFFECTIVENESS_VALUE * effectiveness);
         }
 
         if (myPokemonTypes.size() == 1 && enemyPokemonTypes.size() == 2) {

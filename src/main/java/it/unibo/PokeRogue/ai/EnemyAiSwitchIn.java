@@ -67,7 +67,7 @@ public final class EnemyAiSwitchIn {
      * @return a list containing the action ("SwitchIn" or "Nothing") and additional
      *         info (like index)
      */
-    protected List<String> evaluateSwitchIn() {
+    List<String> evaluateSwitchIn() {
 
         if (enemyTrainer.getPokemon(1).isPresent() && shouldSwitch()) {
 

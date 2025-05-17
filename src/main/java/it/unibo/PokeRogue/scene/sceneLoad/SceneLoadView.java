@@ -27,6 +27,7 @@ import java.awt.Color;
  */
 
 public class SceneLoadView {
+    private static final String POKEMON_PANEL_NAME = "savesPanel";
 
     private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
     private final Map<String, PanelElementImpl> allPanelsElements;
@@ -51,9 +52,9 @@ public class SceneLoadView {
      * Initializes the static graphical components of the load scene, such as panels
      * and background.
      */
-    protected void initGraphicElements() {
+    protected void initGraphicElements() throws IOException {
         this.allPanelsElements.put("firstPanel", new PanelElementImpl("", new OverlayLayout(null)));
-        this.allPanelsElements.put("savesPanel", new PanelElementImpl("firstPanel", new OverlayLayout(null)));
+        this.allPanelsElements.put(POKEMON_PANEL_NAME, new PanelElementImpl("firstPanel", new OverlayLayout(null)));
 
         this.sceneGraphicElements.put(SceneLoadGraphicEnum.BACKGROUND.value(),
                 new BackgroundElementImpl("firstPanel", this.utilityClass.getPathString("images", "sceneLoadBg.png")));
@@ -85,19 +86,19 @@ public class SceneLoadView {
                 savesName = savesName.substring(0, savesName.length() - 5); // removing the extension
 
                 this.sceneGraphicElements.put(x + 10,
-                        new TextElementImpl("savesPanel",
+                        new TextElementImpl(POKEMON_PANEL_NAME,
                                 "Salvataggio: " + savesName + ", Grandezza Box: " + boxPokemonNumber, Color.BLACK, 0.08,
                                 0.282, x * 0.1 + 0.06));
 
-                this.sceneGraphicElements.put(x, new ButtonElementImpl("savesPanel", Color.GREEN, Color.BLACK, 2, 0.28,
+                this.sceneGraphicElements.put(x, new ButtonElementImpl(POKEMON_PANEL_NAME, Color.GREEN, Color.BLACK, 2, 0.28,
                         x * 0.1 + 0.01, 0.5, 0.08));
 
             } else {
 
-                this.sceneGraphicElements.put(x + 10, new TextElementImpl("savesPanel",
+                this.sceneGraphicElements.put(x + 10, new TextElementImpl(POKEMON_PANEL_NAME,
                         "Salvataggio: Nessuno, Grandezza Box: 0 ", Color.BLACK, 0.08, 0.282, x * 0.1 + 0.06));
 
-                this.sceneGraphicElements.put(x, new ButtonElementImpl("savesPanel", Color.GREEN, Color.BLACK, 2, 0.28,
+                this.sceneGraphicElements.put(x, new ButtonElementImpl(POKEMON_PANEL_NAME, Color.GREEN, Color.BLACK, 2, 0.28,
                         x * 0.1 + 0.01, 0.5, 0.08));
 
             }

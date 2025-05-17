@@ -2,6 +2,7 @@ package it.unibo.PokeRogue.scene.sceneBox;
 
 import java.util.List;
 import java.util.Map;
+import java.io.IOException;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
@@ -55,7 +56,7 @@ public class SceneBoxView {
          * 
          * It sets up static UI components like backgrounds, buttons, and panels.
          */
-        protected void initGraphicElements() {
+        protected void initGraphicElements() throws IOException {
                 this.sceneBoxInitView.initGraphicElements();
 
         }
@@ -77,7 +78,9 @@ public class SceneBoxView {
          */
         protected void updateGraphic(final int currentSelectedButton, final int newSelectedButton, final int boxIndex,
                         final int newBoxIndex, final List<List<Pokemon>> boxes,
-                        final PlayerTrainerImpl playerTrainerInstance) {
+                        final PlayerTrainerImpl playerTrainerInstance) 
+						throws IOException
+		{
                 this.sceneBoxUpdateView.updateGraphic(currentSelectedButton, newSelectedButton, boxIndex, newBoxIndex,
                                 boxes, playerTrainerInstance);
         }

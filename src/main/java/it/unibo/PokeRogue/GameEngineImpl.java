@@ -1,14 +1,16 @@
 package it.unibo.PokeRogue;
 
 import java.io.IOException;
-
+import java.lang.IllegalAccessException;
+import java.lang.InstantiationException;
+import java.lang.NoSuchMethodException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.scene.sceneBox.SceneBox;
 import it.unibo.PokeRogue.scene.sceneLoad.SceneLoad;
 import it.unibo.PokeRogue.scene.sceneMenu.SceneMenu;
-import it.unibo.PokeRogue.Singleton;
 
 /**
  * Implementation of the {@link GameEngine} interface.
@@ -45,7 +47,13 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
      * @param newScene the name of the new scene to load
      */
     @Override
-    public void setScene(final String newScene) throws IOException {
+    public void setScene(final String newScene) 
+		throws IOException,
+		InstantiationException,
+		IllegalAccessException,
+		InvocationTargetException,
+		NoSuchMethodException
+		{
         switch (newScene) {
             case "main":
                 currentScene = new SceneMenu();
@@ -72,7 +80,12 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
     }
 
     @Override
-    public void keyPressedToScene(final int keyCode) throws IOException {
+    public void keyPressedToScene(final int keyCode) 
+		throws IOException,
+		InstantiationException,
+		IllegalAccessException,
+		NoSuchMethodException,
+		InvocationTargetException {
         if (this.currentScene == null) {
             LOGGER.log(Level.WARNING, "No active scene");
 

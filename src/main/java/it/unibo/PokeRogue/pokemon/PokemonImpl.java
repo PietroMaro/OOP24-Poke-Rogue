@@ -17,12 +17,17 @@ import lombok.AccessLevel;
 import lombok.ToString;
 import java.awt.Image;
 
+import java.lang.InstantiationException;
+import java.lang.IllegalAccessException;
+import java.lang.NoSuchMethodException;
+import java.lang.reflect.InvocationTargetException;
+
 @Getter
 @Setter
 @ToString
 public final class PokemonImpl implements Pokemon {
 	@Getter(AccessLevel.NONE)
-	private MoveFactoryImpl moveFactoryInstance = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
+	private MoveFactoryImpl moveFactoryInstance;
 	@Getter(AccessLevel.NONE)
 	final private Random random = new Random();
 	@Getter(AccessLevel.NONE)
@@ -60,7 +65,13 @@ public final class PokemonImpl implements Pokemon {
 	private Image spriteFront;
 	private Image spriteBack;
 
-	public PokemonImpl(final PokemonBlueprint pokemonBlueprint) {
+	public PokemonImpl(final PokemonBlueprint pokemonBlueprint) throws 
+		InstantiationException,
+		IllegalAccessException,
+		NoSuchMethodException,
+		InvocationTargetException
+	{
+		this.moveFactoryInstance = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
 		this.baseStats = pokemonBlueprint.stats();
 		generateIVs();
 		generateEVs();

@@ -6,6 +6,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.io.IOException;
+import java.lang.InstantiationException;
+import java.lang.IllegalAccessException;
+import java.lang.NoSuchMethodException;
+import java.lang.reflect.InvocationTargetException;
 
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
@@ -67,7 +71,12 @@ public class SceneLoad implements Scene {
      * Constructs a new {@code SceneLoad} object, initializing internal structures
      * and retrieving the list of saves.
      */
-    public SceneLoad() throws IOException {
+    public SceneLoad() throws 
+		InstantiationException,
+		IllegalAccessException,
+		InvocationTargetException,
+		NoSuchMethodException,
+		IOException {
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
@@ -124,7 +133,13 @@ public class SceneLoad implements Scene {
      * 
      */
     @Override
-    public void updateStatus(final int inputKey) throws IOException {
+    public void updateStatus(final int inputKey) throws 
+		InstantiationException,
+		IllegalAccessException,
+		InvocationTargetException,
+		NoSuchMethodException,
+		IOException
+	{
 
         switch (inputKey) {
             case KeyEvent.VK_UP:

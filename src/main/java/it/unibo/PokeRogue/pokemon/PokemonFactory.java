@@ -2,7 +2,10 @@ package it.unibo.PokeRogue.pokemon;
 
 import java.util.Set;
 import java.io.IOException;
-
+import java.lang.InstantiationException;
+import java.lang.IllegalAccessException;
+import java.lang.NoSuchMethodException;
+import java.lang.reflect.InvocationTargetException;
 
 public interface PokemonFactory {
 	/**
@@ -17,14 +20,22 @@ public interface PokemonFactory {
 	* @return the pokemon with the name specified
 	* @see Pokemon 
 	*/
-	Pokemon pokemonFromName(String pokemonName);
+	Pokemon pokemonFromName(String pokemonName) throws
+		InstantiationException,
+		IllegalAccessException,
+		NoSuchMethodException,
+		InvocationTargetException;
 	/**
 	* generate a random value setting is level to the param
 	* given
 	* @return a random generated pokemon
 	* @param level 
 	*/
-	Pokemon randomPokemon(int level);
+	Pokemon randomPokemon(int level) throws 
+		InstantiationException,
+		IllegalAccessException,
+		NoSuchMethodException,
+		InvocationTargetException;	
 	/**
 	* simple getter 
 	* @return the list of all pokemons 

@@ -70,7 +70,7 @@ public final class EnemyAiAttack {
      * @return a List with the format ["Attack", moveIndex] or ["Nothing",
      *         "Nothing"]
      */
-    protected List<String> whatAttackWillDo(final Optional<Weather> weather) {
+    List<String> whatAttackWillDo(final Optional<Weather> weather) {
         this.currentEnemyPokemon = this.enemyTrainer.getPokemon(0).get();
         this.currentEnemyPokemonMoves = this.currentEnemyPokemon.getActualMoves();
         this.currentPlayerPokemon = this.playerTrainerInstance.getPokemon(0).get();

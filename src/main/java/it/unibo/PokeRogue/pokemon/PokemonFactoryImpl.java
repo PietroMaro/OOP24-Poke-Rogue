@@ -22,6 +22,11 @@ import java.io.IOException;
 import java.awt.Image;
 import javax.imageio.ImageIO;
 
+import java.lang.InstantiationException;
+import java.lang.IllegalAccessException;
+import java.lang.NoSuchMethodException;
+import java.lang.reflect.InvocationTargetException;
+
 public class PokemonFactoryImpl extends Singleton implements PokemonFactory{
 	
    	//make the access in memory and saves the information of all pokemon in local
@@ -86,7 +91,13 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory{
 	}
 
 	@Override
-	public Pokemon pokemonFromName(final String pokemonName){
+	public Pokemon pokemonFromName(final String pokemonName)
+		throws
+		InstantiationException,
+		IllegalAccessException,
+		NoSuchMethodException,
+		InvocationTargetException
+	{
 		PokemonBlueprint pokemonBlueprint = this.pokemonBlueprints.get(pokemonName);
 		if(pokemonBlueprint == null){
 			throw new UnsupportedOperationException("The pokemon "+pokemonName+" blueprint was not found. Is not present in pokemonList / Factory not initialized");
@@ -96,7 +107,12 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory{
 	}
 
 	@Override
-	public Pokemon randomPokemon(int level){
+	public Pokemon randomPokemon(int level) throws 
+		InstantiationException,
+		IllegalAccessException,
+		NoSuchMethodException,
+		InvocationTargetException
+	{
 		String generatedName = (String)this.allPokemonSet.toArray()[random.nextInt(this.allPokemonSet.size())];
 		Pokemon result = new PokemonImpl(this.pokemonBlueprints.get(generatedName)); 
 		for(int x = 0 ; x < level; x+=1){

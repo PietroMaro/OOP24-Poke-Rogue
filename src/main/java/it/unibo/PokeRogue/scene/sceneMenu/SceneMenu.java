@@ -1,6 +1,10 @@
 package it.unibo.PokeRogue.scene.sceneMenu;
 
 import java.io.IOException;
+import java.lang.IllegalAccessException;
+import java.lang.InstantiationException;
+import java.lang.NoSuchMethodException;
+import java.lang.reflect.InvocationTargetException;
 import java.awt.event.KeyEvent;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -43,7 +47,12 @@ public class SceneMenu implements Scene {
      * It also calls the methods to initialize the status and graphic elements for
      * the menu.
      */
-    public SceneMenu() {
+    public SceneMenu() throws 
+		InstantiationException,
+		IllegalAccessException,
+		InvocationTargetException,
+		IOException,
+		NoSuchMethodException{
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
@@ -75,7 +84,12 @@ public class SceneMenu implements Scene {
      * @param inputKey the key code from {@link KeyEvent}.
      */
     @Override
-    public void updateStatus(final int inputKey) throws IOException {
+    public void updateStatus(final int inputKey) 
+		throws IOException,
+		NoSuchMethodException,
+		InstantiationException,
+		IllegalAccessException,
+		InvocationTargetException {
         switch (inputKey) {
             case KeyEvent.VK_UP:
                 this.currentSelectedButton = SceneMenuGraphicEnum.nextButtonsNames(this.currentSelectedButton);
@@ -114,7 +128,7 @@ public class SceneMenu implements Scene {
      * and then highlights the currently selected button.
      */
 
-    private void initGraphicElements() {
+    private void initGraphicElements() throws IOException {
         this.sceneMenuView.initGraphicElements();
 
         this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true);

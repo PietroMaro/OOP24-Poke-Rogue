@@ -17,7 +17,12 @@ public final class InputHandlerImpl extends KeyAdapter {
     private final GameEngine gameEngine;
 
     public InputHandlerImpl() {
-        gameEngine = GameEngineImpl.getInstance(GameEngineImpl.class);
+		try{
+			gameEngine = GameEngineImpl.getInstance(GameEngineImpl.class);
+		}catch(Exception er){
+			LOGGER.log(Level.WARNING,er.getMessage());			
+			throw new RuntimeException("Could not initialize GameEngine", er);
+		}
     }
 
     @Override

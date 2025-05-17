@@ -1,5 +1,7 @@
 package it.unibo.PokeRogue;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.NoSuchMethodException;
 
 /**
  * Interface representing the game engine of an application.
@@ -18,9 +20,19 @@ public interface GameEngine {
      * 
      * @param newScene the name of the new scene to load
      */
-    void setScene(String newScene) throws IOException;
+    void setScene(String newScene) throws 
+		IOException,
+		InstantiationException,
+		IllegalAccessException,
+		InvocationTargetException,
+		NoSuchMethodException;
 
-    void keyPressedToScene(int keyCode) throws IOException ;
+    void keyPressedToScene(int keyCode) throws 
+		IOException,
+		InstantiationException,
+		IllegalAccessException,
+		InvocationTargetException,
+		NoSuchMethodException;
 
     void setGraphicEngine(GraphicEngine graphicEngine);
 
