@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene.scenefight.enums;
+package it.unibo.PokeRogue.scene.scene_fight.enums;
 
 public enum SceneFightStatusValuesEnum {
 

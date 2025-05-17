@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene.scenefight;
+package it.unibo.PokeRogue.scene.scene_fight;
 
 import java.util.Optional;
 

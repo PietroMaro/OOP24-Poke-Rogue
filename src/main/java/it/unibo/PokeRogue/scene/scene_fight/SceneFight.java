@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene.scenefight;
+package it.unibo.PokeRogue.scene.scene_fight;
 
 import java.awt.event.KeyEvent;
 import java.util.LinkedHashMap;
@@ -11,8 +11,8 @@ import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.move.MoveFactoryImpl;
 import it.unibo.PokeRogue.scene.Scene;
-import it.unibo.PokeRogue.scene.scenefight.enums.SceneFightStatusValuesEnum;
-import it.unibo.PokeRogue.scene.scenefight.enums.SceneFightUtilities;
+import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightStatusValuesEnum;
+import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightUtilities;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import lombok.Getter;
 
