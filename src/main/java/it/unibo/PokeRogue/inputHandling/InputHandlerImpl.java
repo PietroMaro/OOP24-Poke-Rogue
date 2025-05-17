@@ -6,9 +6,9 @@ import java.awt.event.KeyAdapter;
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
 
-public class InputHandlerImpl extends KeyAdapter {
+public final class InputHandlerImpl extends KeyAdapter {
 
-    final private GameEngine gameEngine;
+    private final GameEngine gameEngine;
 
     public InputHandlerImpl() {
         gameEngine = GameEngineImpl.getInstance(GameEngineImpl.class);

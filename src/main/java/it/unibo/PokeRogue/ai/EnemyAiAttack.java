@@ -23,13 +23,13 @@ import it.unibo.PokeRogue.utilities.PokemonBattleUtilImpl;
  * It can operate in simple random mode or more advanced scoring modes
  * depending on configuration flags.
  */
-public class EnemyAiAttack {
+public final class EnemyAiAttack {
 
     private final Trainer enemyTrainer;
     private final PlayerTrainerImpl playerTrainerInstance;
     private int attackChosen;
     private Pokemon currentEnemyPokemon;
-    private Random random;
+    private final Random random;
     private Map<Integer, Integer> scoresOfMoves;
     private List<Move> currentEnemyPokemonMoves;
     private final PokeEffectivenessCalc pokeEffectivenessCalculator;
@@ -38,15 +38,15 @@ public class EnemyAiAttack {
     private Pokemon currentPlayerPokemon;
 
     // Flags
-    private boolean scoreMoves;
-    private boolean hpAware;
+    private final boolean scoreMoves;
+    private final boolean hpAware;
 
     /**
      * Constructs an EnemyAiAttack instance.
      *
      * @param scoreMoves   if true, the AI will evaluate move effectiveness
      * @param hpAware      if true, the AI will take into account potential damage
-     * @param enenmyTrainer the Trainer object representing the enemy's team
+     * @param enemyTrainer the Trainer object representing the enemy's team
      */
     public EnemyAiAttack(final boolean scoreMoves, final boolean hpAware,
             final Trainer enemyTrainer) {

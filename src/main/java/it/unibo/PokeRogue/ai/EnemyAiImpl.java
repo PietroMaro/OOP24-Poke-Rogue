@@ -14,7 +14,7 @@ import it.unibo.PokeRogue.trainers.Trainer;
  * or attack intelligently. It adjusts its behavior dynamically using internal
  * flags set during construction.
  */
-public class EnemyAiImpl implements EnemyAi {
+public final class EnemyAiImpl implements EnemyAi {
 
     private static final int LOW_AI_THRESHOLD = 15;
     private static final int MEDIUM_AI_THRESHOLD = 40;
@@ -59,7 +59,7 @@ public class EnemyAiImpl implements EnemyAi {
      * @return a list of strings representing the chosen action and related data
      */
     public List<String> nextMove(final Optional<Weather> weather) {
-        List<String> decision = this.aiOfSwitchIn.willSwitchIn();
+        List<String> decision = this.aiOfSwitchIn.evaluateSwitchIn();
 
         if ("SwitchIn".equals(decision.get(0))) {
             return decision;

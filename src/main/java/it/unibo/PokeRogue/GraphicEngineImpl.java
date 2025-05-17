@@ -24,9 +24,9 @@ import it.unibo.PokeRogue.inputHandling.InputHandlerImpl;
  * The class follows the Singleton pattern to maintain only one instance
  * of the graphic engine throughout the game.
  */
-public class GraphicEngineImpl extends SingletonImpl implements GraphicEngine {
-    JFrame gameWindow;
-    Map<String, PanelElementImpl> allPanelElements;
+public final class GraphicEngineImpl extends SingletonImpl implements GraphicEngine {
+    private final JFrame gameWindow;
+    private Map<String, PanelElementImpl> allPanelElements;
 
     public GraphicEngineImpl() {
         this.gameWindow = new JFrame("Pokérogue Lite");
@@ -53,14 +53,14 @@ public class GraphicEngineImpl extends SingletonImpl implements GraphicEngine {
      * until the logic for rendering the elements is provided.
      * 
      * @param allGraphicElements a map containing the identifiers and graphical
-     *                          representations
-     *                          of the elements to be drawn.
+     *                           representations
+     *                           of the elements to be drawn.
      */
 
     @Override
-    public void drawScene(Map<Integer, GraphicElementImpl> allGraphicElements) {
+    public void drawScene(final Map<Integer, GraphicElementImpl> allGraphicElements) {
 
-        for (GraphicElementImpl graphicElement : allGraphicElements.values()) {
+        for (final GraphicElementImpl graphicElement : allGraphicElements.values()) {
             switch (graphicElement) {
                 case ButtonElementImpl button -> drawButtonGraphicElement(button);
                 case TextElementImpl text -> drawTextGraphicElement(text);
@@ -78,13 +78,13 @@ public class GraphicEngineImpl extends SingletonImpl implements GraphicEngine {
     }
 
     @Override
-    public void createPanels(Map<String, PanelElementImpl> panelElements) {
+    public void createPanels(final Map<String, PanelElementImpl> panelElements) {
         this.gameWindow.getContentPane().removeAll();
 
         this.allPanelElements = panelElements;
 
-        for (Map.Entry<String, PanelElementImpl> entry : allPanelElements.entrySet()) {
-            PanelElementImpl panel = entry.getValue();
+        for (final Map.Entry<String, PanelElementImpl> entry : allPanelElements.entrySet()) {
+            final PanelElementImpl panel = entry.getValue();
             panel.removeAll();
 
             if (!panel.getPanelName().isEmpty()) {
@@ -96,28 +96,28 @@ public class GraphicEngineImpl extends SingletonImpl implements GraphicEngine {
 
     }
 
-    private void drawBoxGraphicElement(BoxElementImpl boxToDraw) {
+    private void drawBoxGraphicElement(final BoxElementImpl boxToDraw) {
 
         allPanelElements.get(boxToDraw.getPanelName()).add(boxToDraw);
 
     }
 
-    private void drawSpriteGraphicElement(SpriteElementImpl spriteToDraw) {
+    private void drawSpriteGraphicElement(final SpriteElementImpl spriteToDraw) {
         allPanelElements.get(spriteToDraw.getPanelName()).add(spriteToDraw);
 
     }
 
-    private void drawButtonGraphicElement(ButtonElementImpl buttonToDraw) {
+    private void drawButtonGraphicElement(final ButtonElementImpl buttonToDraw) {
         drawBoxGraphicElement(buttonToDraw.getButtonBox());
 
     }
 
-    private void drawBackgroundGraphicElement(BackgroundElementImpl BackgroundToDraw) {
-        drawSpriteGraphicElement(BackgroundToDraw.getBackgroundSprite());
+    private void drawBackgroundGraphicElement(final BackgroundElementImpl backgroundToDraw) {
+        drawSpriteGraphicElement(backgroundToDraw.getBackgroundSprite());
 
     }
 
-    private void drawTextGraphicElement(TextElementImpl textToDraw) {
+    private void drawTextGraphicElement(final TextElementImpl textToDraw) {
         allPanelElements.get(textToDraw.getPanelName()).add(textToDraw);
     }
 

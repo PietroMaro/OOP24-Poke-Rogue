@@ -1,5 +1,4 @@
 package it.unibo.PokeRogue.graphic.panel;
 
-public interface PanelElement {
-    
+public interface PanelElement {    
 }

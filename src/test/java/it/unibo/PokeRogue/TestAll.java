@@ -4,18 +4,21 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.json.JSONObject;
-import java.nio.file.*;
+
+import java.util.List;
 import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Optional;
 
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.pokemon.PokemonFactoryImpl;
-import it.unibo.PokeRogue.pokemon.PokemonImpl;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.TrainerImpl;
 import it.unibo.PokeRogue.move.Move;
@@ -27,16 +30,12 @@ import it.unibo.PokeRogue.ability.AbilityFactoryImpl;
 import it.unibo.PokeRogue.ability.AbilitySituationChecks;
 import it.unibo.PokeRogue.ai.EnemyAi;
 import it.unibo.PokeRogue.ai.EnemyAiImpl;
-import it.unibo.PokeRogue.effectParser.EffectParser;
 import it.unibo.PokeRogue.effectParser.EffectParserImpl;
 import it.unibo.PokeRogue.pokemon.Type;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 import it.unibo.PokeRogue.utilities.PokeEffectivenessCalc;
 import it.unibo.PokeRogue.utilities.PokeEffectivenessCalcImpl;
-import it.unibo.PokeRogue.utilities.PokemonBattleUtil;
-import it.unibo.PokeRogue.utilities.PokemonBattleUtilImpl;
-import it.unibo.PokeRogue.utilities.RangeImpl;
 
 public class TestAll {
 
@@ -47,12 +46,12 @@ public class TestAll {
 
 	@Test
 	public void testPlayerTrainer() {
-		PlayerTrainerImpl p1 = PlayerTrainerImpl.getTrainerInstance();
-		PlayerTrainerImpl p2 = PlayerTrainerImpl.getTrainerInstance();
-		PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+		final PlayerTrainerImpl p1 = PlayerTrainerImpl.getTrainerInstance();
+		final PlayerTrainerImpl p2 = PlayerTrainerImpl.getTrainerInstance();
+		final PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
 
-		Pokemon bulbasaur = pokeFactory.pokemonFromName("bulbasaur");
-		Pokemon ivysaur = pokeFactory.pokemonFromName("ivysaur");
+		final Pokemon bulbasaur = pokeFactory.pokemonFromName("bulbasaur");
+		final Pokemon ivysaur = pokeFactory.pokemonFromName("ivysaur");
 
 		p1.addPokemon(ivysaur, 3);
 		p2.addPokemon(bulbasaur, 3);
@@ -168,12 +167,12 @@ public class TestAll {
 
 	@Test
 	public void testEffectivenessCalculator() {
-		PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
-		PokeEffectivenessCalc calculator = new PokeEffectivenessCalcImpl();
+		final PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+		final PokeEffectivenessCalc calculator = new PokeEffectivenessCalcImpl();
 
-		Pokemon charmander = pokeFactory.pokemonFromName("charmander");
-		Pokemon venusaur = pokeFactory.pokemonFromName("venusaur");
-		Pokemon poliwag = pokeFactory.pokemonFromName("poliwag");
+		final Pokemon charmander = pokeFactory.pokemonFromName("charmander");
+		final Pokemon venusaur = pokeFactory.pokemonFromName("venusaur");
+		final Pokemon poliwag = pokeFactory.pokemonFromName("poliwag");
 
 		assertEquals(calculator.calculateEffectiveness(charmander, venusaur), 160);
 		assertEquals(calculator.calculateEffectiveness(venusaur, poliwag), 120);
@@ -183,14 +182,14 @@ public class TestAll {
 
 	@Test
 	public void testAi() {
-		PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
-		PlayerTrainerImpl playerTrainerImpl = PlayerTrainerImpl.getTrainerInstance();
-		TrainerImpl enemyTrainer = new TrainerImpl();
-		Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
-		EnemyAi ai = new EnemyAiImpl(enemyTrainer, 99);
-		Pokemon charmander = pokeFactory.pokemonFromName("charmander");
-		Pokemon venusaur = pokeFactory.pokemonFromName("venusaur");
-		Pokemon poliwag = pokeFactory.pokemonFromName("poliwag");
+		final PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+		final PlayerTrainerImpl playerTrainerImpl = PlayerTrainerImpl.getTrainerInstance();
+		final TrainerImpl enemyTrainer = new TrainerImpl();
+		final Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
+		final EnemyAi ai = new EnemyAiImpl(enemyTrainer, 99);
+		final Pokemon charmander = pokeFactory.pokemonFromName("charmander");
+		final Pokemon venusaur = pokeFactory.pokemonFromName("venusaur");
+		final Pokemon poliwag = pokeFactory.pokemonFromName("poliwag");
 
 		playerTrainerImpl.addPokemon(poliwag, 6);
 		enemyTrainer.addPokemon(charmander, 6);

@@ -21,7 +21,9 @@ import it.unibo.PokeRogue.utilities.PokeEffectivenessCalcImpl;
  * This logic considers various factors such as the order of the squad,
  * type matchups, and whether the AI is configured to make strategic switches.
  */
-public class EnemyAiSwitchIn {
+public final class EnemyAiSwitchIn {
+
+    private static final int MAX_TRAINER_SQUAD_SIZE = 6;
 
     private final Trainer enemyTrainer;
     private final PlayerTrainerImpl playerTrainerInstance;
@@ -33,9 +35,9 @@ public class EnemyAiSwitchIn {
 
     // Flags
 
-    private boolean usePokemonInOrder;
-    private boolean considerSwitching;
-    private int switchFirstRate;
+    private final boolean usePokemonInOrder;
+    private final boolean considerSwitching;
+    private final int switchFirstRate;
 
     /**
      * Constructs an EnemyAiSwitchIn instance with behavior flags.
@@ -64,7 +66,7 @@ public class EnemyAiSwitchIn {
      * @return a list containing the action ("SwitchIn" or "Nothing") and additional
      *         info (like index)
      */
-    protected List<String> willSwitchIn() {
+    protected List<String> evaluateSwitchIn() {
 
         if (enemyTrainer.getPokemon(1).isPresent() && shouldSwitch()) {
 
@@ -115,8 +117,8 @@ public class EnemyAiSwitchIn {
         final Pokemon currentPokemon = this.enemyTrainer.getPokemon(0).get();
         boolean canSwitch = false;
 
-        for(Optional<Pokemon> pokemon : enemyTrainer.getSquad().subList(1, 6)){
-            if(pokemon.isPresent() && pokemon.get().getActualStats().get("hp").getCurrentValue() > 0){
+        for (final Optional<Pokemon> pokemon : enemyTrainer.getSquad().subList(1, MAX_TRAINER_SQUAD_SIZE)) {
+            if (pokemon.isPresent() && pokemon.get().getActualStats().get("hp").getCurrentValue() > 0) {
                 canSwitch = true;
                 break;
             }
@@ -149,7 +151,7 @@ public class EnemyAiSwitchIn {
      * order).
      */
     private void orderSwitchIn() {
-        for (int pokePos = 1; pokePos < 6; pokePos++) {
+        for (int pokePos = 1; pokePos < MAX_TRAINER_SQUAD_SIZE; pokePos++) {
             if (this.isPokemonAlive(pokePos)) {
                 switchPosition = pokePos;
                 break;
@@ -164,13 +166,11 @@ public class EnemyAiSwitchIn {
     private void typeBasedSwitchIn() {
         final List<Integer> scores = this.fromSetToReversList(this.pokeInSquadScore.keySet());
 
-        for (int scorePos = 0; scorePos < scores.size(); scorePos++) {
-
+        for (final Integer score : scores) {
             if (this.random.nextInt(100) < this.switchFirstRate) {
-                this.switchPosition = this.pokeInSquadScore.get(scores.get(scorePos));
+                this.switchPosition = this.pokeInSquadScore.get(score);
                 return;
             }
-
         }
 
         this.switchPosition = pokeInSquadScore.get(scores.get(scores.size() - 1));
@@ -197,7 +197,7 @@ public class EnemyAiSwitchIn {
         this.pokeInSquadScore.clear();
         int effectiveness;
 
-        for (int pokePos = 1; pokePos < 6; pokePos++) {
+        for (int pokePos = 1; pokePos < MAX_TRAINER_SQUAD_SIZE; pokePos++) {
             if (this.enemyTrainer.getPokemon(pokePos).isPresent() && this.isPokemonAlive(pokePos)) {
                 effectiveness = this.calculateEffectivenessDifference(pokePos, 0);
                 if (!this.pokeInSquadScore.containsKey(effectiveness) || random.nextInt(100) < 50) {
@@ -217,7 +217,7 @@ public class EnemyAiSwitchIn {
      * @return a reversed and sorted list of scores
      */
     private List<Integer> fromSetToReversList(final Set<Integer> set) {
-        List<Integer> listFromSet = new ArrayList<>(set);
+        final List<Integer> listFromSet = new ArrayList<>(set);
 
         listFromSet.sort(Collections.reverseOrder());
 

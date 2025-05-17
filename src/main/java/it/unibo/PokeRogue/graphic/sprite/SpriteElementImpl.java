@@ -11,14 +11,15 @@ import java.util.logging.Level;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 
-public class SpriteElementImpl extends GraphicElementImpl implements SpriteElement {
+public final class SpriteElementImpl extends GraphicElementImpl implements SpriteElement {
+    private static final long serialVersionUID = 1L;
+    private static final Logger LOGGER = Logger.getLogger(SpriteElementImpl.class.getName());
 
     private Image spriteImage;
-    final private double leftUpX;
-    final private double leftUpy;
-    final private double width;
-    final private double height;
-    private static final Logger LOGGER = Logger.getLogger(SpriteElementImpl.class.getName());
+    private final double leftUpX;
+    private final double leftUpy;
+    private final double width;
+    private final double height;
 
     public SpriteElementImpl(final String panelName, final String pathToImage, final double leftUpX,
             final double leftUpy, final double width,

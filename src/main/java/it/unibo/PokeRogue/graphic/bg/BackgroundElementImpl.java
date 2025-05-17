@@ -5,11 +5,12 @@ import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
 import lombok.Getter;
 
 @Getter
-public class BackgroundElementImpl extends GraphicElementImpl implements BackgroundElement {
+public final class BackgroundElementImpl extends GraphicElementImpl implements BackgroundElement {
+    private static final long serialVersionUID = 1L;
 
-    SpriteElementImpl backgroundSprite;
+    final SpriteElementImpl backgroundSprite;
 
-    public BackgroundElementImpl(String panelName, String pathToImage) {
+    public BackgroundElementImpl(final String panelName, final String pathToImage) {
         super(panelName);
 
         backgroundSprite = new SpriteElementImpl(panelName, pathToImage, 0, 0, 1, 1);

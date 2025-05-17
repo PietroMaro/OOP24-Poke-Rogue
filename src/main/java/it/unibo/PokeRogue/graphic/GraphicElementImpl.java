@@ -9,15 +9,16 @@ import lombok.Getter;
 @Getter
 public class GraphicElementImpl extends JLayeredPane implements GraphicElement {
 
-    private String panelName;
     private static final long serialVersionUID = 1L;
 
-    public GraphicElementImpl(String panelName) {
+    private final String panelName;
+
+    public GraphicElementImpl(final String panelName) {
         this.panelName = panelName;
     }
 
     @Override
-    protected void paintComponent(Graphics drawEngine) {
+    protected void paintComponent(final Graphics drawEngine) {
         super.paintComponent(drawEngine);
 
     }

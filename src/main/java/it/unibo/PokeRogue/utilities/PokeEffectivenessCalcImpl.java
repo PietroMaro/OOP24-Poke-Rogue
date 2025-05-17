@@ -31,7 +31,7 @@ import it.unibo.PokeRogue.pokemon.Type;
  *
  * 
  */
-public class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
+public final class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
 
     private final Map<Type, Map<Type, Double>> effectiveness = new EnumMap<>(Type.class);
     private final Map<Double, Integer> effectivenessValueCalculator = new HashMap<>();

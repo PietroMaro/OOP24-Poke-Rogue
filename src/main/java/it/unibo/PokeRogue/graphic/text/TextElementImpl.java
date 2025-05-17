@@ -11,16 +11,14 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-public class TextElementImpl extends GraphicElementImpl {
-
-
+public final class TextElementImpl extends GraphicElementImpl {
 
     @Getter
-    final private String text;
-    final private double leftX;
-    final private double leftY;
-    final private Color textColor;
-    final private double textFont;
+    private final String text;
+    private final double leftX;
+    private final double leftY;
+    private final Color textColor;
+    private final double textFont;
 
     public TextElementImpl(final String panelName, final String text, final Color textColor, final double textDimension,
             final double leftX,

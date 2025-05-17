@@ -9,11 +9,12 @@ import lombok.Getter;
 
 @Getter
 public class TrainerImpl implements Trainer {
-    final private List<Optional<Pokemon>> squad;
+    private final List<Optional<Pokemon>> squad;
+    private static final int MAX_SQUAD_SIZE= 6 ;
 
     public TrainerImpl() {
         this.squad = new ArrayList<>();
-        for (int pokeSquadPosition = 0; pokeSquadPosition < 6; pokeSquadPosition++) {
+        for (int pokeSquadPosition = 0; pokeSquadPosition < MAX_SQUAD_SIZE; pokeSquadPosition++) {
             squad.add(Optional.empty());
         }
     }

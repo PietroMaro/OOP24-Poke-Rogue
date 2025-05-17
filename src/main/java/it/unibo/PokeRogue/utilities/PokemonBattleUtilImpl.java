@@ -16,10 +16,10 @@ import it.unibo.PokeRogue.pokemon.Type;
  * This implementation assumes simplified mechanics and is intended
  * for use within the PokeRogue battle system.
  */
-public class PokemonBattleUtilImpl implements PokemonBattleUtil {
+public final class PokemonBattleUtilImpl implements PokemonBattleUtil {
 
-    final private Random random;
-    final private PokeEffectivenessCalc pokeEffectivenessCalc;
+    private final Random random;
+    private final PokeEffectivenessCalc pokeEffectivenessCalc;
 
     /**
      * Constructs a new PokemonBattleUtilImpl with a default random generator
@@ -70,7 +70,6 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
         baseDamage = (2 * attackingPokemon.getLevel().getCurrentValue() / 5 + 2)
                 * attackChosen.getBaseDamage() * attackDefenseDifference / 50;
 
-
         damageWithEnvironment = baseDamage * burn * weatherEffect + 2;
 
         totalDamage = damageWithEnvironment * criticalBonus * randomNumber * moveTypeBonus * stabBonus;
@@ -86,6 +85,14 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
      * If the defending Pokémon's stat is 0, the method returns the attacking
      * Pokémon's stat value to avoid division by zero.
      *
+     * @param attackingPokemon the attacking Pokémon
+     * @param defendingPokemon the defending Pokémon
+     * @param attackStatName   the name of the attack stat (e.g., "attack" or
+     *                         "specialAttack")
+     * @param defenseStatName  the name of the defense stat (e.g., "defense" or
+     *                         "specialDefense")
+     * @return the ratio of the attacker's attack stat to the defender's defense
+     *         stat, or the attack stat value if the defense stat is zero
      */
     private int computeOffenseDefenseRatio(final Pokemon attackingPokemon, final Pokemon defendingPokemon,
             final String attackStatName, final String defenseStatName) {
@@ -107,6 +114,11 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
      * "defense".
      * If the move is special, it uses the attacker's "specialAttack" and the
      * defender's "specialDefense".
+     * 
+     * @param attackingPokemon the attacking Pokémon
+     * @param defendingPokemon the defending Pokémon
+     * @param attackChosen     the move chosen
+     * @return the attack-defense ratio as a double
      */
     private double calculateAttackDefenseDifference(final Pokemon attackingPokemon, final Pokemon defendingPokemon,
             final Move attackChosen) {
@@ -130,6 +142,10 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
     /**
      * Returns a burn penalty multiplier (0.5 if the attacker is burned
      * and does not have the 'guts' ability, 1 otherwise).
+     * 
+     * @param attackingPokemon the attacking Pokémon
+     * @param attackChosen     the move used
+     * @return the burn multiplier (0.5 or 1.0)
      */
     private double checkBurn(final Pokemon attackingPokemon, final Move attackChosen) {
 
@@ -147,6 +163,10 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
     /**
      * Returns a weather-based multiplier (e.g. fire in sunlight: 1.5x,
      * fire in rain: 0.5x, etc.).
+     * 
+     * @param attackChosen   the move used
+     * @param currentWeather an optional current weather condition
+     * @return the damage multiplier due to weather effects
      */
     private double calculateWeatherEffect(final Move attackChosen, final Optional<Weather> currentWeather) {
 
@@ -179,6 +199,10 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
     /**
      * Returns the critical hit multiplier (1 if not a crit, 2 by default,
      * 3 if the attacker has the 'sniper' ability).
+     * 
+     * @param attackingPokemon the attacking Pokémon
+     * @param attackChosen     the move used
+     * @return the critical hit multiplier (1, 2, or 3)
      */
     private int criticalBonus(final Pokemon attackingPokemon, final Move attackChosen) {
 
@@ -199,6 +223,10 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
     /**
      * Returns the STAB multiplier (1.5 if the move type matches one of
      * the Pokémon's types, 1 otherwise).
+     * 
+     * @param attackingPokemon the attacking Pokémon
+     * @param attackChosen     the move used
+     * @return the STAB multiplier (1 or 1.5)
      */
     private double stabMultiplier(final Pokemon attackingPokemon, final Move attackChosen) {
 

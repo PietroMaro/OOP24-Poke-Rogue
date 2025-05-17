@@ -1,5 +1,7 @@
 package it.unibo.PokeRogue;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.scene.sceneBox.SceneBox;
 import it.unibo.PokeRogue.scene.sceneLoad.SceneLoad;
@@ -17,14 +19,16 @@ import it.unibo.PokeRogue.scene.sceneMenu.SceneMenu;
  * This class is responsible for managing the transition between scenes and
  * other game-related operations.
  */
-public class GameEngineImpl extends SingletonImpl implements GameEngine {
+public final class GameEngineImpl extends SingletonImpl implements GameEngine {
+
+    private static final Logger LOGGER = Logger.getLogger(GameEngineImpl.class.getName());
 
     private GraphicEngine graphicEngineInstance;
     private Scene currentScene;
     private String fileToLoadName;
 
-    public GameEngineImpl() {
-
+    protected GameEngineImpl() {
+        super();
     }
 
     /**
@@ -64,9 +68,11 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
 
     }
 
+    @Override
     public void keyPressedToScene(final int keyCode) {
         if (this.currentScene == null) {
-            System.out.println("No active scene");
+            LOGGER.log(Level.WARNING, "No active scene");
+
             return;
         }
         this.currentScene.updateStatus(keyCode);
@@ -76,12 +82,14 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
 
     }
 
+    @Override
     public void setGraphicEngine(final GraphicEngine graphicEngine) {
 
         this.graphicEngineInstance = graphicEngine;
 
     }
 
+    @Override
     public void setFileToLoad(final String fileName) {
         this.fileToLoadName = fileName;
     }

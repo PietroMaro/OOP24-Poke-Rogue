@@ -14,7 +14,11 @@ import it.unibo.PokeRogue.pokemon.TypeColors;
  * If the type is not recognized, it returns black as a default.
  * 
  */
-public class ColorTypeConversion {
+public final class ColorTypeConversion {
+
+    private ColorTypeConversion(){
+        
+    }
 
     /**
      * Returns the {@link Color} associated with the given Pokemon {@link Type}.

@@ -11,7 +11,7 @@ import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
  * Implementation of {@link UtilitiesForScenes} that provides utility methods
  * to manage scene-related resources and UI elements.
  */
-public class UtilitiesForScenesImpl implements UtilitiesForScenes {
+public final class UtilitiesForScenesImpl implements UtilitiesForScenes {
 
     private final String sceneDirName;
     private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
