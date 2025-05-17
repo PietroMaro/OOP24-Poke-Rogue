@@ -1,5 +1,6 @@
 package it.unibo.PokeRogue.scene.sceneMenu;
 
+import java.io.IOException;
 import java.awt.event.KeyEvent;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -74,8 +75,7 @@ public class SceneMenu implements Scene {
      * @param inputKey the key code from {@link KeyEvent}.
      */
     @Override
-    public void updateStatus(final int inputKey) {
-
+    public void updateStatus(final int inputKey) throws IOException {
         switch (inputKey) {
             case KeyEvent.VK_UP:
                 this.currentSelectedButton = SceneMenuGraphicEnum.nextButtonsNames(this.currentSelectedButton);

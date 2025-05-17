@@ -1,5 +1,7 @@
 package it.unibo.PokeRogue;
 
+import java.io.IOException;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import it.unibo.PokeRogue.scene.Scene;
@@ -43,7 +45,7 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
      * @param newScene the name of the new scene to load
      */
     @Override
-    public void setScene(final String newScene) {
+    public void setScene(final String newScene) throws IOException {
         switch (newScene) {
             case "main":
                 currentScene = new SceneMenu();
@@ -70,7 +72,7 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
     }
 
     @Override
-    public void keyPressedToScene(final int keyCode) {
+    public void keyPressedToScene(final int keyCode) throws IOException {
         if (this.currentScene == null) {
             LOGGER.log(Level.WARNING, "No active scene");
 

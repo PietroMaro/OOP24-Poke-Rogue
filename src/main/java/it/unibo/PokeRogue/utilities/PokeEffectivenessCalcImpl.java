@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.json.JSONObject;
+import java.io.IOException;
 
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.pokemon.Pokemon;
@@ -39,7 +40,7 @@ public final class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
     /**
      * Constructs the effectiveness calculator and loads data from the JSON file.
      */
-    public PokeEffectivenessCalcImpl() {
+    public PokeEffectivenessCalcImpl() throws IOException {
         this.effectivenessValueCalculator.put(4.0, 160);
         this.effectivenessValueCalculator.put(2.0, 80);
         this.effectivenessValueCalculator.put(1.0, 40);

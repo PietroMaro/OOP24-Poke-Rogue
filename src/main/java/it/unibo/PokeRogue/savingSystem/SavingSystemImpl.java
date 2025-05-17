@@ -2,6 +2,7 @@ package it.unibo.PokeRogue.savingSystem;
 
 import java.util.List;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import org.json.JSONArray;
@@ -27,12 +28,12 @@ public class SavingSystemImpl extends Singleton implements SavingSystem {
 	}
 
 	@Override
-	public void loadData(String path) {
+	public void loadData(String path) throws IOException {
 		this.savedPokemon = jsonReader.readJsonArray(path);
 	}
 
 	@Override
-	public void saveData(String path, String fileName) {
+	public void saveData(String path, String fileName) throws IOException {
 		File file = new File(path, fileName);
 
 		try {
@@ -46,12 +47,12 @@ public class SavingSystemImpl extends Singleton implements SavingSystem {
 
 	@Override
 	public List<List<String>> getSavedPokemon() {
-		List<List<String>> result = new ArrayList<>();
-		List<String> newBox = new ArrayList<>();
+		final List<List<String>> result = new ArrayList<>();
+		final List<String> newBox = new ArrayList<>();
 		for (int pokemonIndex = 0; pokemonIndex < this.savedPokemon.length(); pokemonIndex += 1) {
 			if (newBox.size() >= 81) {
 				result.add(newBox);
-				newBox = new ArrayList<>();
+				newBox.clear();
 			}
 			newBox.add(this.savedPokemon.getString(pokemonIndex));
 		}
@@ -63,8 +64,8 @@ public class SavingSystemImpl extends Singleton implements SavingSystem {
 
 	@Override
 	public List<String> getSaveFilesName(String dirPath) {
-		List<String> jsonFiles = new ArrayList<>();
-		File directory = new File(dirPath);
+		final List<String> jsonFiles = new ArrayList<>();
+		final File directory = new File(dirPath);
 
 		if (directory.exists() && directory.isDirectory()) {
 			File[] files = directory.listFiles((dir, name) -> name.toLowerCase().endsWith(".json"));
@@ -79,7 +80,7 @@ public class SavingSystemImpl extends Singleton implements SavingSystem {
 	}
 
 	@Override
-	public int howManyPokemonInSave(final String path) {
+	public int howManyPokemonInSave(final String path) throws IOException {
 		final JSONArray boxPokemons = jsonReader.readJsonArray(path);
 		return boxPokemons.length();
 	}

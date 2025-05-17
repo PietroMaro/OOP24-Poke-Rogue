@@ -8,6 +8,7 @@ import it.unibo.PokeRogue.ability.AbilitySituationChecks;
 import java.util.Map;
 import java.util.HashMap;
 
+import java.io.IOException;
 import java.nio.file.Paths;
 
 import org.json.JSONObject;
@@ -20,12 +21,12 @@ public class AbilityFactoryImpl extends Singleton implements AbilityFactory{
 	final private JsonReader jsonReader = new JsonReaderImpl();
 	final private Map<String,Ability> abilityBlueprints = new HashMap<String,Ability>();
 	
-	public AbilityFactoryImpl(){
+	public AbilityFactoryImpl() throws IOException {
 		init();
 	}
 	
 	@Override
-    public void init(){
+    public void init() throws IOException {
 		JSONArray allAbilityJson;
 		allAbilityJson = jsonReader.readJsonArray(Paths.get("src","pokemon_data","abilitiesList.json").toString());
 		for(int abilityIndex = 0; abilityIndex < allAbilityJson.length(); abilityIndex +=1 ){
@@ -33,7 +34,7 @@ public class AbilityFactoryImpl extends Singleton implements AbilityFactory{
 		}
 	}
 
-	private void addAbilityToBlueprints(final String abilityName){
+	private void addAbilityToBlueprints(final String abilityName) throws IOException {
 		JSONObject abilityJson;
         abilityJson = jsonReader.readJsonObject(Paths.get("src","pokemon_data","abilities",abilityName +".json").toString());
 		AbilitySituationChecks situationChecks  = AbilitySituationChecks.fromString(abilityJson.getString("situationChecks"));

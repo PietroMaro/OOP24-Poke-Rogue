@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.io.IOException;
 
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
@@ -69,7 +70,7 @@ public class SceneBox implements Scene {
          *
          * @param savePath the path to the save file used to initialize the scene data
          */
-        public SceneBox(final String savePath) {
+        public SceneBox(final String savePath) throws IOException {
                 this.sceneGraphicElements = new LinkedHashMap<>();
                 this.allPanelsElements = new LinkedHashMap<>();
                 this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
@@ -98,7 +99,7 @@ public class SceneBox implements Scene {
          * @param inputKey the key event received from the user
          */
         @Override
-        public void updateStatus(final int inputKey) {
+        public void updateStatus(final int inputKey) throws IOException {
 
                 switch (inputKey) {
                         case KeyEvent.VK_UP:

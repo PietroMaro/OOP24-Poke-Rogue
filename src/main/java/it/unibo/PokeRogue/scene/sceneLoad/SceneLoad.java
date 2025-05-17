@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.io.IOException;
 
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
@@ -66,7 +67,7 @@ public class SceneLoad implements Scene {
      * Constructs a new {@code SceneLoad} object, initializing internal structures
      * and retrieving the list of saves.
      */
-    public SceneLoad() {
+    public SceneLoad() throws IOException {
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
@@ -90,7 +91,7 @@ public class SceneLoad implements Scene {
      * 
      */
     @Override
-    public void updateGraphic() {
+    public void updateGraphic() throws IOException {
         this.utilityClass.setButtonStatus(this.selectedSave % NUMBER_OF_SAVE_SHOWED, false);
 
         // Going down the saves list
@@ -123,7 +124,7 @@ public class SceneLoad implements Scene {
      * 
      */
     @Override
-    public void updateStatus(final int inputKey) {
+    public void updateStatus(final int inputKey) throws IOException {
 
         switch (inputKey) {
             case KeyEvent.VK_UP:
@@ -175,7 +176,7 @@ public class SceneLoad implements Scene {
      * save.
      * 
      */
-    private void initGraphicElements() {
+    private void initGraphicElements() throws IOException {
 
         this.sceneLoadView.initGraphicElements();
 
@@ -196,7 +197,7 @@ public class SceneLoad implements Scene {
      * @param savesListStart the starting index in the list of save files to
      *                       display.
      */
-    private void showSaves(final int savesListStart) {
+    private void showSaves(final int savesListStart) throws IOException {
         this.sceneLoadView.showSaves(savesListStart, savesList, savingSystemInstance);
     }
 

@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
+import java.io.IOException;
 
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
@@ -48,7 +49,7 @@ public final class EnemyAiSwitchIn {
      * @param enemyTrainer      the AI-controlled trainer
      */
     public EnemyAiSwitchIn(final boolean usePokemonInOrder, final boolean considerSwitching, final int switchFirstRate,
-            final Trainer enemyTrainer) {
+            final Trainer enemyTrainer) throws IOException {
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
         this.pokeEffectivenessCalculator = new PokeEffectivenessCalcImpl();
         pokeInSquadScore = new HashMap<>();

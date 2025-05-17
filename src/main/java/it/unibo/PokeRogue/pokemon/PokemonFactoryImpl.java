@@ -30,12 +30,12 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory{
 	final private Set<String> allPokemonSet = new HashSet<String>();
 	final private Map<String,PokemonBlueprint> pokemonBlueprints = new HashMap<String,PokemonBlueprint>();
 	
-	public PokemonFactoryImpl(){
+	public PokemonFactoryImpl() throws IOException {
 		init();
 	}
 	
 	@Override
-    public void init(){
+    public void init() throws IOException {
 		JSONArray allPokemonJson;
 		allPokemonJson = jsonReader.readJsonArray(Paths.get("src","pokemon_data","pokemonList.json").toString());
 		for(int pokemonIndex = 0; pokemonIndex < allPokemonJson.length(); pokemonIndex +=1 ){
@@ -43,7 +43,7 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory{
 		}
 	}
 
-	private void addPokemonToBlueprints(final String pokemonName){
+	private void addPokemonToBlueprints(final String pokemonName) throws IOException {
 		JSONObject pokemonJson;
         pokemonJson = jsonReader.readJsonObject(Paths.get("src","pokemon_data","pokemon","data",pokemonName+".json").toString());
 		int pokedexNumber = pokemonJson.getInt("pokedexNumber");

@@ -3,6 +3,7 @@ package it.unibo.PokeRogue.scene.sceneLoad;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
+import java.io.IOException;
 
 import javax.swing.OverlayLayout;
 
@@ -71,7 +72,7 @@ public class SceneLoadView {
      *                             save details
      */
     protected void showSaves(final int savesListStart, final List<String> savesList,
-            final SavingSystem savingSystemInstance) {
+            final SavingSystem savingSystemInstance) throws IOException {
         String savesName;
         int boxPokemonNumber;
         for (int x = 0; x < 10; x++) {

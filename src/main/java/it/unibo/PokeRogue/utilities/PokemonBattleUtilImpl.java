@@ -2,6 +2,7 @@ package it.unibo.PokeRogue.utilities;
 
 import java.util.Optional;
 import java.util.Random;
+import java.io.IOException;
 
 import it.unibo.PokeRogue.Weather;
 import it.unibo.PokeRogue.move.Move;
@@ -25,7 +26,7 @@ public final class PokemonBattleUtilImpl implements PokemonBattleUtil {
      * Constructs a new PokemonBattleUtilImpl with a default random generator
      * and an instance of the type effectiveness calculator.
      */
-    public PokemonBattleUtilImpl() {
+    public PokemonBattleUtilImpl() throws IOException {
         this.random = new Random();
         this.pokeEffectivenessCalc = new PokeEffectivenessCalcImpl();
 

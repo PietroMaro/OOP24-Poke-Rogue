@@ -3,6 +3,7 @@ package it.unibo.PokeRogue.scene.sceneBox;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.IOException;
 
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.pokemon.PokemonFactory;
@@ -36,7 +37,7 @@ public class SceneBoxModel {
      * @param savePath The path to the save file. If empty, default Pokémon are
      *                 saved.
      */
-    protected void setUpSave(final String savePath) {
+    protected void setUpSave(final String savePath) throws IOException {
         if ("".equals(savePath)) {
             this.savingSystemInstance.savePokemon(pokemonFactoryInstance.pokemonFromName("bulbasaur"));
             this.savingSystemInstance.savePokemon(pokemonFactoryInstance.pokemonFromName("charmander"));

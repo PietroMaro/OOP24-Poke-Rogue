@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
+import java.io.IOException;
 
 import it.unibo.PokeRogue.Weather;
 import it.unibo.PokeRogue.move.Move;
@@ -49,7 +50,7 @@ public final class EnemyAiAttack {
      * @param enemyTrainer the Trainer object representing the enemy's team
      */
     public EnemyAiAttack(final boolean scoreMoves, final boolean hpAware,
-            final Trainer enemyTrainer) {
+            final Trainer enemyTrainer) throws IOException {
         this.random = new Random();
         this.damageCalculator = new PokemonBattleUtilImpl();
         this.pokeEffectivenessCalculator = new PokeEffectivenessCalcImpl();

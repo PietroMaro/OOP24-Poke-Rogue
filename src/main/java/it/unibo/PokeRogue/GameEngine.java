@@ -1,4 +1,5 @@
 package it.unibo.PokeRogue;
+import java.io.IOException;
 
 /**
  * Interface representing the game engine of an application.
@@ -17,9 +18,9 @@ public interface GameEngine {
      * 
      * @param newScene the name of the new scene to load
      */
-    void setScene(String newScene);
+    void setScene(String newScene) throws IOException;
 
-    void keyPressedToScene(int keyCode);
+    void keyPressedToScene(int keyCode) throws IOException ;
 
     void setGraphicEngine(GraphicEngine graphicEngine);
 

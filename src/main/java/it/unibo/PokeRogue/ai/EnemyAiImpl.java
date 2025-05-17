@@ -2,6 +2,7 @@ package it.unibo.PokeRogue.ai;
 
 import java.util.List;
 import java.util.Optional;
+import java.io.IOException;
 
 import it.unibo.PokeRogue.Weather;
 import it.unibo.PokeRogue.trainers.Trainer;
@@ -38,7 +39,7 @@ public final class EnemyAiImpl implements EnemyAi {
      * @param enemyTrainer the enemy trainer to control
      * @param battleLvl    the current battle difficulty level
      */
-    public EnemyAiImpl(final Trainer enemyTrainer, final int battleLvl) {
+    public EnemyAiImpl(final Trainer enemyTrainer, final int battleLvl) throws IOException {
         this.enemyTrainer = enemyTrainer;
         this.battleLvl = battleLvl;
         this.initFlags();
@@ -47,7 +48,6 @@ public final class EnemyAiImpl implements EnemyAi {
                 this.enemyTrainer);
 
         this.aiOfAttack = new EnemyAiAttack(scoreMoves, hpAware, enemyTrainer);
-
     }
 
     /**
