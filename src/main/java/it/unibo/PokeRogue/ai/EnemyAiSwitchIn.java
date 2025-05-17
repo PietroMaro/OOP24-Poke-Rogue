@@ -66,6 +66,8 @@ public class EnemyAiSwitchIn {
      */
     protected List<String> willSwitchIn() {
 
+      
+
         if (enemyTrainer.getPokemon(1).isPresent() && shouldSwitch()) {
 
             return List.of("SwitchIn", String.valueOf(this.switchPosition));
