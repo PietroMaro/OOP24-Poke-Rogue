@@ -1,6 +1,6 @@
 package it.unibo.PokeRogue.ability;
 
-import it.unibo.PokeRogue.SingletonImpl;
+import it.unibo.PokeRogue.Singleton;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 import it.unibo.PokeRogue.ability.AbilitySituationChecks;
@@ -14,7 +14,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 
-public class AbilityFactoryImpl extends SingletonImpl implements AbilityFactory{
+public class AbilityFactoryImpl extends Singleton implements AbilityFactory{
 	
    	//make the access in memory and saves the information of all pokemon in local
 	final private JsonReader jsonReader = new JsonReaderImpl();

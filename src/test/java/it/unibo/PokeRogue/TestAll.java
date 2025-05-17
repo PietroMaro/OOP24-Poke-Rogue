@@ -73,9 +73,9 @@ public class TestAll {
 
 	@Test
 	public void testMoveFactory() {
-		MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
-		Move moveTest = moveFactory.moveFromName("absorb");
-		UnsupportedOperationException ex = assertThrows(UnsupportedOperationException.class, () -> {
+		final MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
+		final Move moveTest = moveFactory.moveFromName("absorb");
+		final UnsupportedOperationException ex = assertThrows(UnsupportedOperationException.class, () -> {
 			moveFactory.moveFromName("nonExisting");
 		});
 		assertEquals(ex.getMessage(),
@@ -92,9 +92,9 @@ public class TestAll {
 
 	@Test
 	public void testAbilityFactory() {
-		AbilityFactory abilityFactory = AbilityFactoryImpl.getInstance(AbilityFactoryImpl.class);
-		Ability abilityTest = abilityFactory.abilityFromName("adaptability");
-		UnsupportedOperationException ex = assertThrows(UnsupportedOperationException.class, () -> {
+		final AbilityFactory abilityFactory = AbilityFactoryImpl.getInstance(AbilityFactoryImpl.class);
+		final Ability abilityTest = abilityFactory.abilityFromName("adaptability");
+		final UnsupportedOperationException ex = assertThrows(UnsupportedOperationException.class, () -> {
 			abilityFactory.abilityFromName("nonExisting");
 		});
 		assertEquals(ex.getMessage(),
@@ -104,9 +104,9 @@ public class TestAll {
 
 	@Test
 	public void testMoveCopy() {
-		MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
-		Move moveTest1 = moveFactory.moveFromName("absorb");
-		Move moveTest2 = moveFactory.moveFromName("absorb");
+		final MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
+		final Move moveTest1 = moveFactory.moveFromName("absorb");
+		final Move moveTest2 = moveFactory.moveFromName("absorb");
 		moveTest1.getPp().setCurrentValue(0);
 		assertNotSame(moveTest1, moveTest2);
 		assertNotSame(moveTest2.getPp().getCurrentValue(), 0);
@@ -115,19 +115,19 @@ public class TestAll {
 
 	@Test
 	public void testAllMovesEffect() throws IOException {
-		MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
-		PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
-		EffectParserImpl effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
+		final MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
+		final PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+		final EffectParserImpl effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
 
-		Move moveTest1 = moveFactory.moveFromName("absorb");
-		Move moveTest2 = moveFactory.moveFromName("absorb");
-		Pokemon pok1 = pokeFactory.randomPokemon(3);
-		Pokemon pok2 = pokeFactory.randomPokemon(3);
-		Weather weather = Weather.SUNLIGHT;
+		final Move moveTest1 = moveFactory.moveFromName("absorb");
+		final Move moveTest2 = moveFactory.moveFromName("absorb");
+		final Pokemon pok1 = pokeFactory.randomPokemon(3);
+		final Pokemon pok2 = pokeFactory.randomPokemon(3);
+		final Weather weather = Weather.SUNLIGHT;
 
-		JsonReader jsonReader = new JsonReaderImpl();
+		final JsonReader jsonReader = new JsonReaderImpl();
 
-		Path dirPath = Paths.get("src", "pokemon_data", "moves");
+		final Path dirPath = Paths.get("src", "pokemon_data", "moves");
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
 			for (Path entry : stream) {
 				if (Files.isRegularFile(entry)) {
@@ -141,19 +141,19 @@ public class TestAll {
 
 	@Test
 	public void testAllAbilityEffect() throws IOException {
-		MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
-		PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
-		EffectParserImpl effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
+		final MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
+		final PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+		final EffectParserImpl effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
 
-		Move moveTest1 = moveFactory.moveFromName("absorb");
-		Move moveTest2 = moveFactory.moveFromName("absorb");
-		Pokemon pok1 = pokeFactory.randomPokemon(3);
-		Pokemon pok2 = pokeFactory.randomPokemon(3);
-		Weather weather = Weather.SUNLIGHT;
+		final Move moveTest1 = moveFactory.moveFromName("absorb");
+		final Move moveTest2 = moveFactory.moveFromName("absorb");
+		final Pokemon pok1 = pokeFactory.randomPokemon(3);
+		final Pokemon pok2 = pokeFactory.randomPokemon(3);
+		final Weather weather = Weather.SUNLIGHT;
 
-		JsonReader jsonReader = new JsonReaderImpl();
+		final JsonReader jsonReader = new JsonReaderImpl();
 
-		Path dirPath = Paths.get("src", "pokemon_data", "abilities");
+		final Path dirPath = Paths.get("src", "pokemon_data", "abilities");
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
 			for (Path entry : stream) {
 				if (Files.isRegularFile(entry)) {

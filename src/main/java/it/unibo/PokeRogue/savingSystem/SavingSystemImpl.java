@@ -6,12 +6,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import org.json.JSONArray;
 
-import it.unibo.PokeRogue.SingletonImpl;
+import it.unibo.PokeRogue.Singleton;
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 
-public class SavingSystemImpl extends SingletonImpl implements SavingSystem {
+public class SavingSystemImpl extends Singleton implements SavingSystem {
 
 	final private JsonReader jsonReader = new JsonReaderImpl();
 	private JSONArray savedPokemon = new JSONArray();

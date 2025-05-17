@@ -1,8 +1,6 @@
 package it.unibo.PokeRogue.ability;
 
-import it.unibo.PokeRogue.Singleton;
-
-public interface AbilityFactory extends Singleton {
+public interface AbilityFactory {
     /**
 	* Make the access in memory and saves the information of all abilities in local 
 	* (this method gets automatically called by the constructor)

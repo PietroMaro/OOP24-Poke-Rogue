@@ -1,8 +1,6 @@
 package it.unibo.PokeRogue.move;
 
-import it.unibo.PokeRogue.Singleton;
-
-public interface MoveFactory extends Singleton {
+public interface MoveFactory {
 	/**
 	* Make the access in memory and saves the information of all moves in local 
 	* (this method gets automatically called by the constructor)

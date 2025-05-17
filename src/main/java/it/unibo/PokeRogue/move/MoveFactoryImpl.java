@@ -1,6 +1,6 @@
 package it.unibo.PokeRogue.move;
 import it.unibo.PokeRogue.utilities.Range;
-import it.unibo.PokeRogue.SingletonImpl;
+import it.unibo.PokeRogue.Singleton;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 import it.unibo.PokeRogue.utilities.RangeImpl;
@@ -15,7 +15,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 
-public class MoveFactoryImpl extends SingletonImpl implements MoveFactory{
+public class MoveFactoryImpl extends Singleton implements MoveFactory{
 	
    	//make the access in memory and saves the information of all pokemon in local
 	final private JsonReader jsonReader = new JsonReaderImpl();

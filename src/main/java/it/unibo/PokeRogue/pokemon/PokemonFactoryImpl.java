@@ -1,6 +1,6 @@
 package it.unibo.PokeRogue.pokemon;
 
-import it.unibo.PokeRogue.SingletonImpl;
+import it.unibo.PokeRogue.Singleton;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 
@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.awt.Image;
 import javax.imageio.ImageIO;
 
-public class PokemonFactoryImpl extends SingletonImpl implements PokemonFactory{
+public class PokemonFactoryImpl extends Singleton implements PokemonFactory{
 	
    	//make the access in memory and saves the information of all pokemon in local
 	final private JsonReader jsonReader = new JsonReaderImpl();

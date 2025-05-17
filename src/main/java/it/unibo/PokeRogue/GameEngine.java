@@ -8,7 +8,7 @@ package it.unibo.PokeRogue;
  * The game engine handles scene transitions and other central operations
  * required for the game to function.
  */
-public interface GameEngine extends Singleton {
+public interface GameEngine {
     /**
      * Sets the current scene of the game.
      * 

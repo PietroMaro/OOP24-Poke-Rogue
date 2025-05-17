@@ -1,7 +1,7 @@
 package it.unibo.PokeRogue.effectParser;
 
 import org.apache.commons.jexl3.*;
-import it.unibo.PokeRogue.SingletonImpl;
+import it.unibo.PokeRogue.Singleton;
 import it.unibo.PokeRogue.Weather;
 import it.unibo.PokeRogue.pokemon.StatusCondition;
 import it.unibo.PokeRogue.pokemon.Type;
@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Optional;
 
-public class EffectParserImpl extends SingletonImpl implements EffectParser{
+public class EffectParserImpl extends Singleton implements EffectParser{
 
 	private	Optional<Pokemon> us;
 	private	Optional<Pokemon> enemy;

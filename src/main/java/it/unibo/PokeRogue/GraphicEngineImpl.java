@@ -24,7 +24,7 @@ import it.unibo.PokeRogue.inputHandling.InputHandlerImpl;
  * The class follows the Singleton pattern to maintain only one instance
  * of the graphic engine throughout the game.
  */
-public final class GraphicEngineImpl extends SingletonImpl implements GraphicEngine {
+public final class GraphicEngineImpl extends Singleton implements GraphicEngine {
     private final JFrame gameWindow;
     private Map<String, PanelElementImpl> allPanelElements;
 

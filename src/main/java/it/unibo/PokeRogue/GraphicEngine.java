@@ -15,7 +15,7 @@ import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
  * of the game. It uses a collection of graphic elements to draw the current
  * scene.
  */
-public interface GraphicEngine extends Singleton {
+public interface GraphicEngine {
 
     /**
      * Draws the current game scene by rendering graphic elements.

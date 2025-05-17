@@ -2,10 +2,9 @@ package it.unibo.PokeRogue.savingSystem;
 
 import java.util.List;
 
-import it.unibo.PokeRogue.Singleton;
 import it.unibo.PokeRogue.pokemon.Pokemon;
 
-public interface SavingSystem extends Singleton {
+public interface SavingSystem {
 	/**
 	* utility function to see al the save files in a folder
 	* @param dirPath 

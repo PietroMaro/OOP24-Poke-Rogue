@@ -6,6 +6,7 @@ import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.scene.sceneBox.SceneBox;
 import it.unibo.PokeRogue.scene.sceneLoad.SceneLoad;
 import it.unibo.PokeRogue.scene.sceneMenu.SceneMenu;
+import it.unibo.PokeRogue.Singleton;
 
 /**
  * Implementation of the {@link GameEngine} interface.
@@ -19,7 +20,7 @@ import it.unibo.PokeRogue.scene.sceneMenu.SceneMenu;
  * This class is responsible for managing the transition between scenes and
  * other game-related operations.
  */
-public final class GameEngineImpl extends SingletonImpl implements GameEngine {
+public final class GameEngineImpl extends Singleton implements GameEngine {
 
     private static final Logger LOGGER = Logger.getLogger(GameEngineImpl.class.getName());
 
