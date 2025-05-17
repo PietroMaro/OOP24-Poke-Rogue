@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene.sceneFight.enums;
+package it.unibo.PokeRogue.scene.scenefight.enums;
 
 import java.awt.Color;
 import java.util.List;

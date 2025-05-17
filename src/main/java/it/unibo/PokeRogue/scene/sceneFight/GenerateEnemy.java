@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene.sceneFight;
+package it.unibo.PokeRogue.scene.scenefight;
 
 /**
  * Interface for generating an enemy in the battle scene.
