@@ -32,17 +32,6 @@ public final class PokemonBattleUtilImpl implements PokemonBattleUtil {
 
     }
 
-    /**
-     * Computes the damage dealt by a move during a battle, considering:
-     * attacker and defender stats, move properties, weather effects,
-     * critical hits, random factor, type effectiveness, STAB, and burn.
-     *
-     * @param attackingPokemon the Pokémon performing the move
-     * @param defendingPokemon the target Pokémon
-     * @param attackChosen     the move used
-     * @param currentWeather   the current weather condition
-     * @return the final damage value as an int
-     */
     @Override
     public int calculateDamage(final Pokemon attackingPokemon, final Pokemon defendingPokemon,
             final Move attackChosen, final Optional<Weather> currentWeather) {

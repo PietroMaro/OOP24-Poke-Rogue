@@ -68,14 +68,6 @@ public final class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
 
     }
 
-    /**
-     * Calculates the total effectiveness multiplier of a move against an enemy
-     * Pokémon.
-     *
-     * @param move         The move being used
-     * @param enemyPokemon The target Pokémon
-     * @return The cumulative effectiveness multiplier (e.g., 4.0, 0.5)
-     */
     @Override
     public double calculateAttackEffectiveness(final Move move, final Pokemon enemyPokemon) {
 
@@ -90,17 +82,6 @@ public final class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
         return effectiveness;
     }
 
-    /**
-     * Calculates an integer score representing the effectiveness of a Pokémon
-     * against another.
-     *
-     * The score is based on effectiveness multipliers and normalized to discrete
-     * values.
-     *
-     * @param myPokemon    The attacking Pokémon
-     * @param enemyPokemon The defending Pokémon
-     * @return An integer score representing type matchup effectiveness
-     */
     @Override
     public int calculateEffectiveness(final Pokemon myPokemon, final Pokemon enemyPokemon) {
         double effectiveness;
