@@ -20,7 +20,7 @@ import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
  * It creates and organizes the background, buttons, and text elements
  * associated with the menu UI.
  */
-public class SceneMenuView {
+public final class SceneMenuView {
 
         private static final String FIRST_PANEL_NAME = "firstPanel";
 

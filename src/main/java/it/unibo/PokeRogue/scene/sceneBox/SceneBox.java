@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.io.IOException;
-import java.lang.InstantiationException;
-import java.lang.IllegalAccessException;
-import java.lang.NoSuchMethodException;
 import java.lang.reflect.InvocationTargetException;
 
 import it.unibo.PokeRogue.GameEngine;
@@ -74,13 +71,11 @@ public class SceneBox implements Scene {
          *
          * @param savePath the path to the save file used to initialize the scene data
          */
-        public SceneBox(final String savePath) throws 
-			IOException,
-			InstantiationException,
-			IllegalAccessException,
-			NoSuchMethodException,
-			InvocationTargetException
-			{
+        public SceneBox(final String savePath) throws IOException,
+                        InstantiationException,
+                        IllegalAccessException,
+                        NoSuchMethodException,
+                        InvocationTargetException {
                 this.sceneGraphicElements = new LinkedHashMap<>();
                 this.allPanelsElements = new LinkedHashMap<>();
                 this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
@@ -108,14 +103,12 @@ public class SceneBox implements Scene {
          * @param inputKey the key event received from the user
          */
         @Override
-        public void updateStatus(final int inputKey) throws 
-			IOException,
-			InstantiationException,
-			IllegalAccessException,
-			InvocationTargetException,
-			NoSuchMethodException,
-			IOException
-			{
+        public void updateStatus(final int inputKey) throws IOException,
+                        InstantiationException,
+                        IllegalAccessException,
+                        InvocationTargetException,
+                        NoSuchMethodException,
+                        IOException {
 
                 switch (inputKey) {
                         case KeyEvent.VK_UP:
@@ -221,9 +214,7 @@ public class SceneBox implements Scene {
          * 
          */
         @Override
-        public void updateGraphic() throws
-			IOException
-			{
+        public void updateGraphic() throws IOException {
 
                 this.sceneBoxView.updateGraphic(currentSelectedButton, newSelectedButton, boxIndex, newBoxIndex, boxes,
                                 playerTrainerInstance);
@@ -256,9 +247,7 @@ public class SceneBox implements Scene {
          * External classes like {@link SceneBoxView} handle the actual rendering of
          * graphical components.
          */
-        private void initGraphicElements() throws 
-			IOException
-		{
+        private void initGraphicElements() throws IOException {
 
                 this.sceneBoxView.initGraphicElements();
 

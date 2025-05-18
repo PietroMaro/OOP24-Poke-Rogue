@@ -29,7 +29,7 @@ import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
  * @see SceneBoxInitView
  * @see SceneBoxUpdateView
  */
-public class SceneBoxView {
+public final class SceneBoxView {
         private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
         private final SceneBoxInitView sceneBoxInitView;
         private final SceneBoxUpdateView sceneBoxUpdateView;

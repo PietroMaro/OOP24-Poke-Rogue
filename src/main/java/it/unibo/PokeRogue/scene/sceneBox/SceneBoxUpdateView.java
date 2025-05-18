@@ -24,7 +24,7 @@ import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
  * display,
  * box navigation, and detailed Pokémon information rendering.
  */
-public class SceneBoxUpdateView {
+public final class SceneBoxUpdateView {
         private static final String POKEMON_PANEL_NAME = "pokemonPanel";
 
         private final Map<Integer, GraphicElementImpl> sceneGraphicElements;

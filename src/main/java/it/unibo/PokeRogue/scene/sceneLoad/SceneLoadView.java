@@ -26,7 +26,7 @@ import java.awt.Color;
  * interaction buttons dynamically based on existing saves.
  */
 
-public class SceneLoadView {
+public final class SceneLoadView {
     private static final String POKEMON_PANEL_NAME = "savesPanel";
 
     private final Map<Integer, GraphicElementImpl> sceneGraphicElements;

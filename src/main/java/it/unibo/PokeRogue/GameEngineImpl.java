@@ -1,9 +1,6 @@
 package it.unibo.PokeRogue;
 
 import java.io.IOException;
-import java.lang.IllegalAccessException;
-import java.lang.InstantiationException;
-import java.lang.NoSuchMethodException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

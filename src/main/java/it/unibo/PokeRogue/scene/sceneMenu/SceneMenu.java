@@ -30,7 +30,7 @@ import lombok.Getter;
  * {@link SceneMenuView}.
  * 
  */
-public class SceneMenu implements Scene {
+public final class SceneMenu implements Scene {
 
     private SceneMenuGraphicEnum currentSelectedButton;
     @Getter

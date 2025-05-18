@@ -25,6 +25,7 @@ import it.unibo.PokeRogue.utilities.PokeEffectivenessCalcImpl;
 public final class EnemyAiSwitchIn {
 
     private static final int MAX_TRAINER_SQUAD_SIZE = 6;
+    private static final int ACCEPTED_EFFECTIVENESS_DIFFERENCE = 50;
 
     private final Trainer enemyTrainer;
     private final PlayerTrainerImpl playerTrainerInstance;
@@ -32,7 +33,6 @@ public final class EnemyAiSwitchIn {
     private final Map<Integer, Integer> pokeInSquadScore;
     private final Random random;
     private int switchPosition;
-    private final int acceptedEffectivenessDifference = 50;
 
     // Flags
 
@@ -98,7 +98,7 @@ public final class EnemyAiSwitchIn {
         }
 
         if (canSwitch() && this.isBetterOptionInSquad()
-                && this.calculateEffectivenessDifference(0, 0) <= this.acceptedEffectivenessDifference) {
+                && this.calculateEffectivenessDifference(0, 0) <= ACCEPTED_EFFECTIVENESS_DIFFERENCE) {
             this.typeBasedSwitchIn();
 
             return true;
@@ -187,7 +187,7 @@ public final class EnemyAiSwitchIn {
     private boolean isBetterOptionInSquad() {
         final List<Integer> scores = this.fromSetToReversList(this.pokeInSquadScore.keySet());
 
-        return scores.get(0) > this.acceptedEffectivenessDifference;
+        return scores.get(0) > ACCEPTED_EFFECTIVENESS_DIFFERENCE;
 
     }
 
@@ -201,7 +201,7 @@ public final class EnemyAiSwitchIn {
         for (int pokePos = 1; pokePos < MAX_TRAINER_SQUAD_SIZE; pokePos++) {
             if (this.enemyTrainer.getPokemon(pokePos).isPresent() && this.isPokemonAlive(pokePos)) {
                 effectiveness = this.calculateEffectivenessDifference(pokePos, 0);
-                if (!this.pokeInSquadScore.containsKey(effectiveness) || random.nextInt(100) < 50) {
+                if (!this.pokeInSquadScore.containsKey(effectiveness) || random.nextBoolean()) {
 
                     this.pokeInSquadScore.put(effectiveness, pokePos);
                 }

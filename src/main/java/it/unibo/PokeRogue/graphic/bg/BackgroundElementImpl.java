@@ -5,14 +5,13 @@ import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
 import lombok.Getter;
 import java.io.IOException;
 
-
 public final class BackgroundElementImpl extends GraphicElementImpl implements BackgroundElement {
     private static final long serialVersionUID = 1L;
 
     @Getter
     private final SpriteElementImpl backgroundSprite;
 
-    public BackgroundElementImpl(final String panelName, final String pathToImage) throws IOException{
+    public BackgroundElementImpl(final String panelName, final String pathToImage) throws IOException {
         super(panelName);
 
         backgroundSprite = new SpriteElementImpl(panelName, pathToImage, 0, 0, 1, 1);

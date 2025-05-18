@@ -1,7 +1,6 @@
 package it.unibo.PokeRogue;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.NoSuchMethodException;
 
 /**
  * Interface representing the game engine of an application.

@@ -4,9 +4,6 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.IOException;
-import java.lang.InstantiationException;
-import java.lang.IllegalAccessException;
-import java.lang.NoSuchMethodException;
 import java.lang.reflect.InvocationTargetException;
 
 import it.unibo.PokeRogue.pokemon.Pokemon;
@@ -17,7 +14,7 @@ import it.unibo.PokeRogue.savingSystem.SavingSystemImpl;
 import lombok.Getter;
 import lombok.AccessLevel;
 
-public class SceneBoxModel {
+public final class SceneBoxModel {
 
     private final SavingSystem savingSystemInstance;
     private final PokemonFactory pokemonFactoryInstance;
@@ -25,12 +22,10 @@ public class SceneBoxModel {
     @Getter(AccessLevel.PACKAGE)
     private final List<List<Pokemon>> boxes;
 
-    public SceneBoxModel()throws 
-		InstantiationException,
-		IllegalAccessException,
-		InvocationTargetException,
-		NoSuchMethodException
-	{
+    public SceneBoxModel() throws InstantiationException,
+            IllegalAccessException,
+            InvocationTargetException,
+            NoSuchMethodException {
         this.savingSystemInstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
         this.pokemonFactoryInstance = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
 
@@ -46,12 +41,11 @@ public class SceneBoxModel {
      * @param savePath The path to the save file. If empty, default Pokémon are
      *                 saved.
      */
-    protected void setUpSave(final String savePath) throws 
-		InstantiationException,
-		IllegalAccessException,
-		InvocationTargetException,
-		NoSuchMethodException,
-		IOException{
+    protected void setUpSave(final String savePath) throws InstantiationException,
+            IllegalAccessException,
+            InvocationTargetException,
+            NoSuchMethodException,
+            IOException {
         if ("".equals(savePath)) {
             this.savingSystemInstance.savePokemon(pokemonFactoryInstance.pokemonFromName("bulbasaur"));
             this.savingSystemInstance.savePokemon(pokemonFactoryInstance.pokemonFromName("charmander"));

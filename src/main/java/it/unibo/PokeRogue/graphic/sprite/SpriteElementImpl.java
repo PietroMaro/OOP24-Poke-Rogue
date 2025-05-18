@@ -12,7 +12,7 @@ import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 public final class SpriteElementImpl extends GraphicElementImpl implements SpriteElement {
     private static final long serialVersionUID = 1L;
 
-    private Image spriteImage;
+    private final Image spriteImage;
     private final double leftUpX;
     private final double leftUpy;
     private final double width;

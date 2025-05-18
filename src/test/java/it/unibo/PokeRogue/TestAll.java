@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,7 +38,7 @@ import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 import it.unibo.PokeRogue.utilities.PokeEffectivenessCalc;
 import it.unibo.PokeRogue.utilities.PokeEffectivenessCalcImpl;
 
-public class TestAll {
+public final class TestAll {
 
 	@BeforeEach
 	public void resetSingletons() {
@@ -45,7 +46,9 @@ public class TestAll {
 	}
 
 	@Test
-	public void testPlayerTrainer() {
+	void testPlayerTrainer() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+			InstantiationException {
+
 		final PlayerTrainerImpl p1 = PlayerTrainerImpl.getTrainerInstance();
 		final PlayerTrainerImpl p2 = PlayerTrainerImpl.getTrainerInstance();
 		final PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
@@ -72,7 +75,8 @@ public class TestAll {
 	}
 
 	@Test
-	public void testMoveFactory() {
+	void testMoveFactory() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+			InstantiationException {
 		final MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
 		final Move moveTest = moveFactory.moveFromName("absorb");
 		final UnsupportedOperationException ex = assertThrows(UnsupportedOperationException.class, () -> {
@@ -91,7 +95,8 @@ public class TestAll {
 	}
 
 	@Test
-	public void testAbilityFactory() {
+	void testAbilityFactory() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+			InstantiationException, IOException {
 		final AbilityFactory abilityFactory = AbilityFactoryImpl.getInstance(AbilityFactoryImpl.class);
 		final Ability abilityTest = abilityFactory.abilityFromName("adaptability");
 		final UnsupportedOperationException ex = assertThrows(UnsupportedOperationException.class, () -> {
@@ -103,7 +108,8 @@ public class TestAll {
 	}
 
 	@Test
-	public void testMoveCopy() {
+	void testMoveCopy() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+			InstantiationException {
 		final MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
 		final Move moveTest1 = moveFactory.moveFromName("absorb");
 		final Move moveTest2 = moveFactory.moveFromName("absorb");
@@ -114,7 +120,9 @@ public class TestAll {
 	}
 
 	@Test
-	public void testAllMovesEffect() throws IOException {
+	void testAllMovesEffect()
+			throws IOException, NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+			InstantiationException {
 		final MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
 		final PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
 		final EffectParserImpl effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
@@ -140,7 +148,9 @@ public class TestAll {
 	}
 
 	@Test
-	public void testAllAbilityEffect() throws IOException {
+	void testAllAbilityEffect()
+			throws IOException, NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+			InstantiationException {
 		final MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
 		final PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
 		final EffectParserImpl effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
@@ -166,7 +176,10 @@ public class TestAll {
 	}
 
 	@Test
-	public void testEffectivenessCalculator() {
+	void testEffectivenessCalculator()
+			throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+			InstantiationException, IOException {
+
 		final PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
 		final PokeEffectivenessCalc calculator = new PokeEffectivenessCalcImpl();
 
@@ -174,15 +187,18 @@ public class TestAll {
 		final Pokemon venusaur = pokeFactory.pokemonFromName("venusaur");
 		final Pokemon poliwag = pokeFactory.pokemonFromName("poliwag");
 
-		assertEquals(calculator.calculateEffectiveness(charmander, venusaur), 160);
-		assertEquals(calculator.calculateEffectiveness(venusaur, poliwag), 120);
-		assertEquals(calculator.calculateEffectiveness(charmander, poliwag), 20);
+		assertEquals(160, calculator.calculateEffectiveness(charmander, venusaur));
+		assertEquals(120, calculator.calculateEffectiveness(venusaur, poliwag));
+		assertEquals(20, calculator.calculateEffectiveness(charmander, poliwag));
 
 	}
 
 	@Test
-	public void testAi() {
+	void testAi() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+			InstantiationException, IOException {
+		final int trainerSquadSize = 6;
 		final PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+
 		final PlayerTrainerImpl playerTrainerImpl = PlayerTrainerImpl.getTrainerInstance();
 		final TrainerImpl enemyTrainer = new TrainerImpl();
 		final Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
@@ -191,14 +207,14 @@ public class TestAll {
 		final Pokemon venusaur = pokeFactory.pokemonFromName("venusaur");
 		final Pokemon poliwag = pokeFactory.pokemonFromName("poliwag");
 
-		playerTrainerImpl.addPokemon(poliwag, 6);
-		enemyTrainer.addPokemon(charmander, 6);
+		playerTrainerImpl.addPokemon(poliwag, trainerSquadSize);
+		enemyTrainer.addPokemon(charmander, trainerSquadSize);
 
-		assertEquals(ai.nextMove(weather), List.of("Attack", "0"));
+		assertEquals(List.of("Attack", "0"), ai.nextMove(weather));
 
-		enemyTrainer.addPokemon(venusaur, 6);
+		enemyTrainer.addPokemon(venusaur, trainerSquadSize);
 
-		assertEquals(ai.nextMove(weather), List.of("SwitchIn", "1"));
+		assertEquals(List.of("SwitchIn", "1"), ai.nextMove(weather));
 
 	}
 }

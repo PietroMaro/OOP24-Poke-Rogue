@@ -20,7 +20,7 @@ import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
  * Initializes and organizes all graphical elements of the SceneBox scene,
  * including panels, texts, buttons, sprites, and background.
  */
-public class SceneBoxInitView {
+public final class SceneBoxInitView {
 
         private static final String FIRST_PANEL_NAME = "firstPanel";
         private static final String POKEMON_PANEL_NAME = "pokemonPanel";
