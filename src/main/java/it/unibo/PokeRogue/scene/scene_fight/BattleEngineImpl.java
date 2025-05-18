@@ -42,8 +42,8 @@ public class BattleEngineImpl implements BattleEngine {
     private final GameEngine gameEngineInstance;
     private final SavingSystem savingSystemInstance;
     private Boolean isCaptured = false;
-    private Pokemon pokemonPlayer;
-    private Pokemon pokemonEnemy;
+    private Pokemon playerPokemon;
+    private Pokemon enemyPokemon;
 
     /**
      * Constructor for the BattleEngineImpl class that initializes the battle engine
@@ -132,50 +132,47 @@ public class BattleEngineImpl implements BattleEngine {
      */
     @Override
     public void movesPriorityCalculator(Decision playerDecision, Decision enemyDecision) {
-        this.pokemonPlayer = playerTrainerInstance.getPokemon(FIRST_POSITION).get();
-        this.pokemonEnemy = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
+        this.playerPokemon = playerTrainerInstance.getPokemon(FIRST_POSITION).get();
+        this.enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
 
-        Ability abilityPlayer = abilityFactoryInstance.abilityFromName(pokemonPlayer.getAbilityName());
-        Ability abilityEnemy = abilityFactoryInstance.abilityFromName(pokemonEnemy.getAbilityName());
+        Ability abilityPlayer = abilityFactoryInstance.abilityFromName(playerPokemon.getAbilityName());
+        Ability abilityEnemy = abilityFactoryInstance.abilityFromName(enemyPokemon.getAbilityName());
 
-        Move playerMove = getSafeMove(pokemonPlayer, playerDecision);
-        Move enemyMove = getSafeMove(pokemonEnemy, enemyDecision);
-        this.handleAbilityEffects(abilityPlayer, pokemonPlayer, pokemonEnemy, playerMove, enemyMove,
-
-                AbilitySituationChecks.NEUTRAL);
-
-        this.handleAbilityEffects(abilityEnemy, pokemonEnemy, pokemonPlayer, enemyMove, playerMove,
+        Move playerMove = getSafeMove(playerPokemon, playerDecision);
+        Move enemyMove = getSafeMove(enemyPokemon, enemyDecision);
+        this.handleAbilityEffects(abilityPlayer, playerPokemon, enemyPokemon, playerMove, enemyMove,
 
                 AbilitySituationChecks.NEUTRAL);
 
-        this.handleAbilityEffects(abilityPlayer, pokemonPlayer, pokemonEnemy, playerMove, enemyMove,
+        this.handleAbilityEffects(abilityEnemy, enemyPokemon, playerPokemon, enemyMove, playerMove,
+
+                AbilitySituationChecks.NEUTRAL);
+
+        this.handleAbilityEffects(abilityPlayer, playerPokemon, enemyPokemon, playerMove, enemyMove,
                 AbilitySituationChecks.PASSIVE);
-        this.handleAbilityEffects(abilityEnemy, pokemonEnemy, pokemonPlayer, enemyMove, playerMove,
+        this.handleAbilityEffects(abilityEnemy, enemyPokemon, playerPokemon, enemyMove, playerMove,
                 AbilitySituationChecks.PASSIVE);
-        this.applyStatusForAllPokemon(playerTrainerInstance.getSquad(), pokemonEnemy);
-        this.applyStatusForAllPokemon(enemyTrainerInstance.getSquad(), pokemonPlayer);
+        this.applyStatusForAllPokemon(playerTrainerInstance.getSquad(), enemyPokemon);
+        this.applyStatusForAllPokemon(enemyTrainerInstance.getSquad(), playerPokemon);
         if (playerDecision.moveType().priority() >= enemyDecision.moveType().priority()
                 && playerHasPriority(playerMove, enemyMove)) {
             executeDecision(playerDecision, playerTrainerInstance, enemyTrainerInstance, playerMove, enemyMove,
-                    abilityPlayer);
+                    abilityPlayer, abilityEnemy);
             executeDecision(enemyDecision, enemyTrainerInstance, playerTrainerInstance, enemyMove, playerMove,
-                    abilityEnemy);
+                    abilityEnemy, abilityPlayer);
 
         } else {
             executeDecision(enemyDecision, enemyTrainerInstance, playerTrainerInstance, enemyMove, playerMove,
-                    abilityEnemy);
+                    abilityEnemy, abilityPlayer);
             executeDecision(playerDecision, playerTrainerInstance, enemyTrainerInstance, playerMove, enemyMove,
-                    abilityPlayer);
+                    abilityPlayer, abilityEnemy);
         }
-        handleAttackPhases(type, playerMoveString, typeEnemy, pokemonPlayer, pokemonEnemy, playerMove, enemyMove,
-                abilityPlayer,
-                abilityEnemy);
         this.newEnemyCheck();
 
     }
 
     private void executeDecision(Decision decision, PlayerTrainerImpl attackerTrainer,
-            PlayerTrainerImpl defenderTrainer, Move atteckerMove, Move defenderMove, Ability attackerAbility) {
+            PlayerTrainerImpl defenderTrainer, Move atteckerMove, Move defenderMove, Ability attackerAbility, Ability defenderAbility) {
         Pokemon attackerPokemon = attackerTrainer.getPokemon(FIRST_POSITION).get();
         Pokemon defenderPokemon = defenderTrainer.getPokemon(FIRST_POSITION).get();
         if (decision.moveType() == DecisionTypeEnum.SWITCH_IN && statusEffectInstance.checkStatusSwitch(attackerPokemon)
@@ -187,14 +184,19 @@ public class BattleEngineImpl implements BattleEngine {
         if (decision.moveType() == DecisionTypeEnum.POKEBALL) {
             this.pokeObject(decision.subType());
         }
-        if (decision.moveType() == DecisionTypeEnum.ATTACK) {
-        
+        if (decision.moveType() == DecisionTypeEnum.ATTACK && statusEffectInstance.checkStatusAttack(attackerPokemon)) {
+            applyAbilityPhase(attackerPokemon, defenderPokemon, atteckerMove, defenderMove, attackerAbility, defenderAbility,
+                    AbilitySituationChecks.ATTACK);
+            applyAbilityPhase(defenderPokemon, attackerPokemon, defenderMove, atteckerMove, defenderAbility, attackerAbility,
+                    AbilitySituationChecks.ATTACKED);
+            doMove(attackerPokemon, defenderPokemon, atteckerMove, defenderMove);
+            this.newEnemyCheck();
         }
     }
 
     private void refreshActivePokemons() {
-        this.pokemonPlayer = playerTrainerInstance.getPokemon(FIRST_POSITION).get();
-        this.pokemonEnemy = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
+        this.playerPokemon = playerTrainerInstance.getPokemon(FIRST_POSITION).get();
+        this.enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
     }
 
     private void applyStatusForAllPokemon(List<Optional<Pokemon>> squad, Pokemon enemy) {
@@ -225,77 +227,6 @@ public class BattleEngineImpl implements BattleEngine {
         this.handleAbilityEffects(ability, user, target, moveUser, moveTarget, AbilitySituationChecks.SWITCHOUT);
         this.switchIn(moveIndex, trainer);
         handleAbilityEffects(ability, user, target, moveUser, moveTarget, AbilitySituationChecks.SWITCHIN);
-    }
-
-    /**
-     * Handles the different phases of an attack, including the application of
-     * ability effects,
-     * priority calculation, and status checks for both the player's and enemy's
-     * Pokémon.
-     * The method determines the flow of attacks based on the type of action and
-     * Pokémon status.
-     * It applies abilities and executes moves in the appropriate order based on
-     * priority and conditions.
-     *
-     * @param type             the type of action (e.g., "Attack")
-     * @param playerMoveString the name of the player's move
-     * @param typeEnemy        the type of the enemy's action (e.g., "Attack")
-     * @param player           the player's Pokémon involved in the attack
-     * @param enemy            the enemy's Pokémon involved in the attack
-     * @param playerMove       the move used by the player's Pokémon
-     * @param enemyMove        the move used by the enemy's Pokémon
-     * @param abilityPlayer    the ability of the player's Pokémon
-     * @param abilityEnemy     the ability of the enemy's Pokémon
-     */
-    private void handleAttackPhases(
-            String type, String playerMoveString, String typeEnemy,
-            Pokemon player, Pokemon enemy,
-            Move playerMove, Move enemyMove,
-            Ability abilityPlayer, Ability abilityEnemy) {
-        if (type.equals("Attack") && typeEnemy.equals("Attack")) {
-            applyAbilityPhase(player, enemy, playerMove, enemyMove, abilityPlayer, abilityEnemy,
-                    AbilitySituationChecks.ATTACK);
-            applyAbilityPhase(enemy, player, enemyMove, playerMove, abilityEnemy, abilityPlayer,
-                    AbilitySituationChecks.ATTACK);
-            applyAbilityPhase(player, enemy, playerMove, enemyMove, abilityPlayer, abilityEnemy,
-                    AbilitySituationChecks.ATTACKED);
-            applyAbilityPhase(enemy, player, enemyMove, playerMove, abilityEnemy, abilityPlayer,
-                    AbilitySituationChecks.ATTACKED);
-
-            if (playerHasPriority(playerMove, enemyMove)) {
-                if (statusEffectInstance.checkStatusAttack(player)) {
-                    doMove(player, enemy, playerMove, enemyMove);
-                }
-                newEnemyCheck();
-                if (statusEffectInstance.checkStatusAttack(enemy)) {
-                    doMove(enemy, player, enemyMove, playerMove);
-                }
-                newEnemyCheck();
-            } else {
-                if (statusEffectInstance.checkStatusAttack(enemy)) {
-                    doMove(enemy, player, enemyMove, playerMove);
-                }
-                newEnemyCheck();
-                if (statusEffectInstance.checkStatusAttack(player)) {
-                    doMove(player, enemy, playerMove, enemyMove);
-                }
-                newEnemyCheck();
-            }
-
-        } else if (type.equals("Attack") && statusEffectInstance.checkStatusAttack(player)) {
-            applyAbilityPhase(player, enemy, playerMove, enemyMove, abilityPlayer, abilityEnemy,
-                    AbilitySituationChecks.ATTACK);
-            applyAbilityPhase(enemy, player, enemyMove, playerMove, abilityEnemy, abilityPlayer,
-                    AbilitySituationChecks.ATTACKED);
-            doMove(player, enemy, playerMove, enemyMove);
-
-        } else if (typeEnemy.equals("Attack") && statusEffectInstance.checkStatusAttack(enemy)) {
-            applyAbilityPhase(enemy, player, enemyMove, playerMove, abilityEnemy, abilityPlayer,
-                    AbilitySituationChecks.ATTACK);
-            applyAbilityPhase(player, enemy, playerMove, enemyMove, abilityPlayer, abilityEnemy,
-                    AbilitySituationChecks.ATTACKED);
-            doMove(enemy, player, enemyMove, playerMove);
-        }
     }
 
     /**
@@ -370,16 +301,13 @@ public class BattleEngineImpl implements BattleEngine {
      * certain conditions are met.
      */
     private void newEnemyCheck() {
-        Pokemon enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
-        Pokemon playerPokemon = playerTrainerInstance.getPokemon(FIRST_POSITION).get();
         if (BattleUtilities.isTeamWipedOut(enemyTrainerInstance) || this.isCaptured == true) {
-            BattleRewards.awardBattleRewards(playerPokemon, enemyPokemon);
-            this.newMoveToLearn(playerPokemon);
-            // TODO: SCENE SHOP CALL
-            System.out.println("SHOP");
-        } else if (enemyPokemon.getActualStats().get("hp").getCurrentValue() <= 0) {
-            this.movesPriorityCalculator("SwitchIn", "0", enemyAiInstance.nextMove(currentWeather).getFirst(),
-                    enemyAiInstance.nextMove(currentWeather).getLast());
+            BattleRewards.awardBattleRewards(this.playerPokemon, this.enemyPokemon);
+            this.newMoveToLearn(this.playerPokemon);
+            this.gameEngineInstance.setScene("shop");
+        } else if (this.enemyPokemon.getActualStats().get("hp").getCurrentValue() <= 0) {
+            final Decision enemyChoose = enemyAiInstance.nextMove(this.getCurrentWeather());
+            this.movesPriorityCalculator(new Decision(DecisionTypeEnum.NOTHING, ""), enemyChoose);
             BattleRewards.awardBattleRewards(playerPokemon, enemyPokemon);
             this.newMoveToLearn(playerPokemon);
         }

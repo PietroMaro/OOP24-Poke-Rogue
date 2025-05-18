@@ -2,7 +2,6 @@ package it.unibo.PokeRogue.scene.scene_fight;
 
 import java.awt.event.KeyEvent;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import it.unibo.PokeRogue.ai.EnemyAi;
