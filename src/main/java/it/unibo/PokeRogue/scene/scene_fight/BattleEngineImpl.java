@@ -20,6 +20,7 @@ import it.unibo.PokeRogue.move.MoveFactoryImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.savingSystem.SavingSystem;
 import it.unibo.PokeRogue.savingSystem.SavingSystemImpl;
+import it.unibo.PokeRogue.scene.scene_fight.enums.DecisionTypeEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.PokemonBattleUtil;
 import it.unibo.PokeRogue.utilities.PokemonBattleUtilImpl;
@@ -41,6 +42,8 @@ public class BattleEngineImpl implements BattleEngine {
     private final GameEngine gameEngineInstance;
     private final SavingSystem savingSystemInstance;
     private Boolean isCaptured = false;
+    private Pokemon pokemonPlayer;
+    private Pokemon pokemonEnemy;
 
     /**
      * Constructor for the BattleEngineImpl class that initializes the battle engine
@@ -65,7 +68,6 @@ public class BattleEngineImpl implements BattleEngine {
         this.enemyAiInstance = enemyAiInstance;
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.savingSystemInstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
-
     }
 
     /**
@@ -129,51 +131,70 @@ public class BattleEngineImpl implements BattleEngine {
      * @param enemyMoveString  the name of the enemy's move
      */
     @Override
-    public void movesPriorityCalculator(String type, String playerMoveString, String typeEnemy,
-            String enemyMoveString) {
-        Pokemon pokemonPlayer = this.playerTrainerInstance.getPokemon(FIRST_POSITION).get();
-        Pokemon pokemonEnemy = this.enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
+    public void movesPriorityCalculator(Decision playerDecision, Decision enemyDecision) {
+        this.pokemonPlayer = playerTrainerInstance.getPokemon(FIRST_POSITION).get();
+        this.pokemonEnemy = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
 
         Ability abilityPlayer = abilityFactoryInstance.abilityFromName(pokemonPlayer.getAbilityName());
         Ability abilityEnemy = abilityFactoryInstance.abilityFromName(pokemonEnemy.getAbilityName());
 
-        Move playerMove = getSafeMove(pokemonPlayer, playerMoveString, type);
-        Move enemyMove = getSafeMove(pokemonEnemy, enemyMoveString, typeEnemy);
-        handleAbilityEffects(abilityPlayer, pokemonPlayer, pokemonEnemy, playerMove, enemyMove,
+        Move playerMove = getSafeMove(pokemonPlayer, playerDecision);
+        Move enemyMove = getSafeMove(pokemonEnemy, enemyDecision);
+        this.handleAbilityEffects(abilityPlayer, pokemonPlayer, pokemonEnemy, playerMove, enemyMove,
 
                 AbilitySituationChecks.NEUTRAL);
 
-        handleAbilityEffects(abilityEnemy, pokemonEnemy, pokemonPlayer, enemyMove, playerMove,
+        this.handleAbilityEffects(abilityEnemy, pokemonEnemy, pokemonPlayer, enemyMove, playerMove,
 
                 AbilitySituationChecks.NEUTRAL);
 
-        handleAbilityEffects(abilityPlayer, pokemonPlayer, pokemonEnemy, playerMove, enemyMove,
+        this.handleAbilityEffects(abilityPlayer, pokemonPlayer, pokemonEnemy, playerMove, enemyMove,
                 AbilitySituationChecks.PASSIVE);
-        handleAbilityEffects(abilityEnemy, pokemonEnemy, pokemonPlayer, enemyMove, playerMove,
+        this.handleAbilityEffects(abilityEnemy, pokemonEnemy, pokemonPlayer, enemyMove, playerMove,
                 AbilitySituationChecks.PASSIVE);
         this.applyStatusForAllPokemon(playerTrainerInstance.getSquad(), pokemonEnemy);
         this.applyStatusForAllPokemon(enemyTrainerInstance.getSquad(), pokemonPlayer);
-        if (type.equals("SwitchIn") && statusEffectInstance.checkStatusSwitch(pokemonPlayer)
-                && BattleUtilities.canSwitch(this.playerTrainerInstance, Integer.valueOf(playerMoveString))) {
-            handleSwitch(pokemonPlayer, pokemonEnemy, playerMove, enemyMove, abilityPlayer, playerMoveString,
-                    playerTrainerInstance);
-            pokemonPlayer = this.playerTrainerInstance.getPokemon(FIRST_POSITION).get();
+        if (playerDecision.moveType().priority() >= enemyDecision.moveType().priority()
+                && playerHasPriority(playerMove, enemyMove)) {
+            executeDecision(playerDecision, playerTrainerInstance, enemyTrainerInstance, playerMove, enemyMove,
+                    abilityPlayer);
+            executeDecision(enemyDecision, enemyTrainerInstance, playerTrainerInstance, enemyMove, playerMove,
+                    abilityEnemy);
 
-        }
-        if (typeEnemy.equals("SwitchIn") && statusEffectInstance.checkStatusSwitch(pokemonEnemy)
-                && BattleUtilities.canSwitch(this.enemyTrainerInstance, Integer.valueOf(enemyMoveString))) {
-            handleSwitch(pokemonEnemy, pokemonPlayer, enemyMove, playerMove, abilityEnemy, enemyMoveString,
-                    enemyTrainerInstance);
-            pokemonEnemy = this.enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
-        }
-        if (type.equals("Pokeball")) {
-            this.pokeObject(playerMoveString);
+        } else {
+            executeDecision(enemyDecision, enemyTrainerInstance, playerTrainerInstance, enemyMove, playerMove,
+                    abilityEnemy);
+            executeDecision(playerDecision, playerTrainerInstance, enemyTrainerInstance, playerMove, enemyMove,
+                    abilityPlayer);
         }
         handleAttackPhases(type, playerMoveString, typeEnemy, pokemonPlayer, pokemonEnemy, playerMove, enemyMove,
                 abilityPlayer,
                 abilityEnemy);
         this.newEnemyCheck();
 
+    }
+
+    private void executeDecision(Decision decision, PlayerTrainerImpl attackerTrainer,
+            PlayerTrainerImpl defenderTrainer, Move atteckerMove, Move defenderMove, Ability attackerAbility) {
+        Pokemon attackerPokemon = attackerTrainer.getPokemon(FIRST_POSITION).get();
+        Pokemon defenderPokemon = defenderTrainer.getPokemon(FIRST_POSITION).get();
+        if (decision.moveType() == DecisionTypeEnum.SWITCH_IN && statusEffectInstance.checkStatusSwitch(attackerPokemon)
+                && BattleUtilities.canSwitch(attackerTrainer, Integer.valueOf(decision.subType()))) {
+            handleSwitch(attackerPokemon, defenderPokemon, atteckerMove, defenderMove, attackerAbility,
+                    decision.subType(), attackerTrainer);
+            this.refreshActivePokemons();
+        }
+        if (decision.moveType() == DecisionTypeEnum.POKEBALL) {
+            this.pokeObject(decision.subType());
+        }
+        if (decision.moveType() == DecisionTypeEnum.ATTACK) {
+        
+        }
+    }
+
+    private void refreshActivePokemons() {
+        this.pokemonPlayer = playerTrainerInstance.getPokemon(FIRST_POSITION).get();
+        this.pokemonEnemy = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
     }
 
     private void applyStatusForAllPokemon(List<Optional<Pokemon>> squad, Pokemon enemy) {
@@ -184,9 +205,10 @@ public class BattleEngineImpl implements BattleEngine {
         }
     }
 
-    private Move getSafeMove(Pokemon pokemon, String moveIndex, String type) {
-        if (type.equals("Attack") && BattleUtilities.knowsMove(pokemon, Integer.parseInt(moveIndex))) {
-            return pokemon.getActualMoves().get(Integer.parseInt(moveIndex));
+    private Move getSafeMove(Pokemon pokemon, Decision decision) {
+        if (decision.moveType() == DecisionTypeEnum.ATTACK
+                && BattleUtilities.knowsMove(pokemon, Integer.parseInt(decision.subType()))) {
+            return pokemon.getActualMoves().get(Integer.parseInt(decision.subType()));
         }
         return moveFactoryInstance.moveFromName("splash");
     }
@@ -240,7 +262,7 @@ public class BattleEngineImpl implements BattleEngine {
             applyAbilityPhase(enemy, player, enemyMove, playerMove, abilityEnemy, abilityPlayer,
                     AbilitySituationChecks.ATTACKED);
 
-            if (calculatePriority(playerMove, enemyMove)) {
+            if (playerHasPriority(playerMove, enemyMove)) {
                 if (statusEffectInstance.checkStatusAttack(player)) {
                     doMove(player, enemy, playerMove, enemyMove);
                 }
@@ -383,7 +405,10 @@ public class BattleEngineImpl implements BattleEngine {
      * @return true if the player's move has higher priority or if the player's
      *         Pokémon is faster; false otherwise
      */
-    private Boolean calculatePriority(final Move playerMove, final Move enemyMove) {
+    private Boolean playerHasPriority(final Move playerMove, final Move enemyMove) {
+        if (playerMove == null || enemyMove == null) {
+            return true;
+        }
         if (playerMove.getPriority() > enemyMove.getPriority()) {
             return true;
         } else if (playerTrainerInstance.getPokemon(FIRST_POSITION).get().getActualStats().get("speed")
