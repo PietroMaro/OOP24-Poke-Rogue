@@ -1,0 +1,29 @@
+{
+    "id": 9,
+    "name": "Revive",
+    "type": "Healing",
+    "description": "Revives a Pokémon with half of his max HP.",
+    "price": 1500,
+    "rarity": "Common",
+    "category": "Consumable",
+    "captureRate": 0,
+    "effect": {
+        "checks": [
+            [
+                "us.actualStats.hp.currentValue",
+                "<=",
+                "0"
+            ]
+        ],
+        "activation": [
+            [
+                "us.actualStats.hp.currentValue",
+                "us.actualStats.hp.currentMax"
+            ],
+            [
+                "us.statusCondition",
+                "''"
+            ]
+        ]
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "id": 20,
+    "name": "X Accuracy",
+    "type": "Boost",
+    "description": "Raises the user's accuracy for 5 battles.",
+    "price": 500,
+    "rarity": "Common",
+    "category": "Consumable",
+    "captureRate": 0,
+    "effect": {
+        "checks": [
+            
+        ],
+        "activation": [
+            [
+                "us.actualStats.accuracy.currentValue",
+                "us.actualStats.accuracy.currentValue + 1"
+            ]
+        ]
+    }
+}

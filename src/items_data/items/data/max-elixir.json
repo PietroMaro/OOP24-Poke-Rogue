@@ -1,0 +1,33 @@
+{
+    "id": 14,
+    "name": "Max Elixir",
+    "type": "PPRestore",
+    "description": "Fully restores the PP of all of a Pokémon's moves.",
+    "price": 4500,
+    "rarity": "Great",
+    "category": "Consumable",
+    "captureRate": 0,
+    "effect": {
+        "checks": [
+            
+        ],
+        "activation": [
+            [
+                "us.actualMoves[0].currentValue",
+                "us.actualMoves[0].currentMax"
+            ],
+            [
+                "us.actualMoves[1].currentValue",
+                "us.actualMoves[1].currentMax"
+            ],
+            [
+                "us.actualMoves[2].currentValue",
+                "us.actualMoves[2].currentMax"
+            ],
+            [
+                "us.actualMoves[3].currentValue",
+                "us.actualMoves[3].currentMax"
+            ]
+        ]
+    }
+}

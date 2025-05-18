@@ -1,0 +1,31 @@
+{
+    "id": 23,
+    "name": "PP Up",
+    "type": "Boost",
+    "description": "Increases the maximum PP of a selected move by 20%.",
+    "price": 3500,
+    "rarity": "Great",
+    "category": "Consumable",
+    "captureRate": 0,
+    "effect": {
+      "checks": [],
+    "activation": [
+      [
+        "us.actualMoves[0].currentMax",
+        "us.actualMoves[0].currentMax * 1.2"
+      ],
+      [
+        "us.actualMoves[1].currentMax",
+        "us.actualMoves[1].currentMax * 1.2"
+      ],
+      [
+        "us.actualMoves[2].currentMax",
+        "us.actualMoves[2].currentMax * 1.2"
+      ],
+      [
+        "us.actualMoves[3].currentMax",
+        "us.actualMoves[3].currentMax * 1.2"
+      ]
+    ]
+    }
+  }

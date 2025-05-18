@@ -1,0 +1,39 @@
+{
+    "id": 29,
+    "name": "Vitamins",
+    "type": "Equipment",
+    "description": "Increases the holder's base stat by 10%.",
+    "price": 7500,
+    "rarity": "Great",
+    "category": "Equipable",
+    "captureRate": 0,
+    "effect": {
+        "checks": [],
+        "activation": [
+            [
+                "us.actualStats.hp.currentMax",
+                "MATH.floor(us.actualStats.hp.currentMax * 1.1).intValue()"
+            ],
+            [
+                "us.actualStats.attack.currentMax",
+                "MATH.floor(us.actualStats.attack.currentMax * 1.1).intValue()"
+            ],
+            [
+                "us.actualStats.defense.currentMax",
+                "MATH.floor(us.actualStats.defense.currentMax * 1.1).intValue()"
+            ],
+            [
+                "us.actualStats.specialAttack.currentMax",
+                "MATH.floor(us.actualStats.specialAttack.currentMax * 1.1).intValue()"
+            ],
+            [
+                "us.actualStats.specialDefense.currentMax",
+                "MATH.floor(us.actualStats.specialDefense.currentMax * 1.1).intValue()"
+            ],
+            [
+                "us.actualStats.speed.currentMax",
+                "MATH.floor(us.actualStats.speed.currentMax * 1.1).intValue()"
+            ]
+        ]
+    }
+}

@@ -11,6 +11,7 @@ import it.unibo.PokeRogue.pokemon.Pokemon;
 public class TrainerImpl implements Trainer {
     private List<Optional<Pokemon>> pokemonSquad;
     private Map<String, Integer> ball;
+    private int money;
     private Boolean wild = false;
 
     public TrainerImpl() {
@@ -23,6 +24,7 @@ public class TrainerImpl implements Trainer {
         for (int pokeSquadPosition = 0; pokeSquadPosition < 6; pokeSquadPosition++) {
             pokemonSquad.add(Optional.empty());
         }
+        this.money = 1000;
     }
 
     @Override
@@ -72,6 +74,14 @@ public class TrainerImpl implements Trainer {
     }
 
     @Override
+    public int getMoney() {
+        return this.money;
+    }
+
+    @Override
+    public void addMoney(final int amount) {
+        this.money += amount;
+    }
     public Boolean isWild() {
         return this.wild;
     }
