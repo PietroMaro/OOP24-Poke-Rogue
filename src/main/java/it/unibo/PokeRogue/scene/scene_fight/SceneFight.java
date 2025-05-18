@@ -36,9 +36,9 @@ public class SceneFight implements Scene {
     private final SceneFightView sceneFightView;
     private int newSelectedButton;
     private final EnemyAi enemyAiInstance;
-    private MoveFactoryImpl moveFactoryInstance;
-    private BattleEngine battleEngineInstance;
-    private GenerateEnemy generateEnemyInstance;
+    private final MoveFactoryImpl moveFactoryInstance;
+    private final BattleEngine battleEngineInstance;
+    private final GenerateEnemy generateEnemyInstance;
 
     /**
      * Constructor for SceneFight.
@@ -47,7 +47,7 @@ public class SceneFight implements Scene {
      * 
      * @param battleLevel the level of the battle
      */
-    public SceneFight(Integer battleLevel) {
+    public SceneFight(final Integer battleLevel) {
         this.enemyTrainerInstance = new PlayerTrainerImpl();
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
@@ -66,7 +66,7 @@ public class SceneFight implements Scene {
      * Initializes the status of the buttons for the battle scene.
      * Sets the default button selection to "Fight".
      */
-    protected void initStatus() {
+    private void initStatus() {
         this.currentSelectedButton = SceneFightStatusValuesEnum.FIGHT_BUTTON.value();
         this.newSelectedButton = SceneFightStatusValuesEnum.FIGHT_BUTTON.value();
     }
@@ -87,7 +87,6 @@ public class SceneFight implements Scene {
     public void updateGraphic() {
         this.sceneFightView.updateGraphic(currentSelectedButton, newSelectedButton);
     }
-
     /**
      * Updates the status of the scene based on the key input from the user.
      * This method handles user interactions, such as navigating through the buttons

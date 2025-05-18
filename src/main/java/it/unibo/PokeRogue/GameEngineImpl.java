@@ -28,8 +28,6 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
     private String fileToLoadName;
     @Setter
     private Integer fightLevel;
-
-
     public GameEngineImpl() {
 
     }

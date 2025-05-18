@@ -80,33 +80,27 @@ public class BattleEngineImpl implements BattleEngine {
      * @param attackerPokemon the Pokémon using the move
      * @param defenderPokemon the Pokémon receiving the attack
      */
-    private void executeMoves(Move attackerMove, Pokemon attackerPokemon, Pokemon defenderPokemon) {
-        if (attackerMove.getPp().getCurrentValue() <= 0 || attackerMove.getName().equals("splash")) {
+    private void executeMoves(final Move attackerMove, final Pokemon attackerPokemon, final Pokemon defenderPokemon) {
+        if ("splash".equals(attackerMove.getName()) || attackerMove.getPp().getCurrentValue() <= 0) {
             return;
         }
         attackerMove.getPp().decrement(1);
 
-        int finalDamage = (int) pokemonBattleUtilInstance.calculateDamage(attackerPokemon, defenderPokemon,
+        final int finalDamage = pokemonBattleUtilInstance.calculateDamage(attackerPokemon, defenderPokemon,
                 attackerMove,
                 this.currentWeather);
-        System.out.println(finalDamage);
         defenderPokemon.getActualStats().get("hp").decrement(finalDamage);
 
     }
 
-    private void pokeObject(String pokeballName) {
-        int countBall = playerTrainerInstance.getBall().get(pokeballName);
-        Pokemon enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
+    private void pokeObject(final String pokeballName) {
+        final int countBall = playerTrainerInstance.getBall().get(pokeballName);
+        final Pokemon enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
         if (countBall > 0 && enemyTrainerInstance.isWild()) {
             playerTrainerInstance.getBall().put(pokeballName, countBall - 1);
             // eventuali calcoli per vedere se lo catturi o no
-            // da gestire l'aggiunta in squadra o box
-
             if (playerTrainerInstance.getSquad().size() <= MAX_SQUAD) {
                 playerTrainerInstance.addPokemon(enemyPokemon, MAX_SQUAD);
-                // DA VEDERE CON SHOP SE RIMUOVENDO IL POKEMON DA PROBLEMI
-                enemyPokemon.getActualStats().get("hp")
-                        .decrement(enemyPokemon.getActualStats().get("hp").getCurrentValue());
                 this.savingSystemInstance.savePokemon(enemyPokemon);
                 this.isCaptured = true;
                 this.newEnemyCheck();
@@ -131,15 +125,15 @@ public class BattleEngineImpl implements BattleEngine {
      * @param enemyMoveString  the name of the enemy's move
      */
     @Override
-    public void movesPriorityCalculator(Decision playerDecision, Decision enemyDecision) {
+    public void movesPriorityCalculator(final Decision playerDecision, final Decision enemyDecision) {
         this.playerPokemon = playerTrainerInstance.getPokemon(FIRST_POSITION).get();
         this.enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
 
-        Ability abilityPlayer = abilityFactoryInstance.abilityFromName(playerPokemon.getAbilityName());
-        Ability abilityEnemy = abilityFactoryInstance.abilityFromName(enemyPokemon.getAbilityName());
+        final Ability abilityPlayer = abilityFactoryInstance.abilityFromName(playerPokemon.getAbilityName());
+        final Ability abilityEnemy = abilityFactoryInstance.abilityFromName(enemyPokemon.getAbilityName());
 
-        Move playerMove = getSafeMove(playerPokemon, playerDecision);
-        Move enemyMove = getSafeMove(enemyPokemon, enemyDecision);
+        final Move playerMove = getSafeMove(playerPokemon, playerDecision);
+        final Move enemyMove = getSafeMove(enemyPokemon, enemyDecision);
         this.handleAbilityEffects(abilityPlayer, playerPokemon, enemyPokemon, playerMove, enemyMove,
 
                 AbilitySituationChecks.NEUTRAL);
@@ -156,25 +150,27 @@ public class BattleEngineImpl implements BattleEngine {
         this.applyStatusForAllPokemon(enemyTrainerInstance.getSquad(), playerPokemon);
         if (playerDecision.moveType().priority() >= enemyDecision.moveType().priority()
                 && playerHasPriority(playerMove, enemyMove)) {
-            executeDecision(playerDecision, playerTrainerInstance, enemyTrainerInstance, playerMove, enemyMove,
+            this.executeDecision(playerDecision, playerTrainerInstance, enemyTrainerInstance, playerMove, enemyMove,
                     abilityPlayer, abilityEnemy);
-            executeDecision(enemyDecision, enemyTrainerInstance, playerTrainerInstance, enemyMove, playerMove,
+            this.executeDecision(enemyDecision, enemyTrainerInstance, playerTrainerInstance, enemyMove, playerMove,
                     abilityEnemy, abilityPlayer);
 
         } else {
-            executeDecision(enemyDecision, enemyTrainerInstance, playerTrainerInstance, enemyMove, playerMove,
+            this.executeDecision(enemyDecision, enemyTrainerInstance, playerTrainerInstance, enemyMove, playerMove,
                     abilityEnemy, abilityPlayer);
-            executeDecision(playerDecision, playerTrainerInstance, enemyTrainerInstance, playerMove, enemyMove,
+            this.executeDecision(playerDecision, playerTrainerInstance, enemyTrainerInstance, playerMove, enemyMove,
                     abilityPlayer, abilityEnemy);
         }
         this.newEnemyCheck();
 
     }
 
-    private void executeDecision(Decision decision, PlayerTrainerImpl attackerTrainer,
-            PlayerTrainerImpl defenderTrainer, Move atteckerMove, Move defenderMove, Ability attackerAbility, Ability defenderAbility) {
-        Pokemon attackerPokemon = attackerTrainer.getPokemon(FIRST_POSITION).get();
-        Pokemon defenderPokemon = defenderTrainer.getPokemon(FIRST_POSITION).get();
+    private void executeDecision(final Decision decision, final PlayerTrainerImpl attackerTrainer,
+            final PlayerTrainerImpl defenderTrainer, final Move atteckerMove, final Move defenderMove,
+            final Ability attackerAbility,
+            final Ability defenderAbility) {
+        final Pokemon attackerPokemon = attackerTrainer.getPokemon(FIRST_POSITION).get();
+        final Pokemon defenderPokemon = defenderTrainer.getPokemon(FIRST_POSITION).get();
         if (decision.moveType() == DecisionTypeEnum.SWITCH_IN && statusEffectInstance.checkStatusSwitch(attackerPokemon)
                 && BattleUtilities.canSwitch(attackerTrainer, Integer.valueOf(decision.subType()))) {
             handleSwitch(attackerPokemon, defenderPokemon, atteckerMove, defenderMove, attackerAbility,
@@ -185,12 +181,13 @@ public class BattleEngineImpl implements BattleEngine {
             this.pokeObject(decision.subType());
         }
         if (decision.moveType() == DecisionTypeEnum.ATTACK && statusEffectInstance.checkStatusAttack(attackerPokemon)) {
-            applyAbilityPhase(attackerPokemon, defenderPokemon, atteckerMove, defenderMove, attackerAbility, defenderAbility,
+            applyAbilityPhase(attackerPokemon, defenderPokemon, atteckerMove, defenderMove, attackerAbility,
+                    defenderAbility,
                     AbilitySituationChecks.ATTACK);
-            applyAbilityPhase(defenderPokemon, attackerPokemon, defenderMove, atteckerMove, defenderAbility, attackerAbility,
+            applyAbilityPhase(defenderPokemon, attackerPokemon, defenderMove, atteckerMove, defenderAbility,
+                    attackerAbility,
                     AbilitySituationChecks.ATTACKED);
             doMove(attackerPokemon, defenderPokemon, atteckerMove, defenderMove);
-            this.newEnemyCheck();
         }
     }
 
@@ -199,15 +196,15 @@ public class BattleEngineImpl implements BattleEngine {
         this.enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
     }
 
-    private void applyStatusForAllPokemon(List<Optional<Pokemon>> squad, Pokemon enemy) {
-        for (Optional<Pokemon> optionalPokemon : squad) {
+    private void applyStatusForAllPokemon(final List<Optional<Pokemon>> squad, final Pokemon enemy) {
+        for (final Optional<Pokemon> optionalPokemon : squad) {
             if (optionalPokemon.isPresent()) {
                 statusEffectInstance.applyStatus(optionalPokemon.get(), enemy);
             }
         }
     }
 
-    private Move getSafeMove(Pokemon pokemon, Decision decision) {
+    private Move getSafeMove(final Pokemon pokemon, final Decision decision) {
         if (decision.moveType() == DecisionTypeEnum.ATTACK
                 && BattleUtilities.knowsMove(pokemon, Integer.parseInt(decision.subType()))) {
             return pokemon.getActualMoves().get(Integer.parseInt(decision.subType()));
@@ -215,15 +212,17 @@ public class BattleEngineImpl implements BattleEngine {
         return moveFactoryInstance.moveFromName("splash");
     }
 
-    private void executeEffect(JSONObject effect, Pokemon attackerPokemon, Pokemon defenderPokemon, Move atteckerMove,
-            Move defenderMove) {
+    private void executeEffect(final JSONObject effect, final Pokemon attackerPokemon, final Pokemon defenderPokemon,
+            final Move atteckerMove,
+            final Move defenderMove) {
         this.effectParserInstance.parseEffect(effect,
                 attackerPokemon, defenderPokemon, Optional.of(atteckerMove), Optional.of(defenderMove),
                 this.currentWeather);
     }
 
-    private void handleSwitch(Pokemon user, Pokemon target, Move moveUser, Move moveTarget, Ability ability,
-            String moveIndex, PlayerTrainerImpl trainer) {
+    private void handleSwitch(final Pokemon user, final Pokemon target, final Move moveUser, final Move moveTarget,
+            final Ability ability,
+            final String moveIndex, final PlayerTrainerImpl trainer) {
         this.handleAbilityEffects(ability, user, target, moveUser, moveTarget, AbilitySituationChecks.SWITCHOUT);
         this.switchIn(moveIndex, trainer);
         handleAbilityEffects(ability, user, target, moveUser, moveTarget, AbilitySituationChecks.SWITCHIN);
@@ -245,8 +244,9 @@ public class BattleEngineImpl implements BattleEngine {
      * @param phase         the current phase of the ability (e.g., attack,
      *                      attacked)
      */
-    private void applyAbilityPhase(Pokemon source, Pokemon target, Move moveSource, Move moveTarget,
-            Ability abilitySource, Ability abilityTarget, AbilitySituationChecks phase) {
+    private void applyAbilityPhase(final Pokemon source, final Pokemon target, final Move moveSource,
+            final Move moveTarget, final Ability abilitySource, final Ability abilityTarget,
+            final AbilitySituationChecks phase) {
         handleAbilityEffects(abilitySource, source, target, moveSource, moveTarget, phase);
         handleAbilityEffects(abilityTarget, target, source, moveTarget, moveSource, phase);
     }
@@ -263,7 +263,7 @@ public class BattleEngineImpl implements BattleEngine {
      * @param move         the move being used by the attacker
      * @param opponentMove the move used by the opponent Pokémon
      */
-    private void doMove(Pokemon attacker, Pokemon defender, Move move, Move opponentMove) {
+    private void doMove(final Pokemon attacker, final Pokemon defender, final Move move, final Move opponentMove) {
         executeMoves(move, attacker, defender);
         executeEffect(move.getEffect(), attacker, defender, move, opponentMove);
     }
@@ -337,15 +337,12 @@ public class BattleEngineImpl implements BattleEngine {
         if (playerMove == null || enemyMove == null) {
             return true;
         }
-        if (playerMove.getPriority() > enemyMove.getPriority()) {
-            return true;
-        } else if (playerTrainerInstance.getPokemon(FIRST_POSITION).get().getActualStats().get("speed")
-                .getCurrentValue() > enemyTrainerInstance.getPokemon(FIRST_POSITION).get().getActualStats().get("speed")
-                        .getCurrentValue()) {
-            return true;
-        } else {
-            return false;
-        }
+        return playerMove.getPriority() > enemyMove.getPriority()
+                || playerTrainerInstance.getPokemon(FIRST_POSITION).isPresent()
+                        && enemyTrainerInstance.getPokemon(FIRST_POSITION).isPresent()
+                        && playerTrainerInstance.getPokemon(FIRST_POSITION).get().getActualStats().get("speed")
+                                .getCurrentValue() > enemyTrainerInstance.getPokemon(FIRST_POSITION).get()
+                                        .getActualStats().get("speed").getCurrentValue();
     }
 
     /**
@@ -368,9 +365,9 @@ public class BattleEngineImpl implements BattleEngine {
      *
      * @param playerPokemon the player's Pokémon that may need to learn a new move
      */
-    private void newMoveToLearn(Pokemon playerPokemon) {
+    private void newMoveToLearn(final Pokemon playerPokemon) {
         if (playerPokemon.isHasToLearnMove()) {
-            gameEngineInstance.setScene("move");
+            this.gameEngineInstance.setScene("move");
         }
     }
 }

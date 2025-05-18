@@ -51,7 +51,7 @@ public class StatusEffectImpl implements StatusEffect {
      * @return {@code true} if it can attack; {@code false} otherwise
      */
     @Override
-    public Boolean checkStatusAttack(Pokemon pokemon) {
+    public Boolean checkStatusAttack(final Pokemon pokemon) {
         Optional<StatusCondition> status = pokemon.getStatusCondition();
         if (status.isPresent()) {
             switch (status.get()) {
@@ -94,7 +94,7 @@ public class StatusEffectImpl implements StatusEffect {
      * @return {@code true} if it can switch; {@code false} otherwise
      */
     @Override
-    public Boolean checkStatusSwitch(Pokemon pokemon) {
+    public Boolean checkStatusSwitch(final Pokemon pokemon) {
         Optional<StatusCondition> status = pokemon.getStatusCondition();
         if (status.isPresent()) {
             switch (status.get()) {
@@ -117,7 +117,7 @@ public class StatusEffectImpl implements StatusEffect {
      * @param enemy   the opposing Pokémon (used for effects like Leech Seed)
      */
     @Override
-    public void applyStatus(Pokemon pokemon, Pokemon enemy) {
+    public void applyStatus(final Pokemon pokemon, final Pokemon enemy) {
         Optional<StatusCondition> status = pokemon.getStatusCondition();
         if (status.isPresent()) {
             StatusCondition currentStatus = status.get();
@@ -173,7 +173,7 @@ public class StatusEffectImpl implements StatusEffect {
      * @param pokemon the affected Pokémon
      * @param status  the status condition being applied
      */
-    private void setTimeDuration(Pokemon pokemon, StatusCondition status) {
+    private void setTimeDuration(final Pokemon pokemon, final StatusCondition status) {
         if (pokemon.getStatusDuration().isEmpty() || !pokemon.getStatusDuration().containsKey(status)) {
             pokemon.getStatusDuration().clear();
             pokemon.getStatusDuration().put(status, statusMap.get(status));
@@ -187,7 +187,7 @@ public class StatusEffectImpl implements StatusEffect {
      * @param pokemon the affected Pokémon
      * @param status  the status condition being updated
      */
-    private void decrementTimeDuration(Pokemon pokemon, StatusCondition status) {
+    private void decrementTimeDuration(final Pokemon pokemon, final StatusCondition status) {
         int turnLeft = pokemon.getStatusDuration().get(status) - 1;
         pokemon.getStatusDuration().put(status, turnLeft);
         if (pokemon.getStatusDuration().get(status).equals(0)) {
@@ -202,7 +202,7 @@ public class StatusEffectImpl implements StatusEffect {
      * @param pokemon the Pokémon receiving damage
      * @param damage  the amount of damage to inflict
      */
-    private void calculateDamage(Pokemon pokemon, int damage) {
+    private void calculateDamage(final Pokemon pokemon, final int damage) {
         pokemon.getActualStats().get("hp").decrement(damage);
     }
 }

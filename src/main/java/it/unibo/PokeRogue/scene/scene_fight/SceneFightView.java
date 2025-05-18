@@ -31,11 +31,11 @@ public class SceneFightView {
      *                              the current battle.
      */
     public SceneFightView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
-            final Map<String, PanelElementImpl> allPanelsElements, PlayerTrainerImpl enemyTrainerInstance,
-            int currentSelectedButton, int newSelectedButton, SceneFight scene) {
+            final Map<String, PanelElementImpl> allPanelsElements, final PlayerTrainerImpl enemyTrainerInstance,
+            final int currentSelectedButton, final int newSelectedButton, final SceneFight scene) {
         this.sceneGraphicElements = sceneGraphicElements;
         this.sceneFightInitView = new SceneFightInitView(this.sceneGraphicElements, allPanelsElements,
-                enemyTrainerInstance, currentSelectedButton);
+                enemyTrainerInstance);
         this.sceneFightUpdateView = new SceneFightUpdateView(this.sceneGraphicElements, allPanelsElements,
                 this.sceneFightInitView, currentSelectedButton, newSelectedButton, scene);
 

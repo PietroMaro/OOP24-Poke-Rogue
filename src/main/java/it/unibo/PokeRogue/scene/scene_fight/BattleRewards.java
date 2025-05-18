@@ -4,7 +4,14 @@ import java.util.Map;
 
 import it.unibo.PokeRogue.pokemon.Pokemon;
 
-public class BattleRewards {
+public final class BattleRewards {
+
+    /**
+     * empty constructor
+     * 
+     */
+    private BattleRewards() {
+    }
 
     /**
      * Awards experience points (EXP) and effort values (EVs) to the winning Pokémon
@@ -16,20 +23,20 @@ public class BattleRewards {
      * @param winnerPokemon   the Pokémon that won the battle
      * @param defeatedPokemon the Pokémon that was defeated in the battle
      */
-    public static void awardBattleRewards(Pokemon winnerPokemon, Pokemon defeatedPokemon) {
-        int baseExp = 150;
-        int enemyLevel = defeatedPokemon.getLevel().getCurrentValue();
-        int playerLevel = winnerPokemon.getLevel().getCurrentValue();
+    public static void awardBattleRewards(final Pokemon winnerPokemon, final Pokemon defeatedPokemon) {
+        final int baseExp = 150;
+        final int enemyLevel = defeatedPokemon.getLevel().getCurrentValue();
+        final int playerLevel = winnerPokemon.getLevel().getCurrentValue();
 
-        double base = (2.0 * enemyLevel + 10.0) / (enemyLevel + playerLevel + 10.0);
-        double exponent = Math.pow(base, 2.5);
-        double expRaw = ((baseExp * enemyLevel) / 5.0) * exponent;
+        final double base = 2.0 * enemyLevel + 10.0 / enemyLevel + playerLevel + 10.0;
+        final double exponent = Math.pow(base, 2.5);
+        final double expRaw = baseExp * enemyLevel / 5.0 * exponent;
 
-        int gainedExp = (int) Math.floor(expRaw) + 1;
+        final int gainedExp = (int) Math.floor(expRaw) + 1;
 
         winnerPokemon.increaseExp(gainedExp, true);
 
-        Map<String, Integer> awardedEVs = defeatedPokemon.getGivesEV();
+        final Map<String, Integer> awardedEVs = defeatedPokemon.getGivesEV();
         winnerPokemon.increaseEV(awardedEVs);
     }
 
