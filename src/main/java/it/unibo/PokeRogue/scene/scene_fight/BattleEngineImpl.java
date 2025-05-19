@@ -28,15 +28,15 @@ public class BattleEngineImpl implements BattleEngine {
     private final static Integer MAX_SQUAD = 6;
 
     private final PlayerTrainerImpl playerTrainerInstance;
-    private PlayerTrainerImpl enemyTrainerInstance;
+    private final PlayerTrainerImpl enemyTrainerInstance;
 
     private final EffectParser effectParserInstance;
     @Getter
-    private Optional<Weather> currentWeather;
-    private PokemonBattleUtil pokemonBattleUtilInstance;
-    private AbilityFactory abilityFactoryInstance;
-    private StatusEffect statusEffectInstance;
-    private EnemyAi enemyAiInstance;
+    private final Optional<Weather> currentWeather;
+    private final PokemonBattleUtil pokemonBattleUtilInstance;
+    private final AbilityFactory abilityFactoryInstance;
+    private final StatusEffect statusEffectInstance;
+    private final EnemyAi enemyAiInstance;
     private final GameEngine gameEngineInstance;
     private final SavingSystem savingSystemInstance;
     private boolean captured;
@@ -52,7 +52,7 @@ public class BattleEngineImpl implements BattleEngine {
      * @param enemyTrainerInstance the enemy trainer instance involved in the battle
      * @param enemyAiInstance      the AI instance controlling the enemy's strategy
      */
-    public BattleEngineImpl(PlayerTrainerImpl enemyTrainerInstance, EnemyAi enemyAiInstance) {
+    public BattleEngineImpl(final PlayerTrainerImpl enemyTrainerInstance, final EnemyAi enemyAiInstance) {
         this.enemyTrainerInstance = enemyTrainerInstance;
         this.pokemonBattleUtilInstance = new PokemonBattleUtilImpl();
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
@@ -87,8 +87,8 @@ public class BattleEngineImpl implements BattleEngine {
         final Ability abilityPlayer = abilityFactoryInstance.abilityFromName(playerPokemon.getAbilityName());
         final Ability abilityEnemy = abilityFactoryInstance.abilityFromName(enemyPokemon.getAbilityName());
 
-        Optional<Move> playerMove = getSafeMove(playerPokemon, playerDecision);
-        Optional<Move> enemyMove = getSafeMove(enemyPokemon, enemyDecision);
+        final Optional<Move> playerMove = getSafeMove(playerPokemon, playerDecision);
+        final Optional<Move> enemyMove = getSafeMove(enemyPokemon, enemyDecision);
         this.handleAbilityEffects(abilityPlayer, playerPokemon, enemyPokemon, playerMove, enemyMove,
                 AbilitySituationChecks.NEUTRAL);
         this.handleAbilityEffects(abilityEnemy, enemyPokemon, playerPokemon, enemyMove, playerMove,
@@ -152,7 +152,7 @@ public class BattleEngineImpl implements BattleEngine {
         final Pokemon attackerPokemon = attackerTrainer.getPokemon(FIRST_POSITION).get();
         final Pokemon defenderPokemon = defenderTrainer.getPokemon(FIRST_POSITION).get();
         if (decision.moveType() == DecisionTypeEnum.SWITCH_IN && statusEffectInstance.checkStatusSwitch(attackerPokemon)
-                && BattleUtilities.canSwitch(attackerTrainer, Integer.valueOf(decision.subType()))) {
+                && BattleUtilities.canSwitch(attackerTrainer, Integer.parseInt(decision.subType()))) {
             this.handleAbilityEffects(attackerAbility, attackerPokemon, defenderPokemon, atteckerMove, defenderMove,
                     AbilitySituationChecks.SWITCHOUT);
             this.switchIn(decision.subType(), attackerTrainer);
@@ -204,7 +204,7 @@ public class BattleEngineImpl implements BattleEngine {
     }
 
     private void newEnemyCheck() {
-        if (BattleUtilities.isTeamWipedOut(enemyTrainerInstance) || this.captured == true) {
+        if (BattleUtilities.isTeamWipedOut(enemyTrainerInstance) || this.captured) {
             BattleRewards.awardBattleRewards(this.playerPokemon, this.enemyPokemon);
             this.newMoveToLearn(this.playerPokemon);
             this.gameEngineInstance.setScene("shop");

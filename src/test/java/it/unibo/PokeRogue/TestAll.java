@@ -37,6 +37,8 @@ import it.unibo.PokeRogue.scene.scene_fight.BattleEngineImpl;
 import it.unibo.PokeRogue.scene.scene_fight.BattleRewards;
 import it.unibo.PokeRogue.scene.scene_fight.BattleUtilities;
 import it.unibo.PokeRogue.scene.scene_fight.GenerateEnemyImpl;
+import it.unibo.PokeRogue.scene.scene_fight.Decision;
+import it.unibo.PokeRogue.scene.scene_fight.enums.DecisionTypeEnum;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 import it.unibo.PokeRogue.utilities.PokeEffectivenessCalc;
@@ -252,11 +254,10 @@ public class TestAll {
 		Pokemon charmander = factory.pokemonFromName("charmander");
 		playerTrainer.addPokemon(bulbasaur, 1);
 		enemyTrainer.addPokemon(charmander, 1);
-		MoveFactoryImpl moveFactoryImpl = new MoveFactoryImpl();
 		EnemyAi ai = new EnemyAiImpl(enemyTrainer, 99);
 		int beforeLife = playerTrainer.getSquad().get(0).get().getActualStats().get("hp").getCurrentValue();
-		BattleEngine battleEngine = new BattleEngineImpl(moveFactoryImpl, enemyTrainer, ai);
-		battleEngine.movesPriorityCalculator("Run", "", "Attack", "0");
+		BattleEngine battleEngine = new BattleEngineImpl(enemyTrainer, ai);
+		battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""), new Decision(DecisionTypeEnum.ATTACK, "0"));
 		int afterLife = playerTrainer.getSquad().get(0).get().getActualStats().get("hp").getCurrentValue();
 		assertTrue(beforeLife > afterLife);
     }
