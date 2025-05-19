@@ -228,10 +228,7 @@ public class SceneBox implements Scene {
 
         }
 
-        /**
-         * Initializes the status of the elements by setting default values for box
-         * index, selected button, and new button.
-         */
+       
         private void initStatus() {
                 this.boxIndex = 0;
                 this.currentSelectedButton = 0;
@@ -240,13 +237,7 @@ public class SceneBox implements Scene {
                 this.currentBoxLength = this.boxes.get(this.boxIndex).size() - 1;
         }
 
-        /**
-         * Initializes the graphic elements for the scene, including panels, text,
-         * buttons, sprites, and background.
-         * It also sets the first button as selected and draws Pokémon sprites.
-         * External classes like {@link SceneBoxView} handle the actual rendering of
-         * graphical components.
-         */
+       
         private void initGraphicElements() throws IOException {
 
                 this.sceneBoxView.initGraphicElements();

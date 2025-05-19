@@ -35,10 +35,8 @@ public class PlayerTrainerImpl extends TrainerImpl implements PlayerTrainer {
         instanceOfTrainer = null;
     }
 
-    /**
-     * Constructs a new PlayerTrainerImpl.
-     */
-    public PlayerTrainerImpl() {
+   
+    private PlayerTrainerImpl() {
         super();
     }
 }

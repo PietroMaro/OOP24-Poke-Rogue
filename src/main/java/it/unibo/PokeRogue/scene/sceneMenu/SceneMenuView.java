@@ -51,7 +51,7 @@ public final class SceneMenuView {
          * Button elements for interaction
          * Background image
          */
-        protected void initGraphicElements() throws IOException {
+        void initGraphicElements() throws IOException {
                 // Panels
                 this.allPanelsElements.put(FIRST_PANEL_NAME, new PanelElementImpl("", new OverlayLayout(null)));
 

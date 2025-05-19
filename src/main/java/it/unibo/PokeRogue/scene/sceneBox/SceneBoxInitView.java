@@ -47,7 +47,7 @@ public final class SceneBoxInitView {
          * Initializes all the graphic elements of the scene: panels, texts, buttons,
          * sprites, and background.
          */
-        protected void initGraphicElements() throws 
+         void initGraphicElements() throws 
 			IOException
 		{
                 // Panels
@@ -71,10 +71,7 @@ public final class SceneBoxInitView {
 
         }
 
-        /**
-         * Initializes the text elements used in the scene, such as the start button
-         * text and current box number.
-         */
+       
         private void initTextElements() {
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.START_GAME_TEXT.value(),
                                 new TextElementImpl(FIRST_PANEL_NAME, "Start", Color.WHITE, 0.06, 0.406, 0.675));
@@ -83,10 +80,6 @@ public final class SceneBoxInitView {
 
         }
 
-        /**
-         * Initializes the button elements used in the scene, including Pokémon
-         * selection buttons and general buttons.
-         */
         private void initButtonElements() {
 
                 // Pokemon Buttons
@@ -123,11 +116,7 @@ public final class SceneBoxInitView {
 
         }
 
-        /**
-         * Initializes the sprite elements used in the scene, such as arrows and Pokémon
-         * containers.
-         * This includes both foreground and background sprites.
-         */
+       
         private void initSpriteElements() throws IOException {
 
                 // Sprites in foreground

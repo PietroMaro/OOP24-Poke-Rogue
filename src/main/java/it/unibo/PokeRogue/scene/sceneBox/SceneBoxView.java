@@ -56,7 +56,7 @@ public final class SceneBoxView {
          * 
          * It sets up static UI components like backgrounds, buttons, and panels.
          */
-        protected void initGraphicElements() throws IOException {
+        void initGraphicElements() throws IOException {
                 this.sceneBoxInitView.initGraphicElements();
 
         }
@@ -76,11 +76,10 @@ public final class SceneBoxView {
          * @param boxes                 the list of all Pokémon storage boxes
          * @param playerTrainerInstance the player trainer managing their Pokémon
          */
-        protected void updateGraphic(final int currentSelectedButton, final int newSelectedButton, final int boxIndex,
+        void updateGraphic(final int currentSelectedButton, final int newSelectedButton, final int boxIndex,
                         final int newBoxIndex, final List<List<Pokemon>> boxes,
-                        final PlayerTrainerImpl playerTrainerInstance) 
-						throws IOException
-		{
+                        final PlayerTrainerImpl playerTrainerInstance)
+                        throws IOException {
                 this.sceneBoxUpdateView.updateGraphic(currentSelectedButton, newSelectedButton, boxIndex, newBoxIndex,
                                 boxes, playerTrainerInstance);
         }
@@ -96,7 +95,7 @@ public final class SceneBoxView {
          * @param boxIndex the index of the current box being displayed
          * @return the number of Pokémon in the current box
          */
-        protected int loadPokemonSprites(final List<List<Pokemon>> boxes, final int boxIndex) {
+        int loadPokemonSprites(final List<List<Pokemon>> boxes, final int boxIndex) {
                 final int currentBoxLength = boxes.get(boxIndex).size();
                 final List<Pokemon> currentBox = boxes.get(boxIndex);
 

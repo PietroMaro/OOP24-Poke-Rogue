@@ -44,12 +44,11 @@ public final class SceneMenu implements Scene {
      * It also calls the methods to initialize the status and graphic elements for
      * the menu.
      */
-    public SceneMenu() throws 
-		InstantiationException,
-		IllegalAccessException,
-		InvocationTargetException,
-		IOException,
-		NoSuchMethodException{
+    public SceneMenu() throws InstantiationException,
+            IllegalAccessException,
+            InvocationTargetException,
+            IOException,
+            NoSuchMethodException {
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
@@ -81,12 +80,12 @@ public final class SceneMenu implements Scene {
      * @param inputKey the key code from {@link KeyEvent}.
      */
     @Override
-    public void updateStatus(final int inputKey) 
-		throws IOException,
-		NoSuchMethodException,
-		InstantiationException,
-		IllegalAccessException,
-		InvocationTargetException {
+    public void updateStatus(final int inputKey)
+            throws IOException,
+            NoSuchMethodException,
+            InstantiationException,
+            IllegalAccessException,
+            InvocationTargetException {
         switch (inputKey) {
             case KeyEvent.VK_UP:
                 this.currentSelectedButton = SceneMenuGraphicEnum.nextButtonsNames(this.currentSelectedButton);
@@ -117,24 +116,12 @@ public final class SceneMenu implements Scene {
 
     }
 
-    /**
-     * Initializes the graphic elements of the scene by delegating to the
-     * {@code SceneMenuView} and sets the initial button as selected.
-     * This method first calls {@code initGraphicElements()} on the associated
-     * {@code SceneMenuView} instance to create all visual components,
-     * and then highlights the currently selected button.
-     */
-
     private void initGraphicElements() throws IOException {
         this.sceneMenuView.initGraphicElements();
 
         this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true);
     }
 
-    /**
-     * Initializes the internal status of the scene, setting the first selected
-     * button.
-     */
     private void initStatus() {
         this.currentSelectedButton = SceneMenuGraphicEnum.LOAD_BUTTON;
 

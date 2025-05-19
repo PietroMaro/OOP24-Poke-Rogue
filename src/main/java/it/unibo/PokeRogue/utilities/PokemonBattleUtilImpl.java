@@ -68,22 +68,6 @@ public final class PokemonBattleUtilImpl implements PokemonBattleUtil {
 
     }
 
-    /**
-     * Calculates the ratio between the specified attack and defense stats of the
-     * given attacking and defending Pokémon.
-     * 
-     * If the defending Pokémon's stat is 0, the method returns the attacking
-     * Pokémon's stat value to avoid division by zero.
-     *
-     * @param attackingPokemon the attacking Pokémon
-     * @param defendingPokemon the defending Pokémon
-     * @param attackStatName   the name of the attack stat (e.g., "attack" or
-     *                         "specialAttack")
-     * @param defenseStatName  the name of the defense stat (e.g., "defense" or
-     *                         "specialDefense")
-     * @return the ratio of the attacker's attack stat to the defender's defense
-     *         stat, or the attack stat value if the defense stat is zero
-     */
     private int computeOffenseDefenseRatio(final Pokemon attackingPokemon, final Pokemon defendingPokemon,
             final String attackStatName, final String defenseStatName) {
 
@@ -97,19 +81,6 @@ public final class PokemonBattleUtilImpl implements PokemonBattleUtil {
         }
     }
 
-    /**
-     * Calculates the attack-defense ratio based on the nature of the chosen move.
-     * 
-     * If the move is physical, it uses the attacker's "attack" and the defender's
-     * "defense".
-     * If the move is special, it uses the attacker's "specialAttack" and the
-     * defender's "specialDefense".
-     * 
-     * @param attackingPokemon the attacking Pokémon
-     * @param defendingPokemon the defending Pokémon
-     * @param attackChosen     the move chosen
-     * @return the attack-defense ratio as a double
-     */
     private double calculateAttackDefenseDifference(final Pokemon attackingPokemon, final Pokemon defendingPokemon,
             final Move attackChosen) {
 
@@ -129,14 +100,6 @@ public final class PokemonBattleUtilImpl implements PokemonBattleUtil {
 
     }
 
-    /**
-     * Returns a burn penalty multiplier (0.5 if the attacker is burned
-     * and does not have the 'guts' ability, 1 otherwise).
-     * 
-     * @param attackingPokemon the attacking Pokémon
-     * @param attackChosen     the move used
-     * @return the burn multiplier (0.5 or 1.0)
-     */
     private double checkBurn(final Pokemon attackingPokemon, final Move attackChosen) {
 
         if (attackChosen.isPhysical() && attackingPokemon.getStatusCondition().isPresent()
@@ -150,14 +113,6 @@ public final class PokemonBattleUtilImpl implements PokemonBattleUtil {
         return 1;
     }
 
-    /**
-     * Returns a weather-based multiplier (e.g. fire in sunlight: 1.5x,
-     * fire in rain: 0.5x, etc.).
-     * 
-     * @param attackChosen   the move used
-     * @param currentWeather an optional current weather condition
-     * @return the damage multiplier due to weather effects
-     */
     private double calculateWeatherEffect(final Move attackChosen, final Optional<Weather> currentWeather) {
 
         if (currentWeather.isPresent()) {
@@ -186,14 +141,6 @@ public final class PokemonBattleUtilImpl implements PokemonBattleUtil {
         return 1.0;
     }
 
-    /**
-     * Returns the critical hit multiplier (1 if not a crit, 2 by default,
-     * 3 if the attacker has the 'sniper' ability).
-     * 
-     * @param attackingPokemon the attacking Pokémon
-     * @param attackChosen     the move used
-     * @return the critical hit multiplier (1, 2, or 3)
-     */
     private int criticalBonus(final Pokemon attackingPokemon, final Move attackChosen) {
 
         final String attackingPokemonAbility = attackingPokemon.getAbilityName();
@@ -210,14 +157,6 @@ public final class PokemonBattleUtilImpl implements PokemonBattleUtil {
         return 1;
     }
 
-    /**
-     * Returns the STAB multiplier (1.5 if the move type matches one of
-     * the Pokémon's types, 1 otherwise).
-     * 
-     * @param attackingPokemon the attacking Pokémon
-     * @param attackChosen     the move used
-     * @return the STAB multiplier (1 or 1.5)
-     */
     private double stabMultiplier(final Pokemon attackingPokemon, final Move attackChosen) {
 
         for (final Type type : attackingPokemon.getTypes()) {

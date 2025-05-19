@@ -75,10 +75,6 @@ public final class EnemyAiImpl implements EnemyAi {
         return List.of("Nothing", "Nothing");
     }
 
-    /**
-     * Initializes internal flags based on the battle level.
-     * These flags determine AI behavior complexity.
-     */
     private void initFlags() {
 
         if (battleLvl >= LOW_AI_THRESHOLD) {

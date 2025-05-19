@@ -50,11 +50,10 @@ public final class SceneBoxUpdateView {
          * @param boxes                 the list of all Pokémon boxes.
          * @param playerTrainerInstance the player trainer instance.
          */
-        protected void updateGraphic(final int currentSelectedButton, final int newSelectedButton, final int boxIndex,
+        void updateGraphic(final int currentSelectedButton, final int newSelectedButton, final int boxIndex,
                         final int newBoxIndex, final List<List<Pokemon>> boxes,
-                        final PlayerTrainerImpl playerTrainerInstance) 
-						throws IOException
-		{
+                        final PlayerTrainerImpl playerTrainerInstance)
+                        throws IOException {
 
                 this.updateSelectedButton(currentSelectedButton, newSelectedButton);
 
@@ -65,23 +64,11 @@ public final class SceneBoxUpdateView {
                 this.updateDetailedPokemon(newBoxIndex, newSelectedButton, boxes);
         }
 
-        /**
-         * Highlights the new selected button and removes highlight from the previous
-         * one.
-         *
-         * @param currentSelectedButton the previous button.
-         * @param newSelectedButton     the new selected button.
-         */
         private void updateSelectedButton(final int currentSelectedButton, final int newSelectedButton) {
                 this.utilityClass.setButtonStatus(currentSelectedButton, false);
                 this.utilityClass.setButtonStatus(newSelectedButton, true);
         }
 
-        /**
-         * Updates the displayed current box number after navigation.
-         *
-         * @param newBoxIndex the new box index to show.
-         */
         private void updateShowedPokeBox(final int newBoxIndex) {
 
                 this.sceneGraphicElements.put(SceneBoxGraphicEnum.CURRENT_BOX_TEXT.value(),
@@ -90,11 +77,6 @@ public final class SceneBoxUpdateView {
 
         }
 
-        /**
-         * Updates the Pokémon squad sprites based on the player's active Pokémon.
-         *
-         * @param playerTrainerInstance the player trainer instance.
-         */
         private void updatePokeSquad(final PlayerTrainerImpl playerTrainerInstance) throws IOException {
                 for (int squadPosition = SceneBoxGraphicEnum.POKEMON_SPRITE_SELECTED_0
                                 .value(); squadPosition < SceneBoxGraphicEnum.POKEMON_SPRITE_SELECTED_2.value()
@@ -120,18 +102,9 @@ public final class SceneBoxUpdateView {
                 }
         }
 
-        /**
-         * Displays detailed information of the selected Pokémon, including stats,
-         * nature, ability, types, gender, and move.
-         *
-         * @param boxIndex              the index of the current box.
-         * @param currentSelectedButton the selected button index.
-         * @param boxes                 the list of all Pokémon boxes.
-         */
         private void updateDetailedPokemon(final int boxIndex, final int currentSelectedButton,
                         final List<List<Pokemon>> boxes)
-						throws IOException
-		{
+                        throws IOException {
                 final Pokemon selectedPokemon;
                 final Nature pokemonNature;
 

@@ -51,14 +51,6 @@ public final class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
 
     }
 
-    /**
-     * Returns the type effectiveness multiplier from the attacker's type to the
-     * defender's type.
-     *
-     * @param myPokemonType    The attacking type
-     * @param enemyPokemonType The defending type
-     * @return The effectiveness multiplier (e.g., 2.0, 0.5, 1.0)
-     */
     private double calculateTypeMultiplier(final Type myPokemonType, final Type enemyPokemonType) {
 
         if (this.effectiveness.get(myPokemonType).get(enemyPokemonType) == null) {

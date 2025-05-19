@@ -52,7 +52,7 @@ public final class SceneLoadView {
      * Initializes the static graphical components of the load scene, such as panels
      * and background.
      */
-    protected void initGraphicElements() throws IOException {
+    void initGraphicElements() throws IOException {
         this.allPanelsElements.put("firstPanel", new PanelElementImpl("", new OverlayLayout(null)));
         this.allPanelsElements.put(POKEMON_PANEL_NAME, new PanelElementImpl("firstPanel", new OverlayLayout(null)));
 
@@ -72,7 +72,7 @@ public final class SceneLoadView {
      * @param savingSystemInstance the instance of {@code SavingSystem} to retrieve
      *                             save details
      */
-    protected void showSaves(final int savesListStart, final List<String> savesList,
+    void showSaves(final int savesListStart, final List<String> savesList,
             final SavingSystem savingSystemInstance) throws IOException {
         String savesName;
         int boxPokemonNumber;

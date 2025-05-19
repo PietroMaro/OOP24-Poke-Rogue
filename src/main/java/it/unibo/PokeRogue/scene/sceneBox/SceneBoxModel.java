@@ -14,6 +14,13 @@ import it.unibo.PokeRogue.savingSystem.SavingSystemImpl;
 import lombok.Getter;
 import lombok.AccessLevel;
 
+/**
+ * The {@code SceneBoxModel} class represents the data model for handling
+ * Pokémon storage boxes in a scene. It integrates with a saving system to
+ * persist Pokémon data and uses a factory to create Pokémon instances.
+ * Each box can hold up to 81 Pokémon. If a box is full, a new one is created.
+ * Pokémon can be loaded from a save file or initialized with default Pokémon.
+ */
 public final class SceneBoxModel {
 
     private final SavingSystem savingSystemInstance;
@@ -22,6 +29,10 @@ public final class SceneBoxModel {
     @Getter(AccessLevel.PACKAGE)
     private final List<List<Pokemon>> boxes;
 
+    /**
+     * Constructs a new {@code SceneBoxModel} and initializes the saving system
+     * and Pokémon factory instances.
+     */
     public SceneBoxModel() throws InstantiationException,
             IllegalAccessException,
             InvocationTargetException,
@@ -41,7 +52,7 @@ public final class SceneBoxModel {
      * @param savePath The path to the save file. If empty, default Pokémon are
      *                 saved.
      */
-    protected void setUpSave(final String savePath) throws InstantiationException,
+    void setUpSave(final String savePath) throws InstantiationException,
             IllegalAccessException,
             InvocationTargetException,
             NoSuchMethodException,
@@ -68,12 +79,6 @@ public final class SceneBoxModel {
 
     }
 
-    /**
-     * Adds a Pokémon to the current box. If the box is full (81 Pokémon), a new box
-     * is created.
-     * 
-     * @param pokemon The Pokémon to add to the box.
-     */
     private void addPokemonToBox(final Pokemon pokemon) {
 
         if (this.boxes.isEmpty()) {

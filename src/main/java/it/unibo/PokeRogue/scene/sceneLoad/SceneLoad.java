@@ -71,12 +71,11 @@ public final class SceneLoad implements Scene {
      * Constructs a new {@code SceneLoad} object, initializing internal structures
      * and retrieving the list of saves.
      */
-    public SceneLoad() throws 
-		InstantiationException,
-		IllegalAccessException,
-		InvocationTargetException,
-		NoSuchMethodException,
-		IOException {
+    public SceneLoad() throws InstantiationException,
+            IllegalAccessException,
+            InvocationTargetException,
+            NoSuchMethodException,
+            IOException {
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
@@ -133,13 +132,11 @@ public final class SceneLoad implements Scene {
      * 
      */
     @Override
-    public void updateStatus(final int inputKey) throws 
-		InstantiationException,
-		IllegalAccessException,
-		InvocationTargetException,
-		NoSuchMethodException,
-		IOException
-	{
+    public void updateStatus(final int inputKey) throws InstantiationException,
+            IllegalAccessException,
+            InvocationTargetException,
+            NoSuchMethodException,
+            IOException {
 
         switch (inputKey) {
             case KeyEvent.VK_UP:
@@ -171,26 +168,12 @@ public final class SceneLoad implements Scene {
 
     }
 
-    /**
-     * Initializes the selection status by setting both {@code selectedSave} and
-     * {@code newSelectedSave} to zero.
-     */
     private void initStatus() {
         this.selectedSave = 0;
         this.newSelectedSave = this.selectedSave;
 
     }
 
-    /**
-     * Initializes all graphical components for the Load Scene, including the
-     * background,
-     * panels, save file buttons, and associated text labels.
-     * This method first delegates the creation of basic elements to
-     * {@code SceneLoadView},
-     * then displays the current page of save files and highlights the selected
-     * save.
-     * 
-     */
     private void initGraphicElements() throws IOException {
 
         this.sceneLoadView.initGraphicElements();
@@ -200,18 +183,6 @@ public final class SceneLoad implements Scene {
 
     }
 
-    /**
-     * Displays a paginated list of up to 10 save files starting from the given
-     * index.
-     * 
-     * Each save is represented with a button and a text label indicating its name
-     * and the number of Pokémon stored in the save file's box.
-     * This method delegates the creation and rendering of the graphical elements
-     * to the {@link SceneLoadView} class.
-     * 
-     * @param savesListStart the starting index in the list of save files to
-     *                       display.
-     */
     private void showSaves(final int savesListStart) throws IOException {
         this.sceneLoadView.showSaves(savesListStart, savesList, savingSystemInstance);
     }

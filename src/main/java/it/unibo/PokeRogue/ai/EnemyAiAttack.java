@@ -86,12 +86,6 @@ public final class EnemyAiAttack {
         return List.of("Nothing", "Nothing");
     }
 
-    /**
-     * Determines whether the enemy Pokémon is able to attack,
-     * based on available PP and current status conditions.
-     *
-     * @return true if the Pokémon can attack, false otherwise
-     */
     private boolean canAttack() {
         boolean canAttack = true;
         int totalPPs = 0;
@@ -123,12 +117,6 @@ public final class EnemyAiAttack {
         return canAttack;
     }
 
-    /**
-     * Chooses the move to use based on current AI configuration flags.
-     *
-     * @param weather an optional of the current weather condition in battle
-     */
-
     private void chooseMove(final Optional<Weather> weather) {
 
         if (!this.scoreMoves) {
@@ -146,9 +134,6 @@ public final class EnemyAiAttack {
 
     }
 
-    /**
-     * Assigns a base score to each move based on type effectiveness.
-     */
     private void scoreForEffectiveness() {
         Move moveToBeScored;
         int score;
@@ -181,11 +166,6 @@ public final class EnemyAiAttack {
 
     }
 
-    /**
-     * Chooses a random move from the list of available moves with remaining PP.
-     *
-     * @return the index of the selected move
-     **/
     private int randomMove() {
 
         Move moveToBeChecked;
@@ -204,12 +184,6 @@ public final class EnemyAiAttack {
         return possibleAttacks.get(this.random.nextInt(possibleAttacks.size()));
     }
 
-    /**
-     * Increases the score of moves based on their estimated damage
-     * and ability to knock out the opponent.
-     *
-     * @param weather an optional current weather condition in battle
-     */
     private void scoreForDamage(final Optional<Weather> weather) {
         Move moveToBeScored;
         int actualMoveScore;
@@ -242,11 +216,6 @@ public final class EnemyAiAttack {
 
     }
 
-    /**
-     * Selects the move with the highest score.
-     *
-     * @return the index of the best scored move
-     */
     private int obtainBestMove() {
         int bestMoveIndex = -1;
         int bestMoveScore = Integer.MIN_VALUE;
