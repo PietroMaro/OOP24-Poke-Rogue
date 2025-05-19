@@ -6,7 +6,7 @@ import it.unibo.PokeRogue.Weather;
 
 public interface BattleEngine {
 
-    void movesPriorityCalculator(Decision playerDecision, Decision enemyDecision);
+    void runBattleTurn(Decision playerDecision, Decision enemyDecision);
 
     /**
      * Returns the current weather condition in the battle, if any.

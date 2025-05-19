@@ -5,8 +5,7 @@ public enum AbilitySituationChecks{
 		ATTACKED("attacked"),
 		SWITCHIN("switchIn"),
 		SWITCHOUT("switchOut"),
-		NEUTRAL("neutral"),
-		PASSIVE("passive");
+		NEUTRAL("neutral");
 
 	private final String abilitySituationChecksName;
 

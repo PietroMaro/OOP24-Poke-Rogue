@@ -8,7 +8,6 @@ import it.unibo.PokeRogue.ai.EnemyAi;
 import it.unibo.PokeRogue.ai.EnemyAiImpl;
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
-import it.unibo.PokeRogue.move.MoveFactoryImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.scene.scene_fight.enums.DecisionTypeEnum;
 import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightStatusValuesEnum;
@@ -36,7 +35,6 @@ public class SceneFight implements Scene {
     private final SceneFightView sceneFightView;
     private int newSelectedButton;
     private final EnemyAi enemyAiInstance;
-    private final MoveFactoryImpl moveFactoryInstance;
     private final BattleEngine battleEngineInstance;
     private final GenerateEnemy generateEnemyInstance;
 
@@ -51,9 +49,8 @@ public class SceneFight implements Scene {
         this.enemyTrainerInstance = new PlayerTrainerImpl();
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
-        this.moveFactoryInstance = new MoveFactoryImpl();
         this.enemyAiInstance = new EnemyAiImpl(enemyTrainerInstance, battleLevel);
-        this.battleEngineInstance = new BattleEngineImpl(moveFactoryInstance, enemyTrainerInstance, enemyAiInstance);
+        this.battleEngineInstance = new BattleEngineImpl(enemyTrainerInstance, enemyAiInstance);
         this.generateEnemyInstance = new GenerateEnemyImpl(battleLevel, enemyTrainerInstance);
         this.generateEnemyInstance.generateEnemy();
         this.initStatus();
@@ -216,7 +213,7 @@ public class SceneFight implements Scene {
     public void fightLoop(Decision decision) {
         Decision enemyChoose = enemyAiInstance.nextMove(battleEngineInstance.getCurrentWeather());
         System.out.println(enemyChoose);
-        this.battleEngineInstance.movesPriorityCalculator(decision, enemyChoose);
+        this.battleEngineInstance.runBattleTurn(decision, enemyChoose);
     }
 
     /**
