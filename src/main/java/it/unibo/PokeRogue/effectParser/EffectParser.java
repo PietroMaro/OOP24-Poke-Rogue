@@ -3,6 +3,7 @@ package it.unibo.PokeRogue.effectParser;
 import it.unibo.PokeRogue.Weather;
 import it.unibo.PokeRogue.Singleton;
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.trainers.PlayerTrainer;
 import it.unibo.PokeRogue.move.Move;
 
 import java.util.Optional;
@@ -17,11 +18,16 @@ public interface EffectParser extends Singleton {
 		Pokemon enemy,
 		Optional<Move> attackUs,
 		Optional<Move> attackEnemy,
-		Optional<Weather> weather
+		Optional<Weather> weather,
+		Optional<PlayerTrainer> playerMoney
 			);
 	//For pokeObjects
 	void parseEffect(
 		JSONObject effect,
 		Pokemon pokemon
+			);
+	void parseEffect(
+		JSONObject effect,
+		PlayerTrainer playerMoney
 			);
 }

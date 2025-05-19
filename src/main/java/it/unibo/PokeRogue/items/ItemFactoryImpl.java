@@ -38,7 +38,6 @@ public class ItemFactoryImpl extends SingletonImpl implements ItemFactory {
     }
 
     private void addItemToBlueprints(final String itemName) {
-        System.out.println("passato da addBlue");
         JSONObject itemJson;
         itemJson = jsonReader.readJsonObject(Paths.get("src", "items_data", "items", "data", itemName + ".json").toString());
 

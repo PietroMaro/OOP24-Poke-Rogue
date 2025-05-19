@@ -11,20 +11,8 @@
         "checks": [],
         "activation": [
             [
-                "us.actualMoves[0].currentValue",
-                "MATH.min(us.actualMoves[0].currentMax, us.actualMoves[0].currentValue + 5)"
-            ],
-            [
-                "us.actualMoves[1].currentValue",
-                "MATH.min(us.actualMoves[1].currentMax, us.actualMoves[1].currentValue + 5)"
-            ],
-            [
-                "us.actualMoves[2].currentValue",
-                "MATH.min(us.actualMoves[2].currentMax, us.actualMoves[2].currentValue + 5)"
-            ],
-            [
-                "us.actualMoves[3].currentValue",
-                "MATH.min(us.actualMoves[3].currentMax, us.actualMoves[3].currentValue + 5)"
+                "us.actualMoves[0].pp.currentValue",
+                "MATH.min(us.actualMoves[0].pp.currentMax, us.actualMoves[0].pp.currentValue + 5)"
             ]
         ]
     }

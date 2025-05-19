@@ -11,20 +11,8 @@
       "checks": [],
     "activation": [
       [
-        "us.actualMoves[0].currentMax",
-        "us.actualMoves[0].currentMax * 1.2"
-      ],
-      [
-        "us.actualMoves[1].currentMax",
-        "us.actualMoves[1].currentMax * 1.2"
-      ],
-      [
-        "us.actualMoves[2].currentMax",
-        "us.actualMoves[2].currentMax * 1.2"
-      ],
-      [
-        "us.actualMoves[3].currentMax",
-        "us.actualMoves[3].currentMax * 1.2"
+        "us.actualMoves[0].pp.currentMax",
+        "us.actualMoves[0].pp.currentMax * 1.2"
       ]
     ]
     }

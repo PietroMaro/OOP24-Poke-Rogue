@@ -51,6 +51,8 @@ public class SceneShop implements Scene {
         private final int itemIndex = 0;
         private Item selectedItemForUse = null;
         private boolean BuyedItem = false;
+        private final EffectParser effectParser = EffectParserImpl
+                                                        .getInstance(EffectParserImpl.class);
 
         public SceneShop() {
                 this.sceneGraphicElements = new LinkedHashMap<>();
@@ -198,8 +200,6 @@ public class SceneShop implements Scene {
 
                 this.shopItems.addAll(pricyItems);
                 this.shopItems.addAll(freeItems);
-                System.out.println(shopItems);
-                System.out.println(shopItems.size());
         }
 
         private void initStatus() {
@@ -341,15 +341,9 @@ public class SceneShop implements Scene {
         }
 
         private void updateItemsDescription() {
-                // IMPORTANTE: Verifica che i valori di currentSelectedButton per gli item
-                // (es. SceneShopEnum.PRICY_ITEM_1_BUTTON.value()) corrispondano ai case 1-6.
-                // Se i valori sono diversi (es. 10, 11, ... o 101, 102, ...),
-                // la condizione 'if' e lo 'switch' devono essere aggiornati.
-                System.out.println("DEBUG UPDATE: currentSelectedButton = " + currentSelectedButton);
 
-                if (currentSelectedButton >= 1 && currentSelectedButton <= 6) { // ATTENZIONE: Questa condizione dipende
-                                                                                // dai valori reali degli enum dei
-                                                                                // pulsanti
+                if (currentSelectedButton >= 1 && currentSelectedButton <= 6) { 
+                        
                         int itemIndex;
 
                         switch (currentSelectedButton) { // ATTENZIONE: Anche i case dipendono dai valori reali
@@ -383,7 +377,7 @@ public class SceneShop implements Scene {
                 this.initChangePokemonText();
                 this.initChangePokemonButtons();
                 this.initChangePokemonSprites();
-                System.out.println(this.sceneGraphicElements);
+                
                 this.sceneGraphicElements.put(SceneShopEnum.BACKGROUND.value(),
                                 new BackgroundElementImpl("secondPanel",
                                                 this.getPathString("images", "sceneShopBg.png")));
@@ -596,6 +590,9 @@ public class SceneShop implements Scene {
                         playerTrainerInstance.getBall().put(item.getName(), countBall + 1);
                         gameEngineInstance.setScene("fight");
                 }else if (item.getType().equalsIgnoreCase("Valuable")){
+                        Optional<JSONObject> itemEffect = item.getEffect();
+                        this.effectParser.parseEffect(itemEffect.get(),playerTrainerInstance);
+                        System.out.println("soldi" + playerTrainerInstance.getMoney());
                         gameEngineInstance.setScene("fight");
                 } else if (item.getType().equalsIgnoreCase("Healing")
                                 || item.getType().equalsIgnoreCase("Boost")||item.getType().equalsIgnoreCase("PPRestore")) {
@@ -614,13 +611,9 @@ public class SceneShop implements Scene {
                                 // Ottieni l'effetto dell'item
                                 Optional<JSONObject> itemEffect = this.selectedItemForUse.getEffect();
 
-                                if (itemEffect.isPresent()) {
-                                        // Ottieni l'istanza dell'EffectParser
-                                        EffectParser effectParser = EffectParserImpl
-                                                        .getInstance(EffectParserImpl.class);
-
+                                if (itemEffect.isPresent()) {                     
                                         // Applica l'effetto al Pokémon
-                                        effectParser.parseEffect(itemEffect.get(), pokemon);
+                                        this.effectParser.parseEffect(itemEffect.get(), pokemon);
                                 }
 
                                 this.selectedItemForUse = null; // Resetta l'item selezionato
