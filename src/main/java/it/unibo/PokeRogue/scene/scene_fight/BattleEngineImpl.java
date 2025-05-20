@@ -13,6 +13,8 @@ import it.unibo.PokeRogue.ability.AbilitySituationChecks;
 import it.unibo.PokeRogue.ai.EnemyAi;
 import it.unibo.PokeRogue.effectParser.EffectParser;
 import it.unibo.PokeRogue.effectParser.EffectParserImpl;
+import it.unibo.PokeRogue.items.ItemFactory;
+import it.unibo.PokeRogue.items.ItemFactoryImpl;
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.savingSystem.SavingSystem;
@@ -42,6 +44,7 @@ public class BattleEngineImpl implements BattleEngine {
     private boolean captured;
     private Pokemon playerPokemon;
     private Pokemon enemyPokemon;
+    private ItemFactory itemFactoryInstance;
 
     /**
      * Constructor for the BattleEngineImpl class that initializes the battle engine
@@ -63,6 +66,7 @@ public class BattleEngineImpl implements BattleEngine {
         this.enemyAiInstance = enemyAiInstance;
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.savingSystemInstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
+        this.itemFactoryInstance = new ItemFactoryImpl();
         this.captured = false;
     }
 
@@ -123,24 +127,30 @@ public class BattleEngineImpl implements BattleEngine {
                 this.currentWeather);
         defenderPokemon.getActualStats().get("hp").decrement(finalDamage);
         this.effectParserInstance.parseEffect(attackerMove.get().getEffect(), attackerPokemon, defenderPokemon,
-                attackerMove, opponentMove, this.currentWeather);
+                attackerMove, opponentMove, this.currentWeather, Optional.of(playerTrainerInstance));
     }
 
     private void handlePokeball(final String pokeballName) {
         final int countBall = playerTrainerInstance.getBall().get(pokeballName);
+        final int maxHP = enemyPokemon.getActualStats().get("hp").getCurrentMax();
+        final int currentHP = enemyPokemon.getActualStats().get("hp").getCurrentValue();
+        final int baseCaptureRate = enemyPokemon.getCaptureRate();
+        final double ballModifier = itemFactoryInstance.itemFromName(pokeballName).getCaptureRate();
         final Pokemon enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
         if (countBall > 0 && enemyTrainerInstance.isWild()) {
             playerTrainerInstance.getBall().put(pokeballName, countBall - 1);
-            // eventuali calcoli per vedere se lo catturi o no
-            if (playerTrainerInstance.getSquad().size() <= MAX_SQUAD) {
-                playerTrainerInstance.addPokemon(enemyPokemon, MAX_SQUAD);
-                this.savingSystemInstance.savePokemon(enemyPokemon);
-                this.captured = true;
-                this.newEnemyCheck();
-            } else {
-                this.savingSystemInstance.savePokemon(enemyPokemon);
+            final double hpFactor = (3.0 * maxHP - 2.0 * currentHP) / (3.0 * maxHP);
+            final double roll = Math.random() * 255;
+            if (roll < baseCaptureRate * ballModifier * hpFactor) {
+                if (playerTrainerInstance.getSquad().size() <= MAX_SQUAD) {
+                    playerTrainerInstance.addPokemon(enemyPokemon, MAX_SQUAD);
+                    this.savingSystemInstance.savePokemon(enemyPokemon);
+                    this.captured = true;
+                    this.newEnemyCheck();
+                } else {
+                    this.savingSystemInstance.savePokemon(enemyPokemon);
+                }
             }
-
         }
     }
 
@@ -199,7 +209,7 @@ public class BattleEngineImpl implements BattleEngine {
             final Optional<Move> targetMove, final AbilitySituationChecks situation) {
         if (ability.situationChecks() == situation) {
             this.effectParserInstance.parseEffect(ability.effect(), user, target, userMove, targetMove,
-                    this.currentWeather);
+                    this.currentWeather, Optional.of(playerTrainerInstance));
         }
     }
 

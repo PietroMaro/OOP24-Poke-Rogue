@@ -211,6 +211,7 @@ public class SceneFight implements Scene {
      */
     private void fightLoop(final Decision decision) {
         final Decision enemyChoose = enemyAiInstance.nextMove(battleEngineInstance.getCurrentWeather());
+        System.out.println(enemyChoose);
         this.battleEngineInstance.runBattleTurn(decision, enemyChoose);
     }
 
