@@ -29,51 +29,31 @@ import java.awt.Color;
 public final class SceneLoadView {
     private static final String POKEMON_PANEL_NAME = "savesPanel";
 
-    private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
-    private final Map<String, PanelElementImpl> allPanelsElements;
     private final UtilitiesForScenes utilityClass;
 
     /**
      * Constructs a new {@code SceneLoadView} instance.
      *
-     * @param sceneGraphicElements a map linking identifiers to scene graphic
-     *                             elements
-     * @param allPanelsElements    a map linking panel names to their corresponding
-     *                             panel elements
+     * 
      */
-    public SceneLoadView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
-            final Map<String, PanelElementImpl> allPanelsElements) {
-        this.sceneGraphicElements = sceneGraphicElements;
-        this.allPanelsElements = allPanelsElements;
-        this.utilityClass = new UtilitiesForScenesImpl("load", sceneGraphicElements);
+    public SceneLoadView() {
+
+        this.utilityClass = new UtilitiesForScenesImpl("load");
     }
 
-    /**
-     * Initializes the static graphical components of the load scene, such as panels
-     * and background.
-     */
-    void initGraphicElements() throws IOException {
-        this.allPanelsElements.put("firstPanel", new PanelElementImpl("", new OverlayLayout(null)));
-        this.allPanelsElements.put(POKEMON_PANEL_NAME, new PanelElementImpl("firstPanel", new OverlayLayout(null)));
+    void initGraphicElements(final Map<String, PanelElementImpl> allPanelsElements,
+            final Map<Integer, GraphicElementImpl> sceneGraphicElements) throws IOException {
+        allPanelsElements.put("firstPanel", new PanelElementImpl("", new OverlayLayout(null)));
+        allPanelsElements.put(POKEMON_PANEL_NAME, new PanelElementImpl("firstPanel", new OverlayLayout(null)));
 
-        this.sceneGraphicElements.put(SceneLoadGraphicEnum.BACKGROUND.value(),
+        sceneGraphicElements.put(SceneLoadGraphicEnum.BACKGROUND.value(),
                 new BackgroundElementImpl("firstPanel", this.utilityClass.getPathString("images", "sceneLoadBg.png")));
 
     }
 
-    /**
-     * Displays the list of available save files in the scene.
-     * For each available save, it creates a button and a text element showing
-     * the name of the save and the number of Pokémon contained within it.
-     * If no save exists in a slot, it displays a default "no save" message.
-     *
-     * @param savesListStart       the index of the first save file to display
-     * @param savesList            the list of save file names
-     * @param savingSystemInstance the instance of {@code SavingSystem} to retrieve
-     *                             save details
-     */
     void showSaves(final int savesListStart, final List<String> savesList,
-            final SavingSystem savingSystemInstance) throws IOException {
+            final SavingSystem savingSystemInstance, final Map<String, PanelElementImpl> allPanelsElements,
+            final Map<Integer, GraphicElementImpl> sceneGraphicElements) throws IOException {
         String savesName;
         int boxPokemonNumber;
         for (int x = 0; x < 10; x++) {
@@ -85,20 +65,20 @@ public final class SceneLoadView {
 
                 savesName = savesName.substring(0, savesName.length() - 5); // removing the extension
 
-                this.sceneGraphicElements.put(x + 10,
+                sceneGraphicElements.put(x + 10,
                         new TextElementImpl(POKEMON_PANEL_NAME,
                                 "Salvataggio: " + savesName + ", Grandezza Box: " + boxPokemonNumber, Color.BLACK, 0.08,
                                 0.282, x * 0.1 + 0.06));
 
-                this.sceneGraphicElements.put(x, new ButtonElementImpl(POKEMON_PANEL_NAME, Color.GREEN, Color.BLACK, 2, 0.28,
+                sceneGraphicElements.put(x, new ButtonElementImpl(POKEMON_PANEL_NAME, Color.GREEN, Color.BLACK, 2, 0.28,
                         x * 0.1 + 0.01, 0.5, 0.08));
 
             } else {
 
-                this.sceneGraphicElements.put(x + 10, new TextElementImpl(POKEMON_PANEL_NAME,
+                sceneGraphicElements.put(x + 10, new TextElementImpl(POKEMON_PANEL_NAME,
                         "Salvataggio: Nessuno, Grandezza Box: 0 ", Color.BLACK, 0.08, 0.282, x * 0.1 + 0.06));
 
-                this.sceneGraphicElements.put(x, new ButtonElementImpl(POKEMON_PANEL_NAME, Color.GREEN, Color.BLACK, 2, 0.28,
+                sceneGraphicElements.put(x, new ButtonElementImpl(POKEMON_PANEL_NAME, Color.GREEN, Color.BLACK, 2, 0.28,
                         x * 0.1 + 0.01, 0.5, 0.08));
 
             }

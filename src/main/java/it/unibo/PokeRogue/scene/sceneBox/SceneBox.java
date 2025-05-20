@@ -80,8 +80,8 @@ public class SceneBox implements Scene {
                 this.allPanelsElements = new LinkedHashMap<>();
                 this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-                this.utilityClass = new UtilitiesForScenesImpl("box", sceneGraphicElements);
-                this.sceneBoxView = new SceneBoxView(sceneGraphicElements, allPanelsElements);
+                this.utilityClass = new UtilitiesForScenesImpl("box");
+                this.sceneBoxView = new SceneBoxView();
                 this.sceneBoxModel = new SceneBoxModel();
                 this.sceneBoxModel.setUpSave(savePath);
                 this.boxes = this.sceneBoxModel.getBoxes();
@@ -216,19 +216,20 @@ public class SceneBox implements Scene {
         @Override
         public void updateGraphic() throws IOException {
 
-                this.sceneBoxView.updateGraphic(currentSelectedButton, newSelectedButton, boxIndex, newBoxIndex, boxes,
-                                playerTrainerInstance);
+                this.sceneBoxView.updateGraphic(this.currentSelectedButton, this.newSelectedButton, this.boxIndex,
+                                this.newBoxIndex, this.boxes,
+                                this.playerTrainerInstance, this.sceneGraphicElements);
 
                 this.currentSelectedButton = this.newSelectedButton;
 
                 if (this.boxIndex != this.newBoxIndex) {
                         this.boxIndex = this.newBoxIndex;
-                        this.currentBoxLength = this.sceneBoxView.loadPokemonSprites(boxes, boxIndex);
+                        this.currentBoxLength = this.sceneBoxView.loadPokemonSprites(boxes, boxIndex,
+                                        this.sceneGraphicElements);
                 }
 
         }
 
-       
         private void initStatus() {
                 this.boxIndex = 0;
                 this.currentSelectedButton = 0;
@@ -237,16 +238,16 @@ public class SceneBox implements Scene {
                 this.currentBoxLength = this.boxes.get(this.boxIndex).size() - 1;
         }
 
-       
         private void initGraphicElements() throws IOException {
 
-                this.sceneBoxView.initGraphicElements();
+                this.sceneBoxView.initGraphicElements(this.sceneGraphicElements, this.allPanelsElements);
 
                 // Draw Pokemon sprites
-                this.currentBoxLength = this.sceneBoxView.loadPokemonSprites(boxes, boxIndex);
+                this.currentBoxLength = this.sceneBoxView.loadPokemonSprites(boxes, boxIndex,
+                                this.sceneGraphicElements);
 
                 // Set the first button as selected
-                this.utilityClass.setButtonStatus(this.currentSelectedButton, true);
+                this.utilityClass.setButtonStatus(this.currentSelectedButton, true, this.sceneGraphicElements);
         }
 
 }

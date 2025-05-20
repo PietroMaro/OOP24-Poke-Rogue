@@ -30,7 +30,6 @@ import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
  * @see SceneBoxUpdateView
  */
 public final class SceneBoxView {
-        private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
         private final SceneBoxInitView sceneBoxInitView;
         private final SceneBoxUpdateView sceneBoxUpdateView;
 
@@ -38,15 +37,12 @@ public final class SceneBoxView {
          * Constructs a {@code SceneBoxView} instance, setting up the graphical
          * environment and preparing the initialization and update modules.
          *
-         * @param sceneGraphicElements a map of graphic elements to be managed and
-         *                             rendered
-         * @param allPanelsElements    a map of panel elements
+         * 
          */
-        public SceneBoxView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
-                        final Map<String, PanelElementImpl> allPanelsElements) {
-                this.sceneGraphicElements = sceneGraphicElements;
-                this.sceneBoxInitView = new SceneBoxInitView(sceneGraphicElements, allPanelsElements);
-                this.sceneBoxUpdateView = new SceneBoxUpdateView(sceneGraphicElements);
+        public SceneBoxView() {
+
+                this.sceneBoxInitView = new SceneBoxInitView();
+                this.sceneBoxUpdateView = new SceneBoxUpdateView();
 
         }
 
@@ -56,8 +52,9 @@ public final class SceneBoxView {
          * 
          * It sets up static UI components like backgrounds, buttons, and panels.
          */
-        void initGraphicElements() throws IOException {
-                this.sceneBoxInitView.initGraphicElements();
+        void initGraphicElements(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements) throws IOException {
+                this.sceneBoxInitView.initGraphicElements(sceneGraphicElements, allPanelsElements);
 
         }
 
@@ -78,10 +75,11 @@ public final class SceneBoxView {
          */
         void updateGraphic(final int currentSelectedButton, final int newSelectedButton, final int boxIndex,
                         final int newBoxIndex, final List<List<Pokemon>> boxes,
-                        final PlayerTrainerImpl playerTrainerInstance)
+                        final PlayerTrainerImpl playerTrainerInstance,
+                        final Map<Integer, GraphicElementImpl> sceneGraphicElements)
                         throws IOException {
                 this.sceneBoxUpdateView.updateGraphic(currentSelectedButton, newSelectedButton, boxIndex, newBoxIndex,
-                                boxes, playerTrainerInstance);
+                                boxes, playerTrainerInstance, sceneGraphicElements);
         }
 
         /**
@@ -95,13 +93,14 @@ public final class SceneBoxView {
          * @param boxIndex the index of the current box being displayed
          * @return the number of Pokémon in the current box
          */
-        int loadPokemonSprites(final List<List<Pokemon>> boxes, final int boxIndex) {
+        int loadPokemonSprites(final List<List<Pokemon>> boxes, final int boxIndex,
+                        final Map<Integer, GraphicElementImpl> sceneGraphicElements) {
                 final int currentBoxLength = boxes.get(boxIndex).size();
                 final List<Pokemon> currentBox = boxes.get(boxIndex);
 
                 for (int pokemonIndex = 0; pokemonIndex < 81; pokemonIndex++) {
                         if (pokemonIndex < currentBoxLength) {
-                                this.sceneGraphicElements.put(pokemonIndex + 206,
+                                sceneGraphicElements.put(pokemonIndex + 206,
                                                 new SpriteElementImpl("pokemonPanel",
                                                                 currentBox.get(pokemonIndex)
                                                                                 .getSpriteFront(),
@@ -109,7 +108,7 @@ public final class SceneBoxView {
                                                                 0.115 + (pokemonIndex / 9 * 0.09), 0.05, 0.07));
 
                         } else {
-                                this.sceneGraphicElements.remove(pokemonIndex + 206);
+                                sceneGraphicElements.remove(pokemonIndex + 206);
                         }
 
                 }

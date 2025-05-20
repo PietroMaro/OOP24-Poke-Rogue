@@ -6,9 +6,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.io.IOException;
-import java.lang.InstantiationException;
-import java.lang.IllegalAccessException;
-import java.lang.NoSuchMethodException;
 import java.lang.reflect.InvocationTargetException;
 
 import it.unibo.PokeRogue.GameEngine;
@@ -81,8 +78,8 @@ public final class SceneLoad implements Scene {
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.savingSystemInstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
         this.savesList = savingSystemInstance.getSaveFilesName(Paths.get("src", "saves").toString());
-        this.utilityClass = new UtilitiesForScenesImpl("load", sceneGraphicElements);
-        this.sceneLoadView = new SceneLoadView(sceneGraphicElements, allPanelsElements);
+        this.utilityClass = new UtilitiesForScenesImpl("load");
+        this.sceneLoadView = new SceneLoadView();
         this.initStatus();
         this.initGraphicElements();
     }
@@ -100,7 +97,7 @@ public final class SceneLoad implements Scene {
      */
     @Override
     public void updateGraphic() throws IOException {
-        this.utilityClass.setButtonStatus(this.selectedSave % NUMBER_OF_SAVE_SHOWED, false);
+        this.utilityClass.setButtonStatus(this.selectedSave % NUMBER_OF_SAVE_SHOWED, false, sceneGraphicElements);
 
         // Going down the saves list
         if (this.selectedSave < this.newSelectedSave
@@ -119,7 +116,7 @@ public final class SceneLoad implements Scene {
         this.selectedSave = this.newSelectedSave;
 
         this.utilityClass.setButtonStatus(this.selectedSave % NUMBER_OF_SAVE_SHOWED,
-                true);
+                true, sceneGraphicElements);
 
     }
 
@@ -176,15 +173,16 @@ public final class SceneLoad implements Scene {
 
     private void initGraphicElements() throws IOException {
 
-        this.sceneLoadView.initGraphicElements();
+        this.sceneLoadView.initGraphicElements(allPanelsElements, sceneGraphicElements);
 
         this.showSaves(this.selectedSave);
-        this.utilityClass.setButtonStatus(this.selectedSave, true);
+        this.utilityClass.setButtonStatus(this.selectedSave, true, sceneGraphicElements);
 
     }
 
     private void showSaves(final int savesListStart) throws IOException {
-        this.sceneLoadView.showSaves(savesListStart, savesList, savingSystemInstance);
+        this.sceneLoadView.showSaves(savesListStart, savesList, savingSystemInstance, allPanelsElements,
+                sceneGraphicElements);
     }
 
 }

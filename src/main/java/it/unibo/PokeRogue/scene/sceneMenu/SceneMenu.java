@@ -52,8 +52,8 @@ public final class SceneMenu implements Scene {
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
-        this.utilityClass = new UtilitiesForScenesImpl("menu", sceneGraphicElements);
-        this.sceneMenuView = new SceneMenuView(sceneGraphicElements, allPanelsElements);
+        this.utilityClass = new UtilitiesForScenesImpl("menu");
+        this.sceneMenuView = new SceneMenuView();
         this.initStatus();
         this.initGraphicElements();
 
@@ -67,10 +67,10 @@ public final class SceneMenu implements Scene {
     public void updateGraphic() {
 
         for (int i = 0; i < 3; i++) {
-            this.utilityClass.setButtonStatus(i, false);
+            this.utilityClass.setButtonStatus(i, false, sceneGraphicElements);
         }
 
-        this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true);
+        this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true, sceneGraphicElements);
 
     }
 
@@ -117,9 +117,9 @@ public final class SceneMenu implements Scene {
     }
 
     private void initGraphicElements() throws IOException {
-        this.sceneMenuView.initGraphicElements();
+        this.sceneMenuView.initGraphicElements(sceneGraphicElements, allPanelsElements);
 
-        this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true);
+        this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true, sceneGraphicElements);
     }
 
     private void initStatus() {

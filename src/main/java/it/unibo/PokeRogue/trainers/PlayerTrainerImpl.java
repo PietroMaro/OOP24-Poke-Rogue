@@ -11,7 +11,7 @@ package it.unibo.PokeRogue.trainers;
  * handle
  * the player's character.
  */
-public class PlayerTrainerImpl extends TrainerImpl implements PlayerTrainer {
+public final class PlayerTrainerImpl extends TrainerImpl implements PlayerTrainer {
 
     private static PlayerTrainerImpl instanceOfTrainer;
 
@@ -35,7 +35,6 @@ public class PlayerTrainerImpl extends TrainerImpl implements PlayerTrainer {
         instanceOfTrainer = null;
     }
 
-   
     private PlayerTrainerImpl() {
         super();
     }

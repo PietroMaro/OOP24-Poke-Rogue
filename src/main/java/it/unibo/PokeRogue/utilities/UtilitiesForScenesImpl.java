@@ -14,27 +14,23 @@ import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 public final class UtilitiesForScenesImpl implements UtilitiesForScenes {
 
     private final String sceneDirName;
-    private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
 
     /**
      * Constructs a new {@code UtilitiesForScenesImpl} with the specified scene
      * directory name and map of scene graphic elements.
      *
-     * @param sceneDirName         the name of the directory containing the scene's
-     *                             images.
-     * @param sceneGraphicElements a map linking integer codes to
-     *                             {@code GraphicElementImpl} objects.
+     * @param sceneDirName the name of the directory containing the scene's
+     *                     images.
+     *
      */
-    public UtilitiesForScenesImpl(final String sceneDirName,
-            final Map<Integer, GraphicElementImpl> sceneGraphicElements) {
+    public UtilitiesForScenesImpl(final String sceneDirName) {
 
         this.sceneDirName = sceneDirName;
-        this.sceneGraphicElements = sceneGraphicElements;
     }
 
     /**
      * Builds a relative path string for a resource located in the menu scene image
-     * directory.s
+     * directory.
      *
      * @param directory the subdirectory inside the scene-specific image folder.
      * @param fileName  the name of the file.
@@ -50,12 +46,16 @@ public final class UtilitiesForScenesImpl implements UtilitiesForScenes {
     /**
      * Sets the selection state of a button based on its code.
      *
-     * @param buttonCode the unique identifier for the button element.
-     * @param status     {@code true} to mark the button as selected, {@code false}
-     *                   to deselect it.
+     * @param buttonCode           the unique identifier for the button element.
+     * @param status               {@code true} to mark the button as selected,
+     *                             {@code false}
+     *                             to deselect it.
+     * @param sceneGraphicElements a map linking integer codes to
+     *                             {@code GraphicElementImpl} objects.
      */
     @Override
-    public void setButtonStatus(final int buttonCode, final boolean status) {
+    public void setButtonStatus(final int buttonCode, final boolean status,
+            final Map<Integer, GraphicElementImpl> sceneGraphicElements) {
 
         final ButtonElementImpl selectedButton = (ButtonElementImpl) sceneGraphicElements.get(buttonCode);
         selectedButton.setSelected(status);

@@ -10,7 +10,7 @@ import lombok.Getter;
 @Getter
 public class TrainerImpl implements Trainer {
     private final List<Optional<Pokemon>> squad;
-    private static final int MAX_SQUAD_SIZE= 6 ;
+    private static final int MAX_SQUAD_SIZE = 6;
 
     public TrainerImpl() {
         this.squad = new ArrayList<>();
