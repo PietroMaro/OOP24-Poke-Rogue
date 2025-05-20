@@ -13,8 +13,8 @@
         ],
         "activation": [
             [
-                "us.money",
-                "us.money + 12000"
+                "playerMoney.money",
+                "playerMoney.money + 12000"
             ]
         ]
     }

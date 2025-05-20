@@ -2,7 +2,7 @@
     "id": 22,
     "name": "Rareer Candy",
     "type": "Boost",
-    "description": "A rare candy that  increases the level of all Pokémon in your squad by 1.",
+    "description": "Used to increase a Pokémon's level by 2.",
     "price": 10000,
     "rarity": "Ultra",
     "category": "Consumable",
@@ -12,7 +12,7 @@
         "activation": [
             [
                 "us.level",
-                "us.level + 1"
+                "MATH.min(us.level.currentMax, us.level.currentValue + 2)"
             ]
         ]
     }

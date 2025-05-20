@@ -11,8 +11,8 @@
         "checks": [],
         "activation": [
             [
-                "us.level",
-                "us.level + 1"
+                "us.level.currentValue",
+                "MATH.min(us.level.currentMax, us.level.currentValue + 1)"
             ]
         ]
     }
