@@ -164,7 +164,7 @@ public final class SceneFightUtilities {
                     new BoxElementImpl(MOVE_PANEL_STRING,
                             ColorTypeConversion.getColorForType(
                                     move.getType()),
-                            Color.BLACK, 1, 0.65, 0.82, 0.15, 0.06));
+                            Color.BLACK, 1, 0.64, 0.82, 0.15, 0.06));
         }
     }
 
