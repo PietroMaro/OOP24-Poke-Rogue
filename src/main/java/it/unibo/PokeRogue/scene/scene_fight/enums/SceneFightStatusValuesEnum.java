@@ -27,7 +27,7 @@ public enum SceneFightStatusValuesEnum {
 
     private final int code;
 
-    SceneFightStatusValuesEnum(int code) {
+    SceneFightStatusValuesEnum(final int code) {
         this.code = code;
     }
 

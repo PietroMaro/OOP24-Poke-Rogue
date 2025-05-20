@@ -11,7 +11,6 @@ import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.scene.scene_fight.enums.DecisionTypeEnum;
 import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightStatusValuesEnum;
-import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightUtilities;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import lombok.Getter;
 
@@ -92,7 +91,7 @@ public class SceneFight implements Scene {
      * @param inputKey the key pressed by the user
      */
     @Override
-    public void updateStatus(int inputKey) {
+    public void updateStatus(final int inputKey) {
         switch (inputKey) {
             case KeyEvent.VK_UP:
                 if (SceneFightUtilities.isButtonInRange(newSelectedButton, 2, 4) ||
@@ -210,9 +209,8 @@ public class SceneFight implements Scene {
      * @param playerMoveType the type of the move (e.g., "Attack", "SwitchIn", etc.)
      * @param playerMove     the selected move from the player
      */
-    public void fightLoop(Decision decision) {
-        Decision enemyChoose = enemyAiInstance.nextMove(battleEngineInstance.getCurrentWeather());
-        System.out.println(enemyChoose);
+    private void fightLoop(final Decision decision) {
+        final Decision enemyChoose = enemyAiInstance.nextMove(battleEngineInstance.getCurrentWeather());
         this.battleEngineInstance.runBattleTurn(decision, enemyChoose);
     }
 
@@ -221,7 +219,7 @@ public class SceneFight implements Scene {
      * 
      * @param newVal the new selected button value
      */
-    public void setCurrentSelectedButton(int newVal) {
+    public void setCurrentSelectedButton(final int newVal) {
         this.currentSelectedButton = newVal;
     }
 }

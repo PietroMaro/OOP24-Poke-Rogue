@@ -1,6 +1,6 @@
 package it.unibo.PokeRogue.scene.scene_fight;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -23,7 +23,7 @@ public class StatusEffectImpl implements StatusEffect {
      * each status.
      */
     public StatusEffectImpl() {
-        this.statusMap = new HashMap<>();
+        this.statusMap = new EnumMap<>(StatusCondition.class);
         this.generateStatusMap();
     }
 
@@ -52,7 +52,7 @@ public class StatusEffectImpl implements StatusEffect {
      */
     @Override
     public Boolean checkStatusAttack(final Pokemon pokemon) {
-        Optional<StatusCondition> status = pokemon.getStatusCondition();
+        final Optional<StatusCondition> status = pokemon.getStatusCondition();
         if (status.isPresent()) {
             switch (status.get()) {
                 case StatusCondition.FREEZE:
@@ -61,29 +61,15 @@ public class StatusEffectImpl implements StatusEffect {
                     return false;
                 case StatusCondition.SLEEP:
                     return false;
-                case StatusCondition.CONFUSION:
-                    if (Math.random() < 0.5) {
-                        return false;
-                    } else {
-                        return true;
-                    }
+                case StatusCondition.CONFUSION, StatusCondition.CHARMED:
+                    return Math.random() >= 0.5;
                 case StatusCondition.FLINCH:
-                    if (Math.random() < 0.2) {
-                        return false;
-                    }
-                    return true;
-                case StatusCondition.CHARMED:
-                    if (Math.random() < 0.5) {
-                        return false;
-                    } else {
-                        return true;
-                    }
+                    return Math.random() >= 0.2;
                 default:
                     return true;
             }
         }
         return true;
-
     }
 
     /**
@@ -95,12 +81,10 @@ public class StatusEffectImpl implements StatusEffect {
      */
     @Override
     public Boolean checkStatusSwitch(final Pokemon pokemon) {
-        Optional<StatusCondition> status = pokemon.getStatusCondition();
+        final Optional<StatusCondition> status = pokemon.getStatusCondition();
         if (status.isPresent()) {
             switch (status.get()) {
-                case StatusCondition.BOUND:
-                    return false;
-                case StatusCondition.TRAPPED:
+                case StatusCondition.BOUND, StatusCondition.TRAPPED:
                     return false;
                 default:
                     return true;
@@ -118,61 +102,47 @@ public class StatusEffectImpl implements StatusEffect {
      */
     @Override
     public void applyStatus(final Pokemon pokemon, final Pokemon enemy) {
-        Optional<StatusCondition> status = pokemon.getStatusCondition();
+        final Optional<StatusCondition> status = pokemon.getStatusCondition();
         if (status.isPresent()) {
-            StatusCondition currentStatus = status.get();
+            final StatusCondition currentStatus = status.get();
             this.setTimeDuration(pokemon, status.get());
             this.decrementTimeDuration(pokemon, status.get());
             switch (currentStatus) {
+                case StatusCondition.FREEZE, StatusCondition.PARALYSIS, StatusCondition.SLEEP, StatusCondition.TRAPPED:
+                    break;
                 case StatusCondition.BURN:
-                    int burnDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 16;
+                    final int burnDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 16;
                     calculateDamage(pokemon, burnDamage);
                     break;
-                case StatusCondition.FREEZE:
-                    break;
-                case StatusCondition.PARALYSIS:
-                    break;
                 case StatusCondition.POISON:
-                    int poisonDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 8;
+                    final int poisonDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 8;
                     calculateDamage(pokemon, poisonDamage);
                     break;
-                case StatusCondition.SLEEP:
-                    break;
                 case StatusCondition.BOUND:
-                    int boundDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 20;
+                    final int boundDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 20;
                     calculateDamage(pokemon, boundDamage);
                     break;
                 case StatusCondition.CONFUSION:
-                    int selfDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 10;
+                    final int selfDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 10;
                     this.calculateDamage(pokemon, selfDamage);
                     break;
                 case StatusCondition.FLINCH:
-                    int flinchDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 10;
+                    final int flinchDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 10;
                     this.calculateDamage(pokemon, flinchDamage);
-                    break;
-                case StatusCondition.TRAPPED:
                     break;
                 case StatusCondition.CHARMED:
                     pokemon.getActualStats().get("defense")
                             .setCurrentValue(pokemon.getActualStats().get("defense").getCurrentValue() + 5);
                     break;
                 case StatusCondition.SEEDED:
-                    int seededDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 16;
+                    final int seededDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 16;
                     calculateDamage(pokemon, seededDamage);
                     enemy.getActualStats().get("hp").increment(seededDamage);
-                    break;
-                default:
                     break;
             }
         }
     }
 
-    /**
-     * Sets the duration of the status condition if not already set.
-     *
-     * @param pokemon the affected Pokémon
-     * @param status  the status condition being applied
-     */
     private void setTimeDuration(final Pokemon pokemon, final StatusCondition status) {
         if (pokemon.getStatusDuration().isEmpty() || !pokemon.getStatusDuration().containsKey(status)) {
             pokemon.getStatusDuration().clear();
@@ -180,15 +150,8 @@ public class StatusEffectImpl implements StatusEffect {
         }
     }
 
-    /**
-     * Decreases the duration of the status condition by one turn.
-     * Removes the status if the duration reaches zero.
-     *
-     * @param pokemon the affected Pokémon
-     * @param status  the status condition being updated
-     */
     private void decrementTimeDuration(final Pokemon pokemon, final StatusCondition status) {
-        int turnLeft = pokemon.getStatusDuration().get(status) - 1;
+        final int turnLeft = pokemon.getStatusDuration().get(status) - 1;
         pokemon.getStatusDuration().put(status, turnLeft);
         if (pokemon.getStatusDuration().get(status).equals(0)) {
             pokemon.getStatusDuration().clear();
@@ -196,12 +159,6 @@ public class StatusEffectImpl implements StatusEffect {
         }
     }
 
-    /**
-     * Inflicts damage to the Pokémon by reducing its HP stat.
-     *
-     * @param pokemon the Pokémon receiving damage
-     * @param damage  the amount of damage to inflict
-     */
     private void calculateDamage(final Pokemon pokemon, final int damage) {
         pokemon.getActualStats().get("hp").decrement(damage);
     }

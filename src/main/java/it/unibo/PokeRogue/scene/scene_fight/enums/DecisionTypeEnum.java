@@ -9,7 +9,7 @@ public enum DecisionTypeEnum {
 
     private final int code;
 
-    DecisionTypeEnum(int code) {
+    DecisionTypeEnum(final int code) {
         this.code = code;
     }
 
