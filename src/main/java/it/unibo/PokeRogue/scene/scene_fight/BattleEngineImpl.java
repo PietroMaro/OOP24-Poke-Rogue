@@ -89,10 +89,6 @@ public class BattleEngineImpl implements BattleEngine {
 
         final Optional<Move> playerMove = getSafeMove(playerPokemon, playerDecision);
         final Optional<Move> enemyMove = getSafeMove(enemyPokemon, enemyDecision);
-        this.handleAbilityEffects(abilityPlayer, playerPokemon, enemyPokemon, playerMove, enemyMove,
-                AbilitySituationChecks.NEUTRAL);
-        this.handleAbilityEffects(abilityEnemy, enemyPokemon, playerPokemon, enemyMove, playerMove,
-                AbilitySituationChecks.NEUTRAL);
         this.applyStatusForAllPokemon(playerTrainerInstance.getSquad(), enemyPokemon);
         this.applyStatusForAllPokemon(enemyTrainerInstance.getSquad(), playerPokemon);
         if (playerDecision.moveType().priority() >= enemyDecision.moveType().priority()
@@ -108,6 +104,10 @@ public class BattleEngineImpl implements BattleEngine {
             this.executeDecision(playerDecision, playerTrainerInstance, enemyTrainerInstance, playerMove, enemyMove,
                     abilityPlayer, abilityEnemy);
         }
+        this.handleAbilityEffects(abilityPlayer, playerPokemon, enemyPokemon, playerMove, enemyMove,
+                AbilitySituationChecks.NEUTRAL);
+        this.handleAbilityEffects(abilityEnemy, enemyPokemon, playerPokemon, enemyMove, playerMove,
+                AbilitySituationChecks.NEUTRAL);
         this.newEnemyCheck();
 
     }

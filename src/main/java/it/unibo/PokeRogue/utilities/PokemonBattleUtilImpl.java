@@ -40,7 +40,7 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
      * @param defendingPokemon the target Pokémon
      * @param attackChosen     the move used
      * @param currentWeather   the current weather condition
-     * @return the final damage value as an int
+     * @return the final damage value as an int or 1 of totalDamage is less than 1
      */
     @Override
     public int calculateDamage(final Pokemon attackingPokemon, final Pokemon defendingPokemon,
@@ -74,10 +74,10 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
 
         totalDamage = damageWithEnvironment * criticalBonus * randomNumber * moveTypeBonus * stabBonus;
 
-        return (int) totalDamage;
+        return Math.max(1, (int) totalDamage); 
 
     }
-
+    
     /**
      * Calculates the ratio between the specified attack and defense stats of the
      * given attacking and defending Pokémon.
