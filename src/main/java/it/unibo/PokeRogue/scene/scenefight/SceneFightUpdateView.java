@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene.sceneFight;
+package it.unibo.PokeRogue.scene.scenefight;
 
 import java.awt.Color;
 import java.util.Map;
@@ -10,9 +10,9 @@ import it.unibo.PokeRogue.graphic.box.BoxElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
-import it.unibo.PokeRogue.scene.sceneFight.enums.SceneFightGraphicEnum;
-import it.unibo.PokeRogue.scene.sceneFight.enums.SceneFightStatusValuesEnum;
-import it.unibo.PokeRogue.scene.sceneFight.enums.SceneFightUtilities;
+import it.unibo.PokeRogue.scene.scenefight.enums.SceneFightGraphicEnum;
+import it.unibo.PokeRogue.scene.scenefight.enums.SceneFightStatusValuesEnum;
+import it.unibo.PokeRogue.scene.scenefight.enums.SceneFightUtilities;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
@@ -35,7 +35,7 @@ public class SceneFightUpdateView {
         private final PlayerTrainerImpl playerTrainerInstance;
         private int currentSelectedButton;
         private int newSelectedButton;
-        private SceneFight sceneInstance;
+        private final SceneFight sceneInstance;
         private Boolean alreadyInMainMenu;
 
         /**
@@ -52,8 +52,8 @@ public class SceneFightUpdateView {
          *                                   to
          */
         public SceneFightUpdateView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
-                        Map<String, PanelElementImpl> allPanelsElements, SceneFightInitView sceneFightInitViewInstance,
-                        int currentSelectedButton, int newSelectedButton, SceneFight sceneInstance) {
+        final Map<String, PanelElementImpl> allPanelsElements, final SceneFightInitView sceneFightInitViewInstance,
+        final int currentSelectedButton, final int newSelectedButton, final SceneFight sceneInstance) {
                 this.currentSelectedButton = currentSelectedButton;
                 this.newSelectedButton = newSelectedButton;
                 this.sceneGraphicElements = sceneGraphicElements;

@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene.sceneFight;
+package it.unibo.PokeRogue.scene.scenefight;
 
 import java.awt.event.KeyEvent;
 import java.util.LinkedHashMap;
@@ -11,8 +11,8 @@ import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.move.MoveFactoryImpl;
 import it.unibo.PokeRogue.scene.Scene;
-import it.unibo.PokeRogue.scene.sceneFight.enums.SceneFightStatusValuesEnum;
-import it.unibo.PokeRogue.scene.sceneFight.enums.SceneFightUtilities;
+import it.unibo.PokeRogue.scene.scenefight.enums.SceneFightStatusValuesEnum;
+import it.unibo.PokeRogue.scene.scenefight.enums.SceneFightUtilities;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import lombok.Getter;
 
@@ -36,9 +36,13 @@ public class SceneFight implements Scene {
     private final SceneFightView sceneFightView;
     private int newSelectedButton;
     private final EnemyAi enemyAiInstance;
-    private MoveFactoryImpl moveFactoryInstance;
-    private BattleEngine battleEngineInstance;
-    private GenerateEnemy generateEnemyInstance;
+    private final MoveFactoryImpl moveFactoryInstance;
+    private final BattleEngine battleEngineInstance;
+    private final GenerateEnemy generateEnemyInstance;
+    private static final String MOVE_TYPE_ATTACK = "Attack";
+    private static final String MOVE_TYPE_SWITCH = "SwitchIn";
+    private static final String MOVE_TYPE_POKEBALL = "Pokeball";
+    private static final String MOVE_TYPE_RUN = "Run";
 
     /**
      * Constructor for SceneFight.
@@ -47,7 +51,7 @@ public class SceneFight implements Scene {
      * 
      * @param battleLevel the level of the battle
      */
-    public SceneFight(Integer battleLevel) {
+    public SceneFight(final Integer battleLevel) {
         this.enemyTrainerInstance = new PlayerTrainerImpl();
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
@@ -66,7 +70,7 @@ public class SceneFight implements Scene {
      * Initializes the status of the buttons for the battle scene.
      * Sets the default button selection to "Fight".
      */
-    protected void initStatus() {
+    private void initStatus() {
         this.currentSelectedButton = SceneFightStatusValuesEnum.FIGHT_BUTTON.value();
         this.newSelectedButton = SceneFightStatusValuesEnum.FIGHT_BUTTON.value();
     }
@@ -96,7 +100,7 @@ public class SceneFight implements Scene {
      * @param inputKey the key pressed by the user
      */
     @Override
-    public void updateStatus(int inputKey) {
+    public void updateStatus(final int inputKey) {
         switch (inputKey) {
             case KeyEvent.VK_UP:
                 if (SceneFightUtilities.isButtonInRange(newSelectedButton, 2, 4) ||
@@ -137,57 +141,57 @@ public class SceneFight implements Scene {
             case KeyEvent.VK_ENTER:
                 switch (newSelectedButton) {
                     case 100:
-                        fightLoop("Attack", "0");
+                        fightLoop(MOVE_TYPE_ATTACK, "0");
                         break;
 
                     case 101:
-                        fightLoop("Attack", "2");
+                        fightLoop(MOVE_TYPE_ATTACK, "2");
                         break;
 
                     case 102:
-                        fightLoop("Attack", "1");
+                        fightLoop(MOVE_TYPE_ATTACK, "1");
                         break;
 
                     case 103:
-                        fightLoop("Attack", "3");
+                        fightLoop(MOVE_TYPE_ATTACK, "3");
                         break;
 
                     case 200:
-                        fightLoop("SwitchIn", "1");
+                        fightLoop(MOVE_TYPE_SWITCH, "1");
                         break;
 
                     case 201:
-                        fightLoop("SwitchIn", "2");
+                        fightLoop(MOVE_TYPE_SWITCH, "2");
                         break;
 
                     case 202:
-                        fightLoop("SwitchIn", "3");
+                        fightLoop(MOVE_TYPE_SWITCH, "3");
                         break;
 
                     case 203:
-                        fightLoop("SwitchIn", "4");
+                        fightLoop(MOVE_TYPE_SWITCH, "4");
                         break;
 
                     case 204:
-                        fightLoop("SwitchIn", "5");
+                        fightLoop(MOVE_TYPE_SWITCH, "5");
                         break;
                     case 300:
-                        fightLoop("Pokeball", "pokeball");
+                        fightLoop(MOVE_TYPE_POKEBALL, "pokeball");
                         break;
 
                     case 301:
-                        fightLoop("Pokeball", "megaball");
+                        fightLoop(MOVE_TYPE_POKEBALL, "megaball");
                         break;
 
                     case 302:
-                        fightLoop("Pokeball", "ultraball");
+                        fightLoop(MOVE_TYPE_POKEBALL, "ultraball");
                         break;
 
                     case 303:
-                        fightLoop("Pokeball", "masterball");
+                        fightLoop(MOVE_TYPE_POKEBALL, "masterball");
                         break;
                     case 4:
-                        fightLoop("Run", "");
+                        fightLoop(MOVE_TYPE_RUN, "");
                         break;
                     default:
                         break;
@@ -214,9 +218,8 @@ public class SceneFight implements Scene {
      * @param playerMoveType the type of the move (e.g., "Attack", "SwitchIn", etc.)
      * @param playerMove     the selected move from the player
      */
-    public void fightLoop(String playerMoveType, String playerMove) {
-        List<String> enemyChoose = enemyAiInstance.nextMove(battleEngineInstance.getCurrentWeather());
-        System.out.println(enemyChoose);
+    public void fightLoop(final String playerMoveType, final String playerMove) {
+        final List<String> enemyChoose = enemyAiInstance.nextMove(battleEngineInstance.getCurrentWeather());
         this.battleEngineInstance.movesPriorityCalculator(playerMoveType, playerMove,
                 enemyChoose.getFirst(), enemyChoose.getLast());
     }
@@ -226,7 +229,7 @@ public class SceneFight implements Scene {
      * 
      * @param newVal the new selected button value
      */
-    public void setCurrentSelectedButton(int newVal) {
+    public void setCurrentSelectedButton(final int newVal) {
         this.currentSelectedButton = newVal;
     }
 }

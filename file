@@ -1,0 +1,1080 @@
+> Task :compileJava
+> Task :processResources NO-SOURCE
+> Task :classes
+> Task :jar
+> Task :startScripts
+> Task :distTar
+> Task :distZip
+> Task :shadowJar
+> Task :startShadowScripts
+> Task :shadowDistTar
+> Task :shadowDistZip
+> Task :assemble
+> Task :generateCheckstyleConfiguration UP-TO-DATE
+> Task :compileTestJava
+> Task :processTestResources NO-SOURCE
+> Task :testClasses
+> Task :cpdCheck SKIPPED
+> Task :populateDefaultSpotBugsExcludes
+
+> Task :checkstyleMain
+
+> Task :spotbugsTest FAILED
+M D DLS: Dead store to pok1 in it.unibo.PokeRogue.TestAll.testAllMovesEffect()  At TestAll.java:[line 132]
+M D DLS: Dead store to pok2 in it.unibo.PokeRogue.TestAll.testAllMovesEffect()  At TestAll.java:[line 133]
+M D DLS: Dead store to moveTest1 in it.unibo.PokeRogue.TestAll.testAllMovesEffect()  At TestAll.java:[line 130]
+M D DLS: Dead store to moveTest2 in it.unibo.PokeRogue.TestAll.testAllMovesEffect()  At TestAll.java:[line 131]
+L D DLS: Dead store to $L15 in it.unibo.PokeRogue.TestAll.testAllMovesEffect()  At TestAll.java:[line 143]
+M D DLS: Dead store to effectParser in it.unibo.PokeRogue.TestAll.testAllMovesEffect()  At TestAll.java:[line 128]
+M D DLS: Dead store to weather in it.unibo.PokeRogue.TestAll.testAllMovesEffect()  At TestAll.java:[line 134]
+M D DLS: Dead store to weather in it.unibo.PokeRogue.TestAll.testAllAbilityEffect()  At TestAll.java:[line 160]
+L D DLS: Dead store to $L15 in it.unibo.PokeRogue.TestAll.testAllAbilityEffect()  At TestAll.java:[line 169]
+M D DLS: Dead store to effectParser in it.unibo.PokeRogue.TestAll.testAllAbilityEffect()  At TestAll.java:[line 154]
+M D DLS: Dead store to moveTest1 in it.unibo.PokeRogue.TestAll.testAllAbilityEffect()  At TestAll.java:[line 156]
+M D DLS: Dead store to pok2 in it.unibo.PokeRogue.TestAll.testAllAbilityEffect()  At TestAll.java:[line 159]
+M D DLS: Dead store to pok1 in it.unibo.PokeRogue.TestAll.testAllAbilityEffect()  At TestAll.java:[line 158]
+M D DLS: Dead store to moveTest2 in it.unibo.PokeRogue.TestAll.testAllAbilityEffect()  At TestAll.java:[line 157]
+
+> Task :checkstyleTest
+
+> Task :checkstyleTest FAILED
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:20:	UnnecessaryImport:	Unused import 'it.unibo.PokeRogue.pokemon.PokemonImpl'
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:32:	UnnecessaryImport:	Unused import 'it.unibo.PokeRogue.effectParser.EffectParser'
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:44:	UnnecessaryImport:	Unused import 'it.unibo.PokeRogue.utilities.PokemonBattleUtil'
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:45:	UnnecessaryImport:	Unused import 'it.unibo.PokeRogue.utilities.PokemonBattleUtilImpl'
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:46:	UnnecessaryImport:	Unused import 'it.unibo.PokeRogue.utilities.RangeImpl'
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:48:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:56:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:57:	LocalVariableCouldBeFinal:	Local variable 'p1' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:58:	LocalVariableCouldBeFinal:	Local variable 'p2' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:59:	LocalVariableCouldBeFinal:	Local variable 'pokeFactory' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:61:	LocalVariableCouldBeFinal:	Local variable 'bulbasaur' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:62:	LocalVariableCouldBeFinal:	Local variable 'ivysaur' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:83:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:84:	LocalVariableCouldBeFinal:	Local variable 'moveFactory' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:85:	LocalVariableCouldBeFinal:	Local variable 'moveTest' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:85:	AvoidDuplicateLiterals:	The String literal "absorb" appears 7 times in this file; the first occurrence is on line 85
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:86:	LocalVariableCouldBeFinal:	Local variable 'ex' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:94:	SimplifiableTestAssertion:	Assertion may be simplified using assertFalse
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:102:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:103:	LocalVariableCouldBeFinal:	Local variable 'abilityFactory' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:104:	LocalVariableCouldBeFinal:	Local variable 'abilityTest' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:105:	LocalVariableCouldBeFinal:	Local variable 'ex' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:114:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:115:	LocalVariableCouldBeFinal:	Local variable 'moveFactory' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:116:	LocalVariableCouldBeFinal:	Local variable 'moveTest1' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:117:	LocalVariableCouldBeFinal:	Local variable 'moveTest2' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:125:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:126:	LocalVariableCouldBeFinal:	Local variable 'moveFactory' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:127:	LocalVariableCouldBeFinal:	Local variable 'pokeFactory' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:128:	UnusedLocalVariable:	Avoid unused local variables such as 'effectParser'.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:130:	UnusedLocalVariable:	Avoid unused local variables such as 'moveTest1'.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:131:	UnusedLocalVariable:	Avoid unused local variables such as 'moveTest2'.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:132:	UnusedLocalVariable:	Avoid unused local variables such as 'pok1'.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:133:	UnusedLocalVariable:	Avoid unused local variables such as 'pok2'.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:134:	UnusedLocalVariable:	Avoid unused local variables such as 'weather'.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:136:	LocalVariableCouldBeFinal:	Local variable 'jsonReader' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:138:	LocalVariableCouldBeFinal:	Local variable 'dirPath' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:140:	LocalVariableCouldBeFinal:	Local variable 'entry' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:142:	LocalVariableCouldBeFinal:	Local variable 'moveJson' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:143:	UnusedLocalVariable:	Avoid unused local variables such as 'effect'.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:151:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:152:	LocalVariableCouldBeFinal:	Local variable 'moveFactory' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:153:	LocalVariableCouldBeFinal:	Local variable 'pokeFactory' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:154:	UnusedLocalVariable:	Avoid unused local variables such as 'effectParser'.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:156:	UnusedLocalVariable:	Avoid unused local variables such as 'moveTest1'.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:157:	UnusedLocalVariable:	Avoid unused local variables such as 'moveTest2'.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:158:	UnusedLocalVariable:	Avoid unused local variables such as 'pok1'.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:159:	UnusedLocalVariable:	Avoid unused local variables such as 'pok2'.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:160:	UnusedLocalVariable:	Avoid unused local variables such as 'weather'.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:162:	LocalVariableCouldBeFinal:	Local variable 'jsonReader' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:164:	LocalVariableCouldBeFinal:	Local variable 'dirPath' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:166:	LocalVariableCouldBeFinal:	Local variable 'entry' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:168:	LocalVariableCouldBeFinal:	Local variable 'moveJson' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:169:	UnusedLocalVariable:	Avoid unused local variables such as 'effect'.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:177:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:178:	LocalVariableCouldBeFinal:	Local variable 'pokeFactory' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:179:	LocalVariableCouldBeFinal:	Local variable 'calculator' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:181:	LocalVariableCouldBeFinal:	Local variable 'charmander' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:181:	AvoidDuplicateLiterals:	The String literal "charmander" appears 5 times in this file; the first occurrence is on line 181
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:182:	LocalVariableCouldBeFinal:	Local variable 'venusaur' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:183:	LocalVariableCouldBeFinal:	Local variable 'poliwag' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:192:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:193:	LocalVariableCouldBeFinal:	Local variable 'pokeFactory' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:194:	LocalVariableCouldBeFinal:	Local variable 'playerTrainerImpl' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:195:	LocalVariableCouldBeFinal:	Local variable 'enemyTrainer' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:196:	LocalVariableCouldBeFinal:	Local variable 'weather' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:197:	LocalVariableCouldBeFinal:	Local variable 'ai' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:198:	LocalVariableCouldBeFinal:	Local variable 'charmander' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:199:	LocalVariableCouldBeFinal:	Local variable 'venusaur' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:200:	LocalVariableCouldBeFinal:	Local variable 'poliwag' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:214:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:215:	LocalVariableCouldBeFinal:	Local variable 'factory' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:216:	LocalVariableCouldBeFinal:	Local variable 'playerTrainer' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:218:	LocalVariableCouldBeFinal:	Local variable 'charmander' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:227:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:228:	LocalVariableCouldBeFinal:	Local variable 'factory' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:229:	LocalVariableCouldBeFinal:	Local variable 'charmander' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:230:	LocalVariableCouldBeFinal:	Local variable 'bulbasaur' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:231:	LocalVariableCouldBeFinal:	Local variable 'beforeXP' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:233:	LocalVariableCouldBeFinal:	Local variable 'afterXP' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:239:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:240:	LocalVariableCouldBeFinal:	Local variable 'enemyTrainer' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:241:	LocalVariableCouldBeFinal:	Local variable 'generateEnemyInstance' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:247:	JUnit5TestShouldBePackagePrivate:	JUnit 5 tests should be package-private.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:248:	LocalVariableCouldBeFinal:	Local variable 'enemyTrainer' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:249:	LocalVariableCouldBeFinal:	Local variable 'factory' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:250:	LocalVariableCouldBeFinal:	Local variable 'playerTrainer' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:251:	LocalVariableCouldBeFinal:	Local variable 'bulbasaur' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:252:	LocalVariableCouldBeFinal:	Local variable 'charmander' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:255:	LocalVariableCouldBeFinal:	Local variable 'moveFactoryImpl' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:256:	LocalVariableCouldBeFinal:	Local variable 'ai' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:257:	LocalVariableCouldBeFinal:	Local variable 'beforeLife' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:258:	LocalVariableCouldBeFinal:	Local variable 'battleEngine' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/TestAll.java:260:	LocalVariableCouldBeFinal:	Local variable 'afterLife' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/testGraphic/GraphicTest.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/testGraphic/GraphicTest.java:12:	UnnecessaryImport:	Unused import 'it.unibo.PokeRogue.utilities.PokemonBattleUtil'
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/testGraphic/GraphicTest.java:13:	UnnecessaryImport:	Unused import 'it.unibo.PokeRogue.utilities.PokemonBattleUtilImpl'
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/testGraphic/GraphicTest.java:15:	UseUtilityClass:	This utility class has a non-private constructor
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/testGraphic/GraphicTest.java:18:	LocalVariableCouldBeFinal:	Local variable 'pokeFactory' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/testGraphic/GraphicTest.java:19:	LocalVariableCouldBeFinal:	Local variable 'playerTrainerImpl' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/testGraphic/GraphicTest.java:20:	LocalVariableCouldBeFinal:	Local variable 'enemyTrainer' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/testGraphic/GraphicTest.java:21:	LocalVariableCouldBeFinal:	Local variable 'weather' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/testGraphic/GraphicTest.java:22:	LocalVariableCouldBeFinal:	Local variable 'ai' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/testGraphic/GraphicTest.java:23:	LocalVariableCouldBeFinal:	Local variable 'charmander' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/testGraphic/GraphicTest.java:24:	LocalVariableCouldBeFinal:	Local variable 'venusaur' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/testGraphic/GraphicTest.java:25:	LocalVariableCouldBeFinal:	Local variable 'poliwag' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/PokeRogue/testGraphic/GraphicTest.java:32:	SystemPrintln:	Usage of System.out/err
+
+> Task :checkstyleMain
+
+> Task :pmdTest FAILED
+
+> Task :spotbugsMain
+M B Dm: it.unibo.PokeRogue.utilities.JsonReaderImpl.readJsonStringFromFile(String) invokes System.exit(...), which shuts down the entire virtual machine  At JsonReaderImpl.java:[line 26]
+M B Dm: it.unibo.PokeRogue.utilities.JsonReaderImpl.dumpJsonToFile(String, Object) invokes System.exit(...), which shuts down the entire virtual machine  At JsonReaderImpl.java:[line 71]
+L B OS: it.unibo.PokeRogue.utilities.JsonReaderImpl.readJsonStringFromFile(String) may fail to close stream on exception  At JsonReaderImpl.java:[line 31]
+L B OS: it.unibo.PokeRogue.utilities.JsonReaderImpl.readJsonStringFromFile(String) may fail to close stream on exception  At JsonReaderImpl.java:[line 19]
+L B OS: it.unibo.PokeRogue.utilities.JsonReaderImpl.dumpJsonToFile(String, Object) may fail to close stream on exception  At JsonReaderImpl.java:[line 61]
+L D DLS: Dead store to fileCreated in it.unibo.PokeRogue.utilities.JsonReaderImpl.readJsonStringFromFile(String)  At JsonReaderImpl.java:[line 18]
+M X OBL: it.unibo.PokeRogue.utilities.JsonReaderImpl.readJsonStringFromFile(String) may fail to clean up java.io.Writer on checked exception  Obligation to clean up resource created at JsonReaderImpl.java:[line 19] is not discharged
+M B RV: Exceptional return value of java.io.File.mkdirs() ignored in it.unibo.PokeRogue.utilities.JsonReaderImpl.dumpJsonToFile(String, String, Object)  At JsonReaderImpl.java:[line 49]
+H I Dm: Found reliance on default encoding in it.unibo.PokeRogue.utilities.JsonReaderImpl.readJsonStringFromFile(String): new java.io.FileReader(String)  At JsonReaderImpl.java:[line 31]
+H I Dm: Found reliance on default encoding in it.unibo.PokeRogue.utilities.JsonReaderImpl.readJsonStringFromFile(String): new java.io.FileWriter(File)  At JsonReaderImpl.java:[line 19]
+H I Dm: Found reliance on default encoding in it.unibo.PokeRogue.utilities.JsonReaderImpl.dumpJsonToFile(String, Object): new java.io.FileWriter(String)  At JsonReaderImpl.java:[line 61]
+M V EI2: new it.unibo.PokeRogue.ability.Ability(AbilitySituationChecks, JSONObject) may expose internal representation by storing an externally mutable object into Ability.effect  At Ability.java:[line 4]
+M V EI: it.unibo.PokeRogue.ability.Ability.effect() may expose internal representation by returning Ability.effect  At Ability.java:[line 4]
+
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GameEngine.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GameEngine.java:20:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GameEngine.java:21:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GameEngine.java:22:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GameEngine.java:23:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GameEngineImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GameEngineImpl.java:32:	UncommentedEmptyConstructor:	Document empty constructor
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GameEngineImpl.java:81:	MissingOverride:	The method 'keyPressedToScene(int)' is missing an @Override annotation.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GameEngineImpl.java:83:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GameEngineImpl.java:93:	MissingOverride:	The method 'setGraphicEngine(GraphicEngine)' is missing an @Override annotation.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GameEngineImpl.java:99:	MissingOverride:	The method 'setFileToLoad(String)' is missing an @Override annotation.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GraphicEngine.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GraphicEngineImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GraphicEngineImpl.java:61:	MethodArgumentCouldBeFinal:	Parameter 'allGraphicElements' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GraphicEngineImpl.java:63:	LocalVariableCouldBeFinal:	Local variable 'graphicElement' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GraphicEngineImpl.java:81:	MethodArgumentCouldBeFinal:	Parameter 'panelElements' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GraphicEngineImpl.java:86:	LocalVariableCouldBeFinal:	Local variable 'key' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GraphicEngineImpl.java:87:	LocalVariableCouldBeFinal:	Local variable 'panel' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GraphicEngineImpl.java:90:	CompareObjectsWithEquals:	Use equals() to compare object references.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GraphicEngineImpl.java:90:	UseEqualsToCompareStrings:	Use equals() to compare strings instead of '==' or '!='
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GraphicEngineImpl.java:101:	MethodArgumentCouldBeFinal:	Parameter 'boxToDraw' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GraphicEngineImpl.java:107:	MethodArgumentCouldBeFinal:	Parameter 'spriteToDraw' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GraphicEngineImpl.java:112:	MethodArgumentCouldBeFinal:	Parameter 'buttonToDraw' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GraphicEngineImpl.java:117:	MethodArgumentCouldBeFinal:	Parameter 'BackgroundToDraw' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GraphicEngineImpl.java:117:	FormalParameterNamingConventions:	The method parameter name 'BackgroundToDraw' doesn't match '[a-z][a-zA-Z0-9]*'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/GraphicEngineImpl.java:122:	MethodArgumentCouldBeFinal:	Parameter 'textToDraw' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/Main.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/Main.java:3:	UseUtilityClass:	This utility class has a non-private constructor
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/Main.java:7:	LocalVariableCouldBeFinal:	Local variable 'mainGameEngine' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/Main.java:8:	LocalVariableCouldBeFinal:	Local variable 'mainGraphicEngine' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/Singleton.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/SingletonImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/SingletonImpl.java:6:	UseUtilityClass:	This utility class has a non-private constructor
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/SingletonImpl.java:7:	FieldNamingConventions:	The constant name 'instances' doesn't match '[A-Z][A-Z_0-9]*'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/SingletonImpl.java:10:	MethodArgumentCouldBeFinal:	Parameter 'newClass' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/SingletonImpl.java:16:	AvoidThrowingRawExceptionTypes:	Avoid throwing raw exception types.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/SingletonImpl.java:21:	UncommentedEmptyConstructor:	Document empty constructor
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/Weather.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/Weather.java:10:	MethodArgumentCouldBeFinal:	Parameter 'weatherName' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/Weather.java:17:	MethodArgumentCouldBeFinal:	Parameter 'weather' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/Weather.java:18:	LocalVariableCouldBeFinal:	Local variable 't' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/Weather.java:18:	UnnecessaryFullyQualifiedName:	Unnecessary qualifier 'Weather': 'values' is already in scope
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ability/Ability.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ability/Ability.java:3:	UnnecessaryImport:	Unnecessary import from the current package 'it.unibo.PokeRogue.ability.AbilitySituationChecks'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ability/AbilityFactory.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ability/AbilityFactoryImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ability/AbilityFactoryImpl.java:6:	UnnecessaryImport:	Unnecessary import from the current package 'it.unibo.PokeRogue.ability.AbilitySituationChecks'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ability/AbilityFactoryImpl.java:21:	UseDiamondOperator:	Explicit type arguments can be replaced by a diamond: `new HashMap<>()`
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ability/AbilityFactoryImpl.java:24:	ConstructorCallsOverridableMethod:	Overridable method called during object construction: AbilityFactoryImpl.init() 
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ability/AbilityFactoryImpl.java:29:	LocalVariableCouldBeFinal:	Local variable 'allAbilityJson' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ability/AbilityFactoryImpl.java:37:	LocalVariableCouldBeFinal:	Local variable 'abilityJson' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ability/AbilityFactoryImpl.java:39:	LocalVariableCouldBeFinal:	Local variable 'situationChecks' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ability/AbilityFactoryImpl.java:40:	LocalVariableCouldBeFinal:	Local variable 'effect' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ability/AbilityFactoryImpl.java:51:	LocalVariableCouldBeFinal:	Local variable 'ability' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ability/AbilitySituationChecks.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ability/AbilitySituationChecks.java:13:	MethodArgumentCouldBeFinal:	Parameter 'abilitySituationChecksName' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ability/AbilitySituationChecks.java:21:	MethodArgumentCouldBeFinal:	Parameter 'abilitySituationChecks' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ability/AbilitySituationChecks.java:22:	LocalVariableCouldBeFinal:	Local variable 'a' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ability/AbilitySituationChecks.java:22:	UnnecessaryFullyQualifiedName:	Unnecessary qualifier 'AbilitySituationChecks': 'values' is already in scope
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAi.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAi.java:10:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiAttack.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiAttack.java:32:	ImmutableField:	Field 'random' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiAttack.java:41:	ImmutableField:	Field 'scoreMoves' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiAttack.java:42:	ImmutableField:	Field 'hpAware' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiAttack.java:98:	LocalVariableCouldBeFinal:	Local variable 'move' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiAttack.java:191:	LocalVariableCouldBeFinal:	Local variable 'possibleAttacks' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiAttack.java:220:	LocalVariableCouldBeFinal:	Local variable 'entry' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiAttack.java:253:	LocalVariableCouldBeFinal:	Local variable 'entry' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiAttack.java:254:	LocalVariableCouldBeFinal:	Local variable 'moveIndex' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiAttack.java:255:	LocalVariableCouldBeFinal:	Local variable 'score' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiImpl.java:25:	RedundantFieldInitializer:	Avoid using redundant field initializer for 'scoreMoves'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiImpl.java:25:	SingularField:	Perhaps 'scoreMoves' could be replaced by a local variable.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiImpl.java:26:	RedundantFieldInitializer:	Avoid using redundant field initializer for 'hpAware'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiImpl.java:26:	SingularField:	Perhaps 'hpAware' could be replaced by a local variable.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiImpl.java:27:	SingularField:	Perhaps 'usePokemonInOrder' could be replaced by a local variable.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiImpl.java:28:	RedundantFieldInitializer:	Avoid using redundant field initializer for 'considerSwitching'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiImpl.java:28:	SingularField:	Perhaps 'considerSwitching' could be replaced by a local variable.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiImpl.java:29:	SingularField:	Perhaps 'switchFirstRate' could be replaced by a local variable.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiImpl.java:31:	FinalFieldCouldBeStatic:	This final field could be made static
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiImpl.java:32:	FinalFieldCouldBeStatic:	This final field could be made static
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiImpl.java:33:	FinalFieldCouldBeStatic:	This final field could be made static
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiImpl.java:61:	MissingOverride:	The method 'nextMove(Optional<Weather>)' is missing an @Override annotation.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiSwitchIn.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiSwitchIn.java:32:	FinalFieldCouldBeStatic:	This final field could be made static
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiSwitchIn.java:36:	ImmutableField:	Field 'usePokemonInOrder' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiSwitchIn.java:37:	ImmutableField:	Field 'considerSwitching' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiSwitchIn.java:38:	ImmutableField:	Field 'switchFirstRate' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiSwitchIn.java:67:	LinguisticNaming:	Linguistics Antipattern - The method 'willSwitchIn' indicates linguistically it returns a boolean, but it returns 'List<String>'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiSwitchIn.java:118:	LocalVariableCouldBeFinal:	Local variable 'pokemon' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiSwitchIn.java:167:	ForLoopCanBeForeach:	This for loop can be replaced by a foreach loop
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/ai/EnemyAiSwitchIn.java:220:	LocalVariableCouldBeFinal:	Local variable 'listFromSet' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractor.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:19:	ImmutableField:	Field 'client' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:20:	ImmutableField:	Field 'apiURL' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:21:	ImmutableField:	Field 'movesList' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:22:	ImmutableField:	Field 'movesListFilePath' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:23:	ImmutableField:	Field 'abilitiesList' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:24:	ImmutableField:	Field 'abilitiesListFilePath' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:25:	ImmutableField:	Field 'jsonReader' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:27:	MethodArgumentCouldBeFinal:	Parameter 'destionationFolder' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:40:	UselessStringValueOf:	No need to call String.valueOf to append to a string.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:42:	AvoidDuplicateLiterals:	The String literal "name" appears 13 times in this file; the first occurrence is on line 42
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:79:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:80:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:128:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:134:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:159:	LinguisticNaming:	Linguistics Antipattern - The variable 'isPhysical' indicates linguistically it is a boolean, but it is 'String'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:160:	CompareObjectsWithEquals:	Use equals() to compare object references.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:160:	UseEqualsToCompareStrings:	Use equals() to compare strings instead of '==' or '!='
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:187:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:196:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:217:	MethodArgumentCouldBeFinal:	Parameter 'newPath' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:226:	FormalParameterNamingConventions:	The final method parameter name 'Url' doesn't match '[a-z][a-zA-Z0-9]*'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:231:	UnusedLocalVariable:	Avoid unused local variables such as 'response'.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:234:	AvoidPrintStackTrace:	Avoid printStackTrace(); use a logger call instead.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:235:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:249:	AvoidPrintStackTrace:	Avoid printStackTrace(); use a logger call instead.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/dataExtractor/DataExtractorImpl.java:250:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParser.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:13:	UnnecessaryImport:	Unused import 'java.util.Map'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:14:	UnnecessaryImport:	Unused import 'java.util.HashMap'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:15:	UnnecessaryImport:	Duplicate import 'java.util.Optional'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:26:	MethodArgumentCouldBeFinal:	Parameter 'effect' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:32:	AvoidCatchingGenericException:	Avoid catching generic exceptions such as NullPointerException, RuntimeException, Exception in try-catch block
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:33:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:40:	MethodArgumentCouldBeFinal:	Parameter 'checks' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:49:	MethodArgumentCouldBeFinal:	Parameter 'check' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:53:	LocalVariableCouldBeFinal:	Local variable 'firstOperand' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:54:	LocalVariableCouldBeFinal:	Local variable 'secondOperand' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:56:	LocalVariableCouldBeFinal:	Local variable 'checkString' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:57:	UnusedAssignment:	The initializer for variable 'result' is never used (overwritten on line 59)
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:60:	AvoidCatchingGenericException:	Avoid catching generic exceptions such as NullPointerException, RuntimeException, Exception in try-catch block
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:61:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:62:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:68:	MethodArgumentCouldBeFinal:	Parameter 'expression' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:69:	LocalVariableCouldBeFinal:	Local variable 'jexl' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:70:	LocalVariableCouldBeFinal:	Local variable 'expr' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:71:	UnnecessaryLocalBeforeReturn:	Consider simply returning the value vs storing it in local variable 'result'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:71:	LocalVariableCouldBeFinal:	Local variable 'result' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:76:	LocalVariableCouldBeFinal:	Local variable 'context' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:101:	MethodArgumentCouldBeFinal:	Parameter 'activation' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:112:	MethodArgumentCouldBeFinal:	Parameter 'effect' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:113:	MethodArgumentCouldBeFinal:	Parameter 'us' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:114:	MethodArgumentCouldBeFinal:	Parameter 'enemy' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:115:	MethodArgumentCouldBeFinal:	Parameter 'attackUs' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:116:	MethodArgumentCouldBeFinal:	Parameter 'attackEnemy' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:117:	MethodArgumentCouldBeFinal:	Parameter 'weather' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:128:	MethodArgumentCouldBeFinal:	Parameter 'effect' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/effectParser/EffectParserImpl.java:128:	MethodArgumentCouldBeFinal:	Parameter 'pokemon' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/GraphicElement.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/GraphicElement.java:4:	UnnecessaryModifier:	Unnecessary modifier 'public' on method 'getPanelName': the method is declared in an interface type
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/GraphicElementImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/GraphicElementImpl.java:10:	MissingSerialVersionUID:	Classes implementing Serializable should set a serialVersionUID
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/GraphicElementImpl.java:12:	ImmutableField:	Field 'panelName' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/GraphicElementImpl.java:14:	MethodArgumentCouldBeFinal:	Parameter 'panelName' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/GraphicElementImpl.java:19:	MethodArgumentCouldBeFinal:	Parameter 'drawEngine' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/bg/BackgroundElement.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/bg/BackgroundElement.java:6:	UnnecessaryModifier:	Unnecessary modifier 'public' on method 'getBackgroundSprite': the method is declared in an interface type
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/bg/BackgroundElementImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/bg/BackgroundElementImpl.java:8:	MissingSerialVersionUID:	Classes implementing Serializable should set a serialVersionUID
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/bg/BackgroundElementImpl.java:12:	MethodArgumentCouldBeFinal:	Parameter 'panelName' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/bg/BackgroundElementImpl.java:12:	MethodArgumentCouldBeFinal:	Parameter 'pathToImage' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElement.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElementImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElementImpl.java:10:	MissingSerialVersionUID:	Classes implementing Serializable should set a serialVersionUID
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElementImpl.java:12:	ImmutableField:	Field 'mainColor' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElementImpl.java:13:	ImmutableField:	Field 'borderColor' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElementImpl.java:16:	ImmutableField:	Field 'x' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElementImpl.java:17:	ImmutableField:	Field 'y' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElementImpl.java:18:	ImmutableField:	Field 'width' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElementImpl.java:19:	ImmutableField:	Field 'height' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElementImpl.java:21:	MethodArgumentCouldBeFinal:	Parameter 'panelName' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElementImpl.java:21:	MethodArgumentCouldBeFinal:	Parameter 'mainColor' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElementImpl.java:21:	MethodArgumentCouldBeFinal:	Parameter 'borderColor' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElementImpl.java:21:	MethodArgumentCouldBeFinal:	Parameter 'borderThickness' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElementImpl.java:21:	MethodArgumentCouldBeFinal:	Parameter 'x' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElementImpl.java:21:	MethodArgumentCouldBeFinal:	Parameter 'y' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElementImpl.java:22:	MethodArgumentCouldBeFinal:	Parameter 'width' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElementImpl.java:22:	MethodArgumentCouldBeFinal:	Parameter 'height' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElementImpl.java:35:	MethodArgumentCouldBeFinal:	Parameter 'drawEngine' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElementImpl.java:37:	LocalVariableCouldBeFinal:	Local variable 'drawEngine2D' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/box/BoxElementImpl.java:56:	MethodArgumentCouldBeFinal:	Parameter 'thickness' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/button/ButtonElement.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/button/ButtonElementImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/button/ButtonElementImpl.java:11:	MissingSerialVersionUID:	Classes implementing Serializable should set a serialVersionUID
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/button/ButtonElementImpl.java:13:	ImmutableField:	Field 'buttonBox' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/button/ButtonElementImpl.java:14:	ImmutableField:	Field 'selected' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/button/ButtonElementImpl.java:17:	ImmutableField:	Field 'borderThickness' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/button/ButtonElementImpl.java:19:	MethodArgumentCouldBeFinal:	Parameter 'panelName' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/button/ButtonElementImpl.java:19:	MethodArgumentCouldBeFinal:	Parameter 'mainColor' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/button/ButtonElementImpl.java:19:	MethodArgumentCouldBeFinal:	Parameter 'borderColor' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/button/ButtonElementImpl.java:19:	MethodArgumentCouldBeFinal:	Parameter 'borderThickness' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/button/ButtonElementImpl.java:19:	MethodArgumentCouldBeFinal:	Parameter 'x' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/button/ButtonElementImpl.java:20:	MethodArgumentCouldBeFinal:	Parameter 'y' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/button/ButtonElementImpl.java:21:	MethodArgumentCouldBeFinal:	Parameter 'width' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/button/ButtonElementImpl.java:22:	MethodArgumentCouldBeFinal:	Parameter 'height' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/button/ButtonElementImpl.java:32:	MethodArgumentCouldBeFinal:	Parameter 'newStatus' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/panel/PanelElement.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/panel/PanelElementImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/panel/PanelElementImpl.java:9:	MissingSerialVersionUID:	Classes implementing Serializable should set a serialVersionUID
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/panel/PanelElementImpl.java:11:	MethodArgumentCouldBeFinal:	Parameter 'panelName' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/panel/PanelElementImpl.java:11:	MethodArgumentCouldBeFinal:	Parameter 'layout' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/panel/PanelElementImpl.java:15:	ConstructorCallsOverridableMethod:	Overridable method called during object construction: Container.setLayout(LayoutManager) 
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/panel/PanelElementImpl.java:17:	ConstructorCallsOverridableMethod:	Overridable method called during object construction: Container.setLayout(LayoutManager) 
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElement.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:12:	MissingSerialVersionUID:	Classes implementing Serializable should set a serialVersionUID
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:15:	ImmutableField:	Field 'LeftUpX' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:15:	FieldNamingConventions:	The field name 'LeftUpX' doesn't match '[a-z][a-zA-Z0-9]*'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:16:	ImmutableField:	Field 'LeftUpy' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:16:	FieldNamingConventions:	The field name 'LeftUpy' doesn't match '[a-z][a-zA-Z0-9]*'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:17:	ImmutableField:	Field 'width' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:18:	ImmutableField:	Field 'height' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:20:	MethodArgumentCouldBeFinal:	Parameter 'panelName' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:20:	MethodArgumentCouldBeFinal:	Parameter 'pathToImage' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:20:	MethodArgumentCouldBeFinal:	Parameter 'LeftUpX' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:20:	FormalParameterNamingConventions:	The method parameter name 'LeftUpX' doesn't match '[a-z][a-zA-Z0-9]*'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:20:	MethodArgumentCouldBeFinal:	Parameter 'LeftUpy' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:20:	FormalParameterNamingConventions:	The method parameter name 'LeftUpy' doesn't match '[a-z][a-zA-Z0-9]*'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:20:	MethodArgumentCouldBeFinal:	Parameter 'width' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:21:	MethodArgumentCouldBeFinal:	Parameter 'height' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:28:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:29:	AvoidPrintStackTrace:	Avoid printStackTrace(); use a logger call instead.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:39:	MethodArgumentCouldBeFinal:	Parameter 'panelName' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:39:	MethodArgumentCouldBeFinal:	Parameter 'image' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:39:	MethodArgumentCouldBeFinal:	Parameter 'LeftUpX' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:39:	FormalParameterNamingConventions:	The method parameter name 'LeftUpX' doesn't match '[a-z][a-zA-Z0-9]*'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:39:	MethodArgumentCouldBeFinal:	Parameter 'LeftUpy' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:39:	FormalParameterNamingConventions:	The method parameter name 'LeftUpy' doesn't match '[a-z][a-zA-Z0-9]*'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:39:	MethodArgumentCouldBeFinal:	Parameter 'width' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:40:	MethodArgumentCouldBeFinal:	Parameter 'height' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/sprite/SpriteElementImpl.java:53:	MethodArgumentCouldBeFinal:	Parameter 'drawEngine' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/text/TextElement.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/text/TextElement.java:5:	UnnecessaryModifier:	Unnecessary modifier 'public' on method 'getText': the method is declared in an interface type
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/text/TextElementImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/text/TextElementImpl.java:12:	MissingSerialVersionUID:	Classes implementing Serializable should set a serialVersionUID
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/text/TextElementImpl.java:15:	ImmutableField:	Field 'text' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/text/TextElementImpl.java:16:	ImmutableField:	Field 'leftX' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/text/TextElementImpl.java:17:	ImmutableField:	Field 'leftY' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/text/TextElementImpl.java:18:	ImmutableField:	Field 'textColor' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/text/TextElementImpl.java:19:	ImmutableField:	Field 'textFont' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/text/TextElementImpl.java:21:	MethodArgumentCouldBeFinal:	Parameter 'panelName' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/text/TextElementImpl.java:21:	MethodArgumentCouldBeFinal:	Parameter 'text' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/text/TextElementImpl.java:21:	MethodArgumentCouldBeFinal:	Parameter 'textColor' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/text/TextElementImpl.java:21:	MethodArgumentCouldBeFinal:	Parameter 'textDimension' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/text/TextElementImpl.java:21:	MethodArgumentCouldBeFinal:	Parameter 'leftX' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/text/TextElementImpl.java:22:	MethodArgumentCouldBeFinal:	Parameter 'leftY' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/text/TextElementImpl.java:32:	MethodArgumentCouldBeFinal:	Parameter 'drawEngine' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/graphic/text/TextElementImpl.java:40:	AvoidCatchingGenericException:	Avoid catching generic exceptions such as NullPointerException, RuntimeException, Exception in try-catch block
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/inputHandling/InputHandlerImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/inputHandling/InputHandlerImpl.java:11:	ImmutableField:	Field 'gameEngine' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/inputHandling/InputHandlerImpl.java:24:	MethodArgumentCouldBeFinal:	Parameter 'e' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/Item.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemBlueprint.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactory.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:28:	ConstructorCallsOverridableMethod:	Overridable method called during object construction: ItemFactoryImpl.init() 
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:33:	LocalVariableCouldBeFinal:	Local variable 'allItemJson' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:41:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:42:	LocalVariableCouldBeFinal:	Local variable 'itemJson' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:45:	LocalVariableCouldBeFinal:	Local variable 'id' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:46:	LocalVariableCouldBeFinal:	Local variable 'name' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:47:	LocalVariableCouldBeFinal:	Local variable 'type' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:48:	LocalVariableCouldBeFinal:	Local variable 'description' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:49:	LocalVariableCouldBeFinal:	Local variable 'price' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:50:	LocalVariableCouldBeFinal:	Local variable 'rarity' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:51:	LocalVariableCouldBeFinal:	Local variable 'category' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:52:	LocalVariableCouldBeFinal:	Local variable 'captureRate' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:53:	LocalVariableCouldBeFinal:	Local variable 'effect' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:72:	LocalVariableCouldBeFinal:	Local variable 'itemBlueprint' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:81:	LocalVariableCouldBeFinal:	Local variable 'generatedName' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:91:	UnusedPrivateMethod:	Avoid unused private methods such as 'jsonArrayToList(JSONArray)'.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:92:	LocalVariableCouldBeFinal:	Local variable 'result' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:94:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:99:	UnusedPrivateMethod:	Avoid unused private methods such as 'jsonObjectToMap(JSONObject)'.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:100:	LocalVariableCouldBeFinal:	Local variable 'result' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:101:	LocalVariableCouldBeFinal:	Local variable 'keys' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:103:	LocalVariableCouldBeFinal:	Local variable 'key' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemFactoryImpl.java:104:	LocalVariableCouldBeFinal:	Local variable 'value' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/items/ItemImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/move/Move.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/move/Move.java:21:	FieldNamingConventions:	The field name 'STAB' doesn't match '[a-z][a-zA-Z0-9]*'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/move/Move.java:29:	UseDiamondOperator:	Explicit type arguments can be replaced by a diamond: `new RangeImpl<>(...)`
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/move/MoveFactory.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/move/MoveFactoryImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/move/MoveFactoryImpl.java:22:	UseDiamondOperator:	Explicit type arguments can be replaced by a diamond: `new HashMap<>()`
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/move/MoveFactoryImpl.java:25:	ConstructorCallsOverridableMethod:	Overridable method called during object construction: MoveFactoryImpl.init() 
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/move/MoveFactoryImpl.java:30:	LocalVariableCouldBeFinal:	Local variable 'allMoveJson' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/move/MoveFactoryImpl.java:38:	LocalVariableCouldBeFinal:	Local variable 'moveJson' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/move/MoveFactoryImpl.java:40:	LocalVariableCouldBeFinal:	Local variable 'name' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/move/MoveFactoryImpl.java:41:	LocalVariableCouldBeFinal:	Local variable 'pp' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/move/MoveFactoryImpl.java:41:	UseDiamondOperator:	Explicit type arguments can be replaced by a diamond: `new RangeImpl<>(...)`
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/move/MoveFactoryImpl.java:42:	LocalVariableCouldBeFinal:	Local variable 'isPhysical' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/move/MoveFactoryImpl.java:43:	LocalVariableCouldBeFinal:	Local variable 'effect' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/move/MoveFactoryImpl.java:44:	LocalVariableCouldBeFinal:	Local variable 'accuracy' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/move/MoveFactoryImpl.java:45:	LocalVariableCouldBeFinal:	Local variable 'critRate' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/move/MoveFactoryImpl.java:46:	LocalVariableCouldBeFinal:	Local variable 'baseDamage' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/move/MoveFactoryImpl.java:47:	LocalVariableCouldBeFinal:	Local variable 'type' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/move/MoveFactoryImpl.java:48:	LocalVariableCouldBeFinal:	Local variable 'priority' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Nature.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Nature.java:6:	AvoidDuplicateLiterals:	The String literal "attack" appears 10 times in this file; the first occurrence is on line 6
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Nature.java:6:	AvoidDuplicateLiterals:	The String literal "specialAttack" appears 10 times in this file; the first occurrence is on line 6
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Nature.java:8:	AvoidDuplicateLiterals:	The String literal "defense" appears 10 times in this file; the first occurrence is on line 8
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Nature.java:9:	AvoidDuplicateLiterals:	The String literal "speed" appears 10 times in this file; the first occurrence is on line 9
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Nature.java:10:	AvoidDuplicateLiterals:	The String literal "specialDefense" appears 10 times in this file; the first occurrence is on line 10
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Nature.java:36:	MethodArgumentCouldBeFinal:	Parameter 'statIncrease' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Nature.java:36:	MethodArgumentCouldBeFinal:	Parameter 'statDecrease' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Nature.java:48:	LocalVariableCouldBeFinal:	Local variable 'random' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Nature.java:49:	LocalVariableCouldBeFinal:	Local variable 'index' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Nature.java:49:	UnnecessaryFullyQualifiedName:	Unnecessary qualifier 'Nature': 'values' is already in scope
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Nature.java:50:	UnnecessaryFullyQualifiedName:	Unnecessary qualifier 'Nature': 'values' is already in scope
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Nature.java:52:	MethodArgumentCouldBeFinal:	Parameter 'nature' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Nature.java:52:	MethodArgumentCouldBeFinal:	Parameter 'stat' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Nature.java:55:	MethodArgumentCouldBeFinal:	Parameter 'nature' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Nature.java:55:	MethodArgumentCouldBeFinal:	Parameter 'stat' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Pokemon.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonBlueprint.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactory.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:30:	UseDiamondOperator:	Explicit type arguments can be replaced by a diamond: `new HashSet<>()`
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:31:	UseDiamondOperator:	Explicit type arguments can be replaced by a diamond: `new HashMap<>()`
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:34:	ConstructorCallsOverridableMethod:	Overridable method called during object construction: PokemonFactoryImpl.init() 
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:39:	LocalVariableCouldBeFinal:	Local variable 'allPokemonJson' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:40:	AvoidDuplicateLiterals:	The String literal "src" appears 4 times in this file; the first occurrence is on line 40
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:40:	AvoidDuplicateLiterals:	The String literal "pokemon_data" appears 4 times in this file; the first occurrence is on line 40
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:47:	LocalVariableCouldBeFinal:	Local variable 'pokemonJson' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:49:	LocalVariableCouldBeFinal:	Local variable 'pokedexNumber' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:50:	LocalVariableCouldBeFinal:	Local variable 'types' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:51:	LocalVariableCouldBeFinal:	Local variable 'captureRate' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:52:	LocalVariableCouldBeFinal:	Local variable 'minLevelForEncounter' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:53:	LocalVariableCouldBeFinal:	Local variable 'stats' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:54:	LocalVariableCouldBeFinal:	Local variable 'learnableMoves' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:55:	LocalVariableCouldBeFinal:	Local variable 'growthRate' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:56:	LocalVariableCouldBeFinal:	Local variable 'name' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:57:	LocalVariableCouldBeFinal:	Local variable 'weight' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:58:	LocalVariableCouldBeFinal:	Local variable 'possibleAbilities' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:59:	LocalVariableCouldBeFinal:	Local variable 'givesEV' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:66:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:67:	AvoidPrintStackTrace:	Avoid printStackTrace(); use a logger call instead.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:90:	LocalVariableCouldBeFinal:	Local variable 'pokemonBlueprint' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:99:	MethodArgumentCouldBeFinal:	Parameter 'level' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:100:	LocalVariableCouldBeFinal:	Local variable 'generatedName' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:101:	LocalVariableCouldBeFinal:	Local variable 'result' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:114:	LocalVariableCouldBeFinal:	Local variable 'result' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:116:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:122:	LocalVariableCouldBeFinal:	Local variable 'result' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:123:	LocalVariableCouldBeFinal:	Local variable 'keys' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:125:	LocalVariableCouldBeFinal:	Local variable 'key' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonFactoryImpl.java:126:	LocalVariableCouldBeFinal:	Local variable 'value' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:31:	RedundantFieldInitializer:	Avoid using redundant field initializer for 'totalUsedEV'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:34:	FieldNamingConventions:	The field name 'IV' doesn't match '[a-z][a-zA-Z0-9]*'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:35:	FieldNamingConventions:	The field name 'EV' doesn't match '[a-z][a-zA-Z0-9]*'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:40:	UseDiamondOperator:	Explicit type arguments can be replaced by a diamond: `new ArrayList<>()`
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:57:	RedundantFieldInitializer:	Avoid using redundant field initializer for 'hasToLearnMove'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:68:	UseDiamondOperator:	Explicit type arguments can be replaced by a diamond: `new RangeImpl<>(1, 100, 1)`
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:87:	UseEnumCollections:	This collection could be an EnumMap
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:91:	UseDiamondOperator:	Explicit type arguments can be replaced by a diamond: `new HashMap<>()`
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:92:	LocalVariableCouldBeFinal:	Local variable 'stat' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:98:	UseDiamondOperator:	Explicit type arguments can be replaced by a diamond: `new HashMap<>()`
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:99:	LocalVariableCouldBeFinal:	Local variable 'stat' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:112:	MethodArgumentCouldBeFinal:	Parameter 'possibleAbilities' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:117:	UseDiamondOperator:	Explicit type arguments can be replaced by a diamond: `new HashMap<>()`
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:118:	LocalVariableCouldBeFinal:	Local variable 'stat' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:125:	MethodArgumentCouldBeFinal:	Parameter 'types' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:133:	MethodArgumentCouldBeFinal:	Parameter 'learnableMoves' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:134:	UseDiamondOperator:	Explicit type arguments can be replaced by a diamond: `new HashMap<>()`
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:135:	LocalVariableCouldBeFinal:	Local variable 'key' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:141:	LocalVariableCouldBeFinal:	Local variable 'key' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:149:	UseDiamondOperator:	Explicit type arguments can be replaced by a diamond: `new HashMap<>()`
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:151:	LocalVariableCouldBeFinal:	Local variable 'maxLife' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:151:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:155:	LocalVariableCouldBeFinal:	Local variable 'rangeHp' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:155:	UseDiamondOperator:	Explicit type arguments can be replaced by a diamond: `new RangeImpl<>(0, maxLife, maxLife)`
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:157:	LocalVariableCouldBeFinal:	Local variable 'stat' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:161:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:171:	LocalVariableCouldBeFinal:	Local variable 'rangeStat' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:171:	UseDiamondOperator:	Explicit type arguments can be replaced by a diamond: `new RangeImpl<>(0, 255, statValue)`
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:179:	LocalVariableCouldBeFinal:	Local variable 'currentLevel' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:180:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:181:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:182:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:184:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:187:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:188:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:190:	UseDiamondOperator:	Explicit type arguments can be replaced by a diamond: `new RangeImpl<>(0, newRequiredExp, 0)`
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:195:	MethodArgumentCouldBeFinal:	Parameter 'isPlayerPokemon' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:201:	LocalVariableCouldBeFinal:	Local variable 'moveToLearn' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:216:	MethodArgumentCouldBeFinal:	Parameter 'indexMoveToReplace' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:228:	MethodArgumentCouldBeFinal:	Parameter 'amount' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:233:	MethodArgumentCouldBeFinal:	Parameter 'amount' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:233:	MethodArgumentCouldBeFinal:	Parameter 'isPlayerPokemon' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:235:	CompareObjectsWithEquals:	Use equals() to compare object references.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:241:	MethodArgumentCouldBeFinal:	Parameter 'increaseEV' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:242:	LocalVariableCouldBeFinal:	Local variable 'key' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/PokemonImpl.java:251:	LocalVariableCouldBeFinal:	Local variable 'res' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/StatusCondition.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/StatusCondition.java:18:	MethodArgumentCouldBeFinal:	Parameter 'statusName' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/StatusCondition.java:26:	MethodArgumentCouldBeFinal:	Parameter 'status' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/StatusCondition.java:27:	LocalVariableCouldBeFinal:	Local variable 's' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/StatusCondition.java:27:	UnnecessaryFullyQualifiedName:	Unnecessary qualifier 'StatusCondition': 'values' is already in scope
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Type.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Type.java:25:	MethodArgumentCouldBeFinal:	Parameter 'typeName' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Type.java:33:	MethodArgumentCouldBeFinal:	Parameter 'type' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Type.java:34:	LocalVariableCouldBeFinal:	Local variable 't' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/Type.java:34:	UnnecessaryFullyQualifiedName:	Unnecessary qualifier 'Type': 'values' is already in scope
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/TypeColors.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/pokemon/TypeColors.java:26:	MethodArgumentCouldBeFinal:	Parameter 'typeColor' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/savingSystem/SavingSystem.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/savingSystem/SavingSystemImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/savingSystem/SavingSystemImpl.java:20:	MethodArgumentCouldBeFinal:	Parameter 'pokemon' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/savingSystem/SavingSystemImpl.java:30:	MethodArgumentCouldBeFinal:	Parameter 'path' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/savingSystem/SavingSystemImpl.java:35:	MethodArgumentCouldBeFinal:	Parameter 'path' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/savingSystem/SavingSystemImpl.java:35:	MethodArgumentCouldBeFinal:	Parameter 'fileName' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/savingSystem/SavingSystemImpl.java:36:	LocalVariableCouldBeFinal:	Local variable 'file' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/savingSystem/SavingSystemImpl.java:40:	AvoidCatchingGenericException:	Avoid catching generic exceptions such as NullPointerException, RuntimeException, Exception in try-catch block
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/savingSystem/SavingSystemImpl.java:41:	PreserveStackTrace:	Thrown exception does not preserve the stack trace of exception 'e' on all code paths
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/savingSystem/SavingSystemImpl.java:49:	LocalVariableCouldBeFinal:	Local variable 'result' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/savingSystem/SavingSystemImpl.java:58:	UseCollectionIsEmpty:	Substitute calls to size() == 0 (or size() != 0, size() > 0, size() < 1) with calls to isEmpty()
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/savingSystem/SavingSystemImpl.java:65:	MethodArgumentCouldBeFinal:	Parameter 'dirPath' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/savingSystem/SavingSystemImpl.java:66:	LocalVariableCouldBeFinal:	Local variable 'jsonFiles' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/savingSystem/SavingSystemImpl.java:67:	LocalVariableCouldBeFinal:	Local variable 'directory' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/savingSystem/SavingSystemImpl.java:70:	LocalVariableCouldBeFinal:	Local variable 'files' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/savingSystem/SavingSystemImpl.java:70:	UseLocaleWithCaseConversions:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/savingSystem/SavingSystemImpl.java:72:	LocalVariableCouldBeFinal:	Local variable 'file' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/savingSystem/SavingSystemImpl.java:82:	MethodArgumentCouldBeFinal:	Parameter 'path' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/savingSystem/SavingSystemImpl.java:83:	LocalVariableCouldBeFinal:	Local variable 'boxPokemons' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/Scene.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/Scene.java:14:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:51:	FinalFieldCouldBeStatic:	This final field could be made static
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:52:	RedundantFieldInitializer:	Avoid using redundant field initializer for 'selectedItemForUse'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:53:	UnusedPrivateField:	Avoid unused private fields such as 'BuyedItem'.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:53:	RedundantFieldInitializer:	Avoid using redundant field initializer for 'BuyedItem'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:53:	FieldNamingConventions:	The field name 'BuyedItem' doesn't match '[a-z][a-zA-Z0-9]*'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:69:	NonExhaustiveSwitch:	Switch statements or expressions should be exhaustive, add a default case (or missing enum branches)
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:130:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:138:	LocalVariableCouldBeFinal:	Local variable 'item' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:160:	LocalVariableCouldBeFinal:	Local variable 'item' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:162:	LocalVariableCouldBeFinal:	Local variable 'xPosition' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:165:	AvoidDuplicateLiterals:	The String literal "firstPanel" appears 20 times in this file; the first occurrence is on line 165
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:176:	LocalVariableCouldBeFinal:	Local variable 'startIndex' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:177:	LocalVariableCouldBeFinal:	Local variable 'item' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:179:	LocalVariableCouldBeFinal:	Local variable 'xPosition' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:190:	LocalVariableCouldBeFinal:	Local variable 'pricyItems' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:191:	LocalVariableCouldBeFinal:	Local variable 'freeItems' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:201:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:202:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:214:	AvoidDuplicateLiterals:	The String literal "secondPanel" appears 22 times in this file; the first occurrence is on line 214
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:248:	LocalVariableCouldBeFinal:	Local variable 'item' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:348:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:353:	UnusedLocalVariable:	Avoid unused local variables such as 'itemIndex'.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:357:	UnusedAssignment:	The value assigned to variable 'itemIndex' is never used
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:360:	UnusedAssignment:	The value assigned to variable 'itemIndex' is never used
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:363:	UnusedAssignment:	The value assigned to variable 'itemIndex' is never used
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:366:	UnusedAssignment:	The value assigned to variable 'itemIndex' is never used
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:369:	UnusedAssignment:	The value assigned to variable 'itemIndex' is never used
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:372:	UnusedAssignment:	The value assigned to variable 'itemIndex' is never used
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:375:	UnusedAssignment:	The value assigned to variable 'itemIndex' is never used
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:386:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:571:	MethodArgumentCouldBeFinal:	Parameter 'item' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:580:	LinguisticNaming:	Linguistics Antipattern - The getter 'getFreeItem' should not return void linguistically
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:580:	MethodArgumentCouldBeFinal:	Parameter 'item' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:593:	MethodArgumentCouldBeFinal:	Parameter 'item' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:594:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:595:	LocalVariableCouldBeFinal:	Local variable 'countBall' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:598:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:600:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:601:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:601:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:603:	EmptyControlStatement:	Empty else statement
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:607:	MethodArgumentCouldBeFinal:	Parameter 'pokemonIndex' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:609:	UnnecessaryFullyQualifiedName:	Unnecessary qualifier 'it.unibo.PokeRogue.pokemon': 'Pokemon' is already in scope because it is imported in this file
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:609:	LocalVariableCouldBeFinal:	Local variable 'selectedPokemon' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:612:	UnnecessaryFullyQualifiedName:	Unnecessary qualifier 'it.unibo.PokeRogue.pokemon': 'Pokemon' is already in scope because it is imported in this file
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:612:	LocalVariableCouldBeFinal:	Local variable 'pokemon' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:615:	LocalVariableCouldBeFinal:	Local variable 'itemEffect' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:619:	LocalVariableCouldBeFinal:	Local variable 'effectParser' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:632:	MethodArgumentCouldBeFinal:	Parameter 'position' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:633:	LocalVariableCouldBeFinal:	Local variable 'pokemonOpt' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:639:	LocalVariableCouldBeFinal:	Local variable 'pokemon' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:640:	LocalVariableCouldBeFinal:	Local variable 'currentHp' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:641:	LocalVariableCouldBeFinal:	Local variable 'maxHp' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:650:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:654:	LocalVariableCouldBeFinal:	Local variable 'selectedButton' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:660:	MethodArgumentCouldBeFinal:	Parameter 'trainer' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShop.java:660:	MethodArgumentCouldBeFinal:	Parameter 'position' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShopEnum.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/SceneShopEnum.java:99:	MethodArgumentCouldBeFinal:	Parameter 'code' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBox.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxInitView.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxInitView.java:47:	AvoidDuplicateLiterals:	The String literal "firstPanel" appears 18 times in this file; the first occurrence is on line 47
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxInitView.java:48:	AvoidDuplicateLiterals:	The String literal "pokemonPanel" appears 4 times in this file; the first occurrence is on line 48
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxInitView.java:90:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxInitView.java:91:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxInitView.java:124:	AvoidDuplicateLiterals:	The String literal "sprites" appears 9 times in this file; the first occurrence is on line 124
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxModel.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxModel.java:40:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxModel.java:51:	LocalVariableCouldBeFinal:	Local variable 'box' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxModel.java:52:	LocalVariableCouldBeFinal:	Local variable 'pokemonName' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxModel.java:70:	UseCollectionIsEmpty:	Substitute calls to size() == 0 (or size() != 0, size() > 0, size() < 1) with calls to isEmpty()
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxUpdateView.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxUpdateView.java:51:	MethodArgumentCouldBeFinal:	Parameter 'playerTrainerInstance' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxUpdateView.java:97:	LocalVariableCouldBeFinal:	Local variable 'pokemon' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxUpdateView.java:102:	AvoidDuplicateLiterals:	The String literal "pokemonPanel" appears 16 times in this file; the first occurrence is on line 102
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxUpdateView.java:127:	LocalVariableCouldBeFinal:	Local variable 'selectedPokemon' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxUpdateView.java:128:	LocalVariableCouldBeFinal:	Local variable 'pokemonNature' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxUpdateView.java:142:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxUpdateView.java:167:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxUpdateView.java:167:	UseLocaleWithCaseConversions:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxUpdateView.java:179:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxUpdateView.java:179:	UseLocaleWithCaseConversions:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxUpdateView.java:198:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxView.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxView.java:10:	UnnecessarySemicolon:	Unnecessary semicolon
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxView.java:80:	MethodArgumentCouldBeFinal:	Parameter 'playerTrainerInstance' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxView.java:97:	LocalVariableCouldBeFinal:	Local variable 'currentBoxLength' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxView.java:99:	LocalVariableCouldBeFinal:	Local variable 'currentBox' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxView.java:107:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/SceneBoxView.java:108:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/enums/SceneBoxGraphicEnum.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/enums/SceneBoxGraphicEnum.java:45:	MethodArgumentCouldBeFinal:	Parameter 'code' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/enums/SceneBoxStatusValuesEnum.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneBox/enums/SceneBoxStatusValuesEnum.java:13:	MethodArgumentCouldBeFinal:	Parameter 'code' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneLoad/SceneLoad.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneLoad/SceneLoad.java:127:	NonExhaustiveSwitch:	Switch statements or expressions should be exhaustive, add a default case (or missing enum branches)
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneLoad/SceneLoad.java:142:	UseCollectionIsEmpty:	Substitute calls to size() == 0 (or size() != 0, size() > 0, size() < 1) with calls to isEmpty()
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneLoad/SceneLoadView.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneLoad/SceneLoadView.java:55:	AvoidDuplicateLiterals:	The String literal "savesPanel" appears 5 times in this file; the first occurrence is on line 55
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneLoad/SceneLoadView.java:73:	MethodArgumentCouldBeFinal:	Parameter 'savesList' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneLoad/SceneLoadView.java:73:	MethodArgumentCouldBeFinal:	Parameter 'savingSystemInstance' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneLoad/enums/SceneLoadGraphicEnum.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneLoad/enums/SceneLoadGraphicEnum.java:48:	MethodArgumentCouldBeFinal:	Parameter 'code' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneLoad/enums/SceneLoadStatusValuesEnum.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneLoad/enums/SceneLoadStatusValuesEnum.java:13:	MethodArgumentCouldBeFinal:	Parameter 'code' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMenu/SceneMenu.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMenu/SceneMenuGraphicEnum.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMenu/SceneMenuGraphicEnum.java:16:	MethodArgumentCouldBeFinal:	Parameter 'code' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMenu/SceneMenuGraphicEnum.java:30:	MethodArgumentCouldBeFinal:	Parameter 'currentSelectedButton' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMenu/SceneMenuGraphicEnum.java:34:	LocalVariableCouldBeFinal:	Local variable 'nextOrdinal' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMenu/SceneMenuGraphicEnum.java:34:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMenu/SceneMenuGraphicEnum.java:44:	MethodArgumentCouldBeFinal:	Parameter 'currentSelectedButton' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMenu/SceneMenuGraphicEnum.java:49:	LocalVariableCouldBeFinal:	Local variable 'nextOrdinal' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMenu/SceneMenuGraphicEnum.java:49:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMenu/SceneMenuView.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMenu/SceneMenuView.java:53:	AvoidDuplicateLiterals:	The String literal "firstPanel" appears 8 times in this file; the first occurrence is on line 53
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMove.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMove.java:38:	ImmutableField:	Field 'playerTrainerInstance' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMove.java:38:	SingularField:	Perhaps 'playerTrainerInstance' could be replaced by a local variable.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMove.java:39:	ImmutableField:	Field 'playerPokemon' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMoveGraphicEnum.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMoveGraphicEnum.java:21:	MethodArgumentCouldBeFinal:	Parameter 'code' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMoveView.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMoveView.java:30:	ImmutableField:	Field 'playerTrainerInstance' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMoveView.java:30:	SingularField:	Perhaps 'playerTrainerInstance' could be replaced by a local variable.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMoveView.java:31:	ImmutableField:	Field 'playerPokemon' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMoveView.java:60:	AvoidDuplicateLiterals:	The String literal "firstPanel" appears 13 times in this file; the first occurrence is on line 60
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMoveView.java:64:	AvoidDuplicateLiterals:	The String literal " PP: " appears 5 times in this file; the first occurrence is on line 64
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMoveView.java:65:	UselessStringValueOf:	No need to call String.valueOf to append to a string.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMoveView.java:67:	AvoidDuplicateLiterals:	The String literal "Damage : " appears 5 times in this file; the first occurrence is on line 67
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMoveView.java:68:	UselessStringValueOf:	No need to call String.valueOf to append to a string.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMoveView.java:74:	UselessStringValueOf:	No need to call String.valueOf to append to a string.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMoveView.java:77:	UselessStringValueOf:	No need to call String.valueOf to append to a string.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMoveView.java:83:	UselessStringValueOf:	No need to call String.valueOf to append to a string.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMoveView.java:86:	UselessStringValueOf:	No need to call String.valueOf to append to a string.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMoveView.java:92:	UselessStringValueOf:	No need to call String.valueOf to append to a string.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMoveView.java:95:	UselessStringValueOf:	No need to call String.valueOf to append to a string.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMoveView.java:101:	UselessStringValueOf:	No need to call String.valueOf to append to a string.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/sceneMove/SceneMoveView.java:104:	UselessStringValueOf:	No need to call String.valueOf to append to a string.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/BattleEngine.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/BattleEngineImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/BattleRewards.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/BattleUtilities.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/GenerateEnemy.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/GenerateEnemyImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/SceneFight.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/SceneFight.java:66:	ConstructorCallsOverridableMethod:	Overridable method called during object construction: SceneFight.initGraphicElements() 
+
+> Task :checkstyleMain
+
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/SceneFightInitView.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/SceneFightInitView.java:216:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/SceneFightInitView.java:220:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/SceneFightUpdateView.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/SceneFightUpdateView.java:55:	UnusedFormalParameter:	Avoid unused constructor parameters such as 'sceneFightInitViewInstance'.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/SceneFightUpdateView.java:97:	UnusedFormalParameter:	Avoid unused method parameters such as 'currentSelectedButton'.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/SceneFightUpdateView.java:135:	AvoidDuplicateLiterals:	The String literal "movePanel" appears 9 times in this file; the first occurrence is on line 135
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/SceneFightUpdateView.java:197:	AvoidDuplicateLiterals:	The String literal "ballPanel" appears 12 times in this file; the first occurrence is on line 197
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/SceneFightUpdateView.java:201:	UselessStringValueOf:	No need to call String.valueOf to append to a string.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/SceneFightUpdateView.java:207:	UselessStringValueOf:	No need to call String.valueOf to append to a string.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/SceneFightUpdateView.java:213:	UselessStringValueOf:	No need to call String.valueOf to append to a string.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/SceneFightUpdateView.java:219:	UselessStringValueOf:	No need to call String.valueOf to append to a string.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/SceneFightUpdateView.java:272:	AvoidDuplicateLiterals:	The String literal "changePanel" appears 16 times in this file; the first occurrence is on line 272
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/SceneFightView.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/StatusEffect.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/StatusEffectImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/StatusEffectImpl.java:26:	UseEnumCollections:	This collection could be an EnumMap
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/StatusEffectImpl.java:55:	LocalVariableCouldBeFinal:	Local variable 'status' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/StatusEffectImpl.java:65:	SimplifyBooleanReturns:	This if statement can be replaced by `return !{condition};`
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/StatusEffectImpl.java:71:	SimplifyBooleanReturns:	This if statement can be replaced by `return !{condition};`
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/StatusEffectImpl.java:76:	SimplifyBooleanReturns:	This if statement can be replaced by `return !{condition};`
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/StatusEffectImpl.java:98:	LocalVariableCouldBeFinal:	Local variable 'status' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/StatusEffectImpl.java:121:	LocalVariableCouldBeFinal:	Local variable 'status' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/StatusEffectImpl.java:123:	LocalVariableCouldBeFinal:	Local variable 'currentStatus' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/StatusEffectImpl.java:126:	ExhaustiveSwitchHasDefault:	The switch block is exhaustive even without the default case
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/StatusEffectImpl.java:128:	LocalVariableCouldBeFinal:	Local variable 'burnDamage' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/StatusEffectImpl.java:136:	LocalVariableCouldBeFinal:	Local variable 'poisonDamage' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/StatusEffectImpl.java:142:	LocalVariableCouldBeFinal:	Local variable 'boundDamage' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/StatusEffectImpl.java:146:	LocalVariableCouldBeFinal:	Local variable 'selfDamage' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/StatusEffectImpl.java:150:	LocalVariableCouldBeFinal:	Local variable 'flinchDamage' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/StatusEffectImpl.java:160:	LocalVariableCouldBeFinal:	Local variable 'seededDamage' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/StatusEffectImpl.java:191:	LocalVariableCouldBeFinal:	Local variable 'turnLeft' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightGraphicEnum.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightGraphicEnum.java:93:	MethodArgumentCouldBeFinal:	Parameter 'code' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightStatusValuesEnum.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightStatusValuesEnum.java:30:	MethodArgumentCouldBeFinal:	Parameter 'code' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:17:	UseUtilityClass:	This utility class has a non-private constructor
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:20:	UncommentedEmptyConstructor:	Document empty constructor
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:23:	MethodArgumentCouldBeFinal:	Parameter 'trainer' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:23:	MethodArgumentCouldBeFinal:	Parameter 'position' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:26:	AvoidDuplicateLiterals:	The String literal "???" appears 5 times in this file; the first occurrence is on line 26
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:29:	MethodArgumentCouldBeFinal:	Parameter 'position' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:29:	MethodArgumentCouldBeFinal:	Parameter 'playerTrainerInstance' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:30:	LocalVariableCouldBeFinal:	Local variable 'pokemonOpt' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:36:	LocalVariableCouldBeFinal:	Local variable 'pokemon' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:37:	LocalVariableCouldBeFinal:	Local variable 'currentHp' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:38:	LocalVariableCouldBeFinal:	Local variable 'maxHp' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:43:	MethodArgumentCouldBeFinal:	Parameter 'sceneGraphicElements' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:50:	MethodArgumentCouldBeFinal:	Parameter 'currentSelectedButton' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:50:	MethodArgumentCouldBeFinal:	Parameter 'sceneGraphicElements' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:51:	MethodArgumentCouldBeFinal:	Parameter 'playerTrainerInstance' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:54:	LocalVariableCouldBeFinal:	Local variable 'moveIndex' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:63:	ControlStatementBraces:	This statement should have braces
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:65:	LocalVariableCouldBeFinal:	Local variable 'move' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:67:	LocalVariableCouldBeFinal:	Local variable 'moves' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:84:	AvoidDuplicateLiterals:	The String literal "movePanel" appears 4 times in this file; the first occurrence is on line 84
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:103:	MethodArgumentCouldBeFinal:	Parameter 'movePosition' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:103:	MethodArgumentCouldBeFinal:	Parameter 'playerTrainerInstance' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:118:	MethodArgumentCouldBeFinal:	Parameter 'buttonValue' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:118:	MethodArgumentCouldBeFinal:	Parameter 'lowerBound' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/scene/scenefight/enums/SceneFightUtilities.java:118:	MethodArgumentCouldBeFinal:	Parameter 'upperBound' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/trainers/PlayerTrainer.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/trainers/PlayerTrainerImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/trainers/PlayerTrainerImpl.java:16:	RedundantFieldInitializer:	Avoid using redundant field initializer for 'instanceOfTrainer'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/trainers/PlayerTrainerImpl.java:24:	NonThreadSafeSingleton:	Singleton is not thread safe
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/trainers/Trainer.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/trainers/TrainerImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/trainers/TrainerImpl.java:12:	ImmutableField:	Field 'pokemonSquad' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/trainers/TrainerImpl.java:13:	ImmutableField:	Field 'ball' may be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/trainers/TrainerImpl.java:31:	MethodArgumentCouldBeFinal:	Parameter 'pokemonBattlePosition' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/trainers/TrainerImpl.java:31:	MethodArgumentCouldBeFinal:	Parameter 'pokemonSquadPosition' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/trainers/TrainerImpl.java:32:	LocalVariableCouldBeFinal:	Local variable 'tempPokemon' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/trainers/TrainerImpl.java:38:	MethodArgumentCouldBeFinal:	Parameter 'pos' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/trainers/TrainerImpl.java:43:	MethodArgumentCouldBeFinal:	Parameter 'pos' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/trainers/TrainerImpl.java:48:	MethodArgumentCouldBeFinal:	Parameter 'pokemon' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/trainers/TrainerImpl.java:53:	MethodArgumentCouldBeFinal:	Parameter 'pokemon' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/trainers/TrainerImpl.java:53:	MethodArgumentCouldBeFinal:	Parameter 'limits' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/trainers/TrainerImpl.java:85:	MissingOverride:	The method 'isWild()' is missing an @Override annotation.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/trainers/TrainerImpl.java:90:	MethodArgumentCouldBeFinal:	Parameter 'wild' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/ColorTypeConversion.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/ColorTypeConversion.java:8:	UseUtilityClass:	This utility class has a non-private constructor
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/ColorTypeConversion.java:9:	MethodArgumentCouldBeFinal:	Parameter 'type' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/JsonReader.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/JsonReader.java:7:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/JsonReader.java:8:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/JsonReader.java:9:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/JsonReader.java:10:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/JsonReader.java:11:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/JsonReaderImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/JsonReaderImpl.java:18:	UnusedLocalVariable:	Avoid unused local variables such as 'fileCreated'.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/JsonReaderImpl.java:24:	AvoidPrintStackTrace:	Avoid printStackTrace(); use a logger call instead.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/JsonReaderImpl.java:25:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/JsonReaderImpl.java:33:	AssignmentInOperand:	Avoid assignments in operands
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/JsonReaderImpl.java:38:	AvoidPrintStackTrace:	Avoid printStackTrace(); use a logger call instead.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/JsonReaderImpl.java:39:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/JsonReaderImpl.java:69:	AvoidPrintStackTrace:	Avoid printStackTrace(); use a logger call instead.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/JsonReaderImpl.java:70:	SystemPrintln:	Usage of System.out/err
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokeEffectivenessCalc.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokeEffectivenessCalc.java:8:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokeEffectivenessCalc.java:10:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokeEffectivenessCalc.java:10:	UnnecessaryModifier:	Unnecessary modifier 'public' on method 'calculateAttackEffectiveness': the method is declared in an interface type
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokeEffectivenessCalcImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokeEffectivenessCalcImpl.java:50:	LocalVariableCouldBeFinal:	Local variable 'attacker' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokeEffectivenessCalcImpl.java:51:	LocalVariableCouldBeFinal:	Local variable 'inner' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokeEffectivenessCalcImpl.java:52:	LocalVariableCouldBeFinal:	Local variable 'innerMap' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokeEffectivenessCalcImpl.java:52:	UseEnumCollections:	This collection could be an EnumMap
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokeEffectivenessCalcImpl.java:53:	LocalVariableCouldBeFinal:	Local variable 'defender' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokeEffectivenessCalcImpl.java:86:	MissingOverride:	The method 'calculateAttackEffectiveness(Move, Pokemon)' is missing an @Override annotation.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokeEffectivenessCalcImpl.java:92:	LocalVariableCouldBeFinal:	Local variable 'enemyType' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokeEffectivenessCalcImpl.java:118:	LocalVariableCouldBeFinal:	Local variable 'myPokemonType' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokeEffectivenessCalcImpl.java:121:	LocalVariableCouldBeFinal:	Local variable 'enemyPokemonType' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtil.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtil.java:11:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:49:	LocalVariableCouldBeFinal:	Local variable 'baseDamage' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:50:	LocalVariableCouldBeFinal:	Local variable 'damageWithEnvironment' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:51:	LocalVariableCouldBeFinal:	Local variable 'totalDamage' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:52:	LocalVariableCouldBeFinal:	Local variable 'burn' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:53:	LocalVariableCouldBeFinal:	Local variable 'attackDefenseDifference' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:54:	LocalVariableCouldBeFinal:	Local variable 'weatherEffect' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:55:	LocalVariableCouldBeFinal:	Local variable 'criticalBonus' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:56:	LocalVariableCouldBeFinal:	Local variable 'randomNumber' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:57:	LocalVariableCouldBeFinal:	Local variable 'moveTypeBonus' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:58:	LocalVariableCouldBeFinal:	Local variable 'stabBonus' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:70:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:70:	UselessParentheses:	Useless parentheses.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:90:	MethodArgumentCouldBeFinal:	Parameter 'attackStatName' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:90:	MethodArgumentCouldBeFinal:	Parameter 'defenseStatName' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:113:	LocalVariableCouldBeFinal:	Local variable 'attackDefenseDifference' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:135:	CollapsibleIfStatements:	This if statement could be combined with its parent
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:152:	LocalVariableCouldBeFinal:	Local variable 'attackType' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:153:	LocalVariableCouldBeFinal:	Local variable 'weather' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:182:	LocalVariableCouldBeFinal:	Local variable 'attackingPokemonAbility' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:183:	LocalVariableCouldBeFinal:	Local variable 'moveName' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:200:	LinguisticNaming:	Linguistics Antipattern - The method 'hasStab' indicates linguistically it returns a boolean, but it returns 'double'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/PokemonBattleUtilImpl.java:202:	LocalVariableCouldBeFinal:	Local variable 'type' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/Range.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/RangeImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/RangeImpl.java:19:	MethodArgumentCouldBeFinal:	Parameter 'currentMin' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/RangeImpl.java:19:	MethodArgumentCouldBeFinal:	Parameter 'currentMax' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/RangeImpl.java:19:	MethodArgumentCouldBeFinal:	Parameter 'currentValue' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/RangeImpl.java:29:	MethodArgumentCouldBeFinal:	Parameter 'x' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/RangeImpl.java:30:	LocalVariableCouldBeFinal:	Local variable 'newValue' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/RangeImpl.java:39:	MethodArgumentCouldBeFinal:	Parameter 'x' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/RangeImpl.java:40:	LocalVariableCouldBeFinal:	Local variable 'newValue' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/RangeImpl.java:48:	MethodArgumentCouldBeFinal:	Parameter 'value' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/RangeImpl.java:50:	UnnecessaryBoxing:	Unnecessary explicit boxing
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/RangeImpl.java:52:	UnnecessaryBoxing:	Unnecessary explicit boxing
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/RangeImpl.java:54:	UnnecessaryBoxing:	Unnecessary explicit boxing
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/RangeImpl.java:56:	UnnecessaryBoxing:	Unnecessary explicit boxing
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/RangeImpl.java:62:	MethodArgumentCouldBeFinal:	Parameter 'newValue' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/UtilitiesForScenes.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/UtilitiesForScenes.java:4:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/UtilitiesForScenes.java:6:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/UtilitiesForScenes.java:8:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/UtilitiesForScenesImpl.java:1:	PackageCase:	Package name contains upper case characters
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/UtilitiesForScenesImpl.java:42:	MissingOverride:	The method 'getPathString(String, String)' is missing an @Override annotation.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/UtilitiesForScenesImpl.java:55:	MissingOverride:	The method 'setButtonStatus(int, boolean)' is missing an @Override annotation.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/UtilitiesForScenesImpl.java:56:	LocalVariableCouldBeFinal:	Local variable 'selectedButton' could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/UtilitiesForScenesImpl.java:70:	MissingOverride:	The method 'capitalizeFirst(String)' is missing an @Override annotation.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/UtilitiesForScenesImpl.java:72:	ControlStatementBraces:	This statement should have braces
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/PokeRogue/utilities/UtilitiesForScenesImpl.java:73:	UseLocaleWithCaseConversions:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+
+> Task :spotbugsMain
+L B THROWS: Method intentionally throws RuntimeException.  At SingletonImpl.java:[line 16]
+M V EI: it.unibo.PokeRogue.items.ItemBlueprint.effect() may expose internal representation by returning ItemBlueprint.effect  At ItemBlueprint.java:[line 5]
+M V EI2: new it.unibo.PokeRogue.items.ItemBlueprint(int, String, String, String, int, String, String, double, JSONObject) may expose internal representation by storing an externally mutable object into ItemBlueprint.effect  At ItemBlueprint.java:[line 5]
+M D REC: Exception is caught when Exception is not thrown in it.unibo.PokeRogue.graphic.text.TextElementImpl.paintComponent(Graphics)  At TextElementImpl.java:[line 40]
+L V MC: Overridable method init is called from constructor new it.unibo.PokeRogue.ability.AbilityFactoryImpl().  At AbilityFactoryImpl.java:[line 24]
+M V EI: it.unibo.PokeRogue.graphic.button.ButtonElementImpl.getButtonBox() may expose internal representation by returning ButtonElementImpl.buttonBox  At ButtonElementImpl.java:[line 13]
+M B Dm: it.unibo.PokeRogue.dataExtractor.DataExtractorImpl.extractPokemons(int, int) invokes System.exit(...), which shuts down the entire virtual machine  At DataExtractorImpl.java:[line 135]
+M B Dm: it.unibo.PokeRogue.dataExtractor.DataExtractorImpl.makeApiRequestForPng(String, String) invokes System.exit(...), which shuts down the entire virtual machine  At DataExtractorImpl.java:[line 236]
+M B Dm: it.unibo.PokeRogue.dataExtractor.DataExtractorImpl.makeApiRequestForString(String) invokes System.exit(...), which shuts down the entire virtual machine  At DataExtractorImpl.java:[line 251]
+M D DLS: Dead store to $L4 in it.unibo.PokeRogue.dataExtractor.DataExtractorImpl.makeApiRequestForPng(String, String)  At DataExtractorImpl.java:[line 231]
+L D DLS: Dead store to response in it.unibo.PokeRogue.dataExtractor.DataExtractorImpl.makeApiRequestForString(String)  At DataExtractorImpl.java:[line 245]
+M V EI: it.unibo.PokeRogue.trainers.TrainerImpl.getSquad() may expose internal representation by returning TrainerImpl.pokemonSquad  At TrainerImpl.java:[line 68]
+M V EI: it.unibo.PokeRogue.trainers.TrainerImpl.getBall() may expose internal representation by returning TrainerImpl.ball  At TrainerImpl.java:[line 73]
+L I Dm: Use of non-localized String.toUpperCase() or String.toLowerCase() in it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl.capitalizeFirst(String)  At UtilitiesForScenesImpl.java:[line 73]
+M V EI2: new it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl(String, Map) may expose internal representation by storing an externally mutable object into UtilitiesForScenesImpl.sceneGraphicElements  At UtilitiesForScenesImpl.java:[line 31]
+
+> Task :pmdMain FAILED
+
+> Task :checkstyleMain FAILED
+
+> Task :spotbugsMain
+M V EI: it.unibo.PokeRogue.pokemon.PokemonBlueprint.types() may expose internal representation by returning PokemonBlueprint.types  At PokemonBlueprint.java:[line 5]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonBlueprint.spriteBack() may expose internal representation by returning PokemonBlueprint.spriteBack  At PokemonBlueprint.java:[line 5]
+M V EI2: new it.unibo.PokeRogue.pokemon.PokemonBlueprint(int, List, int, int, Map, Map, String, String, int, List, Map, Image, Image) may expose internal representation by storing an externally mutable object into PokemonBlueprint.learnableMoves  At PokemonBlueprint.java:[line 5]
+M V EI2: new it.unibo.PokeRogue.pokemon.PokemonBlueprint(int, List, int, int, Map, Map, String, String, int, List, Map, Image, Image) may expose internal representation by storing an externally mutable object into PokemonBlueprint.possibleAbilities  At PokemonBlueprint.java:[line 5]
+M V EI2: new it.unibo.PokeRogue.pokemon.PokemonBlueprint(int, List, int, int, Map, Map, String, String, int, List, Map, Image, Image) may expose internal representation by storing an externally mutable object into PokemonBlueprint.spriteFront  At PokemonBlueprint.java:[line 5]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonBlueprint.spriteFront() may expose internal representation by returning PokemonBlueprint.spriteFront  At PokemonBlueprint.java:[line 5]
+M V EI2: new it.unibo.PokeRogue.pokemon.PokemonBlueprint(int, List, int, int, Map, Map, String, String, int, List, Map, Image, Image) may expose internal representation by storing an externally mutable object into PokemonBlueprint.stats  At PokemonBlueprint.java:[line 5]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonBlueprint.stats() may expose internal representation by returning PokemonBlueprint.stats  At PokemonBlueprint.java:[line 5]
+M V EI2: new it.unibo.PokeRogue.pokemon.PokemonBlueprint(int, List, int, int, Map, Map, String, String, int, List, Map, Image, Image) may expose internal representation by storing an externally mutable object into PokemonBlueprint.spriteBack  At PokemonBlueprint.java:[line 5]
+M V EI2: new it.unibo.PokeRogue.pokemon.PokemonBlueprint(int, List, int, int, Map, Map, String, String, int, List, Map, Image, Image) may expose internal representation by storing an externally mutable object into PokemonBlueprint.givesEV  At PokemonBlueprint.java:[line 5]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonBlueprint.givesEV() may expose internal representation by returning PokemonBlueprint.givesEV  At PokemonBlueprint.java:[line 5]
+M V EI2: new it.unibo.PokeRogue.pokemon.PokemonBlueprint(int, List, int, int, Map, Map, String, String, int, List, Map, Image, Image) may expose internal representation by storing an externally mutable object into PokemonBlueprint.types  At PokemonBlueprint.java:[line 5]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonBlueprint.learnableMoves() may expose internal representation by returning PokemonBlueprint.learnableMoves  At PokemonBlueprint.java:[line 5]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonBlueprint.possibleAbilities() may expose internal representation by returning PokemonBlueprint.possibleAbilities  At PokemonBlueprint.java:[line 5]
+M V MS: Public static it.unibo.PokeRogue.trainers.PlayerTrainerImpl.getTrainerInstance() may expose internal representation by returning PlayerTrainerImpl.instanceOfTrainer  At PlayerTrainerImpl.java:[line 28]
+L M LI: Incorrect lazy initialization of static field it.unibo.PokeRogue.trainers.PlayerTrainerImpl.instanceOfTrainer in it.unibo.PokeRogue.trainers.PlayerTrainerImpl.getTrainerInstance()  At PlayerTrainerImpl.java:[lines 24-25]
+M C SING: Class (it.unibo.PokeRogue.trainers.PlayerTrainerImpl) using singleton design pattern has non-private constructor.  At PlayerTrainerImpl.java:[lines 42-43]
+M V EI2: new it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl(String, Image, double, double, double, double) may expose internal representation by storing an externally mutable object into SpriteElementImpl.spriteImage  At SpriteElementImpl.java:[line 43]
+L B Nm: The field name it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl.LeftUpX is not conform to the naming convention. If final, it should be ALL_CAPS, otherwise lowerCamelCase.  In SpriteElementImpl.java
+L B Nm: The field name it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl.LeftUpy is not conform to the naming convention. If final, it should be ALL_CAPS, otherwise lowerCamelCase.  In SpriteElementImpl.java
+M B Se: java.awt.image.BufferedImage stored into non-transient field SpriteElementImpl.spriteImage  At SpriteElementImpl.java:[line 25]
+H B DMI: Random object created and used only once in it.unibo.PokeRogue.pokemon.Nature.getRandomNature()  At Nature.java:[line 49]
+L D DB: it.unibo.PokeRogue.scene.scenefight.StatusEffectImpl.checkStatusAttack(Pokemon) uses the same code for two switch clauses  At StatusEffectImpl.java:[lines 65-68]
+L I Dm: Use of non-localized String.toUpperCase() or String.toLowerCase() in it.unibo.PokeRogue.savingSystem.SavingSystemImpl.lambda$getSaveFilesName$0(File, String)  At SavingSystemImpl.java:[line 70]
+L B RV: Exceptional return value of java.io.File.createNewFile() ignored in it.unibo.PokeRogue.savingSystem.SavingSystemImpl.saveData(String, String)  At SavingSystemImpl.java:[line 39]
+M V EI2: it.unibo.PokeRogue.move.Move.setEffect(JSONObject) may expose internal representation by storing an externally mutable object into Move.effect  At Move.java:[line 10]
+M V EI: it.unibo.PokeRogue.move.Move.getPp() may expose internal representation by returning Move.pp  At Move.java:[line 14]
+M V EI2: it.unibo.PokeRogue.move.Move.setPp(Range) may expose internal representation by storing an externally mutable object into Move.pp  At Move.java:[line 10]
+M V EI2: new it.unibo.PokeRogue.move.Move(String, Range, boolean, JSONObject, int, int, int, int, double, boolean, Type, int) may expose internal representation by storing an externally mutable object into Move.effect  At Move.java:[line 11]
+M V EI2: new it.unibo.PokeRogue.move.Move(String, Range, boolean, JSONObject, int, int, int, int, double, boolean, Type, int) may expose internal representation by storing an externally mutable object into Move.pp  At Move.java:[line 11]
+M V EI: it.unibo.PokeRogue.move.Move.getEffect() may expose internal representation by returning Move.effect  At Move.java:[line 16]
+L V MC: Overridable method init is called from constructor new it.unibo.PokeRogue.move.MoveFactoryImpl().  At MoveFactoryImpl.java:[line 25]
+M V EI: it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl.getBackgroundSprite() may expose internal representation by returning BackgroundElementImpl.backgroundSprite  At BackgroundElementImpl.java:[line 10]
+M V EI2: new it.unibo.PokeRogue.ai.EnemyAiSwitchIn(boolean, boolean, int, Trainer) may expose internal representation by storing an externally mutable object into EnemyAiSwitchIn.enemyTrainer  At EnemyAiSwitchIn.java:[line 54]
+M V EI2: new it.unibo.PokeRogue.scene.scenefight.SceneFightUpdateView(Map, Map, SceneFightInitView, int, int, SceneFight) may expose internal representation by storing an externally mutable object into SceneFightUpdateView.sceneInstance  At SceneFightUpdateView.java:[line 63]
+M V EI2: new it.unibo.PokeRogue.scene.scenefight.SceneFightUpdateView(Map, Map, SceneFightInitView, int, int, SceneFight) may expose internal representation by storing an externally mutable object into SceneFightUpdateView.allPanelsElements  At SceneFightUpdateView.java:[line 60]
+M V EI2: new it.unibo.PokeRogue.scene.scenefight.SceneFightUpdateView(Map, Map, SceneFightInitView, int, int, SceneFight) may expose internal representation by storing an externally mutable object into SceneFightUpdateView.sceneGraphicElements  At SceneFightUpdateView.java:[line 59]
+M V EI2: new it.unibo.PokeRogue.ai.EnemyAiAttack(boolean, boolean, Trainer) may expose internal representation by storing an externally mutable object into EnemyAiAttack.enemyTrainer  At EnemyAiAttack.java:[line 57]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonImpl.getGivesEV() may expose internal representation by returning PokemonImpl.givesEV  At PokemonImpl.java:[line 42]
+M V EI2: it.unibo.PokeRogue.pokemon.PokemonImpl.setActualMoves(List) may expose internal representation by storing an externally mutable object into PokemonImpl.actualMoves  At PokemonImpl.java:[line 21]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonImpl.getTempStatsBonus() may expose internal representation by returning PokemonImpl.tempStatsBonus  At PokemonImpl.java:[line 38]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonImpl.getEV() may expose internal representation by returning PokemonImpl.EV  At PokemonImpl.java:[line 35]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonImpl.getStatusDuration() may expose internal representation by returning PokemonImpl.statusDuration  At PokemonImpl.java:[line 56]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonImpl.getLevel() may expose internal representation by returning PokemonImpl.level  At PokemonImpl.java:[line 36]
+M V EI2: it.unibo.PokeRogue.pokemon.PokemonImpl.setLevel(Range) may expose internal representation by storing an externally mutable object into PokemonImpl.level  At PokemonImpl.java:[line 21]
+M V EI2: it.unibo.PokeRogue.pokemon.PokemonImpl.setActualStats(Map) may expose internal representation by storing an externally mutable object into PokemonImpl.actualStats  At PokemonImpl.java:[line 21]
+M V EI2: it.unibo.PokeRogue.pokemon.PokemonImpl.setExp(Range) may expose internal representation by storing an externally mutable object into PokemonImpl.exp  At PokemonImpl.java:[line 21]
+M V EI2: it.unibo.PokeRogue.pokemon.PokemonImpl.setIV(Map) may expose internal representation by storing an externally mutable object into PokemonImpl.IV  At PokemonImpl.java:[line 21]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonImpl.getExp() may expose internal representation by returning PokemonImpl.exp  At PokemonImpl.java:[line 43]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonImpl.getIV() may expose internal representation by returning PokemonImpl.IV  At PokemonImpl.java:[line 34]
+M V EI2: it.unibo.PokeRogue.pokemon.PokemonImpl.setTempStatsBonus(Map) may expose internal representation by storing an externally mutable object into PokemonImpl.tempStatsBonus  At PokemonImpl.java:[line 21]
+M V EI2: it.unibo.PokeRogue.pokemon.PokemonImpl.setSpriteFront(Image) may expose internal representation by storing an externally mutable object into PokemonImpl.spriteFront  At PokemonImpl.java:[line 21]
+M V EI2: it.unibo.PokeRogue.pokemon.PokemonImpl.setEV(Map) may expose internal representation by storing an externally mutable object into PokemonImpl.EV  At PokemonImpl.java:[line 21]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonImpl.getLevelMovesLearn() may expose internal representation by returning PokemonImpl.levelMovesLearn  At PokemonImpl.java:[line 39]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonImpl.getSpriteBack() may expose internal representation by returning PokemonImpl.spriteBack  At PokemonImpl.java:[line 61]
+M V EI2: it.unibo.PokeRogue.pokemon.PokemonImpl.setMoveFactoryInstance(MoveFactoryImpl) may expose internal representation by storing an externally mutable object into PokemonImpl.moveFactoryInstance  At PokemonImpl.java:[line 21]
+M V EI2: it.unibo.PokeRogue.pokemon.PokemonImpl.setGivesEV(Map) may expose internal representation by storing an externally mutable object into PokemonImpl.givesEV  At PokemonImpl.java:[line 21]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonImpl.getBaseStats() may expose internal representation by returning PokemonImpl.baseStats  At PokemonImpl.java:[line 32]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonImpl.getActualMoves() may expose internal representation by returning PokemonImpl.actualMoves  At PokemonImpl.java:[line 40]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonImpl.getActualStats() may expose internal representation by returning PokemonImpl.actualStats  At PokemonImpl.java:[line 37]
+M V EI2: it.unibo.PokeRogue.pokemon.PokemonImpl.setSpriteBack(Image) may expose internal representation by storing an externally mutable object into PokemonImpl.spriteBack  At PokemonImpl.java:[line 21]
+M V EI2: it.unibo.PokeRogue.pokemon.PokemonImpl.setBaseStats(Map) may expose internal representation by storing an externally mutable object into PokemonImpl.baseStats  At PokemonImpl.java:[line 21]
+M V EI2: it.unibo.PokeRogue.pokemon.PokemonImpl.setLevelMovesLearn(Map) may expose internal representation by storing an externally mutable object into PokemonImpl.levelMovesLearn  At PokemonImpl.java:[line 21]
+M V EI2: it.unibo.PokeRogue.pokemon.PokemonImpl.setStatusDuration(Map) may expose internal representation by storing an externally mutable object into PokemonImpl.statusDuration  At PokemonImpl.java:[line 21]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonImpl.getSpriteFront() may expose internal representation by returning PokemonImpl.spriteFront  At PokemonImpl.java:[line 60]
+M P WMI: it.unibo.PokeRogue.pokemon.PokemonImpl.initLevelMovesLearn(Map) makes inefficient use of keySet iterator instead of entrySet iterator  At PokemonImpl.java:[line 136]
+M P WMI: it.unibo.PokeRogue.pokemon.PokemonImpl.initActualMoves() makes inefficient use of keySet iterator instead of entrySet iterator  At PokemonImpl.java:[line 143]
+M P WMI: it.unibo.PokeRogue.pokemon.PokemonImpl.increaseEV(Map) makes inefficient use of keySet iterator instead of entrySet iterator  At PokemonImpl.java:[line 243]
+M D ICAST: Integral division result cast to double or float in it.unibo.PokeRogue.pokemon.PokemonImpl.calculateActualStats()  At PokemonImpl.java:[line 152]
+M D IM: Check for oddness that won't work for negative numbers in it.unibo.PokeRogue.pokemon.PokemonImpl.initGender()  At PokemonImpl.java:[line 105]
+M V EI2: new it.unibo.PokeRogue.scene.scenefight.SceneFightInitView(Map, Map, PlayerTrainerImpl) may expose internal representation by storing an externally mutable object into SceneFightInitView.enemyTrainerInstance  At SceneFightInitView.java:[line 54]
+M V EI2: new it.unibo.PokeRogue.scene.scenefight.SceneFightInitView(Map, Map, PlayerTrainerImpl) may expose internal representation by storing an externally mutable object into SceneFightInitView.sceneGraphicElements  At SceneFightInitView.java:[line 50]
+M V EI2: new it.unibo.PokeRogue.scene.scenefight.SceneFightInitView(Map, Map, PlayerTrainerImpl) may expose internal representation by storing an externally mutable object into SceneFightInitView.allPanelsElements  At SceneFightInitView.java:[line 51]
+L I Dm: Use of non-localized String.toUpperCase() or String.toLowerCase() in it.unibo.PokeRogue.scene.sceneBox.SceneBoxUpdateView.updateDetailedPokemon(int, int, List)  At SceneBoxUpdateView.java:[line 167]
+M V EI2: new it.unibo.PokeRogue.scene.sceneBox.SceneBoxUpdateView(Map) may expose internal representation by storing an externally mutable object into SceneBoxUpdateView.sceneGraphicElements  At SceneBoxUpdateView.java:[line 36]
+M V EI2: new it.unibo.PokeRogue.scene.sceneBox.SceneBoxInitView(Map, Map) may expose internal representation by storing an externally mutable object into SceneBoxInitView.sceneGraphicElements  At SceneBoxInitView.java:[line 36]
+M V EI2: new it.unibo.PokeRogue.scene.sceneBox.SceneBoxInitView(Map, Map) may expose internal representation by storing an externally mutable object into SceneBoxInitView.allPanelsElements  At SceneBoxInitView.java:[line 37]
+M D ICAST: Integral division result cast to double or float in it.unibo.PokeRogue.scene.sceneBox.SceneBoxInitView.initButtonElements()  At SceneBoxInitView.java:[line 88]
+M V EI: it.unibo.PokeRogue.pokemon.PokemonFactoryImpl.getAllPokemonList() may expose internal representation by returning PokemonFactoryImpl.allPokemonSet  At PokemonFactoryImpl.java:[line 110]
+L V MC: Overridable method init is called from constructor new it.unibo.PokeRogue.pokemon.PokemonFactoryImpl().  At PokemonFactoryImpl.java:[line 34]
+M V EI2: new it.unibo.PokeRogue.ai.EnemyAiImpl(Trainer, int) may expose internal representation by storing an externally mutable object into EnemyAiImpl.enemyTrainer  At EnemyAiImpl.java:[line 42]
+M V EI2: new it.unibo.PokeRogue.scene.scenefight.SceneFightView(Map, Map, PlayerTrainerImpl, int, int, SceneFight) may expose internal representation by storing an externally mutable object into SceneFightView.sceneGraphicElements  At SceneFightView.java:[line 36]
+H B DMI: Random object created and used only once in it.unibo.PokeRogue.scene.scenefight.GenerateEnemyImpl.generateWildPokemon()  At GenerateEnemyImpl.java:[line 63]
+H B DMI: Random object created and used only once in it.unibo.PokeRogue.scene.scenefight.GenerateEnemyImpl.generateTrainerTeam()  At GenerateEnemyImpl.java:[line 78]
+M V EI2: new it.unibo.PokeRogue.scene.scenefight.GenerateEnemyImpl(Integer, PlayerTrainerImpl) may expose internal representation by storing an externally mutable object into GenerateEnemyImpl.enemyTrainerInstance  At GenerateEnemyImpl.java:[line 36]
+M V EI2: new it.unibo.PokeRogue.scene.scenefight.BattleEngineImpl(MoveFactoryImpl, PlayerTrainerImpl, EnemyAi) may expose internal representation by storing an externally mutable object into BattleEngineImpl.moveFactoryInstance  At BattleEngineImpl.java:[line 59]
+M V EI2: new it.unibo.PokeRogue.scene.scenefight.BattleEngineImpl(MoveFactoryImpl, PlayerTrainerImpl, EnemyAi) may expose internal representation by storing an externally mutable object into BattleEngineImpl.enemyTrainerInstance  At BattleEngineImpl.java:[line 58]
+M V EI: it.unibo.PokeRogue.scene.scenefight.SceneFight.getAllPanelsElements() may expose internal representation by returning SceneFight.allPanelsElements  At SceneFight.java:[line 32]
+M V EI: it.unibo.PokeRogue.scene.scenefight.SceneFight.getSceneGraphicElements() may expose internal representation by returning SceneFight.sceneGraphicElements  At SceneFight.java:[line 30]
+L V MC: Overridable method initGraphicElements is called from constructor new it.unibo.PokeRogue.scene.scenefight.SceneFight(Integer).  At SceneFight.java:[line 66]
+M V EI2: new it.unibo.PokeRogue.scene.sceneLoad.SceneLoadView(Map, Map) may expose internal representation by storing an externally mutable object into SceneLoadView.sceneGraphicElements  At SceneLoadView.java:[line 44]
+M V EI2: new it.unibo.PokeRogue.scene.sceneLoad.SceneLoadView(Map, Map) may expose internal representation by storing an externally mutable object into SceneLoadView.allPanelsElements  At SceneLoadView.java:[line 45]
+M V EI2: new it.unibo.PokeRogue.scene.sceneBox.SceneBoxView(Map, Map) may expose internal representation by storing an externally mutable object into SceneBoxView.sceneGraphicElements  At SceneBoxView.java:[line 46]
+M D ICAST: Integral division result cast to double or float in it.unibo.PokeRogue.scene.sceneBox.SceneBoxView.loadPokemonSprites(List, int)  At SceneBoxView.java:[line 106]
+M V EI: it.unibo.PokeRogue.scene.sceneLoad.SceneLoad.getSceneGraphicElements() may expose internal representation by returning SceneLoad.sceneGraphicElements  At SceneLoad.java:[line 49]
+M V EI: it.unibo.PokeRogue.scene.sceneLoad.SceneLoad.getAllPanelsElements() may expose internal representation by returning SceneLoad.allPanelsElements  At SceneLoad.java:[line 51]
+M D SF: Switch statement found in it.unibo.PokeRogue.scene.sceneLoad.SceneLoad.updateStatus(int) where default case is missing  At SceneLoad.java:[lines 127-148]
+M V EI2: it.unibo.PokeRogue.GraphicEngineImpl.createPanels(Map) may expose internal representation by storing an externally mutable object into GraphicEngineImpl.allPanelElements  At GraphicEngineImpl.java:[line 84]
+M B ES: Comparison of String objects using == or != in it.unibo.PokeRogue.GraphicEngineImpl.createPanels(Map)  At GraphicEngineImpl.java:[line 90]
+M P WMI: it.unibo.PokeRogue.GraphicEngineImpl.createPanels(Map) makes inefficient use of keySet iterator instead of entrySet iterator  At GraphicEngineImpl.java:[line 87]
+M V EI2: new it.unibo.PokeRogue.scene.sceneMenu.SceneMenuView(Map, Map) may expose internal representation by storing an externally mutable object into SceneMenuView.allPanelsElements  At SceneMenuView.java:[line 41]
+M V EI2: new it.unibo.PokeRogue.scene.sceneMenu.SceneMenuView(Map, Map) may expose internal representation by storing an externally mutable object into SceneMenuView.sceneGraphicElements  At SceneMenuView.java:[line 40]
+M V EI: it.unibo.PokeRogue.scene.sceneBox.SceneBox.getSceneGraphicElements() may expose internal representation by returning SceneBox.sceneGraphicElements  At SceneBox.java:[line 45]
+M V EI: it.unibo.PokeRogue.scene.sceneBox.SceneBox.getAllPanelsElements() may expose internal representation by returning SceneBox.allPanelsElements  At SceneBox.java:[line 47]
+M V EI2: new it.unibo.PokeRogue.scene.sceneMove.SceneMoveView(Map, Map) may expose internal representation by storing an externally mutable object into SceneMoveView.allPanelsElements  At SceneMoveView.java:[line 48]
+M V EI2: new it.unibo.PokeRogue.scene.sceneMove.SceneMoveView(Map, Map) may expose internal representation by storing an externally mutable object into SceneMoveView.sceneGraphicElements  At SceneMoveView.java:[line 47]
+M V EI: it.unibo.PokeRogue.scene.sceneMenu.SceneMenu.getAllPanelsElements() may expose internal representation by returning SceneMenu.allPanelsElements  At SceneMenu.java:[line 33]
+M V EI: it.unibo.PokeRogue.scene.sceneMenu.SceneMenu.getSceneGraphicElements() may expose internal representation by returning SceneMenu.sceneGraphicElements  At SceneMenu.java:[line 31]
+M V EI: it.unibo.PokeRogue.scene.sceneMove.SceneMove.getSceneGraphicElements() may expose internal representation by returning SceneMove.sceneGraphicElements  At SceneMove.java:[line 30]
+M V EI: it.unibo.PokeRogue.scene.sceneMove.SceneMove.getAllPanelsElements() may expose internal representation by returning SceneMove.allPanelsElements  At SceneMove.java:[line 32]
+M V EI: it.unibo.PokeRogue.items.ItemFactoryImpl.getAllItemList() may expose internal representation by returning ItemFactoryImpl.allItemSet  At ItemFactoryImpl.java:[line 87]
+L V MC: Overridable method init is called from constructor new it.unibo.PokeRogue.items.ItemFactoryImpl().  At ItemFactoryImpl.java:[line 28]
+M V EI2: it.unibo.PokeRogue.scene.SceneShop.useOrHandleItem(Item) may expose internal representation by storing an externally mutable object into SceneShop.selectedItemForUse  At SceneShop.java:[line 602]
+M D SF: Switch statement found in it.unibo.PokeRogue.scene.SceneShop.updateStatus(int) where default case is missing  At SceneShop.java:[lines 69-152]
+L B Nm: The field name it.unibo.PokeRogue.scene.SceneShop.BuyedItem is not conform to the naming convention. If final, it should be ALL_CAPS, otherwise lowerCamelCase.  In SceneShop.java
+M P SS: Unread field: it.unibo.PokeRogue.ai.EnemyAiImpl.lowAiThreshold; should this field be static?  At EnemyAiImpl.java:[line 31]
+M P SS: Unread field: it.unibo.PokeRogue.ai.EnemyAiImpl.mediumAiThreshold; should this field be static?  At EnemyAiImpl.java:[line 32]
+M P UrF: Unread field: it.unibo.PokeRogue.scene.SceneShop.BuyedItem  At SceneShop.java:[line 53]
+M P SS: Unread field: it.unibo.PokeRogue.ai.EnemyAiSwitchIn.acceptedEffectivenessDifference; should this field be static?  At EnemyAiSwitchIn.java:[line 32]
+M P SS: Unread field: it.unibo.PokeRogue.scene.SceneShop.itemIndex; should this field be static?  At SceneShop.java:[line 51]
+M P SS: Unread field: it.unibo.PokeRogue.ai.EnemyAiImpl.highAiThreshold; should this field be static?  At EnemyAiImpl.java:[line 33]
+L D UwF: EffectParserImpl.attackEnemy not initialized in constructor and dereferenced in it.unibo.PokeRogue.effectParser.EffectParserImpl.createContext()  At EffectParserImpl.java:[line 86]
+L D UwF: EffectParserImpl.attackUs not initialized in constructor and dereferenced in it.unibo.PokeRogue.effectParser.EffectParserImpl.createContext()  At EffectParserImpl.java:[line 83]
+L D UwF: GameEngineImpl.graphicEngineInstance not initialized in constructor and dereferenced in it.unibo.PokeRogue.GameEngineImpl.setScene(String)  At GameEngineImpl.java:[line 76]
+L D UwF: GraphicEngineImpl.allPanelElements not initialized in constructor and dereferenced in it.unibo.PokeRogue.GraphicEngineImpl.drawBoxGraphicElement(BoxElementImpl)  At GraphicEngineImpl.java:[line 103]
+L D UwF: GraphicEngineImpl.allPanelElements not initialized in constructor and dereferenced in it.unibo.PokeRogue.GraphicEngineImpl.drawSpriteGraphicElement(SpriteElementImpl)  At GraphicEngineImpl.java:[line 108]
+L D UwF: EffectParserImpl.enemy not initialized in constructor and dereferenced in it.unibo.PokeRogue.effectParser.EffectParserImpl.createContext()  At EffectParserImpl.java:[line 80]
+L D UwF: GameEngineImpl.graphicEngineInstance not initialized in constructor and dereferenced in it.unibo.PokeRogue.GameEngineImpl.keyPressedToScene(int)  At GameEngineImpl.java:[line 88]
+L D UwF: GraphicEngineImpl.allPanelElements not initialized in constructor and dereferenced in it.unibo.PokeRogue.GraphicEngineImpl.drawTextGraphicElement(TextElementImpl)  At GraphicEngineImpl.java:[line 123]
+L D UwF: EffectParserImpl.us not initialized in constructor and dereferenced in it.unibo.PokeRogue.effectParser.EffectParserImpl.createContext()  At EffectParserImpl.java:[line 77]
+L D UwF: EffectParserImpl.weather not initialized in constructor and dereferenced in it.unibo.PokeRogue.effectParser.EffectParserImpl.createContext()  At EffectParserImpl.java:[line 89]
+
+> Task :spotbugsMain FAILED
+
+[Incubating] Problems report is available at: file:///home/tommaso/OOP24-Poke-Rogue/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.12.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+18 actionable tasks: 17 executed, 1 up-to-date

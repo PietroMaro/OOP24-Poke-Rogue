@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene.sceneFight;
+package it.unibo.PokeRogue.scene.scenefight;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,19 +27,21 @@ import lombok.Getter;
 
 public class BattleEngineImpl implements BattleEngine {
     private final PlayerTrainerImpl playerTrainerInstance;
-    private PlayerTrainerImpl enemyTrainerInstance;
+    private final PlayerTrainerImpl enemyTrainerInstance;
     private final MoveFactoryImpl moveFactoryInstance;
     private final static Integer FIRST_POSITION = 0;
     private final static Integer MAX_SQUAD = 6;
     private final EffectParser effectParserInstance;
     @Getter
-    private Optional<Weather> currentWeather;
-    private PokemonBattleUtil pokemonBattleUtilInstance;
-    private AbilityFactory abilityFactoryInstance;
-    private StatusEffect statusEffectInstance;
-    private EnemyAi enemyAiInstance;
+    private final Optional<Weather> currentWeather;
+    private final PokemonBattleUtil pokemonBattleUtilInstance;
+    private final AbilityFactory abilityFactoryInstance;
+    private final StatusEffect statusEffectInstance;
+    private final EnemyAi enemyAiInstance;
     private final GameEngine gameEngineInstance;
     private final SavingSystem savingSystemInstance;
+    private Boolean isCaptured = false;
+    private static final String MOVE_TYPE_ATTACK = "Attack";
 
     /**
      * Constructor for the BattleEngineImpl class that initializes the battle engine
@@ -51,8 +53,8 @@ public class BattleEngineImpl implements BattleEngine {
      * @param enemyTrainerInstance the enemy trainer instance involved in the battle
      * @param enemyAiInstance      the AI instance controlling the enemy's strategy
      */
-    public BattleEngineImpl(MoveFactoryImpl moveFactoryInstance,
-            PlayerTrainerImpl enemyTrainerInstance, EnemyAi enemyAiInstance) {
+    public BattleEngineImpl(final MoveFactoryImpl moveFactoryInstance,
+            final PlayerTrainerImpl enemyTrainerInstance, final EnemyAi enemyAiInstance) {
         this.enemyTrainerInstance = enemyTrainerInstance;
         this.moveFactoryInstance = moveFactoryInstance;
         this.pokemonBattleUtilInstance = new PokemonBattleUtilImpl();
@@ -77,35 +79,30 @@ public class BattleEngineImpl implements BattleEngine {
      * @param attackerPokemon the Pokémon using the move
      * @param defenderPokemon the Pokémon receiving the attack
      */
-    private void executeMoves(Move attackerMove, Pokemon attackerPokemon, Pokemon defenderPokemon) {
-        if (attackerMove.getPp().getCurrentValue() <= 0 || attackerMove.getName().equals("splash")) {
+    private void executeMoves(final Move attackerMove, final Pokemon attackerPokemon, final Pokemon defenderPokemon) {
+        if ("splash".equals(attackerMove.getName()) || attackerMove.getPp().getCurrentValue() <= 0) {
             return;
         }
         attackerMove.getPp().decrement(1);
 
-        int finalDamage = (int) pokemonBattleUtilInstance.calculateDamage(attackerPokemon, defenderPokemon,
+        final int finalDamage = pokemonBattleUtilInstance.calculateDamage(attackerPokemon, defenderPokemon,
                 attackerMove,
                 this.currentWeather);
-        System.out.println(finalDamage);
         defenderPokemon.getActualStats().get("hp").decrement(finalDamage);
 
     }
 
-    private void pokeObject(String pokeballName) {
-        int countBall = playerTrainerInstance.getBall().get(pokeballName);
-        Pokemon enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
+    private void pokeObject(final String pokeballName) {
+        final int countBall = playerTrainerInstance.getBall().get(pokeballName);
+        final Pokemon enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
         if (countBall > 0 && enemyTrainerInstance.isWild()) {
             playerTrainerInstance.getBall().put(pokeballName, countBall - 1);
             // eventuali calcoli per vedere se lo catturi o no
-            // da gestire l'aggiunta in squadra o box
-
             if (playerTrainerInstance.getSquad().size() <= MAX_SQUAD) {
                 playerTrainerInstance.addPokemon(enemyPokemon, MAX_SQUAD);
-                // DA VEDERE CON SHOP SE RIMUOVENDO IL POKEMON DA PROBLEMI
-                enemyPokemon.getActualStats().get("hp")
-                        .decrement(enemyPokemon.getActualStats().get("hp").getCurrentValue());
                 this.savingSystemInstance.savePokemon(enemyPokemon);
-
+                this.isCaptured = true;
+                this.newEnemyCheck();
             } else {
                 this.savingSystemInstance.savePokemon(enemyPokemon);
             }
@@ -127,16 +124,16 @@ public class BattleEngineImpl implements BattleEngine {
      * @param enemyMoveString  the name of the enemy's move
      */
     @Override
-    public void movesPriorityCalculator(String type, String playerMoveString, String typeEnemy,
-            String enemyMoveString) {
+    public void movesPriorityCalculator(final String type, final String playerMoveString, final String typeEnemy,
+            final String enemyMoveString) {
         Pokemon pokemonPlayer = this.playerTrainerInstance.getPokemon(FIRST_POSITION).get();
         Pokemon pokemonEnemy = this.enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
 
-        Ability abilityPlayer = abilityFactoryInstance.abilityFromName(pokemonPlayer.getAbilityName());
-        Ability abilityEnemy = abilityFactoryInstance.abilityFromName(pokemonEnemy.getAbilityName());
+        final Ability abilityPlayer = abilityFactoryInstance.abilityFromName(pokemonPlayer.getAbilityName());
+        final Ability abilityEnemy = abilityFactoryInstance.abilityFromName(pokemonEnemy.getAbilityName());
 
-        Move playerMove = getSafeMove(pokemonPlayer, playerMoveString, type);
-        Move enemyMove = getSafeMove(pokemonEnemy, enemyMoveString, typeEnemy);
+        final Move playerMove = getSafeMove(pokemonPlayer, playerMoveString, type);
+        final Move enemyMove = getSafeMove(pokemonEnemy, enemyMoveString, typeEnemy);
         handleAbilityEffects(abilityPlayer, pokemonPlayer, pokemonEnemy, playerMove, enemyMove,
 
                 AbilitySituationChecks.NEUTRAL);
@@ -151,53 +148,55 @@ public class BattleEngineImpl implements BattleEngine {
                 AbilitySituationChecks.PASSIVE);
         this.applyStatusForAllPokemon(playerTrainerInstance.getSquad(), pokemonEnemy);
         this.applyStatusForAllPokemon(enemyTrainerInstance.getSquad(), pokemonPlayer);
-        if (type.equals("SwitchIn") && statusEffectInstance.checkStatusSwitch(pokemonPlayer)
-                && BattleUtilities.canSwitch(this.playerTrainerInstance, Integer.valueOf(playerMoveString))) {
+        if ("SwitchIn".equals(type) && statusEffectInstance.checkStatusSwitch(pokemonPlayer)
+                && BattleUtilities.canSwitch(this.playerTrainerInstance, Integer.parseInt(playerMoveString))) {
             handleSwitch(pokemonPlayer, pokemonEnemy, playerMove, enemyMove, abilityPlayer, playerMoveString,
                     playerTrainerInstance);
             pokemonPlayer = this.playerTrainerInstance.getPokemon(FIRST_POSITION).get();
 
         }
-        if (typeEnemy.equals("SwitchIn") && statusEffectInstance.checkStatusSwitch(pokemonEnemy)
-                && BattleUtilities.canSwitch(this.enemyTrainerInstance, Integer.valueOf(enemyMoveString))) {
+        if ("SwitchIn".equals(typeEnemy) && statusEffectInstance.checkStatusSwitch(pokemonEnemy)
+                && BattleUtilities.canSwitch(this.enemyTrainerInstance, Integer.parseInt(enemyMoveString))) {
             handleSwitch(pokemonEnemy, pokemonPlayer, enemyMove, playerMove, abilityEnemy, enemyMoveString,
                     enemyTrainerInstance);
             pokemonEnemy = this.enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
         }
-        if (type.equals("Pokeball")) {
+        if ("Pokeball".equals(type)) {
             this.pokeObject(playerMoveString);
         }
-        handleAttackPhases(type, playerMoveString, typeEnemy, pokemonPlayer, pokemonEnemy, playerMove, enemyMove,
+        handleAttackPhases(type, typeEnemy, pokemonPlayer, pokemonEnemy, playerMove, enemyMove,
                 abilityPlayer,
                 abilityEnemy);
         this.newEnemyCheck();
 
     }
 
-    private void applyStatusForAllPokemon(List<Optional<Pokemon>> squad, Pokemon enemy) {
-        for (Optional<Pokemon> optionalPokemon : squad) {
+    private void applyStatusForAllPokemon(final List<Optional<Pokemon>> squad, final Pokemon enemy) {
+        for (final Optional<Pokemon> optionalPokemon : squad) {
             if (optionalPokemon.isPresent()) {
                 statusEffectInstance.applyStatus(optionalPokemon.get(), enemy);
             }
         }
     }
 
-    private Move getSafeMove(Pokemon pokemon, String moveIndex, String type) {
-        if (type.equals("Attack") && BattleUtilities.knowsMove(pokemon, Integer.parseInt(moveIndex))) {
+    private Move getSafeMove(final Pokemon pokemon, final String moveIndex, final String type) {
+        if (MOVE_TYPE_ATTACK.equals(type) && BattleUtilities.knowsMove(pokemon, Integer.parseInt(moveIndex))) {
             return pokemon.getActualMoves().get(Integer.parseInt(moveIndex));
         }
         return moveFactoryInstance.moveFromName("splash");
     }
 
-    private void executeEffect(JSONObject effect, Pokemon attackerPokemon, Pokemon defenderPokemon, Move atteckerMove,
-            Move defenderMove) {
+    private void executeEffect(final JSONObject effect, final Pokemon attackerPokemon, final Pokemon defenderPokemon,
+            final Move atteckerMove,
+            final Move defenderMove) {
         this.effectParserInstance.parseEffect(effect,
                 attackerPokemon, defenderPokemon, Optional.of(atteckerMove), Optional.of(defenderMove),
                 this.currentWeather);
     }
 
-    private void handleSwitch(Pokemon user, Pokemon target, Move moveUser, Move moveTarget, Ability ability,
-            String moveIndex, PlayerTrainerImpl trainer) {
+    private void handleSwitch(final Pokemon user, final Pokemon target, final Move moveUser, final Move moveTarget,
+            final Ability ability,
+            final String moveIndex, final PlayerTrainerImpl trainer) {
         this.handleAbilityEffects(ability, user, target, moveUser, moveTarget, AbilitySituationChecks.SWITCHOUT);
         this.switchIn(moveIndex, trainer);
         handleAbilityEffects(ability, user, target, moveUser, moveTarget, AbilitySituationChecks.SWITCHIN);
@@ -213,22 +212,21 @@ public class BattleEngineImpl implements BattleEngine {
      * It applies abilities and executes moves in the appropriate order based on
      * priority and conditions.
      *
-     * @param type             the type of action (e.g., "Attack")
-     * @param playerMoveString the name of the player's move
-     * @param typeEnemy        the type of the enemy's action (e.g., "Attack")
-     * @param player           the player's Pokémon involved in the attack
-     * @param enemy            the enemy's Pokémon involved in the attack
-     * @param playerMove       the move used by the player's Pokémon
-     * @param enemyMove        the move used by the enemy's Pokémon
-     * @param abilityPlayer    the ability of the player's Pokémon
-     * @param abilityEnemy     the ability of the enemy's Pokémon
+     * @param type          the type of action (e.g., "Attack")
+     * @param typeEnemy     the type of the enemy's action (e.g., "Attack")
+     * @param player        the player's Pokémon involved in the attack
+     * @param enemy         the enemy's Pokémon involved in the attack
+     * @param playerMove    the move used by the player's Pokémon
+     * @param enemyMove     the move used by the enemy's Pokémon
+     * @param abilityPlayer the ability of the player's Pokémon
+     * @param abilityEnemy  the ability of the enemy's Pokémon
      */
     private void handleAttackPhases(
-            String type, String playerMoveString, String typeEnemy,
-            Pokemon player, Pokemon enemy,
-            Move playerMove, Move enemyMove,
-            Ability abilityPlayer, Ability abilityEnemy) {
-        if (type.equals("Attack") && typeEnemy.equals("Attack")) {
+            final String type, final String typeEnemy,
+            final Pokemon player, final Pokemon enemy,
+            final Move playerMove, final Move enemyMove,
+            final Ability abilityPlayer, final Ability abilityEnemy) {
+        if (MOVE_TYPE_ATTACK.equals(type) && MOVE_TYPE_ATTACK.equals(typeEnemy)) {
             applyAbilityPhase(player, enemy, playerMove, enemyMove, abilityPlayer, abilityEnemy,
                     AbilitySituationChecks.ATTACK);
             applyAbilityPhase(enemy, player, enemyMove, playerMove, abilityEnemy, abilityPlayer,
@@ -258,14 +256,14 @@ public class BattleEngineImpl implements BattleEngine {
                 newEnemyCheck();
             }
 
-        } else if (type.equals("Attack") && statusEffectInstance.checkStatusAttack(player)) {
+        } else if (MOVE_TYPE_ATTACK.equals(type) && statusEffectInstance.checkStatusAttack(player)) {
             applyAbilityPhase(player, enemy, playerMove, enemyMove, abilityPlayer, abilityEnemy,
                     AbilitySituationChecks.ATTACK);
             applyAbilityPhase(enemy, player, enemyMove, playerMove, abilityEnemy, abilityPlayer,
                     AbilitySituationChecks.ATTACKED);
             doMove(player, enemy, playerMove, enemyMove);
 
-        } else if (typeEnemy.equals("Attack") && statusEffectInstance.checkStatusAttack(enemy)) {
+        } else if (MOVE_TYPE_ATTACK.equals(typeEnemy) && statusEffectInstance.checkStatusAttack(enemy)) {
             applyAbilityPhase(enemy, player, enemyMove, playerMove, abilityEnemy, abilityPlayer,
                     AbilitySituationChecks.ATTACK);
             applyAbilityPhase(player, enemy, playerMove, enemyMove, abilityPlayer, abilityEnemy,
@@ -290,8 +288,9 @@ public class BattleEngineImpl implements BattleEngine {
      * @param phase         the current phase of the ability (e.g., attack,
      *                      attacked)
      */
-    private void applyAbilityPhase(Pokemon source, Pokemon target, Move moveSource, Move moveTarget,
-            Ability abilitySource, Ability abilityTarget, AbilitySituationChecks phase) {
+    private void applyAbilityPhase(final Pokemon source, final Pokemon target, final Move moveSource,
+            final Move moveTarget, final Ability abilitySource, final Ability abilityTarget,
+            final AbilitySituationChecks phase) {
         handleAbilityEffects(abilitySource, source, target, moveSource, moveTarget, phase);
         handleAbilityEffects(abilityTarget, target, source, moveTarget, moveSource, phase);
     }
@@ -308,7 +307,7 @@ public class BattleEngineImpl implements BattleEngine {
      * @param move         the move being used by the attacker
      * @param opponentMove the move used by the opponent Pokémon
      */
-    private void doMove(Pokemon attacker, Pokemon defender, Move move, Move opponentMove) {
+    private void doMove(final Pokemon attacker, final Pokemon defender, final Move move, final Move opponentMove) {
         executeMoves(move, attacker, defender);
         executeEffect(move.getEffect(), attacker, defender, move, opponentMove);
     }
@@ -327,8 +326,9 @@ public class BattleEngineImpl implements BattleEngine {
      * @param situation  the situation in which the ability is checked (e.g.,
      *                   attack, attacked)
      */
-    private void handleAbilityEffects(Ability ability, Pokemon user, Pokemon target, Move userMove,
-            Move targetMove, AbilitySituationChecks situation) {
+    private void handleAbilityEffects(final Ability ability, final Pokemon user, final Pokemon target,
+            final Move userMove,
+            final Move targetMove, final AbilitySituationChecks situation) {
         if (ability.situationChecks() == situation) {
             this.executeEffect(ability.effect(), user, target, userMove, targetMove);
         }
@@ -345,9 +345,9 @@ public class BattleEngineImpl implements BattleEngine {
      * certain conditions are met.
      */
     private void newEnemyCheck() {
-        Pokemon enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
-        Pokemon playerPokemon = playerTrainerInstance.getPokemon(FIRST_POSITION).get();
-        if (BattleUtilities.isTeamWipedOut(enemyTrainerInstance)) {
+        final Pokemon enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
+        final Pokemon playerPokemon = playerTrainerInstance.getPokemon(FIRST_POSITION).get();
+        if (BattleUtilities.isTeamWipedOut(enemyTrainerInstance) || this.isCaptured) {
             BattleRewards.awardBattleRewards(playerPokemon, enemyPokemon);
             this.newMoveToLearn(playerPokemon);
             this.gameEngineInstance.setScene("shop");
@@ -379,16 +379,11 @@ public class BattleEngineImpl implements BattleEngine {
      * @return true if the player's move has higher priority or if the player's
      *         Pokémon is faster; false otherwise
      */
-    private Boolean calculatePriority(Move playerMove, Move enemyMove) {
-        if (playerMove.getPriority() > enemyMove.getPriority()) {
-            return true;
-        } else if (playerTrainerInstance.getPokemon(FIRST_POSITION).get().getActualStats().get("speed")
-                .getCurrentValue() > enemyTrainerInstance.getPokemon(FIRST_POSITION).get().getActualStats().get("speed")
-                        .getCurrentValue()) {
-            return true;
-        } else {
-            return false;
-        }
+    private boolean calculatePriority(final Move playerMove, final Move enemyMove) {
+        return playerMove.getPriority() > enemyMove.getPriority()
+                || playerTrainerInstance.getPokemon(FIRST_POSITION).get().getActualStats().get("speed")
+                        .getCurrentValue() > enemyTrainerInstance.getPokemon(FIRST_POSITION).get().getActualStats()
+                                .get("speed").getCurrentValue();
     }
 
     /**
@@ -400,7 +395,7 @@ public class BattleEngineImpl implements BattleEngine {
      * @param trainer the player trainer instance responsible for the Pokémon
      *                switching
      */
-    private void switchIn(String move, PlayerTrainerImpl trainer) {
+    private void switchIn(final String move, final PlayerTrainerImpl trainer) {
         trainer.switchPokemonPosition(FIRST_POSITION, Integer.parseInt(move));
     }
 
@@ -411,9 +406,9 @@ public class BattleEngineImpl implements BattleEngine {
      *
      * @param playerPokemon the player's Pokémon that may need to learn a new move
      */
-    private void newMoveToLearn(Pokemon playerPokemon) {
+    private void newMoveToLearn(final Pokemon playerPokemon) {
         if (playerPokemon.isHasToLearnMove()) {
-            gameEngineInstance.setScene("move");
+            this.gameEngineInstance.setScene("move");
         }
     }
 }
