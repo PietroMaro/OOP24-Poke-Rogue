@@ -64,6 +64,20 @@ public class TrainerImpl implements Trainer {
     }
 
     @Override
+    public void addMoney(final int amount) {
+        this.money += amount;
+    }
+
+    public Boolean isWild() {
+        return this.wild;
+    }
+
+    @Override
+    public void setWild(Boolean wild) {
+        this.wild = wild;
+    }
+
+    @Override
     public List<Optional<Pokemon>> getSquad() {
         return this.pokemonSquad;
     }
@@ -76,18 +90,5 @@ public class TrainerImpl implements Trainer {
     @Override
     public int getMoney() {
         return this.money;
-    }
-
-    @Override
-    public void addMoney(final int amount) {
-        this.money += amount;
-    }
-    public Boolean isWild() {
-        return this.wild;
-    }
-
-    @Override
-    public void setWild(Boolean wild) {
-        this.wild = wild;
     }
 }

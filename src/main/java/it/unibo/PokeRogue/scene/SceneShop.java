@@ -28,7 +28,6 @@ import it.unibo.PokeRogue.items.ItemFactory;
 import it.unibo.PokeRogue.items.ItemFactoryImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
-import it.unibo.PokeRogue.trainers.Trainer;
 
 public class SceneShop implements Scene {
 
@@ -590,6 +589,7 @@ public class SceneShop implements Scene {
                         playerTrainerInstance.getBall().put(item.getName(), countBall + 1);
                         gameEngineInstance.setScene("fight");
                 }else if (item.getType().equalsIgnoreCase("Valuable")){
+                        System.out.println("entrato ");
                         Optional<JSONObject> itemEffect = item.getEffect();
                         this.effectParser.parseEffect(itemEffect.get(),playerTrainerInstance);
                         System.out.println("soldi" + playerTrainerInstance.getMoney());
@@ -650,8 +650,8 @@ public class SceneShop implements Scene {
                 }
         }
 
-        private String getPokemonNameAt(Trainer trainer, int position) {
-                return trainer.getPokemon(position)
+        private String getPokemonNameAt(PlayerTrainerImpl playerTrainer, int position) {
+                return playerTrainer.getPokemon(position)
                                 .map(Pokemon::getName)
                                 .orElse("???");
         }
