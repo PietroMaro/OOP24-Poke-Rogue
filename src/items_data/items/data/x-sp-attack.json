@@ -13,8 +13,8 @@
         ],
         "activation": [
             [
-                "us.actualStats.specialAttack.currentValue",
-                "us.actualStats.specialAttack.currentValue + 1"
+                "us.tempStatsBonus.specialAttack.currentValue",
+                "us.tempStatsBonus.specialAttack.currentValue + 1"
             ]
         ]
     }

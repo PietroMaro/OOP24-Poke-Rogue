@@ -127,7 +127,7 @@ public class BattleEngineImpl implements BattleEngine {
                 this.currentWeather);
         defenderPokemon.getActualStats().get("hp").decrement(finalDamage);
         this.effectParserInstance.parseEffect(attackerMove.get().getEffect(), attackerPokemon, defenderPokemon,
-                attackerMove, opponentMove, this.currentWeather, Optional.of(playerTrainerInstance));
+                attackerMove, opponentMove, this.currentWeather);
     }
 
     private void handlePokeball(final String pokeballName) {
@@ -209,7 +209,7 @@ public class BattleEngineImpl implements BattleEngine {
             final Optional<Move> targetMove, final AbilitySituationChecks situation) {
         if (ability.situationChecks() == situation) {
             this.effectParserInstance.parseEffect(ability.effect(), user, target, userMove, targetMove,
-                    this.currentWeather, Optional.of(playerTrainerInstance));
+                    this.currentWeather);
         }
     }
 

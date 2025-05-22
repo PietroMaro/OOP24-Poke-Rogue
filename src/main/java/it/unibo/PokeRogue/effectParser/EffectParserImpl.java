@@ -6,6 +6,7 @@ import it.unibo.PokeRogue.Weather;
 import it.unibo.PokeRogue.pokemon.StatusCondition;
 import it.unibo.PokeRogue.pokemon.Type;
 import it.unibo.PokeRogue.trainers.PlayerTrainer;
+import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.move.Move;
 import org.json.JSONObject;
@@ -22,7 +23,7 @@ public class EffectParserImpl extends SingletonImpl implements EffectParser {
 	private Optional<Move> attackUs;
 	private Optional<Move> attackEnemy;
 	private Optional<Weather> weather;
-	private Optional<PlayerTrainer> playerMoney;
+	private final PlayerTrainerImpl playerMoney = PlayerTrainerImpl.getTrainerInstance();
 	
 
 	private void parseEffect(JSONObject effect) {
@@ -46,6 +47,7 @@ public class EffectParserImpl extends SingletonImpl implements EffectParser {
 			result = result && computeSingleCheck(checks.getJSONArray(checkIndex));
 		}
 		return result;
+		
 	}
 
 	private boolean computeSingleCheck(JSONArray check) {
@@ -61,6 +63,7 @@ public class EffectParserImpl extends SingletonImpl implements EffectParser {
 			result = (boolean) parseSingleExpression(checkString);
 		} catch (Exception ex) {
 			System.out.println("ERROR in");
+			ex.printStackTrace();
 			System.out.println("The check " + checkString);
 			throw ex;
 		}
@@ -71,7 +74,12 @@ public class EffectParserImpl extends SingletonImpl implements EffectParser {
 		JexlEngine jexl = new JexlBuilder().create();
 		JexlExpression expr = jexl.createExpression(expression);
 		
-		Object result = expr.evaluate(createContext());
+		Object result = null;
+		try {
+			result = expr.evaluate(createContext());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 
@@ -92,9 +100,8 @@ public class EffectParserImpl extends SingletonImpl implements EffectParser {
 		if (!this.weather.isEmpty()) {
 			context.set("weather", this.weather.get());
 		}
-		if (!this.playerMoney.isEmpty()) {
-			context.set("playerMoney", this.playerMoney.get());
-		}
+		
+		context.set("playerMoney", this.playerMoney);
 		context.set("Optional", Optional.class);
 		context.set("StatusCondition", StatusCondition.class);
 		context.set("Type", Type.class);
@@ -120,15 +127,13 @@ public class EffectParserImpl extends SingletonImpl implements EffectParser {
 		Pokemon enemy,
 		Optional<Move> attackUs,
 		Optional<Move> attackEnemy,
-		Optional<Weather> weather,
-		Optional<PlayerTrainer> playerMoney
+		Optional<Weather> weather
 			){
 		this.us = Optional.of(us);
 		this.enemy = Optional.of(enemy);
 		this.attackUs = attackUs;
 		this.attackEnemy = attackEnemy;
 		this.weather = weather;
-		this.playerMoney = playerMoney;
 		parseEffect(effect);	
 	}
 
@@ -139,18 +144,6 @@ public class EffectParserImpl extends SingletonImpl implements EffectParser {
 		this.attackUs = Optional.empty();
 		this.attackEnemy = Optional.empty();
 		this.weather = Optional.empty();
-		this.playerMoney = Optional.empty();
-		parseEffect(effect);
-	}
-
-	@Override
-	public void parseEffect(JSONObject effect, PlayerTrainer playerMoney) {
-		this.us = Optional.empty();
-		this.enemy = Optional.empty();
-		this.attackUs = Optional.empty();
-		this.attackEnemy = Optional.empty();
-		this.weather = Optional.empty();
-		this.playerMoney = Optional.of(playerMoney);
 		parseEffect(effect);
 	}
 }

@@ -23,6 +23,9 @@ import it.unibo.PokeRogue.trainers.TrainerImpl;
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.move.MoveFactory;
 import it.unibo.PokeRogue.move.MoveFactoryImpl;
+import it.unibo.PokeRogue.items.Item;
+import it.unibo.PokeRogue.items.ItemFactory;
+import it.unibo.PokeRogue.items.ItemFactoryImpl;
 import it.unibo.PokeRogue.ability.Ability;
 import it.unibo.PokeRogue.ability.AbilityFactory;
 import it.unibo.PokeRogue.ability.AbilityFactoryImpl;
@@ -32,13 +35,7 @@ import it.unibo.PokeRogue.ai.EnemyAiImpl;
 import it.unibo.PokeRogue.effectParser.EffectParser;
 import it.unibo.PokeRogue.effectParser.EffectParserImpl;
 import it.unibo.PokeRogue.pokemon.Type;
-<<<<<<< HEAD
-import it.unibo.PokeRogue.scene.scenefight.BattleEngine;
-import it.unibo.PokeRogue.scene.scenefight.BattleEngineImpl;
-import it.unibo.PokeRogue.scene.scenefight.BattleRewards;
-import it.unibo.PokeRogue.scene.scenefight.BattleUtilities;
-import it.unibo.PokeRogue.scene.scenefight.GenerateEnemyImpl;
-=======
+
 import it.unibo.PokeRogue.scene.scene_fight.BattleEngine;
 import it.unibo.PokeRogue.scene.scene_fight.BattleEngineImpl;
 import it.unibo.PokeRogue.scene.scene_fight.BattleRewards;
@@ -46,7 +43,7 @@ import it.unibo.PokeRogue.scene.scene_fight.BattleUtilities;
 import it.unibo.PokeRogue.scene.scene_fight.GenerateEnemyImpl;
 import it.unibo.PokeRogue.scene.scene_fight.Decision;
 import it.unibo.PokeRogue.scene.scene_fight.enums.DecisionTypeEnum;
->>>>>>> refactor
+
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 import it.unibo.PokeRogue.utilities.PokeEffectivenessCalc;
@@ -184,6 +181,27 @@ public class TestAll {
 	}
 
 	@Test
+	public void testAllItemEffect() throws IOException {
+		ItemFactory itemFactory = ItemFactoryImpl.getInstance(ItemFactoryImpl.class);
+		PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+		EffectParserImpl effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
+
+		JsonReader jsonReader = new JsonReaderImpl();
+		Pokemon pok1 = pokeFactory.randomPokemon(3);
+
+		Path dirPath = Paths.get("src", "items_data","items","data");
+		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
+			for (Path entry : stream) {
+				if (Files.isRegularFile(entry)) {
+					JSONObject itemJson = jsonReader.readJsonObject(entry.toString());
+					JSONObject effect = itemJson.getJSONObject("effect");
+					effectParser.parseEffect(effect, pok1);
+				}
+			}
+		}
+	}
+
+	@Test
 	public void testEffectivenessCalculator() {
 		PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
 		PokeEffectivenessCalc calculator = new PokeEffectivenessCalcImpl();
@@ -212,11 +230,11 @@ public class TestAll {
 		playerTrainerImpl.addPokemon(poliwag, 6);
 		enemyTrainer.addPokemon(charmander, 6);
 
-		assertEquals(ai.nextMove(weather), List.of("Attack", "0"));
+		assertEquals(ai.nextMove(weather), new Decision(DecisionTypeEnum.ATTACK, "0"));
 
 		enemyTrainer.addPokemon(venusaur, 6);
 
-		assertEquals(ai.nextMove(weather), List.of("SwitchIn", "1"));
+		assertEquals(ai.nextMove(weather), new Decision(DecisionTypeEnum.SWITCH_IN, "1"));
 
 	}
 

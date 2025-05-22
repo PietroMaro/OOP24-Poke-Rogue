@@ -68,4 +68,5 @@ public class RangeImpl<T extends Number> implements Range<T> {
             this.currentValue = currentMin;
         }
     }
+
 }

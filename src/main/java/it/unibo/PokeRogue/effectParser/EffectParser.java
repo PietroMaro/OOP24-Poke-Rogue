@@ -18,16 +18,11 @@ public interface EffectParser extends Singleton {
 		Pokemon enemy,
 		Optional<Move> attackUs,
 		Optional<Move> attackEnemy,
-		Optional<Weather> weather,
-		Optional<PlayerTrainer> playerMoney
+		Optional<Weather> weather
 			);
 	//For pokeObjects
 	void parseEffect(
 		JSONObject effect,
 		Pokemon pokemon
-			);
-	void parseEffect(
-		JSONObject effect,
-		PlayerTrainer playerMoney
 			);
 }
