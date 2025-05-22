@@ -191,7 +191,7 @@ public class BattleEngineImpl implements BattleEngine {
             final Move defenderMove) {
         this.effectParserInstance.parseEffect(effect,
                 attackerPokemon, defenderPokemon, Optional.of(atteckerMove), Optional.of(defenderMove),
-                this.currentWeather);
+                this.currentWeather, Optional.of(playerTrainerInstance));
     }
 
     private void handleSwitch(final Pokemon user, final Pokemon target, final Move moveUser, final Move moveTarget,
