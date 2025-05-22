@@ -28,7 +28,6 @@
     "weight": 40,
     "abilites": [
         "shell-armor",
-        "skill-link",
         "overcoat"
     ],
     "givesEV": {

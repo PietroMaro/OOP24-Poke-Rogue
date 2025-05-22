@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene.scenefight;
+package it.unibo.PokeRogue.scene.scene_fight;
 
 import java.awt.Color;
 import java.util.Map;
@@ -12,9 +12,8 @@ import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
-import it.unibo.PokeRogue.scene.scenefight.enums.SceneFightGraphicEnum;
-import it.unibo.PokeRogue.scene.scenefight.enums.SceneFightStatusValuesEnum;
-import it.unibo.PokeRogue.scene.scenefight.enums.SceneFightUtilities;
+import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightGraphicEnum;
+import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightStatusValuesEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
@@ -213,12 +212,13 @@ public class SceneFightInitView {
          */
         private void initSpriteElements() {
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.MY_POKEMON_SPRITE.value(),
-                                new SpriteElementImpl(FIRST_PANEL, (playerTrainerInstance
-                                                .getPokemon(FIRST_POSITION).get().getSpriteBack()), 0.03, 0.21, 0.55,
+
+                                new SpriteElementImpl(FIRST_PANEL, playerTrainerInstance
+                                                .getPokemon(FIRST_POSITION).get().getSpriteBack(), 0.03, 0.21, 0.55,
                                                 0.55));
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.ENEMY_POKEMON_SPRITE.value(),
-                                new SpriteElementImpl(FIRST_PANEL, (enemyTrainerInstance
-                                                .getPokemon(FIRST_POSITION).get().getSpriteFront()), 0.4, 0.1, 0.55,
+                                new SpriteElementImpl(FIRST_PANEL, enemyTrainerInstance
+                                                .getPokemon(FIRST_POSITION).get().getSpriteFront(), 0.4, 0.1, 0.55,
                                                 0.55));
         }
 }

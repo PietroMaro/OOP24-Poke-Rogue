@@ -70,6 +70,7 @@ public class EffectParserImpl extends SingletonImpl implements EffectParser {
 	private Object parseSingleExpression(String expression) {
 		JexlEngine jexl = new JexlBuilder().create();
 		JexlExpression expr = jexl.createExpression(expression);
+		
 		Object result = expr.evaluate(createContext());
 		return result;
 	}

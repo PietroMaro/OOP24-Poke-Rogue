@@ -1,4 +1,5 @@
-package it.unibo.PokeRogue.scene.scenefight;
+package it.unibo.PokeRogue.scene.scene_fight;
+
 
 import java.util.Random;
 
@@ -60,7 +61,9 @@ public class GenerateEnemyImpl implements GenerateEnemy {
      */
     private void generateWildPokemon() {
         final int baseLevel = calculatePokemonLevel();
-        final int variance = new Random().nextInt(5) - 2;
+
+        final int variance = new Random().nextInt(3) - 2;
+
         final int level = Math.max(0, Math.min(baseLevel + variance < 1 ? 0 : baseLevel + variance, 100));
         final Pokemon wild = pokemonFactory.randomPokemon(level);
         this.enemyTrainerInstance.addPokemon(wild, 1);
@@ -75,7 +78,9 @@ public class GenerateEnemyImpl implements GenerateEnemy {
         final int teamSize = Math.min(3 + battleLevel / 10, 6);
         final int baseLevel = calculatePokemonLevel();
         for (int i = 1; i <= teamSize; i++) {
-            final int variance = new Random().nextInt(5) - 2;
+
+            final int variance = new Random().nextInt(3) - 2;
+
             final int level = Math.max(0, Math.min(baseLevel + variance < MIN_LEVEL ? 0 : baseLevel + variance, 100));
             final Pokemon teamPokemon = pokemonFactory.randomPokemon(level);
             enemyTrainerInstance.addPokemon(teamPokemon, i);
@@ -89,7 +94,9 @@ public class GenerateEnemyImpl implements GenerateEnemy {
      * @return the calculated level for the generated Pokémon
      */
     private int calculatePokemonLevel() {
-        final double scalingFactor = 0.2;
-        return (int) Math.floor(1 + Math.pow(battleLevel, 0.2) * scalingFactor);
+
+        final double scalingFactor = 0.8;
+        return (int) Math.floor(1 + Math.pow(battleLevel, 0.8) * scalingFactor);
+
     }
 }

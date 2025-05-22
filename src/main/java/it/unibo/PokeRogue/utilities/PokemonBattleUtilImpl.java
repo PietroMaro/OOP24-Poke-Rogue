@@ -77,7 +77,7 @@ public class PokemonBattleUtilImpl implements PokemonBattleUtil {
         return Math.max(1, (int) totalDamage); 
 
     }
-
+    
     /**
      * Calculates the ratio between the specified attack and defense stats of the
      * given attacking and defending Pokémon.

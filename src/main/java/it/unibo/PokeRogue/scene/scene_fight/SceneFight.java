@@ -1,18 +1,17 @@
-package it.unibo.PokeRogue.scene.scenefight;
+package it.unibo.PokeRogue.scene.scene_fight;
+
 
 import java.awt.event.KeyEvent;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import it.unibo.PokeRogue.ai.EnemyAi;
 import it.unibo.PokeRogue.ai.EnemyAiImpl;
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
-import it.unibo.PokeRogue.move.MoveFactoryImpl;
 import it.unibo.PokeRogue.scene.Scene;
-import it.unibo.PokeRogue.scene.scenefight.enums.SceneFightStatusValuesEnum;
-import it.unibo.PokeRogue.scene.scenefight.enums.SceneFightUtilities;
+import it.unibo.PokeRogue.scene.scene_fight.enums.DecisionTypeEnum;
+import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightStatusValuesEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import lombok.Getter;
 
@@ -25,6 +24,7 @@ import lombok.Getter;
  * It also updates the graphic elements displayed on the screen based on user
  * interactions.
  */
+
 public class SceneFight implements Scene {
 
     @Getter
@@ -36,13 +36,10 @@ public class SceneFight implements Scene {
     private final SceneFightView sceneFightView;
     private int newSelectedButton;
     private final EnemyAi enemyAiInstance;
-    private final MoveFactoryImpl moveFactoryInstance;
+
     private final BattleEngine battleEngineInstance;
     private final GenerateEnemy generateEnemyInstance;
-    private static final String MOVE_TYPE_ATTACK = "Attack";
-    private static final String MOVE_TYPE_SWITCH = "SwitchIn";
-    private static final String MOVE_TYPE_POKEBALL = "Pokeball";
-    private static final String MOVE_TYPE_RUN = "Run";
+
 
     /**
      * Constructor for SceneFight.
@@ -55,9 +52,8 @@ public class SceneFight implements Scene {
         this.enemyTrainerInstance = new PlayerTrainerImpl();
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
-        this.moveFactoryInstance = new MoveFactoryImpl();
         this.enemyAiInstance = new EnemyAiImpl(enemyTrainerInstance, battleLevel);
-        this.battleEngineInstance = new BattleEngineImpl(moveFactoryInstance, enemyTrainerInstance, enemyAiInstance);
+        this.battleEngineInstance = new BattleEngineImpl(enemyTrainerInstance, enemyAiInstance);
         this.generateEnemyInstance = new GenerateEnemyImpl(battleLevel, enemyTrainerInstance);
         this.generateEnemyInstance.generateEnemy();
         this.initStatus();
@@ -91,7 +87,6 @@ public class SceneFight implements Scene {
     public void updateGraphic() {
         this.sceneFightView.updateGraphic(currentSelectedButton, newSelectedButton);
     }
-
     /**
      * Updates the status of the scene based on the key input from the user.
      * This method handles user interactions, such as navigating through the buttons
@@ -141,57 +136,58 @@ public class SceneFight implements Scene {
             case KeyEvent.VK_ENTER:
                 switch (newSelectedButton) {
                     case 100:
-                        fightLoop(MOVE_TYPE_ATTACK, "0");
+                        fightLoop(new Decision(DecisionTypeEnum.ATTACK, "0"));
                         break;
 
                     case 101:
-                        fightLoop(MOVE_TYPE_ATTACK, "2");
+                        fightLoop(new Decision(DecisionTypeEnum.ATTACK, "2"));
                         break;
 
                     case 102:
-                        fightLoop(MOVE_TYPE_ATTACK, "1");
+                        fightLoop(new Decision(DecisionTypeEnum.ATTACK, "1"));
                         break;
 
                     case 103:
-                        fightLoop(MOVE_TYPE_ATTACK, "3");
+                        fightLoop(new Decision(DecisionTypeEnum.ATTACK, "3"));
                         break;
 
                     case 200:
-                        fightLoop(MOVE_TYPE_SWITCH, "1");
+                        fightLoop(new Decision(DecisionTypeEnum.SWITCH_IN, "1"));
                         break;
 
                     case 201:
-                        fightLoop(MOVE_TYPE_SWITCH, "2");
+                        fightLoop(new Decision(DecisionTypeEnum.SWITCH_IN, "2"));
                         break;
 
                     case 202:
-                        fightLoop(MOVE_TYPE_SWITCH, "3");
+                        fightLoop(new Decision(DecisionTypeEnum.SWITCH_IN, "3"));
                         break;
 
                     case 203:
-                        fightLoop(MOVE_TYPE_SWITCH, "4");
+                        fightLoop(new Decision(DecisionTypeEnum.SWITCH_IN, "4"));
                         break;
 
                     case 204:
-                        fightLoop(MOVE_TYPE_SWITCH, "5");
+                        fightLoop(new Decision(DecisionTypeEnum.SWITCH_IN, "5"));
                         break;
                     case 300:
-                        fightLoop(MOVE_TYPE_POKEBALL, "pokeball");
+                        fightLoop(new Decision(DecisionTypeEnum.POKEBALL, "pokeball"));
                         break;
 
                     case 301:
-                        fightLoop(MOVE_TYPE_POKEBALL, "megaball");
+                        fightLoop(new Decision(DecisionTypeEnum.POKEBALL, "megaball"));
                         break;
 
                     case 302:
-                        fightLoop(MOVE_TYPE_POKEBALL, "ultraball");
+                        fightLoop(new Decision(DecisionTypeEnum.POKEBALL, "ultraball"));
                         break;
 
                     case 303:
-                        fightLoop(MOVE_TYPE_POKEBALL, "masterball");
+                        fightLoop(new Decision(DecisionTypeEnum.POKEBALL, "masterball"));
                         break;
                     case 4:
-                        fightLoop(MOVE_TYPE_RUN, "");
+                        fightLoop(new Decision(DecisionTypeEnum.NOTHING, ""));
+
                         break;
                     default:
                         break;
@@ -218,10 +214,12 @@ public class SceneFight implements Scene {
      * @param playerMoveType the type of the move (e.g., "Attack", "SwitchIn", etc.)
      * @param playerMove     the selected move from the player
      */
-    public void fightLoop(final String playerMoveType, final String playerMove) {
-        final List<String> enemyChoose = enemyAiInstance.nextMove(battleEngineInstance.getCurrentWeather());
-        this.battleEngineInstance.movesPriorityCalculator(playerMoveType, playerMove,
-                enemyChoose.getFirst(), enemyChoose.getLast());
+
+    private void fightLoop(final Decision decision) {
+        final Decision enemyChoose = enemyAiInstance.nextMove(battleEngineInstance.getCurrentWeather());
+        System.out.println(enemyChoose);
+        this.battleEngineInstance.runBattleTurn(decision, enemyChoose);
+
     }
 
     /**

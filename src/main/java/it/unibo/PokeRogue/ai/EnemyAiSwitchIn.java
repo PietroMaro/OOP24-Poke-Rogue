@@ -10,6 +10,8 @@ import java.util.Random;
 import java.util.Set;
 
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.scene.scene_fight.Decision;
+import it.unibo.PokeRogue.scene.scene_fight.enums.DecisionTypeEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
 import it.unibo.PokeRogue.utilities.PokeEffectivenessCalc;
@@ -59,19 +61,21 @@ public class EnemyAiSwitchIn {
     }
 
     /**
-     * Determines whether a switch should happen and returns the decision.
+     * Determines whether the enemy AI should switch Pokémon and returns the
+     * corresponding decision.
      *
-     * @return a list containing the action ("SwitchIn" or "Nothing") and additional
-     *         info (like index)
+     * @return a {@link Decision} indicating a switch-in with the target position,
+     *         or a fallback indicating no action
      */
-    protected List<String> willSwitchIn() {
+    protected Decision willSwitchIn() {
 
         if (enemyTrainer.getPokemon(1).isPresent() && shouldSwitch()) {
 
-            return List.of("SwitchIn", String.valueOf(this.switchPosition));
+            return new Decision(DecisionTypeEnum.SWITCH_IN, String.valueOf(this.switchPosition));
+
         }
 
-        return List.of("Nothing", "Nothing");
+        return new Decision(DecisionTypeEnum.NOTHING, "Nothing");
     }
 
     /**
@@ -115,8 +119,8 @@ public class EnemyAiSwitchIn {
         final Pokemon currentPokemon = this.enemyTrainer.getPokemon(0).get();
         boolean canSwitch = false;
 
-        for(Optional<Pokemon> pokemon : enemyTrainer.getSquad().subList(1, 6)){
-            if(pokemon.isPresent() && pokemon.get().getActualStats().get("hp").getCurrentValue() > 0){
+        for (Optional<Pokemon> pokemon : enemyTrainer.getSquad().subList(1, 6)) {
+            if (pokemon.isPresent() && pokemon.get().getActualStats().get("hp").getCurrentValue() > 0) {
                 canSwitch = true;
                 break;
             }

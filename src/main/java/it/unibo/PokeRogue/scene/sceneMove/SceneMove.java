@@ -35,8 +35,7 @@ public class SceneMove implements Scene {
     private final UtilitiesForScenes utilityClass;
     private final SceneMoveView sceneMoveView;
     private int newSelectedButton;
-    private PlayerTrainerImpl playerTrainerInstance;
-    private Pokemon playerPokemon;
+    private final Pokemon playerPokemon;
 
     /**
      * Constructs a new SceneMove.
@@ -52,8 +51,7 @@ public class SceneMove implements Scene {
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.utilityClass = new UtilitiesForScenesImpl("move", sceneGraphicElements);
         this.sceneMoveView = new SceneMoveView(sceneGraphicElements, allPanelsElements);
-        this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-        this.playerPokemon = playerTrainerInstance.getPokemon(0).get();
+        this.playerPokemon = PlayerTrainerImpl.getTrainerInstance().getPokemon(0).get();
         this.initStatus();
         this.initGraphicElements();
     }

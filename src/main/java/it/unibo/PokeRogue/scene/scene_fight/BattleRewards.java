@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.scene.scenefight;
+package it.unibo.PokeRogue.scene.scene_fight;
 
 import java.util.Map;
 
@@ -24,7 +24,7 @@ public final class BattleRewards {
      * @param defeatedPokemon the Pokémon that was defeated in the battle
      */
     public static void awardBattleRewards(final Pokemon winnerPokemon, final Pokemon defeatedPokemon) {
-        final int baseExp = 150;
+        final int baseExp = 120;
         final int enemyLevel = defeatedPokemon.getLevel().getCurrentValue();
         final int playerLevel = winnerPokemon.getLevel().getCurrentValue();
 

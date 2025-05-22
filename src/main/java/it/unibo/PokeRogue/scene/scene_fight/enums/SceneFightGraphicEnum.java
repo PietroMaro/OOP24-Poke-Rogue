@@ -1,9 +1,9 @@
-package it.unibo.PokeRogue.scene.scenefight.enums;
+package it.unibo.PokeRogue.scene.scene_fight.enums;
+
 
 public enum SceneFightGraphicEnum {
 
     BACKGROUND(400),
-    DETAILS_CONTAINER_BOX(401), //nop
     DETAILS_CONTAINER_TEXT(402),
     FIGHT_BUTTON_TEXT(403),
     BALL_BUTTON_TEXT(404),
@@ -26,18 +26,13 @@ public enum SceneFightGraphicEnum {
     ENEMY_POKEMON_STATUS_TEXT(421),
     ENEMY_POKEMON_LIFE_BOX(422),
 
-    MOVES_DETAIL_CONTAINER_BOX(423), //nop
     MOVE_1_TEXT(424),
     MOVE_2_TEXT(425),
     MOVE_3_TEXT(426),
     MOVE_4_TEXT(427),
     MOVE_TYPE_TEXT(428),
-    MOVE_TYPE_VALUE_TEXT(429), //nop
     MOVE_PP_TEXT(430),
-    MOVE_PP_VALUE_TEXT(431), //nop
-    MOVE_PP_VALUE_MAX_TEXT(432), //nop
     MOVE_POWER_TEXT(433),
-    MOVE_POWER_VALUE_TEXT(434), //nop
     MOVE_TYPE(481),
 
     POKEMON_1_STATS_BOX(435),
@@ -79,18 +74,14 @@ public enum SceneFightGraphicEnum {
 
     BALL_BOX(471),
     POKEBALL_TEXT(472),
-    POKEBALL_NUMBER_TEXT(473), // nop
     MEGABALL_TEXT(474),
-    MEGABALL_NUMBER_TEXT(475), // nop
     ULTRABALL_TEXT(476),
-    ULTRABALL_NUMBER_TEXT(477), // nop
     MASTERBALL_TEXT(478),
-    MASTERBALL_NUMBER_TEXT(479), // nop
     CANCEL_TEXT(480);
 
     private final int code;
 
-    SceneFightGraphicEnum(int code) {
+    SceneFightGraphicEnum(final int code) {
         this.code = code;
     }
 
