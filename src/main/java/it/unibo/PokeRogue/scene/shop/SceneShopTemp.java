@@ -3,10 +3,17 @@ package it.unibo.PokeRogue.scene.shop;
 import java.awt.event.KeyEvent;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
+import org.json.JSONObject;
+
+import it.unibo.PokeRogue.GameEngineImpl;
+import it.unibo.PokeRogue.effectParser.EffectParser;
+import it.unibo.PokeRogue.effectParser.EffectParserImpl;
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.items.Item;
+import it.unibo.PokeRogue.items.ItemFactoryImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.scene.shop.enums.SceneShopStatusEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
@@ -18,22 +25,27 @@ public class SceneShopTemp implements Scene {
     @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final PlayerTrainerImpl playerTrainerInstance;
-    
+    private final GameEngineImpl gameEngineInstance;
     private int newSelectedButton;
     private int currentSelectedButton;
     private final SceneShopView sceneShopView;
     private final SceneShopUtilities sceneShopUtilities;
+    private final ItemFactoryImpl itemFactoryInstance;
     private boolean selectedItemForUse = false;
+    private Item selectedUsableItem = null;
     private boolean BuyedItem = false;
-    
+    private final EffectParser effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
 
     public SceneShopTemp() {
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
-        this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-        this.sceneShopView = new SceneShopView(sceneGraphicElements, allPanelsElements, currentSelectedButton,
-                newSelectedButton, this);
         this.sceneShopUtilities = new SceneShopUtilities();
+        this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
+        this.itemFactoryInstance = new ItemFactoryImpl();
+        this.sceneShopView = new SceneShopView(sceneGraphicElements, allPanelsElements, itemFactoryInstance,
+                playerTrainerInstance,
+                currentSelectedButton, newSelectedButton, this, sceneShopUtilities);
+        this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.initStatus();
         this.initGraphicElements();
     }
@@ -91,35 +103,37 @@ public class SceneShopTemp implements Scene {
                     // Resetta lo stato dello shop alla visualizzazione iniziale
                     this.newSelectedButton = SceneShopStatusEnum.PRICY_ITEM_1_BUTTON.value();
                     if (BuyedItem) {
-                        sceneShopView.compensation(playerTrainerInstance);
+                        compensation(playerTrainerInstance);
                         BuyedItem = false;
                     }
                     this.selectedItemForUse = false;
-                    sceneShopView.updateGraphic(newSelectedButton);
+                    sceneShopView.updateGraphic(currentSelectedButton, newSelectedButton);
                 } else if ((this.newSelectedButton >= 200
                         && this.newSelectedButton <= 205) && selectedItemForUse) {
                     this.initGraphicElements();
-                    sceneShopView.applyItemToPokemon(this.newSelectedButton - 200);
+                    applyItemToPokemon(this.newSelectedButton - 200, playerTrainerInstance,
+                            gameEngineInstance, effectParser);
                     this.newSelectedButton = SceneShopStatusEnum.PRICY_ITEM_1_BUTTON.value();
                 } else if (this.newSelectedButton >= SceneShopStatusEnum.PRICY_ITEM_1_BUTTON.value() &&
                         this.newSelectedButton <= SceneShopStatusEnum.PRICY_ITEM_3_BUTTON
                                 .value()) {
-                    Item item = sceneShopView.getShopItems(this.newSelectedButton - 4);
+                    Item item = SceneShopUtilities.getShopItems(this.newSelectedButton - 4);
                     if (playerTrainerInstance.getMoney() >= item.getPrice()) {
-                        sceneShopView.buyItem(item);
+                        buyItem(playerTrainerInstance, item, sceneShopView, gameEngineInstance);
                         BuyedItem = true;
                         this.newSelectedButton = SceneShopStatusEnum.CHANGE_POKEMON_1_BUTTON.value();
-                        sceneShopView.updateGraphic(newSelectedButton);
+                        sceneShopView.updateGraphic(currentSelectedButton, newSelectedButton);
                     }
                 } else if (this.newSelectedButton >= SceneShopStatusEnum.FREE_ITEM_1_BUTTON.value() &&
                         this.newSelectedButton <= SceneShopStatusEnum.FREE_ITEM_3_BUTTON
                                 .value()) {
-                    sceneShopView.getFreeItem(sceneShopView.getShopItems(this.newSelectedButton + 2));
+                    useOrHandleItem(playerTrainerInstance, gameEngineInstance,
+                            SceneShopUtilities.getShopItems(this.newSelectedButton + 2));
                     BuyedItem = false;
                     this.newSelectedButton = SceneShopStatusEnum.CHANGE_POKEMON_1_BUTTON.value();
-                    sceneShopView.updateGraphic(newSelectedButton);
+                    sceneShopView.updateGraphic(currentSelectedButton, newSelectedButton);
                 } else if (this.newSelectedButton == SceneShopStatusEnum.REROL_BUTTON.value()) {
-                    sceneShopView.rerollShopItems();
+                    rerollShopItems(playerTrainerInstance, itemFactoryInstance);
                 }
                 break;
         }
@@ -137,11 +151,73 @@ public class SceneShopTemp implements Scene {
 
     @Override
     public void updateGraphic() {
-        this.sceneShopView.updateGraphic(newSelectedButton);
+        this.sceneShopView.updateGraphic(currentSelectedButton, newSelectedButton);
     }
 
     public void setCurrentSelectedButton(final int newVal) {
         this.newSelectedButton = newVal;
     }
-    
+
+    public void buyItem(final PlayerTrainerImpl trainer, final Item item, final SceneShopView sceneShopView,
+            final GameEngineImpl gameEngineInstance) {
+
+        trainer.addMoney(-item.getPrice());
+        SceneShopUtilities.updatePlayerMoneyText(sceneGraphicElements, trainer);
+        useOrHandleItem(trainer, gameEngineInstance, item);
+
+    }
+
+    protected void useOrHandleItem(final PlayerTrainerImpl trainer, final GameEngineImpl gameEngineInstance,
+            final Item item) {
+        if (item.getType().equalsIgnoreCase("Capture")) {
+            int countBall = trainer.getBall().get(item.getName());
+            trainer.getBall().put(item.getName(), countBall + 1);
+            gameEngineInstance.setScene("fight");
+        } else if (item.getType().equalsIgnoreCase("Valuable")) {
+            Optional<JSONObject> itemEffect = item.getEffect();
+            this.effectParser.parseEffect(itemEffect.get(), trainer.getPokemon(0).get());
+            gameEngineInstance.setScene("fight");
+        } else if (item.getType().equalsIgnoreCase("Healing")
+                || item.getType().equalsIgnoreCase("Boost") || item.getType().equalsIgnoreCase("PPRestore")) {
+            this.selectedUsableItem = item;
+        }
+    }
+
+    public void applyItemToPokemon(final int pokemonIndex, final PlayerTrainerImpl trainer,
+            final GameEngineImpl gameEngineInstance, final EffectParser effectParser) {
+        if (this.selectedUsableItem != null) {
+            Optional<it.unibo.PokeRogue.pokemon.Pokemon> selectedPokemon = trainer
+                    .getPokemon(pokemonIndex);
+            if (selectedPokemon.isPresent()) {
+                it.unibo.PokeRogue.pokemon.Pokemon pokemon = selectedPokemon.get();
+
+                // Ottieni l'effetto dell'item
+                Optional<JSONObject> itemEffect = this.selectedUsableItem.getEffect();
+
+                if (itemEffect.isPresent()) {
+                    // Applica l'effetto al Pokémon
+                    effectParser.parseEffect(itemEffect.get(), pokemon);
+                }
+
+                this.selectedUsableItem = null; // Resetta l'item selezionato
+                gameEngineInstance.setScene("fight");
+            }
+        }
+    }
+
+    public void compensation(PlayerTrainerImpl playerTrainerInstance) {
+        playerTrainerInstance.addMoney(selectedUsableItem.getPrice());
+        selectedUsableItem = null;
+    }
+
+    public void rerollShopItems(PlayerTrainerImpl playerTrainerInstance, ItemFactoryImpl itemFactoryInstance) {
+        if (playerTrainerInstance.getMoney() >= 50) {
+            playerTrainerInstance.addMoney(-50);
+            SceneShopUtilities.updatePlayerMoneyText(sceneGraphicElements, playerTrainerInstance);
+            SceneShopUtilities.initShopItems(itemFactoryInstance);
+            SceneShopUtilities.updateItemsText(sceneGraphicElements);
+
+        }
+    }
+
 }

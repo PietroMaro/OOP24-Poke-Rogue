@@ -10,7 +10,6 @@ import org.json.JSONObject;
 
 import it.unibo.PokeRogue.GameEngineImpl;
 import it.unibo.PokeRogue.effectParser.EffectParser;
-import it.unibo.PokeRogue.effectParser.EffectParserImpl;
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.items.Item;
@@ -23,11 +22,10 @@ import it.unibo.PokeRogue.trainers.Trainer;
 
 public class SceneShopUtilities {
     private static final String QUESTION_MARK_STRING = "???";
-    private Item selectedItemForUse = null;
     private static final List<Item> shopItems = new ArrayList<>();
     private static final Integer PRICY_ITEMS_SIZE = 3;
     private static final Integer FREE_ITEMS_SIZE = 3;
-    private final EffectParser effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
+    private static final String FIRST_PANEL = "firstPanel";
 
     public SceneShopUtilities() {
 
@@ -53,63 +51,8 @@ public class SceneShopUtilities {
         return currentHp + " / " + maxHp;
     }
 
-    public void buyItem(final PlayerTrainerImpl trainer, final Item item, final SceneShopUpdateView sceneShopUpdateView,
-            final GameEngineImpl gameEngineInstance) {
-
-        trainer.addMoney(-item.getPrice());
-        sceneShopUpdateView.updatePlayerMoneyText();
-        useOrHandleItem(trainer, gameEngineInstance, item);
-
-    }
-
-    public void getFreeItem(final PlayerTrainerImpl trainer, final GameEngineImpl gameEngineInstance, Item item) {
-        useOrHandleItem(trainer, gameEngineInstance, item);
-    }
-
-    protected void useOrHandleItem(final PlayerTrainerImpl trainer, final GameEngineImpl gameEngineInstance,
-            final Item item) {
-        if (item.getType().equalsIgnoreCase("Capture")) {
-            int countBall = trainer.getBall().get(item.getName());
-            trainer.getBall().put(item.getName(), countBall + 1);
-            gameEngineInstance.setScene("fight");
-        } else if (item.getType().equalsIgnoreCase("Valuable")) {
-            System.out.println("entrato ");
-            Optional<JSONObject> itemEffect = item.getEffect();
-            this.effectParser.parseEffect(itemEffect.get(), trainer.getPokemon(0).get());
-            gameEngineInstance.setScene("fight");
-        } else if (item.getType().equalsIgnoreCase("Healing")
-                || item.getType().equalsIgnoreCase("Boost") || item.getType().equalsIgnoreCase("PPRestore")) {
-            this.selectedItemForUse = item;
-        } else {
-            System.out.println("ERR: item not recognized!");
-        }
-    }
-
-    public void applyItemToPokemon(final int pokemonIndex, final PlayerTrainerImpl trainer,
-            final GameEngineImpl gameEngineInstance) {
-        if (this.selectedItemForUse != null) {
-            Optional<it.unibo.PokeRogue.pokemon.Pokemon> selectedPokemon = trainer
-                    .getPokemon(pokemonIndex);
-            if (selectedPokemon.isPresent()) {
-                it.unibo.PokeRogue.pokemon.Pokemon pokemon = selectedPokemon.get();
-
-                // Ottieni l'effetto dell'item
-                Optional<JSONObject> itemEffect = this.selectedItemForUse.getEffect();
-
-                if (itemEffect.isPresent()) {
-                    // Applica l'effetto al Pokémon
-                    this.effectParser.parseEffect(itemEffect.get(), pokemon);
-                }
-
-                this.selectedItemForUse = null; // Resetta l'item selezionato
-                gameEngineInstance.setScene("fight");
-            }
-        }
-    }
-
     public static void initShopItems(ItemFactoryImpl itemFactory) {
-        List<Item> pricyItems = new ArrayList<>();
-        List<Item> freeItems = new ArrayList<>();
+        shopItems.clear();
         for (int i = 0; i < PRICY_ITEMS_SIZE; i++) {
             shopItems.add(itemFactory.randomItem());
         }
@@ -122,38 +65,66 @@ public class SceneShopUtilities {
         return shopItems.get(index);
     }
 
-    public void compensation(PlayerTrainerImpl playerTrainerInstance) {
-        playerTrainerInstance.addMoney(selectedItemForUse.getPrice());
-        selectedItemForUse = null;
-    }
-
-    public void rerollShopItems(PlayerTrainerImpl playerTrainerInstance, ItemFactoryImpl itemFactoryInstance) {
-        if (playerTrainerInstance.getMoney() >= 50) {
-            playerTrainerInstance.addMoney(-50);
-            initShopItems(itemFactoryInstance);
-            updateItemsText();
-        }
-    }
-
-    private void updateItemDescription(final int newSelectedButton,
-            final Map<Integer, GraphicElementImpl> sceneGraphicElements) {
-        Item item = null;
+    public static void updateItemDescription(final Map<Integer, GraphicElementImpl> sceneGraphicElements, Item item) {
+        System.out.println("PASSATO DA UPDATE DESCRIPTION!!!");
         sceneGraphicElements.remove(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value());
-        if (newSelectedButton >= SceneShopStatusEnum.FREE_ITEM_1_BUTTON.value() &&
-                newSelectedButton <= SceneShopStatusEnum.FREE_ITEM_3_BUTTON
-                        .value()) {
-            item = getShopItems(newSelectedButton + 2);
-        } else if (newSelectedButton >= SceneShopStatusEnum.PRICY_ITEM_1_BUTTON.value() &&
-                newSelectedButton <= SceneShopStatusEnum.PRICY_ITEM_3_BUTTON
-                        .value()) {
-            item = getShopItems(newSelectedButton - 4);
-        }
         sceneGraphicElements.put(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value(),
-                new TextElementImpl("firstPanel",
+                new TextElementImpl(FIRST_PANEL,
                         item.getDescription(),
                         Color.BLACK, 0.05,
                         0.35,
                         0.85));
+
+    }
+
+    public static void updateItemsText(final Map<Integer, GraphicElementImpl> sceneGraphicElements) {
+        System.out.println("SCENE GRAPHIC ELEMENTS:" + sceneGraphicElements);
+        for (int i = 0; i < PRICY_ITEMS_SIZE; i++) {
+            sceneGraphicElements.remove(SceneShopEnum.PRICY_ITEM_1_NAME_TEXT.value() + i);
+            sceneGraphicElements.remove(SceneShopEnum.PRICY_ITEM_1_PRICE_TEXT.value() + i);
+            sceneGraphicElements.remove(SceneShopEnum.FREE_ITEM_1_NAME_TEXT.value() + i);
+        }
+        for (int i = 0; i < PRICY_ITEMS_SIZE; i++) {
+            System.out.println("valore i:" + i);
+            Item item = SceneShopUtilities.getShopItems(i);
+
+            double xPosition = 0.14 + (i * 0.29);
+
+            sceneGraphicElements.put(SceneShopEnum.PRICY_ITEM_1_NAME_TEXT.value() + i,
+                    new TextElementImpl(FIRST_PANEL,
+                            item.getName(),
+                            Color.BLACK, 0.055,
+                            xPosition, 0.12));
+            sceneGraphicElements.put(SceneShopEnum.PRICY_ITEM_1_PRICE_TEXT.value() + i,
+                    new TextElementImpl(FIRST_PANEL,
+                            String.valueOf(item.getPrice()),
+                            Color.BLACK, 0.05,
+                            xPosition, 0.17));
+        }
+        for (int i = 0; i < FREE_ITEMS_SIZE; i++) {
+            int startIndex = PRICY_ITEMS_SIZE;
+            int tot = startIndex + i;
+            System.out.println("valore startIndex + i:" + tot);
+            Item item = SceneShopUtilities.getShopItems(startIndex + i);
+
+            double xPosition = 0.14 + (i * 0.29);
+
+            sceneGraphicElements.put(SceneShopEnum.FREE_ITEM_1_NAME_TEXT.value() + i,
+                    new TextElementImpl(FIRST_PANEL,
+                            item.getName(),
+                            Color.BLACK, 0.055,
+                            xPosition, 0.35));
+        }
+    }
+
+    public static void updatePlayerMoneyText(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
+            final PlayerTrainerImpl playerTrainerInstance) {
+
+        sceneGraphicElements.remove(SceneShopEnum.PLAYER_MONEY_TEXT.value());
+        sceneGraphicElements.put(SceneShopEnum.PLAYER_MONEY_TEXT.value(),
+                new TextElementImpl("firstPanel", "MONEY: " + playerTrainerInstance.getMoney(),
+                        Color.BLACK,
+                        0.04, 0.92, 0.04));
 
     }
 

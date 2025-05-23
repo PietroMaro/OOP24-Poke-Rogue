@@ -13,8 +13,6 @@ import it.unibo.PokeRogue.graphic.box.BoxElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
-import it.unibo.PokeRogue.items.Item;
-import it.unibo.PokeRogue.items.ItemFactoryImpl;
 import it.unibo.PokeRogue.scene.shop.enums.SceneShopEnum;
 import it.unibo.PokeRogue.scene.shop.enums.SceneShopStatusEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
@@ -28,8 +26,7 @@ public class SceneShopInitView {
         private final UtilitiesForScenes utilityClass;
         private final PlayerTrainerImpl playerTrainerInstance;
         private static final String FIRST_PANEL = "firstPanel";
-        private ItemFactoryImpl itemFactoryInstance;
-        
+        private int itemIndex;
 
         public SceneShopInitView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements) {
@@ -45,7 +42,35 @@ public class SceneShopInitView {
                 this.initButtonElements();
                 this.initBoxElements();
 
-                SceneShopUtilities.updateItemDescription(newSelectedButton,);
+                if (currentSelectedButton >= 1 && currentSelectedButton <= 6) {
+
+                        switch (currentSelectedButton) { 
+                                case 1:
+                                        this.itemIndex = 3;
+                                        break; 
+                                case 2:
+                                        this.itemIndex = 4;
+                                        break;
+                                case 3:
+                                        this.itemIndex = 5;
+                                        break;
+                                case 4:
+                                        this.itemIndex = 0;
+                                        break; 
+                                case 5:
+                                        this.itemIndex = 1;
+                                        break; 
+                                case 6:
+                                        this.itemIndex = 2;
+                                        break; 
+                                default:
+                                        this.itemIndex = 0;
+                                        break;
+                        }
+                }
+
+                SceneShopUtilities.updateItemDescription(sceneGraphicElements,
+                                SceneShopUtilities.getShopItems(this.itemIndex));
 
                 this.sceneGraphicElements.put(SceneShopEnum.BACKGROUND.value(),
                                 new BackgroundElementImpl(FIRST_PANEL,
@@ -58,7 +83,7 @@ public class SceneShopInitView {
 
         private void initTextElements() {
 
-                updateItemsText();
+                SceneShopUtilities.updateItemsText(sceneGraphicElements);
 
                 this.sceneGraphicElements.put(SceneShopEnum.PLAYER_MONEY_TEXT.value(),
                                 new TextElementImpl(FIRST_PANEL, "MONEY: " + playerTrainerInstance.getMoney(),
@@ -76,8 +101,6 @@ public class SceneShopInitView {
                                                 0.93,
                                                 0.68));
         }
-
-        
 
         private void initButtonElements() {
                 // Pulsanti degli item acquistabili (sopra)
@@ -117,7 +140,5 @@ public class SceneShopInitView {
                                                 0.10, 0.07));
 
         }
-
-        
 
 }
