@@ -41,37 +41,7 @@ public class SceneShopInitView {
                 this.initTextElements();
                 this.initButtonElements();
                 this.initBoxElements();
-
-                if (currentSelectedButton >= 1 && currentSelectedButton <= 6) {
-
-                        switch (currentSelectedButton) { 
-                                case 1:
-                                        this.itemIndex = 3;
-                                        break; 
-                                case 2:
-                                        this.itemIndex = 4;
-                                        break;
-                                case 3:
-                                        this.itemIndex = 5;
-                                        break;
-                                case 4:
-                                        this.itemIndex = 0;
-                                        break; 
-                                case 5:
-                                        this.itemIndex = 1;
-                                        break; 
-                                case 6:
-                                        this.itemIndex = 2;
-                                        break; 
-                                default:
-                                        this.itemIndex = 0;
-                                        break;
-                        }
-                }
-
-                SceneShopUtilities.updateItemDescription(sceneGraphicElements,
-                                SceneShopUtilities.getShopItems(this.itemIndex));
-
+                SceneShopUtilities.updateItemDescription(sceneGraphicElements, SceneShopUtilities.getShopItems(4));
                 this.sceneGraphicElements.put(SceneShopEnum.BACKGROUND.value(),
                                 new BackgroundElementImpl(FIRST_PANEL,
                                                 this.utilityClass.getPathString("images", "sceneShopBgBar.png")));

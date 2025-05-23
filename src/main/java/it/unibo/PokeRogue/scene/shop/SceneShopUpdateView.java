@@ -35,8 +35,7 @@ public class SceneShopUpdateView {
         private int currentSelectedButton;
         private int newSelectedButton;
         private final SceneShopTemp sceneInstance;
-        private Boolean alreadyInMainMenu;
-        
+        private Boolean alreadyInMainMenu = true;
 
         public SceneShopUpdateView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
@@ -50,35 +49,36 @@ public class SceneShopUpdateView {
                 this.utilityClass = new UtilitiesForScenesImpl("shop", sceneGraphicElements);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
                 this.sceneInstance = sceneInstance;
-                this.alreadyInMainMenu = true;
         }
 
-        protected void updateGraphic(final int currentSelectedButton,final int newSelectedButton) {
+        protected void updateGraphic(final int newSelectedButton) {
+                System.out.println("Bottone selezionato in update graphic: " + newSelectedButton);
                 this.newSelectedButton = newSelectedButton;
                 this.updateSelectedButton(newSelectedButton);
+                this.updateItemDescription();
                 this.updatePokemonSelection();
                 this.mainMenu();
 
         }
 
         private void updatePokemonSelection() {
-                if (currentSelectedButton >= SceneShopStatusEnum.CHANGE_POKEMON_1_BUTTON.value()
-                                && currentSelectedButton <= SceneShopStatusEnum.CHANGE_POKEMON_BACK_BUTTON.value()
-                                && alreadyInMainMenu) {
+                if (this.newSelectedButton >= SceneShopStatusEnum.CHANGE_POKEMON_1_BUTTON.value()
+                                && this.newSelectedButton <= SceneShopStatusEnum.CHANGE_POKEMON_BACK_BUTTON.value()
+                                && this.alreadyInMainMenu) {
                         this.alreadyInMainMenu = false;
+                        System.out.println("PASSATO DA UPDATE POKEMON");
                         sceneGraphicElements.clear();
                         this.allPanelsElements.put(POKEMON_PANEL_TEXT,
                                         new PanelElementImpl("firstPanel", new OverlayLayout(null)));
-                        this.sceneGraphicElements.clear();
                         this.initPokemonSelectionText();
                         this.initPokemonSelectionButtons();
 
-                        this.sceneGraphicElements.put(SceneShopEnum.BACKGROUND.value(),
+                        sceneGraphicElements.put(SceneShopEnum.BACKGROUND.value(),
                                         new BackgroundElementImpl(POKEMON_PANEL_TEXT,
                                                         this.utilityClass.getPathString("images", "sceneShopBg.png")));
 
                         // Set the first button as selected
-                        this.utilityClass.setButtonStatus(this.currentSelectedButton, true);
+                        this.utilityClass.setButtonStatus(this.newSelectedButton, true);
                 }
         }
 
@@ -221,13 +221,49 @@ public class SceneShopUpdateView {
         }
 
         private void updateSelectedButton(final int newSelectedButton) {
+                System.out.println("current button prima di update: " + currentSelectedButton);
                 this.utilityClass.setButtonStatus(this.currentSelectedButton, false);
                 this.utilityClass.setButtonStatus(newSelectedButton, true);
                 this.currentSelectedButton = newSelectedButton;
         }
 
+        private void updateItemDescription() {
+                int itemIndex;
+                if (this.newSelectedButton >= SceneShopStatusEnum.FREE_ITEM_1_BUTTON.value()
+                                && this.newSelectedButton <= SceneShopStatusEnum.PRICY_ITEM_3_BUTTON.value()
+                                && alreadyInMainMenu) {
+
+                        switch (this.newSelectedButton) {
+                                case 1:
+                                        itemIndex = 3;
+                                        break;
+                                case 2:
+                                        itemIndex = 4;
+                                        break;
+                                case 3:
+                                        itemIndex = 5;
+                                        break;
+                                case 4:
+                                        itemIndex = 0;
+                                        break;
+                                case 5:
+                                        itemIndex = 1;
+                                        break;
+                                case 6:
+                                        itemIndex = 2;
+                                        break;
+                                default:
+                                        itemIndex = 0;
+                                        break;
+                        }
+                        SceneShopUtilities.updateItemDescription(sceneGraphicElements,
+                                        SceneShopUtilities.getShopItems(itemIndex));
+                }
+        }
+
         private void mainMenu() {
-                if (!alreadyInMainMenu) {
+                if (!alreadyInMainMenu && this.newSelectedButton >= SceneShopStatusEnum.FREE_ITEM_1_BUTTON.value()
+                                && this.newSelectedButton <= SceneShopStatusEnum.TEAM_BUTTON.value()) {
                         sceneGraphicElements.clear();
                         allPanelsElements.clear();
                         sceneInstance.setCurrentSelectedButton(currentSelectedButton);

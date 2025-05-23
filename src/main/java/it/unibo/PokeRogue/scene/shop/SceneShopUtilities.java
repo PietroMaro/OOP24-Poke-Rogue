@@ -66,8 +66,6 @@ public class SceneShopUtilities {
     }
 
     public static void updateItemDescription(final Map<Integer, GraphicElementImpl> sceneGraphicElements, Item item) {
-        System.out.println("PASSATO DA UPDATE DESCRIPTION!!!");
-        sceneGraphicElements.remove(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value());
         sceneGraphicElements.put(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value(),
                 new TextElementImpl(FIRST_PANEL,
                         item.getDescription(),
@@ -78,14 +76,8 @@ public class SceneShopUtilities {
     }
 
     public static void updateItemsText(final Map<Integer, GraphicElementImpl> sceneGraphicElements) {
-        System.out.println("SCENE GRAPHIC ELEMENTS:" + sceneGraphicElements);
+        
         for (int i = 0; i < PRICY_ITEMS_SIZE; i++) {
-            sceneGraphicElements.remove(SceneShopEnum.PRICY_ITEM_1_NAME_TEXT.value() + i);
-            sceneGraphicElements.remove(SceneShopEnum.PRICY_ITEM_1_PRICE_TEXT.value() + i);
-            sceneGraphicElements.remove(SceneShopEnum.FREE_ITEM_1_NAME_TEXT.value() + i);
-        }
-        for (int i = 0; i < PRICY_ITEMS_SIZE; i++) {
-            System.out.println("valore i:" + i);
             Item item = SceneShopUtilities.getShopItems(i);
 
             double xPosition = 0.14 + (i * 0.29);
@@ -102,10 +94,7 @@ public class SceneShopUtilities {
                             xPosition, 0.17));
         }
         for (int i = 0; i < FREE_ITEMS_SIZE; i++) {
-            int startIndex = PRICY_ITEMS_SIZE;
-            int tot = startIndex + i;
-            System.out.println("valore startIndex + i:" + tot);
-            Item item = SceneShopUtilities.getShopItems(startIndex + i);
+            Item item = SceneShopUtilities.getShopItems(PRICY_ITEMS_SIZE + i);
 
             double xPosition = 0.14 + (i * 0.29);
 
@@ -119,8 +108,6 @@ public class SceneShopUtilities {
 
     public static void updatePlayerMoneyText(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
             final PlayerTrainerImpl playerTrainerInstance) {
-
-        sceneGraphicElements.remove(SceneShopEnum.PLAYER_MONEY_TEXT.value());
         sceneGraphicElements.put(SceneShopEnum.PLAYER_MONEY_TEXT.value(),
                 new TextElementImpl("firstPanel", "MONEY: " + playerTrainerInstance.getMoney(),
                         Color.BLACK,

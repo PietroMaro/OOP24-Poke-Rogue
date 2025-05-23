@@ -29,8 +29,8 @@ public class SceneShopView {
         this.sceneShopInitView.initGraphicElements(currentSelectedButton);
     }
 
-    protected void updateGraphic(final int currentSelectedButton,final int newSelectedButton) {
-        this.sceneShopUpdateView.updateGraphic(currentSelectedButton,newSelectedButton);
+    protected void updateGraphic(final int newSelectedButton) {
+        this.sceneShopUpdateView.updateGraphic(newSelectedButton);
     }
 
     protected void updatePlayerMoneyText(final Map<Integer, GraphicElementImpl> sceneGraphicElements,final PlayerTrainerImpl playerTrainerInstance){

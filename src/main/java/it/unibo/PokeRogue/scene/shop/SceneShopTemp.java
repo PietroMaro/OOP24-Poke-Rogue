@@ -100,14 +100,13 @@ public class SceneShopTemp implements Scene {
                     this.newSelectedButton = SceneShopStatusEnum.CHANGE_POKEMON_1_BUTTON.value();
                 } else if (this.newSelectedButton == SceneShopStatusEnum.CHANGE_POKEMON_BACK_BUTTON
                         .value()) {
-                    // Resetta lo stato dello shop alla visualizzazione iniziale
                     this.newSelectedButton = SceneShopStatusEnum.PRICY_ITEM_1_BUTTON.value();
                     if (BuyedItem) {
                         compensation(playerTrainerInstance);
                         BuyedItem = false;
                     }
                     this.selectedItemForUse = false;
-                    sceneShopView.updateGraphic(currentSelectedButton, newSelectedButton);
+                    sceneShopView.updateGraphic(newSelectedButton);
                 } else if ((this.newSelectedButton >= 200
                         && this.newSelectedButton <= 205) && selectedItemForUse) {
                     this.initGraphicElements();
@@ -119,19 +118,21 @@ public class SceneShopTemp implements Scene {
                                 .value()) {
                     Item item = SceneShopUtilities.getShopItems(this.newSelectedButton - 4);
                     if (playerTrainerInstance.getMoney() >= item.getPrice()) {
+                        this.selectedItemForUse = true;
                         buyItem(playerTrainerInstance, item, sceneShopView, gameEngineInstance);
                         BuyedItem = true;
                         this.newSelectedButton = SceneShopStatusEnum.CHANGE_POKEMON_1_BUTTON.value();
-                        sceneShopView.updateGraphic(currentSelectedButton, newSelectedButton);
+                        sceneShopView.updateGraphic(newSelectedButton);
                     }
                 } else if (this.newSelectedButton >= SceneShopStatusEnum.FREE_ITEM_1_BUTTON.value() &&
                         this.newSelectedButton <= SceneShopStatusEnum.FREE_ITEM_3_BUTTON
                                 .value()) {
+                    this.selectedItemForUse = true;
                     useOrHandleItem(playerTrainerInstance, gameEngineInstance,
                             SceneShopUtilities.getShopItems(this.newSelectedButton + 2));
                     BuyedItem = false;
                     this.newSelectedButton = SceneShopStatusEnum.CHANGE_POKEMON_1_BUTTON.value();
-                    sceneShopView.updateGraphic(currentSelectedButton, newSelectedButton);
+                    sceneShopView.updateGraphic(newSelectedButton);
                 } else if (this.newSelectedButton == SceneShopStatusEnum.REROL_BUTTON.value()) {
                     rerollShopItems(playerTrainerInstance, itemFactoryInstance);
                 }
@@ -151,7 +152,7 @@ public class SceneShopTemp implements Scene {
 
     @Override
     public void updateGraphic() {
-        this.sceneShopView.updateGraphic(currentSelectedButton, newSelectedButton);
+        this.sceneShopView.updateGraphic(newSelectedButton);
     }
 
     public void setCurrentSelectedButton(final int newVal) {
