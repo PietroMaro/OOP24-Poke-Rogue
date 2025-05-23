@@ -14,6 +14,7 @@ import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.items.Item;
+import it.unibo.PokeRogue.items.ItemFactoryImpl;
 import it.unibo.PokeRogue.scene.shop.enums.SceneShopEnum;
 import it.unibo.PokeRogue.scene.shop.enums.SceneShopStatusEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
@@ -26,10 +27,8 @@ public class SceneShopInitView {
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final UtilitiesForScenes utilityClass;
         private final PlayerTrainerImpl playerTrainerInstance;
-        private final SceneShopUtilities sceneShopUtilities;
         private static final String FIRST_PANEL = "firstPanel";
-        private static final Integer PRICY_ITEMS_SIZE = 3;
-        private static final Integer FREE_ITEMS_SIZE = 3;
+        private ItemFactoryImpl itemFactoryInstance;
         
 
         public SceneShopInitView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
@@ -38,7 +37,6 @@ public class SceneShopInitView {
                 this.allPanelsElements = allPanelsElements;
                 this.utilityClass = new UtilitiesForScenesImpl("shop", sceneGraphicElements);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-                this.sceneShopUtilities = new SceneShopUtilities();
         }
 
         public void initGraphicElements(final int currentSelectedButton) {
@@ -47,6 +45,8 @@ public class SceneShopInitView {
                 this.initButtonElements();
                 this.initBoxElements();
 
+                SceneShopUtilities.updateItemDescription(newSelectedButton,);
+
                 this.sceneGraphicElements.put(SceneShopEnum.BACKGROUND.value(),
                                 new BackgroundElementImpl(FIRST_PANEL,
                                                 this.utilityClass.getPathString("images", "sceneShopBgBar.png")));
@@ -54,42 +54,6 @@ public class SceneShopInitView {
                 // Set the first button as selected
                 this.utilityClass.setButtonStatus(currentSelectedButton, true);
 
-        }
-
-        private void updateItemsText() {
-                for (int i = 0; i < PRICY_ITEMS_SIZE; i++) {
-                        this.sceneGraphicElements.remove(SceneShopEnum.PRICY_ITEM_1_NAME_TEXT.value() + i);
-                        this.sceneGraphicElements.remove(SceneShopEnum.PRICY_ITEM_1_PRICE_TEXT.value() + i);
-                        this.sceneGraphicElements.remove(SceneShopEnum.FREE_ITEM_1_NAME_TEXT.value() + i);
-                }
-                for (int i = 0; i < PRICY_ITEMS_SIZE; i++) {
-                        Item item = sceneShopUtilities.getShopItems(i);
-
-                        double xPosition = 0.14 + (i * 0.29);
-
-                        this.sceneGraphicElements.put(SceneShopEnum.PRICY_ITEM_1_NAME_TEXT.value() + i,
-                                        new TextElementImpl(FIRST_PANEL,
-                                                        item.getName(),
-                                                        Color.BLACK, 0.055,
-                                                        xPosition, 0.12));
-                        this.sceneGraphicElements.put(SceneShopEnum.PRICY_ITEM_1_PRICE_TEXT.value() + i,
-                                        new TextElementImpl(FIRST_PANEL,
-                                                        String.valueOf(item.getPrice()),
-                                                        Color.BLACK, 0.05,
-                                                        xPosition, 0.17));
-                }
-                for (int i = 0; i < FREE_ITEMS_SIZE; i++) {
-                        int startIndex = PRICY_ITEMS_SIZE;
-                        Item item = sceneShopUtilities.getShopItems(startIndex + i);
-
-                        double xPosition = 0.14 + (i * 0.29);
-
-                        this.sceneGraphicElements.put(SceneShopEnum.FREE_ITEM_1_NAME_TEXT.value() + i,
-                                        new TextElementImpl(FIRST_PANEL,
-                                                        item.getName(),
-                                                        Color.BLACK, 0.055,
-                                                        xPosition, 0.35));
-                }
         }
 
         private void initTextElements() {
@@ -105,14 +69,6 @@ public class SceneShopInitView {
                                 new TextElementImpl(FIRST_PANEL, "REROLL: " + 50,
                                                 Color.BLACK, 0.055, 0.01,
                                                 0.68));
-
-                Item item = sceneShopUtilities.getShopItems(0);
-                this.sceneGraphicElements.put(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value(),
-                                new TextElementImpl(FIRST_PANEL,
-                                                item.getDescription(),
-                                                Color.BLACK, 0.05,
-                                                0.35,
-                                                0.85));
 
                 this.sceneGraphicElements.put(SceneShopEnum.TEAM_TEXT.value(),
                                 new TextElementImpl(FIRST_PANEL,
@@ -162,12 +118,6 @@ public class SceneShopInitView {
 
         }
 
-        public void rerollShopItems() {
-                if (playerTrainerInstance.getMoney() >= 50) {
-                        playerTrainerInstance.addMoney(-50);
-                        sceneShopUtilities.initShopItems();
-                        updateItemsText();
-                }
-        }
+        
 
 }

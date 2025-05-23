@@ -4,6 +4,7 @@ import java.util.Map;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
+import it.unibo.PokeRogue.items.Item;
 
 public class SceneShopView {
 
@@ -18,13 +19,12 @@ public class SceneShopView {
         this.sceneShopUpdateView = new SceneShopUpdateView(this.sceneGraphicElements, allPanelsElements,currentSelectedButton, newSelectedButton, scene);
 
     }
-
     protected void initGraphicElements(final int currentSelectedButton) {
         this.sceneShopInitView.initGraphicElements(currentSelectedButton);
     }
-
     protected void updateGraphic(final int newSelectedButton) {
         this.sceneShopUpdateView.updateGraphic(newSelectedButton);
     }
+    }
     
-}
+

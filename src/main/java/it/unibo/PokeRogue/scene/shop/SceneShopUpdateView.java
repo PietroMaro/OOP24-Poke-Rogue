@@ -32,28 +32,16 @@ public class SceneShopUpdateView {
         private static final String FIRST_PANEL = "firstPanel";
         private static final String POKEMON_PANEL_TEXT = "pokemonSelection";
         private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
-        private final SceneShopUtilities sceneShopUtilities;
         private final UtilitiesForScenes utilityClass;
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final PlayerTrainerImpl playerTrainerInstance;
         private int currentSelectedButton;
         private int newSelectedButton;
-        // DA CAMBIARE
         private final SceneShopTemp sceneInstance;
         private Boolean alreadyInMainMenu;
+        private static final Integer PRICY_ITEMS_SIZE = 3;
+        private static final Integer FREE_ITEMS_SIZE = 3;
 
-        /**
-         * Constructs a new SceneFightUpdateView.
-         *
-         * @param sceneGraphicElements  a map of all graphic elements in the scene
-         * @param allPanelsElements     a map of all panel elements used in the UI
-         *                              (used for dependency)
-         * @param currentSelectedButton the currently highlighted/selected menu
-         *                              option
-         * @param newSelectedButton     the newly selected menu option
-         * @param sceneInstance         the instance of the scene this view belongs
-         *                              to
-         */
         public SceneShopUpdateView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final int currentSelectedButton, final int newSelectedButton,
@@ -66,16 +54,16 @@ public class SceneShopUpdateView {
                 this.utilityClass = new UtilitiesForScenesImpl("shop", sceneGraphicElements);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
                 this.sceneInstance = sceneInstance;
-                this.sceneShopUtilities = new SceneShopUtilities();
                 this.alreadyInMainMenu = true;
                 this.item = null;
         }
 
-        protected void updateGraphic(final int newSelectedButton) {
+        protected void updateGraphic(final int currentSelectedButton,final int newSelectedButton) {
                 this.newSelectedButton = newSelectedButton;
                 this.updateSelectedButton(newSelectedButton);
                 this.updatePokemonSelection();
                 this.updateItemDescription();
+                this.updateItemsText();
                 this.mainMenu();
 
         }
@@ -239,28 +227,6 @@ public class SceneShopUpdateView {
                                                 0.15, 0.1));
         }
 
-        private void updateItemDescription() {
-                if (alreadyInMainMenu && currentSelectedButton >= SceneShopStatusEnum.FREE_ITEM_1_BUTTON.value()
-                                && currentSelectedButton <= SceneShopStatusEnum.PRICY_ITEM_3_BUTTON.value()) {
-                        this.sceneGraphicElements.remove(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value());
-                        if (this.newSelectedButton >= SceneShopStatusEnum.FREE_ITEM_1_BUTTON.value() &&
-                                        this.newSelectedButton <= SceneShopStatusEnum.FREE_ITEM_3_BUTTON
-                                                        .value()) {
-                                item = sceneShopUtilities.getShopItems(this.newSelectedButton + 2);
-                        } else if (this.newSelectedButton >= SceneShopStatusEnum.PRICY_ITEM_1_BUTTON.value() &&
-                                        this.newSelectedButton <= SceneShopStatusEnum.PRICY_ITEM_3_BUTTON
-                                                        .value()) {
-                                item = sceneShopUtilities.getShopItems(this.newSelectedButton - 4);
-                        }
-                        this.sceneGraphicElements.put(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value(),
-                                        new TextElementImpl(FIRST_PANEL,
-                                                        item.getDescription(),
-                                                        Color.BLACK, 0.05,
-                                                        0.35,
-                                                        0.85));
-                }
-        }
-
         private void updateSelectedButton(final int newSelectedButton) {
                 this.utilityClass.setButtonStatus(this.currentSelectedButton, false);
                 this.utilityClass.setButtonStatus(newSelectedButton, true);
@@ -274,6 +240,42 @@ public class SceneShopUpdateView {
                                         new TextElementImpl("firstPanel", "MONEY: " + playerTrainerInstance.getMoney(),
                                                         Color.BLACK,
                                                         0.04, 0.92, 0.04));
+                }
+        }
+
+        private void updateItemsText() {
+                for (int i = 0; i < PRICY_ITEMS_SIZE; i++) {
+                        this.sceneGraphicElements.remove(SceneShopEnum.PRICY_ITEM_1_NAME_TEXT.value() + i);
+                        this.sceneGraphicElements.remove(SceneShopEnum.PRICY_ITEM_1_PRICE_TEXT.value() + i);
+                        this.sceneGraphicElements.remove(SceneShopEnum.FREE_ITEM_1_NAME_TEXT.value() + i);
+                }
+                for (int i = 0; i < PRICY_ITEMS_SIZE; i++) {
+                        Item item = SceneShopUtilities.getShopItems(i);
+
+                        double xPosition = 0.14 + (i * 0.29);
+
+                        this.sceneGraphicElements.put(SceneShopEnum.PRICY_ITEM_1_NAME_TEXT.value() + i,
+                                        new TextElementImpl(FIRST_PANEL,
+                                                        item.getName(),
+                                                        Color.BLACK, 0.055,
+                                                        xPosition, 0.12));
+                        this.sceneGraphicElements.put(SceneShopEnum.PRICY_ITEM_1_PRICE_TEXT.value() + i,
+                                        new TextElementImpl(FIRST_PANEL,
+                                                        String.valueOf(item.getPrice()),
+                                                        Color.BLACK, 0.05,
+                                                        xPosition, 0.17));
+                }
+                for (int i = 0; i < FREE_ITEMS_SIZE; i++) {
+                        int startIndex = PRICY_ITEMS_SIZE;
+                        Item item = SceneShopUtilities.getShopItems(startIndex + i);
+
+                        double xPosition = 0.14 + (i * 0.29);
+
+                        this.sceneGraphicElements.put(SceneShopEnum.FREE_ITEM_1_NAME_TEXT.value() + i,
+                                        new TextElementImpl(FIRST_PANEL,
+                                                        item.getName(),
+                                                        Color.BLACK, 0.055,
+                                                        xPosition, 0.35));
                 }
         }
 

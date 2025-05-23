@@ -70,10 +70,13 @@ public class SceneFightInitView {
                                 new BoxElementImpl(FIRST_PANEL, Color.GRAY, Color.WHITE, 2, 0.69, 0.58, 0.31, 0.1));
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.ENEMY_POKEMON_STATS_BOX.value(),
                                 new BoxElementImpl(FIRST_PANEL, Color.GRAY, Color.WHITE, 2, 0, 0, 0.31, 0.1));
+                
+                SceneFightUtilities.updateItemDescription();
                 // background
                 this.sceneGraphicElements.put(SceneFightGraphicEnum.BACKGROUND.value(),
                                 new BackgroundElementImpl(FIRST_PANEL,
                                                 this.utilityClass.getPathString("images", "bgBar.png")));
+                
                 this.utilityClass.setButtonStatus(currentSelectedButton, true);
         }
 
