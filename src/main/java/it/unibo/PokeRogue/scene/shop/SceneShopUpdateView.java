@@ -52,7 +52,6 @@ public class SceneShopUpdateView {
         }
 
         protected void updateGraphic(final int newSelectedButton) {
-                System.out.println("Bottone selezionato in update graphic: " + newSelectedButton);
                 this.newSelectedButton = newSelectedButton;
                 this.updateSelectedButton(newSelectedButton);
                 this.updateItemDescription();
@@ -66,7 +65,6 @@ public class SceneShopUpdateView {
                                 && this.newSelectedButton <= SceneShopStatusEnum.CHANGE_POKEMON_BACK_BUTTON.value()
                                 && this.alreadyInMainMenu) {
                         this.alreadyInMainMenu = false;
-                        System.out.println("PASSATO DA UPDATE POKEMON");
                         sceneGraphicElements.clear();
                         this.allPanelsElements.put(POKEMON_PANEL_TEXT,
                                         new PanelElementImpl("firstPanel", new OverlayLayout(null)));
@@ -221,7 +219,6 @@ public class SceneShopUpdateView {
         }
 
         private void updateSelectedButton(final int newSelectedButton) {
-                System.out.println("current button prima di update: " + currentSelectedButton);
                 this.utilityClass.setButtonStatus(this.currentSelectedButton, false);
                 this.utilityClass.setButtonStatus(newSelectedButton, true);
                 this.currentSelectedButton = newSelectedButton;
