@@ -36,7 +36,10 @@ public class EffectParserImpl extends SingletonImpl implements EffectParser {
 			System.out.println("ERROR IN READING EFFECT JSON " + ex);
 		}
 		if (computeChecks(checks)) {
+			try{
 			activateActivations(activation);
+			} catch (Exception ex) {
+			}
 		}
 	}
 
