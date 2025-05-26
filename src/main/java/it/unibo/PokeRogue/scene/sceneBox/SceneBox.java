@@ -41,7 +41,7 @@ import lombok.Getter;
  * @see PlayerTrainerImpl
  * @see SavingSystem
  */
-public class SceneBox implements Scene {
+public class SceneBox extends Scene {
 
         private static final int START_BUTTON_POSITION = 5;
         private static final int FIRST_POKEMON_BUTTON_POSITION = 6;

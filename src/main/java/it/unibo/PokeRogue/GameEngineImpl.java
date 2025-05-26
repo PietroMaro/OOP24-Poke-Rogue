@@ -60,6 +60,8 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
             case "main":
                 currentScene = new SceneMenu();
                 break;
+
+            /* 
             case "load":
                 currentScene = new SceneLoad();
                 break;
@@ -80,12 +82,14 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
             case "move":
                 currentScene = new SceneMove();
                 break;
+
+                */
             default:
                 break;
         }
 
         graphicEngineInstance.createPanels(currentScene.getAllPanelsElements());
-        graphicEngineInstance.drawScene(currentScene.getSceneGraphicElements());
+        graphicEngineInstance.drawScene(currentScene.getCurrentSceneGraphicElements());
 
     }
 
@@ -104,7 +108,7 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
         this.currentScene.updateStatus(keyCode);
         currentScene.updateGraphic();
         graphicEngineInstance.createPanels(currentScene.getAllPanelsElements());
-        graphicEngineInstance.drawScene(currentScene.getSceneGraphicElements());
+        graphicEngineInstance.drawScene(currentScene.getCurrentSceneGraphicElements());
 
     }
 

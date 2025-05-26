@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import org.json.JSONObject;
+
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import lombok.Setter;
 
@@ -33,6 +35,17 @@ public final class BoxElementImpl extends GraphicElementImpl implements BoxEleme
         this.width = width;
         this.height = height;
 
+    }
+
+    public BoxElementImpl(JSONObject jsonMetrix) {
+        super(jsonMetrix.getString("panelName"));
+        this.mainColor =Color.decode(jsonMetrix.getString("mainColor"));
+        this.borderColor = Color.decode(jsonMetrix.getString("borderColor"));
+        this.borderThickness = jsonMetrix.getInt("borderThickness");
+        this.x = jsonMetrix.getDouble("leftX");
+        this.y = jsonMetrix.getDouble("leftY");
+        this.width =jsonMetrix.getInt("width");
+        this.height =jsonMetrix.getInt("height");
     }
 
     @Override

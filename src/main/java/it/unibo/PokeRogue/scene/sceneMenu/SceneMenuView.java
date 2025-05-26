@@ -3,16 +3,13 @@ package it.unibo.PokeRogue.scene.sceneMenu;
 import java.util.Map;
 
 import javax.swing.OverlayLayout;
-import java.awt.Color;
 
 import java.io.IOException;
+
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
-import it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl;
-import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
-import it.unibo.PokeRogue.graphic.text.TextElementImpl;
-import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
-import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
+import it.unibo.PokeRogue.scene.GraphicElementRegistry;
+
 
 /**
  * The {@code SceneMenuView} class is responsible for initializing and managing
@@ -24,7 +21,6 @@ public final class SceneMenuView {
 
         private static final String FIRST_PANEL_NAME = "firstPanel";
 
-        private final UtilitiesForScenes utilityClass;
 
         /**
          * Constructs a new {@code SceneMenuView} instance.
@@ -32,40 +28,35 @@ public final class SceneMenuView {
          * 
          */
         public SceneMenuView() {
-                this.utilityClass = new UtilitiesForScenesImpl("menu");
 
         }
 
-        void initGraphicElements(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
-                        final Map<String, PanelElementImpl> allPanelsElements) throws IOException {
+        void initGraphicElements(final Map<Integer, GraphicElementImpl> currentSceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements,
+                        GraphicElementRegistry graphicElements, Map<String, Integer> graphicElementNameToInt)
+                        throws IOException {
                 // Panels
                 allPanelsElements.put(FIRST_PANEL_NAME, new PanelElementImpl("", new OverlayLayout(null)));
 
                 // Texts
-                sceneGraphicElements.put(SceneMenuGraphicEnum.LOAD_GAME_BUTTON_TEXT.value(),
-                                new TextElementImpl(FIRST_PANEL_NAME, "Continua", Color.BLACK, 0.08, 0.45, 0.24));
+                currentSceneGraphicElements.put(graphicElementNameToInt.get("LOAD_GAME_BUTTON_TEXT"),
+                                graphicElements.getByName("LOAD_GAME_BUTTON_TEXT"));
+                currentSceneGraphicElements.put(graphicElementNameToInt.get("NEW_GAME_BUTTON_TEXT"),
+                                graphicElements.getByName("NEW_GAME_BUTTON_TEXT"));
 
-                sceneGraphicElements.put(SceneMenuGraphicEnum.NEW_GAME_BUTTON_TEXT.value(),
-                                new TextElementImpl(FIRST_PANEL_NAME, "Nuova Partita", Color.BLACK, 0.08, 0.44, 0.44));
-
-                sceneGraphicElements.put(SceneMenuGraphicEnum.OPTIONS_GAME_BUTTON_TEXT.value(),
-                                new TextElementImpl(FIRST_PANEL_NAME, "Opzioni", Color.BLACK, 0.08, 0.455, 0.64));
+                currentSceneGraphicElements.put(graphicElementNameToInt.get("OPTIONS_GAME_BUTTON_TEXT"),
+                                graphicElements.getByName("OPTIONS_GAME_BUTTON_TEXT"));
 
                 // Buttons
-                sceneGraphicElements.put(SceneMenuGraphicEnum.LOAD_BUTTON.value(),
-                                new ButtonElementImpl(FIRST_PANEL_NAME, Color.GREEN, Color.BLACK, 1, 0.3, 0.2, 0.4,
-                                                0.05));
-                sceneGraphicElements.put(SceneMenuGraphicEnum.NEW_GAME_BUTTON.value(),
-                                new ButtonElementImpl(FIRST_PANEL_NAME, Color.GREEN, Color.BLACK, 1, 0.3, 0.4, 0.4,
-                                                0.05));
-                sceneGraphicElements.put(SceneMenuGraphicEnum.OPTIONS_BUTTON.value(),
-                                new ButtonElementImpl(FIRST_PANEL_NAME, Color.GREEN, Color.BLACK, 1, 0.3, 0.6, 0.4,
-                                                0.05));
-
+                currentSceneGraphicElements.put(graphicElementNameToInt.get("LOAD_BUTTON"),
+                                graphicElements.getByName("LOAD_BUTTON"));
+                currentSceneGraphicElements.put(graphicElementNameToInt.get("NEW_GAME_BUTTON"),
+                                graphicElements.getByName("NEW_GAME_BUTTON"));
+                currentSceneGraphicElements.put(graphicElementNameToInt.get("OPTIONS_BUTTON"),
+                                graphicElements.getByName("OPTIONS_BUTTON"));
                 // Background
-                sceneGraphicElements.put(SceneMenuGraphicEnum.BACKGROUND.value(),
-                                new BackgroundElementImpl(FIRST_PANEL_NAME,
-                                                this.utilityClass.getPathString("images", "sceneMenuBg.png")));
+                currentSceneGraphicElements.put(graphicElementNameToInt.get("BACKGROUND"),
+                                graphicElements.getByName("BACKGROUND"));
 
         }
 }

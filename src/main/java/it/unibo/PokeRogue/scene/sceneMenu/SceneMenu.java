@@ -7,8 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
-import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
+import it.unibo.PokeRogue.graphic.GraphicElement;
+import it.unibo.PokeRogue.graphic.panel.PanelElement;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
@@ -27,13 +27,13 @@ import lombok.Getter;
  * {@link SceneMenuView}.
  * 
  */
-public final class SceneMenu implements Scene {
+public final class SceneMenu extends Scene {
 
     private SceneMenuGraphicEnum currentSelectedButton;
     @Getter
-    private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+    private final Map<Integer, GraphicElement> currentSceneGraphicElements;
     @Getter
-    private final Map<String, PanelElementImpl> allPanelsElements;
+    private final Map<String, PanelElement> allPanelsElements;
     private final GameEngine gameEngineInstance;
     private final UtilitiesForScenes utilityClass;
     private final SceneMenuView sceneMenuView;
@@ -49,11 +49,12 @@ public final class SceneMenu implements Scene {
             InvocationTargetException,
             IOException,
             NoSuchMethodException {
-        this.sceneGraphicElements = new LinkedHashMap<>();
+        this.currentSceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
-        this.utilityClass = new UtilitiesForScenesImpl("menu");
+        this.utilityClass = new UtilitiesForScenesImpl();
         this.sceneMenuView = new SceneMenuView();
+        this.loadGraphicElements("menuElements.json");
         this.initStatus();
         this.initGraphicElements();
 
@@ -63,14 +64,13 @@ public final class SceneMenu implements Scene {
      * Updates the graphical state of the menu by toggling button selection
      * highlights.
      */
-    @Override
     public void updateGraphic() {
 
         for (int i = 0; i < 3; i++) {
-            this.utilityClass.setButtonStatus(i, false, sceneGraphicElements);
+            this.utilityClass.setButtonStatus(i, false, currentSceneGraphicElements);
         }
 
-        this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true, sceneGraphicElements);
+        this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true, currentSceneGraphicElements);
 
     }
 
@@ -117,9 +117,10 @@ public final class SceneMenu implements Scene {
     }
 
     private void initGraphicElements() throws IOException {
-        this.sceneMenuView.initGraphicElements(sceneGraphicElements, allPanelsElements);
+        this.sceneMenuView.initGraphicElements(currentSceneGraphicElements, allPanelsElements, this.graphicElements,
+                this.graphicElementNameToInt);
 
-        this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true, sceneGraphicElements);
+        this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true, currentSceneGraphicElements);
     }
 
     private void initStatus() {

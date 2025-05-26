@@ -4,7 +4,7 @@ import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.Map;
 
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
+import it.unibo.PokeRogue.graphic.GraphicElement;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 
 /**
@@ -13,20 +13,6 @@ import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
  */
 public final class UtilitiesForScenesImpl implements UtilitiesForScenes {
 
-    private final String sceneDirName;
-
-    /**
-     * Constructs a new {@code UtilitiesForScenesImpl} with the specified scene
-     * directory name and map of scene graphic elements.
-     *
-     * @param sceneDirName the name of the directory containing the scene's
-     *                     images.
-     *
-     */
-    public UtilitiesForScenesImpl(final String sceneDirName) {
-
-        this.sceneDirName = sceneDirName;
-    }
 
     /**
      * Builds a relative path string for a resource located in the menu scene image
@@ -36,10 +22,9 @@ public final class UtilitiesForScenesImpl implements UtilitiesForScenes {
      * @param fileName  the name of the file.
      * @return the full relative path to the file as a string.
      */
-    @Override
-    public String getPathString(final String directory, final String fileName) {
+    public static String getPathString(final String tsceneDirName, final String fileName) {
 
-        return Paths.get("src", "sceneImages", this.sceneDirName, directory, fileName).toString();
+        return Paths.get("src", "sceneImages", tsceneDirName, fileName).toString();
 
     }
 
@@ -55,7 +40,7 @@ public final class UtilitiesForScenesImpl implements UtilitiesForScenes {
      */
     @Override
     public void setButtonStatus(final int buttonCode, final boolean status,
-            final Map<Integer, GraphicElementImpl> sceneGraphicElements) {
+            final Map<Integer, GraphicElement> sceneGraphicElements) {
 
         final ButtonElementImpl selectedButton = (ButtonElementImpl) sceneGraphicElements.get(buttonCode);
         selectedButton.setSelected(status);

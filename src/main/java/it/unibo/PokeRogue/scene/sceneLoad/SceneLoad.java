@@ -45,7 +45,7 @@ import lombok.Getter;
  * @see it.unibo.PokeRogue.savingSystem.SavingSystem
  * @see it.unibo.PokeRogue.utilities.UtilitiesForScenes
  */
-public final class SceneLoad implements Scene {
+public final class SceneLoad extends Scene {
 
     private static final int ABSOLUTE_FIRST_SAVE_POSITION = 0;
     private static final int LAST_SAVE_POSITION = 9;
