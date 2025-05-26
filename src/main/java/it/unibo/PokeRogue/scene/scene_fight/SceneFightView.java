@@ -1,7 +1,7 @@
 
 package it.unibo.PokeRogue.scene.scene_fight;
 
-
+import java.io.IOException;
 import java.util.Map;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
@@ -18,13 +18,10 @@ import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 public class SceneFightView {
     private final SceneFightInitView sceneFightInitView;
     private final SceneFightUpdateView sceneFightUpdateView;
-    private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
 
     /**
      * Constructs a new SceneFightView object.
      * 
-     * @param sceneGraphicElements  A map of graphic elements for the battle scene.
-     * @param allPanelsElements     A map of all panel elements in the scene.
      * @param enemyTrainerInstance  The enemy trainer for the battle.
      * @param currentSelectedButton The initial selected button in the UI.
      * @param newSelectedButton     The new selected button in the UI after an
@@ -32,14 +29,10 @@ public class SceneFightView {
      * @param scene                 The scene object containing information about
      *                              the current battle.
      */
-    public SceneFightView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
-            final Map<String, PanelElementImpl> allPanelsElements, final PlayerTrainerImpl enemyTrainerInstance,
+    public SceneFightView(final PlayerTrainerImpl enemyTrainerInstance,
             final int currentSelectedButton, final int newSelectedButton, final SceneFight scene) {
-        this.sceneGraphicElements = sceneGraphicElements;
-        this.sceneFightInitView = new SceneFightInitView(this.sceneGraphicElements, allPanelsElements,
-                enemyTrainerInstance);
-        this.sceneFightUpdateView = new SceneFightUpdateView(this.sceneGraphicElements, allPanelsElements,
-                currentSelectedButton, newSelectedButton, scene);
+        this.sceneFightInitView = new SceneFightInitView(enemyTrainerInstance);
+        this.sceneFightUpdateView = new SceneFightUpdateView(currentSelectedButton, newSelectedButton, scene);
 
     }
 
@@ -48,9 +41,12 @@ public class SceneFightView {
      * method of `SceneFightInitView`.
      * 
      * @param currentSelectedButton The initially selected button in the UI.
+     * @throws IOException
      */
-    protected void initGraphicElements(final int currentSelectedButton) {
-        this.sceneFightInitView.initGraphicElements(currentSelectedButton);
+    protected void initGraphicElements(final int currentSelectedButton,
+            final Map<String, PanelElementImpl> allPanelsElements,
+            final Map<Integer, GraphicElementImpl> sceneGraphicElements) throws IOException {
+        this.sceneFightInitView.initGraphicElements(currentSelectedButton, allPanelsElements, sceneGraphicElements);
     }
 
     /**
@@ -59,9 +55,13 @@ public class SceneFightView {
      * 
      * @param currentSelectedButton The currently selected button in the UI.
      * @param newSelectedButton     The new selected button after an update.
+     * @throws IOException
      */
-    protected void updateGraphic(final int currentSelectedButton, final int newSelectedButton) {
-        this.sceneFightUpdateView.updateGraphic(currentSelectedButton, newSelectedButton);
+    protected void updateGraphic(final int currentSelectedButton, final int newSelectedButton,
+            final Map<String, PanelElementImpl> allPanelsElements,
+            final Map<Integer, GraphicElementImpl> sceneGraphicElements) throws IOException {
+        this.sceneFightUpdateView.updateGraphic(currentSelectedButton, newSelectedButton, sceneGraphicElements,
+                allPanelsElements);
     }
 
 }

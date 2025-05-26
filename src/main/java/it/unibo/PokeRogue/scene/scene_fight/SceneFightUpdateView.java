@@ -1,7 +1,7 @@
 package it.unibo.PokeRogue.scene.scene_fight;
 
-
 import java.awt.Color;
+import java.io.IOException;
 import java.util.Map;
 import javax.swing.OverlayLayout;
 
@@ -31,9 +31,7 @@ public class SceneFightUpdateView {
         private static final String MOVE_PANEL_TEXT = "movePanel";
         private static final String BALL_PANEL_TEXT = "ballPanel";
         private static final String CHANGE_PANEL_TEXT = "changePanel";
-        private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
         private final UtilitiesForScenes utilityClass;
-        private final Map<String, PanelElementImpl> allPanelsElements;
         private final PlayerTrainerImpl playerTrainerInstance;
         private int currentSelectedButton;
         private int newSelectedButton;
@@ -43,25 +41,20 @@ public class SceneFightUpdateView {
         /**
          * Constructs a new SceneFightUpdateView.
          *
-         * @param sceneGraphicElements       a map of all graphic elements in the scene
-         * @param allPanelsElements          a map of all panel elements used in the UI
-         *                                   (used for dependency)
-         * @param currentSelectedButton      the currently highlighted/selected menu
-         *                                   option
-         * @param newSelectedButton          the newly selected menu option
-         * @param sceneInstance              the instance of the scene this view belongs
-         *                                   to
+         * @param sceneGraphicElements  a map of all graphic elements in the scene
+         * @param allPanelsElements     a map of all panel elements used in the UI
+         *                              (used for dependency)
+         * @param currentSelectedButton the currently highlighted/selected menu
+         *                              option
+         * @param newSelectedButton     the newly selected menu option
+         * @param sceneInstance         the instance of the scene this view belongs
+         *                              to
          */
-        public SceneFightUpdateView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
-
-                        final Map<String, PanelElementImpl> allPanelsElements,
-                        final int currentSelectedButton, final int newSelectedButton, final SceneFight sceneInstance) {
-
+        public SceneFightUpdateView(final int currentSelectedButton, final int newSelectedButton,
+                        final SceneFight sceneInstance) {
                 this.currentSelectedButton = currentSelectedButton;
                 this.newSelectedButton = newSelectedButton;
-                this.sceneGraphicElements = sceneGraphicElements;
-                this.allPanelsElements = allPanelsElements;
-                this.utilityClass = new UtilitiesForScenesImpl("fight", sceneGraphicElements);
+                this.utilityClass = new UtilitiesForScenesImpl("fight");
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
                 this.sceneInstance = sceneInstance;
                 this.alreadyInMainMenu = true;
@@ -78,40 +71,44 @@ public class SceneFightUpdateView {
          * @param newSelectedButton     the index of the newly selected button after
          *                              user input
          */
-        protected void updateGraphic(final int currentSelectedButton, final int newSelectedButton) {
+        protected void updateGraphic(final int currentSelectedButton, final int newSelectedButton,
+                        final Map<Integer, GraphicElementImpl> sceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements) throws IOException {
                 this.newSelectedButton = newSelectedButton;
-                this.updateSelectedButton(newSelectedButton);
-                this.updateMoves();
-                this.updateBall();
-                this.pokemonChange();
-                this.mainMenu();
+                this.updateSelectedButton(newSelectedButton, sceneGraphicElements);
+                this.updateMoves(sceneGraphicElements, allPanelsElements);
+                this.updateBall(sceneGraphicElements, allPanelsElements);
+                this.pokemonChange(sceneGraphicElements, allPanelsElements);
+                this.mainMenu(sceneGraphicElements, allPanelsElements);
 
         }
 
-        private void updateSelectedButton(final int newSelectedButton) {
-                this.utilityClass.setButtonStatus(this.currentSelectedButton, false);
-                this.utilityClass.setButtonStatus(newSelectedButton, true);
+        private void updateSelectedButton(final int newSelectedButton,
+                        final Map<Integer, GraphicElementImpl> sceneGraphicElements) {
+                this.utilityClass.setButtonStatus(this.currentSelectedButton, false, sceneGraphicElements);
+                this.utilityClass.setButtonStatus(newSelectedButton, true, sceneGraphicElements);
                 this.currentSelectedButton = newSelectedButton;
         }
 
-        private void updateMoves() {
+        private void updateMoves(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements) {
                 if (currentSelectedButton >= SceneFightStatusValuesEnum.MOVE_BUTTON_1.value()
                                 && currentSelectedButton < SceneFightStatusValuesEnum.CHANGE_POKEMON_1.value()) {
                         this.alreadyInMainMenu = false;
-                        this.sceneGraphicElements.remove(SceneFightStatusValuesEnum.RUN_BUTTON.value());
-                        this.sceneGraphicElements.remove(SceneFightStatusValuesEnum.POKEMON_BUTTON.value());
-                        this.sceneGraphicElements.remove(SceneFightStatusValuesEnum.FIGHT_BUTTON.value());
-                        this.sceneGraphicElements.remove(SceneFightStatusValuesEnum.BALL_BUTTON.value());
-                        this.sceneGraphicElements.remove(SceneFightGraphicEnum.RUN_BUTTON_TEXT.value());
-                        this.sceneGraphicElements.remove(SceneFightGraphicEnum.POKEMON_BUTTON_TEXT.value());
-                        this.sceneGraphicElements.remove(SceneFightGraphicEnum.BALL_BUTTON_TEXT.value());
-                        this.sceneGraphicElements.remove(SceneFightGraphicEnum.FIGHT_BUTTON_TEXT.value());
-                        this.sceneGraphicElements.remove(SceneFightGraphicEnum.DETAILS_CONTAINER_TEXT.value());
-                        this.initMoveText();
-                        this.initMoveButton();
+                        sceneGraphicElements.remove(SceneFightStatusValuesEnum.RUN_BUTTON.value());
+                        sceneGraphicElements.remove(SceneFightStatusValuesEnum.POKEMON_BUTTON.value());
+                        sceneGraphicElements.remove(SceneFightStatusValuesEnum.FIGHT_BUTTON.value());
+                        sceneGraphicElements.remove(SceneFightStatusValuesEnum.BALL_BUTTON.value());
+                        sceneGraphicElements.remove(SceneFightGraphicEnum.RUN_BUTTON_TEXT.value());
+                        sceneGraphicElements.remove(SceneFightGraphicEnum.POKEMON_BUTTON_TEXT.value());
+                        sceneGraphicElements.remove(SceneFightGraphicEnum.BALL_BUTTON_TEXT.value());
+                        sceneGraphicElements.remove(SceneFightGraphicEnum.FIGHT_BUTTON_TEXT.value());
+                        sceneGraphicElements.remove(SceneFightGraphicEnum.DETAILS_CONTAINER_TEXT.value());
+                        this.initMoveText(sceneGraphicElements, allPanelsElements);
+                        this.initMoveButton(sceneGraphicElements, allPanelsElements);
                         SceneFightUtilities.updateMoveInfo(currentSelectedButton, sceneGraphicElements,
                                         playerTrainerInstance);
-                        this.utilityClass.setButtonStatus(this.currentSelectedButton, true);
+                        this.utilityClass.setButtonStatus(this.currentSelectedButton, true, sceneGraphicElements);
                 }
         }
 
@@ -120,24 +117,25 @@ public class SceneFightUpdateView {
          * Creates a panel for moves and adds button elements for the four available
          * moves.
          */
-        private void initMoveButton() {
-                this.allPanelsElements.put(MOVE_PANEL_TEXT,
+        private void initMoveButton(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements) {
+                allPanelsElements.put(MOVE_PANEL_TEXT,
                                 new PanelElementImpl("firstPanel", new OverlayLayout(null)));
 
-                this.sceneGraphicElements.put(SceneFightStatusValuesEnum.MOVE_BUTTON_1.value(),
+                sceneGraphicElements.put(SceneFightStatusValuesEnum.MOVE_BUTTON_1.value(),
                                 new ButtonElementImpl(MOVE_PANEL_TEXT, new Color(38, 102, 102), Color.WHITE, 0, 0.05,
                                                 0.74,
                                                 0.2, 0.1));
-                this.sceneGraphicElements.put(SceneFightStatusValuesEnum.MOVE_BUTTON_2.value(),
+                sceneGraphicElements.put(SceneFightStatusValuesEnum.MOVE_BUTTON_2.value(),
                                 new ButtonElementImpl(MOVE_PANEL_TEXT, new Color(38, 102, 102), Color.WHITE, 0, 0.27,
                                                 0.74,
                                                 0.2, 0.1));
 
-                this.sceneGraphicElements.put(SceneFightStatusValuesEnum.MOVE_BUTTON_3.value(),
+                sceneGraphicElements.put(SceneFightStatusValuesEnum.MOVE_BUTTON_3.value(),
                                 new ButtonElementImpl(MOVE_PANEL_TEXT, new Color(38, 102, 102), Color.WHITE, 0, 0.05,
                                                 0.87,
                                                 0.2, 0.1));
-                this.sceneGraphicElements.put(SceneFightStatusValuesEnum.MOVE_BUTTON_4.value(),
+                sceneGraphicElements.put(SceneFightStatusValuesEnum.MOVE_BUTTON_4.value(),
                                 new ButtonElementImpl(MOVE_PANEL_TEXT, new Color(38, 102, 102), Color.WHITE, 0, 0.27,
                                                 0.87,
                                                 0.2, 0.1));
@@ -148,15 +146,15 @@ public class SceneFightUpdateView {
          * Initializes the graphical elements for the text displaying move names
          * in the fight scene. Adds text elements for the four available moves.
          */
-        private void initMoveText() {
-
-                this.sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_1_TEXT.value(),
+        private void initMoveText(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements) {
+                sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_1_TEXT.value(),
                                 new TextElementImpl(
                                                 MOVE_PANEL_TEXT,
                                                 SceneFightUtilities.getMoveNameOrPlaceholder(FIRST_POSITION,
                                                                 playerTrainerInstance),
                                                 Color.WHITE, 0.06, 0.05, 0.80));
-                this.sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_2_TEXT.value(),
+                sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_2_TEXT.value(),
                                 new TextElementImpl(MOVE_PANEL_TEXT,
                                                 SceneFightUtilities.getMoveNameOrPlaceholder(SECOND_POSITION,
                                                                 playerTrainerInstance),
@@ -164,14 +162,14 @@ public class SceneFightUpdateView {
                                                 0.06, 0.27,
                                                 0.80));
 
-                this.sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_3_TEXT.value(),
+                sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_3_TEXT.value(),
                                 new TextElementImpl(MOVE_PANEL_TEXT,
                                                 SceneFightUtilities.getMoveNameOrPlaceholder(THIRD_POSITION,
                                                                 playerTrainerInstance),
                                                 Color.WHITE,
                                                 0.06, 0.05,
                                                 0.93));
-                this.sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_4_TEXT.value(),
+                sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_4_TEXT.value(),
                                 new TextElementImpl(MOVE_PANEL_TEXT,
                                                 SceneFightUtilities.getMoveNameOrPlaceholder(FOURTH_POSITION,
                                                                 playerTrainerInstance),
@@ -184,72 +182,73 @@ public class SceneFightUpdateView {
          * Updates the UI elements related to balls when the ball button is selected
          * in the fight scene. Displays the available balls and their counts.
          */
-        private void updateBall() {
+        private void updateBall(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements) {
                 if (currentSelectedButton >= SceneFightStatusValuesEnum.POKEBALL_BUTTON.value()
                                 && currentSelectedButton < SceneFightGraphicEnum.BACKGROUND.value()) {
                         this.alreadyInMainMenu = false;
-                        this.allPanelsElements.put(BALL_PANEL_TEXT,
+                        allPanelsElements.put(BALL_PANEL_TEXT,
                                         new PanelElementImpl("firstPanel", new OverlayLayout(null)));
-                        this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEBALL_TEXT.value(),
+                        sceneGraphicElements.put(SceneFightGraphicEnum.POKEBALL_TEXT.value(),
                                         new TextElementImpl(BALL_PANEL_TEXT,
                                                         playerTrainerInstance.getBall().get("pokeball")
                                                                         + " x Poke Ball",
                                                         Color.WHITE, 0.04, 0.62,
                                                         0.34));
-                        this.sceneGraphicElements.put(SceneFightGraphicEnum.MEGABALL_TEXT.value(),
+                        sceneGraphicElements.put(SceneFightGraphicEnum.MEGABALL_TEXT.value(),
                                         new TextElementImpl(BALL_PANEL_TEXT,
                                                         playerTrainerInstance.getBall().get("megaball")
                                                                         + " x Mega Ball",
                                                         Color.WHITE, 0.04, 0.62,
                                                         0.39));
-                        this.sceneGraphicElements.put(SceneFightGraphicEnum.ULTRABALL_TEXT.value(),
+                        sceneGraphicElements.put(SceneFightGraphicEnum.ULTRABALL_TEXT.value(),
                                         new TextElementImpl(BALL_PANEL_TEXT,
                                                         playerTrainerInstance.getBall().get("ultraball")
                                                                         + " x Ulta Ball",
                                                         Color.WHITE, 0.04, 0.62,
                                                         0.44));
-                        this.sceneGraphicElements.put(SceneFightGraphicEnum.MASTERBALL_TEXT.value(),
+                        sceneGraphicElements.put(SceneFightGraphicEnum.MASTERBALL_TEXT.value(),
                                         new TextElementImpl(BALL_PANEL_TEXT,
                                                         playerTrainerInstance.getBall()
                                                                         .get("masterball") + " x Master Ball",
                                                         Color.WHITE, 0.04, 0.62,
                                                         0.49));
-                        this.sceneGraphicElements.put(SceneFightGraphicEnum.CANCEL_TEXT.value(),
+                        sceneGraphicElements.put(SceneFightGraphicEnum.CANCEL_TEXT.value(),
                                         new TextElementImpl(BALL_PANEL_TEXT, " x CANCEL", Color.WHITE, 0.04, 0.62,
                                                         0.54));
                         // BUTTON
-                        this.sceneGraphicElements.put(SceneFightStatusValuesEnum.POKEBALL_BUTTON.value(),
+                        sceneGraphicElements.put(SceneFightStatusValuesEnum.POKEBALL_BUTTON.value(),
                                         new ButtonElementImpl(BALL_PANEL_TEXT, new Color(38, 102, 102), Color.WHITE, 0,
                                                         0.62,
                                                         0.31,
                                                         0.35, 0.05));
-                        this.sceneGraphicElements.put(SceneFightStatusValuesEnum.MEGABALL_BUTTON.value(),
+                        sceneGraphicElements.put(SceneFightStatusValuesEnum.MEGABALL_BUTTON.value(),
                                         new ButtonElementImpl(BALL_PANEL_TEXT, new Color(38, 102, 102), Color.WHITE, 0,
                                                         0.62,
                                                         0.36,
                                                         0.35, 0.05));
-                        this.sceneGraphicElements.put(SceneFightStatusValuesEnum.ULTRABALL_BUTTON.value(),
+                        sceneGraphicElements.put(SceneFightStatusValuesEnum.ULTRABALL_BUTTON.value(),
                                         new ButtonElementImpl(BALL_PANEL_TEXT, new Color(38, 102, 102), Color.WHITE, 0,
                                                         0.62,
                                                         0.41,
                                                         0.35, 0.05));
-                        this.sceneGraphicElements.put(SceneFightStatusValuesEnum.MASTERBALL_BUTTON.value(),
+                        sceneGraphicElements.put(SceneFightStatusValuesEnum.MASTERBALL_BUTTON.value(),
                                         new ButtonElementImpl(BALL_PANEL_TEXT, new Color(38, 102, 102), Color.WHITE, 0,
                                                         0.62,
                                                         0.46,
                                                         0.35, 0.05));
-                        this.sceneGraphicElements.put(SceneFightStatusValuesEnum.CANCEL_BUTTON.value(),
+                        sceneGraphicElements.put(SceneFightStatusValuesEnum.CANCEL_BUTTON.value(),
                                         new ButtonElementImpl(BALL_PANEL_TEXT, new Color(38, 102, 102), Color.WHITE, 0,
                                                         0.62,
                                                         0.51,
                                                         0.35, 0.05));
-                        this.sceneGraphicElements.put(SceneFightGraphicEnum.BALL_BOX.value(),
+                        sceneGraphicElements.put(SceneFightGraphicEnum.BALL_BOX.value(),
                                         new BoxElementImpl(BALL_PANEL_TEXT, new Color(38, 102, 102), Color.WHITE, 0,
                                                         0.62,
                                                         0.31, 0.35,
                                                         0.4));
 
-                        this.utilityClass.setButtonStatus(currentSelectedButton, true);
+                        this.utilityClass.setButtonStatus(currentSelectedButton, true, sceneGraphicElements);
 
                 }
         }
@@ -259,23 +258,24 @@ public class SceneFightUpdateView {
          * Clears current elements, initializes change-specific UI,
          * and sets the button status.
          */
-        private void pokemonChange() {
+        private void pokemonChange(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements) throws IOException {
                 if (currentSelectedButton >= SceneFightStatusValuesEnum.CHANGE_POKEMON_1.value()
                                 && currentSelectedButton < SceneFightStatusValuesEnum.POKEBALL_BUTTON.value()) {
                         this.alreadyInMainMenu = false;
                         sceneGraphicElements.clear();
-                        this.allPanelsElements.put(CHANGE_PANEL_TEXT,
+                        allPanelsElements.put(CHANGE_PANEL_TEXT,
                                         new PanelElementImpl("firstPanel", new OverlayLayout(null)));
-                        this.initChangeText();
-                        this.initChangeButton();
-                        this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_0_STATS_BOX.value(),
+                        this.initChangeText(sceneGraphicElements, allPanelsElements);
+                        this.initChangeButton(sceneGraphicElements, allPanelsElements);
+                        sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_0_STATS_BOX.value(),
                                         new BoxElementImpl(CHANGE_PANEL_TEXT, Color.GRAY, Color.WHITE, 0, 0.1,
                                                         0.45,
                                                         0.3, 0.1));
-                        this.sceneGraphicElements.put(SceneFightGraphicEnum.BACKGROUND.value(),
+                        sceneGraphicElements.put(SceneFightGraphicEnum.BACKGROUND.value(),
                                         new BackgroundElementImpl(CHANGE_PANEL_TEXT,
                                                         this.utilityClass.getPathString("images", "bg.png")));
-                        this.utilityClass.setButtonStatus(currentSelectedButton, true);
+                        this.utilityClass.setButtonStatus(currentSelectedButton, true, sceneGraphicElements);
 
                 }
         }
@@ -284,11 +284,12 @@ public class SceneFightUpdateView {
          * Initializes the graphical elements for the text displaying
          * Pokemon names and life status in the change Pokemon menu.
          */
-        private void initChangeText() {
-                this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_BUTTON_TEXT.value(),
+        private void initChangeText(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements) {
+                sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_BUTTON_TEXT.value(),
                                 new TextElementImpl(CHANGE_PANEL_TEXT, "BACK", Color.WHITE, 0.06, 0.86, 0.98));
                 // POKEMON STATS TEXT
-                this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_0_NAME_TEXT.value(),
+                sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_0_NAME_TEXT.value(),
                                 new TextElementImpl(CHANGE_PANEL_TEXT,
                                                 SceneFightUtilities.getPokemonNameAt(playerTrainerInstance,
                                                                 FIRST_POSITION)
@@ -299,7 +300,7 @@ public class SceneFightUpdateView {
                                                 0.06, 0.1,
                                                 0.51));
 
-                this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_1_NAME_TEXT.value(),
+                sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_1_NAME_TEXT.value(),
                                 new TextElementImpl(CHANGE_PANEL_TEXT,
                                                 SceneFightUtilities.getPokemonNameAt(playerTrainerInstance,
                                                                 SECOND_POSITION)
@@ -310,7 +311,7 @@ public class SceneFightUpdateView {
                                                 0.06, 0.5,
                                                 0.11));
 
-                this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_2_NAME_TEXT.value(),
+                sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_2_NAME_TEXT.value(),
                                 new TextElementImpl(CHANGE_PANEL_TEXT,
                                                 SceneFightUtilities.getPokemonNameAt(playerTrainerInstance,
                                                                 THIRD_POSITION)
@@ -321,7 +322,7 @@ public class SceneFightUpdateView {
                                                 0.06, 0.5,
                                                 0.31));
 
-                this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_3_NAME_TEXT.value(),
+                sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_3_NAME_TEXT.value(),
                                 new TextElementImpl(CHANGE_PANEL_TEXT,
                                                 SceneFightUtilities.getPokemonNameAt(playerTrainerInstance,
                                                                 FOURTH_POSITION)
@@ -332,7 +333,7 @@ public class SceneFightUpdateView {
                                                 0.06, 0.5,
                                                 0.51));
 
-                this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_4_NAME_TEXT.value(),
+                sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_4_NAME_TEXT.value(),
                                 new TextElementImpl(CHANGE_PANEL_TEXT,
                                                 SceneFightUtilities.getPokemonNameAt(playerTrainerInstance,
                                                                 FIFTH_POSITION)
@@ -343,7 +344,7 @@ public class SceneFightUpdateView {
                                                 0.06, 0.5,
                                                 0.71));
 
-                this.sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_5_NAME_TEXT.value(),
+                sceneGraphicElements.put(SceneFightGraphicEnum.POKEMON_5_NAME_TEXT.value(),
                                 new TextElementImpl(CHANGE_PANEL_TEXT,
                                                 SceneFightUtilities.getPokemonNameAt(playerTrainerInstance,
                                                                 SIXTH_POSITION)
@@ -360,33 +361,34 @@ public class SceneFightUpdateView {
          * Initializes the graphical elements for the buttons used to
          * select a Pokemon to switch to in the change Pokemon menu.
          */
-        private void initChangeButton() {
-                this.sceneGraphicElements.put(SceneFightStatusValuesEnum.CHANGE_POKEMON_1.value(),
+        private void initChangeButton(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements) {
+                sceneGraphicElements.put(SceneFightStatusValuesEnum.CHANGE_POKEMON_1.value(),
                                 new ButtonElementImpl(CHANGE_PANEL_TEXT, Color.GRAY, Color.WHITE, 0,
                                                 0.5,
                                                 0.05,
                                                 0.3, 0.1));
-                this.sceneGraphicElements.put(SceneFightStatusValuesEnum.CHANGE_POKEMON_2.value(),
+                sceneGraphicElements.put(SceneFightStatusValuesEnum.CHANGE_POKEMON_2.value(),
                                 new ButtonElementImpl(CHANGE_PANEL_TEXT, Color.GRAY, Color.WHITE, 0,
                                                 0.5,
                                                 0.25,
                                                 0.3, 0.1));
-                this.sceneGraphicElements.put(SceneFightStatusValuesEnum.CHANGE_POKEMON_3.value(),
+                sceneGraphicElements.put(SceneFightStatusValuesEnum.CHANGE_POKEMON_3.value(),
                                 new ButtonElementImpl(CHANGE_PANEL_TEXT, Color.GRAY, Color.WHITE, 0,
                                                 0.5,
                                                 0.45,
                                                 0.3, 0.1));
-                this.sceneGraphicElements.put(SceneFightStatusValuesEnum.CHANGE_POKEMON_4.value(),
+                sceneGraphicElements.put(SceneFightStatusValuesEnum.CHANGE_POKEMON_4.value(),
                                 new ButtonElementImpl(CHANGE_PANEL_TEXT, Color.GRAY, Color.WHITE, 0,
                                                 0.5,
                                                 0.65,
                                                 0.3, 0.1));
-                this.sceneGraphicElements.put(SceneFightStatusValuesEnum.CHANGE_POKEMON_5.value(),
+                sceneGraphicElements.put(SceneFightStatusValuesEnum.CHANGE_POKEMON_5.value(),
                                 new ButtonElementImpl(CHANGE_PANEL_TEXT, Color.GRAY, Color.WHITE, 0,
                                                 0.5,
                                                 0.85,
                                                 0.3, 0.1));
-                this.sceneGraphicElements.put(SceneFightStatusValuesEnum.CHANGE_POKEMON_BACK.value(),
+                sceneGraphicElements.put(SceneFightStatusValuesEnum.CHANGE_POKEMON_BACK.value(),
                                 new ButtonElementImpl(CHANGE_PANEL_TEXT, Color.GRAY, Color.WHITE, 0,
                                                 0.85,
                                                 0.93,
@@ -396,8 +398,10 @@ public class SceneFightUpdateView {
         /**
          * Handles the transition back to the main fight menu if the conditions are met.
          * Clears current UI elements and re-initializes the main menu graphics.
+         * @throws IOException 
          */
-        private void mainMenu() {
+        private void mainMenu(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements) throws IOException {
                 if ((this.currentSelectedButton <= SceneFightStatusValuesEnum.BALL_BUTTON.value() && !alreadyInMainMenu)
                                 || this.newSelectedButton == SceneFightStatusValuesEnum.RUN_BUTTON.value()) {
                         sceneGraphicElements.clear();

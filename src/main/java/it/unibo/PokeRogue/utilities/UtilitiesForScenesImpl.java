@@ -56,9 +56,11 @@ public final class UtilitiesForScenesImpl implements UtilitiesForScenes {
     @Override
     public void setButtonStatus(final int buttonCode, final boolean status,
             final Map<Integer, GraphicElementImpl> sceneGraphicElements) {
-
+        
         final ButtonElementImpl selectedButton = (ButtonElementImpl) sceneGraphicElements.get(buttonCode);
-        selectedButton.setSelected(status);
+        if (selectedButton != null) {
+            selectedButton.setSelected(status);
+        }
 
     }
 

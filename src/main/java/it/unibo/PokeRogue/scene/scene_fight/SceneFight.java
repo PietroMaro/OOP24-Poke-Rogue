@@ -1,7 +1,8 @@
 package it.unibo.PokeRogue.scene.scene_fight;
 
-
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -40,15 +41,20 @@ public class SceneFight implements Scene {
     private final BattleEngine battleEngineInstance;
     private final GenerateEnemy generateEnemyInstance;
 
-
     /**
      * Constructor for SceneFight.
      * Initializes all the necessary components for the battle scene, including the
      * enemy trainer, AI, and battle engine.
      * 
      * @param battleLevel the level of the battle
+     * @throws IOException
+     * @throws InvocationTargetException
+     * @throws NoSuchMethodException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
      */
-    public SceneFight(final Integer battleLevel) {
+    public SceneFight(final Integer battleLevel) throws IOException, InstantiationException, IllegalAccessException,
+            NoSuchMethodException, InvocationTargetException {
         this.enemyTrainerInstance = new PlayerTrainerImpl();
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
@@ -57,7 +63,7 @@ public class SceneFight implements Scene {
         this.generateEnemyInstance = new GenerateEnemyImpl(battleLevel, enemyTrainerInstance);
         this.generateEnemyInstance.generateEnemy();
         this.initStatus();
-        this.sceneFightView = new SceneFightView(sceneGraphicElements, allPanelsElements, enemyTrainerInstance,
+        this.sceneFightView = new SceneFightView(enemyTrainerInstance,
                 currentSelectedButton, newSelectedButton, this);
         this.initGraphicElements();
     }
@@ -74,28 +80,38 @@ public class SceneFight implements Scene {
     /**
      * Initializes the graphic elements displayed in the scene.
      * This method sets up the UI components for the battle interface.
+     * 
+     * @throws IOException
      */
-    protected void initGraphicElements() {
-        this.sceneFightView.initGraphicElements(this.currentSelectedButton);
+    protected void initGraphicElements() throws IOException {
+        this.sceneFightView.initGraphicElements(this.currentSelectedButton, this.allPanelsElements, this.sceneGraphicElements);
     }
 
     /**
      * Updates the graphic elements based on the current selected button and the new
      * selected button.
+     * @throws IOException 
      */
     @Override
-    public void updateGraphic() {
-        this.sceneFightView.updateGraphic(currentSelectedButton, newSelectedButton);
+    public void updateGraphic() throws IOException {
+        this.sceneFightView.updateGraphic(currentSelectedButton, newSelectedButton, this.allPanelsElements, this.sceneGraphicElements);
     }
+
     /**
      * Updates the status of the scene based on the key input from the user.
      * This method handles user interactions, such as navigating through the buttons
      * or performing actions.
      * 
      * @param inputKey the key pressed by the user
+     * @throws IOException
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
      */
     @Override
-    public void updateStatus(final int inputKey) {
+    public void updateStatus(final int inputKey) throws InstantiationException, IllegalAccessException,
+            InvocationTargetException, NoSuchMethodException, IOException {
         switch (inputKey) {
             case KeyEvent.VK_UP:
                 if (SceneFightUtilities.isButtonInRange(newSelectedButton, 2, 4) ||
@@ -205,17 +221,8 @@ public class SceneFight implements Scene {
         }
     }
 
-    /**
-     * Executes the battle logic based on the player's move type and the selected
-     * move.
-     * This method simulates the battle between the player's Pokémon and the enemy's
-     * Pokémon.
-     * 
-     * @param playerMoveType the type of the move (e.g., "Attack", "SwitchIn", etc.)
-     * @param playerMove     the selected move from the player
-     */
-
-    private void fightLoop(final Decision decision) {
+    private void fightLoop(final Decision decision) throws InstantiationException, IllegalAccessException,
+            InvocationTargetException, NoSuchMethodException, IOException {
         final Decision enemyChoose = enemyAiInstance.nextMove(battleEngineInstance.getCurrentWeather());
         this.battleEngineInstance.runBattleTurn(decision, enemyChoose);
 

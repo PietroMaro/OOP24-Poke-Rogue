@@ -1,5 +1,7 @@
 package it.unibo.PokeRogue.scene.scene_fight;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,7 +57,12 @@ public class BattleEngineImpl implements BattleEngine {
      * @param enemyTrainerInstance the enemy trainer instance involved in the battle
      * @param enemyAiInstance      the AI instance controlling the enemy's strategy
      */
-    public BattleEngineImpl(final PlayerTrainerImpl enemyTrainerInstance, final EnemyAi enemyAiInstance) {
+    public BattleEngineImpl(final PlayerTrainerImpl enemyTrainerInstance, final EnemyAi enemyAiInstance)
+            throws IOException,
+            InstantiationException,
+            IllegalAccessException,
+            NoSuchMethodException,
+            InvocationTargetException {
         this.enemyTrainerInstance = enemyTrainerInstance;
         this.pokemonBattleUtilInstance = new PokemonBattleUtilImpl();
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
@@ -82,9 +89,15 @@ public class BattleEngineImpl implements BattleEngine {
      * @param playerMoveString the name of the player's move
      * @param typeEnemy        the type of the enemy's action (e.g., "SwitchIn")
      * @param enemyMoveString  the name of the enemy's move
+     * @throws IOException
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
      */
     @Override
-    public void runBattleTurn(final Decision playerDecision, final Decision enemyDecision) {
+    public void runBattleTurn(final Decision playerDecision, final Decision enemyDecision) throws IOException,
+            InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         this.playerPokemon = playerTrainerInstance.getPokemon(FIRST_POSITION).get();
         this.enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
 
@@ -130,7 +143,8 @@ public class BattleEngineImpl implements BattleEngine {
                 attackerMove, opponentMove, this.currentWeather);
     }
 
-    private void handlePokeball(final String pokeballName) {
+    private void handlePokeball(final String pokeballName) throws InstantiationException, IllegalAccessException,
+            InvocationTargetException, NoSuchMethodException, IOException {
         final int countBall = playerTrainerInstance.getBall().get(pokeballName);
         final int maxHP = enemyPokemon.getActualStats().get("hp").getCurrentMax();
         final int currentHP = enemyPokemon.getActualStats().get("hp").getCurrentValue();
@@ -158,7 +172,8 @@ public class BattleEngineImpl implements BattleEngine {
             final PlayerTrainerImpl defenderTrainer, final Optional<Move> atteckerMove,
             final Optional<Move> defenderMove,
             final Ability attackerAbility,
-            final Ability defenderAbility) {
+            final Ability defenderAbility) throws InstantiationException, IllegalAccessException,
+            InvocationTargetException, NoSuchMethodException, IOException {
         final Pokemon attackerPokemon = attackerTrainer.getPokemon(FIRST_POSITION).get();
         final Pokemon defenderPokemon = defenderTrainer.getPokemon(FIRST_POSITION).get();
         if (decision.moveType() == DecisionTypeEnum.SWITCH_IN && statusEffectInstance.checkStatusSwitch(attackerPokemon)
@@ -213,7 +228,8 @@ public class BattleEngineImpl implements BattleEngine {
         }
     }
 
-    private void newEnemyCheck() {
+    private void newEnemyCheck() throws InstantiationException, IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException, IOException {
         if (BattleUtilities.isTeamWipedOut(enemyTrainerInstance) || this.captured) {
             BattleRewards.awardBattleRewards(this.playerPokemon, this.enemyPokemon);
             this.newMoveToLearn(this.playerPokemon);
@@ -253,7 +269,8 @@ public class BattleEngineImpl implements BattleEngine {
         trainer.switchPokemonPosition(FIRST_POSITION, Integer.parseInt(move));
     }
 
-    private void newMoveToLearn(final Pokemon playerPokemon) {
+    private void newMoveToLearn(final Pokemon playerPokemon) throws InstantiationException, IllegalAccessException,
+            InvocationTargetException, NoSuchMethodException, IOException {
         if (playerPokemon.isHasToLearnMove()) {
             this.gameEngineInstance.setScene("move");
         }
