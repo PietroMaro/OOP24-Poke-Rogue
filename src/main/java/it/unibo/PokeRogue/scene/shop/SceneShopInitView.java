@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.awt.Color;
+import java.io.IOException;
 
 import javax.swing.OverlayLayout;
 
@@ -32,11 +33,11 @@ public class SceneShopInitView {
                         final Map<String, PanelElementImpl> allPanelsElements) {
                 this.sceneGraphicElements = sceneGraphicElements;
                 this.allPanelsElements = allPanelsElements;
-                this.utilityClass = new UtilitiesForScenesImpl("shop", sceneGraphicElements);
+                this.utilityClass = new UtilitiesForScenesImpl("shop");
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
         }
 
-        public void initGraphicElements(final int currentSelectedButton) {
+        public void initGraphicElements(final int currentSelectedButton) throws IOException {
                 this.allPanelsElements.put(FIRST_PANEL, new PanelElementImpl("", new OverlayLayout(null)));
                 this.initTextElements();
                 this.initButtonElements();
@@ -47,7 +48,7 @@ public class SceneShopInitView {
                                                 this.utilityClass.getPathString("images", "sceneShopBgBar.png")));
 
                 // Set the first button as selected
-                this.utilityClass.setButtonStatus(currentSelectedButton, true);
+                this.utilityClass.setButtonStatus(currentSelectedButton, true, sceneGraphicElements);
 
         }
 
