@@ -1,0 +1,45 @@
+{
+  "0": {
+    "type": "button",
+    "borderThickness": 1,
+    "leftX": 0.3,
+    "leftY": 0.2,
+    "width": 0.4,
+    "height": 0.05
+  },
+
+  "1": {
+    "type": "button",
+    "borderThickness": 1,
+    "leftX": 0.3,
+    "leftY": 0.4,
+    "width": 0.4,
+    "height": 0.05
+
+  },
+  "2": {
+    "type": "button",
+    "borderThickness": 1,
+    "leftX": 0.3,
+    "leftY": 0.6,
+    "width": 0.4,
+    "height": 0.05
+
+  },
+"101": {
+    "type": "text",
+    "content": "Nuova Partita",
+    "textColor": "#000000",
+    "textDimension": 0.08,
+    "leftX": 0.44,
+    "leftY": 0.44
+  },
+  "102": {
+    "type": "text",
+    "content": "Opzioni",
+    "textColor": "#000000",
+    "textDimension": 0.08,
+    "leftX": 0.455,
+    "leftY": 0.64
+  }
+}
