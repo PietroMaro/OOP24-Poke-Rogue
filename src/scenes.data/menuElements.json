@@ -28,16 +28,12 @@
   },
 "101": {
     "type": "text",
-    "content": "Nuova Partita",
-    "textColor": "#000000",
     "textDimension": 0.08,
     "leftX": 0.44,
     "leftY": 0.44
   },
   "102": {
     "type": "text",
-    "content": "Opzioni",
-    "textColor": "#000000",
     "textDimension": 0.08,
     "leftX": 0.455,
     "leftY": 0.64
