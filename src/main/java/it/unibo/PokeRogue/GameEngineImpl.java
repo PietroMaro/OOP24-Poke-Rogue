@@ -34,6 +34,7 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
     private String fileToLoadName;
     @Setter
     private Integer fightLevel;
+
     protected GameEngineImpl() {
         super();
     }
@@ -49,13 +50,12 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
      * @param newScene the name of the new scene to load
      */
     @Override
-    public void setScene(final String newScene) 
-		throws IOException,
-		InstantiationException,
-		IllegalAccessException,
-		InvocationTargetException,
-		NoSuchMethodException
-		{
+    public void setScene(final String newScene)
+            throws IOException,
+            InstantiationException,
+            IllegalAccessException,
+            InvocationTargetException,
+            NoSuchMethodException {
         switch (newScene) {
             case "main":
                 currentScene = new SceneMenu();
@@ -67,15 +67,16 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
                 currentScene = new SceneBox(this.fileToLoadName);
                 break;
             case "fight":
-                currentScene = new SceneShopTemp();
-                break;
-                /*if (fightLevel == null) {
+                if (fightLevel == null) {
                     fightLevel = 0;
                 } else {
                     fightLevel = fightLevel + 1;
                 }
+
                 currentScene = new SceneFight(fightLevel);
-                break;*/
+
+                currentScene = new SceneFight(fightLevel);
+                break;
             case "shop":
                 currentScene = new SceneShopTemp();
                 break;
@@ -92,12 +93,12 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
     }
 
     @Override
-    public void keyPressedToScene(final int keyCode) 
-		throws IOException,
-		InstantiationException,
-		IllegalAccessException,
-		NoSuchMethodException,
-		InvocationTargetException {
+    public void keyPressedToScene(final int keyCode)
+            throws IOException,
+            InstantiationException,
+            IllegalAccessException,
+            NoSuchMethodException,
+            InvocationTargetException {
         if (this.currentScene == null) {
             LOGGER.log(Level.WARNING, "No active scene");
 
