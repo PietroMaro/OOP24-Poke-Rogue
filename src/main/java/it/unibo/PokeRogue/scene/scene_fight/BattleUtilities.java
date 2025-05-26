@@ -5,8 +5,8 @@ import java.util.Optional;
 
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.pokemon.Pokemon;
-import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
+import it.unibo.PokeRogue.trainers.TrainerImpl;
 
 /**
  * Utility class for various battle-related operations.
@@ -77,7 +77,7 @@ public final class BattleUtilities {
      * @return true if the Pokémon at the specified position can be switched in,
      *         false otherwise
      */
-    public static boolean canSwitch(final PlayerTrainerImpl trainer, final int switchPokemonPosition) {
+    public static boolean canSwitch(final TrainerImpl trainer, final int switchPokemonPosition) {
         return switchPokemonPosition < trainer.getSquad().size()
                 && trainer.getPokemon(switchPokemonPosition)
                         .map(pokemon -> pokemon.getActualStats().get("hp").getCurrentValue() > 0)

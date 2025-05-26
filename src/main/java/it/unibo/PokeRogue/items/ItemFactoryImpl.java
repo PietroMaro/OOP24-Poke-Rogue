@@ -1,35 +1,33 @@
 package it.unibo.PokeRogue.items;
 
-import it.unibo.PokeRogue.SingletonImpl;
+import it.unibo.PokeRogue.Singleton;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Iterator;
 import java.util.Random;
-
+import java.io.IOException;
 import java.nio.file.Paths;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class ItemFactoryImpl extends SingletonImpl implements ItemFactory {
+public class ItemFactoryImpl extends Singleton implements ItemFactory {
 
     private final JsonReader jsonReader = new JsonReaderImpl();
     private final Random random = new Random();
     private final Set<String> allItemSet = new HashSet<>();
     private final Map<String, ItemBlueprint> itemBlueprints = new HashMap<>();
 
-    public ItemFactoryImpl() {
+    public ItemFactoryImpl() throws IOException{
         init();
     }
 
     @Override
-    public void init() {
+    public void init()  throws IOException{
         JSONArray allItemJson;
         allItemJson = jsonReader.readJsonArray(Paths.get("src", "items_data", "itemsList.json").toString());
         for (int itemIndex = 0; itemIndex < allItemJson.length(); itemIndex += 1) {
@@ -37,7 +35,7 @@ public class ItemFactoryImpl extends SingletonImpl implements ItemFactory {
         }
     }
 
-    private void addItemToBlueprints(final String itemName) {
+    private void addItemToBlueprints(final String itemName) throws IOException {
         JSONObject itemJson;
         itemJson = jsonReader.readJsonObject(Paths.get("src", "items_data", "items", "data", itemName + ".json").toString());
 
@@ -86,23 +84,4 @@ public class ItemFactoryImpl extends SingletonImpl implements ItemFactory {
         return this.allItemSet;
     }
 
-    // Utility methods (moved from PokemonFactoryImpl for potential reuse)
-    private <T> List<T> jsonArrayToList(final JSONArray jsonArray) {
-        List<T> result = new ArrayList<>();
-        for (int index = 0; index < jsonArray.length(); index += 1) {
-            result.add(((T) jsonArray.get(index)));
-        }
-        return result;
-    }
-
-    private <T> Map<String, T> jsonObjectToMap(final JSONObject jsonObject) {
-        Map<String, T> result = new HashMap<>();
-        Iterator<String> keys = jsonObject.keys();
-        while (keys.hasNext()) {
-            String key = keys.next();
-            T value = (T) jsonObject.get(key);
-            result.put(key, value);
-        }
-        return result;
-    }
 }

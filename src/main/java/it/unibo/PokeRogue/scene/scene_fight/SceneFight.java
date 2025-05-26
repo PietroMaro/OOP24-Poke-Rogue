@@ -1,7 +1,8 @@
 package it.unibo.PokeRogue.scene.scene_fight;
 
-
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.scene.scene_fight.enums.DecisionTypeEnum;
 import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightStatusValuesEnum;
-import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
+import it.unibo.PokeRogue.trainers.TrainerImpl;
 import lombok.Getter;
 
 /**
@@ -32,14 +33,13 @@ public class SceneFight implements Scene {
     @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private int currentSelectedButton;
-    private final PlayerTrainerImpl enemyTrainerInstance;
+    private final TrainerImpl enemyTrainerInstance;
     private final SceneFightView sceneFightView;
     private int newSelectedButton;
     private final EnemyAi enemyAiInstance;
 
     private final BattleEngine battleEngineInstance;
     private final GenerateEnemy generateEnemyInstance;
-
 
     /**
      * Constructor for SceneFight.
@@ -48,8 +48,11 @@ public class SceneFight implements Scene {
      * 
      * @param battleLevel the level of the battle
      */
-    public SceneFight(final Integer battleLevel) {
-        this.enemyTrainerInstance = new PlayerTrainerImpl();
+    public SceneFight(final Integer battleLevel) throws IOException, NoSuchMethodException,
+            IllegalAccessException,
+            InvocationTargetException,
+            InstantiationException {
+        this.enemyTrainerInstance = new TrainerImpl();
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.enemyAiInstance = new EnemyAiImpl(enemyTrainerInstance, battleLevel);
@@ -75,7 +78,7 @@ public class SceneFight implements Scene {
      * Initializes the graphic elements displayed in the scene.
      * This method sets up the UI components for the battle interface.
      */
-    protected void initGraphicElements() {
+    protected void initGraphicElements() throws IOException {
         this.sceneFightView.initGraphicElements(this.currentSelectedButton);
     }
 
@@ -84,9 +87,10 @@ public class SceneFight implements Scene {
      * selected button.
      */
     @Override
-    public void updateGraphic() {
+    public void updateGraphic() throws IOException{
         this.sceneFightView.updateGraphic(currentSelectedButton, newSelectedButton);
     }
+
     /**
      * Updates the status of the scene based on the key input from the user.
      * This method handles user interactions, such as navigating through the buttons
@@ -95,7 +99,11 @@ public class SceneFight implements Scene {
      * @param inputKey the key pressed by the user
      */
     @Override
-    public void updateStatus(final int inputKey) {
+    public void updateStatus(final int inputKey) throws NoSuchMethodException,
+            IOException,
+            IllegalAccessException,
+            InvocationTargetException,
+            InstantiationException {
         switch (inputKey) {
             case KeyEvent.VK_UP:
                 if (SceneFightUtilities.isButtonInRange(newSelectedButton, 2, 4) ||
@@ -215,7 +223,11 @@ public class SceneFight implements Scene {
      * @param playerMove     the selected move from the player
      */
 
-    private void fightLoop(final Decision decision) {
+    private void fightLoop(final Decision decision) throws NoSuchMethodException,
+            IOException,
+            IllegalAccessException,
+            InvocationTargetException,
+            InstantiationException {
         final Decision enemyChoose = enemyAiInstance.nextMove(battleEngineInstance.getCurrentWeather());
         this.battleEngineInstance.runBattleTurn(decision, enemyChoose);
 

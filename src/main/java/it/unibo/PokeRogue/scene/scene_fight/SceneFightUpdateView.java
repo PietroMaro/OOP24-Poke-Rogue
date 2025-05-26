@@ -2,6 +2,7 @@ package it.unibo.PokeRogue.scene.scene_fight;
 
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.Map;
 import javax.swing.OverlayLayout;
 
@@ -61,7 +62,7 @@ public class SceneFightUpdateView {
                 this.newSelectedButton = newSelectedButton;
                 this.sceneGraphicElements = sceneGraphicElements;
                 this.allPanelsElements = allPanelsElements;
-                this.utilityClass = new UtilitiesForScenesImpl("fight", sceneGraphicElements);
+                this.utilityClass = new UtilitiesForScenesImpl("fight");
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
                 this.sceneInstance = sceneInstance;
                 this.alreadyInMainMenu = true;
@@ -78,7 +79,7 @@ public class SceneFightUpdateView {
          * @param newSelectedButton     the index of the newly selected button after
          *                              user input
          */
-        protected void updateGraphic(final int currentSelectedButton, final int newSelectedButton) {
+        protected void updateGraphic(final int currentSelectedButton, final int newSelectedButton) throws IOException {
                 this.newSelectedButton = newSelectedButton;
                 this.updateSelectedButton(newSelectedButton);
                 this.updateMoves();
@@ -89,8 +90,8 @@ public class SceneFightUpdateView {
         }
 
         private void updateSelectedButton(final int newSelectedButton) {
-                this.utilityClass.setButtonStatus(this.currentSelectedButton, false);
-                this.utilityClass.setButtonStatus(newSelectedButton, true);
+                this.utilityClass.setButtonStatus(this.currentSelectedButton, false,this.sceneGraphicElements);
+                this.utilityClass.setButtonStatus(newSelectedButton, true,this.sceneGraphicElements);
                 this.currentSelectedButton = newSelectedButton;
         }
 
@@ -111,7 +112,7 @@ public class SceneFightUpdateView {
                         this.initMoveButton();
                         SceneFightUtilities.updateMoveInfo(currentSelectedButton, sceneGraphicElements,
                                         playerTrainerInstance);
-                        this.utilityClass.setButtonStatus(this.currentSelectedButton, true);
+                        this.utilityClass.setButtonStatus(this.currentSelectedButton, true,this.sceneGraphicElements);
                 }
         }
 
@@ -249,7 +250,7 @@ public class SceneFightUpdateView {
                                                         0.31, 0.35,
                                                         0.4));
 
-                        this.utilityClass.setButtonStatus(currentSelectedButton, true);
+                        this.utilityClass.setButtonStatus(currentSelectedButton, true,this.sceneGraphicElements);
 
                 }
         }
@@ -259,7 +260,7 @@ public class SceneFightUpdateView {
          * Clears current elements, initializes change-specific UI,
          * and sets the button status.
          */
-        private void pokemonChange() {
+        private void pokemonChange() throws IOException{
                 if (currentSelectedButton >= SceneFightStatusValuesEnum.CHANGE_POKEMON_1.value()
                                 && currentSelectedButton < SceneFightStatusValuesEnum.POKEBALL_BUTTON.value()) {
                         this.alreadyInMainMenu = false;
@@ -275,7 +276,7 @@ public class SceneFightUpdateView {
                         this.sceneGraphicElements.put(SceneFightGraphicEnum.BACKGROUND.value(),
                                         new BackgroundElementImpl(CHANGE_PANEL_TEXT,
                                                         this.utilityClass.getPathString("images", "bg.png")));
-                        this.utilityClass.setButtonStatus(currentSelectedButton, true);
+                        this.utilityClass.setButtonStatus(currentSelectedButton, true,this.sceneGraphicElements);
 
                 }
         }
@@ -397,7 +398,7 @@ public class SceneFightUpdateView {
          * Handles the transition back to the main fight menu if the conditions are met.
          * Clears current UI elements and re-initializes the main menu graphics.
          */
-        private void mainMenu() {
+        private void mainMenu() throws IOException {
                 if ((this.currentSelectedButton <= SceneFightStatusValuesEnum.BALL_BUTTON.value() && !alreadyInMainMenu)
                                 || this.newSelectedButton == SceneFightStatusValuesEnum.RUN_BUTTON.value()) {
                         sceneGraphicElements.clear();

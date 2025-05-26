@@ -1,6 +1,7 @@
 package it.unibo.PokeRogue.scene.sceneMove;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.Map;
 
 import javax.swing.OverlayLayout;
@@ -43,7 +44,7 @@ public class SceneMoveView {
          */
         public SceneMoveView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements) {
-                this.utilityClass = new UtilitiesForScenesImpl("move", sceneGraphicElements);
+                this.utilityClass = new UtilitiesForScenesImpl("move");
                 this.playerPokemon = PlayerTrainerImpl.getTrainerInstance().getPokemon(0).get();
                 this.sceneGraphicElements = sceneGraphicElements;
                 this.allPanelsElements = allPanelsElements;
@@ -56,7 +57,7 @@ public class SceneMoveView {
          * move names, PP, and damage, buttons for selecting moves, and the background.
          * The elements are added to the maps provided during construction.
          */
-        protected void initGraphicElements() {
+        protected void initGraphicElements() throws IOException{
                 // Panels
                 this.allPanelsElements.put(FIRST_PANEL_STRING, new PanelElementImpl("", new OverlayLayout(null)));
 
