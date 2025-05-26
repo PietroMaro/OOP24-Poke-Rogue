@@ -2,10 +2,10 @@ package it.unibo.PokeRogue.utilities;
 
 import java.nio.file.Paths;
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.json.JSONObject;
+import java.io.IOException;
 
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.pokemon.Pokemon;
@@ -19,7 +19,7 @@ import it.unibo.PokeRogue.pokemon.Type;
  * This class provides methods to:
  * Evaluate the effectiveness of a move against a Pokémon
  * Compute an integer score representing effectiveness for ranking or
- * decision-making purposes</li>
+ * decision-making purposes
  * 
  *
  * The effectiveness data is read from a JSON file located at:
@@ -27,30 +27,23 @@ import it.unibo.PokeRogue.pokemon.Type;
  *
  * 
  */
-public class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
+public final class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
 
+    private static final int BASE_EFFECTIVENESS_VALUE = 40;
     private final Map<Type, Map<Type, Double>> effectiveness = new EnumMap<>(Type.class);
-    private final Map<Double, Integer> effectivenessValueCalculator = new HashMap<>();
 
     /**
      * Constructs the effectiveness calculator and loads data from the JSON file.
      */
-    public PokeEffectivenessCalcImpl() {
-        this.effectivenessValueCalculator.put(4.0, 160);
-        this.effectivenessValueCalculator.put(2.0, 80);
-        this.effectivenessValueCalculator.put(1.0, 40);
-        this.effectivenessValueCalculator.put(0.5, 20);
-        this.effectivenessValueCalculator.put(0.25, 10);
-        this.effectivenessValueCalculator.put(0.0, 0);
-
+    public PokeEffectivenessCalcImpl() throws IOException {
         final JsonReader jsonReader = new JsonReaderImpl();
         final JSONObject root = jsonReader
                 .readJsonObject(Paths.get("src", "pokemon_data", "pokemonEffectiveness.json").toString());
 
-        for (String attacker : root.keySet()) {
-            JSONObject inner = root.getJSONObject(attacker);
-            Map<Type, Double> innerMap = new HashMap<>();
-            for (String defender : inner.keySet()) {
+        for (final String attacker : root.keySet()) {
+            final JSONObject inner = root.getJSONObject(attacker);
+            final Map<Type, Double> innerMap = new EnumMap<>(Type.class);
+            for (final String defender : inner.keySet()) {
                 innerMap.put(Type.valueOf(defender), inner.getDouble(defender));
             }
             this.effectiveness.put(Type.valueOf(attacker), innerMap);
@@ -58,14 +51,6 @@ public class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
 
     }
 
-    /**
-     * Returns the type effectiveness multiplier from the attacker's type to the
-     * defender's type.
-     *
-     * @param myPokemonType    The attacking type
-     * @param enemyPokemonType The defending type
-     * @return The effectiveness multiplier (e.g., 2.0, 0.5, 1.0)
-     */
     private double calculateTypeMultiplier(final Type myPokemonType, final Type enemyPokemonType) {
 
         if (this.effectiveness.get(myPokemonType).get(enemyPokemonType) == null) {
@@ -75,38 +60,20 @@ public class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
 
     }
 
-    /**
-     * Calculates the total effectiveness multiplier of a move against an enemy
-     * Pokémon.
-     *
-     * @param move         The move being used
-     * @param enemyPokemon The target Pokémon
-     * @return The cumulative effectiveness multiplier (e.g., 4.0, 0.5)
-     */
+    @Override
     public double calculateAttackEffectiveness(final Move move, final Pokemon enemyPokemon) {
 
         double effectiveness = 1;
         final Type moveType = move.getType();
         final List<Type> enemyPokemonTypes = enemyPokemon.getTypes();
 
-        for (Type enemyType : enemyPokemonTypes) {
+        for (final Type enemyType : enemyPokemonTypes) {
             effectiveness = effectiveness * this.calculateTypeMultiplier(moveType, enemyType);
         }
 
         return effectiveness;
     }
 
-    /**
-     * Calculates an integer score representing the effectiveness of a Pokémon
-     * against another.
-     *
-     * The score is based on effectiveness multipliers and normalized to discrete
-     * values.
-     *
-     * @param myPokemon    The attacking Pokémon
-     * @param enemyPokemon The defending Pokémon
-     * @return An integer score representing type matchup effectiveness
-     */
     @Override
     public int calculateEffectiveness(final Pokemon myPokemon, final Pokemon enemyPokemon) {
         double effectiveness;
@@ -115,15 +82,15 @@ public class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
         final List<Type> myPokemonTypes = myPokemon.getTypes();
         final List<Type> enemyPokemonTypes = enemyPokemon.getTypes();
 
-        for (Type myPokemonType : myPokemonTypes) {
+        for (final Type myPokemonType : myPokemonTypes) {
             effectiveness = 1;
 
-            for (Type enemyPokemonType : enemyPokemonTypes) {
+            for (final Type enemyPokemonType : enemyPokemonTypes) {
 
                 effectiveness = effectiveness * this.calculateTypeMultiplier(myPokemonType, enemyPokemonType);
             }
 
-            effectivenessValue = effectivenessValue + this.effectivenessValueCalculator.get(effectiveness);
+            effectivenessValue = effectivenessValue + (int) (BASE_EFFECTIVENESS_VALUE * effectiveness);
         }
 
         if (myPokemonTypes.size() == 1 && enemyPokemonTypes.size() == 2) {

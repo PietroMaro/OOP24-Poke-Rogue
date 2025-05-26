@@ -1,36 +1,34 @@
 package it.unibo.PokeRogue.inputHandling;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.KeyAdapter;
 
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
 
-public class InputHandlerImpl implements KeyListener {
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
-    private GameEngine gameEngine;
+public final class InputHandlerImpl extends KeyAdapter {
 
-    public InputHandlerImpl() {
-        gameEngine = GameEngineImpl.getInstance(GameEngineImpl.class);
-    }
+	private static final Logger LOGGER = Logger.getLogger(InputHandlerImpl.class.getName());
+	private final GameEngine gameEngine;
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
+	public InputHandlerImpl() {
+		try {
+			gameEngine = GameEngineImpl.getInstance(GameEngineImpl.class);
+		} catch (final Exception er) {
+			LOGGER.log(Level.WARNING, er.getMessage());
+			throw new RuntimeException("Could not initialize GameEngine", er);
+		}
+	}
 
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-
-        gameEngine.keyPressedToScene(e.getKeyCode());
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
+	@Override
+	public void keyPressed(final KeyEvent e) {
+		try {
+			gameEngine.keyPressedToScene(e.getKeyCode());
+		} catch (final Exception er) {
+			LOGGER.log(Level.WARNING, er.getMessage());
+		}
+	}
 }

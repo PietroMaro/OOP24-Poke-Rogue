@@ -6,19 +6,18 @@ import javax.swing.OverlayLayout;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 
-public class PanelElementImpl extends GraphicElementImpl implements PanelElement {
+public final class PanelElementImpl extends GraphicElementImpl implements PanelElement {
 
-    public PanelElementImpl(String panelName, LayoutManager layout) {
+    private static final long serialVersionUID = 1L;
+
+    public PanelElementImpl(final String panelName, final LayoutManager layout) {
         super(panelName);
 
         if (layout instanceof OverlayLayout) {
-            this.setLayout(new OverlayLayout(this));
+            super.setLayout(new OverlayLayout(this));
         } else {
-            this.setLayout(layout);
+            super.setLayout(layout);
         }
-
-
-    
 
     }
 

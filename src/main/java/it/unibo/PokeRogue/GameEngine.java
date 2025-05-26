@@ -1,4 +1,6 @@
 package it.unibo.PokeRogue;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Interface representing the game engine of an application.
@@ -8,7 +10,7 @@ package it.unibo.PokeRogue;
  * The game engine handles scene transitions and other central operations
  * required for the game to function.
  */
-public interface GameEngine extends Singleton {
+public interface GameEngine {
     /**
      * Sets the current scene of the game.
      * 
@@ -17,9 +19,22 @@ public interface GameEngine extends Singleton {
      * 
      * @param newScene the name of the new scene to load
      */
-    void setScene(final String newScene);
-    void keyPressedToScene(final int keyCode);
-    void setGraphicEngine(final GraphicEngine graphicEngine);
-    void setFileToLoad(final String fileName);
+    void setScene(String newScene) throws 
+		IOException,
+		InstantiationException,
+		IllegalAccessException,
+		InvocationTargetException,
+		NoSuchMethodException;
+
+    void keyPressedToScene(int keyCode) throws 
+		IOException,
+		InstantiationException,
+		IllegalAccessException,
+		InvocationTargetException,
+		NoSuchMethodException;
+
+    void setGraphicEngine(GraphicEngine graphicEngine);
+
+    void setFileToLoad(String fileName);
     void setFightLevel(Integer newVal);
 }

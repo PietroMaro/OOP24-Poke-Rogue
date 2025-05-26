@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
+import java.io.IOException;
 
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.scene.scene_fight.Decision;
@@ -23,7 +24,10 @@ import it.unibo.PokeRogue.utilities.PokeEffectivenessCalcImpl;
  * This logic considers various factors such as the order of the squad,
  * type matchups, and whether the AI is configured to make strategic switches.
  */
-public class EnemyAiSwitchIn {
+public final class EnemyAiSwitchIn {
+
+    private static final int MAX_TRAINER_SQUAD_SIZE = 6;
+    private static final int ACCEPTED_EFFECTIVENESS_DIFFERENCE = 50;
 
     private final Trainer enemyTrainer;
     private final PlayerTrainerImpl playerTrainerInstance;
@@ -31,13 +35,12 @@ public class EnemyAiSwitchIn {
     private final Map<Integer, Integer> pokeInSquadScore;
     private final Random random;
     private int switchPosition;
-    private final int acceptedEffectivenessDifference = 50;
 
     // Flags
 
-    private boolean usePokemonInOrder;
-    private boolean considerSwitching;
-    private int switchFirstRate;
+    private final boolean usePokemonInOrder;
+    private final boolean considerSwitching;
+    private final int switchFirstRate;
 
     /**
      * Constructs an EnemyAiSwitchIn instance with behavior flags.
@@ -48,7 +51,7 @@ public class EnemyAiSwitchIn {
      * @param enemyTrainer      the AI-controlled trainer
      */
     public EnemyAiSwitchIn(final boolean usePokemonInOrder, final boolean considerSwitching, final int switchFirstRate,
-            final Trainer enemyTrainer) {
+            final Trainer enemyTrainer) throws IOException {
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
         this.pokeEffectivenessCalculator = new PokeEffectivenessCalcImpl();
         pokeInSquadScore = new HashMap<>();
@@ -78,12 +81,6 @@ public class EnemyAiSwitchIn {
         return new Decision(DecisionTypeEnum.NOTHING, "Nothing");
     }
 
-    /**
-     * Evaluates all squad members to determine if switching is beneficial.
-     * Chooses either a strategic type-based switch or fallback order.
-     *
-     * @return true if a switch should be made, false otherwise
-     */
     private boolean shouldSwitch() {
         this.calculateEffectivenessOfSquad();
 
@@ -99,7 +96,7 @@ public class EnemyAiSwitchIn {
         }
 
         if (canSwitch() && this.isBetterOptionInSquad()
-                && this.calculateEffectivenessDifference(0, 0) <= this.acceptedEffectivenessDifference) {
+                && this.calculateEffectivenessDifference(0, 0) <= ACCEPTED_EFFECTIVENESS_DIFFERENCE) {
             this.typeBasedSwitchIn();
 
             return true;
@@ -110,16 +107,11 @@ public class EnemyAiSwitchIn {
 
     }
 
-    /**
-     * Determines if the currently active Pokémon can legally switch.
-     *
-     * @return true if switching is allowed, false otherwise
-     */
     private boolean canSwitch() {
         final Pokemon currentPokemon = this.enemyTrainer.getPokemon(0).get();
         boolean canSwitch = false;
 
-        for (Optional<Pokemon> pokemon : enemyTrainer.getSquad().subList(1, 6)) {
+        for (final Optional<Pokemon> pokemon : enemyTrainer.getSquad().subList(1, MAX_TRAINER_SQUAD_SIZE)) {
             if (pokemon.isPresent() && pokemon.get().getActualStats().get("hp").getCurrentValue() > 0) {
                 canSwitch = true;
                 break;
@@ -148,12 +140,8 @@ public class EnemyAiSwitchIn {
         return canSwitch;
     }
 
-    /**
-     * Switches to the first available living Pokémon (used when switching in
-     * order).
-     */
     private void orderSwitchIn() {
-        for (int pokePos = 1; pokePos < 6; pokePos++) {
+        for (int pokePos = 1; pokePos < MAX_TRAINER_SQUAD_SIZE; pokePos++) {
             if (this.isPokemonAlive(pokePos)) {
                 switchPosition = pokePos;
                 break;
@@ -161,50 +149,35 @@ public class EnemyAiSwitchIn {
         }
     }
 
-    /**
-     * Chooses the best Pokémon to switch to based on type effectiveness against the
-     * opponent.
-     */
     private void typeBasedSwitchIn() {
         final List<Integer> scores = this.fromSetToReversList(this.pokeInSquadScore.keySet());
 
-        for (int scorePos = 0; scorePos < scores.size(); scorePos++) {
-
+        for (final Integer score : scores) {
             if (this.random.nextInt(100) < this.switchFirstRate) {
-                this.switchPosition = this.pokeInSquadScore.get(scores.get(scorePos));
+                this.switchPosition = this.pokeInSquadScore.get(score);
                 return;
             }
-
         }
 
         this.switchPosition = pokeInSquadScore.get(scores.get(scores.size() - 1));
 
     }
 
-    /**
-     * Determines if there is a better pokemon in squad based on calculated
-     * effectiveness.
-     *
-     * @return true if a stronger option exists, false otherwise
-     */
     private boolean isBetterOptionInSquad() {
         final List<Integer> scores = this.fromSetToReversList(this.pokeInSquadScore.keySet());
 
-        return scores.get(0) > this.acceptedEffectivenessDifference;
+        return scores.get(0) > ACCEPTED_EFFECTIVENESS_DIFFERENCE;
 
     }
 
-    /**
-     * Calculates and ranks effectiveness scores for all Pokémon in the squad.
-     */
     private void calculateEffectivenessOfSquad() {
         this.pokeInSquadScore.clear();
         int effectiveness;
 
-        for (int pokePos = 1; pokePos < 6; pokePos++) {
+        for (int pokePos = 1; pokePos < MAX_TRAINER_SQUAD_SIZE; pokePos++) {
             if (this.enemyTrainer.getPokemon(pokePos).isPresent() && this.isPokemonAlive(pokePos)) {
                 effectiveness = this.calculateEffectivenessDifference(pokePos, 0);
-                if (!this.pokeInSquadScore.containsKey(effectiveness) || random.nextInt(100) < 50) {
+                if (!this.pokeInSquadScore.containsKey(effectiveness) || random.nextBoolean()) {
 
                     this.pokeInSquadScore.put(effectiveness, pokePos);
                 }
@@ -214,14 +187,8 @@ public class EnemyAiSwitchIn {
 
     }
 
-    /**
-     * Converts a set of effectiveness scores to a descending-ordered list.
-     *
-     * @param set the set to convert
-     * @return a reversed and sorted list of scores
-     */
     private List<Integer> fromSetToReversList(final Set<Integer> set) {
-        List<Integer> listFromSet = new ArrayList<>(set);
+        final List<Integer> listFromSet = new ArrayList<>(set);
 
         listFromSet.sort(Collections.reverseOrder());
 
@@ -229,23 +196,10 @@ public class EnemyAiSwitchIn {
 
     }
 
-    /**
-     * Checks if the Pokémon at the specified position is still alive.
-     *
-     * @param positionInSquad index in the squad
-     * @return true if Pokémon has HP > 0, false otherwise
-     */
     private boolean isPokemonAlive(final int positionInSquad) {
         return enemyTrainer.getPokemon(positionInSquad).get().getActualStats().get("hp").getCurrentValue() > 0;
     }
 
-    /**
-     * Calculates the type effectiveness difference between two Pokémon.
-     *
-     * @param posEnemyPokemon  position in enemy trainer's squad
-     * @param posPlayerPokemon position in player's squad
-     * @return effectiveness value as integer
-     */
     private int calculateEffectivenessDifference(final int posEnemyPokemon, final int posPlayerPokemon) {
         return this.pokeEffectivenessCalculator.calculateEffectiveness(enemyTrainer.getPokemon(posEnemyPokemon).get(),
                 playerTrainerInstance.getPokemon(posPlayerPokemon).get());

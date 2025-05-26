@@ -6,20 +6,24 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
+import lombok.Setter;
 
-public class BoxElementImpl extends GraphicElementImpl implements BoxElement {
+public final class BoxElementImpl extends GraphicElementImpl implements BoxElement {
+    private static final long serialVersionUID = 1L;
 
-    private Color mainColor;
-    private Color borderColor;
+    private final Color mainColor;
+    private final Color borderColor;
+    private final double x;
+    private final double y;
+    private final double width;
+    private final double height;
+
+    @Setter
     private int borderThickness;
 
-    private double x;
-    private double y;
-    private double width;
-    private double height;
-
-    public BoxElementImpl(String panelName, Color mainColor, Color borderColor, int borderThickness, double x, double y,
-            double width, double height) {
+    public BoxElementImpl(final String panelName, final Color mainColor, final Color borderColor,
+            final int borderThickness, final double x, final double y,
+            final double width, final double height) {
         super(panelName);
         this.mainColor = mainColor;
         this.borderColor = borderColor;
@@ -32,9 +36,9 @@ public class BoxElementImpl extends GraphicElementImpl implements BoxElement {
     }
 
     @Override
-    protected void paintComponent(Graphics drawEngine) {
+    protected void paintComponent(final Graphics drawEngine) {
         super.paintComponent(drawEngine);
-        Graphics2D drawEngine2D = (Graphics2D) drawEngine;
+        final Graphics2D drawEngine2D = (Graphics2D) drawEngine;
 
         if (this.mainColor != null) {
             drawEngine2D.setColor(this.mainColor);
@@ -50,11 +54,6 @@ public class BoxElementImpl extends GraphicElementImpl implements BoxElement {
                     (int) (getWidth() * this.width), (int) (getHeight() * this.height));
 
         }
-
-    }
-
-    public void setBorderThickness(int thickness) {
-        this.borderThickness = thickness;
 
     }
 

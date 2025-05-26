@@ -13,7 +13,7 @@ public enum SceneMenuGraphicEnum {
 
     private final int code;
 
-    SceneMenuGraphicEnum(int code) {
+    SceneMenuGraphicEnum(final int code) {
         this.code = code;
     }
 
@@ -27,11 +27,12 @@ public enum SceneMenuGraphicEnum {
      * @param currentSelectedButton the currently selected button.
      * @return the next button.
      */
-    public static SceneMenuGraphicEnum nextButtonsNames(SceneMenuGraphicEnum currentSelectedButton) {
+    public static SceneMenuGraphicEnum nextButtonsNames(final SceneMenuGraphicEnum currentSelectedButton) {
+
         if (currentSelectedButton.ordinal() == 0) {
             return values()[2];
         }
-        int nextOrdinal = (currentSelectedButton.ordinal() - 1);
+        final int nextOrdinal = currentSelectedButton.ordinal() - 1;
         return values()[nextOrdinal];
     }
 
@@ -41,12 +42,13 @@ public enum SceneMenuGraphicEnum {
      * @param currentSelectedButton the currently selected button.
      * @return the previous button.
      */
-    public static SceneMenuGraphicEnum previousButtonsNames(SceneMenuGraphicEnum currentSelectedButton) {
+    public static SceneMenuGraphicEnum previousButtonsNames(final SceneMenuGraphicEnum currentSelectedButton) {
 
         if (currentSelectedButton.ordinal() == 2) {
             return values()[0];
         }
-        int nextOrdinal = (currentSelectedButton.ordinal() + 1);
+
+        final int nextOrdinal = currentSelectedButton.ordinal() + 1;
         return values()[nextOrdinal];
     }
 }

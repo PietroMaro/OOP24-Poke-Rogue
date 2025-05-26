@@ -9,50 +9,47 @@ import javax.imageio.ImageIO;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 
-public class SpriteElementImpl extends GraphicElementImpl implements SpriteElement {
+public final class SpriteElementImpl extends GraphicElementImpl implements SpriteElement {
+    private static final long serialVersionUID = 1L;
 
-    private Image spriteImage;
-    private double LeftUpX;
-    private double LeftUpy;
-    private double width;
-    private double height;
+    private final Image spriteImage;
+    private final double leftUpX;
+    private final double leftUpy;
+    private final double width;
+    private final double height;
 
-    public SpriteElementImpl(String panelName, String pathToImage, double LeftUpX, double LeftUpy, double width,
-            double height) {
+    public SpriteElementImpl(final String panelName, final String pathToImage, final double leftUpX,
+            final double leftUpy, final double width,
+            final double height) throws IOException {
         super(panelName);
 
-        try {
-            this.spriteImage = ImageIO.read(new File(pathToImage));
+        this.spriteImage = ImageIO.read(new File(pathToImage));
 
-        } catch (IOException e) {
-            System.out.println("error image not found");
-            e.printStackTrace();
-        }
-
-        this.LeftUpX = LeftUpX;
-        this.LeftUpy = LeftUpy;
+        this.leftUpX = leftUpX;
+        this.leftUpy = leftUpy;
         this.width = width;
         this.height = height;
 
     }
 
-    public SpriteElementImpl(String panelName, Image image, double LeftUpX, double LeftUpy, double width,
-            double height) {
+    public SpriteElementImpl(final String panelName, final Image image, final double leftUpX, final double leftUpy,
+            final double width,
+            final double height) {
         super(panelName);
 
         this.spriteImage = image;
 
-        this.LeftUpX = LeftUpX;
-        this.LeftUpy = LeftUpy;
+        this.leftUpX = leftUpX;
+        this.leftUpy = leftUpy;
         this.width = width;
         this.height = height;
 
     }
 
     @Override
-    protected void paintComponent(Graphics drawEngine) {
+    protected void paintComponent(final Graphics drawEngine) {
         super.paintComponent(drawEngine);
-        drawEngine.drawImage(this.spriteImage, (int) (getWidth() * this.LeftUpX), (int) (getHeight() * this.LeftUpy),
+        drawEngine.drawImage(this.spriteImage, (int) (getWidth() * this.leftUpX), (int) (getHeight() * this.leftUpy),
                 (int) (getWidth() * this.width), (int) (getHeight() * this.height), null);
 
     }

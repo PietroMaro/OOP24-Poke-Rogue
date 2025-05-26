@@ -8,18 +8,22 @@ import lombok.AccessLevel;
 import lombok.Getter;
 
 @Getter
-public class ButtonElementImpl extends GraphicElementImpl implements ButtonElement {
+public final class ButtonElementImpl extends GraphicElementImpl implements ButtonElement {
+    
+    @Getter(AccessLevel.NONE)
+    private static final long serialVersionUID = 1L;
 
-    private BoxElementImpl buttonBox;
-    private boolean selected;
+    private final BoxElementImpl buttonBox;
+    private final boolean selected;
 
     @Getter(AccessLevel.NONE)
-    private int borderThickness;
+    private final int borderThickness;
 
-    public ButtonElementImpl(String panelName, Color mainColor, Color borderColor, int borderThickness, double x,
-            double y,
-            double width,
-            double height) {
+    public ButtonElementImpl(final String panelName, final Color mainColor, final Color borderColor,
+            final int borderThickness, final double x,
+            final double y,
+            final double width,
+            final double height) {
         super(panelName);
         this.borderThickness = borderThickness;
 
@@ -29,7 +33,7 @@ public class ButtonElementImpl extends GraphicElementImpl implements ButtonEleme
     }
 
     @Override
-    public void setSelected(boolean newStatus) {
+    public void setSelected(final boolean newStatus) {
         if (newStatus) {
             buttonBox.setBorderThickness(this.borderThickness + 2);
         } else {

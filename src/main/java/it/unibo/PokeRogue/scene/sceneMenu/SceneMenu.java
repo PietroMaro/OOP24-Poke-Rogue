@@ -1,5 +1,7 @@
 package it.unibo.PokeRogue.scene.sceneMenu;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.awt.event.KeyEvent;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -25,7 +27,7 @@ import lombok.Getter;
  * {@link SceneMenuView}.
  * 
  */
-public class SceneMenu implements Scene {
+public final class SceneMenu implements Scene {
 
     private SceneMenuGraphicEnum currentSelectedButton;
     @Getter
@@ -42,12 +44,16 @@ public class SceneMenu implements Scene {
      * It also calls the methods to initialize the status and graphic elements for
      * the menu.
      */
-    public SceneMenu() {
+    public SceneMenu() throws InstantiationException,
+            IllegalAccessException,
+            InvocationTargetException,
+            IOException,
+            NoSuchMethodException {
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
-        this.utilityClass = new UtilitiesForScenesImpl("menu", sceneGraphicElements);
-        this.sceneMenuView = new SceneMenuView(sceneGraphicElements, allPanelsElements);
+        this.utilityClass = new UtilitiesForScenesImpl("menu");
+        this.sceneMenuView = new SceneMenuView();
         this.initStatus();
         this.initGraphicElements();
 
@@ -61,10 +67,10 @@ public class SceneMenu implements Scene {
     public void updateGraphic() {
 
         for (int i = 0; i < 3; i++) {
-            this.utilityClass.setButtonStatus(i, false);
+            this.utilityClass.setButtonStatus(i, false, sceneGraphicElements);
         }
 
-        this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true);
+        this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true, sceneGraphicElements);
 
     }
 
@@ -74,8 +80,12 @@ public class SceneMenu implements Scene {
      * @param inputKey the key code from {@link KeyEvent}.
      */
     @Override
-    public void updateStatus(final int inputKey) {
-
+    public void updateStatus(final int inputKey)
+            throws IOException,
+            NoSuchMethodException,
+            InstantiationException,
+            IllegalAccessException,
+            InvocationTargetException {
         switch (inputKey) {
             case KeyEvent.VK_UP:
                 this.currentSelectedButton = SceneMenuGraphicEnum.nextButtonsNames(this.currentSelectedButton);
@@ -106,24 +116,12 @@ public class SceneMenu implements Scene {
 
     }
 
-    /**
-     * Initializes the graphic elements of the scene by delegating to the
-     * {@code SceneMenuView} and sets the initial button as selected.
-     * This method first calls {@code initGraphicElements()} on the associated
-     * {@code SceneMenuView} instance to create all visual components,
-     * and then highlights the currently selected button.
-     */
+    private void initGraphicElements() throws IOException {
+        this.sceneMenuView.initGraphicElements(sceneGraphicElements, allPanelsElements);
 
-    private void initGraphicElements() {
-        this.sceneMenuView.initGraphicElements();
-
-        this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true);
+        this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true, sceneGraphicElements);
     }
 
-    /**
-     * Initializes the internal status of the scene, setting the first selected
-     * button.
-     */
     private void initStatus() {
         this.currentSelectedButton = SceneMenuGraphicEnum.LOAD_BUTTON;
 

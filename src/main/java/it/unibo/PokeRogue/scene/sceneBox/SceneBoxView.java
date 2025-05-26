@@ -2,12 +2,13 @@ package it.unibo.PokeRogue.scene.sceneBox;
 
 import java.util.List;
 import java.util.Map;
+import java.io.IOException;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
-import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;;
+import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 
 /**
  * {@code SceneBoxView} handles the graphical representation of the SceneBox.
@@ -28,8 +29,7 @@ import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;;
  * @see SceneBoxInitView
  * @see SceneBoxUpdateView
  */
-public class SceneBoxView {
-        private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+public final class SceneBoxView {
         private final SceneBoxInitView sceneBoxInitView;
         private final SceneBoxUpdateView sceneBoxUpdateView;
 
@@ -37,15 +37,12 @@ public class SceneBoxView {
          * Constructs a {@code SceneBoxView} instance, setting up the graphical
          * environment and preparing the initialization and update modules.
          *
-         * @param sceneGraphicElements a map of graphic elements to be managed and
-         *                             rendered
-         * @param allPanelsElements    a map of panel elements
+         * 
          */
-        public SceneBoxView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
-                        final Map<String, PanelElementImpl> allPanelsElements) {
-                this.sceneGraphicElements = sceneGraphicElements;
-                this.sceneBoxInitView = new SceneBoxInitView(sceneGraphicElements, allPanelsElements);
-                this.sceneBoxUpdateView = new SceneBoxUpdateView(sceneGraphicElements);
+        public SceneBoxView() {
+
+                this.sceneBoxInitView = new SceneBoxInitView();
+                this.sceneBoxUpdateView = new SceneBoxUpdateView();
 
         }
 
@@ -55,8 +52,9 @@ public class SceneBoxView {
          * 
          * It sets up static UI components like backgrounds, buttons, and panels.
          */
-        protected void initGraphicElements() {
-                this.sceneBoxInitView.initGraphicElements();
+        void initGraphicElements(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements) throws IOException {
+                this.sceneBoxInitView.initGraphicElements(sceneGraphicElements, allPanelsElements);
 
         }
 
@@ -75,11 +73,13 @@ public class SceneBoxView {
          * @param boxes                 the list of all Pokémon storage boxes
          * @param playerTrainerInstance the player trainer managing their Pokémon
          */
-        protected void updateGraphic(final int currentSelectedButton, final int newSelectedButton, final int boxIndex,
+        void updateGraphic(final int currentSelectedButton, final int newSelectedButton, final int boxIndex,
                         final int newBoxIndex, final List<List<Pokemon>> boxes,
-                        PlayerTrainerImpl playerTrainerInstance) {
+                        final PlayerTrainerImpl playerTrainerInstance,
+                        final Map<Integer, GraphicElementImpl> sceneGraphicElements)
+                        throws IOException {
                 this.sceneBoxUpdateView.updateGraphic(currentSelectedButton, newSelectedButton, boxIndex, newBoxIndex,
-                                boxes, playerTrainerInstance);
+                                boxes, playerTrainerInstance, sceneGraphicElements);
         }
 
         /**
@@ -93,22 +93,22 @@ public class SceneBoxView {
          * @param boxIndex the index of the current box being displayed
          * @return the number of Pokémon in the current box
          */
-        protected int loadPokemonSprites(final List<List<Pokemon>> boxes, final int boxIndex) {
-                int currentBoxLength;
-                currentBoxLength = boxes.get(boxIndex).size();
-                List<Pokemon> currentBox = boxes.get(boxIndex);
+        int loadPokemonSprites(final List<List<Pokemon>> boxes, final int boxIndex,
+                        final Map<Integer, GraphicElementImpl> sceneGraphicElements) {
+                final int currentBoxLength = boxes.get(boxIndex).size();
+                final List<Pokemon> currentBox = boxes.get(boxIndex);
 
                 for (int pokemonIndex = 0; pokemonIndex < 81; pokemonIndex++) {
                         if (pokemonIndex < currentBoxLength) {
-                                this.sceneGraphicElements.put(pokemonIndex + 206,
+                                sceneGraphicElements.put(pokemonIndex + 206,
                                                 new SpriteElementImpl("pokemonPanel",
                                                                 currentBox.get(pokemonIndex)
                                                                                 .getSpriteFront(),
-                                                                0.455 + ((pokemonIndex % 9) * 0.049),
-                                                                0.115 + ((pokemonIndex / 9) * 0.09), 0.05, 0.07));
+                                                                0.455 + (pokemonIndex % 9 * 0.049),
+                                                                0.115 + (pokemonIndex / 9 * 0.09), 0.05, 0.07));
 
                         } else {
-                                this.sceneGraphicElements.remove(pokemonIndex + 206);
+                                sceneGraphicElements.remove(pokemonIndex + 206);
                         }
 
                 }

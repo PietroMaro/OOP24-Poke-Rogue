@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
+import java.io.IOException;
 
 import it.unibo.PokeRogue.Weather;
 import it.unibo.PokeRogue.move.Move;
@@ -25,23 +26,23 @@ import it.unibo.PokeRogue.utilities.PokemonBattleUtilImpl;
  * It can operate in simple random mode or more advanced scoring modes
  * depending on configuration flags.
  */
-public class EnemyAiAttack {
+public final class EnemyAiAttack {
 
     private final Trainer enemyTrainer;
     private final PlayerTrainerImpl playerTrainerInstance;
     private int attackChosen;
     private Pokemon currentEnemyPokemon;
-    private Random random;
+    private final Random random;
     private Map<Integer, Integer> scoresOfMoves;
-    List<Move> currentEnemyPokemonMoves;
+    private List<Move> currentEnemyPokemonMoves;
     private final PokeEffectivenessCalc pokeEffectivenessCalculator;
     private final PokemonBattleUtil damageCalculator;
 
     private Pokemon currentPlayerPokemon;
 
     // Flags
-    private boolean scoreMoves;
-    private boolean hpAware;
+    private final boolean scoreMoves;
+    private final boolean hpAware;
 
     /**
      * Constructs an EnemyAiAttack instance.
@@ -51,12 +52,12 @@ public class EnemyAiAttack {
      * @param enemyTrainer the Trainer object representing the enemy's team
      */
     public EnemyAiAttack(final boolean scoreMoves, final boolean hpAware,
-            final Trainer enenmyTrainer) {
+            final Trainer enemyTrainer) throws IOException {
         this.random = new Random();
         this.damageCalculator = new PokemonBattleUtilImpl();
         this.pokeEffectivenessCalculator = new PokeEffectivenessCalcImpl();
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-        this.enemyTrainer = enenmyTrainer;
+        this.enemyTrainer = enemyTrainer;
         this.scoreMoves = scoreMoves;
         this.hpAware = hpAware;
 
@@ -88,17 +89,11 @@ public class EnemyAiAttack {
         return new Decision(DecisionTypeEnum.NOTHING, "Nothing");
     }
 
-    /**
-     * Determines whether the enemy Pokémon is able to attack,
-     * based on available PP and current status conditions.
-     *
-     * @return true if the Pokémon can attack, false otherwise
-     */
     private boolean canAttack() {
         boolean canAttack = true;
         int totalPPs = 0;
 
-        for (Move move : currentEnemyPokemonMoves) {
+        for (final Move move : currentEnemyPokemonMoves) {
             totalPPs = totalPPs + move.getPp().getCurrentValue();
         }
 
@@ -125,12 +120,6 @@ public class EnemyAiAttack {
         return canAttack;
     }
 
-    /**
-     * Chooses the move to use based on current AI configuration flags.
-     *
-     * @param weather an optional of the current weather condition in battle
-     */
-
     private void chooseMove(final Optional<Weather> weather) {
 
         if (!this.scoreMoves) {
@@ -148,9 +137,6 @@ public class EnemyAiAttack {
 
     }
 
-    /**
-     * Assigns a base score to each move based on type effectiveness.
-     */
     private void scoreForEffectiveness() {
         Move moveToBeScored;
         int score;
@@ -183,15 +169,10 @@ public class EnemyAiAttack {
 
     }
 
-    /**
-     * Chooses a random move from the list of available moves with remaining PP.
-     *
-     * @return the index of the selected move
-     **/
     private int randomMove() {
 
         Move moveToBeChecked;
-        List<Integer> possibleAttacks = new ArrayList<>();
+        final List<Integer> possibleAttacks = new ArrayList<>();
 
         for (int movePos = 0; movePos < this.currentEnemyPokemonMoves.size(); movePos++) {
 
@@ -206,12 +187,6 @@ public class EnemyAiAttack {
         return possibleAttacks.get(this.random.nextInt(possibleAttacks.size()));
     }
 
-    /**
-     * Increases the score of moves based on their estimated damage
-     * and ability to knock out the opponent.
-     *
-     * @param weather an optional current weather condition in battle
-     */
     private void scoreForDamage(final Optional<Weather> weather) {
         Move moveToBeScored;
         int actualMoveScore;
@@ -220,7 +195,7 @@ public class EnemyAiAttack {
         int bestMoveIndex = -1;
         double bestMoveDamage = Double.MIN_VALUE;
 
-        for (Map.Entry<Integer, Integer> entry : this.scoresOfMoves.entrySet()) {
+        for (final Map.Entry<Integer, Integer> entry : this.scoresOfMoves.entrySet()) {
             moveIndex = entry.getKey();
             moveToBeScored = this.currentEnemyPokemonMoves.get(moveIndex);
             actualMoveScore = entry.getValue();
@@ -244,18 +219,13 @@ public class EnemyAiAttack {
 
     }
 
-    /**
-     * Selects the move with the highest score.
-     *
-     * @return the index of the best scored move
-     */
     private int obtainBestMove() {
         int bestMoveIndex = -1;
         int bestMoveScore = Integer.MIN_VALUE;
 
-        for (Map.Entry<Integer, Integer> entry : this.scoresOfMoves.entrySet()) {
-            int moveIndex = entry.getKey();
-            int score = entry.getValue();
+        for (final Map.Entry<Integer, Integer> entry : this.scoresOfMoves.entrySet()) {
+            final int moveIndex = entry.getKey();
+            final int score = entry.getValue();
 
             if (score > bestMoveScore) {
                 bestMoveScore = score;

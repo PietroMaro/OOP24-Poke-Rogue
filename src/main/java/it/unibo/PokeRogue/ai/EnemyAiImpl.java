@@ -1,6 +1,7 @@
 package it.unibo.PokeRogue.ai;
 
 import java.util.Optional;
+import java.io.IOException;
 
 import it.unibo.PokeRogue.Weather;
 import it.unibo.PokeRogue.scene.scene_fight.Decision;
@@ -15,7 +16,11 @@ import it.unibo.PokeRogue.trainers.Trainer;
  * or attack intelligently. It adjusts its behavior dynamically using internal
  * flags set during construction.
  */
-public class EnemyAiImpl implements EnemyAi {
+public final class EnemyAiImpl implements EnemyAi {
+
+    private static final int LOW_AI_THRESHOLD = 15;
+    private static final int MEDIUM_AI_THRESHOLD = 40;
+    private static final int HIGH_AI_THRESHOLD = 75;
 
     private final Trainer enemyTrainer;
     private final int battleLvl;
@@ -23,15 +28,11 @@ public class EnemyAiImpl implements EnemyAi {
     private final EnemyAiAttack aiOfAttack;
 
     // Flags
-    private boolean scoreMoves = false;
-    private boolean hpAware = false;
+    private boolean scoreMoves;
+    private boolean hpAware;
+    private boolean considerSwitching;
     private boolean usePokemonInOrder = true;
-    private boolean considerSwitching = false;
     private int switchFirstRate = 60;
-
-    private final int lowAiThreshold = 15;
-    private final int mediumAiThreshold = 40;
-    private final int highAiThreshold = 75;
 
     /**
      * Constructs an EnemyAiImpl with behavior tailored to the given battle level.
@@ -39,7 +40,7 @@ public class EnemyAiImpl implements EnemyAi {
      * @param enemyTrainer the enemy trainer to control
      * @param battleLvl    the current battle difficulty level
      */
-    public EnemyAiImpl(final Trainer enemyTrainer, final int battleLvl) {
+    public EnemyAiImpl(final Trainer enemyTrainer, final int battleLvl) throws IOException {
         this.enemyTrainer = enemyTrainer;
         this.battleLvl = battleLvl;
         this.initFlags();
@@ -48,7 +49,6 @@ public class EnemyAiImpl implements EnemyAi {
                 this.enemyTrainer);
 
         this.aiOfAttack = new EnemyAiAttack(scoreMoves, hpAware, enemyTrainer);
-
     }
 
     /**
@@ -75,25 +75,21 @@ public class EnemyAiImpl implements EnemyAi {
         return decision;
     }
 
-    /**
-     * Initializes internal flags based on the battle level.
-     * These flags determine AI behavior complexity.
-     */
     private void initFlags() {
 
-        if (battleLvl >= lowAiThreshold) {
+        if (battleLvl >= LOW_AI_THRESHOLD) {
             this.scoreMoves = true;
             this.usePokemonInOrder = false;
 
         }
 
-        if (battleLvl > mediumAiThreshold) {
+        if (battleLvl > MEDIUM_AI_THRESHOLD) {
             this.considerSwitching = true;
             this.hpAware = true;
 
         }
 
-        if (battleLvl > highAiThreshold) {
+        if (battleLvl > HIGH_AI_THRESHOLD) {
             this.switchFirstRate = 90;
 
         }

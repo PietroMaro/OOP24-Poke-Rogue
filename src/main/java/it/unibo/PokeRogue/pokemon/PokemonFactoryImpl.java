@@ -1,6 +1,6 @@
 package it.unibo.PokeRogue.pokemon;
 
-import it.unibo.PokeRogue.SingletonImpl;
+import it.unibo.PokeRogue.Singleton;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 
@@ -22,7 +22,12 @@ import java.io.IOException;
 import java.awt.Image;
 import javax.imageio.ImageIO;
 
-public class PokemonFactoryImpl extends SingletonImpl implements PokemonFactory{
+import java.lang.InstantiationException;
+import java.lang.IllegalAccessException;
+import java.lang.NoSuchMethodException;
+import java.lang.reflect.InvocationTargetException;
+
+public class PokemonFactoryImpl extends Singleton implements PokemonFactory{
 	
    	//make the access in memory and saves the information of all pokemon in local
 	final private JsonReader jsonReader = new JsonReaderImpl();
@@ -30,12 +35,12 @@ public class PokemonFactoryImpl extends SingletonImpl implements PokemonFactory{
 	final private Set<String> allPokemonSet = new HashSet<String>();
 	final private Map<String,PokemonBlueprint> pokemonBlueprints = new HashMap<String,PokemonBlueprint>();
 	
-	public PokemonFactoryImpl(){
+	public PokemonFactoryImpl() throws IOException {
 		init();
 	}
 	
 	@Override
-    public void init(){
+    public void init() throws IOException {
 		JSONArray allPokemonJson;
 		allPokemonJson = jsonReader.readJsonArray(Paths.get("src","pokemon_data","pokemonList.json").toString());
 		for(int pokemonIndex = 0; pokemonIndex < allPokemonJson.length(); pokemonIndex +=1 ){
@@ -43,7 +48,7 @@ public class PokemonFactoryImpl extends SingletonImpl implements PokemonFactory{
 		}
 	}
 
-	private void addPokemonToBlueprints(final String pokemonName){
+	private void addPokemonToBlueprints(final String pokemonName) throws IOException {
 		JSONObject pokemonJson;
         pokemonJson = jsonReader.readJsonObject(Paths.get("src","pokemon_data","pokemon","data",pokemonName+".json").toString());
 		int pokedexNumber = pokemonJson.getInt("pokedexNumber");
@@ -86,7 +91,13 @@ public class PokemonFactoryImpl extends SingletonImpl implements PokemonFactory{
 	}
 
 	@Override
-	public Pokemon pokemonFromName(final String pokemonName){
+	public Pokemon pokemonFromName(final String pokemonName)
+		throws
+		InstantiationException,
+		IllegalAccessException,
+		NoSuchMethodException,
+		InvocationTargetException
+	{
 		PokemonBlueprint pokemonBlueprint = this.pokemonBlueprints.get(pokemonName);
 		if(pokemonBlueprint == null){
 			throw new UnsupportedOperationException("The pokemon "+pokemonName+" blueprint was not found. Is not present in pokemonList / Factory not initialized");
@@ -96,7 +107,12 @@ public class PokemonFactoryImpl extends SingletonImpl implements PokemonFactory{
 	}
 
 	@Override
-	public Pokemon randomPokemon(int level){
+	public Pokemon randomPokemon(int level) throws 
+		InstantiationException,
+		IllegalAccessException,
+		NoSuchMethodException,
+		InvocationTargetException
+	{
 		String generatedName = (String)this.allPokemonSet.toArray()[random.nextInt(this.allPokemonSet.size())];
 		Pokemon result = new PokemonImpl(this.pokemonBlueprints.get(generatedName)); 
 		for(int x = 0 ; x < level; x+=1){

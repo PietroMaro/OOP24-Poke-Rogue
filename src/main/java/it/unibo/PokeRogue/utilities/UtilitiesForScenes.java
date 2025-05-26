@@ -1,9 +1,13 @@
 package it.unibo.PokeRogue.utilities;
 
+import java.util.Map;
+
+import it.unibo.PokeRogue.graphic.GraphicElementImpl;
+
 public interface UtilitiesForScenes {
-    String getPathString(final String directory, final String fileName);
+    String getPathString(String directory, String fileName);
 
-    void setButtonStatus(final int buttonCode, final boolean status);
+    void setButtonStatus(int buttonCode, boolean status, Map<Integer, GraphicElementImpl> sceneGraphicElements);
 
-    String capitalizeFirst(final String str);
+    String capitalizeFirst(String str);
 }

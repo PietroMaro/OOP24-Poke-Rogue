@@ -11,16 +11,16 @@ package it.unibo.PokeRogue.trainers;
  * handle
  * the player's character.
  */
-public class PlayerTrainerImpl extends TrainerImpl implements PlayerTrainer {
+public final class PlayerTrainerImpl extends TrainerImpl implements PlayerTrainer {
 
-    private static PlayerTrainerImpl instanceOfTrainer = null;
+    private static PlayerTrainerImpl instanceOfTrainer;
 
     /**
      * Returns the singleton instance of PlayerTrainerImpl.
      *
      * @return the singleton instance
      */
-    public static PlayerTrainerImpl getTrainerInstance() {
+    public static synchronized PlayerTrainerImpl getTrainerInstance() {
         if (instanceOfTrainer == null) {
             instanceOfTrainer = new PlayerTrainerImpl();
         }
@@ -35,10 +35,7 @@ public class PlayerTrainerImpl extends TrainerImpl implements PlayerTrainer {
         instanceOfTrainer = null;
     }
 
-    /**
-     * Constructs a new PlayerTrainerImpl.
-     */
-    public PlayerTrainerImpl() {
+    private PlayerTrainerImpl() {
         super();
     }
 }

@@ -1,5 +1,9 @@
 package it.unibo.PokeRogue;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.scene.sceneBox.SceneBox;
 import it.unibo.PokeRogue.scene.scene_fight.SceneFight;
@@ -7,7 +11,6 @@ import it.unibo.PokeRogue.scene.shop.SceneShopTemp;
 import it.unibo.PokeRogue.scene.sceneLoad.SceneLoad;
 import it.unibo.PokeRogue.scene.sceneMenu.SceneMenu;
 import it.unibo.PokeRogue.scene.sceneMove.SceneMove;
-import it.unibo.PokeRogue.scene.shop.SceneShopTemp;
 import lombok.Setter;
 
 /**
@@ -22,15 +25,17 @@ import lombok.Setter;
  * This class is responsible for managing the transition between scenes and
  * other game-related operations.
  */
-public class GameEngineImpl extends SingletonImpl implements GameEngine {
+public final class GameEngineImpl extends Singleton implements GameEngine {
+
+    private static final Logger LOGGER = Logger.getLogger(GameEngineImpl.class.getName());
 
     private GraphicEngine graphicEngineInstance;
     private Scene currentScene;
     private String fileToLoadName;
     @Setter
     private Integer fightLevel;
-    public GameEngineImpl() {
-
+    protected GameEngineImpl() {
+        super();
     }
 
     /**
@@ -44,7 +49,13 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
      * @param newScene the name of the new scene to load
      */
     @Override
-    public void setScene(final String newScene) {
+    public void setScene(final String newScene) 
+		throws IOException,
+		InstantiationException,
+		IllegalAccessException,
+		InvocationTargetException,
+		NoSuchMethodException
+		{
         switch (newScene) {
             case "main":
                 currentScene = new SceneMenu();
@@ -78,9 +89,16 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
 
     }
 
-    public void keyPressedToScene(final int keyCode) {
+    @Override
+    public void keyPressedToScene(final int keyCode) 
+		throws IOException,
+		InstantiationException,
+		IllegalAccessException,
+		NoSuchMethodException,
+		InvocationTargetException {
         if (this.currentScene == null) {
-            System.out.println("No active scene");
+            LOGGER.log(Level.WARNING, "No active scene");
+
             return;
         }
         this.currentScene.updateStatus(keyCode);
@@ -90,12 +108,14 @@ public class GameEngineImpl extends SingletonImpl implements GameEngine {
 
     }
 
+    @Override
     public void setGraphicEngine(final GraphicEngine graphicEngine) {
 
         this.graphicEngineInstance = graphicEngine;
 
     }
 
+    @Override
     public void setFileToLoad(final String fileName) {
         this.fileToLoadName = fileName;
     }

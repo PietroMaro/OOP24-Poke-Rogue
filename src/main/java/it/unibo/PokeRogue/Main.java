@@ -1,11 +1,19 @@
 package it.unibo.PokeRogue;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+			throws IOException,
+			InstantiationException,
+			IllegalAccessException,
+			InvocationTargetException,
+			NoSuchMethodException {
 
-		GameEngine mainGameEngine = GameEngineImpl.getInstance(GameEngineImpl.class);
-		GraphicEngine mainGraphicEngine = GraphicEngineImpl.getInstance(GraphicEngineImpl.class);
+		final GameEngine mainGameEngine = GameEngineImpl.getInstance(GameEngineImpl.class);
+		final GraphicEngine mainGraphicEngine = GraphicEngineImpl.getInstance(GraphicEngineImpl.class);
 
 		mainGameEngine.setGraphicEngine(mainGraphicEngine);
 		mainGameEngine.setScene("main");

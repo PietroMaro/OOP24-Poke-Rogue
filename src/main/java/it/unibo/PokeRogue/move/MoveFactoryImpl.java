@@ -1,12 +1,13 @@
 package it.unibo.PokeRogue.move;
 
 import it.unibo.PokeRogue.utilities.Range;
-import it.unibo.PokeRogue.SingletonImpl;
+import it.unibo.PokeRogue.Singleton;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 import it.unibo.PokeRogue.utilities.RangeImpl;
 import it.unibo.PokeRogue.pokemon.Type;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -15,18 +16,19 @@ import java.nio.file.Paths;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-public class MoveFactoryImpl extends SingletonImpl implements MoveFactory {
 
-	// make the access in memory and saves the information of all pokemon in local
+public class MoveFactoryImpl extends Singleton implements MoveFactory{
+	
+   	//make the access in memory and saves the information of all pokemon in local
 	final private JsonReader jsonReader = new JsonReaderImpl();
-	final private Map<String, Move> movesBlueprints = new HashMap<String, Move>();
-
-	public MoveFactoryImpl() {
+	final private Map<String,Move> movesBlueprints = new HashMap<String,Move>();
+	
+	public MoveFactoryImpl() throws IOException {
 		init();
 	}
 
 	@Override
-	public void init() {
+    public void init() throws IOException {
 		JSONArray allMoveJson;
 		allMoveJson = jsonReader.readJsonArray(Paths.get("src", "pokemon_data", "movesList.json").toString());
 		for (int moveIndex = 0; moveIndex < allMoveJson.length(); moveIndex += 1) {
@@ -34,7 +36,7 @@ public class MoveFactoryImpl extends SingletonImpl implements MoveFactory {
 		}
 	}
 
-	private void addMoveToBlueprints(final String moveName) {
+	private void addMoveToBlueprints(final String moveName) throws IOException {
 		JSONObject moveJson;
 		moveJson = jsonReader.readJsonObject(Paths.get("src", "pokemon_data", "moves", moveName + ".json").toString());
 		String name = moveName;

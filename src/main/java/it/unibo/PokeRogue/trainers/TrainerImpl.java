@@ -10,15 +10,17 @@ import lombok.Setter;
 
 import it.unibo.PokeRogue.pokemon.Pokemon;
 
+@Getter
 public class TrainerImpl implements Trainer {
-    @Getter @Setter
+    @Setter
     private List<Optional<Pokemon>> squad;
-	@Getter 
     private Map<String, Integer> ball;
-    @Getter @Setter
+    @Setter
     private int money;
-    @Getter @Setter
+    @Setter
     private boolean wild = false;
+
+    private static final int MAX_SQUAD_SIZE = 6;
 
     public TrainerImpl() {
         this.squad = new ArrayList<>();
@@ -34,29 +36,29 @@ public class TrainerImpl implements Trainer {
     }
 
     @Override
-    public void switchPokemonPosition(int pokemonBattlePosition, int squadPosition) {
-        Optional<Pokemon> tempPokemon = squad.get(pokemonBattlePosition);
+    public void switchPokemonPosition(final int pokemonBattlePosition, final int squadPosition) {
+        final Optional<Pokemon> tempPokemon = squad.get(pokemonBattlePosition);
         squad.set(pokemonBattlePosition, squad.get(squadPosition));
         squad.set(squadPosition, tempPokemon);
     }
 
     @Override
-    public void removePokemon(int pos) {
+    public void removePokemon(final int pos) {
         squad.set(pos, Optional.empty());
     }
 
     @Override
-    public Optional<Pokemon> getPokemon(int pos) {
+    public Optional<Pokemon> getPokemon(final int pos) {
 
         return squad.get(pos);
     }
 
-    private Boolean isPokemonInSquad(Pokemon pokemon) {
+    private Boolean isPokemonInSquad(final Pokemon pokemon) {
         return squad.contains(Optional.of(pokemon));
     }
 
     @Override
-    public Boolean addPokemon(Pokemon pokemon, int limits) {
+    public Boolean addPokemon(final Pokemon pokemon, final int limits) {
         if (!isPokemonInSquad(pokemon)) {
 
             for (int x = 0; x < limits; x++) {
@@ -73,30 +75,30 @@ public class TrainerImpl implements Trainer {
     public void addMoney(final int amount) {
         this.money += amount;
     }
-    /* 
-    public Boolean isWild() {
-        return this.wild;
-    }
-     
-    @Override
-    public void setWild(Boolean wild) {
-        this.wild = wild;
-    }
+    /*
+     * public Boolean isWild() {
+     * return this.wild;
+     * }
+     * 
+     * @Override
+     * public void setWild(Boolean wild) {
+     * this.wild = wild;
+     * }
+     * 
+     * @Override
+     * public List<Optional<Pokemon>> getSquad() {
+     * return this.squad;
+     * }
+     * 
+     * @Override
+     * public Map<String, Integer> getBall() {
+     * return this.ball;
+     * }
+     * 
+     * @Override
+     * public int getMoney() {
+     * return this.money;
+     * }
+     */
 
-    @Override
-    public List<Optional<Pokemon>> getSquad() {
-        return this.squad;
-    }
-
-    @Override
-    public Map<String, Integer> getBall() {
-        return this.ball;
-    }
-
-    @Override
-    public int getMoney() {
-        return this.money;
-    }
-    */
-    
 }

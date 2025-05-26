@@ -4,6 +4,8 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
@@ -12,7 +14,6 @@ import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.savingSystem.SavingSystem;
 import it.unibo.PokeRogue.scene.Scene;
-import it.unibo.PokeRogue.scene.sceneBox.enums.SceneBoxStatusValuesEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
@@ -42,6 +43,12 @@ import lombok.Getter;
  */
 public class SceneBox implements Scene {
 
+        private static final int START_BUTTON_POSITION = 5;
+        private static final int FIRST_POKEMON_BUTTON_POSITION = 6;
+        private static final int POKE_BOX_ROW_LENGTH = 9;
+        private static final int UP_ARROW_BUTTON_POSITION = 0;
+        private static final int DOWN_ARROW_BUTTON_POSITION = 1;
+
         @Getter
         private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
         @Getter
@@ -64,19 +71,22 @@ public class SceneBox implements Scene {
          *
          * @param savePath the path to the save file used to initialize the scene data
          */
-        public SceneBox(final String savePath) {
+        public SceneBox(final String savePath) throws IOException,
+                        InstantiationException,
+                        IllegalAccessException,
+                        NoSuchMethodException,
+                        InvocationTargetException {
                 this.sceneGraphicElements = new LinkedHashMap<>();
                 this.allPanelsElements = new LinkedHashMap<>();
                 this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-                this.utilityClass = new UtilitiesForScenesImpl("box", sceneGraphicElements);
-                this.sceneBoxView = new SceneBoxView(sceneGraphicElements, allPanelsElements);
+                this.utilityClass = new UtilitiesForScenesImpl("box");
+                this.sceneBoxView = new SceneBoxView();
                 this.sceneBoxModel = new SceneBoxModel();
                 this.sceneBoxModel.setUpSave(savePath);
                 this.boxes = this.sceneBoxModel.getBoxes();
                 this.initStatus();
                 this.initGraphicElements();
-
         }
 
         /**
@@ -93,131 +103,98 @@ public class SceneBox implements Scene {
          * @param inputKey the key event received from the user
          */
         @Override
-        public void updateStatus(final int inputKey) {
+        public void updateStatus(final int inputKey) throws IOException,
+                        InstantiationException,
+                        IllegalAccessException,
+                        InvocationTargetException,
+                        NoSuchMethodException,
+                        IOException {
 
                 switch (inputKey) {
                         case KeyEvent.VK_UP:
-                                if (this.currentSelectedButton >= SceneBoxStatusValuesEnum.FIRST_POKEMON_BUTTON_POSITION
-                                                .value() + SceneBoxStatusValuesEnum.POKE_BOX_ROW_LENGHT.value()) {
-                                        this.newSelectedButton -= SceneBoxStatusValuesEnum.POKE_BOX_ROW_LENGHT.value();
+                                if (this.currentSelectedButton >= FIRST_POKEMON_BUTTON_POSITION + POKE_BOX_ROW_LENGTH) {
+                                        this.newSelectedButton -= POKE_BOX_ROW_LENGTH;
                                 }
 
-                                if (this.currentSelectedButton < SceneBoxStatusValuesEnum.FIRST_POKEMON_BUTTON_POSITION
-                                                .value()
-                                                && this.currentSelectedButton > SceneBoxStatusValuesEnum.UP_ARROW_BUTTON_POSITION
-                                                                .value()) {
+                                if (this.currentSelectedButton < FIRST_POKEMON_BUTTON_POSITION
+                                                && this.currentSelectedButton > UP_ARROW_BUTTON_POSITION) {
                                         this.newSelectedButton -= 1;
                                 }
-
                                 break;
+
                         case KeyEvent.VK_DOWN:
-                                if (this.currentSelectedButton < SceneBoxStatusValuesEnum.START_BUTTON_POSITION
-                                                .value()) {
+                                if (this.currentSelectedButton < START_BUTTON_POSITION) {
                                         this.newSelectedButton += 1;
                                 }
 
-                                if (this.currentSelectedButton > SceneBoxStatusValuesEnum.START_BUTTON_POSITION.value()
-                                                && this.currentSelectedButton
-                                                                - SceneBoxStatusValuesEnum.FIRST_POKEMON_BUTTON_POSITION
-                                                                                .value()
-                                                                + SceneBoxStatusValuesEnum.POKE_BOX_ROW_LENGHT
-                                                                                .value() < this.currentBoxLength) {
-                                        this.newSelectedButton += SceneBoxStatusValuesEnum.POKE_BOX_ROW_LENGHT.value();
+                                if (this.currentSelectedButton > START_BUTTON_POSITION
+                                                && this.currentSelectedButton - FIRST_POKEMON_BUTTON_POSITION
+                                                                + POKE_BOX_ROW_LENGTH < this.currentBoxLength) {
+                                        this.newSelectedButton += POKE_BOX_ROW_LENGTH;
                                 }
                                 break;
+
                         case KeyEvent.VK_RIGHT:
-                                if (this.currentSelectedButton < SceneBoxStatusValuesEnum.FIRST_POKEMON_BUTTON_POSITION
-                                                .value()
-                                                && (SceneBoxStatusValuesEnum.POKE_BOX_ROW_LENGHT.value()
+                                if (this.currentSelectedButton < FIRST_POKEMON_BUTTON_POSITION
+                                                && (POKE_BOX_ROW_LENGTH
                                                                 * this.currentSelectedButton) <= this.currentBoxLength) {
-
-                                        this.newSelectedButton = (SceneBoxStatusValuesEnum.POKE_BOX_ROW_LENGHT.value()
-                                                        * this.currentSelectedButton)
-                                                        + SceneBoxStatusValuesEnum.FIRST_POKEMON_BUTTON_POSITION
-                                                                        .value();
+                                        this.newSelectedButton = (POKE_BOX_ROW_LENGTH * this.currentSelectedButton)
+                                                        + FIRST_POKEMON_BUTTON_POSITION;
                                 }
-                                if (this.currentSelectedButton > SceneBoxStatusValuesEnum.START_BUTTON_POSITION
-                                                .value()
+
+                                if (this.currentSelectedButton > START_BUTTON_POSITION
                                                 && this.currentSelectedButton
-                                                                % SceneBoxStatusValuesEnum.POKE_BOX_ROW_LENGHT
-                                                                                .value() != SceneBoxStatusValuesEnum.START_BUTTON_POSITION
-                                                                                                .value()
+                                                                % POKE_BOX_ROW_LENGTH != START_BUTTON_POSITION
                                                 && this.currentSelectedButton
-                                                                - SceneBoxStatusValuesEnum.START_BUTTON_POSITION
-                                                                                .value() < this.currentBoxLength) {
+                                                                - START_BUTTON_POSITION < this.currentBoxLength) {
                                         this.newSelectedButton += 1;
                                 }
-
                                 break;
-                        case KeyEvent.VK_LEFT:
 
-                                if (this.currentSelectedButton > SceneBoxStatusValuesEnum.START_BUTTON_POSITION
-                                                .value()
-                                                && (this.currentSelectedButton
-                                                                - SceneBoxStatusValuesEnum.FIRST_POKEMON_BUTTON_POSITION
-                                                                                .value())
-                                                                % SceneBoxStatusValuesEnum.POKE_BOX_ROW_LENGHT
-                                                                                .value() == 0
-                                                && (this.currentSelectedButton
-                                                                - SceneBoxStatusValuesEnum.FIRST_POKEMON_BUTTON_POSITION
-                                                                                .value())
-                                                                / SceneBoxStatusValuesEnum.POKE_BOX_ROW_LENGHT
-                                                                                .value() < SceneBoxStatusValuesEnum.FIRST_POKEMON_BUTTON_POSITION
-                                                                                                .value()) {
+                        case KeyEvent.VK_LEFT:
+                                if (this.currentSelectedButton > START_BUTTON_POSITION
+                                                && (this.currentSelectedButton - FIRST_POKEMON_BUTTON_POSITION)
+                                                                % POKE_BOX_ROW_LENGTH == 0
+                                                && (this.currentSelectedButton - FIRST_POKEMON_BUTTON_POSITION)
+                                                                / POKE_BOX_ROW_LENGTH < FIRST_POKEMON_BUTTON_POSITION) {
                                         this.newSelectedButton = (this.currentSelectedButton
-                                                        - SceneBoxStatusValuesEnum.FIRST_POKEMON_BUTTON_POSITION
-                                                                        .value())
-                                                        / SceneBoxStatusValuesEnum.POKE_BOX_ROW_LENGHT.value();
-                                } else if (this.currentSelectedButton > SceneBoxStatusValuesEnum.START_BUTTON_POSITION
-                                                .value()
-                                                && (this.currentSelectedButton
-                                                                - SceneBoxStatusValuesEnum.FIRST_POKEMON_BUTTON_POSITION
-                                                                                .value())
-                                                                % SceneBoxStatusValuesEnum.POKE_BOX_ROW_LENGHT
-                                                                                .value() != SceneBoxStatusValuesEnum.UP_ARROW_BUTTON_POSITION
-                                                                                                .value()) {
+                                                        - FIRST_POKEMON_BUTTON_POSITION) / POKE_BOX_ROW_LENGTH;
+                                } else if (this.currentSelectedButton > START_BUTTON_POSITION
+                                                && (this.currentSelectedButton - FIRST_POKEMON_BUTTON_POSITION)
+                                                                % POKE_BOX_ROW_LENGTH != UP_ARROW_BUTTON_POSITION) {
                                         this.newSelectedButton -= 1;
                                 }
                                 break;
 
                         case KeyEvent.VK_ENTER:
-
-                                if (this.currentSelectedButton == SceneBoxStatusValuesEnum.START_BUTTON_POSITION
-                                                .value()) {
+                                if (this.currentSelectedButton == START_BUTTON_POSITION) {
                                         this.gameEngineInstance.setScene("fight");
                                 }
 
-                                if (this.currentSelectedButton == SceneBoxStatusValuesEnum.UP_ARROW_BUTTON_POSITION
-                                                .value()
-                                                && this.boxIndex > 0) {
+                                if (this.currentSelectedButton == UP_ARROW_BUTTON_POSITION && this.boxIndex > 0) {
                                         this.newBoxIndex -= 1;
-
                                 }
 
-                                if (this.currentSelectedButton == SceneBoxStatusValuesEnum.DOWN_ARROW_BUTTON_POSITION
-                                                .value() && this.boxIndex < this.boxes.size() - 1) {
+                                if (this.currentSelectedButton == DOWN_ARROW_BUTTON_POSITION
+                                                && this.boxIndex < this.boxes.size() - 1) {
                                         this.newBoxIndex += 1;
-
                                 }
 
-                                if (this.currentSelectedButton > SceneBoxStatusValuesEnum.START_BUTTON_POSITION
-                                                .value()) {
+                                if (this.currentSelectedButton > START_BUTTON_POSITION) {
                                         this.playerTrainerInstance.addPokemon(
-                                                        this.boxes.get(boxIndex).get(this.currentSelectedButton - 6),
+                                                        this.boxes.get(boxIndex).get(this.currentSelectedButton
+                                                                        - FIRST_POKEMON_BUTTON_POSITION),
                                                         3);
                                 }
 
-                                if (this.currentSelectedButton > SceneBoxStatusValuesEnum.DOWN_ARROW_BUTTON_POSITION
-                                                .value()
-                                                && this.currentSelectedButton < SceneBoxStatusValuesEnum.START_BUTTON_POSITION
-                                                                .value()) {
+                                if (this.currentSelectedButton > DOWN_ARROW_BUTTON_POSITION
+                                                && this.currentSelectedButton < START_BUTTON_POSITION) {
                                         this.playerTrainerInstance.removePokemon(this.currentSelectedButton - 2);
                                 }
                                 break;
 
                         default:
                                 break;
-
                 }
 
         }
@@ -237,24 +214,22 @@ public class SceneBox implements Scene {
          * 
          */
         @Override
-        public void updateGraphic() {
+        public void updateGraphic() throws IOException {
 
-                this.sceneBoxView.updateGraphic(currentSelectedButton, newSelectedButton, boxIndex, newBoxIndex, boxes,
-                                playerTrainerInstance);
+                this.sceneBoxView.updateGraphic(this.currentSelectedButton, this.newSelectedButton, this.boxIndex,
+                                this.newBoxIndex, this.boxes,
+                                this.playerTrainerInstance, this.sceneGraphicElements);
 
                 this.currentSelectedButton = this.newSelectedButton;
 
                 if (this.boxIndex != this.newBoxIndex) {
                         this.boxIndex = this.newBoxIndex;
-                        this.currentBoxLength = this.sceneBoxView.loadPokemonSprites(boxes, boxIndex);
+                        this.currentBoxLength = this.sceneBoxView.loadPokemonSprites(boxes, boxIndex,
+                                        this.sceneGraphicElements);
                 }
 
         }
 
-        /**
-         * Initializes the status of the elements by setting default values for box
-         * index, selected button, and new button.
-         */
         private void initStatus() {
                 this.boxIndex = 0;
                 this.currentSelectedButton = 0;
@@ -263,22 +238,16 @@ public class SceneBox implements Scene {
                 this.currentBoxLength = this.boxes.get(this.boxIndex).size() - 1;
         }
 
-        /**
-         * Initializes the graphic elements for the scene, including panels, text,
-         * buttons, sprites, and background.
-         * It also sets the first button as selected and draws Pokémon sprites.
-         * External classes like {@link SceneBoxView} handle the actual rendering of
-         * graphical components.
-         */
-        private void initGraphicElements() {
+        private void initGraphicElements() throws IOException {
 
-                this.sceneBoxView.initGraphicElements();
+                this.sceneBoxView.initGraphicElements(this.sceneGraphicElements, this.allPanelsElements);
 
                 // Draw Pokemon sprites
-                this.currentBoxLength = this.sceneBoxView.loadPokemonSprites(boxes, boxIndex);
+                this.currentBoxLength = this.sceneBoxView.loadPokemonSprites(boxes, boxIndex,
+                                this.sceneGraphicElements);
 
                 // Set the first button as selected
-                this.utilityClass.setButtonStatus(this.currentSelectedButton, true);
+                this.utilityClass.setButtonStatus(this.currentSelectedButton, true, this.sceneGraphicElements);
         }
 
 }

@@ -24,7 +24,7 @@ public class DataExtractorImpl implements DataExtractor {
 	private String abilitiesListFilePath;
 	private JsonReader jsonReader = new JsonReaderImpl();
 
-	public DataExtractorImpl(String destionationFolder) {
+	public DataExtractorImpl(String destionationFolder) throws IOException {
 		this.destinationFolder = destionationFolder;
 		this.client = HttpClient.newHttpClient();
 		this.apiURL = "https://pokeapi.co/api/v2/";
@@ -35,7 +35,7 @@ public class DataExtractorImpl implements DataExtractor {
 	}
 
 	@Override
-	public void extractPokemon(final int apiIndex) {
+	public void extractPokemon(final int apiIndex) throws IOException {
 		Optional<HttpResponse<String>> response = makeApiRequestForString(
 				this.apiURL + "pokemon/" + String.valueOf(apiIndex));
 		final JSONObject pokemonExtractedJSON = new JSONObject(response.get().body());
@@ -129,17 +129,16 @@ public class DataExtractorImpl implements DataExtractor {
 	}
 
 	@Override
-	public void extractPokemons(final int startIndex, final int endIndex) {
+	public void extractPokemons(final int startIndex, final int endIndex) throws IOException {
 		if (endIndex > 151) {
-			System.out.println("Currently only the first 151 pokemons are supported");
-			System.exit(1);
+			throw new IllegalArgumentException("Currently only the first 151 Pokémon are supported.");
 		}
 		for (int index = startIndex; index <= endIndex; index += 1) {
 			extractPokemon(index);
 		}
 	}
 
-	private void updateMovesList(final String newMoveName) {
+	private void updateMovesList(final String newMoveName) throws IOException {
 		for (int moveIndex = 0; moveIndex < this.movesList.length(); moveIndex += 1) {
 			if (this.movesList.getString(moveIndex).equals(newMoveName)) {
 				return;
@@ -150,7 +149,7 @@ public class DataExtractorImpl implements DataExtractor {
 	}
 
 	@Override
-	public void extractMove(final String toExtractMoveName) {
+	public void extractMove(final String toExtractMoveName) throws IOException {
 		final Optional<HttpResponse<String>> response = makeApiRequestForString(
 				this.apiURL + "move/" + toExtractMoveName);
 		final JSONObject moveExtractedJSON = new JSONObject(response.get().body());
@@ -197,13 +196,13 @@ public class DataExtractorImpl implements DataExtractor {
 	}
 
 	@Override
-	public void extractMoves() {
+	public void extractMoves() throws IOException {
 		for (int moveNameIndex = 0; moveNameIndex < this.movesList.length(); moveNameIndex += 1) {
 			extractMove(this.movesList.getString(moveNameIndex));
 		}
 	}
 
-	private void updateAbilitiesList(final String newAbilityName) {
+	private void updateAbilitiesList(final String newAbilityName) throws IOException {
 		for (int abilityIndex = 0; abilityIndex < this.abilitiesList.length(); abilityIndex += 1) {
 			if (this.abilitiesList.getString(abilityIndex).equals(newAbilityName)) {
 				return;
@@ -228,12 +227,9 @@ public class DataExtractorImpl implements DataExtractor {
 				.uri(URI.create(Url))
 				.build();
 		try {
-			final HttpResponse<Path> response = client.send(request,
-					HttpResponse.BodyHandlers.ofFile(Path.of(filePath)));
+			client.send(request,HttpResponse.BodyHandlers.ofFile(Path.of(filePath)));
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
-			System.out.println("An error occurred while the HTTP request the image " + filePath);
-			System.exit(1);
 		}
 	}
 
@@ -244,11 +240,9 @@ public class DataExtractorImpl implements DataExtractor {
 				.build();
 		Optional<HttpResponse<String>> response = Optional.empty();
 		try {
-			response = Optional.of(client.send(request, HttpResponse.BodyHandlers.ofString()));
+			response = Optional.ofNullable(client.send(request, HttpResponse.BodyHandlers.ofString()));
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
-			System.out.println("An error occurred while sending the HTTP request.");
-			System.exit(1);
 		}
 
 		return response;
