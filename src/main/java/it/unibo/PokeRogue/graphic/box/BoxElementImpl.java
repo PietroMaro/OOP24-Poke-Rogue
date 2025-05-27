@@ -13,7 +13,8 @@ import lombok.Setter;
 public final class BoxElementImpl extends GraphicElementImpl implements BoxElement {
     private static final long serialVersionUID = 1L;
 
-    private final Color mainColor;
+    @Setter
+    private  Color mainColor;
     private final Color borderColor;
     private final double x;
     private final double y;
@@ -39,13 +40,20 @@ public final class BoxElementImpl extends GraphicElementImpl implements BoxEleme
 
     public BoxElementImpl(JSONObject jsonMetrix) {
         super(jsonMetrix.getString("panelName"));
-        this.mainColor =Color.decode(jsonMetrix.getString("mainColor"));
+
+        if ("null".equals(jsonMetrix.getString("mainColor"))) {
+            this.mainColor = null;
+        } else {
+            this.mainColor = Color.decode(jsonMetrix.getString("mainColor"));
+        }
+
         this.borderColor = Color.decode(jsonMetrix.getString("borderColor"));
         this.borderThickness = jsonMetrix.getInt("borderThickness");
         this.x = jsonMetrix.getDouble("leftX");
         this.y = jsonMetrix.getDouble("leftY");
-        this.width =jsonMetrix.getDouble("width");
-        this.height =jsonMetrix.getDouble("height");
+        this.width = jsonMetrix.getDouble("width");
+        this.height = jsonMetrix.getDouble("height");
+
     }
 
     @Override

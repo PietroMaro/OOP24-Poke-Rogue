@@ -1,19 +1,24 @@
 package it.unibo.PokeRogue.utilities;
 
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
+import it.unibo.PokeRogue.scene.GraphicElementRegistry;
 
 /**
  * Implementation of {@link UtilitiesForScenes} that provides utility methods
  * to manage scene-related resources and UI elements.
  */
-public final class UtilitiesForScenes  {
+public final class UtilitiesForScenes {
 
-    private UtilitiesForScenes(){
+    private UtilitiesForScenes() {
 
     }
 
@@ -27,7 +32,6 @@ public final class UtilitiesForScenes  {
      */
     public static String getPathString(final String sceneDirName, final String fileName) {
 
-        System.out.println(Paths.get("src", "sceneImages", sceneDirName, fileName).toString());
         return Paths.get("src", "sceneImages", sceneDirName, fileName).toString();
 
     }
@@ -42,7 +46,7 @@ public final class UtilitiesForScenes  {
      * @param sceneGraphicElements a map linking integer codes to
      *                             {@code GraphicElementImpl} objects.
      */
-    
+
     public static void setButtonStatus(final int buttonCode, final boolean status,
             final Map<Integer, GraphicElementImpl> sceneGraphicElements) {
 
@@ -64,5 +68,23 @@ public final class UtilitiesForScenes  {
             return str;
         }
         return str.substring(0, 1).toUpperCase(Locale.ROOT) + str.substring(1);
+    }
+
+    public static void loadSceneElements(String fileName, String loadSectionName,
+            Map<Integer, GraphicElementImpl> currentSceneGraphicElements,
+            GraphicElementRegistry graphicElements) throws IOException {
+
+        JsonReader jsonReader = new JsonReaderImpl();
+        JSONObject root = jsonReader
+                .readJsonObject(Paths.get("src", "scene.data", fileName).toString());
+
+        JSONArray initArrayIndex = root.getJSONObject("loadableObjects").getJSONArray(loadSectionName);
+
+        for (int i = 0; i < initArrayIndex.length(); i++) {
+            int index = initArrayIndex.getInt(i);
+            currentSceneGraphicElements.put(index, graphicElements.getById(index));
+
+        }
+
     }
 }

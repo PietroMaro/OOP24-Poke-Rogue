@@ -6,19 +6,16 @@ import java.awt.event.KeyAdapter;
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
 
-import java.util.logging.Logger;
-import java.util.logging.Level;
 
 public final class InputHandlerImpl extends KeyAdapter {
 
-	private static final Logger LOGGER = Logger.getLogger(InputHandlerImpl.class.getName());
 	private final GameEngine gameEngine;
 
 	public InputHandlerImpl() {
 		try {
 			gameEngine = GameEngineImpl.getInstance(GameEngineImpl.class);
 		} catch (final Exception er) {
-			LOGGER.log(Level.WARNING, er.getMessage());
+			er.printStackTrace();
 			throw new RuntimeException("Could not initialize GameEngine", er);
 		}
 	}
@@ -28,7 +25,7 @@ public final class InputHandlerImpl extends KeyAdapter {
 		try {
 			gameEngine.keyPressedToScene(e.getKeyCode());
 		} catch (final Exception er) {
-			LOGGER.log(Level.WARNING, er.getMessage());
+			er.printStackTrace();
 		}
 	}
 }

@@ -22,7 +22,7 @@ public class GraphicElementRegistryImpl implements GraphicElementRegistry {
         return elements.get(id);
     }
 
-     public void put(int id, GraphicElementImpl elem) {
+    public void put(int id, GraphicElementImpl elem) {
         elements.put(id, elem);
     }
 }

@@ -51,7 +51,7 @@ public final class SceneMenu extends Scene {
         this.currentSceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
-        this.sceneMenuView = new SceneMenuView(this.graphicElements, this.graphicElementNameToInt);
+        this.sceneMenuView = new SceneMenuView(this.graphicElements);
         this.initStatus();
         this.initGraphicElements();
 

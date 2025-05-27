@@ -1,0 +1,49 @@
+[
+    {
+        "type": "button",
+        "panelName": "",
+        "mainColor": "",
+        "borderColor": "",
+        "borderThickness": 0,
+        "leftX": 0.0,
+        "leftY": 0.0,
+        "width": 0.0,
+        "height": 0.0
+    },
+    {
+        "type": "box",
+        "panelName": "",
+        "mainColor": "",
+        "borderColor": "",
+        "borderThickness": 0,
+        "leftX": 0.0,
+        "leftY": 0.0,
+        "width": 0.0,
+        "height": 0.0
+    },
+    {
+        "type": "sprite",
+        "panelName": "",
+        "dirToImage": "",
+        "imageFileName": "",
+        "leftX": 0.0,
+        "leftY": 0.0,
+        "width": 0.0,
+        "height": 0.0
+    },
+    {
+        "type": "background",
+        "panelName": "",
+        "dirToImage": "",
+        "imageFileName": ""
+    },
+    {
+        "type": "text",
+        "panelName": "",
+        "text": "",
+        "textColor": "",
+        "textDimension": 0.0,
+        "leftX": 0.0,
+        "leftY": 0.0
+    }
+]

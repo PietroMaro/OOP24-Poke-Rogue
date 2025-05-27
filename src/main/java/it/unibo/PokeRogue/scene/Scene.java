@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl;
+import it.unibo.PokeRogue.graphic.box.BoxElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
@@ -54,7 +55,7 @@ public abstract class Scene {
 				newGraphicElement = new SpriteElementImpl(jsonElement);
 				break;
 			case "box":
-				newGraphicElement = new ButtonElementImpl(jsonElement);
+				newGraphicElement = new BoxElementImpl(jsonElement);
 				break;
 
 			default:
@@ -69,14 +70,15 @@ public abstract class Scene {
 	protected void loadGraphicElements(String fileName) throws IOException {
 		JsonReader jsonReader = new JsonReaderImpl();
 		JSONObject root = jsonReader.readJsonObject(Paths.get("src", "scene.data", fileName).toString());
-
 		graphicElementNameToInt = new HashMap<>();
 
 		JSONObject mapper = root.getJSONObject("mapper");
+
 		for (String key : mapper.keySet()) {
 			int val = mapper.getInt(key);
 			graphicElementNameToInt.put(key, val);
 		}
+
 		graphicElements = new GraphicElementRegistryImpl(new HashMap<>(), graphicElementNameToInt);
 
 		JSONObject metrics = root.getJSONObject("metrics");

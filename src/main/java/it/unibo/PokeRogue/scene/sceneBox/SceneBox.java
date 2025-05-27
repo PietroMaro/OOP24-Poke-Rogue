@@ -74,11 +74,12 @@ public class SceneBox extends Scene {
                         IllegalAccessException,
                         NoSuchMethodException,
                         InvocationTargetException {
+                this.loadGraphicElements("sceneBoxElements.json");
                 this.currentSceneGraphicElements = new LinkedHashMap<>();
                 this.allPanelsElements = new LinkedHashMap<>();
                 this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-                this.sceneBoxView = new SceneBoxView();
+                this.sceneBoxView = new SceneBoxView(this.graphicElements,this.graphicElementNameToInt);
                 this.sceneBoxModel = new SceneBoxModel();
                 this.sceneBoxModel.setUpSave(savePath);
                 this.boxes = this.sceneBoxModel.getBoxes();

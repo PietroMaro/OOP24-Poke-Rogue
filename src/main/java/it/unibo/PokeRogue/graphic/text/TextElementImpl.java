@@ -2,6 +2,7 @@ package it.unibo.PokeRogue.graphic.text;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -15,8 +16,8 @@ import org.json.JSONObject;
 
 public final class TextElementImpl extends GraphicElementImpl {
 
-    @Getter
-    private final String text;
+    @Getter @Setter
+    private String text;
     private final double leftX;
     private final double leftY;
     private final Color textColor;
@@ -32,6 +33,8 @@ public final class TextElementImpl extends GraphicElementImpl {
         this.textDimension = textDimension;
         this.textColor = textColor;
     }
+
+
 
     public TextElementImpl(JSONObject jsonMetrix) {
         super(jsonMetrix.getString("panelName"));

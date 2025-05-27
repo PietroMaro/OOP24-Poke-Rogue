@@ -4,11 +4,14 @@ import java.util.Map;
 
 import javax.swing.OverlayLayout;
 
+import org.json.JSONArray;
+
 import java.io.IOException;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.scene.GraphicElementRegistry;
+import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 
 /**
  * The {@code SceneMenuView} class is responsible for initializing and managing
@@ -20,44 +23,25 @@ public final class SceneMenuView {
 
         private static final String FIRST_PANEL_NAME = "firstPanel";
         private final GraphicElementRegistry graphicElements;
-        private final Map<String, Integer> graphicElementNameToInt;
 
         /**
          * Constructs a new {@code SceneMenuView} instance.
          *
          * 
          */
-        public SceneMenuView(final GraphicElementRegistry graphicElements,
-                        final Map<String, Integer> graphicElementNameToInt) throws IOException {
-                this.graphicElementNameToInt = graphicElementNameToInt;
+        public SceneMenuView(final GraphicElementRegistry graphicElements) throws IOException {
                 this.graphicElements = graphicElements;
+
         }
 
         void initGraphicElements(final Map<Integer, GraphicElementImpl> currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements)
                         throws IOException {
-                // Panels
+
                 allPanelsElements.put(FIRST_PANEL_NAME, new PanelElementImpl("", new OverlayLayout(null)));
 
-                // Texts
-                currentSceneGraphicElements.put(this.graphicElementNameToInt.get("LOAD_GAME_BUTTON_TEXT"),
-                                this.graphicElements.getByName("LOAD_GAME_BUTTON_TEXT"));
-                currentSceneGraphicElements.put(this.graphicElementNameToInt.get("NEW_GAME_BUTTON_TEXT"),
-                                this.graphicElements.getByName("NEW_GAME_BUTTON_TEXT"));
-
-                currentSceneGraphicElements.put(this.graphicElementNameToInt.get("OPTIONS_GAME_BUTTON_TEXT"),
-                                this.graphicElements.getByName("OPTIONS_GAME_BUTTON_TEXT"));
-
-                // Buttons
-                currentSceneGraphicElements.put(this.graphicElementNameToInt.get("LOAD_BUTTON"),
-                                this.graphicElements.getByName("LOAD_BUTTON"));
-                currentSceneGraphicElements.put(this.graphicElementNameToInt.get("NEW_GAME_BUTTON"),
-                                this.graphicElements.getByName("NEW_GAME_BUTTON"));
-                currentSceneGraphicElements.put(this.graphicElementNameToInt.get("OPTIONS_BUTTON"),
-                                this.graphicElements.getByName("OPTIONS_BUTTON"));
-                // Background
-                currentSceneGraphicElements.put(this.graphicElementNameToInt.get("BACKGROUND"),
-                                this.graphicElements.getByName("BACKGROUND"));
+                UtilitiesForScenes.loadSceneElements("sceneMenuElements.json", "init", currentSceneGraphicElements,
+                                this.graphicElements);
 
         }
 }

@@ -37,8 +37,10 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
 
     public SpriteElementImpl(JSONObject jsonMetrix) throws IOException {
         super(jsonMetrix.getString("panelName"));
-        this.spriteImage = ImageIO.read(new File(UtilitiesForScenes
-                .getPathString(jsonMetrix.getString("dirToImage"), jsonMetrix.getString("imageFileName"))));
+        if (!"null".equals(jsonMetrix.getString("imageFileName"))) {
+            this.spriteImage = ImageIO.read(new File(UtilitiesForScenes
+                    .getPathString(jsonMetrix.getString("dirToImage"), jsonMetrix.getString("imageFileName"))));
+        }
 
         if (jsonMetrix.has("width")) {
             this.leftUpX = jsonMetrix.getDouble("leftX");
@@ -62,6 +64,14 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
         this.width = width;
         this.height = height;
 
+    }
+
+    public void setImage(final String pathToImage) throws IOException {
+        this.spriteImage = ImageIO.read(new File(pathToImage));
+    }
+
+    public void setImage(final Image image) {
+        this.spriteImage = image;
     }
 
     @Override
