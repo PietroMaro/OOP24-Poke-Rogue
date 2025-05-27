@@ -4,6 +4,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
@@ -45,11 +48,15 @@ public class SceneMove implements Scene {
      * Also sets the initial status and initializes the graphic elements' visual
      * state.
      */
-    public SceneMove() {
+    public SceneMove() throws NoSuchMethodException,
+            IOException,
+            IllegalAccessException,
+            InvocationTargetException,
+            InstantiationException {
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
-        this.utilityClass = new UtilitiesForScenesImpl("move", sceneGraphicElements);
+        this.utilityClass = new UtilitiesForScenesImpl("move");
         this.sceneMoveView = new SceneMoveView(sceneGraphicElements, allPanelsElements);
         this.playerPokemon = PlayerTrainerImpl.getTrainerInstance().getPokemon(0).get();
         this.initStatus();
@@ -63,10 +70,10 @@ public class SceneMove implements Scene {
      */
     @Override
     public void updateGraphic() {
-        this.utilityClass.setButtonStatus(currentSelectedButton, false);
-        this.utilityClass.setButtonStatus(newSelectedButton, true);
+        this.utilityClass.setButtonStatus(currentSelectedButton, false, this.sceneGraphicElements);
+        this.utilityClass.setButtonStatus(newSelectedButton, true, this.sceneGraphicElements);
         this.currentSelectedButton = this.newSelectedButton;
-        this.utilityClass.setButtonStatus(this.currentSelectedButton, true);
+        this.utilityClass.setButtonStatus(this.currentSelectedButton, true, this.sceneGraphicElements);
     }
 
     /**
@@ -80,7 +87,11 @@ public class SceneMove implements Scene {
      *                 KeyEvent.VK_UP).
      */
     @Override
-    public void updateStatus(final int inputKey) {
+    public void updateStatus(final int inputKey) throws NoSuchMethodException,
+            IOException,
+            IllegalAccessException,
+            InvocationTargetException,
+            InstantiationException {
 
         switch (inputKey) {
             case KeyEvent.VK_UP:
@@ -132,7 +143,11 @@ public class SceneMove implements Scene {
      * scene.
      * Assumes the selected button index corresponds to a valid move index.
      */
-    private void learnNewMoveByButton() {
+    private void learnNewMoveByButton() throws NoSuchMethodException,
+            IOException,
+            IllegalAccessException,
+            InvocationTargetException,
+            InstantiationException{
         playerPokemon.learnNewMove(Optional.of(currentSelectedButton));
         this.gameEngineInstance.setScene("fight");
     }
@@ -142,9 +157,9 @@ public class SceneMove implements Scene {
      * Delegates the initial graphic setup to the SceneMoveView
      * and sets the initial status of the buttons using the utility class.
      */
-    private void initGraphicElements() {
+    private void initGraphicElements() throws IOException {
         this.sceneMoveView.initGraphicElements();
-        this.utilityClass.setButtonStatus(this.currentSelectedButton, true);
+        this.utilityClass.setButtonStatus(this.currentSelectedButton, true, this.sceneGraphicElements);
     }
 
     /**

@@ -2,14 +2,15 @@ package it.unibo.PokeRogue;
 
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.json.JSONObject;
 
-import java.util.List;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.DirectoryStream;
@@ -34,8 +35,12 @@ import it.unibo.PokeRogue.ai.EnemyAi;
 import it.unibo.PokeRogue.ai.EnemyAiImpl;
 import it.unibo.PokeRogue.effectParser.EffectParserImpl;
 import it.unibo.PokeRogue.pokemon.Type;
-
-
+import it.unibo.PokeRogue.scene.scene_fight.BattleEngine;
+import it.unibo.PokeRogue.scene.scene_fight.BattleEngineImpl;
+import it.unibo.PokeRogue.scene.scene_fight.BattleRewards;
+import it.unibo.PokeRogue.scene.scene_fight.Decision;
+import it.unibo.PokeRogue.scene.scene_fight.GenerateEnemyImpl;
+import it.unibo.PokeRogue.scene.scene_fight.enums.DecisionTypeEnum;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 import it.unibo.PokeRogue.utilities.PokeEffectivenessCalc;
@@ -196,30 +201,94 @@ public final class TestAll {
 
 	}
 
+
+
 	@Test
-	void testAi() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
-			InstantiationException, IOException {
-		final int trainerSquadSize = 6;
-		final PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+	public void testAllItemEffect() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+			InstantiationException, IOException  {
+		PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+		EffectParserImpl effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
 
-		final PlayerTrainerImpl playerTrainerImpl = PlayerTrainerImpl.getTrainerInstance();
-		final TrainerImpl enemyTrainer = new TrainerImpl();
-		final Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
-		final EnemyAi ai = new EnemyAiImpl(enemyTrainer, 99);
-		final Pokemon charmander = pokeFactory.pokemonFromName("charmander");
-		final Pokemon venusaur = pokeFactory.pokemonFromName("venusaur");
-		final Pokemon poliwag = pokeFactory.pokemonFromName("poliwag");
+		JsonReader jsonReader = new JsonReaderImpl();
+		Pokemon pok1 = pokeFactory.randomPokemon(3);
 
-		playerTrainerImpl.addPokemon(poliwag, trainerSquadSize);
-		enemyTrainer.addPokemon(charmander, trainerSquadSize);
+		Path dirPath = Paths.get("src", "items_data","items","data");
+		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
+			for (Path entry : stream) {
+				if (Files.isRegularFile(entry)) {
+					JSONObject itemJson = jsonReader.readJsonObject(entry.toString());
+					JSONObject effect = itemJson.getJSONObject("effect");
+					effectParser.parseEffect(effect, pok1);
+				}
+			}
+		}
+	}
 
-		assertEquals(List.of("Attack", "0"), ai.nextMove(weather));
 
-		enemyTrainer.addPokemon(venusaur, trainerSquadSize);
+	@Test
+	public void testAi()  throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+			InstantiationException, IOException{
+		PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+		PlayerTrainerImpl playerTrainerImpl = PlayerTrainerImpl.getTrainerInstance();
+		TrainerImpl enemyTrainer = new TrainerImpl();
+		Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
+		EnemyAi ai = new EnemyAiImpl(enemyTrainer, 99);
+		Pokemon charmander = pokeFactory.pokemonFromName("charmander");
+		Pokemon venusaur = pokeFactory.pokemonFromName("venusaur");
+		Pokemon poliwag = pokeFactory.pokemonFromName("poliwag");
 
-		assertEquals(List.of("SwitchIn", "1"), ai.nextMove(weather));
+		playerTrainerImpl.addPokemon(poliwag, 6);
+		enemyTrainer.addPokemon(charmander, 6);
+
+		assertEquals(ai.nextMove(weather), new Decision(DecisionTypeEnum.ATTACK, "0"));
+
+		enemyTrainer.addPokemon(venusaur, 6);
+
+		assertEquals(ai.nextMove(weather), new Decision(DecisionTypeEnum.SWITCH_IN, "1"));
 
 	}
+
+
+	@Test
+    public void testBattleRewards() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+			InstantiationException, IOException {
+        PokemonFactoryImpl factory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+        Pokemon charmander = factory.pokemonFromName("charmander");
+		Pokemon bulbasaur = factory.pokemonFromName("bulbasaur");
+		int beforeXP = charmander.getExp().getCurrentValue();
+		BattleRewards.awardBattleRewards(charmander, bulbasaur);
+		int afterXP = charmander.getExp().getCurrentValue();
+        assertFalse(beforeXP > afterXP);
+
+    }
+
+	@Test
+    public void testGenerateEnemy() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+			InstantiationException, IOException {
+		TrainerImpl enemyTrainer = new TrainerImpl();
+		GenerateEnemyImpl generateEnemyInstance = new GenerateEnemyImpl(5, enemyTrainer);
+		generateEnemyInstance.generateEnemy();
+		assertTrue(enemyTrainer.getSquad().size() > 1);
+    }
+
+	@Test
+    public void testBattleEngine() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+			InstantiationException, IOException {
+		TrainerImpl enemyTrainer = new TrainerImpl();
+		PokemonFactoryImpl factory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+		PlayerTrainerImpl playerTrainer = PlayerTrainerImpl.getTrainerInstance();
+		Pokemon bulbasaur = factory.pokemonFromName("bulbasaur");
+		Pokemon charmander = factory.pokemonFromName("charmander");
+		playerTrainer.addPokemon(bulbasaur, 1);
+		enemyTrainer.addPokemon(charmander, 1);
+		EnemyAi ai = new EnemyAiImpl(enemyTrainer, 99);
+		int beforeLife = playerTrainer.getSquad().get(0).get().getActualStats().get("hp").getCurrentValue();
+		BattleEngine battleEngine = new BattleEngineImpl(enemyTrainer, ai);
+		battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""), new Decision(DecisionTypeEnum.ATTACK, "0"));
+		int afterLife = playerTrainer.getSquad().get(0).get().getActualStats().get("hp").getCurrentValue();
+		assertTrue(beforeLife > afterLife);
+    }
+
 }
 
 

@@ -1,6 +1,8 @@
 package it.unibo.PokeRogue.scene.shop;
 
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -36,7 +38,11 @@ public class SceneShopTemp implements Scene {
     private boolean BuyedItem = false;
     private final EffectParser effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
 
-    public SceneShopTemp() {
+    public SceneShopTemp() throws IOException,
+            InstantiationException,
+            IllegalAccessException,
+            NoSuchMethodException,
+            InvocationTargetException {
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.sceneShopUtilities = new SceneShopUtilities();
@@ -51,7 +57,8 @@ public class SceneShopTemp implements Scene {
     }
 
     @Override
-    public void updateStatus(final int inputKey) {
+    public void updateStatus(final int inputKey) throws IOException, InstantiationException, IllegalAccessException,
+            InvocationTargetException, NoSuchMethodException {
         switch (inputKey) {
             case KeyEvent.VK_UP:
                 if (this.newSelectedButton >= 1 && this.newSelectedButton <= 3) {
@@ -146,12 +153,12 @@ public class SceneShopTemp implements Scene {
 
     }
 
-    public void initGraphicElements() {
+    public void initGraphicElements() throws IOException {
         this.sceneShopView.initGraphicElements(this.newSelectedButton);
     }
 
     @Override
-    public void updateGraphic() {
+    public void updateGraphic() throws IOException {
         this.sceneShopView.updateGraphic(newSelectedButton);
     }
 
@@ -160,7 +167,8 @@ public class SceneShopTemp implements Scene {
     }
 
     public void buyItem(final PlayerTrainerImpl trainer, final Item item, final SceneShopView sceneShopView,
-            final GameEngineImpl gameEngineInstance) {
+            final GameEngineImpl gameEngineInstance) throws InstantiationException, IllegalAccessException,
+            InvocationTargetException, NoSuchMethodException, IOException {
 
         trainer.addMoney(-item.getPrice());
         SceneShopUtilities.updatePlayerMoneyText(sceneGraphicElements, trainer);
@@ -169,7 +177,8 @@ public class SceneShopTemp implements Scene {
     }
 
     protected void useOrHandleItem(final PlayerTrainerImpl trainer, final GameEngineImpl gameEngineInstance,
-            final Item item) {
+            final Item item) throws InstantiationException, IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException, IOException {
         if (item.getType().equalsIgnoreCase("Capture")) {
             int countBall = trainer.getBall().get(item.getName());
             trainer.getBall().put(item.getName(), countBall + 1);
@@ -185,7 +194,8 @@ public class SceneShopTemp implements Scene {
     }
 
     public void applyItemToPokemon(final int pokemonIndex, final PlayerTrainerImpl trainer,
-            final GameEngineImpl gameEngineInstance, final EffectParser effectParser) {
+            final GameEngineImpl gameEngineInstance, final EffectParser effectParser) throws InstantiationException,
+            IllegalAccessException, InvocationTargetException, NoSuchMethodException, IOException {
         if (this.selectedUsableItem != null) {
             Optional<it.unibo.PokeRogue.pokemon.Pokemon> selectedPokemon = trainer
                     .getPokemon(pokemonIndex);

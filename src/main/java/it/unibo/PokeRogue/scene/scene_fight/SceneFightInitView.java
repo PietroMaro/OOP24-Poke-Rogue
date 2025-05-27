@@ -1,6 +1,7 @@
 package it.unibo.PokeRogue.scene.scene_fight;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.Map;
 
 import javax.swing.OverlayLayout;
@@ -15,6 +16,7 @@ import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightGraphicEnum;
 import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightStatusValuesEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
+import it.unibo.PokeRogue.trainers.TrainerImpl;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
 
@@ -30,8 +32,8 @@ public class SceneFightInitView {
         private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final UtilitiesForScenes utilityClass;
-        private final PlayerTrainerImpl playerTrainerInstance;
-        private final PlayerTrainerImpl enemyTrainerInstance;
+        private final TrainerImpl playerTrainerInstance;
+        private final TrainerImpl enemyTrainerInstance;
         private final static Integer FIRST_POSITION = 0;
         private static final String FIRST_PANEL = "firstPanel";
 
@@ -45,10 +47,10 @@ public class SceneFightInitView {
          */
         public SceneFightInitView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
-                        final PlayerTrainerImpl enemyTrainerInstance) {
+                        final TrainerImpl enemyTrainerInstance) {
                 this.sceneGraphicElements = sceneGraphicElements;
                 this.allPanelsElements = allPanelsElements;
-                this.utilityClass = new UtilitiesForScenesImpl("fight", sceneGraphicElements);
+                this.utilityClass = new UtilitiesForScenesImpl("fight");
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
                 this.enemyTrainerInstance = enemyTrainerInstance;
 
@@ -60,7 +62,7 @@ public class SceneFightInitView {
          *
          * @param currentSelectedButton The currently selected button in the UI.
          */
-        protected void initGraphicElements(final int currentSelectedButton) {
+        protected void initGraphicElements(final int currentSelectedButton) throws IOException{
                 this.allPanelsElements.put(FIRST_PANEL, new PanelElementImpl("", new OverlayLayout(null)));
                 this.initTextElements();
                 this.initButtonElements();
@@ -76,7 +78,7 @@ public class SceneFightInitView {
                                 new BackgroundElementImpl(FIRST_PANEL,
                                                 this.utilityClass.getPathString("images", "bgBar.png")));
                 
-                this.utilityClass.setButtonStatus(currentSelectedButton, true);
+                this.utilityClass.setButtonStatus(currentSelectedButton, true,this.sceneGraphicElements);
         }
 
         /**

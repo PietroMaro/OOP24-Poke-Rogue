@@ -1,5 +1,6 @@
 package it.unibo.PokeRogue.scene.shop;
 
+import java.io.IOException;
 import java.util.Map;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
@@ -25,11 +26,11 @@ public class SceneShopView {
                 currentSelectedButton, newSelectedButton, scene,sceneShopUtilities);
     }
 
-    protected void initGraphicElements(final int currentSelectedButton) {
+    protected void initGraphicElements(final int currentSelectedButton) throws IOException {
         this.sceneShopInitView.initGraphicElements(currentSelectedButton);
     }
 
-    protected void updateGraphic(final int newSelectedButton) {
+    protected void updateGraphic(final int newSelectedButton) throws IOException {
         this.sceneShopUpdateView.updateGraphic(newSelectedButton);
     }
 

@@ -2,11 +2,12 @@
 package it.unibo.PokeRogue.scene.scene_fight;
 
 
+import java.io.IOException;
 import java.util.Map;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
-import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
+import it.unibo.PokeRogue.trainers.TrainerImpl;
 
 /**
  * This class represents the view for the battle scene in the game. It acts as a
@@ -33,7 +34,7 @@ public class SceneFightView {
      *                              the current battle.
      */
     public SceneFightView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
-            final Map<String, PanelElementImpl> allPanelsElements, final PlayerTrainerImpl enemyTrainerInstance,
+            final Map<String, PanelElementImpl> allPanelsElements, final TrainerImpl enemyTrainerInstance,
             final int currentSelectedButton, final int newSelectedButton, final SceneFight scene) {
         this.sceneGraphicElements = sceneGraphicElements;
         this.sceneFightInitView = new SceneFightInitView(this.sceneGraphicElements, allPanelsElements,
@@ -49,7 +50,7 @@ public class SceneFightView {
      * 
      * @param currentSelectedButton The initially selected button in the UI.
      */
-    protected void initGraphicElements(final int currentSelectedButton) {
+    protected void initGraphicElements(final int currentSelectedButton) throws IOException {
         this.sceneFightInitView.initGraphicElements(currentSelectedButton);
     }
 
@@ -60,7 +61,7 @@ public class SceneFightView {
      * @param currentSelectedButton The currently selected button in the UI.
      * @param newSelectedButton     The new selected button after an update.
      */
-    protected void updateGraphic(final int currentSelectedButton, final int newSelectedButton) {
+    protected void updateGraphic(final int currentSelectedButton, final int newSelectedButton) throws IOException{
         this.sceneFightUpdateView.updateGraphic(currentSelectedButton, newSelectedButton);
     }
 

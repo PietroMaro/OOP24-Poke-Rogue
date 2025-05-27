@@ -1,6 +1,7 @@
 package it.unibo.PokeRogue.scene.shop;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.Map;
 
 import javax.swing.OverlayLayout;
@@ -46,12 +47,12 @@ public class SceneShopUpdateView {
                 this.newSelectedButton = newSelectedButton;
                 this.sceneGraphicElements = sceneGraphicElements;
                 this.allPanelsElements = allPanelsElements;
-                this.utilityClass = new UtilitiesForScenesImpl("shop", sceneGraphicElements);
+                this.utilityClass = new UtilitiesForScenesImpl("shop");
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
                 this.sceneInstance = sceneInstance;
         }
 
-        protected void updateGraphic(final int newSelectedButton) {
+        protected void updateGraphic(final int newSelectedButton) throws IOException {
                 this.newSelectedButton = newSelectedButton;
                 this.updateSelectedButton(newSelectedButton);
                 this.updateItemDescription();
@@ -60,7 +61,7 @@ public class SceneShopUpdateView {
 
         }
 
-        private void updatePokemonSelection() {
+        private void updatePokemonSelection() throws IOException {
                 if (this.newSelectedButton >= SceneShopStatusEnum.CHANGE_POKEMON_1_BUTTON.value()
                                 && this.newSelectedButton <= SceneShopStatusEnum.CHANGE_POKEMON_BACK_BUTTON.value()
                                 && this.alreadyInMainMenu) {
@@ -76,7 +77,7 @@ public class SceneShopUpdateView {
                                                         this.utilityClass.getPathString("images", "sceneShopBg.png")));
 
                         // Set the first button as selected
-                        this.utilityClass.setButtonStatus(this.newSelectedButton, true);
+                        this.utilityClass.setButtonStatus(this.newSelectedButton, true, sceneGraphicElements);
                 }
         }
 
@@ -219,8 +220,8 @@ public class SceneShopUpdateView {
         }
 
         private void updateSelectedButton(final int newSelectedButton) {
-                this.utilityClass.setButtonStatus(this.currentSelectedButton, false);
-                this.utilityClass.setButtonStatus(newSelectedButton, true);
+                this.utilityClass.setButtonStatus(this.currentSelectedButton, false, sceneGraphicElements);
+                this.utilityClass.setButtonStatus(newSelectedButton, true, sceneGraphicElements);
                 this.currentSelectedButton = newSelectedButton;
         }
 
@@ -258,7 +259,7 @@ public class SceneShopUpdateView {
                 }
         }
 
-        private void mainMenu() {
+        private void mainMenu() throws IOException {
                 if (!alreadyInMainMenu && this.newSelectedButton >= SceneShopStatusEnum.FREE_ITEM_1_BUTTON.value()
                                 && this.newSelectedButton <= SceneShopStatusEnum.TEAM_BUTTON.value()) {
                         sceneGraphicElements.clear();

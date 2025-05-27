@@ -1,5 +1,7 @@
 package it.unibo.PokeRogue.scene.scene_fight;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Interface for generating an enemy in the battle scene.
@@ -13,5 +15,10 @@ public interface GenerateEnemy {
      * Implementations should define the logic for creating an enemy Pokémon
      * and adding it to the battle scenario.
      */
-    void generateEnemy();
+    void generateEnemy() throws 
+		NoSuchMethodException,
+		IOException,
+		IllegalAccessException,
+		InvocationTargetException,
+		InstantiationException;;
 }

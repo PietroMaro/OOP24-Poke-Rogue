@@ -1,5 +1,7 @@
 package it.unibo.PokeRogue.scene.scene_fight;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +23,7 @@ import it.unibo.PokeRogue.savingSystem.SavingSystem;
 import it.unibo.PokeRogue.savingSystem.SavingSystemImpl;
 import it.unibo.PokeRogue.scene.scene_fight.enums.DecisionTypeEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
+import it.unibo.PokeRogue.trainers.TrainerImpl;
 import it.unibo.PokeRogue.utilities.PokemonBattleUtil;
 import it.unibo.PokeRogue.utilities.PokemonBattleUtilImpl;
 import lombok.Getter;
@@ -29,8 +32,8 @@ public class BattleEngineImpl implements BattleEngine {
     private final static Integer FIRST_POSITION = 0;
     private final static Integer MAX_SQUAD = 6;
 
-    private final PlayerTrainerImpl playerTrainerInstance;
-    private final PlayerTrainerImpl enemyTrainerInstance;
+    private final TrainerImpl playerTrainerInstance;
+    private final TrainerImpl enemyTrainerInstance;
 
     private final EffectParser effectParserInstance;
     @Getter
@@ -55,7 +58,12 @@ public class BattleEngineImpl implements BattleEngine {
      * @param enemyTrainerInstance the enemy trainer instance involved in the battle
      * @param enemyAiInstance      the AI instance controlling the enemy's strategy
      */
-    public BattleEngineImpl(final PlayerTrainerImpl enemyTrainerInstance, final EnemyAi enemyAiInstance) {
+    public BattleEngineImpl(final TrainerImpl enemyTrainerInstance, final EnemyAi enemyAiInstance)
+            throws NoSuchMethodException,
+            IOException,
+            IllegalAccessException,
+            InvocationTargetException,
+            InstantiationException {
         this.enemyTrainerInstance = enemyTrainerInstance;
         this.pokemonBattleUtilInstance = new PokemonBattleUtilImpl();
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
@@ -84,7 +92,11 @@ public class BattleEngineImpl implements BattleEngine {
      * @param enemyMoveString  the name of the enemy's move
      */
     @Override
-    public void runBattleTurn(final Decision playerDecision, final Decision enemyDecision) {
+    public void runBattleTurn(final Decision playerDecision, final Decision enemyDecision) throws NoSuchMethodException,
+            IOException,
+            IllegalAccessException,
+            InvocationTargetException,
+            InstantiationException {
         this.playerPokemon = playerTrainerInstance.getPokemon(FIRST_POSITION).get();
         this.enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
 
@@ -130,7 +142,11 @@ public class BattleEngineImpl implements BattleEngine {
                 attackerMove, opponentMove, this.currentWeather);
     }
 
-    private void handlePokeball(final String pokeballName) {
+    private void handlePokeball(final String pokeballName) throws NoSuchMethodException,
+            IOException,
+            IllegalAccessException,
+            InvocationTargetException,
+            InstantiationException {
         final int countBall = playerTrainerInstance.getBall().get(pokeballName);
         final int maxHP = enemyPokemon.getActualStats().get("hp").getCurrentMax();
         final int currentHP = enemyPokemon.getActualStats().get("hp").getCurrentValue();
@@ -154,11 +170,15 @@ public class BattleEngineImpl implements BattleEngine {
         }
     }
 
-    private void executeDecision(final Decision decision, final PlayerTrainerImpl attackerTrainer,
-            final PlayerTrainerImpl defenderTrainer, final Optional<Move> atteckerMove,
+    private void executeDecision(final Decision decision, final TrainerImpl attackerTrainer,
+            final TrainerImpl defenderTrainer, final Optional<Move> atteckerMove,
             final Optional<Move> defenderMove,
             final Ability attackerAbility,
-            final Ability defenderAbility) {
+            final Ability defenderAbility) throws NoSuchMethodException,
+            IOException,
+            IllegalAccessException,
+            InvocationTargetException,
+            InstantiationException {
         final Pokemon attackerPokemon = attackerTrainer.getPokemon(FIRST_POSITION).get();
         final Pokemon defenderPokemon = defenderTrainer.getPokemon(FIRST_POSITION).get();
         if (decision.moveType() == DecisionTypeEnum.SWITCH_IN && statusEffectInstance.checkStatusSwitch(attackerPokemon)
@@ -213,7 +233,11 @@ public class BattleEngineImpl implements BattleEngine {
         }
     }
 
-    private void newEnemyCheck() {
+    private void newEnemyCheck() throws NoSuchMethodException,
+            IOException,
+            IllegalAccessException,
+            InvocationTargetException,
+            InstantiationException {
         if (BattleUtilities.isTeamWipedOut(enemyTrainerInstance) || this.captured) {
             BattleRewards.awardBattleRewards(this.playerPokemon, this.enemyPokemon);
             this.newMoveToLearn(this.playerPokemon);
@@ -249,11 +273,15 @@ public class BattleEngineImpl implements BattleEngine {
                                         .getActualStats().get("speed").getCurrentValue();
     }
 
-    private void switchIn(final String move, final PlayerTrainerImpl trainer) {
+    private void switchIn(final String move, final TrainerImpl trainer) {
         trainer.switchPokemonPosition(FIRST_POSITION, Integer.parseInt(move));
     }
 
-    private void newMoveToLearn(final Pokemon playerPokemon) {
+    private void newMoveToLearn(final Pokemon playerPokemon) throws NoSuchMethodException,
+            IOException,
+            IllegalAccessException,
+            InvocationTargetException,
+            InstantiationException {
         if (playerPokemon.isHasToLearnMove()) {
             this.gameEngineInstance.setScene("move");
         }
