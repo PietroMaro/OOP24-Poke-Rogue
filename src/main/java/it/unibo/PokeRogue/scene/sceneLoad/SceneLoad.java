@@ -16,7 +16,7 @@ import it.unibo.PokeRogue.savingSystem.SavingSystem;
 import it.unibo.PokeRogue.savingSystem.SavingSystemImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
-import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
+import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 import lombok.Getter;
 
 /**
@@ -45,20 +45,19 @@ import lombok.Getter;
  * @see it.unibo.PokeRogue.savingSystem.SavingSystem
  * @see it.unibo.PokeRogue.utilities.UtilitiesForScenes
  */
-public final class SceneLoad extends Scene {
+public final class SceneLoad implements Scene {
 
     private static final int ABSOLUTE_FIRST_SAVE_POSITION = 0;
     private static final int LAST_SAVE_POSITION = 9;
     private static final int NUMBER_OF_SAVE_SHOWED = 10;
 
     @Getter
-    private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+    private final Map<Integer, GraphicElementImpl> currentSceneGraphicElements;
     @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GameEngine gameEngineInstance;
     private final SavingSystem savingSystemInstance;
     private final List<String> savesList;
-    private final UtilitiesForScenes utilityClass;
     private final SceneLoadView sceneLoadView;
 
     private int newSelectedSave;
@@ -73,12 +72,11 @@ public final class SceneLoad extends Scene {
             InvocationTargetException,
             NoSuchMethodException,
             IOException {
-        this.sceneGraphicElements = new LinkedHashMap<>();
+        this.currentSceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.savingSystemInstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
         this.savesList = savingSystemInstance.getSaveFilesName(Paths.get("src", "saves").toString());
-        this.utilityClass = new UtilitiesForScenesImpl("load");
         this.sceneLoadView = new SceneLoadView();
         this.initStatus();
         this.initGraphicElements();
@@ -97,7 +95,7 @@ public final class SceneLoad extends Scene {
      */
     @Override
     public void updateGraphic() throws IOException {
-        this.utilityClass.setButtonStatus(this.selectedSave % NUMBER_OF_SAVE_SHOWED, false, sceneGraphicElements);
+        UtilitiesForScenes.setButtonStatus(this.selectedSave % NUMBER_OF_SAVE_SHOWED, false, currentSceneGraphicElements);
 
         // Going down the saves list
         if (this.selectedSave < this.newSelectedSave
@@ -115,8 +113,8 @@ public final class SceneLoad extends Scene {
 
         this.selectedSave = this.newSelectedSave;
 
-        this.utilityClass.setButtonStatus(this.selectedSave % NUMBER_OF_SAVE_SHOWED,
-                true, sceneGraphicElements);
+        UtilitiesForScenes.setButtonStatus(this.selectedSave % NUMBER_OF_SAVE_SHOWED,
+                true, currentSceneGraphicElements);
 
     }
 
@@ -173,16 +171,16 @@ public final class SceneLoad extends Scene {
 
     private void initGraphicElements() throws IOException {
 
-        this.sceneLoadView.initGraphicElements(allPanelsElements, sceneGraphicElements);
+        this.sceneLoadView.initGraphicElements(allPanelsElements, currentSceneGraphicElements);
 
         this.showSaves(this.selectedSave);
-        this.utilityClass.setButtonStatus(this.selectedSave, true, sceneGraphicElements);
+        UtilitiesForScenes.setButtonStatus(this.selectedSave, true, currentSceneGraphicElements);
 
     }
 
     private void showSaves(final int savesListStart) throws IOException {
         this.sceneLoadView.showSaves(savesListStart, savesList, savingSystemInstance, allPanelsElements,
-                sceneGraphicElements);
+                currentSceneGraphicElements);
     }
 
 }

@@ -14,7 +14,6 @@ import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.scene.sceneBox.enums.SceneBoxGraphicEnum;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
-import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
 
 /**
  * Initializes and organizes all graphical elements of the SceneBox scene,
@@ -26,7 +25,6 @@ public final class SceneBoxInitView {
         private static final String POKEMON_PANEL_NAME = "pokemonPanel";
         private static final String SPRITES_DIR_NAME = "sprites";
 
-        private final UtilitiesForScenes utilityClass;
 
         /**
          * Constructor for the SceneBoxInitView class.
@@ -36,7 +34,6 @@ public final class SceneBoxInitView {
          */
         public SceneBoxInitView() {
 
-                this.utilityClass = new UtilitiesForScenesImpl("box");
         }
 
         /**
@@ -62,7 +59,7 @@ public final class SceneBoxInitView {
                 // Bg
                 sceneGraphicElements.put(SceneBoxGraphicEnum.BACKGROUND.value(),
                                 new BackgroundElementImpl(FIRST_PANEL_NAME,
-                                                this.utilityClass.getPathString("images", "sceneBoxBg.png")));
+                                                UtilitiesForScenes.getPathString("images", "sceneBoxBg.png")));
 
         }
 
@@ -116,7 +113,7 @@ public final class SceneBoxInitView {
                 // Sprites in foreground
                 sceneGraphicElements.put(SceneBoxGraphicEnum.DOWN_ARROW_SPRITE.value(),
                                 new SpriteElementImpl(FIRST_PANEL_NAME,
-                                                this.utilityClass.getPathString(SPRITES_DIR_NAME,
+                                                UtilitiesForScenes.getPathString(SPRITES_DIR_NAME,
                                                                 "downArrowSprite.png"),
                                                 0.4,
                                                 0.2, 0.04,
@@ -124,26 +121,26 @@ public final class SceneBoxInitView {
 
                 sceneGraphicElements.put(SceneBoxGraphicEnum.UP_ARROW_SPRITE.value(),
                                 new SpriteElementImpl(FIRST_PANEL_NAME,
-                                                this.utilityClass.getPathString(SPRITES_DIR_NAME, "upArrowSprite.png"),
+                                                UtilitiesForScenes.getPathString(SPRITES_DIR_NAME, "upArrowSprite.png"),
                                                 0.4,
                                                 0.105, 0.04,
                                                 0.06));
                 sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_SPRITE_SELECTED_0.value(),
                                 new SpriteElementImpl(
                                                 POKEMON_PANEL_NAME,
-                                                this.utilityClass.getPathString(SPRITES_DIR_NAME, "pokeSquadEmpty.png"),
+                                                UtilitiesForScenes.getPathString(SPRITES_DIR_NAME, "pokeSquadEmpty.png"),
                                                 0.39, 0.3, 0.065,
                                                 0.09));
                 sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_SPRITE_SELECTED_1.value(),
                                 new SpriteElementImpl(
                                                 POKEMON_PANEL_NAME,
-                                                this.utilityClass.getPathString(SPRITES_DIR_NAME, "pokeSquadEmpty.png"),
+                                                UtilitiesForScenes.getPathString(SPRITES_DIR_NAME, "pokeSquadEmpty.png"),
                                                 0.39, 0.4, 0.065,
                                                 0.09));
                 sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_SPRITE_SELECTED_2.value(),
                                 new SpriteElementImpl(
                                                 POKEMON_PANEL_NAME,
-                                                this.utilityClass.getPathString(SPRITES_DIR_NAME, "pokeSquadEmpty.png"),
+                                                UtilitiesForScenes.getPathString(SPRITES_DIR_NAME, "pokeSquadEmpty.png"),
                                                 0.39, 0.5, 0.065,
                                                 0.09));
 
@@ -151,27 +148,27 @@ public final class SceneBoxInitView {
                 sceneGraphicElements.put(SceneBoxGraphicEnum.SELECTED_POKEMON_CONTAINER_SPRITE.value(),
                                 new SpriteElementImpl(
                                                 FIRST_PANEL_NAME,
-                                                this.utilityClass.getPathString(SPRITES_DIR_NAME,
+                                                UtilitiesForScenes.getPathString(SPRITES_DIR_NAME,
                                                                 "changeBoxSprite.png"),
                                                 0.372, 0.06, 0.1, 0.25));
                 sceneGraphicElements.put(SceneBoxGraphicEnum.ARROWS_CONTAINER_SPRITE.value(),
                                 new SpriteElementImpl(
                                                 FIRST_PANEL_NAME,
-                                                this.utilityClass.getPathString(SPRITES_DIR_NAME,
+                                                UtilitiesForScenes.getPathString(SPRITES_DIR_NAME,
                                                                 "selectedSquadSprite.png"),
                                                 0.375, 0.244,
                                                 0.09, 0.4));
                 sceneGraphicElements.put(SceneBoxGraphicEnum.START_BUTTON_CONTAINER_SPRITE.value(),
                                 new SpriteElementImpl(
                                                 FIRST_PANEL_NAME,
-                                                this.utilityClass.getPathString(SPRITES_DIR_NAME, "startSpriteBg.png"),
+                                                UtilitiesForScenes.getPathString(SPRITES_DIR_NAME, "startSpriteBg.png"),
                                                 0.395,
                                                 0.613, 0.055, 0.1));
 
                 sceneGraphicElements.put(SceneBoxGraphicEnum.POKEMON_CONTAINER_SPRITE.value(),
                                 new SpriteElementImpl(
                                                 FIRST_PANEL_NAME,
-                                                this.utilityClass.getPathString(SPRITES_DIR_NAME,
+                                                UtilitiesForScenes.getPathString(SPRITES_DIR_NAME,
                                                                 "singleBoxSprite.png"),
                                                 0.45, 0.1, 0.45,
                                                 0.85));

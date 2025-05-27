@@ -15,7 +15,6 @@ import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.savingSystem.SavingSystem;
 import it.unibo.PokeRogue.scene.sceneLoad.enums.SceneLoadGraphicEnum;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
-import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
 import java.awt.Color;
 
 /**
@@ -29,7 +28,6 @@ import java.awt.Color;
 public final class SceneLoadView {
     private static final String POKEMON_PANEL_NAME = "savesPanel";
 
-    private final UtilitiesForScenes utilityClass;
 
     /**
      * Constructs a new {@code SceneLoadView} instance.
@@ -38,7 +36,6 @@ public final class SceneLoadView {
      */
     public SceneLoadView() {
 
-        this.utilityClass = new UtilitiesForScenesImpl("load");
     }
 
     void initGraphicElements(final Map<String, PanelElementImpl> allPanelsElements,
@@ -47,7 +44,7 @@ public final class SceneLoadView {
         allPanelsElements.put(POKEMON_PANEL_NAME, new PanelElementImpl("firstPanel", new OverlayLayout(null)));
 
         sceneGraphicElements.put(SceneLoadGraphicEnum.BACKGROUND.value(),
-                new BackgroundElementImpl("firstPanel", this.utilityClass.getPathString("images", "sceneLoadBg.png")));
+                new BackgroundElementImpl("firstPanel", UtilitiesForScenes.getPathString("images", "sceneLoadBg.png")));
 
     }
 

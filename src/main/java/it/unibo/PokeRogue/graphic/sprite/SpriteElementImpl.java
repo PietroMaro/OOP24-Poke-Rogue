@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import org.json.JSONObject;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
-import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
+import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 
 public final class SpriteElementImpl extends GraphicElementImpl implements SpriteElement {
     private static final long serialVersionUID = 1L;
@@ -37,8 +37,16 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
 
     public SpriteElementImpl(JSONObject jsonMetrix) throws IOException {
         super(jsonMetrix.getString("panelName"));
-        this.spriteImage = ImageIO.read(new File(UtilitiesForScenesImpl
+        this.spriteImage = ImageIO.read(new File(UtilitiesForScenes
                 .getPathString(jsonMetrix.getString("dirToImage"), jsonMetrix.getString("imageFileName"))));
+
+        if (jsonMetrix.has("width")) {
+            this.leftUpX = jsonMetrix.getDouble("leftX");
+            this.leftUpy = jsonMetrix.getDouble("leftY");
+            this.width = jsonMetrix.getDouble("width");
+            this.height = jsonMetrix.getDouble("height");
+
+        }
 
     }
 

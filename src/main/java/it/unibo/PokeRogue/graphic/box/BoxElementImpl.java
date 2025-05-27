@@ -44,8 +44,8 @@ public final class BoxElementImpl extends GraphicElementImpl implements BoxEleme
         this.borderThickness = jsonMetrix.getInt("borderThickness");
         this.x = jsonMetrix.getDouble("leftX");
         this.y = jsonMetrix.getDouble("leftY");
-        this.width =jsonMetrix.getInt("width");
-        this.height =jsonMetrix.getInt("height");
+        this.width =jsonMetrix.getDouble("width");
+        this.height =jsonMetrix.getDouble("height");
     }
 
     @Override

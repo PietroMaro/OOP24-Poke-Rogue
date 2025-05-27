@@ -23,7 +23,7 @@ import lombok.Getter;
 
 public class SceneShopTemp implements Scene {
     @Getter
-    private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+    private final Map<Integer, GraphicElementImpl> currentSceneGraphicElements;
     @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final PlayerTrainerImpl playerTrainerInstance;
@@ -43,12 +43,12 @@ public class SceneShopTemp implements Scene {
             IllegalAccessException,
             NoSuchMethodException,
             InvocationTargetException {
-        this.sceneGraphicElements = new LinkedHashMap<>();
+        this.currentSceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.sceneShopUtilities = new SceneShopUtilities();
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
         this.itemFactoryInstance = new ItemFactoryImpl();
-        this.sceneShopView = new SceneShopView(sceneGraphicElements, allPanelsElements, itemFactoryInstance,
+        this.sceneShopView = new SceneShopView(currentSceneGraphicElements, allPanelsElements, itemFactoryInstance,
                 playerTrainerInstance,
                 currentSelectedButton, newSelectedButton, this, sceneShopUtilities);
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
@@ -171,7 +171,7 @@ public class SceneShopTemp implements Scene {
             InvocationTargetException, NoSuchMethodException, IOException {
 
         trainer.addMoney(-item.getPrice());
-        SceneShopUtilities.updatePlayerMoneyText(sceneGraphicElements, trainer);
+        SceneShopUtilities.updatePlayerMoneyText(currentSceneGraphicElements, trainer);
         useOrHandleItem(trainer, gameEngineInstance, item);
 
     }
@@ -224,9 +224,9 @@ public class SceneShopTemp implements Scene {
     public void rerollShopItems(PlayerTrainerImpl playerTrainerInstance, ItemFactoryImpl itemFactoryInstance) {
         if (playerTrainerInstance.getMoney() >= 50) {
             playerTrainerInstance.addMoney(-50);
-            SceneShopUtilities.updatePlayerMoneyText(sceneGraphicElements, playerTrainerInstance);
+            SceneShopUtilities.updatePlayerMoneyText(currentSceneGraphicElements, playerTrainerInstance);
             SceneShopUtilities.initShopItems(itemFactoryInstance);
-            SceneShopUtilities.updateItemsText(sceneGraphicElements);
+            SceneShopUtilities.updateItemsText(currentSceneGraphicElements);
 
         }
     }

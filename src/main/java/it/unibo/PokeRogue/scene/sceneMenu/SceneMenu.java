@@ -7,11 +7,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
-import it.unibo.PokeRogue.graphic.GraphicElement;
-import it.unibo.PokeRogue.graphic.panel.PanelElement;
+import it.unibo.PokeRogue.graphic.GraphicElementImpl;
+import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
-import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
 import lombok.Getter;
 
 /**
@@ -27,15 +26,14 @@ import lombok.Getter;
  * {@link SceneMenuView}.
  * 
  */
-public final class SceneMenu extends Scene {
+public final class SceneMenu implements Scene {
 
     private SceneMenuGraphicEnum currentSelectedButton;
     @Getter
-    private final Map<Integer, GraphicElement> currentSceneGraphicElements;
+    private final Map<Integer, GraphicElementImpl> currentSceneGraphicElements;
     @Getter
-    private final Map<String, PanelElement> allPanelsElements;
+    private final Map<String, PanelElementImpl> allPanelsElements;
     private final GameEngine gameEngineInstance;
-    private final UtilitiesForScenes utilityClass;
     private final SceneMenuView sceneMenuView;
 
     /**
@@ -52,9 +50,7 @@ public final class SceneMenu extends Scene {
         this.currentSceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
-        this.utilityClass = new UtilitiesForScenesImpl();
         this.sceneMenuView = new SceneMenuView();
-        this.loadGraphicElements("menuElements.json");
         this.initStatus();
         this.initGraphicElements();
 
@@ -67,10 +63,10 @@ public final class SceneMenu extends Scene {
     public void updateGraphic() {
 
         for (int i = 0; i < 3; i++) {
-            this.utilityClass.setButtonStatus(i, false, currentSceneGraphicElements);
+            UtilitiesForScenes.setButtonStatus(i, false, currentSceneGraphicElements);
         }
 
-        this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true, currentSceneGraphicElements);
+        UtilitiesForScenes.setButtonStatus(this.currentSelectedButton.value(), true, currentSceneGraphicElements);
 
     }
 
@@ -117,15 +113,13 @@ public final class SceneMenu extends Scene {
     }
 
     private void initGraphicElements() throws IOException {
-        this.sceneMenuView.initGraphicElements(currentSceneGraphicElements, allPanelsElements, this.graphicElements,
-                this.graphicElementNameToInt);
+        this.sceneMenuView.initGraphicElements(currentSceneGraphicElements, allPanelsElements);
 
-        this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true, currentSceneGraphicElements);
+        UtilitiesForScenes.setButtonStatus(this.currentSelectedButton.value(), true, currentSceneGraphicElements);
     }
 
     private void initStatus() {
         this.currentSelectedButton = SceneMenuGraphicEnum.LOAD_BUTTON;
-
     }
 
 }

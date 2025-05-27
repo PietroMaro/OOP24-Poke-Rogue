@@ -61,7 +61,6 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
                 currentScene = new SceneMenu();
                 break;
 
-            /* 
             case "load":
                 currentScene = new SceneLoad();
                 break;
@@ -77,8 +76,6 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
 
                 currentScene = new SceneFight(fightLevel);
 
-                currentScene = new SceneFight(fightLevel);
-                break;
             case "shop":
                 currentScene = new SceneShopTemp();
                 break;
@@ -86,7 +83,6 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
                 currentScene = new SceneMove();
                 break;
 
-                */
             default:
                 break;
         }

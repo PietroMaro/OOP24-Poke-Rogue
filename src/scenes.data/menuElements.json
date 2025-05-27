@@ -23,20 +23,21 @@
       "height": 0.05
     },
     "2": {
+      "type": "button",
+      "panelName": "firstPanel",
+      "mainColor": "#00FF00",
+      "borderColor": "#000000",
+      "borderThickness": 1,
+      "leftX": 0.3,
+      "leftY": 0.6,
+      "width": 0.4,
+      "height": 0.05
+    },
+    "100": {
       "type": "background",
       "panelName": "firstPanel",
       "dirToImage": "menu",
       "imageFileName": "sceneMenuBg.png"
-    
-    },
-     "100": {
-      "type": "text",
-      "textColor": "#000000",
-      "text": "Continua",
-      "panelName": "firstPanel",
-      "textDimension": 0.08,
-      "leftX": 0.455,
-      "leftY": 0.24
     },
     "101": {
       "type": "text",
@@ -44,7 +45,7 @@
       "text": "Continua",
       "panelName": "firstPanel",
       "textDimension": 0.08,
-      "leftX": 0.455,
+      "leftX": 0.45,
       "leftY": 0.24
     },
     "102": {
@@ -54,7 +55,7 @@
       "text": "Nuova Partita",
       "textDimension": 0.08,
       "leftX": 0.44,
-      "leftY": 0.64
+      "leftY": 0.44
     },
     "103": {
       "type": "text",

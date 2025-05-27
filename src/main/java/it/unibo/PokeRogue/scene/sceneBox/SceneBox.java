@@ -16,7 +16,6 @@ import it.unibo.PokeRogue.savingSystem.SavingSystem;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
-import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
 import lombok.Getter;
 
 /**
@@ -41,7 +40,7 @@ import lombok.Getter;
  * @see PlayerTrainerImpl
  * @see SavingSystem
  */
-public class SceneBox extends Scene {
+public class SceneBox implements Scene {
 
         private static final int START_BUTTON_POSITION = 5;
         private static final int FIRST_POKEMON_BUTTON_POSITION = 6;
@@ -50,7 +49,7 @@ public class SceneBox extends Scene {
         private static final int DOWN_ARROW_BUTTON_POSITION = 1;
 
         @Getter
-        private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+        private final Map<Integer, GraphicElementImpl> currentSceneGraphicElements;
         @Getter
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final GameEngine gameEngineInstance;
@@ -58,7 +57,6 @@ public class SceneBox extends Scene {
         private int currentSelectedButton;
         private final PlayerTrainerImpl playerTrainerInstance;
         private final List<List<Pokemon>> boxes;
-        private final UtilitiesForScenes utilityClass;
         private final SceneBoxView sceneBoxView;
         private final SceneBoxModel sceneBoxModel;
         private int currentBoxLength;
@@ -76,11 +74,10 @@ public class SceneBox extends Scene {
                         IllegalAccessException,
                         NoSuchMethodException,
                         InvocationTargetException {
-                this.sceneGraphicElements = new LinkedHashMap<>();
+                this.currentSceneGraphicElements = new LinkedHashMap<>();
                 this.allPanelsElements = new LinkedHashMap<>();
                 this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-                this.utilityClass = new UtilitiesForScenesImpl("box");
                 this.sceneBoxView = new SceneBoxView();
                 this.sceneBoxModel = new SceneBoxModel();
                 this.sceneBoxModel.setUpSave(savePath);
@@ -218,14 +215,14 @@ public class SceneBox extends Scene {
 
                 this.sceneBoxView.updateGraphic(this.currentSelectedButton, this.newSelectedButton, this.boxIndex,
                                 this.newBoxIndex, this.boxes,
-                                this.playerTrainerInstance, this.sceneGraphicElements);
+                                this.playerTrainerInstance, this.currentSceneGraphicElements);
 
                 this.currentSelectedButton = this.newSelectedButton;
 
                 if (this.boxIndex != this.newBoxIndex) {
                         this.boxIndex = this.newBoxIndex;
                         this.currentBoxLength = this.sceneBoxView.loadPokemonSprites(boxes, boxIndex,
-                                        this.sceneGraphicElements);
+                                        this.currentSceneGraphicElements);
                 }
 
         }
@@ -240,14 +237,14 @@ public class SceneBox extends Scene {
 
         private void initGraphicElements() throws IOException {
 
-                this.sceneBoxView.initGraphicElements(this.sceneGraphicElements, this.allPanelsElements);
+                this.sceneBoxView.initGraphicElements(this.currentSceneGraphicElements, this.allPanelsElements);
 
                 // Draw Pokemon sprites
                 this.currentBoxLength = this.sceneBoxView.loadPokemonSprites(boxes, boxIndex,
-                                this.sceneGraphicElements);
+                                this.currentSceneGraphicElements);
 
                 // Set the first button as selected
-                this.utilityClass.setButtonStatus(this.currentSelectedButton, true, this.sceneGraphicElements);
+                UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, this.currentSceneGraphicElements);
         }
 
 }

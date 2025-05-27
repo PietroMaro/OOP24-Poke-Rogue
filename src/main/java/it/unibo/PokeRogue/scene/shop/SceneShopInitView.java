@@ -18,13 +18,11 @@ import it.unibo.PokeRogue.scene.shop.enums.SceneShopEnum;
 import it.unibo.PokeRogue.scene.shop.enums.SceneShopStatusEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
-import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
 
 public class SceneShopInitView {
 
         private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
         private final Map<String, PanelElementImpl> allPanelsElements;
-        private final UtilitiesForScenes utilityClass;
         private final PlayerTrainerImpl playerTrainerInstance;
         private static final String FIRST_PANEL = "firstPanel";
         private int itemIndex;
@@ -33,7 +31,6 @@ public class SceneShopInitView {
                         final Map<String, PanelElementImpl> allPanelsElements) {
                 this.sceneGraphicElements = sceneGraphicElements;
                 this.allPanelsElements = allPanelsElements;
-                this.utilityClass = new UtilitiesForScenesImpl("shop");
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
         }
 
@@ -45,10 +42,10 @@ public class SceneShopInitView {
                 SceneShopUtilities.updateItemDescription(sceneGraphicElements, SceneShopUtilities.getShopItems(4));
                 this.sceneGraphicElements.put(SceneShopEnum.BACKGROUND.value(),
                                 new BackgroundElementImpl(FIRST_PANEL,
-                                                this.utilityClass.getPathString("images", "sceneShopBgBar.png")));
+                                                UtilitiesForScenes.getPathString("images", "sceneShopBgBar.png")));
 
                 // Set the first button as selected
-                this.utilityClass.setButtonStatus(currentSelectedButton, true, sceneGraphicElements);
+                UtilitiesForScenes.setButtonStatus(currentSelectedButton, true, sceneGraphicElements);
 
         }
 

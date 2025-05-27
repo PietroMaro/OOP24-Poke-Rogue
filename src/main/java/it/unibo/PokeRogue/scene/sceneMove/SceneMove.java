@@ -15,7 +15,6 @@ import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
-import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
 import lombok.Getter;
 
 /**
@@ -31,11 +30,10 @@ public class SceneMove implements Scene {
 
     private int currentSelectedButton;
     @Getter
-    private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+    private final Map<Integer, GraphicElementImpl> currentSceneGraphicElements;
     @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GameEngine gameEngineInstance;
-    private final UtilitiesForScenes utilityClass;
     private final SceneMoveView sceneMoveView;
     private int newSelectedButton;
     private final Pokemon playerPokemon;
@@ -53,11 +51,10 @@ public class SceneMove implements Scene {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
-        this.sceneGraphicElements = new LinkedHashMap<>();
+        this.currentSceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
-        this.utilityClass = new UtilitiesForScenesImpl("move");
-        this.sceneMoveView = new SceneMoveView(sceneGraphicElements, allPanelsElements);
+        this.sceneMoveView = new SceneMoveView(currentSceneGraphicElements, allPanelsElements);
         this.playerPokemon = PlayerTrainerImpl.getTrainerInstance().getPokemon(0).get();
         this.initStatus();
         this.initGraphicElements();
@@ -70,10 +67,10 @@ public class SceneMove implements Scene {
      */
     @Override
     public void updateGraphic() {
-        this.utilityClass.setButtonStatus(currentSelectedButton, false, this.sceneGraphicElements);
-        this.utilityClass.setButtonStatus(newSelectedButton, true, this.sceneGraphicElements);
+       UtilitiesForScenes.setButtonStatus(currentSelectedButton, false, this.currentSceneGraphicElements);
+       UtilitiesForScenes.setButtonStatus(newSelectedButton, true, this.currentSceneGraphicElements);
         this.currentSelectedButton = this.newSelectedButton;
-        this.utilityClass.setButtonStatus(this.currentSelectedButton, true, this.sceneGraphicElements);
+       UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, this.currentSceneGraphicElements);
     }
 
     /**
@@ -159,7 +156,7 @@ public class SceneMove implements Scene {
      */
     private void initGraphicElements() throws IOException {
         this.sceneMoveView.initGraphicElements();
-        this.utilityClass.setButtonStatus(this.currentSelectedButton, true, this.sceneGraphicElements);
+       UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, this.currentSceneGraphicElements);
     }
 
     /**

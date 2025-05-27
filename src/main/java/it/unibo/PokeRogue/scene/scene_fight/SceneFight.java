@@ -29,7 +29,7 @@ import lombok.Getter;
 public class SceneFight implements Scene {
 
     @Getter
-    private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+    private final Map<Integer, GraphicElementImpl> currentSceneGraphicElements;
     @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private int currentSelectedButton;
@@ -53,14 +53,14 @@ public class SceneFight implements Scene {
             InvocationTargetException,
             InstantiationException {
         this.enemyTrainerInstance = new TrainerImpl();
-        this.sceneGraphicElements = new LinkedHashMap<>();
+        this.currentSceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.enemyAiInstance = new EnemyAiImpl(enemyTrainerInstance, battleLevel);
         this.battleEngineInstance = new BattleEngineImpl(enemyTrainerInstance, enemyAiInstance);
         this.generateEnemyInstance = new GenerateEnemyImpl(battleLevel, enemyTrainerInstance);
         this.generateEnemyInstance.generateEnemy();
         this.initStatus();
-        this.sceneFightView = new SceneFightView(sceneGraphicElements, allPanelsElements, enemyTrainerInstance,
+        this.sceneFightView = new SceneFightView(currentSceneGraphicElements, allPanelsElements, enemyTrainerInstance,
                 currentSelectedButton, newSelectedButton, this);
         this.initGraphicElements();
     }
