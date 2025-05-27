@@ -1,7 +1,8 @@
 package it.unibo.PokeRogue.scene.sceneInfo.enums;
 
 public enum SceneInfoEnum {
-    BACK_TEXT(0);
+    BACK_TEXT(0),
+    BACKGROUND(100);
 
     private final int code;
 

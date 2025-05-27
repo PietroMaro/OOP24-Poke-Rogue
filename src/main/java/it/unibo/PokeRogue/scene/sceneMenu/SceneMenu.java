@@ -98,13 +98,14 @@ public final class SceneMenu implements Scene {
                 switch (this.currentSelectedButton) {
                     case LOAD_BUTTON:
                         this.gameEngineInstance.setScene("load");
-
                         break;
                     case NEW_GAME_BUTTON:
                         this.gameEngineInstance.setFileToLoad("");
                         this.gameEngineInstance.setScene("box");
                         break;
-
+                    case OPTIONS_BUTTON:
+                        this.gameEngineInstance.setScene("info");
+                        break;
                     default:
                         break;
                 }

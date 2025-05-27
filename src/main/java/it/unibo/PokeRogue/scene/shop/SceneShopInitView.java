@@ -61,7 +61,7 @@ public class SceneShopInitView {
                                                 0.05, 0.92, 0.04));
 
                 this.sceneGraphicElements.put(SceneShopEnum.REROL_TEXT.value(),
-                                new TextElementImpl(FIRST_PANEL, "REROLL: " + 50,
+                                new TextElementImpl(FIRST_PANEL, "REROLL: 50",
                                                 Color.BLACK, 0.055, 0.01,
                                                 0.68));
 

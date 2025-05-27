@@ -13,7 +13,6 @@ import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.scene.sceneInfo.enums.SceneInfoEnum;
 import it.unibo.PokeRogue.scene.sceneInfo.enums.SceneInfoStatusEnum;
-import it.unibo.PokeRogue.scene.sceneSave.enums.SceneSaveEnum;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
 
@@ -39,7 +38,7 @@ public class SceneInfoInitView {
         this.sceneGraphicElements.put(SceneInfoStatusEnum.BACK_BUTTON.value(),
                 new ButtonElementImpl(FIRST_PANEL, new Color(38, 102, 102), Color.WHITE, 0, 0.60, 0.45,
                         0.20, 0.1));
-        this.sceneGraphicElements.put(SceneSaveEnum.BACKGROUND.value(),
+        this.sceneGraphicElements.put(SceneInfoEnum.BACKGROUND.value(),
                 new BackgroundElementImpl(FIRST_PANEL,
                         this.utilityClass.getPathString("images", "sceneInfoBg.png")));
     }

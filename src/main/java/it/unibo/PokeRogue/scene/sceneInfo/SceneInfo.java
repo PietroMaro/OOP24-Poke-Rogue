@@ -58,4 +58,8 @@ public class SceneInfo implements Scene{
     public void initGraphicElements() throws IOException {
         this.sceneInfoView.initGraphicElements(this.newSelectedButton);
     }
+    @Override
+    public void updateGraphic() throws IOException {
+    }
 }
+
