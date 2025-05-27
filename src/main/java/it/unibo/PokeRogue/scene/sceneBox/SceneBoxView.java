@@ -66,7 +66,7 @@ public final class SceneBoxView {
                 for (int pokemonIndex = 0; pokemonIndex < 81; pokemonIndex++) {
 
                         currentSceneGraphicElements.put(pokemonIndex + 6,
-                                        new ButtonElementImpl(FIRST_PANEL_NAME, null, Color.WHITE, 0,
+                                        new ButtonElementImpl(FIRST_PANEL_NAME, null, Color.BLACK, 0,
                                                         0.465 + (pokemonIndex % 9 * 0.049),
                                                         0.125 + (pokemonIndex / 9 * 0.09), 0.03, 0.05));
 
