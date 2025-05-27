@@ -68,7 +68,7 @@ public class SceneSaveInitView {
                 new ButtonElementImpl(FIRST_PANEL, new Color(38, 102, 102), Color.WHITE, 0, 0.60, 0.45,
                         0.20, 0.1));
         this.sceneGraphicElements.put(SceneSaveStatusEnum.EXIT_AND_SAVE_BUTTON.value(),
-                new ButtonElementImpl(FIRST_PANEL, new Color(38, 102, 102), Color.PINK/* Color.WHITE */, 0, 0.20, 0.45,
+                new ButtonElementImpl(FIRST_PANEL, new Color(38, 102, 102), Color.WHITE , 0, 0.20, 0.45,
                         0.20, 0.1));
 
     }

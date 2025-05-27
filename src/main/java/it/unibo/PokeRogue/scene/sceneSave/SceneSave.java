@@ -30,9 +30,10 @@ public class SceneSave implements Scene {
             InvocationTargetException {
         this.sceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
-        this.sceneSaveView = new SceneSaveView(sceneGraphicElements, allPanelsElements, currentSelectedButton, currentSelectedButton, this);
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.initStatus();
+        this.sceneSaveView = new SceneSaveView(sceneGraphicElements, allPanelsElements, currentSelectedButton,
+                newSelectedButton, this);
         this.initGraphicElements();
     }
 
@@ -42,9 +43,7 @@ public class SceneSave implements Scene {
         switch (inputKey) {
             case KeyEvent.VK_RIGHT:
                 if (this.newSelectedButton == SceneSaveStatusEnum.EXIT_AND_SAVE_BUTTON.value()) {
-                    System.out.println(newSelectedButton);
                     this.newSelectedButton = SceneSaveStatusEnum.CONTINUE_GAME_BUTTON.value();
-                    System.out.println(newSelectedButton);
                 }
                 break;
 
@@ -57,6 +56,7 @@ public class SceneSave implements Scene {
             case KeyEvent.VK_ENTER:
                 if (this.newSelectedButton == SceneSaveStatusEnum.CONTINUE_GAME_BUTTON.value()) {
                     gameEngineInstance.setScene("fight");
+
                 } else if (this.newSelectedButton == SceneSaveStatusEnum.EXIT_AND_SAVE_BUTTON.value()) {
                     gameEngineInstance.setScene("main");
                 }

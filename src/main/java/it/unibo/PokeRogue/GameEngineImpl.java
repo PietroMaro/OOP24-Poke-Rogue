@@ -59,12 +59,8 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
             NoSuchMethodException {
         switch (newScene) {
             case "main":
-                currentScene = new SceneSave();
+                currentScene = new SceneMenu();
                 break;
-            /*
-             * currentScene = new SceneMenu();
-             * break;
-             */
             case "load":
                 currentScene = new SceneLoad();
                 break;
@@ -79,14 +75,15 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
                 }
 
                 currentScene = new SceneFight(fightLevel);
-
-                currentScene = new SceneFight(fightLevel);
                 break;
             case "shop":
                 currentScene = new SceneShopTemp();
                 break;
             case "move":
                 currentScene = new SceneMove();
+                break;
+            case "save":
+                currentScene = new SceneSave();
                 break;
             default:
                 break;
