@@ -6,12 +6,12 @@ import java.util.Map;
 
 import javax.swing.OverlayLayout;
 
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 
@@ -27,7 +27,7 @@ public class SceneMoveView {
         private static final String FIRST_PANEL_STRING = "firstPanel";
         private static final String PP_STRING = " PP : ";
         private static final String DAMAGE_STRING = " Damage : ";
-        private final Map<Integer, GraphicElementImpl> currentSceneGraphicElements;
+        private final GraphicElementsRegistry currentSceneGraphicElements;
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final Pokemon playerPokemon;
 
@@ -40,7 +40,7 @@ public class SceneMoveView {
          * @param currentSceneGraphicElements The map to store scene's graphical elements.
          * @param allPanelsElements    The map to store scene's panel elements.
          */
-        public SceneMoveView(final Map<Integer, GraphicElementImpl> currentSceneGraphicElements,
+        public SceneMoveView(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements) {
                 this.playerPokemon = PlayerTrainerImpl.getTrainerInstance().getPokemon(0).get();
                 this.currentSceneGraphicElements = currentSceneGraphicElements;

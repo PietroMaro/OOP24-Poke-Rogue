@@ -1,12 +1,18 @@
 package it.unibo.PokeRogue.scene;
 
+import java.util.Map;
+
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 
-public interface GraphicElementRegistry {
+public interface GraphicElementsRegistry {
 
     GraphicElementImpl getByName(String name);
 
     GraphicElementImpl getById(int id);
 
+    Map<Integer, GraphicElementImpl> getElements();
+
     void put(int id, GraphicElementImpl elem);
+    void remove(int id);
+    void clear();
 }

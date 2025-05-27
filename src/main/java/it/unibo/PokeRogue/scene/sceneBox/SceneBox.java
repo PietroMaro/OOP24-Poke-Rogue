@@ -9,10 +9,11 @@ import java.lang.reflect.InvocationTargetException;
 
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.savingSystem.SavingSystem;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistryImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
@@ -49,7 +50,7 @@ public class SceneBox extends Scene {
         private static final int DOWN_ARROW_BUTTON_POSITION = 1;
 
         @Getter
-        private final Map<Integer, GraphicElementImpl> currentSceneGraphicElements;
+        private final GraphicElementsRegistry currentSceneGraphicElements;
         @Getter
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final GameEngine gameEngineInstance;
@@ -75,7 +76,7 @@ public class SceneBox extends Scene {
                         NoSuchMethodException,
                         InvocationTargetException {
                 this.loadGraphicElements("sceneBoxElements.json");
-                this.currentSceneGraphicElements = new LinkedHashMap<>();
+                this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),this.graphicElementNameToInt);
                 this.allPanelsElements = new LinkedHashMap<>();
                 this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();

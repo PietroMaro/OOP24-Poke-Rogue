@@ -13,6 +13,7 @@ import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.inputHandling.InputHandlerImpl;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 
 /**
  * Implementation of the {@link GraphicEngine} interface.
@@ -58,9 +59,9 @@ public final class GraphicEngineImpl extends Singleton implements GraphicEngine 
      */
 
     @Override
-    public void drawScene(final Map<Integer, GraphicElementImpl> allGraphicElements) {
+    public void drawScene(GraphicElementsRegistry allGraphicElements) {
 
-        for (final GraphicElementImpl graphicElement : allGraphicElements.values()) {
+        for (final GraphicElementImpl graphicElement : allGraphicElements.getElements().values()) {
             switch (graphicElement) {
                 case ButtonElementImpl button -> drawButtonGraphicElement(button);
                 case TextElementImpl text -> drawTextGraphicElement(text);

@@ -12,10 +12,11 @@ import org.json.JSONObject;
 import it.unibo.PokeRogue.GameEngineImpl;
 import it.unibo.PokeRogue.effectParser.EffectParser;
 import it.unibo.PokeRogue.effectParser.EffectParserImpl;
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.items.Item;
 import it.unibo.PokeRogue.items.ItemFactoryImpl;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistryImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.scene.shop.enums.SceneShopStatusEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
@@ -23,7 +24,7 @@ import lombok.Getter;
 
 public class SceneShopTemp extends Scene {
     @Getter
-    private final Map<Integer, GraphicElementImpl> currentSceneGraphicElements;
+    private final GraphicElementsRegistry currentSceneGraphicElements;
     @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final PlayerTrainerImpl playerTrainerInstance;
@@ -43,7 +44,7 @@ public class SceneShopTemp extends Scene {
             IllegalAccessException,
             NoSuchMethodException,
             InvocationTargetException {
-        this.currentSceneGraphicElements = new LinkedHashMap<>();
+        this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(), this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.sceneShopUtilities = new SceneShopUtilities();
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();

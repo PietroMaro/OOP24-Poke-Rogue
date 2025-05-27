@@ -1,8 +1,8 @@
 package it.unibo.PokeRogue;
 
 import java.util.Map;
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 
 /**
  * Interface representing the graphic engine of the game.
@@ -28,7 +28,7 @@ public interface GraphicEngine {
      * @param allGraphicElements a map containing the identifiers and representations
      *                          of all graphic elements to be drawn
      */
-    void drawScene(Map<Integer, GraphicElementImpl> allGraphicElements);
+    void drawScene(GraphicElementsRegistry allGraphicElements);
 
     void createPanels(Map<String, PanelElementImpl> allPanelElements);
 

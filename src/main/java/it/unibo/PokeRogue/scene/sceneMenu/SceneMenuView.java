@@ -4,13 +4,11 @@ import java.util.Map;
 
 import javax.swing.OverlayLayout;
 
-import org.json.JSONArray;
 
 import java.io.IOException;
 
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
-import it.unibo.PokeRogue.scene.GraphicElementRegistry;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 
 /**
@@ -22,19 +20,19 @@ import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 public final class SceneMenuView {
 
         private static final String FIRST_PANEL_NAME = "firstPanel";
-        private final GraphicElementRegistry graphicElements;
+        private final GraphicElementsRegistry graphicElements;
 
         /**
          * Constructs a new {@code SceneMenuView} instance.
          *
          * 
          */
-        public SceneMenuView(final GraphicElementRegistry graphicElements) throws IOException {
+        public SceneMenuView(final GraphicElementsRegistry graphicElements) throws IOException {
                 this.graphicElements = graphicElements;
 
         }
 
-        void initGraphicElements(final Map<Integer, GraphicElementImpl> currentSceneGraphicElements,
+        void initGraphicElements(GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements)
                         throws IOException {
 

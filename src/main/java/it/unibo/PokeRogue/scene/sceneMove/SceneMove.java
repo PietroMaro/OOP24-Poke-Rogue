@@ -12,6 +12,8 @@ import it.unibo.PokeRogue.GameEngineImpl;
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistryImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
@@ -30,7 +32,7 @@ public class SceneMove extends Scene {
 
     private int currentSelectedButton;
     @Getter
-    private final Map<Integer, GraphicElementImpl> currentSceneGraphicElements;
+    private final GraphicElementsRegistry currentSceneGraphicElements;
     @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GameEngine gameEngineInstance;
@@ -51,7 +53,7 @@ public class SceneMove extends Scene {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
-        this.currentSceneGraphicElements = new LinkedHashMap<>();
+        this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(), this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.sceneMoveView = new SceneMoveView(currentSceneGraphicElements, allPanelsElements);

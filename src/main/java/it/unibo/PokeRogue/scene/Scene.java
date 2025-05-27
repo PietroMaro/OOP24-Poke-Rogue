@@ -29,11 +29,11 @@ public abstract class Scene {
 			InvocationTargetException,
 			InstantiationException;
 
-	public abstract Map<Integer, GraphicElementImpl> getCurrentSceneGraphicElements();
+	public abstract GraphicElementsRegistry getCurrentSceneGraphicElements();
 
 	public abstract Map<String, PanelElementImpl> getAllPanelsElements();
 
-	protected GraphicElementRegistry graphicElements;
+	protected GraphicElementsRegistry graphicElements;
 	protected Map<String, Integer> graphicElementNameToInt;
 
 	private GraphicElementImpl createGraphicElementFromJson(JSONObject jsonElement) throws IOException {
@@ -79,7 +79,7 @@ public abstract class Scene {
 			graphicElementNameToInt.put(key, val);
 		}
 
-		graphicElements = new GraphicElementRegistryImpl(new HashMap<>(), graphicElementNameToInt);
+		graphicElements = new GraphicElementsRegistryImpl(new HashMap<>(), graphicElementNameToInt);
 
 		JSONObject metrics = root.getJSONObject("metrics");
 		for (String key : metrics.keySet()) {

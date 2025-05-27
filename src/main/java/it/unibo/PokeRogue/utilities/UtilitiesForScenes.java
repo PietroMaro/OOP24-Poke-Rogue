@@ -10,7 +10,7 @@ import org.json.JSONObject;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
-import it.unibo.PokeRogue.scene.GraphicElementRegistry;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 
 /**
  * Implementation of {@link UtilitiesForScenes} that provides utility methods
@@ -48,9 +48,9 @@ public final class UtilitiesForScenes {
      */
 
     public static void setButtonStatus(final int buttonCode, final boolean status,
-            final Map<Integer, GraphicElementImpl> sceneGraphicElements) {
+            GraphicElementsRegistry sceneGraphicElements) {
 
-        final ButtonElementImpl selectedButton = (ButtonElementImpl) sceneGraphicElements.get(buttonCode);
+        final ButtonElementImpl selectedButton = (ButtonElementImpl) sceneGraphicElements.getById(buttonCode);
         selectedButton.setSelected(status);
 
     }
@@ -71,8 +71,8 @@ public final class UtilitiesForScenes {
     }
 
     public static void loadSceneElements(String fileName, String loadSectionName,
-            Map<Integer, GraphicElementImpl> currentSceneGraphicElements,
-            GraphicElementRegistry graphicElements) throws IOException {
+            GraphicElementsRegistry currentSceneGraphicElements,
+            GraphicElementsRegistry graphicElements) throws IOException {
 
         JsonReader jsonReader = new JsonReaderImpl();
         JSONObject root = jsonReader

@@ -8,8 +8,9 @@ import java.util.Map;
 
 import it.unibo.PokeRogue.ai.EnemyAi;
 import it.unibo.PokeRogue.ai.EnemyAiImpl;
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistryImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.scene.scene_fight.enums.DecisionTypeEnum;
 import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightStatusValuesEnum;
@@ -29,7 +30,7 @@ import lombok.Getter;
 public class SceneFight extends Scene {
 
     @Getter
-    private final Map<Integer, GraphicElementImpl> currentSceneGraphicElements;
+    private final GraphicElementsRegistry currentSceneGraphicElements;
     @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private int currentSelectedButton;
@@ -53,7 +54,8 @@ public class SceneFight extends Scene {
             InvocationTargetException,
             InstantiationException {
         this.enemyTrainerInstance = new TrainerImpl();
-        this.currentSceneGraphicElements = new LinkedHashMap<>();
+        this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
+                this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.enemyAiInstance = new EnemyAiImpl(enemyTrainerInstance, battleLevel);
         this.battleEngineInstance = new BattleEngineImpl(enemyTrainerInstance, enemyAiInstance);
@@ -87,7 +89,7 @@ public class SceneFight extends Scene {
      * selected button.
      */
     @Override
-    public void updateGraphic() throws IOException{
+    public void updateGraphic() throws IOException {
         this.sceneFightView.updateGraphic(currentSelectedButton, newSelectedButton);
     }
 

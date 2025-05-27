@@ -1,17 +1,16 @@
 package it.unibo.PokeRogue.scene.scene_fight;
 
-
 import java.awt.Color;
 import java.io.IOException;
 import java.util.Map;
 import javax.swing.OverlayLayout;
 
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl;
 import it.unibo.PokeRogue.graphic.box.BoxElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightGraphicEnum;
 import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightStatusValuesEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
@@ -31,7 +30,7 @@ public class SceneFightUpdateView {
         private static final String MOVE_PANEL_TEXT = "movePanel";
         private static final String BALL_PANEL_TEXT = "ballPanel";
         private static final String CHANGE_PANEL_TEXT = "changePanel";
-        private final Map<Integer, GraphicElementImpl> currentSceneGraphicElements;
+        private final GraphicElementsRegistry currentSceneGraphicElements;
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final PlayerTrainerImpl playerTrainerInstance;
         private int currentSelectedButton;
@@ -42,16 +41,17 @@ public class SceneFightUpdateView {
         /**
          * Constructs a new SceneFightUpdateView.
          *
-         * @param currentSceneGraphicElements       a map of all graphic elements in the scene
-         * @param allPanelsElements          a map of all panel elements used in the UI
-         *                                   (used for dependency)
-         * @param currentSelectedButton      the currently highlighted/selected menu
-         *                                   option
-         * @param newSelectedButton          the newly selected menu option
-         * @param sceneInstance              the instance of the scene this view belongs
-         *                                   to
+         * @param currentSceneGraphicElements a map of all graphic elements in the scene
+         * @param allPanelsElements           a map of all panel elements used in the UI
+         *                                    (used for dependency)
+         * @param currentSelectedButton       the currently highlighted/selected menu
+         *                                    option
+         * @param newSelectedButton           the newly selected menu option
+         * @param sceneInstance               the instance of the scene this view
+         *                                    belongs
+         *                                    to
          */
-        public SceneFightUpdateView(final Map<Integer, GraphicElementImpl> currentSceneGraphicElements,
+        public SceneFightUpdateView(final GraphicElementsRegistry currentSceneGraphicElements,
 
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final int currentSelectedButton, final int newSelectedButton, final SceneFight sceneInstance) {
@@ -87,8 +87,8 @@ public class SceneFightUpdateView {
         }
 
         private void updateSelectedButton(final int newSelectedButton) {
-                UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, false,this.currentSceneGraphicElements);
-                UtilitiesForScenes.setButtonStatus(newSelectedButton, true,this.currentSceneGraphicElements);
+                UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, false, this.currentSceneGraphicElements);
+                UtilitiesForScenes.setButtonStatus(newSelectedButton, true, this.currentSceneGraphicElements);
                 this.currentSelectedButton = newSelectedButton;
         }
 
@@ -109,7 +109,8 @@ public class SceneFightUpdateView {
                         this.initMoveButton();
                         SceneFightUtilities.updateMoveInfo(currentSelectedButton, currentSceneGraphicElements,
                                         playerTrainerInstance);
-                        UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true,this.currentSceneGraphicElements);
+                        UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true,
+                                        this.currentSceneGraphicElements);
                 }
         }
 
@@ -247,7 +248,8 @@ public class SceneFightUpdateView {
                                                         0.31, 0.35,
                                                         0.4));
 
-                        UtilitiesForScenes.setButtonStatus(currentSelectedButton, true,this.currentSceneGraphicElements);
+                        UtilitiesForScenes.setButtonStatus(currentSelectedButton, true,
+                                        this.currentSceneGraphicElements);
 
                 }
         }
@@ -257,7 +259,7 @@ public class SceneFightUpdateView {
          * Clears current elements, initializes change-specific UI,
          * and sets the button status.
          */
-        private void pokemonChange() throws IOException{
+        private void pokemonChange() throws IOException {
                 if (currentSelectedButton >= SceneFightStatusValuesEnum.CHANGE_POKEMON_1.value()
                                 && currentSelectedButton < SceneFightStatusValuesEnum.POKEBALL_BUTTON.value()) {
                         this.alreadyInMainMenu = false;
@@ -273,7 +275,8 @@ public class SceneFightUpdateView {
                         this.currentSceneGraphicElements.put(SceneFightGraphicEnum.BACKGROUND.value(),
                                         new BackgroundElementImpl(CHANGE_PANEL_TEXT,
                                                         UtilitiesForScenes.getPathString("images", "bg.png")));
-                        UtilitiesForScenes.setButtonStatus(currentSelectedButton, true,this.currentSceneGraphicElements);
+                        UtilitiesForScenes.setButtonStatus(currentSelectedButton, true,
+                                        this.currentSceneGraphicElements);
 
                 }
         }

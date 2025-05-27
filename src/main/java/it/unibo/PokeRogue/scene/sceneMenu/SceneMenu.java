@@ -7,8 +7,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistryImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 import lombok.Getter;
@@ -30,7 +31,7 @@ public final class SceneMenu extends Scene {
 
     private int currentSelectedButton;
     @Getter
-    private final Map<Integer, GraphicElementImpl> currentSceneGraphicElements;
+    private final GraphicElementsRegistry currentSceneGraphicElements;
     @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GameEngine gameEngineInstance;
@@ -48,7 +49,7 @@ public final class SceneMenu extends Scene {
             IOException,
             NoSuchMethodException {
         this.loadGraphicElements("sceneMenuElements.json");
-        this.currentSceneGraphicElements = new LinkedHashMap<>();
+        this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.sceneMenuView = new SceneMenuView(this.graphicElements);
@@ -99,10 +100,11 @@ public final class SceneMenu extends Scene {
                 if (this.currentSelectedButton == this.graphicElementNameToInt.get("LOAD_BUTTON")) {
 
                     this.gameEngineInstance.setScene("load");
-                } else if (this.currentSelectedButton == this.graphicElementNameToInt.get("NEW_GAME_BUTTON"))
+                } else if (this.currentSelectedButton == this.graphicElementNameToInt.get("NEW_GAME_BUTTON")) {
 
                     this.gameEngineInstance.setFileToLoad("");
-                this.gameEngineInstance.setScene("box");
+                    this.gameEngineInstance.setScene("box");
+                }
                 break;
             default:
                 break;

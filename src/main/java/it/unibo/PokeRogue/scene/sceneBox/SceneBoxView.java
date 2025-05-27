@@ -10,7 +10,6 @@ import javax.swing.OverlayLayout;
 import java.io.IOException;
 
 import java.awt.Color;
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.box.BoxElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
@@ -18,8 +17,7 @@ import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.pokemon.Nature;
 import it.unibo.PokeRogue.pokemon.Pokemon;
-import it.unibo.PokeRogue.scene.GraphicElementRegistry;
-import it.unibo.PokeRogue.scene.GraphicElementRegistryImpl;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.ColorTypeConversion;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
@@ -47,16 +45,16 @@ public final class SceneBoxView {
 
         private static final String FIRST_PANEL_NAME = "firstPanel";
         private static final String POKEMON_PANEL_NAME = "pokemonPanel";
-        private final GraphicElementRegistry graphicElements;
+        private final GraphicElementsRegistry graphicElements;
         private final Map<String, Integer> graphicElementNameToInt;
 
-        public SceneBoxView(final GraphicElementRegistry graphicElements,
+        public SceneBoxView(final GraphicElementsRegistry graphicElements,
                         final Map<String, Integer> graphicElementNameToInt) throws IOException {
                 this.graphicElementNameToInt = graphicElementNameToInt;
                 this.graphicElements = graphicElements;
         }
 
-        void initGraphicElements(final Map<Integer, GraphicElementImpl> currentSceneGraphicElements,
+        void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements) throws IOException {
 
                 // Panels
@@ -82,29 +80,27 @@ public final class SceneBoxView {
         void updateGraphic(final int currentSelectedButton, final int newSelectedButton, final int boxIndex,
                         final int newBoxIndex, final List<List<Pokemon>> boxes,
                         final PlayerTrainerImpl playerTrainerInstance,
-                        final Map<Integer, GraphicElementImpl> currentSceneGraphicElements)
+                        final GraphicElementsRegistry currentSceneGraphicElements)
                         throws IOException {
 
-                GraphicElementRegistry graphicElementRegistry = new GraphicElementRegistryImpl(
-                                currentSceneGraphicElements, graphicElementNameToInt);
-
+                
                 this.updateSelectedButton(currentSelectedButton, newSelectedButton, currentSceneGraphicElements);
 
-                this.updateShowedPokeBox(newBoxIndex, graphicElementRegistry);
+                this.updateShowedPokeBox(newBoxIndex, currentSceneGraphicElements);
 
-                this.updatePokeSquad(playerTrainerInstance, graphicElementRegistry);
+                this.updatePokeSquad(playerTrainerInstance, currentSceneGraphicElements);
 
-                this.updateDetailedPokemon(newBoxIndex, newSelectedButton, boxes, graphicElementRegistry);
+                this.updateDetailedPokemon(newBoxIndex, newSelectedButton, boxes, currentSceneGraphicElements);
         }
 
         private void updateSelectedButton(final int currentSelectedButton, final int newSelectedButton,
-                        final Map<Integer, GraphicElementImpl> currentSceneGraphicElements) {
+                        final GraphicElementsRegistry currentSceneGraphicElements) {
                 UtilitiesForScenes.setButtonStatus(currentSelectedButton, false, currentSceneGraphicElements);
                 UtilitiesForScenes.setButtonStatus(newSelectedButton, true, currentSceneGraphicElements);
         }
 
         private void updateShowedPokeBox(final int newBoxIndex,
-                        final GraphicElementRegistry currentSceneGraphicElements) {
+                        final GraphicElementsRegistry currentSceneGraphicElements) {
 
                 ((TextElementImpl) currentSceneGraphicElements.getByName("CURRENT_BOX_TEXT"))
                                 .setText(String.valueOf(newBoxIndex + 1));
@@ -112,7 +108,7 @@ public final class SceneBoxView {
         }
 
         private void updatePokeSquad(final PlayerTrainerImpl playerTrainerInstance,
-                        final GraphicElementRegistry currentSceneGraphicElements) throws IOException {
+                        final GraphicElementsRegistry currentSceneGraphicElements) throws IOException {
 
                 for (int squadPosition = this.graphicElementNameToInt
                                 .get("POKEMON_SPRITE_SELECTED_0"); squadPosition < this.graphicElementNameToInt
@@ -139,7 +135,7 @@ public final class SceneBoxView {
 
         private void updateDetailedPokemon(final int boxIndex, final int currentSelectedButton,
                         final List<List<Pokemon>> boxes,
-                        GraphicElementRegistry currentSceneGraphicElements)
+                        GraphicElementsRegistry currentSceneGraphicElements)
                         throws IOException {
                 final Pokemon selectedPokemon;
                 final Nature pokemonNature;
@@ -224,7 +220,7 @@ public final class SceneBoxView {
         }
 
         int loadPokemonSprites(final List<List<Pokemon>> boxes, final int boxIndex,
-                        final Map<Integer, GraphicElementImpl> currentSceneGraphicElements) {
+                        final GraphicElementsRegistry currentSceneGraphicElements) {
                 final int currentBoxLength = boxes.get(boxIndex).size();
                 final List<Pokemon> currentBox = boxes.get(boxIndex);
 

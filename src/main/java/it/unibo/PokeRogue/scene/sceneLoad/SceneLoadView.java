@@ -7,12 +7,13 @@ import java.io.IOException;
 
 import javax.swing.OverlayLayout;
 
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
+
 import it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.savingSystem.SavingSystem;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 import java.awt.Color;
 
@@ -48,7 +49,7 @@ public final class SceneLoadView {
         }
 
         void initGraphicElements(final Map<String, PanelElementImpl> allPanelsElements,
-                        final Map<Integer, GraphicElementImpl> sceneGraphicElements) throws IOException {
+                        final GraphicElementsRegistry sceneGraphicElements) throws IOException {
                 allPanelsElements.put("firstPanel", new PanelElementImpl("", new OverlayLayout(null)));
                 allPanelsElements.put(POKEMON_PANEL_NAME, new PanelElementImpl("firstPanel", new OverlayLayout(null)));
 
@@ -60,7 +61,7 @@ public final class SceneLoadView {
 
         void showSaves(final int savesListStart, final List<String> savesList,
                         final SavingSystem savingSystemInstance, final Map<String, PanelElementImpl> allPanelsElements,
-                        final Map<Integer, GraphicElementImpl> sceneGraphicElements) throws IOException {
+                        final GraphicElementsRegistry sceneGraphicElements) throws IOException {
                 String savesName;
                 int boxPokemonNumber;
                 for (int x = 0; x < 10; x++) {

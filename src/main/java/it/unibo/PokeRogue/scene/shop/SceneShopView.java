@@ -3,19 +3,19 @@ package it.unibo.PokeRogue.scene.shop;
 import java.io.IOException;
 import java.util.Map;
 
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.items.ItemFactoryImpl;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 
 public class SceneShopView {
 
     private final SceneShopInitView sceneShopInitView;
     private final SceneShopUpdateView sceneShopUpdateView;
-    private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+    private final GraphicElementsRegistry sceneGraphicElements;
     private final ItemFactoryImpl itemFactoryImpl;
 
-    public SceneShopView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
+    public SceneShopView(final GraphicElementsRegistry sceneGraphicElements,
             final Map<String, PanelElementImpl> allPanelsElements,final ItemFactoryImpl itemFactoryImpl,final PlayerTrainerImpl playerTrainerInstance, final int currentSelectedButton,
             final int newSelectedButton, final SceneShopTemp scene,final SceneShopUtilities sceneShopUtilities) {
         this.itemFactoryImpl = itemFactoryImpl;
@@ -34,7 +34,7 @@ public class SceneShopView {
         this.sceneShopUpdateView.updateGraphic(newSelectedButton);
     }
 
-    protected void updatePlayerMoneyText(final Map<Integer, GraphicElementImpl> sceneGraphicElements,final PlayerTrainerImpl playerTrainerInstance){
+    protected void updatePlayerMoneyText(final GraphicElementsRegistry sceneGraphicElements,final PlayerTrainerImpl playerTrainerInstance){
         SceneShopUtilities.updatePlayerMoneyText(sceneGraphicElements,playerTrainerInstance);
     }
 

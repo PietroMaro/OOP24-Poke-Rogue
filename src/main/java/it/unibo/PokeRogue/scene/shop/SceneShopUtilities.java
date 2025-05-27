@@ -3,14 +3,13 @@ package it.unibo.PokeRogue.scene.shop;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.items.Item;
 import it.unibo.PokeRogue.items.ItemFactoryImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.scene.shop.enums.SceneShopEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
@@ -60,7 +59,7 @@ public class SceneShopUtilities {
         return shopItems.get(index);
     }
 
-    public static void updateItemDescription(final Map<Integer, GraphicElementImpl> sceneGraphicElements, Item item) {
+    public static void updateItemDescription(final GraphicElementsRegistry sceneGraphicElements, Item item) {
         sceneGraphicElements.put(SceneShopEnum.ITEM_DESCRIPTION_TEXT.value(),
                 new TextElementImpl(FIRST_PANEL,
                         item.getDescription(),
@@ -70,7 +69,7 @@ public class SceneShopUtilities {
 
     }
 
-    public static void updateItemsText(final Map<Integer, GraphicElementImpl> sceneGraphicElements) {
+    public static void updateItemsText(final GraphicElementsRegistry sceneGraphicElements) {
         
         for (int i = 0; i < PRICY_ITEMS_SIZE; i++) {
             Item item = SceneShopUtilities.getShopItems(i);
@@ -101,7 +100,7 @@ public class SceneShopUtilities {
         }
     }
 
-    public static void updatePlayerMoneyText(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
+    public static void updatePlayerMoneyText(final GraphicElementsRegistry sceneGraphicElements,
             final PlayerTrainerImpl playerTrainerInstance) {
         sceneGraphicElements.put(SceneShopEnum.PLAYER_MONEY_TEXT.value(),
                 new TextElementImpl("firstPanel", "MONEY: " + playerTrainerInstance.getMoney(),

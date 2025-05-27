@@ -6,11 +6,11 @@ import java.util.Map;
 
 import javax.swing.OverlayLayout;
 
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.scene.shop.enums.SceneShopEnum;
 import it.unibo.PokeRogue.scene.shop.enums.SceneShopStatusEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
@@ -28,7 +28,7 @@ public class SceneShopUpdateView {
         private static final Integer FIFTH_POSITION = 4;
         private static final Integer SIXTH_POSITION = 5;
         private static final String POKEMON_PANEL_TEXT = "pokemonSelection";
-        private final Map<Integer, GraphicElementImpl> currentSceneGraphicElements;
+        private final GraphicElementsRegistry currentSceneGraphicElements;
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final PlayerTrainerImpl playerTrainerInstance;
         private int currentSelectedButton;
@@ -36,7 +36,7 @@ public class SceneShopUpdateView {
         private final SceneShopTemp sceneInstance;
         private Boolean alreadyInMainMenu = true;
 
-        public SceneShopUpdateView(final Map<Integer, GraphicElementImpl> currentSceneGraphicElements,
+        public SceneShopUpdateView(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final int currentSelectedButton, final int newSelectedButton,
                         final SceneShopTemp sceneInstance, final SceneShopUtilities sceneShopUtilities) {

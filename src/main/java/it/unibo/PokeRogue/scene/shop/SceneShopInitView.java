@@ -1,19 +1,18 @@
 package it.unibo.PokeRogue.scene.shop;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Map;
 import java.awt.Color;
 import java.io.IOException;
 
 import javax.swing.OverlayLayout;
 
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl;
 import it.unibo.PokeRogue.graphic.box.BoxElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.scene.shop.enums.SceneShopEnum;
 import it.unibo.PokeRogue.scene.shop.enums.SceneShopStatusEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
@@ -21,13 +20,13 @@ import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 
 public class SceneShopInitView {
 
-        private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+        private final GraphicElementsRegistry sceneGraphicElements;
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final PlayerTrainerImpl playerTrainerInstance;
         private static final String FIRST_PANEL = "firstPanel";
         private int itemIndex;
 
-        public SceneShopInitView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
+        public SceneShopInitView(final GraphicElementsRegistry sceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements) {
                 this.sceneGraphicElements = sceneGraphicElements;
                 this.allPanelsElements = allPanelsElements;

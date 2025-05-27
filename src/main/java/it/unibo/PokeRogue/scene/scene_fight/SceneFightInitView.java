@@ -6,13 +6,13 @@ import java.util.Map;
 
 import javax.swing.OverlayLayout;
 
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl;
 import it.unibo.PokeRogue.graphic.box.BoxElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightGraphicEnum;
 import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightStatusValuesEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
@@ -28,7 +28,7 @@ import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
  */
 public class SceneFightInitView {
 
-        private final Map<Integer, GraphicElementImpl> currentSceneGraphicElements;
+        private final GraphicElementsRegistry currentSceneGraphicElements;
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final TrainerImpl playerTrainerInstance;
         private final TrainerImpl enemyTrainerInstance;
@@ -43,7 +43,7 @@ public class SceneFightInitView {
          * @param enemyTrainerInstance        The enemy trainer for the battle.
          * @param currentSelectedButton       The initial selected button in the UI.
          */
-        public SceneFightInitView(final Map<Integer, GraphicElementImpl> currentSceneGraphicElements,
+        public SceneFightInitView(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final TrainerImpl enemyTrainerInstance) {
                 this.currentSceneGraphicElements = currentSceneGraphicElements;
