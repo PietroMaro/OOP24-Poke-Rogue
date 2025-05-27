@@ -27,7 +27,6 @@ public class SceneShopInitView {
         private final UtilitiesForScenes utilityClass;
         private final PlayerTrainerImpl playerTrainerInstance;
         private static final String FIRST_PANEL = "firstPanel";
-        private int itemIndex;
 
         public SceneShopInitView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements) {

@@ -11,6 +11,7 @@ import it.unibo.PokeRogue.scene.shop.SceneShopTemp;
 import it.unibo.PokeRogue.scene.sceneLoad.SceneLoad;
 import it.unibo.PokeRogue.scene.sceneMenu.SceneMenu;
 import it.unibo.PokeRogue.scene.sceneMove.SceneMove;
+import it.unibo.PokeRogue.scene.sceneSave.SceneSave;
 import lombok.Setter;
 
 /**
@@ -58,8 +59,12 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
             NoSuchMethodException {
         switch (newScene) {
             case "main":
-                currentScene = new SceneMenu();
+                currentScene = new SceneSave();
                 break;
+            /*
+             * currentScene = new SceneMenu();
+             * break;
+             */
             case "load":
                 currentScene = new SceneLoad();
                 break;
