@@ -25,9 +25,10 @@ public final class UtilitiesForScenes  {
      * @param fileName  the name of the file.
      * @return the full relative path to the file as a string.
      */
-    public static String getPathString(final String tsceneDirName, final String fileName) {
+    public static String getPathString(final String sceneDirName, final String fileName) {
 
-        return Paths.get("src", "sceneImages", tsceneDirName, fileName).toString();
+        System.out.println(Paths.get("src", "sceneImages", sceneDirName, fileName).toString());
+        return Paths.get("src", "sceneImages", sceneDirName, fileName).toString();
 
     }
 

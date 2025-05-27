@@ -26,9 +26,9 @@ import lombok.Getter;
  * {@link SceneMenuView}.
  * 
  */
-public final class SceneMenu implements Scene {
+public final class SceneMenu extends Scene {
 
-    private SceneMenuGraphicEnum currentSelectedButton;
+    private int currentSelectedButton;
     @Getter
     private final Map<Integer, GraphicElementImpl> currentSceneGraphicElements;
     @Getter
@@ -47,10 +47,11 @@ public final class SceneMenu implements Scene {
             InvocationTargetException,
             IOException,
             NoSuchMethodException {
+        this.loadGraphicElements("sceneMenuElements.json");
         this.currentSceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
-        this.sceneMenuView = new SceneMenuView();
+        this.sceneMenuView = new SceneMenuView(this.graphicElements, this.graphicElementNameToInt);
         this.initStatus();
         this.initGraphicElements();
 
@@ -66,7 +67,7 @@ public final class SceneMenu implements Scene {
             UtilitiesForScenes.setButtonStatus(i, false, currentSceneGraphicElements);
         }
 
-        UtilitiesForScenes.setButtonStatus(this.currentSelectedButton.value(), true, currentSceneGraphicElements);
+        UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, currentSceneGraphicElements);
 
     }
 
@@ -84,42 +85,38 @@ public final class SceneMenu implements Scene {
             InvocationTargetException {
         switch (inputKey) {
             case KeyEvent.VK_UP:
-                this.currentSelectedButton = SceneMenuGraphicEnum.nextButtonsNames(this.currentSelectedButton);
+                if (this.currentSelectedButton > 0) {
+                    this.currentSelectedButton--;
+                }
 
                 break;
             case KeyEvent.VK_DOWN:
-                this.currentSelectedButton = SceneMenuGraphicEnum.previousButtonsNames(this.currentSelectedButton);
+                if (this.currentSelectedButton < 2) {
+                    this.currentSelectedButton++;
+                }
                 break;
             case KeyEvent.VK_ENTER:
-                switch (this.currentSelectedButton) {
-                    case LOAD_BUTTON:
-                        this.gameEngineInstance.setScene("load");
+                if (this.currentSelectedButton == this.graphicElementNameToInt.get("LOAD_BUTTON")) {
 
-                        break;
-                    case NEW_GAME_BUTTON:
-                        this.gameEngineInstance.setFileToLoad("");
-                        this.gameEngineInstance.setScene("box");
-                        break;
+                    this.gameEngineInstance.setScene("load");
+                } else if (this.currentSelectedButton == this.graphicElementNameToInt.get("NEW_GAME_BUTTON"))
 
-                    default:
-                        break;
-                }
-
+                    this.gameEngineInstance.setFileToLoad("");
+                this.gameEngineInstance.setScene("box");
                 break;
             default:
                 break;
         }
-
     }
 
     private void initGraphicElements() throws IOException {
         this.sceneMenuView.initGraphicElements(currentSceneGraphicElements, allPanelsElements);
 
-        UtilitiesForScenes.setButtonStatus(this.currentSelectedButton.value(), true, currentSceneGraphicElements);
+        UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, currentSceneGraphicElements);
     }
 
     private void initStatus() {
-        this.currentSelectedButton = SceneMenuGraphicEnum.LOAD_BUTTON;
+        this.currentSelectedButton = this.graphicElementNameToInt.get("LOAD_BUTTON");
     }
 
 }

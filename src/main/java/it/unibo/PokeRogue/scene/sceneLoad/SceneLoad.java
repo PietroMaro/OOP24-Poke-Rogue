@@ -16,7 +16,6 @@ import it.unibo.PokeRogue.savingSystem.SavingSystem;
 import it.unibo.PokeRogue.savingSystem.SavingSystemImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
-import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 import lombok.Getter;
 
 /**
@@ -45,7 +44,7 @@ import lombok.Getter;
  * @see it.unibo.PokeRogue.savingSystem.SavingSystem
  * @see it.unibo.PokeRogue.utilities.UtilitiesForScenes
  */
-public final class SceneLoad implements Scene {
+public final class SceneLoad extends Scene {
 
     private static final int ABSOLUTE_FIRST_SAVE_POSITION = 0;
     private static final int LAST_SAVE_POSITION = 9;
@@ -72,12 +71,13 @@ public final class SceneLoad implements Scene {
             InvocationTargetException,
             NoSuchMethodException,
             IOException {
+        this.loadGraphicElements("sceneLoadElements.json");
         this.currentSceneGraphicElements = new LinkedHashMap<>();
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.savingSystemInstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
         this.savesList = savingSystemInstance.getSaveFilesName(Paths.get("src", "saves").toString());
-        this.sceneLoadView = new SceneLoadView();
+        this.sceneLoadView = new SceneLoadView(this.graphicElementNameToInt);
         this.initStatus();
         this.initGraphicElements();
     }
@@ -95,7 +95,8 @@ public final class SceneLoad implements Scene {
      */
     @Override
     public void updateGraphic() throws IOException {
-        UtilitiesForScenes.setButtonStatus(this.selectedSave % NUMBER_OF_SAVE_SHOWED, false, currentSceneGraphicElements);
+        UtilitiesForScenes.setButtonStatus(this.selectedSave % NUMBER_OF_SAVE_SHOWED, false,
+                currentSceneGraphicElements);
 
         // Going down the saves list
         if (this.selectedSave < this.newSelectedSave

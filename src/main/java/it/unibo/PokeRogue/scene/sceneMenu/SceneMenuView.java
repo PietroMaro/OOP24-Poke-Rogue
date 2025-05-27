@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
-import it.unibo.PokeRogue.scene.SceneView;
+import it.unibo.PokeRogue.scene.GraphicElementRegistry;
 
 /**
  * The {@code SceneMenuView} class is responsible for initializing and managing
@@ -16,18 +16,21 @@ import it.unibo.PokeRogue.scene.SceneView;
  * It creates and organizes the background, buttons, and text elements
  * associated with the menu UI.
  */
-public final class SceneMenuView extends SceneView {
+public final class SceneMenuView {
 
         private static final String FIRST_PANEL_NAME = "firstPanel";
+        private final GraphicElementRegistry graphicElements;
+        private final Map<String, Integer> graphicElementNameToInt;
 
         /**
          * Constructs a new {@code SceneMenuView} instance.
          *
          * 
          */
-        public SceneMenuView() throws IOException {
-
-                this.loadGraphicElements("menuElements.json");
+        public SceneMenuView(final GraphicElementRegistry graphicElements,
+                        final Map<String, Integer> graphicElementNameToInt) throws IOException {
+                this.graphicElementNameToInt = graphicElementNameToInt;
+                this.graphicElements = graphicElements;
         }
 
         void initGraphicElements(final Map<Integer, GraphicElementImpl> currentSceneGraphicElements,

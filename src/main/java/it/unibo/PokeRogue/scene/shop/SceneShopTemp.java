@@ -21,7 +21,7 @@ import it.unibo.PokeRogue.scene.shop.enums.SceneShopStatusEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import lombok.Getter;
 
-public class SceneShopTemp implements Scene {
+public class SceneShopTemp extends Scene {
     @Getter
     private final Map<Integer, GraphicElementImpl> currentSceneGraphicElements;
     @Getter

@@ -26,7 +26,7 @@ import lombok.Getter;
  * interactions.
  */
 
-public class SceneFight implements Scene {
+public class SceneFight extends Scene {
 
     @Getter
     private final Map<Integer, GraphicElementImpl> currentSceneGraphicElements;

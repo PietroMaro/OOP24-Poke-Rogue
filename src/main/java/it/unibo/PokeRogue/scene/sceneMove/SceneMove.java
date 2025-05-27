@@ -26,7 +26,7 @@ import lombok.Getter;
  * It handles user input for navigation and action selection within the move
  * management interface.
  */
-public class SceneMove implements Scene {
+public class SceneMove extends Scene {
 
     private int currentSelectedButton;
     @Getter
