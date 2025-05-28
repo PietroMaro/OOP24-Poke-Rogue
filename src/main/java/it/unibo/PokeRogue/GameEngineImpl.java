@@ -13,6 +13,8 @@ import it.unibo.PokeRogue.scene.sceneLoad.SceneLoad;
 import it.unibo.PokeRogue.scene.sceneMenu.SceneMenu;
 import it.unibo.PokeRogue.scene.sceneMove.SceneMove;
 import it.unibo.PokeRogue.scene.sceneSave.SceneSave;
+
+
 import lombok.Setter;
 
 /**
@@ -62,6 +64,7 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
             case "main":
                 currentScene = new SceneMenu();
                 break;
+
             case "load":
                 currentScene = new SceneLoad();
                 break;
@@ -74,7 +77,6 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
                 } else {
                     fightLevel = fightLevel + 1;
                 }
-
                 currentScene = new SceneFight(fightLevel);
                 break;
             case "shop":
@@ -94,7 +96,7 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
         }
 
         graphicEngineInstance.createPanels(currentScene.getAllPanelsElements());
-        graphicEngineInstance.drawScene(currentScene.getSceneGraphicElements());
+        graphicEngineInstance.drawScene(currentScene.getCurrentSceneGraphicElements());
 
     }
 
@@ -113,7 +115,7 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
         this.currentScene.updateStatus(keyCode);
         currentScene.updateGraphic();
         graphicEngineInstance.createPanels(currentScene.getAllPanelsElements());
-        graphicEngineInstance.drawScene(currentScene.getSceneGraphicElements());
+        graphicEngineInstance.drawScene(currentScene.getCurrentSceneGraphicElements());
 
     }
 

@@ -10,6 +10,7 @@ import it.unibo.PokeRogue.graphic.box.BoxElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightGraphicEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
@@ -83,11 +84,11 @@ public final class SceneFightUtilities {
      * @param sceneGraphicElements a map containing graphic elements keyed by their
      *                             integer identifiers
      */
-    private static void clearMoveInfo(final Map<Integer, GraphicElementImpl> sceneGraphicElements) {
-        sceneGraphicElements.remove(SceneFightGraphicEnum.MOVE_PP_TEXT.value());
-        sceneGraphicElements.remove(SceneFightGraphicEnum.MOVE_TYPE_TEXT.value());
-        sceneGraphicElements.remove(SceneFightGraphicEnum.MOVE_POWER_TEXT.value());
-        sceneGraphicElements.remove(SceneFightGraphicEnum.MOVE_TYPE.value());
+    private static void clearMoveInfo(final GraphicElementsRegistry sceneGraphicElements) {
+        sceneGraphicElements.removeById(SceneFightGraphicEnum.MOVE_PP_TEXT.value());
+        sceneGraphicElements.removeById(SceneFightGraphicEnum.MOVE_TYPE_TEXT.value());
+        sceneGraphicElements.removeById(SceneFightGraphicEnum.MOVE_POWER_TEXT.value());
+        sceneGraphicElements.removeById(SceneFightGraphicEnum.MOVE_TYPE.value());
     }
 
     /**
@@ -117,7 +118,7 @@ public final class SceneFightUtilities {
      *                              to retrieve the details of the Pokémon's moves.
      */
     public static void updateMoveInfo(final int currentSelectedButton,
-            final Map<Integer, GraphicElementImpl> sceneGraphicElements,
+            final GraphicElementsRegistry sceneGraphicElements,
             final PlayerTrainerImpl playerTrainerInstance) {
         clearMoveInfo(sceneGraphicElements);
 

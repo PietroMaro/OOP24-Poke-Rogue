@@ -7,35 +7,33 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import it.unibo.PokeRogue.GameEngineImpl;
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistryImpl;
 import it.unibo.PokeRogue.scene.Scene;
-import it.unibo.PokeRogue.scene.sceneInfo.SceneInfoView;
-import it.unibo.PokeRogue.scene.sceneInfo.enums.SceneInfoStatusEnum;
-import it.unibo.PokeRogue.scene.sceneSave.enums.SceneSaveStatusEnum;
 import lombok.Getter;
 
-public class SceneInfo implements Scene{
+public class SceneInfo extends Scene {
     @Getter
-    private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+    private final GraphicElementsRegistry currentSceneGraphicElements;
     @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final SceneInfoView sceneInfoView;
     private final GameEngineImpl gameEngineInstance;
     private int newSelectedButton;
-    private int currentSelectedButton;
 
     public SceneInfo() throws IOException,
             InstantiationException,
             IllegalAccessException,
             NoSuchMethodException,
             InvocationTargetException {
-        this.sceneGraphicElements = new LinkedHashMap<>();
+        this.loadGraphicElements("sceneInfoElements.json");
+        this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
+                this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.initStatus();
-        this.sceneInfoView = new SceneInfoView(sceneGraphicElements, allPanelsElements, currentSelectedButton,
-                newSelectedButton, this);
+        this.sceneInfoView = new SceneInfoView(this.graphicElements);
         this.initGraphicElements();
     }
 
@@ -44,22 +42,22 @@ public class SceneInfo implements Scene{
             InvocationTargetException, NoSuchMethodException {
         switch (inputKey) {
             case KeyEvent.VK_ENTER:
-                if (this.newSelectedButton == SceneInfoStatusEnum.BACK_BUTTON.value()) {
+                if (this.newSelectedButton == this.graphicElementNameToInt.get("BACK_BUTTON")) {
                     gameEngineInstance.setScene("main");
                 }
                 break;
         }
     }
+
     private void initStatus() {
-        this.currentSelectedButton = SceneSaveStatusEnum.EXIT_AND_SAVE_BUTTON.value();
-        this.newSelectedButton = SceneSaveStatusEnum.EXIT_AND_SAVE_BUTTON.value();
+        this.newSelectedButton = this.graphicElementNameToInt.get("EXIT_AND_SAVE_BUTTON");
     }
 
     public void initGraphicElements() throws IOException {
-        this.sceneInfoView.initGraphicElements(this.newSelectedButton);
+        this.sceneInfoView.initGraphicElements(currentSceneGraphicElements, allPanelsElements);
     }
+
     @Override
     public void updateGraphic() throws IOException {
     }
 }
-

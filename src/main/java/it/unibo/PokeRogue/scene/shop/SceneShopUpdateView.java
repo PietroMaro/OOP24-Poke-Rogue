@@ -1,21 +1,14 @@
 package it.unibo.PokeRogue.scene.shop;
 
-import java.awt.Color;
 import java.io.IOException;
 import java.util.Map;
 
 import javax.swing.OverlayLayout;
-
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
-import it.unibo.PokeRogue.graphic.bg.BackgroundElementImpl;
-import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
-import it.unibo.PokeRogue.scene.shop.enums.SceneShopEnum;
-import it.unibo.PokeRogue.scene.shop.enums.SceneShopStatusEnum;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
-import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
 
 /**
  * Class responsible for handling the update logic of the fight scene view.
@@ -29,8 +22,9 @@ public class SceneShopUpdateView {
         private static final Integer FIFTH_POSITION = 4;
         private static final Integer SIXTH_POSITION = 5;
         private static final String POKEMON_PANEL_TEXT = "pokemonSelection";
-        private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
-        private final UtilitiesForScenes utilityClass;
+        private final GraphicElementsRegistry currentSceneGraphicElements;
+        private final GraphicElementsRegistry graphicElements;
+        private final Map<String, Integer> graphicElementNameToInt;
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final PlayerTrainerImpl playerTrainerInstance;
         private int currentSelectedButton;
@@ -38,16 +32,19 @@ public class SceneShopUpdateView {
         private final SceneShop sceneInstance;
         private Boolean alreadyInMainMenu = true;
 
-        public SceneShopUpdateView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
+        public SceneShopUpdateView(final GraphicElementsRegistry currentSceneGraphicElements,
+                        final GraphicElementsRegistry graphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final int currentSelectedButton, final int newSelectedButton,
-                        final SceneShop sceneInstance, final SceneShopUtilities sceneShopUtilities) {
+                        final SceneShop sceneInstance, final SceneShopUtilities sceneShopUtilities,
+                        final Map<String, Integer> graphicElementNameToInt) {
 
                 this.currentSelectedButton = currentSelectedButton;
                 this.newSelectedButton = newSelectedButton;
-                this.sceneGraphicElements = sceneGraphicElements;
+                this.currentSceneGraphicElements = currentSceneGraphicElements;
+                this.graphicElements = graphicElements;
+                this.graphicElementNameToInt = graphicElementNameToInt;
                 this.allPanelsElements = allPanelsElements;
-                this.utilityClass = new UtilitiesForScenesImpl("shop");
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
                 this.sceneInstance = sceneInstance;
         }
@@ -62,173 +59,77 @@ public class SceneShopUpdateView {
         }
 
         private void updatePokemonSelection() throws IOException {
-                if (this.newSelectedButton >= SceneShopStatusEnum.CHANGE_POKEMON_1_BUTTON.value()
-                                && this.newSelectedButton <= SceneShopStatusEnum.CHANGE_POKEMON_BACK_BUTTON.value()
+                if (this.newSelectedButton >= this.graphicElementNameToInt.get("CHANGE_POKEMON_1_BUTTON")
+                                && this.newSelectedButton <= this.graphicElementNameToInt
+                                                .get("CHANGE_POKEMON_BACK_BUTTON")
                                 && this.alreadyInMainMenu) {
                         this.alreadyInMainMenu = false;
-                        sceneGraphicElements.clear();
+                        currentSceneGraphicElements.clear();
                         this.allPanelsElements.put(POKEMON_PANEL_TEXT,
                                         new PanelElementImpl("firstPanel", new OverlayLayout(null)));
+                        UtilitiesForScenes.loadSceneElements("sceneShopElements.json", "init",
+                                        currentSceneGraphicElements,
+                                        this.graphicElements);
                         this.initPokemonSelectionText();
-                        this.initPokemonSelectionButtons();
 
-                        sceneGraphicElements.put(SceneShopEnum.BACKGROUND.value(),
-                                        new BackgroundElementImpl(POKEMON_PANEL_TEXT,
-                                                        this.utilityClass.getPathString("images", "sceneShopBg.png")));
-
-                        // Set the first button as selected
-                        this.utilityClass.setButtonStatus(this.newSelectedButton, true, sceneGraphicElements);
+                        UtilitiesForScenes.setButtonStatus(this.newSelectedButton, true, currentSceneGraphicElements);
                 }
         }
 
         private void initPokemonSelectionText() {
                 // Pokémon 1
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_1_NAME_TEXT.value(),
-                                new TextElementImpl(POKEMON_PANEL_TEXT,
-                                                SceneShopUtilities.getPokemonNameAt(playerTrainerInstance,
-                                                                FIRST_POSITION),
-                                                Color.WHITE,
-                                                0.04, 0.425, 0.12));
+                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_1_NAME_TEXT"))
+                                .setText(SceneShopUtilities.getPokemonNameAt(playerTrainerInstance, FIRST_POSITION));
 
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_1_LIFE_TEXT.value(),
-                                new TextElementImpl(POKEMON_PANEL_TEXT,
-                                                SceneShopUtilities.getPokemonLifeText(FIRST_POSITION,
-                                                                playerTrainerInstance),
-                                                Color.WHITE,
-                                                0.04, 0.425, 0.16));
+                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_1_LIFE_TEXT"))
+                                .setText(SceneShopUtilities.getPokemonLifeText(FIRST_POSITION, playerTrainerInstance));
 
                 // Pokémon 2
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_2_NAME_TEXT.value(),
-                                new TextElementImpl(POKEMON_PANEL_TEXT,
-                                                SceneShopUtilities.getPokemonNameAt(playerTrainerInstance,
-                                                                SECOND_POSITION),
-                                                Color.WHITE,
-                                                0.04, 0.425, 0.22));
+                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_2_NAME_TEXT"))
+                                .setText(SceneShopUtilities.getPokemonNameAt(playerTrainerInstance, SECOND_POSITION));
 
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_2_LIFE_TEXT.value(),
-                                new TextElementImpl(POKEMON_PANEL_TEXT,
-                                                SceneShopUtilities.getPokemonLifeText(SECOND_POSITION,
-                                                                playerTrainerInstance),
-                                                Color.WHITE,
-                                                0.04, 0.425, 0.26));
+                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_2_LIFE_TEXT"))
+                                .setText(SceneShopUtilities.getPokemonLifeText(SECOND_POSITION, playerTrainerInstance));
 
                 // Pokémon 3
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_3_NAME_TEXT.value(),
-                                new TextElementImpl(POKEMON_PANEL_TEXT,
-                                                SceneShopUtilities.getPokemonNameAt(playerTrainerInstance,
-                                                                THIRD_POSITION),
-                                                Color.WHITE,
-                                                0.04, 0.425, 0.32));
+                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_3_NAME_TEXT"))
+                                .setText(SceneShopUtilities.getPokemonNameAt(playerTrainerInstance, THIRD_POSITION));
 
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_3_LIFE_TEXT.value(),
-                                new TextElementImpl(POKEMON_PANEL_TEXT,
-                                                SceneShopUtilities.getPokemonLifeText(THIRD_POSITION,
-                                                                playerTrainerInstance),
-                                                Color.WHITE,
-                                                0.04, 0.425, 0.36));
+                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_3_LIFE_TEXT"))
+                                .setText(SceneShopUtilities.getPokemonLifeText(THIRD_POSITION, playerTrainerInstance));
 
                 // Pokémon 4
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_4_NAME_TEXT.value(),
-                                new TextElementImpl(POKEMON_PANEL_TEXT,
-                                                SceneShopUtilities.getPokemonNameAt(playerTrainerInstance,
-                                                                FOURTH_POSITION),
-                                                Color.WHITE,
-                                                0.04, 0.425, 0.42));
+                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_4_NAME_TEXT"))
+                                .setText(SceneShopUtilities.getPokemonNameAt(playerTrainerInstance, FOURTH_POSITION));
 
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_4_LIFE_TEXT.value(),
-                                new TextElementImpl(POKEMON_PANEL_TEXT,
-                                                SceneShopUtilities.getPokemonLifeText(FOURTH_POSITION,
-                                                                playerTrainerInstance),
-                                                Color.WHITE,
-                                                0.04, 0.425, 0.46));
+                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_4_LIFE_TEXT"))
+                                .setText(SceneShopUtilities.getPokemonLifeText(FOURTH_POSITION, playerTrainerInstance));
 
                 // Pokémon 5
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_5_NAME_TEXT.value(),
-                                new TextElementImpl(POKEMON_PANEL_TEXT,
-                                                SceneShopUtilities.getPokemonNameAt(playerTrainerInstance,
-                                                                FIFTH_POSITION),
-                                                Color.WHITE,
-                                                0.04, 0.425, 0.52));
+                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_5_NAME_TEXT"))
+                                .setText(SceneShopUtilities.getPokemonNameAt(playerTrainerInstance, FIFTH_POSITION));
 
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_5_LIFE_TEXT.value(),
-                                new TextElementImpl(POKEMON_PANEL_TEXT,
-                                                SceneShopUtilities.getPokemonLifeText(FIFTH_POSITION,
-                                                                playerTrainerInstance),
-                                                Color.WHITE,
-                                                0.04, 0.425, 0.56));
+                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_5_LIFE_TEXT"))
+                                .setText(SceneShopUtilities.getPokemonLifeText(FIFTH_POSITION, playerTrainerInstance));
 
                 // Pokémon 6
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_6_NAME_TEXT.value(),
-                                new TextElementImpl(POKEMON_PANEL_TEXT,
-                                                SceneShopUtilities.getPokemonNameAt(playerTrainerInstance,
-                                                                SIXTH_POSITION),
-                                                Color.WHITE,
-                                                0.04, 0.425, 0.62));
+                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_6_NAME_TEXT"))
+                                .setText(SceneShopUtilities.getPokemonNameAt(playerTrainerInstance, SIXTH_POSITION));
 
-                this.sceneGraphicElements.put(SceneShopEnum.POKEMON_6_LIFE_TEXT.value(),
-                                new TextElementImpl(POKEMON_PANEL_TEXT,
-                                                SceneShopUtilities.getPokemonLifeText(SIXTH_POSITION,
-                                                                playerTrainerInstance),
-                                                Color.WHITE,
-                                                0.04, 0.425, 0.66));
-
-                // Testo per il pulsante di ritorno (in basso a destra)
-                this.sceneGraphicElements.put(SceneShopEnum.CHANGE_POKEMON_BACK_TEXT.value(),
-                                new TextElementImpl(POKEMON_PANEL_TEXT,
-                                                "BACK", Color.WHITE,
-                                                0.04, 0.80, 0.83));
-        }
-
-        private void initPokemonSelectionButtons() {
-                // Pulsanti dei Pokémon in colonna
-                this.sceneGraphicElements.put(SceneShopStatusEnum.CHANGE_POKEMON_1_BUTTON.value(),
-                                new ButtonElementImpl(POKEMON_PANEL_TEXT, new Color(38, 102, 102), Color.WHITE, 0,
-                                                0.425,
-                                                0.10,
-                                                0.25, 0.08));
-                this.sceneGraphicElements.put(SceneShopStatusEnum.CHANGE_POKEMON_2_BUTTON.value(),
-                                new ButtonElementImpl(POKEMON_PANEL_TEXT, new Color(38, 102, 102), Color.WHITE, 0,
-                                                0.425,
-                                                0.20,
-                                                0.25, 0.08));
-                this.sceneGraphicElements.put(SceneShopStatusEnum.CHANGE_POKEMON_3_BUTTON.value(),
-                                new ButtonElementImpl(POKEMON_PANEL_TEXT, new Color(38, 102, 102), Color.WHITE, 0,
-                                                0.425,
-                                                0.30,
-                                                0.25, 0.08));
-                this.sceneGraphicElements.put(SceneShopStatusEnum.CHANGE_POKEMON_4_BUTTON.value(),
-                                new ButtonElementImpl(POKEMON_PANEL_TEXT, new Color(38, 102, 102), Color.WHITE, 0,
-                                                0.425,
-                                                0.40,
-                                                0.25, 0.08));
-                this.sceneGraphicElements.put(SceneShopStatusEnum.CHANGE_POKEMON_5_BUTTON.value(),
-                                new ButtonElementImpl(POKEMON_PANEL_TEXT, new Color(38, 102, 102), Color.WHITE, 0,
-                                                0.425,
-                                                0.50,
-                                                0.25, 0.08));
-                this.sceneGraphicElements.put(SceneShopStatusEnum.CHANGE_POKEMON_6_BUTTON.value(),
-                                new ButtonElementImpl(POKEMON_PANEL_TEXT, new Color(38, 102, 102), Color.WHITE, 0,
-                                                0.425,
-                                                0.60,
-                                                0.25, 0.08));
-
-                // Pulsante "back" in basso a destra
-                this.sceneGraphicElements.put(SceneShopStatusEnum.CHANGE_POKEMON_BACK_BUTTON.value(),
-                                new ButtonElementImpl(POKEMON_PANEL_TEXT, new Color(38, 102, 102), Color.WHITE, 0, 0.80,
-                                                0.80,
-                                                0.15, 0.1));
+                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_6_LIFE_TEXT"))
+                                .setText(SceneShopUtilities.getPokemonLifeText(SIXTH_POSITION, playerTrainerInstance));
         }
 
         private void updateSelectedButton(final int newSelectedButton) {
-                this.utilityClass.setButtonStatus(this.currentSelectedButton, false, sceneGraphicElements);
-                this.utilityClass.setButtonStatus(newSelectedButton, true, sceneGraphicElements);
+                UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, false, currentSceneGraphicElements);
+                UtilitiesForScenes.setButtonStatus(newSelectedButton, true, currentSceneGraphicElements);
                 this.currentSelectedButton = newSelectedButton;
         }
 
         private void updateItemDescription() {
                 int itemIndex;
-                if (this.newSelectedButton >= SceneShopStatusEnum.FREE_ITEM_1_BUTTON.value()
-                                && this.newSelectedButton <= SceneShopStatusEnum.PRICY_ITEM_3_BUTTON.value()
+                if (this.newSelectedButton >= this.graphicElementNameToInt.get("FREE_ITEM_1_BUTTON")
+                                && this.newSelectedButton <= this.graphicElementNameToInt.get("PRICY_ITEM_3_BUTTON")
                                 && alreadyInMainMenu) {
 
                         switch (this.newSelectedButton) {
@@ -254,15 +155,16 @@ public class SceneShopUpdateView {
                                         itemIndex = 0;
                                         break;
                         }
-                        SceneShopUtilities.updateItemDescription(sceneGraphicElements,
+                        SceneShopUtilities.updateItemDescription(currentSceneGraphicElements,
                                         SceneShopUtilities.getShopItems(itemIndex));
                 }
         }
 
         private void mainMenu() throws IOException {
-                if (!alreadyInMainMenu && this.newSelectedButton >= SceneShopStatusEnum.FREE_ITEM_1_BUTTON.value()
-                                && this.newSelectedButton <= SceneShopStatusEnum.TEAM_BUTTON.value()) {
-                        sceneGraphicElements.clear();
+                if (!alreadyInMainMenu
+                                && this.newSelectedButton >= this.graphicElementNameToInt.get("FREE_ITEM_1_BUTTON")
+                                && this.newSelectedButton <= this.graphicElementNameToInt.get("TEAM_BUTTON")) {
+                        currentSceneGraphicElements.clear();
                         allPanelsElements.clear();
                         sceneInstance.setCurrentSelectedButton(currentSelectedButton);
                         sceneInstance.initGraphicElements();

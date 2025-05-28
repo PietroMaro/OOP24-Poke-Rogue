@@ -1,14 +1,26 @@
 package it.unibo.PokeRogue.scene.sceneBox;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
+
+import javax.swing.OverlayLayout;
+
 import java.io.IOException;
 
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
+import java.awt.Color;
+import it.unibo.PokeRogue.graphic.box.BoxElementImpl;
+import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
+import it.unibo.PokeRogue.graphic.text.TextElementImpl;
+import it.unibo.PokeRogue.pokemon.Nature;
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
+import it.unibo.PokeRogue.utilities.ColorTypeConversion;
+import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 
 /**
  * {@code SceneBoxView} handles the graphical representation of the SceneBox.
@@ -30,77 +42,193 @@ import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
  * @see SceneBoxUpdateView
  */
 public final class SceneBoxView {
-        private final SceneBoxInitView sceneBoxInitView;
-        private final SceneBoxUpdateView sceneBoxUpdateView;
 
-        /**
-         * Constructs a {@code SceneBoxView} instance, setting up the graphical
-         * environment and preparing the initialization and update modules.
-         *
-         * 
-         */
-        public SceneBoxView() {
+        private static final String FIRST_PANEL_NAME = "firstPanel";
+        private static final String POKEMON_PANEL_NAME = "pokemonPanel";
+        private final GraphicElementsRegistry graphicElements;
+        private final Map<String, Integer> graphicElementNameToInt;
 
-                this.sceneBoxInitView = new SceneBoxInitView();
-                this.sceneBoxUpdateView = new SceneBoxUpdateView();
-
+        public SceneBoxView(final GraphicElementsRegistry graphicElements,
+                        final Map<String, Integer> graphicElementNameToInt) throws IOException {
+                this.graphicElementNameToInt = graphicElementNameToInt;
+                this.graphicElements = graphicElements;
         }
 
-        /**
-         * Initializes the graphical elements of the scene by delegating to
-         * {@link SceneBoxInitView}.
-         * 
-         * It sets up static UI components like backgrounds, buttons, and panels.
-         */
-        void initGraphicElements(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
+        void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements) throws IOException {
-                this.sceneBoxInitView.initGraphicElements(sceneGraphicElements, allPanelsElements);
+
+                // Panels
+                allPanelsElements.put(FIRST_PANEL_NAME, new PanelElementImpl("", new OverlayLayout(null)));
+                allPanelsElements.put(POKEMON_PANEL_NAME,
+                                new PanelElementImpl(FIRST_PANEL_NAME, new OverlayLayout(null)));
+
+                // Pokemon Buttons
+                for (int pokemonIndex = 0; pokemonIndex < 81; pokemonIndex++) {
+
+                        currentSceneGraphicElements.put(pokemonIndex + 6,
+                                        new ButtonElementImpl(FIRST_PANEL_NAME, null, Color.BLACK, 0,
+                                                        0.465 + (pokemonIndex % 9 * 0.049),
+                                                        0.125 + (pokemonIndex / 9 * 0.09), 0.03, 0.05));
+
+                }
+
+                UtilitiesForScenes.loadSceneElements("sceneBoxElements.json", "init", currentSceneGraphicElements,
+                                this.graphicElements);
+
+                                
 
         }
 
-        /**
-         * Updates the graphical elements based on the current and new scene state.
-         * 
-         * Delegates the actual update logic to {@link SceneBoxUpdateView}, including:
-         * - Selected button highlighting
-         * - Box switching
-         * - Pokémon squad and details updates
-         *
-         * @param currentSelectedButton the currently selected button index
-         * @param newSelectedButton     the newly selected button index after user input
-         * @param boxIndex              the currently active box index
-         * @param newBoxIndex           the new box index if switching boxes
-         * @param boxes                 the list of all Pokémon storage boxes
-         * @param playerTrainerInstance the player trainer managing their Pokémon
-         */
         void updateGraphic(final int currentSelectedButton, final int newSelectedButton, final int boxIndex,
                         final int newBoxIndex, final List<List<Pokemon>> boxes,
                         final PlayerTrainerImpl playerTrainerInstance,
-                        final Map<Integer, GraphicElementImpl> sceneGraphicElements)
+                        final GraphicElementsRegistry currentSceneGraphicElements)
                         throws IOException {
-                this.sceneBoxUpdateView.updateGraphic(currentSelectedButton, newSelectedButton, boxIndex, newBoxIndex,
-                                boxes, playerTrainerInstance, sceneGraphicElements);
+
+                
+                this.updateSelectedButton(currentSelectedButton, newSelectedButton, currentSceneGraphicElements);
+
+                this.updateShowedPokeBox(newBoxIndex, currentSceneGraphicElements);
+
+                this.updatePokeSquad(playerTrainerInstance, currentSceneGraphicElements);
+
+                this.updateDetailedPokemon(newBoxIndex, newSelectedButton, boxes, currentSceneGraphicElements);
         }
 
-        /**
-         * Loads and displays the Pokémon sprites from the current box.
-         * 
-         * - Adds a new {@link SpriteElementImpl} for each Pokémon found in the box.
-         * - Removes unused sprite slots if the number of Pokémon is less than the
-         * maximum (81).
-         * 
-         * @param boxes    the list of all Pokémon storage boxes
-         * @param boxIndex the index of the current box being displayed
-         * @return the number of Pokémon in the current box
-         */
+        private void updateSelectedButton(final int currentSelectedButton, final int newSelectedButton,
+                        final GraphicElementsRegistry currentSceneGraphicElements) {
+                UtilitiesForScenes.setButtonStatus(currentSelectedButton, false, currentSceneGraphicElements);
+                UtilitiesForScenes.setButtonStatus(newSelectedButton, true, currentSceneGraphicElements);
+        }
+
+        private void updateShowedPokeBox(final int newBoxIndex,
+                        final GraphicElementsRegistry currentSceneGraphicElements) {
+
+                ((TextElementImpl) currentSceneGraphicElements.getByName("CURRENT_BOX_TEXT"))
+                                .setText(String.valueOf(newBoxIndex + 1));
+
+        }
+
+        private void updatePokeSquad(final PlayerTrainerImpl playerTrainerInstance,
+                        final GraphicElementsRegistry currentSceneGraphicElements) throws IOException {
+
+                for (int squadPosition = this.graphicElementNameToInt
+                                .get("POKEMON_SPRITE_SELECTED_0"); squadPosition < this.graphicElementNameToInt
+                                                .get("POKEMON_SPRITE_SELECTED_2")
+                                                + 1; squadPosition++) {
+
+                        final Optional<Pokemon> pokemon = playerTrainerInstance
+                                        .getPokemon(squadPosition
+                                                        - this.graphicElementNameToInt
+                                                                        .get("POKEMON_SPRITE_SELECTED_0"));
+                        if (pokemon.isEmpty()) {
+                                ((SpriteElementImpl) currentSceneGraphicElements.getById(squadPosition)).setImage(
+                                                UtilitiesForScenes.getPathString("box", "pokeSquadEmpty.png"));
+
+                        } else {
+
+                                ((SpriteElementImpl) currentSceneGraphicElements.getById(squadPosition))
+                                                .setImage(pokemon.get().getSpriteFront());
+
+                        }
+
+                }
+        }
+
+        private void updateDetailedPokemon(final int boxIndex, final int currentSelectedButton,
+                        final List<List<Pokemon>> boxes,
+                        GraphicElementsRegistry currentSceneGraphicElements)
+                        throws IOException {
+                final Pokemon selectedPokemon;
+                final Nature pokemonNature;
+
+                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_TYPE_2"))
+                                .setText("");
+
+                ((BoxElementImpl) currentSceneGraphicElements.getByName("POKEMON_BOX_TYPE_2"))
+                                .setMainColor(null);
+
+                // Showing selected pokemon details
+                if (currentSelectedButton > 5) {
+                        selectedPokemon = boxes.get(boxIndex).get(currentSelectedButton - 6);
+                        pokemonNature = selectedPokemon.getNature();
+
+                        ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_NUMBER_TEXT"))
+                                        .setText(String.valueOf(currentSelectedButton - 5
+                                                        + boxIndex * 81));
+
+                        ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_NAME"))
+                                        .setText(UtilitiesForScenes
+                                                        .capitalizeFirst(selectedPokemon.getName()));
+
+                        ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_ABILITY"))
+                                        .setText("Ability: " + UtilitiesForScenes.capitalizeFirst(
+                                                        selectedPokemon.getAbilityName()));
+
+                        ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_NATURE"))
+                                        .setText("Nature: " + pokemonNature + " (+"
+                                                        + pokemonNature.statIncrease()
+                                                        + "/-" + pokemonNature.statDecrease() + ")");
+
+                        ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_TYPE_1"))
+                                        .setText(selectedPokemon.getTypes().get(0).typeName()
+                                                        .toUpperCase(Locale.ROOT));
+
+                        ((BoxElementImpl) currentSceneGraphicElements.getByName("POKEMON_BOX_TYPE_1"))
+                                        .setMainColor(ColorTypeConversion.getColorForType(
+                                                        selectedPokemon.getTypes().get(0)));
+
+                        if (selectedPokemon.getTypes().size() > 1) {
+
+                                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_TYPE_2"))
+                                                .setText(selectedPokemon.getTypes().get(1).typeName()
+                                                                .toUpperCase(Locale.ROOT));
+
+                                ((BoxElementImpl) currentSceneGraphicElements.getByName("POKEMON_BOX_TYPE_2"))
+                                                .setMainColor(ColorTypeConversion.getColorForType(
+                                                                selectedPokemon.getTypes().get(1)));
+
+                        }
+
+                        ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_GROWTH_RATE"))
+                                        .setText("Growth Rate: " + UtilitiesForScenes.capitalizeFirst(
+                                                        selectedPokemon.getLevelUpCurve()));
+
+                        if ("male".equals(selectedPokemon.getGender())) {
+
+                                ((SpriteElementImpl) currentSceneGraphicElements.getByName("POKEMON_GENDER"))
+                                                .setImage(UtilitiesForScenes.getPathString("box",
+                                                                "maleSymbolSprite.png"));
+
+                        } else {
+                                ((SpriteElementImpl) currentSceneGraphicElements.getByName("POKEMON_GENDER"))
+                                                .setImage(UtilitiesForScenes.getPathString("box",
+                                                                "femaleSymbolSprite.png"));
+
+                        }
+
+                        ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_MOVE_1"))
+                                        .setText(UtilitiesForScenes.capitalizeFirst(
+                                                        selectedPokemon.getActualMoves().get(0)
+                                                                        .getName()));
+                        ((BoxElementImpl) currentSceneGraphicElements.getByName("POKEMON_MOVE_BOX_1"))
+                                        .setMainColor(Color.GRAY);
+
+                        ((SpriteElementImpl) currentSceneGraphicElements.getByName("POKEMON_DETAIL_SPRITE"))
+                                        .setImage(selectedPokemon.getSpriteFront());
+
+                }
+
+        }
+
         int loadPokemonSprites(final List<List<Pokemon>> boxes, final int boxIndex,
-                        final Map<Integer, GraphicElementImpl> sceneGraphicElements) {
+                        final GraphicElementsRegistry currentSceneGraphicElements) {
                 final int currentBoxLength = boxes.get(boxIndex).size();
                 final List<Pokemon> currentBox = boxes.get(boxIndex);
 
                 for (int pokemonIndex = 0; pokemonIndex < 81; pokemonIndex++) {
                         if (pokemonIndex < currentBoxLength) {
-                                sceneGraphicElements.put(pokemonIndex + 206,
+                                currentSceneGraphicElements.put(pokemonIndex + 206,
                                                 new SpriteElementImpl("pokemonPanel",
                                                                 currentBox.get(pokemonIndex)
                                                                                 .getSpriteFront(),
@@ -108,7 +236,7 @@ public final class SceneBoxView {
                                                                 0.115 + (pokemonIndex / 9 * 0.09), 0.05, 0.07));
 
                         } else {
-                                sceneGraphicElements.remove(pokemonIndex + 206);
+                                currentSceneGraphicElements.removeById(pokemonIndex + 206);
                         }
 
                 }

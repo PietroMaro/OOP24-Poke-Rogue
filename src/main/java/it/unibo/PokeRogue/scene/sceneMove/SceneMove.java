@@ -9,13 +9,13 @@ import java.lang.reflect.InvocationTargetException;
 
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistryImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
-import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
 import lombok.Getter;
 
 /**
@@ -27,15 +27,14 @@ import lombok.Getter;
  * It handles user input for navigation and action selection within the move
  * management interface.
  */
-public class SceneMove implements Scene {
+public class SceneMove extends Scene {
 
     private int currentSelectedButton;
     @Getter
-    private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+    private final GraphicElementsRegistry currentSceneGraphicElements;
     @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GameEngine gameEngineInstance;
-    private final UtilitiesForScenes utilityClass;
     private final SceneMoveView sceneMoveView;
     private int newSelectedButton;
     private final Pokemon playerPokemon;
@@ -53,11 +52,10 @@ public class SceneMove implements Scene {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
-        this.sceneGraphicElements = new LinkedHashMap<>();
+        this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(), this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
-        this.utilityClass = new UtilitiesForScenesImpl("move");
-        this.sceneMoveView = new SceneMoveView(sceneGraphicElements, allPanelsElements);
+        this.sceneMoveView = new SceneMoveView(currentSceneGraphicElements, allPanelsElements);
         this.playerPokemon = PlayerTrainerImpl.getTrainerInstance().getPokemon(0).get();
         this.initStatus();
         this.initGraphicElements();
@@ -70,10 +68,10 @@ public class SceneMove implements Scene {
      */
     @Override
     public void updateGraphic() {
-        this.utilityClass.setButtonStatus(currentSelectedButton, false, this.sceneGraphicElements);
-        this.utilityClass.setButtonStatus(newSelectedButton, true, this.sceneGraphicElements);
+       UtilitiesForScenes.setButtonStatus(currentSelectedButton, false, this.currentSceneGraphicElements);
+       UtilitiesForScenes.setButtonStatus(newSelectedButton, true, this.currentSceneGraphicElements);
         this.currentSelectedButton = this.newSelectedButton;
-        this.utilityClass.setButtonStatus(this.currentSelectedButton, true, this.sceneGraphicElements);
+       UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, this.currentSceneGraphicElements);
     }
 
     /**
@@ -159,7 +157,7 @@ public class SceneMove implements Scene {
      */
     private void initGraphicElements() throws IOException {
         this.sceneMoveView.initGraphicElements();
-        this.utilityClass.setButtonStatus(this.currentSelectedButton, true, this.sceneGraphicElements);
+       UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, this.currentSceneGraphicElements);
     }
 
     /**

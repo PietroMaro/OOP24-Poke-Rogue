@@ -3,24 +3,26 @@ package it.unibo.PokeRogue.scene.sceneInfo;
 import java.io.IOException;
 import java.util.Map;
 
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
+import javax.swing.OverlayLayout;
+
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
-import it.unibo.PokeRogue.scene.sceneInfo.SceneInfo;
-import it.unibo.PokeRogue.scene.sceneInfo.SceneInfoInitView;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
+import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
+
 
 public class SceneInfoView {
-    private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
-    private final SceneInfoInitView sceneInfoInitView;
+    private final GraphicElementsRegistry graphicElements;
+    private static final String FIRST_PANEL = "firstPanel";
 
-    public SceneInfoView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
-            final Map<String, PanelElementImpl> allPanelsElements, final int currentSelectedButton,
-            final int newSelectedButton,final SceneInfo scene) {
-        this.sceneGraphicElements = sceneGraphicElements;
-        this.sceneInfoInitView = new SceneInfoInitView(this.sceneGraphicElements, allPanelsElements);
+    public SceneInfoView(final GraphicElementsRegistry graphicElements) {
+        this.graphicElements = graphicElements;
     }
 
-    protected void initGraphicElements(final int currentSelectedButton) throws IOException {
-        this.sceneInfoInitView.initGraphicElements(currentSelectedButton);
+    protected void initGraphicElements(GraphicElementsRegistry currentSceneGraphicElements,
+            final Map<String, PanelElementImpl> allPanelsElements) throws IOException {
+        allPanelsElements.put(FIRST_PANEL, new PanelElementImpl("", new OverlayLayout(null)));
+        UtilitiesForScenes.loadSceneElements("sceneInfoElements.json", "init", currentSceneGraphicElements,
+                                this.graphicElements);
     }
 
 }

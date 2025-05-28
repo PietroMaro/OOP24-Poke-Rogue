@@ -32,7 +32,11 @@
         "BACK_BUTTON":1,
         "BACKGROUND":100
     },
-    "loadableObjects": {
-        "init": []
+    "dynamicObjects": {
+        "init": [
+            0,
+            1,
+            100
+        ]
     }
 }

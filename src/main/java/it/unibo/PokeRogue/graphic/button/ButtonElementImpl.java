@@ -2,6 +2,8 @@ package it.unibo.PokeRogue.graphic.button;
 
 import java.awt.Color;
 
+import org.json.JSONObject;
+
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.box.BoxElementImpl;
 import lombok.AccessLevel;
@@ -14,7 +16,7 @@ public final class ButtonElementImpl extends GraphicElementImpl implements Butto
     private static final long serialVersionUID = 1L;
 
     private final BoxElementImpl buttonBox;
-    private final boolean selected;
+    private final boolean selected = false;
 
     @Getter(AccessLevel.NONE)
     private final int borderThickness;
@@ -28,8 +30,13 @@ public final class ButtonElementImpl extends GraphicElementImpl implements Butto
         this.borderThickness = borderThickness;
 
         buttonBox = new BoxElementImpl(panelName, mainColor, borderColor, this.borderThickness, x, y, width, height);
-        this.selected = false;
 
+    }
+
+    public ButtonElementImpl(JSONObject jsonMetrix){
+        super(jsonMetrix.getString("panelName"));
+        this.borderThickness = jsonMetrix.getInt("borderThickness");
+        buttonBox = new BoxElementImpl(jsonMetrix);
     }
 
     @Override

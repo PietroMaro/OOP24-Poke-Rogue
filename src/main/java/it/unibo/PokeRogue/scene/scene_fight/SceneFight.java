@@ -8,8 +8,9 @@ import java.util.Map;
 
 import it.unibo.PokeRogue.ai.EnemyAi;
 import it.unibo.PokeRogue.ai.EnemyAiImpl;
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistryImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.scene.scene_fight.enums.DecisionTypeEnum;
 import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightStatusValuesEnum;
@@ -26,10 +27,10 @@ import lombok.Getter;
  * interactions.
  */
 
-public class SceneFight implements Scene {
+public class SceneFight extends Scene {
 
     @Getter
-    private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+    private final GraphicElementsRegistry currentSceneGraphicElements;
     @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private int currentSelectedButton;
@@ -53,14 +54,15 @@ public class SceneFight implements Scene {
             InvocationTargetException,
             InstantiationException {
         this.enemyTrainerInstance = new TrainerImpl();
-        this.sceneGraphicElements = new LinkedHashMap<>();
+        this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
+                this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.enemyAiInstance = new EnemyAiImpl(enemyTrainerInstance, battleLevel);
         this.battleEngineInstance = new BattleEngineImpl(enemyTrainerInstance, enemyAiInstance);
         this.generateEnemyInstance = new GenerateEnemyImpl(battleLevel, enemyTrainerInstance);
         this.generateEnemyInstance.generateEnemy();
         this.initStatus();
-        this.sceneFightView = new SceneFightView(sceneGraphicElements, allPanelsElements, enemyTrainerInstance,
+        this.sceneFightView = new SceneFightView(currentSceneGraphicElements, allPanelsElements, enemyTrainerInstance,
                 currentSelectedButton, newSelectedButton, this);
         this.initGraphicElements();
     }
@@ -87,7 +89,7 @@ public class SceneFight implements Scene {
      * selected button.
      */
     @Override
-    public void updateGraphic() throws IOException{
+    public void updateGraphic() throws IOException {
         this.sceneFightView.updateGraphic(currentSelectedButton, newSelectedButton);
     }
 

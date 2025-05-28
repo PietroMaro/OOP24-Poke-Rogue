@@ -7,11 +7,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistryImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
-import it.unibo.PokeRogue.utilities.UtilitiesForScenesImpl;
 import lombok.Getter;
 
 /**
@@ -27,15 +27,14 @@ import lombok.Getter;
  * {@link SceneMenuView}.
  * 
  */
-public final class SceneMenu implements Scene {
+public final class SceneMenu extends Scene {
 
-    private SceneMenuGraphicEnum currentSelectedButton;
+    private int currentSelectedButton;
     @Getter
-    private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+    private final GraphicElementsRegistry currentSceneGraphicElements;
     @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GameEngine gameEngineInstance;
-    private final UtilitiesForScenes utilityClass;
     private final SceneMenuView sceneMenuView;
 
     /**
@@ -49,11 +48,12 @@ public final class SceneMenu implements Scene {
             InvocationTargetException,
             IOException,
             NoSuchMethodException {
-        this.sceneGraphicElements = new LinkedHashMap<>();
+        this.loadGraphicElements("sceneMenuElements.json");
+        this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
+                this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
-        this.utilityClass = new UtilitiesForScenesImpl("menu");
-        this.sceneMenuView = new SceneMenuView();
+        this.sceneMenuView = new SceneMenuView(this.graphicElements);
         this.initStatus();
         this.initGraphicElements();
 
@@ -63,14 +63,13 @@ public final class SceneMenu implements Scene {
      * Updates the graphical state of the menu by toggling button selection
      * highlights.
      */
-    @Override
     public void updateGraphic() {
 
         for (int i = 0; i < 3; i++) {
-            this.utilityClass.setButtonStatus(i, false, sceneGraphicElements);
+            UtilitiesForScenes.setButtonStatus(i, false, currentSceneGraphicElements);
         }
 
-        this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true, sceneGraphicElements);
+        UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, currentSceneGraphicElements);
 
     }
 
@@ -88,44 +87,42 @@ public final class SceneMenu implements Scene {
             InvocationTargetException {
         switch (inputKey) {
             case KeyEvent.VK_UP:
-                this.currentSelectedButton = SceneMenuGraphicEnum.nextButtonsNames(this.currentSelectedButton);
+                if (this.currentSelectedButton > 0) {
+                    this.currentSelectedButton--;
+                }
 
                 break;
             case KeyEvent.VK_DOWN:
-                this.currentSelectedButton = SceneMenuGraphicEnum.previousButtonsNames(this.currentSelectedButton);
+                if (this.currentSelectedButton < 2) {
+                    this.currentSelectedButton++;
+                }
                 break;
             case KeyEvent.VK_ENTER:
-                switch (this.currentSelectedButton) {
-                    case LOAD_BUTTON:
-                        this.gameEngineInstance.setScene("load");
-                        break;
-                    case NEW_GAME_BUTTON:
-                        this.gameEngineInstance.setFileToLoad("");
-                        this.gameEngineInstance.setScene("box");
-                        break;
-                    case OPTIONS_BUTTON:
-                        this.gameEngineInstance.setScene("info");
-                        break;
-                    default:
-                        break;
-                }
+                if (this.currentSelectedButton == this.graphicElementNameToInt.get("LOAD_BUTTON")) {
 
+                    this.gameEngineInstance.setScene("load");
+                } else if (this.currentSelectedButton == this.graphicElementNameToInt.get("NEW_GAME_BUTTON")) {
+
+                    this.gameEngineInstance.setFileToLoad("");
+                    this.gameEngineInstance.setScene("box");
+                } else if (this.currentSelectedButton == this.graphicElementNameToInt.get("OPTION_BUTTON")) {
+                    this.gameEngineInstance.setScene("info");
+
+                }
                 break;
             default:
                 break;
         }
-
     }
 
     private void initGraphicElements() throws IOException {
-        this.sceneMenuView.initGraphicElements(sceneGraphicElements, allPanelsElements);
+        this.sceneMenuView.initGraphicElements(currentSceneGraphicElements, allPanelsElements);
 
-        this.utilityClass.setButtonStatus(this.currentSelectedButton.value(), true, sceneGraphicElements);
+        UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, currentSceneGraphicElements);
     }
 
     private void initStatus() {
-        this.currentSelectedButton = SceneMenuGraphicEnum.LOAD_BUTTON;
-
+        this.currentSelectedButton = this.graphicElementNameToInt.get("LOAD_BUTTON");
     }
 
 }

@@ -2,6 +2,7 @@ package it.unibo.PokeRogue.graphic.text;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -11,14 +12,19 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
+import org.json.JSONObject;
+
 public final class TextElementImpl extends GraphicElementImpl {
 
-    @Getter
-    private final String text;
-    private final double leftX;
-    private final double leftY;
+    @Getter @Setter
+    private String text;
+
+    @Setter
+    private double leftX;
+    @Setter
+    private  double leftY;
     private final Color textColor;
-    private final double textFont;
+    private final double textDimension;
 
     public TextElementImpl(final String panelName, final String text, final Color textColor, final double textDimension,
             final double leftX,
@@ -27,8 +33,20 @@ public final class TextElementImpl extends GraphicElementImpl {
         this.text = text;
         this.leftX = leftX;
         this.leftY = leftY;
-        this.textFont = textDimension;
+        this.textDimension = textDimension;
         this.textColor = textColor;
+    }
+
+
+
+    public TextElementImpl(JSONObject jsonMetrix) {
+        super(jsonMetrix.getString("panelName"));
+
+        this.text = jsonMetrix.getString("text");
+        this.leftX = jsonMetrix.getDouble("leftX");
+        this.leftY = jsonMetrix.getDouble("leftY");
+        this.textDimension = jsonMetrix.getDouble("textDimension");
+        this.textColor = Color.decode(jsonMetrix.getString("textColor"));
     }
 
     @Override
@@ -41,11 +59,11 @@ public final class TextElementImpl extends GraphicElementImpl {
             customFont = Font.createFont(Font.TRUETYPE_FONT,
                     new File(Paths.get("src", "font", "pixelFont.ttf").toString()));
             customFont = customFont.deriveFont(Font.PLAIN,
-                    Math.min((int) (getWidth() * this.textFont) / 3, (int) (getHeight() * this.textFont)));
+                    Math.min((int) (getWidth() * this.textDimension) / 3, (int) (getHeight() * this.textDimension)));
         } catch (final IOException | FontFormatException e) {
 
             customFont = new Font("Default", Font.PLAIN,
-                    Math.min((int) (getWidth() * this.textFont) / 3, (int) (getHeight() * this.textFont)));
+                    Math.min((int) (getWidth() * this.textDimension) / 3, (int) (getHeight() * this.textDimension)));
 
         }
 

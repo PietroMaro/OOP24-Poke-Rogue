@@ -7,15 +7,15 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import it.unibo.PokeRogue.GameEngineImpl;
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistryImpl;
 import it.unibo.PokeRogue.scene.Scene;
-import it.unibo.PokeRogue.scene.sceneSave.enums.SceneSaveStatusEnum;
 import lombok.Getter;
 
-public class SceneSave implements Scene {
+public class SceneSave extends Scene {
     @Getter
-    private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+    private final GraphicElementsRegistry currentSceneGraphicElements;
     @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final SceneSaveView sceneSaveView;
@@ -28,11 +28,13 @@ public class SceneSave implements Scene {
             IllegalAccessException,
             NoSuchMethodException,
             InvocationTargetException {
-        this.sceneGraphicElements = new LinkedHashMap<>();
+        this.loadGraphicElements("sceneSaveElements.json");
+        this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
+                this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.initStatus();
-        this.sceneSaveView = new SceneSaveView(sceneGraphicElements, allPanelsElements, currentSelectedButton,
+        this.sceneSaveView = new SceneSaveView(this.currentSceneGraphicElements,this.graphicElements,this.allPanelsElements, currentSelectedButton,
                 newSelectedButton, this);
         this.initGraphicElements();
     }
@@ -42,22 +44,22 @@ public class SceneSave implements Scene {
             InvocationTargetException, NoSuchMethodException {
         switch (inputKey) {
             case KeyEvent.VK_RIGHT:
-                if (this.newSelectedButton == SceneSaveStatusEnum.EXIT_AND_SAVE_BUTTON.value()) {
-                    this.newSelectedButton = SceneSaveStatusEnum.CONTINUE_GAME_BUTTON.value();
+                if (this.newSelectedButton == this.graphicElementNameToInt.get("EXIT_AND_SAVE_BUTTON")) {
+                    this.newSelectedButton = this.graphicElementNameToInt.get("CONTINUE_GAME_BUTTON");
                 }
                 break;
 
             case KeyEvent.VK_LEFT:
-                if (this.newSelectedButton == SceneSaveStatusEnum.CONTINUE_GAME_BUTTON.value()) {
-                    this.newSelectedButton = SceneSaveStatusEnum.EXIT_AND_SAVE_BUTTON.value();
+                if (this.newSelectedButton == this.graphicElementNameToInt.get("CONTINUE_GAME_BUTTON")) {
+                    this.newSelectedButton = this.graphicElementNameToInt.get("EXIT_AND_SAVE_BUTTON");
                 }
                 break;
 
             case KeyEvent.VK_ENTER:
-                if (this.newSelectedButton == SceneSaveStatusEnum.CONTINUE_GAME_BUTTON.value()) {
+                if (this.newSelectedButton == this.graphicElementNameToInt.get("CONTINUE_GAME_BUTTON")) {
                     gameEngineInstance.setScene("fight");
 
-                } else if (this.newSelectedButton == SceneSaveStatusEnum.EXIT_AND_SAVE_BUTTON.value()) {
+                } else if (this.newSelectedButton == this.graphicElementNameToInt.get("EXIT_AND_SAVE_BUTTON")) {
                     gameEngineInstance.setScene("main");
                 }
                 break;
@@ -65,8 +67,8 @@ public class SceneSave implements Scene {
     }
 
     private void initStatus() {
-        this.currentSelectedButton = SceneSaveStatusEnum.EXIT_AND_SAVE_BUTTON.value();
-        this.newSelectedButton = SceneSaveStatusEnum.EXIT_AND_SAVE_BUTTON.value();
+        this.currentSelectedButton = this.graphicElementNameToInt.get("EXIT_AND_SAVE_BUTTON");
+        this.newSelectedButton = this.graphicElementNameToInt.get("EXIT_AND_SAVE_BUTTON");
     }
 
     public void initGraphicElements() throws IOException {
@@ -75,6 +77,6 @@ public class SceneSave implements Scene {
 
     @Override
     public void updateGraphic() throws IOException {
-        this.sceneSaveView.updateGraphic(newSelectedButton);
+        this.sceneSaveView.updateGraphic(this.newSelectedButton);
     }
 }

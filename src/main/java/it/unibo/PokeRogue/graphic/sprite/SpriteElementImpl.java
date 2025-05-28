@@ -7,16 +7,19 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.json.JSONObject;
+
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
+import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 
 public final class SpriteElementImpl extends GraphicElementImpl implements SpriteElement {
     private static final long serialVersionUID = 1L;
 
-    private final Image spriteImage;
-    private final double leftUpX;
-    private final double leftUpy;
-    private final double width;
-    private final double height;
+    private Image spriteImage;
+    private double leftUpX = 0;
+    private double leftUpy = 0;
+    private double width = 1;
+    private double height = 1;
 
     public SpriteElementImpl(final String panelName, final String pathToImage, final double leftUpX,
             final double leftUpy, final double width,
@@ -32,6 +35,23 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
 
     }
 
+    public SpriteElementImpl(JSONObject jsonMetrix) throws IOException {
+        super(jsonMetrix.getString("panelName"));
+        if (!"null".equals(jsonMetrix.getString("imageFileName"))) {
+            this.spriteImage = ImageIO.read(new File(UtilitiesForScenes
+                    .getPathString(jsonMetrix.getString("dirToImage"), jsonMetrix.getString("imageFileName"))));
+        }
+
+        if (jsonMetrix.has("width")) {
+            this.leftUpX = jsonMetrix.getDouble("leftX");
+            this.leftUpy = jsonMetrix.getDouble("leftY");
+            this.width = jsonMetrix.getDouble("width");
+            this.height = jsonMetrix.getDouble("height");
+
+        }
+
+    }
+
     public SpriteElementImpl(final String panelName, final Image image, final double leftUpX, final double leftUpy,
             final double width,
             final double height) {
@@ -44,6 +64,14 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
         this.width = width;
         this.height = height;
 
+    }
+
+    public void setImage(final String pathToImage) throws IOException {
+        this.spriteImage = ImageIO.read(new File(pathToImage));
+    }
+
+    public void setImage(final Image image) {
+        this.spriteImage = image;
     }
 
     @Override

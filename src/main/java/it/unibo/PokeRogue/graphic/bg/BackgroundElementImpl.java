@@ -5,6 +5,8 @@ import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
 import lombok.Getter;
 import java.io.IOException;
 
+import org.json.JSONObject;
+
 public final class BackgroundElementImpl extends GraphicElementImpl implements BackgroundElement {
     private static final long serialVersionUID = 1L;
 
@@ -17,4 +19,9 @@ public final class BackgroundElementImpl extends GraphicElementImpl implements B
         backgroundSprite = new SpriteElementImpl(panelName, pathToImage, 0, 0, 1, 1);
     }
 
+    public BackgroundElementImpl(JSONObject jsonMetrix) throws IOException{
+
+        super(jsonMetrix.getString("panelName"));
+        backgroundSprite = new SpriteElementImpl(jsonMetrix);
+    }
 }

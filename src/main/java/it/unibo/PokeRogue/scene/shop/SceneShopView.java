@@ -3,27 +3,34 @@ package it.unibo.PokeRogue.scene.shop;
 import java.io.IOException;
 import java.util.Map;
 
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.items.ItemFactoryImpl;
+import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 
 public class SceneShopView {
 
     private final SceneShopInitView sceneShopInitView;
     private final SceneShopUpdateView sceneShopUpdateView;
-    private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
+    private final GraphicElementsRegistry sceneGraphicElements;
+    private final GraphicElementsRegistry graphicElements;
     private final ItemFactoryImpl itemFactoryImpl;
 
-    public SceneShopView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
-            final Map<String, PanelElementImpl> allPanelsElements,final ItemFactoryImpl itemFactoryImpl,final PlayerTrainerImpl playerTrainerInstance, final int currentSelectedButton,
-            final int newSelectedButton, final SceneShop scene,final SceneShopUtilities sceneShopUtilities) {
+    public SceneShopView(final GraphicElementsRegistry sceneGraphicElements,
+            final GraphicElementsRegistry graphicElements,
+            final Map<String, PanelElementImpl> allPanelsElements, final ItemFactoryImpl itemFactoryImpl,
+            final PlayerTrainerImpl playerTrainerInstance, final int currentSelectedButton,
+            final int newSelectedButton, final SceneShop scene, final SceneShopUtilities sceneShopUtilities,
+            final Map<String, Integer> graphicElementNameToInt) {
         this.itemFactoryImpl = itemFactoryImpl;
         this.sceneGraphicElements = sceneGraphicElements;
+        this.graphicElements = graphicElements;
         this.initShopItems();
-        this.sceneShopInitView = new SceneShopInitView(this.sceneGraphicElements, allPanelsElements);
-        this.sceneShopUpdateView = new SceneShopUpdateView(this.sceneGraphicElements, allPanelsElements,
-                currentSelectedButton, newSelectedButton, scene,sceneShopUtilities);
+        this.sceneShopInitView = new SceneShopInitView(this.sceneGraphicElements, this.graphicElements,
+                allPanelsElements);
+        this.sceneShopUpdateView = new SceneShopUpdateView(this.sceneGraphicElements, this.graphicElements,
+                allPanelsElements, currentSelectedButton,
+                newSelectedButton, scene, sceneShopUtilities, graphicElementNameToInt);
     }
 
     protected void initGraphicElements(final int currentSelectedButton) throws IOException {
@@ -34,11 +41,13 @@ public class SceneShopView {
         this.sceneShopUpdateView.updateGraphic(newSelectedButton);
     }
 
-    protected void updatePlayerMoneyText(final Map<Integer, GraphicElementImpl> sceneGraphicElements,final PlayerTrainerImpl playerTrainerInstance){
-        SceneShopUtilities.updatePlayerMoneyText(sceneGraphicElements,playerTrainerInstance);
+    protected void updatePlayerMoneyText(final GraphicElementsRegistry sceneGraphicElements,
+            final GraphicElementsRegistry graphicElements,
+            final PlayerTrainerImpl playerTrainerInstance) {
+        SceneShopUtilities.updatePlayerMoneyText(sceneGraphicElements, playerTrainerInstance);
     }
 
-    private void initShopItems(){
+    private void initShopItems() {
         SceneShopUtilities.initShopItems(itemFactoryImpl);
     }
 }
