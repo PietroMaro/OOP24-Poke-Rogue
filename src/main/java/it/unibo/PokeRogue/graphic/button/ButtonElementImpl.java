@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public final class ButtonElementImpl extends GraphicElementImpl implements ButtonElement {
-    
+
     @Getter(AccessLevel.NONE)
     private static final long serialVersionUID = 1L;
 
@@ -33,7 +33,7 @@ public final class ButtonElementImpl extends GraphicElementImpl implements Butto
 
     }
 
-    public ButtonElementImpl(JSONObject jsonMetrix){
+    public ButtonElementImpl(final JSONObject jsonMetrix) {
         super(jsonMetrix.getString("panelName"));
         this.borderThickness = jsonMetrix.getInt("borderThickness");
         buttonBox = new BoxElementImpl(jsonMetrix);

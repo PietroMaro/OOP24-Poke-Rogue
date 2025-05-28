@@ -53,9 +53,14 @@ public final class SceneBoxView {
         private static final double OFFSET_X = 0.049;
         private static final double OFFSET_Y = 0.09;
 
-        private static final double POKEMON_BUTTON_START_X = 0.465;
+        private static final double POKEMON_BUTTON_START_X = 0.46;
         private static final double POKEMON_BUTTON_START_Y = 0.125;
-   
+
+        private static final int START_BUTTON_POSITION = 5;
+        private static final int FIRST_POKEMON_BUTTON_POSITION = 6;
+        private static final int POKE_BOX_ROW_LENGTH = 9;
+
+        private static final int POKEMON_TO_BUTTON_OFFSET = 206;
 
         private static final String FIRST_PANEL_NAME = "firstPanel";
         private static final String POKEMON_PANEL_NAME = "pokemonPanel";
@@ -79,12 +84,14 @@ public final class SceneBoxView {
                 // Pokemon Buttons
                 for (int pokemonIndex = 0; pokemonIndex < LENGTH_OF_POKEBOX; pokemonIndex++) {
 
-                        currentSceneGraphicElements.put(pokemonIndex + 6,
+                        currentSceneGraphicElements.put(pokemonIndex + FIRST_POKEMON_BUTTON_POSITION,
                                         new ButtonElementImpl(FIRST_PANEL_NAME, null, Color.BLACK, 0,
                                                         POKEMON_BUTTON_START_X
-                                                                        + (pokemonIndex % 9 * OFFSET_X),
+                                                                        + (pokemonIndex % POKE_BOX_ROW_LENGTH
+                                                                                        * OFFSET_X),
                                                         POKEMON_BUTTON_START_Y
-                                                                        + (pokemonIndex / 9 * OFFSET_Y),
+                                                                        + (pokemonIndex / POKE_BOX_ROW_LENGTH
+                                                                                        * OFFSET_Y),
                                                         POKEMON_BUTTON_WIDTH,
                                                         POKEMON_BUTTON_HEIGHT));
 
@@ -164,12 +171,13 @@ public final class SceneBoxView {
                                 .setMainColor(null);
 
                 // Showing selected pokemon details
-                if (currentSelectedButton > 5) {
-                        selectedPokemon = boxes.get(boxIndex).get(currentSelectedButton - 6);
+                if (currentSelectedButton > START_BUTTON_POSITION) {
+                        selectedPokemon = boxes.get(boxIndex)
+                                        .get(currentSelectedButton - FIRST_POKEMON_BUTTON_POSITION);
                         pokemonNature = selectedPokemon.getNature();
 
                         ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_NUMBER_TEXT"))
-                                        .setText(String.valueOf(currentSelectedButton - 5
+                                        .setText(String.valueOf(currentSelectedButton - START_BUTTON_POSITION
                                                         + boxIndex * LENGTH_OF_POKEBOX));
 
                         ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_NAME"))
@@ -243,17 +251,19 @@ public final class SceneBoxView {
 
                 for (int pokemonIndex = 0; pokemonIndex < LENGTH_OF_POKEBOX; pokemonIndex++) {
                         if (pokemonIndex < currentBoxLength) {
-                                currentSceneGraphicElements.put(pokemonIndex + 206,
+                                currentSceneGraphicElements.put(pokemonIndex + POKEMON_TO_BUTTON_OFFSET,
                                                 new SpriteElementImpl("pokemonPanel",
                                                                 currentBox.get(pokemonIndex)
                                                                                 .getSpriteFront(),
-                                                                POKEMON_START_X + (pokemonIndex % 9 * OFFSET_X),
-                                                                POKEMON_START_Y + (pokemonIndex / 9 * OFFSET_Y),
+                                                                POKEMON_START_X + (pokemonIndex % POKE_BOX_ROW_LENGTH
+                                                                                * OFFSET_X),
+                                                                POKEMON_START_Y + (pokemonIndex / POKE_BOX_ROW_LENGTH
+                                                                                * OFFSET_Y),
                                                                 POKEMON_SPRITE_WIDTH,
                                                                 POKEMON_SPRITE_HEIGHT));
 
                         } else {
-                                currentSceneGraphicElements.removeById(pokemonIndex + 206);
+                                currentSceneGraphicElements.removeById(pokemonIndex + POKEMON_TO_BUTTON_OFFSET);
                         }
 
                 }

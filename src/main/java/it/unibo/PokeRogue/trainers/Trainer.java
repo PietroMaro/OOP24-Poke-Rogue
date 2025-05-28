@@ -6,9 +6,6 @@ import java.util.Optional;
 
 import it.unibo.PokeRogue.pokemon.Pokemon;
 
-
-
-
 public interface Trainer {
 
 	void switchPokemonPosition(int pos1, int pos2);
@@ -19,13 +16,13 @@ public interface Trainer {
 
 	List<Optional<Pokemon>> getSquad();
 
-	Boolean addPokemon(Pokemon pokemon,int limits);
+	Boolean addPokemon(Pokemon pokemon, int limits);
 
 	Map<String, Integer> getBall();
 
 	int getMoney();
 
-    void addMoney(int amount);
+	void addMoney(int amount);
 
 	boolean isWild();
 

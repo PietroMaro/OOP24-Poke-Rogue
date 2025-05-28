@@ -21,6 +21,7 @@ public final class EnemyAiImpl implements EnemyAi {
     private static final int LOW_AI_THRESHOLD = 15;
     private static final int MEDIUM_AI_THRESHOLD = 40;
     private static final int HIGH_AI_THRESHOLD = 75;
+    private static final int DEFAULT_SWITCH_FIRST_RATE_PERCENT = 60;
 
     private final Trainer enemyTrainer;
     private final int battleLvl;
@@ -32,7 +33,7 @@ public final class EnemyAiImpl implements EnemyAi {
     private boolean hpAware;
     private boolean considerSwitching;
     private boolean usePokemonInOrder = true;
-    private int switchFirstRate = 60;
+    private int switchFirstRate = DEFAULT_SWITCH_FIRST_RATE_PERCENT;
 
     /**
      * Constructs an EnemyAiImpl with behavior tailored to the given battle level.

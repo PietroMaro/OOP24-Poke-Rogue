@@ -16,8 +16,8 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
     private static final long serialVersionUID = 1L;
 
     private Image spriteImage;
-    private double leftUpX = 0;
-    private double leftUpy = 0;
+    private double leftUpX;
+    private double leftUpy;
     private double width = 1;
     private double height = 1;
 
@@ -35,7 +35,7 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
 
     }
 
-    public SpriteElementImpl(JSONObject jsonMetrix) throws IOException {
+    public SpriteElementImpl(final JSONObject jsonMetrix) throws IOException {
         super(jsonMetrix.getString("panelName"));
         if (!"null".equals(jsonMetrix.getString("imageFileName"))) {
             this.spriteImage = ImageIO.read(new File(UtilitiesForScenes

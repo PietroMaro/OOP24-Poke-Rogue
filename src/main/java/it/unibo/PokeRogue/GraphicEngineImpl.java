@@ -59,7 +59,7 @@ public final class GraphicEngineImpl extends Singleton implements GraphicEngine 
      */
 
     @Override
-    public void drawScene(GraphicElementsRegistry allGraphicElements) {
+    public void drawScene(final GraphicElementsRegistry allGraphicElements) {
 
         for (final GraphicElementImpl graphicElement : allGraphicElements.getElements().values()) {
             switch (graphicElement) {

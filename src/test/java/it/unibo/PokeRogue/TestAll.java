@@ -147,9 +147,9 @@ public final class TestAll {
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
 			for (Path entry : stream) {
 				if (Files.isRegularFile(entry)) {
-					JSONObject moveJson = jsonReader.readJsonObject(entry.toString());
-					JSONObject effect = moveJson.getJSONObject("effect");
-					//effectParser.parseEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
+					final JSONObject moveJson = jsonReader.readJsonObject(entry.toString());
+					final JSONObject effect = moveJson.getJSONObject("effect");
+					// effectParser.parseEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
 				}
 			}
 		}
@@ -163,7 +163,7 @@ public final class TestAll {
 		final PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
 		final EffectParserImpl effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
 
-		final Optional<Move> moveTest1 =Optional.of(moveFactory.moveFromName("absorb"));
+		final Optional<Move> moveTest1 = Optional.of(moveFactory.moveFromName("absorb"));
 		final Optional<Move> moveTest2 = Optional.of(moveFactory.moveFromName("absorb"));
 		final Pokemon pok1 = pokeFactory.randomPokemon(3);
 		final Pokemon pok2 = pokeFactory.randomPokemon(3);
@@ -201,18 +201,16 @@ public final class TestAll {
 
 	}
 
-
-
 	@Test
 	public void testAllItemEffect() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
-			InstantiationException, IOException  {
-		PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
-		EffectParserImpl effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
+			InstantiationException, IOException {
+		final PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+		final EffectParserImpl effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
 
-		JsonReader jsonReader = new JsonReaderImpl();
-		Pokemon pok1 = pokeFactory.randomPokemon(3);
+		final JsonReader jsonReader = new JsonReaderImpl();
+		final Pokemon pok1 = pokeFactory.randomPokemon(3);
 
-		Path dirPath = Paths.get("src", "items_data","items","data");
+		final Path dirPath = Paths.get("src", "items_data", "items", "data");
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
 			for (Path entry : stream) {
 				if (Files.isRegularFile(entry)) {
@@ -224,18 +222,17 @@ public final class TestAll {
 		}
 	}
 
-
 	@Test
-	public void testAi()  throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
-			InstantiationException, IOException{
-		PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
-		PlayerTrainerImpl playerTrainerImpl = PlayerTrainerImpl.getTrainerInstance();
-		TrainerImpl enemyTrainer = new TrainerImpl();
-		Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
-		EnemyAi ai = new EnemyAiImpl(enemyTrainer, 99);
-		Pokemon charmander = pokeFactory.pokemonFromName("charmander");
-		Pokemon venusaur = pokeFactory.pokemonFromName("venusaur");
-		Pokemon poliwag = pokeFactory.pokemonFromName("poliwag");
+	public void testAi() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+			InstantiationException, IOException {
+		final PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+		final PlayerTrainerImpl playerTrainerImpl = PlayerTrainerImpl.getTrainerInstance();
+		final TrainerImpl enemyTrainer = new TrainerImpl();
+		final Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
+		final EnemyAi ai = new EnemyAiImpl(enemyTrainer, 99);
+		final Pokemon charmander = pokeFactory.pokemonFromName("charmander");
+		final Pokemon venusaur = pokeFactory.pokemonFromName("venusaur");
+		final Pokemon poliwag = pokeFactory.pokemonFromName("poliwag");
 
 		playerTrainerImpl.addPokemon(poliwag, 6);
 		enemyTrainer.addPokemon(charmander, 6);
@@ -248,49 +245,45 @@ public final class TestAll {
 
 	}
 
-
 	@Test
-    public void testBattleRewards() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+	public void testBattleRewards() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
 			InstantiationException, IOException {
-        PokemonFactoryImpl factory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
-        Pokemon charmander = factory.pokemonFromName("charmander");
-		Pokemon bulbasaur = factory.pokemonFromName("bulbasaur");
-		int beforeXP = charmander.getExp().getCurrentValue();
+		final PokemonFactoryImpl factory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+		final Pokemon charmander = factory.pokemonFromName("charmander");
+		final Pokemon bulbasaur = factory.pokemonFromName("bulbasaur");
+		final int beforeXP = charmander.getExp().getCurrentValue();
 		BattleRewards.awardBattleRewards(charmander, bulbasaur);
-		int afterXP = charmander.getExp().getCurrentValue();
-        assertFalse(beforeXP > afterXP);
+		final int afterXP = charmander.getExp().getCurrentValue();
+		assertFalse(beforeXP > afterXP);
 
-    }
+	}
 
 	@Test
-    public void testGenerateEnemy() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+	public void testGenerateEnemy() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
 			InstantiationException, IOException {
-		TrainerImpl enemyTrainer = new TrainerImpl();
-		GenerateEnemyImpl generateEnemyInstance = new GenerateEnemyImpl(5, enemyTrainer);
+		final TrainerImpl enemyTrainer = new TrainerImpl();
+		final GenerateEnemyImpl generateEnemyInstance = new GenerateEnemyImpl(5, enemyTrainer);
 		generateEnemyInstance.generateEnemy();
 		assertTrue(enemyTrainer.getSquad().size() > 1);
-    }
+	}
 
 	@Test
-    public void testBattleEngine() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+	public void testBattleEngine() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
 			InstantiationException, IOException {
-		TrainerImpl enemyTrainer = new TrainerImpl();
-		PokemonFactoryImpl factory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
-		PlayerTrainerImpl playerTrainer = PlayerTrainerImpl.getTrainerInstance();
-		Pokemon bulbasaur = factory.pokemonFromName("bulbasaur");
-		Pokemon charmander = factory.pokemonFromName("charmander");
+		final TrainerImpl enemyTrainer = new TrainerImpl();
+		final PokemonFactoryImpl factory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+		final PlayerTrainerImpl playerTrainer = PlayerTrainerImpl.getTrainerInstance();
+		final Pokemon bulbasaur = factory.pokemonFromName("bulbasaur");
+		final Pokemon charmander = factory.pokemonFromName("charmander");
 		playerTrainer.addPokemon(bulbasaur, 1);
 		enemyTrainer.addPokemon(charmander, 1);
-		EnemyAi ai = new EnemyAiImpl(enemyTrainer, 99);
-		int beforeLife = playerTrainer.getSquad().get(0).get().getActualStats().get("hp").getCurrentValue();
-		BattleEngine battleEngine = new BattleEngineImpl(enemyTrainer, ai);
-		battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""), new Decision(DecisionTypeEnum.ATTACK, "0"));
+		final EnemyAi ai = new EnemyAiImpl(enemyTrainer, 99);
+		final int beforeLife = playerTrainer.getSquad().get(0).get().getActualStats().get("hp").getCurrentValue();
+		final BattleEngine battleEngine = new BattleEngineImpl(enemyTrainer, ai);
+		battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""),
+				new Decision(DecisionTypeEnum.ATTACK, "0"));
 		int afterLife = playerTrainer.getSquad().get(0).get().getActualStats().get("hp").getCurrentValue();
 		assertTrue(beforeLife > afterLife);
-    }
+	}
 
 }
-
-
-
-

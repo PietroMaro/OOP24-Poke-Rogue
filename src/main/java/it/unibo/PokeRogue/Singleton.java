@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Singleton {
+public class Singleton {
 
     private static final Map<Class<? extends Singleton>, Singleton> INSTANCES = new HashMap<>();
 

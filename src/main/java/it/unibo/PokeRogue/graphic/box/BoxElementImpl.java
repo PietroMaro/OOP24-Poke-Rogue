@@ -38,7 +38,7 @@ public final class BoxElementImpl extends GraphicElementImpl implements BoxEleme
 
     }
 
-    public BoxElementImpl(JSONObject jsonMetrix) {
+    public BoxElementImpl(final JSONObject jsonMetrix) {
         super(jsonMetrix.getString("panelName"));
 
         if ("null".equals(jsonMetrix.getString("mainColor"))) {

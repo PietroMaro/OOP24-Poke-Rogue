@@ -68,42 +68,39 @@ public final class UtilitiesForScenes {
         return str.substring(0, 1).toUpperCase(Locale.ROOT) + str.substring(1);
     }
 
-    public static void loadSceneElements(String fileName, String loadSectionName,
-            GraphicElementsRegistry currentSceneGraphicElements,
-            GraphicElementsRegistry graphicElements) throws IOException {
+    public static void loadSceneElements(final String fileName, final String loadSectionName,
+            final GraphicElementsRegistry currentSceneGraphicElements,
+            final GraphicElementsRegistry graphicElements) throws IOException {
 
-        JsonReader jsonReader = new JsonReaderImpl();
-        JSONObject root = jsonReader
+        final JsonReader jsonReader = new JsonReaderImpl();
+        final JSONObject root = jsonReader
                 .readJsonObject(Paths.get("src", "scene.data", fileName).toString());
 
-        JSONArray initArrayIndex = root.getJSONObject("dynamicObjects").getJSONArray(loadSectionName);
+        final JSONArray initArrayIndex = root.getJSONObject("dynamicObjects").getJSONArray(loadSectionName);
 
         for (int i = 0; i < initArrayIndex.length(); i++) {
-            int index = initArrayIndex.getInt(i);
+            final int index = initArrayIndex.getInt(i);
             currentSceneGraphicElements.put(index, graphicElements.getById(index));
 
         }
 
     }
 
+    public static void removeSceneElements(final String fileName, final String loadSectionName,
+            final GraphicElementsRegistry currentSceneGraphicElements) throws IOException {
 
-    public static void removeSceneElements(String fileName, String loadSectionName,
-        GraphicElementsRegistry currentSceneGraphicElements) throws IOException {
-
-        JsonReader jsonReader = new JsonReaderImpl();
-        JSONObject root = jsonReader
+        final JsonReader jsonReader = new JsonReaderImpl();
+        final JSONObject root = jsonReader
                 .readJsonObject(Paths.get("src", "scene.data", fileName).toString());
 
-        JSONArray initArrayIndex = root.getJSONObject("dynamicObjects").getJSONArray(loadSectionName);
+        final JSONArray initArrayIndex = root.getJSONObject("dynamicObjects").getJSONArray(loadSectionName);
 
         for (int i = 0; i < initArrayIndex.length(); i++) {
-            int index = initArrayIndex.getInt(i);
+            final int index = initArrayIndex.getInt(i);
             currentSceneGraphicElements.removeById(index);
 
         }
 
     }
-
-
 
 }

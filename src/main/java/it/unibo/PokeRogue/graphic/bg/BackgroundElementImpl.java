@@ -19,7 +19,7 @@ public final class BackgroundElementImpl extends GraphicElementImpl implements B
         backgroundSprite = new SpriteElementImpl(panelName, pathToImage, 0, 0, 1, 1);
     }
 
-    public BackgroundElementImpl(JSONObject jsonMetrix) throws IOException{
+    public BackgroundElementImpl(final JSONObject jsonMetrix) throws IOException {
 
         super(jsonMetrix.getString("panelName"));
         backgroundSprite = new SpriteElementImpl(jsonMetrix);

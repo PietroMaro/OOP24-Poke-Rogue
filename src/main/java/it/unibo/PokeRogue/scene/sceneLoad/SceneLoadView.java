@@ -26,11 +26,7 @@ public final class SceneLoadView {
         private static final String POKEMON_PANEL_NAME = "savesPanel";
         private final GraphicElementsRegistry graphicElements;
 
-        /**
-         * Constructs a new {@code SceneLoadView} instance.
-         *
-         * 
-         */
+      
         public SceneLoadView(final GraphicElementsRegistry graphicElements) throws IOException {
                 this.graphicElements = graphicElements;
         }

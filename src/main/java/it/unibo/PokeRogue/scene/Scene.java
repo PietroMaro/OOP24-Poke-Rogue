@@ -68,25 +68,25 @@ public abstract class Scene {
 	}
 
 	protected void loadGraphicElements(String fileName) throws IOException {
-		JsonReader jsonReader = new JsonReaderImpl();
-		JSONObject root = jsonReader.readJsonObject(Paths.get("src", "scene.data", fileName).toString());
+		final JsonReader jsonReader = new JsonReaderImpl();
+		final JSONObject root = jsonReader.readJsonObject(Paths.get("src", "scene.data", fileName).toString());
 		graphicElementNameToInt = new HashMap<>();
 
-		JSONObject mapper = root.getJSONObject("mapper");
+		final JSONObject mapper = root.getJSONObject("mapper");
 
-		for (String key : mapper.keySet()) {
+		for (final String key : mapper.keySet()) {
 			int val = mapper.getInt(key);
 			graphicElementNameToInt.put(key, val);
 		}
 
 		graphicElements = new GraphicElementsRegistryImpl(new HashMap<>(), graphicElementNameToInt);
 
-		JSONObject metrics = root.getJSONObject("metrics");
-		for (String key : metrics.keySet()) {
-			int keyInt = Integer.parseInt(key);
-			JSONObject elemJson = metrics.getJSONObject(key);
+		final JSONObject metrics = root.getJSONObject("metrics");
+		for (final String key : metrics.keySet()) {
+			final int keyInt = Integer.parseInt(key);
+			final JSONObject elemJson = metrics.getJSONObject(key);
 
-			GraphicElementImpl elem = createGraphicElementFromJson(elemJson);
+			final GraphicElementImpl elem = createGraphicElementFromJson(elemJson);
 
 			graphicElements.put(keyInt, elem);
 		}

@@ -10,33 +10,41 @@ public class GraphicElementsRegistryImpl implements GraphicElementsRegistry {
     private final Map<Integer, GraphicElementImpl> elements;
     private final Map<String, Integer> nameToId;
 
-    public GraphicElementsRegistryImpl(Map<Integer, GraphicElementImpl> elements, Map<String, Integer> nameToId) {
+    public GraphicElementsRegistryImpl(final Map<Integer, GraphicElementImpl> elements,
+            final Map<String, Integer> nameToId) {
         this.elements = elements;
         this.nameToId = nameToId;
     }
 
-    public GraphicElementImpl getByName(String name) {
+    @Override
+    public GraphicElementImpl getByName(final String name) {
         Integer id = nameToId.get(name);
         return id != null ? elements.get(id) : null;
     }
 
-    public GraphicElementImpl getById(int id) {
+    @Override
+    public GraphicElementImpl getById(final int id) {
         return elements.get(id);
     }
 
-    public void put(int id, GraphicElementImpl elem) {
+    @Override
+
+    public void put(final int id, final GraphicElementImpl elem) {
         elements.put(id, elem);
     }
 
-    public void removeById(int id) {
+    @Override
+    public void removeById(final int id) {
         elements.remove(id);
     }
 
-    public void removeByName(String name) {
+    @Override
+    public void removeByName(final String name) {
         Integer id = nameToId.get(name);
         elements.remove(id);
     }
 
+    @Override
     public void clear() {
         elements.clear();
     }

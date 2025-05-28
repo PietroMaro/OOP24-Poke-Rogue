@@ -16,13 +16,14 @@ import org.json.JSONObject;
 
 public final class TextElementImpl extends GraphicElementImpl {
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private String text;
 
     @Setter
     private double leftX;
     @Setter
-    private  double leftY;
+    private double leftY;
     private final Color textColor;
     private final double textDimension;
 
@@ -37,9 +38,7 @@ public final class TextElementImpl extends GraphicElementImpl {
         this.textColor = textColor;
     }
 
-
-
-    public TextElementImpl(JSONObject jsonMetrix) {
+    public TextElementImpl(final JSONObject jsonMetrix) {
         super(jsonMetrix.getString("panelName"));
 
         this.text = jsonMetrix.getString("text");
