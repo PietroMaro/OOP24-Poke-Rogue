@@ -75,6 +75,8 @@ public final class SceneBoxView {
                 UtilitiesForScenes.loadSceneElements("sceneBoxElements.json", "init", currentSceneGraphicElements,
                                 this.graphicElements);
 
+                                
+
         }
 
         void updateGraphic(final int currentSelectedButton, final int newSelectedButton, final int boxIndex,
