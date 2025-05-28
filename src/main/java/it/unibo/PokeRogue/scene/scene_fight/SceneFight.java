@@ -63,7 +63,7 @@ public class SceneFight extends Scene {
         this.generateEnemyInstance.generateEnemy();
         this.initStatus();
         this.sceneFightView = new SceneFightView(currentSceneGraphicElements, allPanelsElements, enemyTrainerInstance,
-                currentSelectedButton, newSelectedButton, this);
+                currentSelectedButton, newSelectedButton, this, graphicElements);
         this.initGraphicElements();
     }
 

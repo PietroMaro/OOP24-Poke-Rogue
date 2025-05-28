@@ -31,7 +31,12 @@ public class GraphicElementsRegistryImpl implements GraphicElementsRegistry {
         elements.put(id, elem);
     }
 
-    public void remove(int id){
+    public void removeByInt(int id){
+        elements.remove(id);
+    }
+
+    public void removeByName(String name){
+        Integer id = nameToId.get(name);
         elements.remove(id);
     }
 

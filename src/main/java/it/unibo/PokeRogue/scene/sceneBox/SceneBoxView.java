@@ -234,7 +234,7 @@ public final class SceneBoxView {
                                                                 0.115 + (pokemonIndex / 9 * 0.09), 0.05, 0.07));
 
                         } else {
-                                currentSceneGraphicElements.remove(pokemonIndex + 206);
+                                currentSceneGraphicElements.removeByInt(pokemonIndex + 206);
                         }
 
                 }

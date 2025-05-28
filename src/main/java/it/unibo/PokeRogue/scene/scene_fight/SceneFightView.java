@@ -34,10 +34,10 @@ public class SceneFightView {
      */
     public SceneFightView(final GraphicElementsRegistry sceneGraphicElements,
             final Map<String, PanelElementImpl> allPanelsElements, final TrainerImpl enemyTrainerInstance,
-            final int currentSelectedButton, final int newSelectedButton, final SceneFight scene) {
+            final int currentSelectedButton, final int newSelectedButton, final SceneFight scene, final GraphicElementsRegistry graphicElements) {
         this.sceneGraphicElements = sceneGraphicElements;
         this.sceneFightInitView = new SceneFightInitView(this.sceneGraphicElements, allPanelsElements,
-                enemyTrainerInstance);
+                enemyTrainerInstance, graphicElements);
         this.sceneFightUpdateView = new SceneFightUpdateView(this.sceneGraphicElements, allPanelsElements,
                 currentSelectedButton, newSelectedButton, scene);
 

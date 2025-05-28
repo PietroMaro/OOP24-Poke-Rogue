@@ -85,10 +85,10 @@ public final class SceneFightUtilities {
      *                             integer identifiers
      */
     private static void clearMoveInfo(final GraphicElementsRegistry sceneGraphicElements) {
-        sceneGraphicElements.remove(SceneFightGraphicEnum.MOVE_PP_TEXT.value());
-        sceneGraphicElements.remove(SceneFightGraphicEnum.MOVE_TYPE_TEXT.value());
-        sceneGraphicElements.remove(SceneFightGraphicEnum.MOVE_POWER_TEXT.value());
-        sceneGraphicElements.remove(SceneFightGraphicEnum.MOVE_TYPE.value());
+        sceneGraphicElements.removeByInt(SceneFightGraphicEnum.MOVE_PP_TEXT.value());
+        sceneGraphicElements.removeByInt(SceneFightGraphicEnum.MOVE_TYPE_TEXT.value());
+        sceneGraphicElements.removeByInt(SceneFightGraphicEnum.MOVE_POWER_TEXT.value());
+        sceneGraphicElements.removeByInt(SceneFightGraphicEnum.MOVE_TYPE.value());
     }
 
     /**
