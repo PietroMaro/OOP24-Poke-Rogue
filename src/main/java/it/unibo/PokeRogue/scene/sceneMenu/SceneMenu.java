@@ -105,7 +105,7 @@ public final class SceneMenu extends Scene {
 
                     this.gameEngineInstance.setFileToLoad("");
                     this.gameEngineInstance.setScene("box");
-                } else if (this.currentSelectedButton == this.graphicElementNameToInt.get("OPTION_BUTTON")) {
+                } else if (this.currentSelectedButton == this.graphicElementNameToInt.get("OPTIONS_BUTTON")) {
                     this.gameEngineInstance.setScene("info");
 
                 }

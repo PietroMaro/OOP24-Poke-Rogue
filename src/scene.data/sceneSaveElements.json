@@ -3,7 +3,7 @@
         "1": {
             "type": "box",
             "panelName": "firstPanel",
-            "mainColor": "#266666",
+            "mainColor": "#00FF00",
             "borderColor": "#f58442",
             "borderThickness": 2,
             "leftX": 0.35,
@@ -15,7 +15,7 @@
             "type": "text",
             "panelName": "firstPanel",
             "text": "What do you want to do?",
-            "textColor": "#FFFFFF",
+            "textColor": "#000000",
             "textDimension": 0.1,
             "leftX": 0.36,
             "leftY": 0.04
@@ -24,7 +24,7 @@
             "type": "text",
             "panelName": "firstPanel",
             "text": "continue the game",
-            "textColor": "#FFFFFF",
+            "textColor": "#000000",
             "textDimension": 0.05,
             "leftX": 0.64,
             "leftY": 0.505
@@ -33,7 +33,7 @@
             "type": "text",
             "panelName": "firstPanel",
             "text": "exit and save the game",
-            "textColor": "#FFFFFF",
+            "textColor": "#000000",
             "textDimension": 0.05,
             "leftX": 0.23,
             "leftY": 0.505
@@ -41,7 +41,7 @@
         "5": {
             "type": "button",
             "panelName": "firstPanel",
-            "mainColor": "#266666",
+            "mainColor": "#00FF00",
             "borderColor": "#000000",
             "borderThickness": 0,
             "leftX": 0.20,
@@ -52,7 +52,7 @@
         "6": {
             "type": "button",
             "panelName": "firstPanel",
-            "mainColor": "#266666",
+            "mainColor": "#00FF00",
             "borderColor": "#000000",
             "borderThickness": 0,
             "leftX": 0.60,

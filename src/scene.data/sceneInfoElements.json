@@ -4,21 +4,21 @@
             "type": "text",
             "panelName": "firstPanel",
             "text": "BACK",
-            "textColor": "#FFFFFF",
-            "textDimension": 0.1,
-            "leftX": 0.36,
-            "leftY": 0.04
+            "textColor": "#000000",
+            "textDimension": 0.05,
+            "leftX": 0.01,
+            "leftY": 0.03
         },
         "1": {
             "type": "button",
             "panelName": "firstPanel",
-            "mainColor": "#266666",
+            "mainColor": "#00FF00",
             "borderColor": "#000000",
             "borderThickness": 0,
-            "leftX": 0.60,
-            "leftY": 0.45,
-            "width": 0.20,
-            "height": 0.1
+            "leftX": 0.00,
+            "leftY": 0.00,
+            "width": 0.05,
+            "height": 0.05
         },
         "100": {
             "type": "background",

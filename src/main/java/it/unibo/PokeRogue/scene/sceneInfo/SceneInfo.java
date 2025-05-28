@@ -50,7 +50,7 @@ public class SceneInfo extends Scene {
     }
 
     private void initStatus() {
-        this.newSelectedButton = this.graphicElementNameToInt.get("EXIT_AND_SAVE_BUTTON");
+        this.newSelectedButton = this.graphicElementNameToInt.get("BACK_BUTTON");
     }
 
     public void initGraphicElements() throws IOException {
