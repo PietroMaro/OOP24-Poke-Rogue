@@ -1,5 +1,23 @@
 {
-    "metrics": {},
+    "metrics": {
+        "0": {
+            "type": "button",
+            "panelName": "",
+            "mainColor": "",
+            "borderColor": "",
+            "borderThickness": 0,
+            "leftX": 0.0,
+            "leftY": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        },
+        "100": {
+            "type": "background",
+            "panelName": "firstPanel",
+            "dirToImage": "load",
+            "imageFileName": "sceneLoadBg.png"
+        }
+    },
     "mapper": {
         "FIRST_SAVE_BUTTON": 0,
         "SECOND_SAVE_BUTTON": 1,

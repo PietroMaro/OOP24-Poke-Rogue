@@ -18,8 +18,11 @@ public final class TextElementImpl extends GraphicElementImpl {
 
     @Getter @Setter
     private String text;
-    private final double leftX;
-    private final double leftY;
+
+    @Setter
+    private double leftX;
+    @Setter
+    private  double leftY;
     private final Color textColor;
     private final double textDimension;
 
