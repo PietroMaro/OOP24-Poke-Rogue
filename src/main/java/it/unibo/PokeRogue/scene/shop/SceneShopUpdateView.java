@@ -35,13 +35,13 @@ public class SceneShopUpdateView {
         private final PlayerTrainerImpl playerTrainerInstance;
         private int currentSelectedButton;
         private int newSelectedButton;
-        private final SceneShopTemp sceneInstance;
+        private final SceneShop sceneInstance;
         private Boolean alreadyInMainMenu = true;
 
         public SceneShopUpdateView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final int currentSelectedButton, final int newSelectedButton,
-                        final SceneShopTemp sceneInstance, final SceneShopUtilities sceneShopUtilities) {
+                        final SceneShop sceneInstance, final SceneShopUtilities sceneShopUtilities) {
 
                 this.currentSelectedButton = currentSelectedButton;
                 this.newSelectedButton = newSelectedButton;

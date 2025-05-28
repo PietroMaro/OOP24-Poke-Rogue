@@ -17,7 +17,7 @@ public class SceneShopView {
 
     public SceneShopView(final Map<Integer, GraphicElementImpl> sceneGraphicElements,
             final Map<String, PanelElementImpl> allPanelsElements,final ItemFactoryImpl itemFactoryImpl,final PlayerTrainerImpl playerTrainerInstance, final int currentSelectedButton,
-            final int newSelectedButton, final SceneShopTemp scene,final SceneShopUtilities sceneShopUtilities) {
+            final int newSelectedButton, final SceneShop scene,final SceneShopUtilities sceneShopUtilities) {
         this.itemFactoryImpl = itemFactoryImpl;
         this.sceneGraphicElements = sceneGraphicElements;
         this.initShopItems();

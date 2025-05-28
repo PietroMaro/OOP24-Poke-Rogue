@@ -8,7 +8,7 @@ import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.scene.sceneBox.SceneBox;
 import it.unibo.PokeRogue.scene.sceneInfo.SceneInfo;
 import it.unibo.PokeRogue.scene.scene_fight.SceneFight;
-import it.unibo.PokeRogue.scene.shop.SceneShopTemp;
+import it.unibo.PokeRogue.scene.shop.SceneShop;
 import it.unibo.PokeRogue.scene.sceneLoad.SceneLoad;
 import it.unibo.PokeRogue.scene.sceneMenu.SceneMenu;
 import it.unibo.PokeRogue.scene.sceneMove.SceneMove;
@@ -78,7 +78,7 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
                 currentScene = new SceneFight(fightLevel);
                 break;
             case "shop":
-                currentScene = new SceneShopTemp();
+                currentScene = new SceneShop();
                 break;
             case "move":
                 currentScene = new SceneMove();

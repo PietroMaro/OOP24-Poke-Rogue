@@ -21,7 +21,7 @@ import it.unibo.PokeRogue.scene.shop.enums.SceneShopStatusEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import lombok.Getter;
 
-public class SceneShopTemp implements Scene {
+public class SceneShop implements Scene {
     @Getter
     private final Map<Integer, GraphicElementImpl> sceneGraphicElements;
     @Getter
@@ -38,7 +38,7 @@ public class SceneShopTemp implements Scene {
     private boolean BuyedItem = false;
     private final EffectParser effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
 
-    public SceneShopTemp() throws IOException,
+    public SceneShop() throws IOException,
             InstantiationException,
             IllegalAccessException,
             NoSuchMethodException,
