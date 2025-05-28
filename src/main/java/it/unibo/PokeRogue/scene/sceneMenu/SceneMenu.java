@@ -49,7 +49,8 @@ public final class SceneMenu extends Scene {
             IOException,
             NoSuchMethodException {
         this.loadGraphicElements("sceneMenuElements.json");
-        this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),this.graphicElementNameToInt);
+        this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
+                this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.sceneMenuView = new SceneMenuView(this.graphicElements);
@@ -104,6 +105,9 @@ public final class SceneMenu extends Scene {
 
                     this.gameEngineInstance.setFileToLoad("");
                     this.gameEngineInstance.setScene("box");
+                } else if (this.currentSelectedButton == this.graphicElementNameToInt.get("OPTION_BUTTON")) {
+                    this.gameEngineInstance.setScene("info");
+
                 }
                 break;
             default:

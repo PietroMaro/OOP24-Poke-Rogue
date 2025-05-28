@@ -50,7 +50,6 @@ public class SceneFightInitView {
                 this.allPanelsElements = allPanelsElements;
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
                 this.enemyTrainerInstance = enemyTrainerInstance;
-
         }
 
         /**
@@ -124,6 +123,7 @@ public class SceneFightInitView {
                                                                 .getLevel().getCurrentValue()),
                                                 Color.WHITE,
                                                 0.04, 0.1, 0.06));
+                
 
                 // TEXT hp TO FIX MA
                 this.currentSceneGraphicElements.put(SceneFightGraphicEnum.MY_POKEMON_ACTUAL_LIFE_TEXT.value(),
@@ -148,6 +148,7 @@ public class SceneFightInitView {
                                                                                 .getCurrentMax(),
                                                 Color.GREEN,
                                                 0.04, 0.12, 0.06));
+                                                System.out.println(7);
                 // TEXT EXP
                 this.currentSceneGraphicElements.put(SceneFightGraphicEnum.MY_POKEMON_ACTUAL_EXP_TEXT.value(),
                                 new TextElementImpl(FIRST_PANEL, "exp. " +

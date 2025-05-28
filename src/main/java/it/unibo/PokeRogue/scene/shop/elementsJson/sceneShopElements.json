@@ -1,0 +1,477 @@
+{
+    "metrics": {
+        "1": {
+            "type": "button",
+            "panelName": "firstPanel",
+            "mainColor": "#266666",
+            "borderColor": "#000000",
+            "borderThickness": 0,
+            "leftX": 0.14,
+            "leftY": 0.30,
+            "width": 0.15,
+            "height": 0.1
+        },
+        "2": {
+            "type": "button",
+            "panelName": "firstPanel",
+            "mainColor": "#266666",
+            "borderColor": "#000000",
+            "borderThickness": 0,
+            "leftX": 0.43,
+            "leftY": 0.30,
+            "width": 0.15,
+            "height": 0.1
+        },
+        "3": {
+            "type": "button",
+            "panelName": "firstPanel",
+            "mainColor": "#266666",
+            "borderColor": "#000000",
+            "borderThickness": 0,
+            "leftX": 0.72,
+            "leftY": 0.30,
+            "width": 0.15,
+            "height": 0.1
+        },
+        "4": {
+            "type": "button",
+            "panelName": "firstPanel",
+            "mainColor": "#266666",
+            "borderColor": "#000000",
+            "borderThickness": 0,
+            "leftX": 0.14,
+            "leftY": 0.10,
+            "width": 0.15,
+            "height": 0.1
+        },
+        "5": {
+            "type": "button",
+            "panelName": "firstPanel",
+            "mainColor": "#266666",
+            "borderColor": "#000000",
+            "borderThickness": 0,
+            "leftX": 0.43,
+            "leftY": 0.10,
+            "width": 0.15,
+            "height": 0.1
+        },
+        "6": {
+            "type": "button",
+            "panelName": "firstPanel",
+            "mainColor": "#266666",
+            "borderColor": "#000000",
+            "borderThickness": 0,
+            "leftX": 0.72,
+            "leftY": 0.10,
+            "width": 0.15,
+            "height": 0.1
+        },
+        "7": {
+            "type": "button",
+            "panelName": "firstPanel",
+            "mainColor": "#266666",
+            "borderColor": "#000000",
+            "borderThickness": 0,
+            "leftX": 0.00,
+            "leftY": 0.64,
+            "width": 0.10,
+            "height": 0.07
+        },
+        "8": {
+            "type": "button",
+            "panelName": "firstPanel",
+            "mainColor": "#266666",
+            "borderColor": "#000000",
+            "borderThickness": 0,
+            "leftX": 0.90,
+            "leftY": 0.64,
+            "width": 0.10,
+            "height": 0.07
+        },
+        "200": {
+            "type": "button",
+            "panelName": "pokemonSelection",
+            "mainColor": "#266666",
+            "borderColor": "#000000",
+            "borderThickness": 0,
+            "leftX": 0.425,
+            "leftY": 0.10,
+            "width": 0.25,
+            "height": 0.08
+        },
+        "201": {
+            "type": "button",
+            "panelName": "pokemonSelection",
+            "mainColor": "#266666",
+            "borderColor": "#000000",
+            "borderThickness": 0,
+            "leftX": 0.425,
+            "leftY": 0.20,
+            "width": 0.25,
+            "height": 0.08
+        },
+        "202": {
+            "type": "button",
+            "panelName": "pokemonSelection",
+            "mainColor": "#266666",
+            "borderColor": "#000000",
+            "borderThickness": 0,
+            "leftX": 0.425,
+            "leftY": 0.30,
+            "width": 0.25,
+            "height": 0.08
+        },
+        "203": {
+            "type": "button",
+            "panelName": "pokemonSelection",
+            "mainColor": "#266666",
+            "borderColor": "#000000",
+            "borderThickness": 0,
+            "leftX": 0.425,
+            "leftY": 0.40,
+            "width": 0.25,
+            "height": 0.08
+        },
+        "204": {
+            "type": "button",
+            "panelName": "pokemonSelection",
+            "mainColor": "#266666",
+            "borderColor": "#000000",
+            "borderThickness": 0,
+            "leftX": 0.425,
+            "leftY": 0.50,
+            "width": 0.25,
+            "height": 0.08
+        },
+        "205": {
+            "type": "button",
+            "panelName": "pokemonSelection",
+            "mainColor": "#266666",
+            "borderColor": "#000000",
+            "borderThickness": 0,
+            "leftX": 0.425,
+            "leftY": 0.60,
+            "width": 0.25,
+            "height": 0.08
+        },
+        "206": {
+            "type": "button",
+            "panelName": "pokemonSelection",
+            "mainColor": "#266666",
+            "borderColor": "#000000",
+            "borderThickness": 0,
+            "leftX": 0.80,
+            "leftY": 0.80,
+            "width": 0.15,
+            "height": 0.1
+        },
+        "99": {
+            "type": "background",
+            "panelName": "firstPanel",
+            "dirToImage": "shop",
+            "imageFileName": "sceneBoxBg.png"
+        },
+        "100": {
+            "type": "backgroundChange",
+            "panelName": "pokemonSelection",
+            "dirToImage": "shop",
+            "imageFileName": "sceneBoxBgBar.png"
+        },
+        "101": {
+            "type": "box",
+            "panelName": "firstPanel",
+            "mainColor": "#266666",
+            "borderColor": "#f58442",
+            "borderThickness": 1,
+            "leftX": 0.1,
+            "leftY": 0.635,
+            "width": 0.068,
+            "height": 0.03
+        },
+        "102": {
+            "type": "text",
+            "panelName": "firstPanel",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.05,
+            "leftX": 0.92,
+            "leftY": 0.04
+        },
+        "103": {
+            "type": "text",
+            "panelName": "firstPanel",
+            "text": "REROLL: 50",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.055,
+            "leftX": 0.93,
+            "leftY": 0.68
+        },
+        "104": {
+            "type": "text",
+            "panelName": "firstPanel",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.05,
+            "leftX": 0.35,
+            "leftY": 0.85
+        },
+        "105": {
+            "type": "text",
+            "panelName": "firstPanel",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.05,
+            "leftX": 0.0,
+            "leftY": 0.85
+        },
+        "106": {
+            "type": "text",
+            "panelName": "firstPanel",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.05,
+            "leftX": 0.0,
+            "leftY": 0.85
+        },
+        "107": {
+            "type": "text",
+            "panelName": "firstPanel",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.05,
+            "leftX": 0.0,
+            "leftY": 0.85
+        },
+        "108": {
+            "type": "text",
+            "panelName": "firstPanel",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.05,
+            "leftX": 0.0,
+            "leftY": 0.85
+        },
+        "109": {
+            "type": "text",
+            "panelName": "firstPanel",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.05,
+            "leftX": 0.0,
+            "leftY": 0.85
+        },
+        "110": {
+            "type": "text",
+            "panelName": "firstPanel",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.05,
+            "leftX": 0.0,
+            "leftY": 0.85
+        },
+        "111": {
+            "type": "text",
+            "panelName": "firstPanel",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.05,
+            "leftX": 0.0,
+            "leftY": 0.85
+        },
+        "112": {
+            "type": "text",
+            "panelName": "firstPanel",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.05,
+            "leftX": 0.0,
+            "leftY": 0.85
+        },
+        "113": {
+            "type": "text",
+            "panelName": "firstPanel",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.05,
+            "leftX": 0.0,
+            "leftY": 0.85
+        },
+        "114": {
+            "type": "text",
+            "panelName": "firstPanel",
+            "text": "TEAM",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.055,
+            "leftX": 0.93,
+            "leftY": 0.68
+        },
+        "115": {
+            "type": "text",
+            "panelName": "pokemonSelection",
+            "text": "BACK",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.04,
+            "leftX": 0.80,
+            "leftY": 0.83
+        },
+        "116": {
+            "type": "text",
+            "panelName": "pokemonSelection",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.04,
+            "leftX": 0.425,
+            "leftY": 0.12
+        },
+        "117": {
+            "type": "text",
+            "panelName": "pokemonSelection",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.04,
+            "leftX": 0.425,
+            "leftY": 0.16
+        },
+        "118": {
+            "type": "text",
+            "panelName": "pokemonSelection",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.04,
+            "leftX": 0.425,
+            "leftY": 0.22
+        },
+        "119": {
+            "type": "text",
+            "panelName": "pokemonSelection",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.04,
+            "leftX": 0.425,
+            "leftY": 0.26
+        },
+        "120": {
+            "type": "text",
+            "panelName": "pokemonSelection",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.04,
+            "leftX": 0.425,
+            "leftY": 0.32
+        },
+        "121": {
+            "type": "text",
+            "panelName": "pokemonSelection",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.04,
+            "leftX": 0.425,
+            "leftY": 0.36
+        },
+        "122": {
+            "type": "text",
+            "panelName": "pokemonSelection",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.04,
+            "leftX": 0.425,
+            "leftY": 0.42
+        },
+        "123": {
+            "type": "text",
+            "panelName": "pokemonSelection",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.04,
+            "leftX": 0.425,
+            "leftY": 0.46
+        },
+        "124": {
+            "type": "text",
+            "panelName": "pokemonSelection",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.04,
+            "leftX": 0.425,
+            "leftY": 0.52
+        },
+        "125": {
+            "type": "text",
+            "panelName": "pokemonSelection",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.04,
+            "leftX": 0.425,
+            "leftY": 0.56
+        },
+        "126": {
+            "type": "text",
+            "panelName": "pokemonSelection",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.04,
+            "leftX": 0.425,
+            "leftY": 0.62
+        },
+        "127": {
+            "type": "text",
+            "panelName": "pokemonSelection",
+            "text": "",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.04,
+            "leftX": 0.425,
+            "leftY": 0.66
+        }
+    },
+    "mapper": {
+    "FREE_ITEM_1_BUTTON":1,
+    "FREE_ITEM_2_BUTTON":2,
+    "FREE_ITEM_3_BUTTON":3,
+    "PRICY_ITEM_1_BUTTON":4,
+    "PRICY_ITEM_2_BUTTON":5,
+    "PRICY_ITEM_3_BUTTON":6,
+    "REROL_BUTTON":7,
+    "TEAM_BUTTON":8,
+    "BACKGROUND":99,
+    "BACKGROUND_CHANGE":100,
+    "PLAYER_MONEY_BOX":101,
+    "PLAYER_MONEY_TEXT":102,
+    "REROL_TEXT":103,
+    "ITEM_DESCRIPTION_TEXT":104,
+    "PRICY_ITEM_1_PRICE_TEXT":105,
+    "PRICY_ITEM_2_PRICE_TEXT":106,
+    "PRICY_ITEM_3_PRICE_TEXT":107,
+    "FREE_ITEM_1_NAME_TEXT":108,
+    "FREE_ITEM_2_NAME_TEXT":109,
+    "FREE_ITEM_3_NAME_TEXT":110,
+    "PRICY_ITEM_1_NAME_TEXT":111,
+    "PRICY_ITEM_2_NAME_TEXT":112,
+    "PRICY_ITEM_3_NAME_TEXT":113,
+    "TEAM_TEXT":114,
+    "CHANGE_POKEMON_BACK_TEXT":115,
+    "POKEMON_1_NAME_TEXT":116,
+    "POKEMON_1_LIFE_TEXT":117,
+    "POKEMON_2_NAME_TEXT":118,
+    "POKEMON_2_LIFE_TEXT":119,
+    "POKEMON_3_NAME_TEXT":120,
+    "POKEMON_3_LIFE_TEXT":121,
+    "POKEMON_4_NAME_TEXT":122,
+    "POKEMON_4_LIFE_TEXT":123,
+    "POKEMON_5_NAME_TEXT":124,
+    "POKEMON_5_LIFE_TEXT":125,
+    "POKEMON_6_NAME_TEXT":126,
+    "POKEMON_6_LIFE_TEXT":127,
+    "CHANGE_POKEMON_1_BUTTON":200,
+    "CHANGE_POKEMON_2_BUTTON":201,
+    "CHANGE_POKEMON_3_BUTTON":202,
+    "CHANGE_POKEMON_4_BUTTON":203,
+    "CHANGE_POKEMON_5_BUTTON":204,
+    "CHANGE_POKEMON_6_BUTTON":205,
+    "CHANGE_POKEMON_BACK_BUTTON":206
+        
+    },
+    "loadableObjects": {
+        "init": [
+        ]
+    }
+}
