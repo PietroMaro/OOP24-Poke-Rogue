@@ -75,6 +75,8 @@ public final class SceneBoxView {
                 UtilitiesForScenes.loadSceneElements("sceneBoxElements.json", "init", currentSceneGraphicElements,
                                 this.graphicElements);
 
+                                
+
         }
 
         void updateGraphic(final int currentSelectedButton, final int newSelectedButton, final int boxIndex,
@@ -234,7 +236,7 @@ public final class SceneBoxView {
                                                                 0.115 + (pokemonIndex / 9 * 0.09), 0.05, 0.07));
 
                         } else {
-                                currentSceneGraphicElements.removeByInt(pokemonIndex + 206);
+                                currentSceneGraphicElements.removeById(pokemonIndex + 206);
                         }
 
                 }

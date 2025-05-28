@@ -339,7 +339,7 @@
         "START_BUTTON_CONTAINER_SPRITE": 125,
         "START_GAME_TEXT": 126
     },
-    "loadableObjects": {
+    "dynamicObjects": {
         "init": [
             126,
             105,

@@ -79,7 +79,7 @@ public final class SceneLoad extends Scene {
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.savingSystemInstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
         this.savesList = savingSystemInstance.getSaveFilesName(Paths.get("src", "saves").toString());
-        this.sceneLoadView = new SceneLoadView(this.graphicElementNameToInt);
+        this.sceneLoadView = new SceneLoadView(this.graphicElements);
         this.initStatus();
         this.initGraphicElements();
     }

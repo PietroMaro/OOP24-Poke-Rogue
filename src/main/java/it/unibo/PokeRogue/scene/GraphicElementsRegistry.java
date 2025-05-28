@@ -13,7 +13,7 @@ public interface GraphicElementsRegistry {
     Map<Integer, GraphicElementImpl> getElements();
 
     void put(int id, GraphicElementImpl elem);
-    void removeByInt(int id);
+    void removeById(int id);
     void removeByName(String name);
     void clear();
 }

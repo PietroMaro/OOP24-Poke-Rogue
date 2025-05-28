@@ -6,11 +6,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.scene.sceneBox.SceneBox;
+import it.unibo.PokeRogue.scene.sceneInfo.SceneInfo;
 import it.unibo.PokeRogue.scene.scene_fight.SceneFight;
 import it.unibo.PokeRogue.scene.shop.SceneShopTemp;
 import it.unibo.PokeRogue.scene.sceneLoad.SceneLoad;
 import it.unibo.PokeRogue.scene.sceneMenu.SceneMenu;
 import it.unibo.PokeRogue.scene.sceneMove.SceneMove;
+import it.unibo.PokeRogue.scene.sceneSave.SceneSave;
+
+
 import lombok.Setter;
 
 /**
@@ -73,16 +77,20 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
                 } else {
                     fightLevel = fightLevel + 1;
                 }
-
                 currentScene = new SceneFight(fightLevel);
-
+                break;
             case "shop":
                 currentScene = new SceneShopTemp();
                 break;
             case "move":
                 currentScene = new SceneMove();
                 break;
-
+            case "info":
+                currentScene = new SceneInfo();
+                break;
+            case "save":
+                currentScene = new SceneSave();
+                break;
             default:
                 break;
         }
