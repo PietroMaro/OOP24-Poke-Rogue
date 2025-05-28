@@ -2,14 +2,213 @@
     "metrics": {
         "0": {
             "type": "button",
-            "panelName": "",
-            "mainColor": "",
-            "borderColor": "",
-            "borderThickness": 0,
-            "leftX": 0.0,
-            "leftY": 0.0,
-            "width": 0.0,
-            "height": 0.0
+            "panelName": "savesPanel",
+            "mainColor": "#00FF00",
+            "borderColor": "#000000",
+            "borderThickness": 2,
+            "leftX": 0.28,
+            "leftY": 0.01,
+            "width": 0.5,
+            "height": 0.08
+        },
+        "1": {
+            "type": "button",
+            "panelName": "savesPanel",
+            "mainColor": "#00FF00",
+            "borderColor": "#000000",
+            "borderThickness": 2,
+            "leftX": 0.28,
+            "leftY": 0.11,
+            "width": 0.5,
+            "height": 0.08
+        },
+        "2": {
+            "type": "button",
+            "panelName": "savesPanel",
+            "mainColor": "#00FF00",
+            "borderColor": "#000000",
+            "borderThickness": 2,
+            "leftX": 0.28,
+            "leftY": 0.21,
+            "width": 0.5,
+            "height": 0.08
+        },
+        "3": {
+            "type": "button",
+            "panelName": "savesPanel",
+            "mainColor": "#00FF00",
+            "borderColor": "#000000",
+            "borderThickness": 2,
+            "leftX": 0.28,
+            "leftY": 0.31,
+            "width": 0.5,
+            "height": 0.08
+        },
+        "4": {
+            "type": "button",
+            "panelName": "savesPanel",
+            "mainColor": "#00FF00",
+            "borderColor": "#000000",
+            "borderThickness": 2,
+            "leftX": 0.28,
+            "leftY": 0.41,
+            "width": 0.5,
+            "height": 0.08
+        },
+        "5": {
+            "type": "button",
+            "panelName": "savesPanel",
+            "mainColor": "#00FF00",
+            "borderColor": "#000000",
+            "borderThickness": 2,
+            "leftX": 0.28,
+            "leftY": 0.51,
+            "width": 0.5,
+            "height": 0.08
+        },
+        "6": {
+            "type": "button",
+            "panelName": "savesPanel",
+            "mainColor": "#00FF00",
+            "borderColor": "#000000",
+            "borderThickness": 2,
+            "leftX": 0.28,
+            "leftY": 0.61,
+            "width": 0.5,
+            "height": 0.08
+        },
+        "7": {
+            "type": "button",
+            "panelName": "savesPanel",
+            "mainColor": "#00FF00",
+            "borderColor": "#000000",
+            "borderThickness": 2,
+            "leftX": 0.28,
+            "leftY": 0.71,
+            "width": 0.5,
+            "height": 0.08
+        },
+        "8": {
+            "type": "button",
+            "panelName": "savesPanel",
+            "mainColor": "#00FF00",
+            "borderColor": "#000000",
+            "borderThickness": 2,
+            "leftX": 0.28,
+            "leftY": 0.81,
+            "width": 0.5,
+            "height": 0.08
+        },
+        "9": {
+            "type": "button",
+            "panelName": "savesPanel",
+            "mainColor": "#00FF00",
+            "borderColor": "#000000",
+            "borderThickness": 2,
+            "leftX": 0.28,
+            "leftY": 0.91,
+            "width": 0.5,
+            "height": 0.08
+        },
+        "10": {
+            "type": "text",
+            "panelName": "savesPanel",
+            "textDimension": 0.08,
+            "text": "",
+            "textColor": "#000000",
+            "fontSize": 0.08,
+            "leftX": 0.282,
+            "leftY": 0.06
+        },
+        "11": {
+            "type": "text",
+            "panelName": "savesPanel",
+            "textDimension": 0.08,
+            "text": "",
+            "textColor": "#000000",
+            "fontSize": 0.08,
+            "leftX": 0.282,
+            "leftY": 0.16
+        },
+        "12": {
+            "type": "text",
+            "panelName": "savesPanel",
+            "textDimension": 0.08,
+            "text": "",
+            "textColor": "#000000",
+            "fontSize": 0.08,
+            "leftX": 0.282,
+            "leftY": 0.26
+        },
+        "13": {
+            "type": "text",
+            "panelName": "savesPanel",
+            "textDimension": 0.08,
+            "text": "",
+            "textColor": "#000000",
+            "fontSize": 0.08,
+            "leftX": 0.282,
+            "leftY": 0.36
+        },
+        "14": {
+            "type": "text",
+            "panelName": "savesPanel",
+            "textDimension": 0.08,
+            "text": "",
+            "textColor": "#000000",
+            "fontSize": 0.08,
+            "leftX": 0.282,
+            "leftY": 0.46
+        },
+        "15": {
+            "type": "text",
+            "panelName": "savesPanel",
+            "textDimension": 0.08,
+            "text": "",
+            "textColor": "#000000",
+            "fontSize": 0.08,
+            "leftX": 0.282,
+            "leftY": 0.56
+        },
+        "16": {
+            "type": "text",
+            "panelName": "savesPanel",
+            "textDimension": 0.08,
+            "text": "",
+            "textColor": "#000000",
+            "fontSize": 0.08,
+            "leftX": 0.282,
+            "leftY": 0.66
+        },
+        "17": {
+            "type": "text",
+            "panelName": "savesPanel",
+            "textDimension": 0.08,
+            "text": "",
+            "textColor": "#000000",
+            "fontSize": 0.08,
+            "leftX": 0.282,
+            "leftY": 0.76
+        },
+        "18": {
+            "type": "text",
+            "panelName": "savesPanel",
+            "textDimension": 0.08,
+            "text": "",
+            "textColor": "#000000",
+            "fontSize": 0.08,
+            "leftX": 0.282,
+            "leftY": 0.86
+        },
+        "19": {
+            "type": "text",
+            "panelName": "savesPanel",
+            "textDimension": 0.08,
+            "text": "",
+            "textColor": "#000000",
+            "fontSize": 0.08,
+            "leftX": 0.282,
+            "leftY": 0.96
         },
         "100": {
             "type": "background",
@@ -40,5 +239,30 @@
         "NINTH_SAVE_TEXT": 18,
         "TENTH_SAVE_TEXT": 19,
         "BACKGROUND": 100
+    },
+    "dynamicObjects": {
+        "init": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            100
+        ]
     }
 }

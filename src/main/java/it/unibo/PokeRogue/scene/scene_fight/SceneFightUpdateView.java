@@ -96,15 +96,15 @@ public class SceneFightUpdateView {
                 if (currentSelectedButton >= SceneFightStatusValuesEnum.MOVE_BUTTON_1.value()
                                 && currentSelectedButton < SceneFightStatusValuesEnum.CHANGE_POKEMON_1.value()) {
                         this.alreadyInMainMenu = false;
-                        this.currentSceneGraphicElements.remove(SceneFightStatusValuesEnum.RUN_BUTTON.value());
-                        this.currentSceneGraphicElements.remove(SceneFightStatusValuesEnum.POKEMON_BUTTON.value());
-                        this.currentSceneGraphicElements.remove(SceneFightStatusValuesEnum.FIGHT_BUTTON.value());
-                        this.currentSceneGraphicElements.remove(SceneFightStatusValuesEnum.BALL_BUTTON.value());
-                        this.currentSceneGraphicElements.remove(SceneFightGraphicEnum.RUN_BUTTON_TEXT.value());
-                        this.currentSceneGraphicElements.remove(SceneFightGraphicEnum.POKEMON_BUTTON_TEXT.value());
-                        this.currentSceneGraphicElements.remove(SceneFightGraphicEnum.BALL_BUTTON_TEXT.value());
-                        this.currentSceneGraphicElements.remove(SceneFightGraphicEnum.FIGHT_BUTTON_TEXT.value());
-                        this.currentSceneGraphicElements.remove(SceneFightGraphicEnum.DETAILS_CONTAINER_TEXT.value());
+                        this.currentSceneGraphicElements.removeById(SceneFightStatusValuesEnum.RUN_BUTTON.value());
+                        this.currentSceneGraphicElements.removeById(SceneFightStatusValuesEnum.POKEMON_BUTTON.value());
+                        this.currentSceneGraphicElements.removeById(SceneFightStatusValuesEnum.FIGHT_BUTTON.value());
+                        this.currentSceneGraphicElements.removeById(SceneFightStatusValuesEnum.BALL_BUTTON.value());
+                        this.currentSceneGraphicElements.removeById(SceneFightGraphicEnum.RUN_BUTTON_TEXT.value());
+                        this.currentSceneGraphicElements.removeById(SceneFightGraphicEnum.POKEMON_BUTTON_TEXT.value());
+                        this.currentSceneGraphicElements.removeById(SceneFightGraphicEnum.BALL_BUTTON_TEXT.value());
+                        this.currentSceneGraphicElements.removeById(SceneFightGraphicEnum.FIGHT_BUTTON_TEXT.value());
+                        this.currentSceneGraphicElements.removeById(SceneFightGraphicEnum.DETAILS_CONTAINER_TEXT.value());
                         this.initMoveText();
                         this.initMoveButton();
                         SceneFightUtilities.updateMoveInfo(currentSelectedButton, currentSceneGraphicElements,

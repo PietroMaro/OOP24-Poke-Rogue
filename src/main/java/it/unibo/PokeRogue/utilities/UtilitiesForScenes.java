@@ -3,12 +3,10 @@ package it.unibo.PokeRogue.utilities;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Locale;
-import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 
@@ -78,7 +76,7 @@ public final class UtilitiesForScenes {
         JSONObject root = jsonReader
                 .readJsonObject(Paths.get("src", "scene.data", fileName).toString());
 
-        JSONArray initArrayIndex = root.getJSONObject("loadableObjects").getJSONArray(loadSectionName);
+        JSONArray initArrayIndex = root.getJSONObject("dynamicObjects").getJSONArray(loadSectionName);
 
         for (int i = 0; i < initArrayIndex.length(); i++) {
             int index = initArrayIndex.getInt(i);
@@ -87,4 +85,25 @@ public final class UtilitiesForScenes {
         }
 
     }
+
+
+    public static void removeSceneElements(String fileName, String loadSectionName,
+        GraphicElementsRegistry currentSceneGraphicElements) throws IOException {
+
+        JsonReader jsonReader = new JsonReaderImpl();
+        JSONObject root = jsonReader
+                .readJsonObject(Paths.get("src", "scene.data", fileName).toString());
+
+        JSONArray initArrayIndex = root.getJSONObject("dynamicObjects").getJSONArray(loadSectionName);
+
+        for (int i = 0; i < initArrayIndex.length(); i++) {
+            int index = initArrayIndex.getInt(i);
+            currentSceneGraphicElements.removeById(index);
+
+        }
+
+    }
+
+
+
 }

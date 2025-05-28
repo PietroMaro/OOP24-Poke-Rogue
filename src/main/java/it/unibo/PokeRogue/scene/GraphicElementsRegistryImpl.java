@@ -15,9 +15,6 @@ public class GraphicElementsRegistryImpl implements GraphicElementsRegistry {
         this.nameToId = nameToId;
     }
 
-     
-
-
     public GraphicElementImpl getByName(String name) {
         Integer id = nameToId.get(name);
         return id != null ? elements.get(id) : null;
@@ -31,11 +28,16 @@ public class GraphicElementsRegistryImpl implements GraphicElementsRegistry {
         elements.put(id, elem);
     }
 
-    public void remove(int id){
+    public void removeById(int id) {
         elements.remove(id);
     }
 
-    public void clear(){
+    public void removeByName(String name) {
+        Integer id = nameToId.get(name);
+        elements.remove(id);
+    }
+
+    public void clear() {
         elements.clear();
     }
 }
