@@ -4,13 +4,23 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The class from which every singleton extends.
+ */
 public abstract class Singleton {
 
     private static final Map<Class<? extends Singleton>, Singleton> INSTANCES = new HashMap<>();
 
+	/**
+	 * Shouldn't be instanciated.
+	 */
     protected Singleton() {
+		//Empty on purpose
     }
 
+	/**
+	 * The getInstance function that will return the instance of the specific singleton.
+	 */
     public static <T extends Singleton> T getInstance(final Class<T> clazz)
             throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         synchronized (INSTANCES) {

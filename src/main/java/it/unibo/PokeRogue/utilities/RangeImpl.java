@@ -16,7 +16,7 @@ public class RangeImpl<T extends Number> implements Range<T> {
     @Getter
     private T currentValue;
 
-    public RangeImpl(T currentMin, T currentMax, T currentValue) {
+    public RangeImpl(final T currentMin, final T currentMax, final T currentValue) {
 
         this.currentMin = currentMin;
 
@@ -26,8 +26,8 @@ public class RangeImpl<T extends Number> implements Range<T> {
     }
 
     @Override
-    public void increment(T x) {
-        double newValue = this.currentValue.doubleValue() + x.doubleValue();
+    public void increment(final T x) {
+        final double newValue = this.currentValue.doubleValue() + x.doubleValue();
         if (newValue <= this.currentMax.doubleValue()) {
             this.currentValue = convertToType(newValue);
         } else {
@@ -36,8 +36,8 @@ public class RangeImpl<T extends Number> implements Range<T> {
     }
 
     @Override
-    public void decrement(T x) {
-        double newValue = this.currentValue.doubleValue() - x.doubleValue();
+    public void decrement(final T x) {
+        final double newValue = this.currentValue.doubleValue() - x.doubleValue();
         if (newValue > this.currentMin.doubleValue()) {
             this.currentValue = convertToType(newValue);
         } else {
@@ -45,21 +45,21 @@ public class RangeImpl<T extends Number> implements Range<T> {
         }
     }
 
-    private T convertToType(double value) {
+    private T convertToType(final double value) {
         if (currentValue instanceof Integer) {
-            return (T) Integer.valueOf((int) value);
+            return (T) (Integer)(int) value;
         } else if (currentValue instanceof Double) {
-            return (T) Double.valueOf(value);
+            return (T) (Double)value;
         } else if (currentValue instanceof Long) {
-            return (T) Long.valueOf((long) value);
+            return (T) (Long)(long) value;
         } else if (currentValue instanceof Float) {
-            return (T) Float.valueOf((float) value);
+            return (T) (Float)(float) value;
         }
         throw new UnsupportedOperationException("Unsupported Number type");
     }
 
     @Override
-    public void setCurrentValue(T newValue) {
+    public void setCurrentValue(final T newValue) {
         this.currentValue = newValue;
         if (newValue.doubleValue() > this.currentMax.doubleValue()) {
             this.currentValue = currentMax;

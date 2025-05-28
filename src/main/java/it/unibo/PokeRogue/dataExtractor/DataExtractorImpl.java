@@ -16,15 +16,15 @@ import java.nio.file.Path;
 
 public class DataExtractorImpl implements DataExtractor {
 	private String destinationFolder;
-	private HttpClient client;
-	private String apiURL;
-	private JSONArray movesList;
-	private String movesListFilePath;
-	private JSONArray abilitiesList;
-	private String abilitiesListFilePath;
-	private JsonReader jsonReader = new JsonReaderImpl();
+	final private HttpClient client;
+	final private String apiURL;
+	final private JSONArray movesList;
+	final private String movesListFilePath;
+	final private JSONArray abilitiesList;
+	final private String abilitiesListFilePath;
+	final private JsonReader jsonReader = new JsonReaderImpl();
 
-	public DataExtractorImpl(String destionationFolder) throws IOException {
+	public DataExtractorImpl(final String destionationFolder) throws IOException {
 		this.destinationFolder = destionationFolder;
 		this.client = HttpClient.newHttpClient();
 		this.apiURL = "https://pokeapi.co/api/v2/";
@@ -35,19 +35,20 @@ public class DataExtractorImpl implements DataExtractor {
 	}
 
 	@Override
-	public void extractPokemon(final int apiIndex) throws IOException {
+	public void extractPokemon(final int apiIndex) throws IOException, InterruptedException {
+		final String nameLitteral = "name";
 		Optional<HttpResponse<String>> response = makeApiRequestForString(
-				this.apiURL + "pokemon/" + String.valueOf(apiIndex));
+				this.apiURL + "pokemon/" + apiIndex);
 		final JSONObject pokemonExtractedJSON = new JSONObject(response.get().body());
-		final String pokemonName = pokemonExtractedJSON.getString("name");
+		final String pokemonName = pokemonExtractedJSON.getString(nameLitteral);
 		final JSONObject newPokemonJSON = new JSONObject()
-				.put("name", pokemonName)
+				.put(nameLitteral, pokemonName)
 				.put("weight", pokemonExtractedJSON.getInt("weight"))
 				.put("pokedexNumber", apiIndex);
 		final JSONObject newPokemonStats = new JSONObject();
 		for (int statNum = 0; statNum < 6; statNum += 1) {
 			final String statName = pokemonExtractedJSON.getJSONArray("stats").getJSONObject(statNum)
-					.getJSONObject("stat").getString("name");
+					.getJSONObject("stat").getString(nameLitteral);
 			final int statValue = pokemonExtractedJSON.getJSONArray("stats").getJSONObject(statNum).getInt("base_stat");
 			newPokemonStats.put(statName, statValue);
 		}
@@ -55,13 +56,13 @@ public class DataExtractorImpl implements DataExtractor {
 		for (int typeIndex = 0; typeIndex < pokemonExtractedJSON.getJSONArray("types").length(); typeIndex += 1) {
 			newPokemonTypes.put(
 					pokemonExtractedJSON.getJSONArray("types").getJSONObject(typeIndex).getJSONObject("type")
-							.getString("name"));
+							.getString(nameLitteral));
 		}
 		final JSONArray newPokemonAbilities = new JSONArray();
 		for (int abilityIndex = 0; abilityIndex < pokemonExtractedJSON.getJSONArray("abilities")
 				.length(); abilityIndex += 1) {
 			final String abilityName = pokemonExtractedJSON.getJSONArray("abilities").getJSONObject(abilityIndex)
-					.getJSONObject("ability").getString("name");
+					.getJSONObject("ability").getString(nameLitteral);
 			newPokemonAbilities.put(abilityName);
 			updateAbilitiesList(abilityName);
 		}
@@ -69,16 +70,16 @@ public class DataExtractorImpl implements DataExtractor {
 		final JSONObject newPokemonMoves = new JSONObject();
 		for (int moveIndex = 0; moveIndex < pokemonExtractedJSON.getJSONArray("moves").length(); moveIndex += 1) {
 			final JSONObject move = pokemonExtractedJSON.getJSONArray("moves").getJSONObject(moveIndex);
-			final String moveName = move.getJSONObject("move").getString("name");
+			final String moveName = move.getJSONObject("move").getString(nameLitteral);
 			Optional<Integer> level = Optional.empty();
 			for (int versionGroupIndex = 0; versionGroupIndex < move.getJSONArray("version_group_details")
 					.length(); versionGroupIndex += 1) {
 				final JSONObject singleVersionGroup = move.getJSONArray("version_group_details")
 						.getJSONObject(versionGroupIndex);
 				if (singleVersionGroup.getInt("level_learned_at") > 0 &&
-						singleVersionGroup.getJSONObject("move_learn_method").getString("name").equals("level-up") &&
-						singleVersionGroup.getJSONObject("version_group").getString("name")
-								.equals("firered-leafgreen")) {
+						"level-up".equals(singleVersionGroup.getJSONObject("move_learn_method").getString(nameLitteral)) &&
+						"firered-leafgreen"
+						.equals(singleVersionGroup.getJSONObject("version_group").getString(nameLitteral))) {
 					level = Optional.of(singleVersionGroup.getInt("level_learned_at"));
 					if (level.get() < minLevelForFirstMove) {
 						minLevelForFirstMove = level.get();
@@ -125,11 +126,10 @@ public class DataExtractorImpl implements DataExtractor {
 				.put("givesEV", newPokemonGivesEV);
 		jsonReader.dumpJsonToFile(this.destinationFolder + File.separator + pokemonName + ".json",
 				this.destinationFolder, newPokemonJSON);
-		System.out.println("Dumped " + pokemonName + "!");
 	}
 
 	@Override
-	public void extractPokemons(final int startIndex, final int endIndex) throws IOException {
+	public void extractPokemons(final int startIndex, final int endIndex) throws IOException, InterruptedException {
 		if (endIndex > 151) {
 			throw new IllegalArgumentException("Currently only the first 151 Pokémon are supported.");
 		}
@@ -149,15 +149,16 @@ public class DataExtractorImpl implements DataExtractor {
 	}
 
 	@Override
-	public void extractMove(final String toExtractMoveName) throws IOException {
+	public void extractMove(final String toExtractMoveName) throws IOException, InterruptedException {
+		final String nameLitteral = "name";
 		final Optional<HttpResponse<String>> response = makeApiRequestForString(
 				this.apiURL + "move/" + toExtractMoveName);
 		final JSONObject moveExtractedJSON = new JSONObject(response.get().body());
-		final String moveName = moveExtractedJSON.getString("name");
+		final String moveName = moveExtractedJSON.getString(nameLitteral);
 		final JSONObject newMoveJSON = new JSONObject();
-		final String isPhysical = moveExtractedJSON.getJSONObject("damage_class").getString("name");
-		newMoveJSON.put("isPhysical", isPhysical == "physical");
-		final String type = moveExtractedJSON.getJSONObject("type").getString("name");
+		final String physical = moveExtractedJSON.getJSONObject("damage_class").getString(nameLitteral);
+		newMoveJSON.put("isPhysical", "physical".equals(physical));
+		final String type = moveExtractedJSON.getJSONObject("type").getString(nameLitteral);
 		newMoveJSON.put("type", type);
 		final int critRate = moveExtractedJSON.getJSONObject("meta").getInt("crit_rate");
 		newMoveJSON.put("critRate", critRate);
@@ -183,7 +184,7 @@ public class DataExtractorImpl implements DataExtractor {
 				.length(); flavourTextIndex += 1) {
 			final JSONObject flavourText = moveExtractedJSON.getJSONArray("flavor_text_entries")
 					.getJSONObject(flavourTextIndex);
-			if (flavourText.getJSONObject("language").getString("name").equals("en")) {
+			if ("en".equals(flavourText.getJSONObject("language").getString(nameLitteral))) {
 				newMoveJSON.put("effect",
 						flavourText.getString("flavor_text") + " TODO Create effect and link it here");
 				break;
@@ -192,11 +193,10 @@ public class DataExtractorImpl implements DataExtractor {
 
 		jsonReader.dumpJsonToFile(this.destinationFolder + File.separator + moveName + ".json", this.destinationFolder,
 				newMoveJSON);
-		System.out.println("Dumped " + moveName + "!");
 	}
 
 	@Override
-	public void extractMoves() throws IOException {
+	public void extractMoves() throws IOException, InterruptedException {
 		for (int moveNameIndex = 0; moveNameIndex < this.movesList.length(); moveNameIndex += 1) {
 			extractMove(this.movesList.getString(moveNameIndex));
 		}
@@ -213,7 +213,7 @@ public class DataExtractorImpl implements DataExtractor {
 	}
 
 	@Override
-	public void setDestinationFolder(String newPath) {
+	public void setDestinationFolder(final String newPath) {
 		this.destinationFolder = newPath;
 	}
 
@@ -222,30 +222,20 @@ public class DataExtractorImpl implements DataExtractor {
 		return this.destinationFolder;
 	}
 
-	private void makeApiRequestForPng(final String Url, final String filePath) {
+	private void makeApiRequestForPng(final String url, final String filePath) throws IOException, InterruptedException {
 		final HttpRequest request = HttpRequest.newBuilder()
-				.uri(URI.create(Url))
+				.uri(URI.create(url))
 				.build();
-		try {
-			client.send(request,HttpResponse.BodyHandlers.ofFile(Path.of(filePath)));
-		} catch (IOException | InterruptedException e) {
-			e.printStackTrace();
-		}
+		client.send(request,HttpResponse.BodyHandlers.ofFile(Path.of(filePath)));
 	}
 
-	private Optional<HttpResponse<String>> makeApiRequestForString(final String uri) {
+	private Optional<HttpResponse<String>> makeApiRequestForString(final String uri) throws IOException, InterruptedException {
 		final HttpRequest request = HttpRequest.newBuilder()
 				.uri(URI.create(uri))
 				.header("Accept", "application/json")
 				.build();
-		Optional<HttpResponse<String>> response = Optional.empty();
-		try {
-			response = Optional.ofNullable(client.send(request, HttpResponse.BodyHandlers.ofString()));
-		} catch (IOException | InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		return response;
+		return Optional
+			.ofNullable(client.send(request, HttpResponse.BodyHandlers.ofString()));
 	}
 
 }

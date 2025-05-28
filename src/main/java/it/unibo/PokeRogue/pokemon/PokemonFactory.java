@@ -2,20 +2,20 @@ package it.unibo.PokeRogue.pokemon;
 
 import java.util.Set;
 import java.io.IOException;
-import java.lang.InstantiationException;
-import java.lang.IllegalAccessException;
-import java.lang.NoSuchMethodException;
 import java.lang.reflect.InvocationTargetException;
 
+/**
+ * The factory that generates pokemon.
+ */
 public interface PokemonFactory {
 	/**
-	* Make the access in memory and saves the information of all pokemons in local 
-	* (this method gets automatically called by the constructor)
+	* Make the access in memory and saves the information of all pokemons in local
+	* (this method gets automatically called by the constructor).
 	*/
     void init() throws IOException;
 	/**
 	* Create a {@link Pokemon} building it using the blueprint info and some
-	* random generated values
+	* random generated values.
 	* @param pokemonName 
 	* @return the pokemon with the name specified
 	* @see Pokemon 
@@ -27,7 +27,7 @@ public interface PokemonFactory {
 		InvocationTargetException;
 	/**
 	* generate a random value setting is level to the param
-	* given
+	* given.
 	* @return a random generated pokemon
 	* @param level 
 	*/
@@ -37,7 +37,7 @@ public interface PokemonFactory {
 		NoSuchMethodException,
 		InvocationTargetException;	
 	/**
-	* simple getter 
+	* simple getter.
 	* @return the list of all pokemons 
 	*/
 	Set<String> getAllPokemonList();

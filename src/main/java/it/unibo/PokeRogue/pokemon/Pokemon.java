@@ -9,73 +9,314 @@ import java.awt.Image;
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.utilities.Range;
 
+/**
+ * The interface of pokemon class.
+ */
 public interface Pokemon {
-	// When you call level up with isPlayerPokemon. if the pokemon learns a new move
-	// it will set up a flag inside the
-	// logic the scene will get this flag and if true it will call (learnNewMove)
-	// where it will choose if It want to delete
-	// an old move or not
+	/** 
+	* When you call level up with isPlayerPokemon. if the pokemon learns a new move
+	* it will set up a flag inside the
+	* logic the scene will get this flag and if true it will call (learnNewMove)
+	* where it will choose if It want to delete
+	* an old move or not.
+	* @param isPlayerPokemon if it is it will set a flag on level up
+	*/
 	void levelUp(boolean isPlayerPokemon);
+	/**
+	 * Make pokemon learn a move.
+	 * @param indexMoveToReplace is an Optional for the case that it doesn't want to learn the move
+	 */
 	void learnNewMove(Optional<Integer> indexMoveToReplace);
+	/**
+	 * Inflict damage.
+	 * @param amount of damage
+	 */
 	void inflictDamage(int amount);
-
-	void increaseExp(int amount,boolean isPlayerPokemon);
-	void increaseEV(Map<String,Integer> increaseEV);
-
-	int getTotalUsedEV();
-	void setTotalUsedEV(int newVal);
-	Map<String,Integer> getBaseStats();
-	void setBaseStats(Map<String,Integer> newVal);
+	/**
+	 * Increase exp.
+	 * @param amount of exp
+	 * @param isPlayerPokemon if it is it will set a flag on level up
+	 */
+	void increaseExp(int amount, boolean isPlayerPokemon);
+	/**
+	 * Increase exp.
+	 * @param increaseEv which and by how much
+	 */
+	void increaseEv(Map<String, Integer> increaseEv);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
+	int getTotalUsedEv();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
+	void setTotalUsedEv(int newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
+	Map<String, Integer> getBaseStats();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
+	void setBaseStats(Map<String, Integer> newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
 	Nature getNature();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
 	void setNature(Nature newVal);
-	Map<String,Integer> getIV();
-	void setIV(Map<String,Integer> newVal);
-	Map<String,Range<Integer>> getEV();
-	void setEV(Map<String,Range<Integer>> newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
+	Map<String, Integer> getIv();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
+	void setIv(Map<String, Integer> newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
+	Map<String, Range<Integer>> getEv();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
+	void setEv(Map<String, Range<Integer>> newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
 	Range<Integer> getLevel();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
 	void setLevel(Range<Integer> newVal);
-	Map<String,Range<Integer>> getActualStats();
-	void setActualStats(Map<String,Range<Integer>> newVal);
-	Map<String,Range<Integer>> getTempStatsBonus();
-	void setTempStatsBonus(Map<String,Range<Integer>> newVal);
-	Map<Integer,String> getLevelMovesLearn();
-	void setLevelMovesLearn(Map<Integer,String> newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
+	Map<String, Range<Integer>> getActualStats();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
+	void setActualStats(Map<String, Range<Integer>> newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
+	Map<String, Range<Integer>> getTempStatsBonus();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
+	void setTempStatsBonus(Map<String, Range<Integer>> newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
+	Map<Integer, String> getLevelMovesLearn();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
+	void setLevelMovesLearn(Map<Integer, String> newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
 	List<Move> getActualMoves();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
 	void setActualMoves(List<Move> newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
 	String getLevelUpCurve();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
 	void setLevelUpCurve(String newVal);
-	Map<String,Integer> getGivesEV();
-	void setGivesEV(Map<String,Integer> newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
+	Map<String, Integer> getGivesEv();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
+	void setGivesEv(Map<String, Integer> newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
 	Range<Integer> getExp();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
 	void setExp(Range<Integer> newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
 	int getPokedexNumber();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
 	void setPokedexNumber(int newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
 	int getWeight();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
 	void setWeight(int newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
 	String getName();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
 	void setName(String newVal);
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
 	void setType1(Type newVal);
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
 	void setType2(Optional<Type> newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
 	List<Type> getTypes();
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
 	int getCaptureRate();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
 	void setCaptureRate(int newVal);
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
+	 void setGender(String newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
 	String getGender();
-	void setGender(String newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
 	Optional<String> getHoldingObject();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
 	void setHoldingObject(Optional<String> newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
 	String getAbilityName();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
 	void setAbilityName(String newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
 	Optional<StatusCondition> getStatusCondition();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
 	void setStatusCondition(Optional<StatusCondition> newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
 	boolean isHasToLearnMove();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
 	void setHasToLearnMove(boolean newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
 	Optional<Move> getNewMoveToLearn();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
 	void setNewMoveToLearn(Optional<Move> newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
 	Image getSpriteFront();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
 	void setSpriteFront(Image newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
 	Image getSpriteBack();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
 	void setSpriteBack(Image newVal);
-	Map<StatusCondition,Integer> getStatusDuration();
-	void setStatusDuration(Map<StatusCondition,Integer> newVal);
+	/**
+	 * Simple getter.
+	 * @return the parameter
+	 */
+	Map<StatusCondition, Integer> getStatusDuration();
+	/**
+	 * Simple setter.
+	 * @param newVal value to set
+	 */
+	void setStatusDuration(Map<StatusCondition, Integer> newVal);
 	//if exp+amount = max of the level it will trigger level up
 }

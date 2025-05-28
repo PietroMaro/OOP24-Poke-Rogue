@@ -36,8 +36,8 @@ public final class BattleRewards {
 
         winnerPokemon.increaseExp(gainedExp, true);
 
-        final Map<String, Integer> awardedEVs = defeatedPokemon.getGivesEV();
-        winnerPokemon.increaseEV(awardedEVs);
+        final Map<String, Integer> awardedEvs = defeatedPokemon.getGivesEv();
+        winnerPokemon.increaseEv(awardedEvs);
     }
 
 }
