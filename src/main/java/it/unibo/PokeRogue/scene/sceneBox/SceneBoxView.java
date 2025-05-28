@@ -42,6 +42,20 @@ import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
  * @see SceneBoxUpdateView
  */
 public final class SceneBoxView {
+        private static final int LENGTH_OF_POKEBOX = 81;
+        private static final double POKEMON_BUTTON_WIDTH = 0.03;
+        private static final double POKEMON_BUTTON_HEIGHT = 0.05;
+        private static final double POKEMON_SPRITE_WIDTH = 0.05;
+        private static final double POKEMON_SPRITE_HEIGHT = 0.07;
+
+        private static final double POKEMON_START_X = 0.455;
+        private static final double POKEMON_START_Y = 0.115;
+        private static final double OFFSET_X = 0.049;
+        private static final double OFFSET_Y = 0.09;
+
+        private static final double POKEMON_BUTTON_START_X = 0.465;
+        private static final double POKEMON_BUTTON_START_Y = 0.125;
+   
 
         private static final String FIRST_PANEL_NAME = "firstPanel";
         private static final String POKEMON_PANEL_NAME = "pokemonPanel";
@@ -63,19 +77,21 @@ public final class SceneBoxView {
                                 new PanelElementImpl(FIRST_PANEL_NAME, new OverlayLayout(null)));
 
                 // Pokemon Buttons
-                for (int pokemonIndex = 0; pokemonIndex < 81; pokemonIndex++) {
+                for (int pokemonIndex = 0; pokemonIndex < LENGTH_OF_POKEBOX; pokemonIndex++) {
 
                         currentSceneGraphicElements.put(pokemonIndex + 6,
                                         new ButtonElementImpl(FIRST_PANEL_NAME, null, Color.BLACK, 0,
-                                                        0.465 + (pokemonIndex % 9 * 0.049),
-                                                        0.125 + (pokemonIndex / 9 * 0.09), 0.03, 0.05));
+                                                        POKEMON_BUTTON_START_X
+                                                                        + (pokemonIndex % 9 * OFFSET_X),
+                                                        POKEMON_BUTTON_START_Y
+                                                                        + (pokemonIndex / 9 * OFFSET_Y),
+                                                        POKEMON_BUTTON_WIDTH,
+                                                        POKEMON_BUTTON_HEIGHT));
 
                 }
 
                 UtilitiesForScenes.loadSceneElements("sceneBoxElements.json", "init", currentSceneGraphicElements,
                                 this.graphicElements);
-
-                                
 
         }
 
@@ -85,7 +101,6 @@ public final class SceneBoxView {
                         final GraphicElementsRegistry currentSceneGraphicElements)
                         throws IOException {
 
-                
                 this.updateSelectedButton(currentSelectedButton, newSelectedButton, currentSceneGraphicElements);
 
                 this.updateShowedPokeBox(newBoxIndex, currentSceneGraphicElements);
@@ -155,7 +170,7 @@ public final class SceneBoxView {
 
                         ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_NUMBER_TEXT"))
                                         .setText(String.valueOf(currentSelectedButton - 5
-                                                        + boxIndex * 81));
+                                                        + boxIndex * LENGTH_OF_POKEBOX));
 
                         ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_NAME"))
                                         .setText(UtilitiesForScenes
@@ -226,14 +241,16 @@ public final class SceneBoxView {
                 final int currentBoxLength = boxes.get(boxIndex).size();
                 final List<Pokemon> currentBox = boxes.get(boxIndex);
 
-                for (int pokemonIndex = 0; pokemonIndex < 81; pokemonIndex++) {
+                for (int pokemonIndex = 0; pokemonIndex < LENGTH_OF_POKEBOX; pokemonIndex++) {
                         if (pokemonIndex < currentBoxLength) {
                                 currentSceneGraphicElements.put(pokemonIndex + 206,
                                                 new SpriteElementImpl("pokemonPanel",
                                                                 currentBox.get(pokemonIndex)
                                                                                 .getSpriteFront(),
-                                                                0.455 + (pokemonIndex % 9 * 0.049),
-                                                                0.115 + (pokemonIndex / 9 * 0.09), 0.05, 0.07));
+                                                                POKEMON_START_X + (pokemonIndex % 9 * OFFSET_X),
+                                                                POKEMON_START_Y + (pokemonIndex / 9 * OFFSET_Y),
+                                                                POKEMON_SPRITE_WIDTH,
+                                                                POKEMON_SPRITE_HEIGHT));
 
                         } else {
                                 currentSceneGraphicElements.removeById(pokemonIndex + 206);
