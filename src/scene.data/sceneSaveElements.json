@@ -76,7 +76,7 @@
         "CONTINUE_GAME_BUTTON": 6,
         "BACKGROUND":100
     },
-    "loadableObjects": {
+    "dynamicObjects": {
         "init": [
             2,
             3,

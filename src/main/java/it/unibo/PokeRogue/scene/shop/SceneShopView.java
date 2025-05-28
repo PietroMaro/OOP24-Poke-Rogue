@@ -37,8 +37,8 @@ public class SceneShopView {
         this.sceneShopInitView.initGraphicElements(currentSelectedButton);
     }
 
-    protected void updateGraphic(final int newSelectedButton) throws IOException {
-        this.sceneShopUpdateView.updateGraphic(newSelectedButton);
+    protected void updateGraphic(final int currentSelectedButton, final int newSelectedButton) throws IOException {
+        this.sceneShopUpdateView.updateGraphic(currentSelectedButton,newSelectedButton);
     }
 
     protected void updatePlayerMoneyText(final GraphicElementsRegistry sceneGraphicElements,

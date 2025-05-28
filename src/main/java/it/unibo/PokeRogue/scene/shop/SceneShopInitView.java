@@ -1,6 +1,5 @@
 package it.unibo.PokeRogue.scene.shop;
 
-
 import java.util.Map;
 import java.io.IOException;
 
@@ -19,7 +18,8 @@ public class SceneShopInitView {
         private final PlayerTrainerImpl playerTrainerInstance;
         private static final String FIRST_PANEL = "firstPanel";
 
-        public SceneShopInitView(final GraphicElementsRegistry sceneGraphicElements,final GraphicElementsRegistry graphicElements,
+        public SceneShopInitView(final GraphicElementsRegistry sceneGraphicElements,
+                        final GraphicElementsRegistry graphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements) {
                 this.sceneGraphicElements = sceneGraphicElements;
                 this.graphicElements = graphicElements;
@@ -28,8 +28,10 @@ public class SceneShopInitView {
         }
 
         public void initGraphicElements(final int currentSelectedButton) throws IOException {
-                this.allPanelsElements.put(FIRST_PANEL, new PanelElementImpl("", new OverlayLayout(null)));         
-                UtilitiesForScenes.loadSceneElements("sceneShopElements.json", "init", sceneGraphicElements,
+                this.sceneGraphicElements.clear();
+                this.allPanelsElements.put(FIRST_PANEL, new PanelElementImpl("", new OverlayLayout(null)));
+                UtilitiesForScenes.loadSceneElements("sceneShopElements.json", "init",
+                                sceneGraphicElements,
                                 this.graphicElements);
                 this.initTextElements();
                 SceneShopUtilities.updateItemDescription(sceneGraphicElements, SceneShopUtilities.getShopItems(4));

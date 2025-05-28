@@ -169,13 +169,13 @@
             "type": "background",
             "panelName": "firstPanel",
             "dirToImage": "shop",
-            "imageFileName": "sceneBoxBg.png"
+            "imageFileName": "sceneShopBgBar.png"
         },
         "100": {
             "type": "backgroundChange",
             "panelName": "pokemonSelection",
             "dirToImage": "shop",
-            "imageFileName": "sceneBoxBgBar.png"
+            "imageFileName": "sceneShopBg.png"
         },
         "101": {
             "type": "box",
@@ -470,7 +470,7 @@
     "CHANGE_POKEMON_BACK_BUTTON":206
         
     },
-    "loadableObjects": {
+    "dynamicObjects": {
         "init": [
             102,
             103,

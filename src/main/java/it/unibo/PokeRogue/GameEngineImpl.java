@@ -72,13 +72,15 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
                 currentScene = new SceneBox(this.fileToLoadName);
                 break;
             case "fight":
-                if (fightLevel == null) {
+                currentScene = new SceneShop();
+                break;
+                /*if (fightLevel == null) {
                     fightLevel = 0;
                 } else {
                     fightLevel = fightLevel + 1;
                 }
                 currentScene = new SceneFight(fightLevel);
-                break;
+                break;*/
             case "shop":
                 currentScene = new SceneShop();
                 break;

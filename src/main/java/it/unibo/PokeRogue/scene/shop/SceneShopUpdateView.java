@@ -49,9 +49,9 @@ public class SceneShopUpdateView {
                 this.sceneInstance = sceneInstance;
         }
 
-        protected void updateGraphic(final int newSelectedButton) throws IOException {
+        protected void updateGraphic(final int currentSelectedButton,final int newSelectedButton) throws IOException {
                 this.newSelectedButton = newSelectedButton;
-                this.updateSelectedButton(newSelectedButton);
+                this.updateSelectedButton(currentSelectedButton,newSelectedButton);
                 this.updateItemDescription();
                 this.updatePokemonSelection();
                 this.mainMenu();
@@ -64,12 +64,13 @@ public class SceneShopUpdateView {
                                                 .get("CHANGE_POKEMON_BACK_BUTTON")
                                 && this.alreadyInMainMenu) {
                         this.alreadyInMainMenu = false;
-                        currentSceneGraphicElements.clear();
+                        this.currentSceneGraphicElements.clear();
                         this.allPanelsElements.put(POKEMON_PANEL_TEXT,
                                         new PanelElementImpl("firstPanel", new OverlayLayout(null)));
-                        UtilitiesForScenes.loadSceneElements("sceneShopElements.json", "init",
+                        UtilitiesForScenes.loadSceneElements("sceneShopElements.json", "pokeChange",
                                         currentSceneGraphicElements,
                                         this.graphicElements);
+
                         this.initPokemonSelectionText();
 
                         UtilitiesForScenes.setButtonStatus(this.newSelectedButton, true, currentSceneGraphicElements);
@@ -120,10 +121,12 @@ public class SceneShopUpdateView {
                                 .setText(SceneShopUtilities.getPokemonLifeText(SIXTH_POSITION, playerTrainerInstance));
         }
 
-        private void updateSelectedButton(final int newSelectedButton) {
-                UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, false, currentSceneGraphicElements);
+        private void updateSelectedButton(final int currentSelectedButton,final int newSelectedButton) {
+                System.out.println(newSelectedButton);
+                System.out.println(this.currentSelectedButton);
+                System.out.println(currentSceneGraphicElements.getElements());
+                UtilitiesForScenes.setButtonStatus(currentSelectedButton, false, currentSceneGraphicElements);
                 UtilitiesForScenes.setButtonStatus(newSelectedButton, true, currentSceneGraphicElements);
-                this.currentSelectedButton = newSelectedButton;
         }
 
         private void updateItemDescription() {
@@ -161,14 +164,15 @@ public class SceneShopUpdateView {
         }
 
         private void mainMenu() throws IOException {
-                if (!alreadyInMainMenu
-                                && this.newSelectedButton >= this.graphicElementNameToInt.get("FREE_ITEM_1_BUTTON")
-                                && this.newSelectedButton <= this.graphicElementNameToInt.get("TEAM_BUTTON")) {
-                        currentSceneGraphicElements.clear();
-                        allPanelsElements.clear();
-                        sceneInstance.setCurrentSelectedButton(currentSelectedButton);
-                        sceneInstance.initGraphicElements();
+                if (this.newSelectedButton >= this.graphicElementNameToInt.get("FREE_ITEM_1_BUTTON")
+                                && this.newSelectedButton <= this.graphicElementNameToInt.get("TEAM_BUTTON")
+                                && !alreadyInMainMenu) {
+                        System.out.println("ENTRATO IN MAIN MENU");
                         alreadyInMainMenu = true;
+                        this.currentSceneGraphicElements.clear();
+                        this.allPanelsElements.clear();
+                        sceneInstance.setCurrentSelectedButton(this.currentSelectedButton);
+                        sceneInstance.initGraphicElements();
                 }
         }
 }
