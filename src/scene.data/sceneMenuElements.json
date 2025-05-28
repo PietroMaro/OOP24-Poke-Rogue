@@ -76,7 +76,7 @@
         "NEW_GAME_BUTTON_TEXT": 102,
         "OPTIONS_GAME_BUTTON_TEXT": 103
     },
-    "loadableObjects": {
+    "dynamicObjects": {
         "init": [
             101,
             102,

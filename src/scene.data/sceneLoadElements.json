@@ -240,7 +240,7 @@
         "TENTH_SAVE_TEXT": 19,
         "BACKGROUND": 100
     },
-    "loadableObjects": {
+    "dynamicObjects": {
         "init": [
             10,
             11,
