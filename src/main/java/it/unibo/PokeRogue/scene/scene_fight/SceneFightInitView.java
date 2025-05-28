@@ -111,7 +111,7 @@ public class SceneFightInitView {
                                                                 .getPokemon(FIRST_POSITION).get()
                                                                 .getExp().getCurrentMax());
                 // TEXT STATUS
-                ((TextElementImpl) currentSceneGraphicElements.getByName("ENEMY_POKEMON_STATUS_TEXT"))
+                ((TextElementImpl) currentSceneGraphicElements.getByName("MY_POKEMON_STATUS_TEXT"))
                                 .setText("Status: " +
                                                 (playerTrainerInstance.getPokemon(FIRST_POSITION).get()
                                                                 .getStatusCondition().isPresent()
@@ -120,7 +120,7 @@ public class SceneFightInitView {
                                                                                                 .getStatusCondition()
                                                                                                 .get()
                                                                                 : "NONE"));
-                ((TextElementImpl) currentSceneGraphicElements.getByName("MY_POKEMON_STATUS_TEXT"))
+                ((TextElementImpl) currentSceneGraphicElements.getByName("ENEMY_POKEMON_STATUS_TEXT"))
                                 .setText("Status: " +
                                                 (enemyTrainerInstance.getPokemon(FIRST_POSITION).get()
                                                                 .getStatusCondition().isPresent()

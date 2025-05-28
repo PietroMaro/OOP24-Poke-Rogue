@@ -38,7 +38,6 @@ public class SceneFight extends Scene {
     private final SceneFightView sceneFightView;
     private int newSelectedButton;
     private final EnemyAi enemyAiInstance;
-
     private final BattleEngine battleEngineInstance;
     private final GenerateEnemy generateEnemyInstance;
 
@@ -53,6 +52,7 @@ public class SceneFight extends Scene {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
+        this.loadGraphicElements("sceneFightElement.json");
         this.enemyTrainerInstance = new TrainerImpl();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
@@ -63,7 +63,7 @@ public class SceneFight extends Scene {
         this.generateEnemyInstance.generateEnemy();
         this.initStatus();
         this.sceneFightView = new SceneFightView(currentSceneGraphicElements, allPanelsElements, enemyTrainerInstance,
-                currentSelectedButton, newSelectedButton, this, graphicElements);
+                currentSelectedButton, newSelectedButton, this, this.graphicElements);
         this.initGraphicElements();
     }
 

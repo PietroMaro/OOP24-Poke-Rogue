@@ -130,7 +130,7 @@
 		"MOVE_5_BUTTON_TEXT": 105,
 		"NEW_MOVE_TEXT" : 106
     },
-	"dinamicObjects": {
+	"dynamicObjects": {
         "init": [
         ]
     }

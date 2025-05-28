@@ -1,6 +1,6 @@
 package it.unibo.PokeRogue.scene.scene_fight;
 
-import java.awt.Color;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -11,10 +11,10 @@ import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
-import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightGraphicEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
 import it.unibo.PokeRogue.utilities.ColorTypeConversion;
+import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 
 /**
  * Utility class providing constants and helper methods
@@ -22,7 +22,6 @@ import it.unibo.PokeRogue.utilities.ColorTypeConversion;
  */
 public final class SceneFightUtilities {
     private static final Integer FIRST_POSITION = 0;
-    private static final String MOVE_PANEL_STRING = "movePanel";
     private static final String QUESTION_MARK_STRING = "???";
 
     /**
@@ -74,21 +73,9 @@ public final class SceneFightUtilities {
         return currentHp + " / " + maxHp;
     }
 
-    /**
-     * Removes move-related graphic elements from the provided map of scene graphic
-     * elements.
-     * Specifically, it removes elements associated with move PP text, move type
-     * text,
-     * move power text, and move type icons.
-     *
-     * @param sceneGraphicElements a map containing graphic elements keyed by their
-     *                             integer identifiers
-     */
-    private static void clearMoveInfo(final GraphicElementsRegistry sceneGraphicElements) {
-        sceneGraphicElements.removeById(SceneFightGraphicEnum.MOVE_PP_TEXT.value());
-        sceneGraphicElements.removeById(SceneFightGraphicEnum.MOVE_TYPE_TEXT.value());
-        sceneGraphicElements.removeById(SceneFightGraphicEnum.MOVE_POWER_TEXT.value());
-        sceneGraphicElements.removeById(SceneFightGraphicEnum.MOVE_TYPE.value());
+    private static void clearMoveInfo(final GraphicElementsRegistry currentSceneGraphicElements) throws IOException {
+        UtilitiesForScenes.removeSceneElements("sceneFightElement.json", "clearMoveInfo",
+                currentSceneGraphicElements);
     }
 
     /**
@@ -99,29 +86,36 @@ public final class SceneFightUtilities {
      * the relevant graphic elements with details of the selected move, such as PP,
      * type, and power.
      *
-     * @param currentSelectedButton The integer representing the ID of the currently
-     *                              selected button.
-     *                              Expected values for move buttons are between 100
-     *                              and 103,
-     *                              inclusive.
-     * @param sceneGraphicElements  A {@link Map} where keys are integer IDs and
-     *                              values are
-     *                              {@link GraphicElementImpl} objects. This map
-     *                              represents
-     *                              the graphic elements currently displayed on the
-     *                              scene,
-     *                              which will be updated by this method.
-     * @param playerTrainerInstance The {@link PlayerTrainerImpl} instance,
-     *                              representing
-     *                              the player's trainer and their Pokémon. This is
-     *                              used
-     *                              to retrieve the details of the Pokémon's moves.
+     * @param currentSelectedButton       The integer representing the ID of the
+     *                                    currently
+     *                                    selected button.
+     *                                    Expected values for move buttons are
+     *                                    between 100
+     *                                    and 103,
+     *                                    inclusive.
+     * @param currentSceneGraphicElements A {@link Map} where keys are integer IDs
+     *                                    and
+     *                                    values are
+     *                                    {@link GraphicElementImpl} objects. This
+     *                                    map
+     *                                    represents
+     *                                    the graphic elements currently displayed
+     *                                    on the
+     *                                    scene,
+     *                                    which will be updated by this method.
+     * @param playerTrainerInstance       The {@link PlayerTrainerImpl} instance,
+     *                                    representing
+     *                                    the player's trainer and their Pokémon.
+     *                                    This is
+     *                                    used
+     *                                    to retrieve the details of the Pokémon's
+     *                                    moves.
+     * @throws IOException
      */
     public static void updateMoveInfo(final int currentSelectedButton,
-            final GraphicElementsRegistry sceneGraphicElements,
-            final PlayerTrainerImpl playerTrainerInstance) {
-        clearMoveInfo(sceneGraphicElements);
-
+            final GraphicElementsRegistry currentSceneGraphicElements,
+            final PlayerTrainerImpl playerTrainerInstance) throws IOException {
+        clearMoveInfo(currentSceneGraphicElements);
         final int[] indexMapping = { 0, 2, 1, 3 };
         final int moveIndex = (currentSelectedButton >= 100 && currentSelectedButton <= 103)
                 ? indexMapping[currentSelectedButton - 100]
@@ -148,24 +142,16 @@ public final class SceneFightUtilities {
             type = String.valueOf(move.getType());
             power = String.valueOf(move.getBaseDamage());
         }
-
-        sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_PP_TEXT.value(),
-                new TextElementImpl(MOVE_PANEL_STRING, "PP: " + pp,
-                        Color.WHITE, 0.06, 0.6, 0.79));
-        sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_TYPE_TEXT.value(),
-                new TextElementImpl(MOVE_PANEL_STRING,
-                        "Type: " + type,
-                        Color.WHITE, 0.06, 0.6, 0.86));
-        sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_POWER_TEXT.value(),
-                new TextElementImpl(MOVE_PANEL_STRING,
-                        "Power: " + power,
-                        Color.WHITE, 0.06, 0.6, 0.94));
+        ((TextElementImpl) currentSceneGraphicElements.getByName("MOVE_PP_TEXT"))
+                .setText("PP: " + pp);
+        ((TextElementImpl) currentSceneGraphicElements.getByName("MOVE_TYPE_TEXT"))
+                .setText("Type: " + type);
+        ((TextElementImpl) currentSceneGraphicElements.getByName("MOVE_POWER_TEXT"))
+                .setText("Power: " + power);
         if (move != null) {
-            sceneGraphicElements.put(SceneFightGraphicEnum.MOVE_TYPE.value(),
-                    new BoxElementImpl(MOVE_PANEL_STRING,
-                            ColorTypeConversion.getColorForType(
-                                    move.getType()),
-                            Color.BLACK, 1, 0.64, 0.82, 0.15, 0.06));
+            ((BoxElementImpl) currentSceneGraphicElements.getByName("MOVE_TYPE"))
+                    .setMainColor(ColorTypeConversion.getColorForType(
+                            move.getType()));
         }
     }
 

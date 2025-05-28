@@ -77,8 +77,8 @@ public enum SceneFightGraphicEnum {
     MEGABALL_TEXT(474),
     ULTRABALL_TEXT(476),
     MASTERBALL_TEXT(478),
-    CANCEL_TEXT(480);
-
+    CANCEL_TEXT(480),
+    BACK_TEXT(482);
     private final int code;
 
     SceneFightGraphicEnum(final int code) {

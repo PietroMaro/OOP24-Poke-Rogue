@@ -8,7 +8,7 @@
             "borderThickness": 0,
             "leftX": 0.77,
             "leftY": 0.74,
-            "width": 0.02,
+            "width": 0.2,
             "height": 0.1
         },
         "1": {
@@ -19,7 +19,7 @@
             "borderThickness": 0,
             "leftX": 0.55,
             "leftY": 0.74,
-            "width": 0.02,
+            "width": 0.2,
             "height": 0.1
         },
         "4": {
@@ -29,9 +29,9 @@
             "borderColor": "#FFFFFF",
             "borderThickness": 0,
             "leftX": 0.77,
-            "leftY": 0.21,
-            "width": 0.02,
-            "height": 0.04
+            "leftY": 0.87,
+            "width": 0.2,
+            "height": 0.1
         },
         "2": {
             "type": "button",
@@ -41,7 +41,7 @@
             "borderThickness": 0,
             "leftX": 0.55,
             "leftY": 0.87,
-            "width": 0.02,
+            "width": 0.2,
             "height": 0.1
         },
         "100": {
@@ -52,18 +52,7 @@
             "borderThickness": 0,
             "leftX": 0.05,
             "leftY": 0.74,
-            "width": 0.02,
-            "height": 0.1
-        },
-        "101": {
-            "type": "button",
-            "panelName": "movePanel",
-            "mainColor": "#266666",
-            "borderColor": "#FFFFFF",
-            "borderThickness": 0,
-            "leftX": 0.27,
-            "leftY": 0.74,
-            "width": 0.02,
+            "width": 0.2,
             "height": 0.1
         },
         "102": {
@@ -72,9 +61,20 @@
             "mainColor": "#266666",
             "borderColor": "#FFFFFF",
             "borderThickness": 0,
+            "leftX": 0.27,
+            "leftY": 0.74,
+            "width": 0.2,
+            "height": 0.1
+        },
+        "101": {
+            "type": "button",
+            "panelName": "movePanel",
+            "mainColor": "#266666",
+            "borderColor": "#FFFFFF",
+            "borderThickness": 0,
             "leftX": 0.05,
             "leftY": 0.87,
-            "width": 0.02,
+            "width": 0.2,
             "height": 0.1
         },
         "103": {
@@ -84,8 +84,8 @@
             "borderColor": "#FFFFFF",
             "borderThickness": 0,
             "leftX": 0.27,
-            "leftY": 0.74,
-            "width": 0.02,
+            "leftY": 0.87,
+            "width": 0.2,
             "height": 0.1
         },
         "200": {
@@ -227,7 +227,7 @@
         "403": {
             "type": "text",
             "panelName": "firstPanel",
-            "text": "",
+            "text": "FIGHT",
             "textColor": "#FFFFFF",
             "textDimension": 0.06,
             "leftX": 0.55,
@@ -265,7 +265,7 @@
             "panelName": "firstPanel",
             "dirToImage": "box",
             "imageFileName": "null",
-            "leftX": 0.3,
+            "leftX": 0.03,
             "leftY": 0.21,
             "width": 0.55,
             "height": 0.55
@@ -326,6 +326,16 @@
             "leftX": 0.69,
             "leftY": 0.67
         },
+        "416": {
+            "type": "sprite",
+            "panelName": "firstPanel",
+            "dirToImage": "box",
+            "imageFileName": "null",
+            "leftX": 0.4,
+            "leftY": 0.1,
+            "width": 0.55,
+            "height": 0.55
+        },
         "417": {
             "type": "box",
             "panelName": "firstPanel",
@@ -370,8 +380,8 @@
             "text": "",
             "textColor": "#FFFFFF",
             "textDimension": 0.04,
-            "leftX": 0.69,
-            "leftY": 0.61
+            "leftX": 0,
+            "leftY": 0.03
         },
         "424": {
             "type": "text",
@@ -397,8 +407,8 @@
             "text": "",
             "textColor": "#FFFFFF",
             "textDimension": 0.06,
-            "leftX": 0.27,
-            "leftY": 0.80
+            "leftX": 0.05,
+            "leftY": 0.93
         },
         "427": {
             "type": "text",
@@ -439,7 +449,7 @@
         "481": {
             "type": "box",
             "panelName": "movePanel",
-            "mainColor": "",
+            "mainColor": "null",
             "borderColor": "#000000",
             "borderThickness": 1,
             "leftX": 0.64,
@@ -495,8 +505,8 @@
         "465": {
             "type": "box",
             "panelName": "movePanel",
-            "mainColor": "",
-            "borderColor": "#000000",
+            "mainColor": "#808080",
+            "borderColor": "#FFFFFF",
             "borderThickness": 1,
             "leftX": 0.1,
             "leftY": 0.45,
@@ -567,6 +577,33 @@
             "textDimension": 0.04,
             "leftX": 0.62,
             "leftY": 0.54
+        },
+        "482": {
+            "type": "text",
+            "panelName": "changePanel",
+            "text": "BACK",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.06,
+            "leftX": 0.86,
+            "leftY": 0.98
+        },
+        "483": {
+            "type": "background",
+            "panelName": "changePanel",
+            "dirToImage": "fight",
+            "imageFileName": "bg.png"
+        },
+        "484": {
+            "type": "background",
+            "panelName": "ballPanel",
+            "dirToImage": "fight",
+            "imageFileName": "bgBar.png"
+        },
+        "485": {
+            "type": "background",
+            "panelName": "movePanel",
+            "dirToImage": "fight",
+            "imageFileName": "bgBar.png"
         }
     },
     "mapper": {
@@ -602,6 +639,7 @@
         "MY_POKEMON_ACTUAL_LIFE_TEXT": 411,
         "MY_POKEMON_STATUS_TEXT": 412,
         "MY_POKEMON_ACTUAL_EXP_TEXT": 414,
+        "ENEMY_POKEMON_SPRITE": 416,
         "ENEMY_POKEMON_STATS_BOX": 417,
         "ENEMY_POKEMON_NAME_TEXT": 418,
         "ENEMY_POKEMON_LEVEL_TEXT": 419,
@@ -627,38 +665,56 @@
         "MEGABALL_TEXT": 474,
         "ULTRABALL_TEXT": 476,
         "MASTERBALL_TEXT": 478,
-        "CANCEL_TEXT": 480
+        "CANCEL_TEXT": 480,
+        "BACK_TEXT": 482,
+        "BACKGROUND_CHANGE": 483,
+        "BACKGROUND_BALL": 484,
+        "BACKGROUND_MOVE": 485
     },
-    "dinamicObjects": {
+    "dynamicObjects": {
         "init": [
-            3,
-            1,
-            4,
-            2,
-            400,
+            421,
             402,
             403,
             404,
             405,
             406,
             407,
-            408,
             409,
             410,
             411,
             412,
             414,
-            417,
+            416,
             418,
             419,
             420,
-            421
+            3,
+            1,
+            4,
+            2,
+            408,
+            417,
+            400
+        ],
+        "movePreparation": [
+            3,
+            1,
+            4,
+            2,
+            402,
+            403,
+            404,
+            405,
+            406
+        ],
+        "clearMoveInfo": [
+            428,
+            430,
+            433,
+            481
         ],
         "move": [
-            100,
-            101,
-            102,
-            103,
             424,
             425,
             426,
@@ -666,8 +722,40 @@
             428,
             430,
             433,
+            481,
+            100,
+            101,
+            102,
+            103
+        ],
+        "pokeball": [
+            472,
+            474,
+            476,
+            478,
+            480,
+            471,
+            300,
+            301,
+            302,
+            303
+        ],
+        "change": [
+            482,
+            466,
+            436,
+            442,
+            448,
+            454,
+            460,
             465,
-            481
+            200,
+            201,
+            202,
+            203,
+            204,
+            205,
+            483
         ]
     }
 }
