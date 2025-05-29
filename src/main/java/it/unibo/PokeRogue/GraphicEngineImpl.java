@@ -96,7 +96,7 @@ public final class GraphicEngineImpl extends Singleton implements GraphicEngine 
     }
 
     private void drawBoxGraphicElement(final BoxElementImpl boxToDraw) {
-
+        
         allPanelElements.get(boxToDraw.getPanelName()).add(boxToDraw);
 
     }

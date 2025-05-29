@@ -69,23 +69,37 @@ public class SceneFightInitView {
          * It includes text for Pokémon names, levels, HP, and status conditions.
          */
         private void initTextElements() {
-                ((TextElementImpl) currentSceneGraphicElements.getByName("DETAILS_CONTAINER_TEXT")).setText("What will "
-                                + SceneFightUtilities.getPokemonNameAt(playerTrainerInstance, FIRST_POSITION) + " do?");
-                ((TextElementImpl) currentSceneGraphicElements.getByName("MY_POKEMON_NAME_TEXT"))
+                UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "DETAILS_CONTAINER_TEXT",
+                                TextElementImpl.class).setText(
+                                                "What will "
+                                                                + SceneFightUtilities.getPokemonNameAt(
+                                                                                playerTrainerInstance, FIRST_POSITION)
+                                                                + " do?");
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "MY_POKEMON_NAME_TEXT",
+                                                TextElementImpl.class)
                                 .setText(SceneFightUtilities.getPokemonNameAt(playerTrainerInstance,
                                                 FIRST_POSITION));
-                ((TextElementImpl) currentSceneGraphicElements.getByName("ENEMY_POKEMON_NAME_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "ENEMY_POKEMON_NAME_TEXT",
+                                                TextElementImpl.class)
                                 .setText(SceneFightUtilities.getPokemonNameAt(enemyTrainerInstance,
                                                 FIRST_POSITION));
                 // Lv
-                ((TextElementImpl) currentSceneGraphicElements.getByName("MY_POKEMON_LEVEL_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "MY_POKEMON_LEVEL_TEXT",
+                                                TextElementImpl.class)
                                 .setText(String.valueOf(playerTrainerInstance.getPokemon(FIRST_POSITION).get()
                                                 .getLevel().getCurrentValue()));
-                ((TextElementImpl) currentSceneGraphicElements.getByName("ENEMY_POKEMON_LEVEL_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "ENEMY_POKEMON_LEVEL_TEXT",
+                                                TextElementImpl.class)
                                 .setText(String.valueOf(enemyTrainerInstance.getPokemon(FIRST_POSITION).get()
                                                 .getLevel().getCurrentValue()));
                 // TEXT hp TO FIX MA
-                ((TextElementImpl) currentSceneGraphicElements.getByName("MY_POKEMON_ACTUAL_LIFE_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "MY_POKEMON_ACTUAL_LIFE_TEXT",
+                                                TextElementImpl.class)
                                 .setText(playerTrainerInstance.getPokemon(FIRST_POSITION).get()
                                                 .getActualStats().get("hp").getCurrentValue()
                                                 + " / "
@@ -93,7 +107,9 @@ public class SceneFightInitView {
                                                                 .getPokemon(FIRST_POSITION).get()
                                                                 .getActualStats().get("hp")
                                                                 .getCurrentMax());
-                ((TextElementImpl) currentSceneGraphicElements.getByName("ENEMY_POKEMON_ACTUAL_LIFE_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "ENEMY_POKEMON_ACTUAL_LIFE_TEXT",
+                                                TextElementImpl.class)
                                 .setText(enemyTrainerInstance.getPokemon(FIRST_POSITION).get()
                                                 .getActualStats().get("hp").getCurrentValue()
                                                 + " / "
@@ -102,7 +118,9 @@ public class SceneFightInitView {
                                                                 .getActualStats().get("hp")
                                                                 .getCurrentMax());
                 // TEXT EXP
-                ((TextElementImpl) currentSceneGraphicElements.getByName("MY_POKEMON_ACTUAL_EXP_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "MY_POKEMON_ACTUAL_EXP_TEXT",
+                                                TextElementImpl.class)
                                 .setText("exp. " +
                                                 playerTrainerInstance.getPokemon(FIRST_POSITION).get()
                                                                 .getExp().getCurrentValue()
@@ -111,7 +129,9 @@ public class SceneFightInitView {
                                                                 .getPokemon(FIRST_POSITION).get()
                                                                 .getExp().getCurrentMax());
                 // TEXT STATUS
-                ((TextElementImpl) currentSceneGraphicElements.getByName("ENEMY_POKEMON_STATUS_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "MY_POKEMON_STATUS_TEXT",
+                                                TextElementImpl.class)
                                 .setText("Status: " +
                                                 (playerTrainerInstance.getPokemon(FIRST_POSITION).get()
                                                                 .getStatusCondition().isPresent()
@@ -120,7 +140,9 @@ public class SceneFightInitView {
                                                                                                 .getStatusCondition()
                                                                                                 .get()
                                                                                 : "NONE"));
-                ((TextElementImpl) currentSceneGraphicElements.getByName("MY_POKEMON_STATUS_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "ENEMY_POKEMON_STATUS_TEXT",
+                                                TextElementImpl.class)
                                 .setText("Status: " +
                                                 (enemyTrainerInstance.getPokemon(FIRST_POSITION).get()
                                                                 .getStatusCondition().isPresent()
@@ -132,10 +154,14 @@ public class SceneFightInitView {
         }
 
         private void initSpriteElements() {
-                ((SpriteElementImpl) currentSceneGraphicElements.getByName("MY_POKEMON_SPRITE"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "MY_POKEMON_SPRITE",
+                                                SpriteElementImpl.class)
                                 .setImage(playerTrainerInstance
                                                 .getPokemon(FIRST_POSITION).get().getSpriteBack());
-                ((SpriteElementImpl) currentSceneGraphicElements.getByName("ENEMY_POKEMON_SPRITE"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "ENEMY_POKEMON_SPRITE",
+                                                SpriteElementImpl.class)
                                 .setImage(enemyTrainerInstance
                                                 .getPokemon(FIRST_POSITION).get().getSpriteFront());
         }

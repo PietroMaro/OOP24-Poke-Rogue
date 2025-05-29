@@ -54,13 +54,14 @@ public class SceneMove extends Scene {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
+        this.loadGraphicElements("sceneMoveElements.json");
         this.graphicElementNameToInt = this.getGraphicElementNameToInt();
         this.graphicElements = this.getGraphicElements();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
-        this.sceneMoveView = new SceneMoveView(currentSceneGraphicElements, allPanelsElements);
+        this.sceneMoveView = new SceneMoveView(currentSceneGraphicElements, allPanelsElements, this.graphicElements);
         this.playerPokemon = PlayerTrainerImpl.getTrainerInstance().getPokemon(0).get();
         this.initStatus();
         this.initGraphicElements();
@@ -98,36 +99,24 @@ public class SceneMove extends Scene {
 
         switch (inputKey) {
             case KeyEvent.VK_UP:
-                if (this.currentSelectedButton == SceneMoveGraphicEnum.MOVE_1_BUTTON.value()) {
+                if (this.currentSelectedButton == graphicElementNameToInt.get("MOVE_1_BUTTON")) {
                     this.newSelectedButton = 4;
-                } else if (this.currentSelectedButton >= SceneMoveGraphicEnum.MOVE_1_BUTTON.value()
-                        && this.currentSelectedButton <= SceneMoveGraphicEnum.MOVE_5_BUTTON.value()) {
+                } else if (this.currentSelectedButton >= graphicElementNameToInt.get("MOVE_1_BUTTON")
+                        && this.currentSelectedButton <= graphicElementNameToInt.get("MOVE_5_BUTTON")) {
                     this.newSelectedButton -= 1;
                 }
                 break;
             case KeyEvent.VK_DOWN:
-                if (this.currentSelectedButton == SceneMoveGraphicEnum.MOVE_5_BUTTON.value()) {
+                if (this.currentSelectedButton == graphicElementNameToInt.get("MOVE_5_BUTTON")) {
                     this.newSelectedButton = 0;
-                } else if (this.currentSelectedButton >= SceneMoveGraphicEnum.MOVE_1_BUTTON.value()
-                        && this.currentSelectedButton <= SceneMoveGraphicEnum.MOVE_5_BUTTON.value()) {
+                } else if (this.currentSelectedButton >= graphicElementNameToInt.get("MOVE_1_BUTTON")
+                        && this.currentSelectedButton <= graphicElementNameToInt.get("MOVE_5_BUTTON")) {
                     this.newSelectedButton += 1;
                 }
                 break;
             case KeyEvent.VK_ENTER:
                 switch (this.currentSelectedButton) {
-                    case 0:
-                        this.learnNewMoveByButton();
-                        break;
-                    case 1:
-                        this.learnNewMoveByButton();
-                        break;
-                    case 2:
-                        this.learnNewMoveByButton();
-                        break;
-                    case 3:
-                        this.learnNewMoveByButton();
-                        break;
-                    case 4:
+                    case 0, 1, 2, 3, 4:
                         this.learnNewMoveByButton();
                         break;
                     default:
@@ -139,13 +128,6 @@ public class SceneMove extends Scene {
 
     }
 
-    /**
-     * Initiates the process for the player's Pokemon to learn a new move
-     * based on the currently selected button.
-     * After attempting to learn the move, the scene is switched to the "fight"
-     * scene.
-     * Assumes the selected button index corresponds to a valid move index.
-     */
     private void learnNewMoveByButton() throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
@@ -155,23 +137,14 @@ public class SceneMove extends Scene {
         this.gameEngineInstance.setScene("fight");
     }
 
-    /**
-     * Initializes and sets up the graphical elements for the scene.
-     * Delegates the initial graphic setup to the SceneMoveView
-     * and sets the initial status of the buttons using the utility class.
-     */
     private void initGraphicElements() throws IOException {
         this.sceneMoveView.initGraphicElements();
         UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, this.currentSceneGraphicElements);
     }
 
-    /**
-     * Initializes the internal state variables for the scene's logic.
-     * Sets the initial selected button index and the new selected button index.
-     */
     private void initStatus() {
         this.newSelectedButton = 0;
-        this.currentSelectedButton = SceneMoveGraphicEnum.MOVE_1_BUTTON.value();
+        this.currentSelectedButton = graphicElementNameToInt.get("MOVE_1_BUTTON");
     }
 
 }
