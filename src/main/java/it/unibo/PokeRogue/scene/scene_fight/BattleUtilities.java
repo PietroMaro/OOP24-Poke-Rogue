@@ -19,9 +19,8 @@ import it.unibo.PokeRogue.trainers.TrainerImpl;
 public final class BattleUtilities {
 
     /**
-     * empty constructor
-     * 
-     */
+    * Private constructor to prevent instantiation of utility class.
+    */
     private BattleUtilities() {
     }
 

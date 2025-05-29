@@ -16,15 +16,15 @@ import it.unibo.PokeRogue.pokemon.TypeColors;
  */
 public final class ColorTypeConversion {
 
-    private ColorTypeConversion(){
-        
+    private ColorTypeConversion() {
+
     }
 
     /**
      * Returns the {@link Color} associated with the given Pokemon {@link Type}.
      * 
      * @param type the Pokemon type for which the color is requested
-     * @return the color corresponding to the given type, or black  if
+     * @return the color corresponding to the given type, or black if
      *         the type is not recognized
      */
     public static Color getColorForType(final Type type) {

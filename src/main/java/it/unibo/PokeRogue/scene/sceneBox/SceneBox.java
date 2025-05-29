@@ -11,7 +11,6 @@ import it.unibo.PokeRogue.GameEngine;
 import it.unibo.PokeRogue.GameEngineImpl;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
-import it.unibo.PokeRogue.savingSystem.SavingSystem;
 import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.scene.GraphicElementsRegistryImpl;
 import it.unibo.PokeRogue.scene.Scene;
@@ -20,26 +19,11 @@ import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 import lombok.Getter;
 
 /**
- * The {@code SceneBox} class represents the graphical and interactive
- * scene in which the player can view, navigate, and manage their Pokémon
- * storage boxes.
+ * Represents the Box scene where the player can view and manage stored
+ * Pokémon.
  * 
- * It allows the user to browse different boxes, add Pokémon from boxes to the
- * squad, and visualize Pokémon details such as nature, type, and abilities
- * while making selections
- * 
- * 
- * This scene is interactive and responds to directional inputs and the ENTER
- * key
- * to perform actions. It relies on other core components like the
- * {@link GameEngine},
- * {@link PlayerTrainerImpl}, and {@link SavingSystem}.
- * 
- * 
- * @see Scene
- * @see GameEngine
- * @see PlayerTrainerImpl
- * @see SavingSystem
+ * Handles rendering, user interaction, and Pokémon transfer between storage and
+ * party.
  */
 public class SceneBox extends Scene {
 
@@ -59,29 +43,35 @@ public class SceneBox extends Scene {
         private final PlayerTrainerImpl playerTrainerInstance;
         private final List<List<Pokemon>> boxes;
         private final SceneBoxView sceneBoxView;
-        private final SceneBoxModel sceneBoxModel;
+        private final SceneBoxLoad sceneBoxModel;
         private int currentBoxLength;
         private int newSelectedButton;
         private int newBoxIndex;
+        private final GraphicElementsRegistry graphicElements;
+        private final Map<String, Integer> graphicElementNameToInt;
 
         /**
-         * Constructs a new {@code SceneBox} instance, initializing all graphic
-         * elements, status, Pokémon boxes, and loading data from the given save path.
+         * Constructs a new SceneBox instance.
          *
-         * @param savePath the path to the save file used to initialize the scene data
+         * @param savePath the path to the save file used to load stored Pokémon boxes.
+         * 
          */
         public SceneBox(final String savePath) throws IOException,
                         InstantiationException,
                         IllegalAccessException,
                         NoSuchMethodException,
                         InvocationTargetException {
+                
                 this.loadGraphicElements("sceneBoxElements.json");
-                this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),this.graphicElementNameToInt);
+                this.graphicElementNameToInt = this.getGraphicElementNameToInt();
+                this.graphicElements = this.getGraphicElements();
+                this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
+                                this.graphicElementNameToInt);
                 this.allPanelsElements = new LinkedHashMap<>();
                 this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-                this.sceneBoxView = new SceneBoxView(this.graphicElements,this.graphicElementNameToInt);
-                this.sceneBoxModel = new SceneBoxModel();
+                this.sceneBoxView = new SceneBoxView(this.graphicElements, this.graphicElementNameToInt);
+                this.sceneBoxModel = new SceneBoxLoad();
                 this.sceneBoxModel.setUpSave(savePath);
                 this.boxes = this.sceneBoxModel.getBoxes();
                 this.initStatus();

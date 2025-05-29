@@ -21,13 +21,17 @@ public class SceneInfo extends Scene {
     private final SceneInfoView sceneInfoView;
     private final GameEngineImpl gameEngineInstance;
     private int newSelectedButton;
+    private int currentSelectedButton;
+    private GraphicElementsRegistry graphicElements;
+    private Map<String, Integer> graphicElementNameToInt;
 
     public SceneInfo() throws IOException,
             InstantiationException,
             IllegalAccessException,
             NoSuchMethodException,
             InvocationTargetException {
-        this.loadGraphicElements("sceneInfoElements.json");
+        this.graphicElementNameToInt = this.getGraphicElementNameToInt();
+        this.graphicElements = this.getGraphicElements();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();

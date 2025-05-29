@@ -7,5 +7,5 @@ import it.unibo.PokeRogue.scene.scene_fight.Decision;
 
 public interface EnemyAi {
 
-    Decision nextMove(final Optional<Weather> weather);
+    Decision nextMove( Optional<Weather> weather);
 }

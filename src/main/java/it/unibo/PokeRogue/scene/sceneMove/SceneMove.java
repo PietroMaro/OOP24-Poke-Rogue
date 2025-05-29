@@ -38,6 +38,8 @@ public class SceneMove extends Scene {
     private final SceneMoveView sceneMoveView;
     private int newSelectedButton;
     private final Pokemon playerPokemon;
+    private GraphicElementsRegistry graphicElements;
+    private Map<String, Integer> graphicElementNameToInt;
 
     /**
      * Constructs a new SceneMove.
@@ -52,7 +54,10 @@ public class SceneMove extends Scene {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
-        this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(), this.graphicElementNameToInt);
+        this.graphicElementNameToInt = this.getGraphicElementNameToInt();
+        this.graphicElements = this.getGraphicElements();
+        this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
+                this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.sceneMoveView = new SceneMoveView(currentSceneGraphicElements, allPanelsElements);
@@ -68,10 +73,10 @@ public class SceneMove extends Scene {
      */
     @Override
     public void updateGraphic() {
-       UtilitiesForScenes.setButtonStatus(currentSelectedButton, false, this.currentSceneGraphicElements);
-       UtilitiesForScenes.setButtonStatus(newSelectedButton, true, this.currentSceneGraphicElements);
+        UtilitiesForScenes.setButtonStatus(currentSelectedButton, false, this.currentSceneGraphicElements);
+        UtilitiesForScenes.setButtonStatus(newSelectedButton, true, this.currentSceneGraphicElements);
         this.currentSelectedButton = this.newSelectedButton;
-       UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, this.currentSceneGraphicElements);
+        UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, this.currentSceneGraphicElements);
     }
 
     /**
@@ -145,7 +150,7 @@ public class SceneMove extends Scene {
             IOException,
             IllegalAccessException,
             InvocationTargetException,
-            InstantiationException{
+            InstantiationException {
         playerPokemon.learnNewMove(Optional.of(currentSelectedButton));
         this.gameEngineInstance.setScene("fight");
     }
@@ -157,7 +162,7 @@ public class SceneMove extends Scene {
      */
     private void initGraphicElements() throws IOException {
         this.sceneMoveView.initGraphicElements();
-       UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, this.currentSceneGraphicElements);
+        UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, this.currentSceneGraphicElements);
     }
 
     /**

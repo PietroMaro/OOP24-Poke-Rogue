@@ -22,13 +22,16 @@ public class SceneSave extends Scene {
     private final GameEngineImpl gameEngineInstance;
     private int newSelectedButton;
     private int currentSelectedButton;
+    private GraphicElementsRegistry graphicElements;
+    private Map<String, Integer> graphicElementNameToInt;
 
     public SceneSave() throws IOException,
             InstantiationException,
             IllegalAccessException,
             NoSuchMethodException,
             InvocationTargetException {
-        this.loadGraphicElements("sceneSaveElements.json");
+        this.graphicElementNameToInt = this.getGraphicElementNameToInt();
+        this.graphicElements = this.getGraphicElements();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();

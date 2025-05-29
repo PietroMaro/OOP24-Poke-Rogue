@@ -40,13 +40,16 @@ public class SceneShop extends Scene {
     private Item selectedUsableItem = null;
     private boolean BuyedItem = false;
     private final EffectParser effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
+    private GraphicElementsRegistry graphicElements;
+    private Map<String, Integer> graphicElementNameToInt;
 
     public SceneShop() throws IOException,
             InstantiationException,
             IllegalAccessException,
             NoSuchMethodException,
             InvocationTargetException {
-        this.loadGraphicElements("sceneShopElements.json");
+        this.graphicElementNameToInt = this.getGraphicElementNameToInt();
+        this.graphicElements = this.getGraphicElements();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
