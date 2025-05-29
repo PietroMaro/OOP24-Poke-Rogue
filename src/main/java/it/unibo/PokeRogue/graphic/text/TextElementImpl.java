@@ -1,6 +1,7 @@
 package it.unibo.PokeRogue.graphic.text;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,18 +15,39 @@ import java.nio.file.Paths;
 
 import org.json.JSONObject;
 
+/**
+ * Implementation of a text graphic element that can be rendered on a panel.
+ * It supports loading text properties from JSON and rendering the text
+ * with a custom or default font, color, position, and size.
+ */
+@Setter
 public final class TextElementImpl extends GraphicElementImpl {
 
-    @Getter @Setter
+    @Getter
     private String text;
 
-    @Setter
     private double leftX;
-    @Setter
-    private  double leftY;
+    private double leftY;
+
+    @Setter(AccessLevel.NONE)
     private final Color textColor;
+    @Setter(AccessLevel.NONE)
+
     private final double textDimension;
 
+    /**
+     * Constructs a new TextElementImpl with specified properties.
+     * 
+     * @param panelName     the name of the panel this text element belongs to
+     * @param text          the string content to display
+     * @param textColor     the color of the text
+     * @param textDimension the scale factor for text size relative to component
+     *                      size
+     * @param leftX         the relative horizontal position (0.0 - 1.0) of the text
+     *                      within the element
+     * @param leftY         the relative vertical position (0.0 - 1.0) of the text
+     *                      within the element
+     */
     public TextElementImpl(final String panelName, final String text, final Color textColor, final double textDimension,
             final double leftX,
             final double leftY) {
@@ -37,9 +59,15 @@ public final class TextElementImpl extends GraphicElementImpl {
         this.textColor = textColor;
     }
 
-
-
-    public TextElementImpl(JSONObject jsonMetrix) {
+    /**
+     * Constructs a new TextElementImpl from a JSON object describing its
+     * properties.
+     * The JSON must contain keys: "panelName", "text", "leftX", "leftY",
+     * "textDimension", and "textColor".
+     * 
+     * @param jsonMetrix the JSONObject containing the text element configuration
+     */
+    public TextElementImpl(final JSONObject jsonMetrix) {
         super(jsonMetrix.getString("panelName"));
 
         this.text = jsonMetrix.getString("text");

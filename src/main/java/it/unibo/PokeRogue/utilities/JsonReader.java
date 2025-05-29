@@ -11,29 +11,29 @@ public interface JsonReader{
 	* @param destionationFolder 
 	* @param jsonFile
 	*/
-	void dumpJsonToFile(final String filePath, final String destionationFolder, final Object jsonFile) throws IOException;
+	void dumpJsonToFile(String filePath, String destionationFolder, Object jsonFile) throws IOException;
 	/**
 	* Dumps a JSON file into memory
 	* @param filePath 
 	* @param jsonFile
 	*/
-	void dumpJsonToFile(final String filePath, final Object jsonFile) throws IOException;
+	void dumpJsonToFile(String filePath, Object jsonFile) throws IOException;
 	/**
 	* reads a JSON from memory
 	* @param filePath 
 	* @return the JSON string
 	*/
-	String readJsonStringFromFile(final String filePath) throws IOException ;
+	String readJsonStringFromFile(String filePath) throws IOException ;
 	/**
 	* reads a JSON from memory
 	* @param filePath 
 	* @return the JSON Object
 	*/
-	JSONObject readJsonObject(final String filePath) throws IOException ;
+	JSONObject readJsonObject(String filePath) throws IOException ;
 	/**
 	* reads a JSON from memory
 	* @param filePath 
 	* @return the JSON array
 	*/
-	JSONArray readJsonArray(final String filePath) throws IOException ;
+	JSONArray readJsonArray(String filePath) throws IOException ;
 }

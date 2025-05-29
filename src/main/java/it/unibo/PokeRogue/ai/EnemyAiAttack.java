@@ -63,17 +63,8 @@ public final class EnemyAiAttack {
 
     }
 
-    /**
-     * Determines the enemy AI's action during its turn.
-     * If attacking is possible, returns a {@link Decision} containing the attack
-     * move index.
-     * Otherwise, returns a {@link Decision} indicating no action.
-     *
-     * @param weather an optional of the current weather condition in battle
-     * @return a {@link Decision} representing either an attack with the selected
-     *         move index, or a fallback action indicating no move
-     */
-    protected Decision whatAttackWillDo(final Optional<Weather> weather) {
+   
+    Decision whatAttackWillDo(final Optional<Weather> weather) {
         this.currentEnemyPokemon = this.enemyTrainer.getPokemon(0).get();
         this.currentEnemyPokemonMoves = this.currentEnemyPokemon.getActualMoves();
         this.currentPlayerPokemon = this.playerTrainerInstance.getPokemon(0).get();

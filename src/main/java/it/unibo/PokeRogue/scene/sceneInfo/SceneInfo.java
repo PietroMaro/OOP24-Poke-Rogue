@@ -17,7 +17,7 @@ import it.unibo.PokeRogue.scene.sceneInfo.enums.SceneInfoStatusEnum;
 import it.unibo.PokeRogue.scene.sceneSave.enums.SceneSaveStatusEnum;
 import lombok.Getter;
 
-public class SceneInfo extends Scene{
+public class SceneInfo extends Scene {
     @Getter
     private final GraphicElementsRegistry currentSceneGraphicElements;
     @Getter
@@ -26,13 +26,18 @@ public class SceneInfo extends Scene{
     private final GameEngineImpl gameEngineInstance;
     private int newSelectedButton;
     private int currentSelectedButton;
+    private GraphicElementsRegistry graphicElements;
+    private Map<String, Integer> graphicElementNameToInt;
 
     public SceneInfo() throws IOException,
             InstantiationException,
             IllegalAccessException,
             NoSuchMethodException,
             InvocationTargetException {
-        this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(), this.graphicElementNameToInt);
+        this.graphicElementNameToInt = this.getGraphicElementNameToInt();
+        this.graphicElements = this.getGraphicElements();
+        this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
+                this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.initStatus();
@@ -52,6 +57,7 @@ public class SceneInfo extends Scene{
                 break;
         }
     }
+
     private void initStatus() {
         this.currentSelectedButton = SceneSaveStatusEnum.EXIT_AND_SAVE_BUTTON.value();
         this.newSelectedButton = SceneSaveStatusEnum.EXIT_AND_SAVE_BUTTON.value();
@@ -60,8 +66,8 @@ public class SceneInfo extends Scene{
     public void initGraphicElements() throws IOException {
         this.sceneInfoView.initGraphicElements(this.newSelectedButton);
     }
+
     @Override
     public void updateGraphic() throws IOException {
     }
 }
-

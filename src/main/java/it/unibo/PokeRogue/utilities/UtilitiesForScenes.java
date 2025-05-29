@@ -11,22 +11,21 @@ import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
 import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 
 /**
- * Implementation of {@link UtilitiesForScenes} that provides utility methods
- * to manage scene-related resources and UI elements.
+ * Utility class for managing scene-related file paths, button states,
+ * and loading/removing dynamic graphic elements.
  */
 public final class UtilitiesForScenes {
 
     private UtilitiesForScenes() {
-
+        // Prevent instantiation
     }
 
     /**
-     * Builds a relative path string for a resource located in the menu scene image
-     * directory.
+     * Builds the full path string to a file within a scene's image directory.
      *
-     * @param directory the subdirectory inside the scene-specific image folder.
-     * @param fileName  the name of the file.
-     * @return the full relative path to the file as a string.
+     * @param sceneDirName the name of the scene's directory.
+     * @param fileName     the name of the file.
+     * @return the full path string to the file.
      */
     public static String getPathString(final String sceneDirName, final String fileName) {
 
@@ -35,31 +34,29 @@ public final class UtilitiesForScenes {
     }
 
     /**
-     * Sets the selection state of a button based on its code.
+     * Sets the selected status of a button in the given scene's graphic elements.
      *
-     * @param buttonCode           the unique identifier for the button element.
-     * @param status               {@code true} to mark the button as selected,
-     *                             {@code false}
+     * @param buttonCode           the ID of the button.
+     * @param status               true to select the button, false
      *                             to deselect it.
-     * @param sceneGraphicElements a map linking integer codes to
-     *                             {@code GraphicElementImpl} objects.
+     * @param sceneGraphicElements the registry containing the scene's graphic
+     *                             elements.
      */
-
     public static void setButtonStatus(final int buttonCode, final boolean status,
-            GraphicElementsRegistry sceneGraphicElements) {
+            final GraphicElementsRegistry sceneGraphicElements) {
 
-        final ButtonElementImpl selectedButton = (ButtonElementImpl) sceneGraphicElements.getById(buttonCode);
+        final ButtonElementImpl selectedButton = UtilitiesForScenes.safeGetElementById(sceneGraphicElements, buttonCode,
+                ButtonElementImpl.class);
         selectedButton.setSelected(status);
 
     }
 
     /**
-     * Capitalizes the first letter of a string, ensuring the rest of the string
-     * remains unchanged.
-     * 
-     * @param str The string to capitalize.
-     * @return The string with the first letter capitalized, or the original string
-     *         if it is null or empty.
+     * Capitalizes the first letter of the given string.
+     *
+     * @param str the input string.
+     * @return the string with the first letter capitalized, or the original string
+     *         if null or empty.
      */
     public static String capitalizeFirst(final String str) {
         if (str == null || str.isEmpty()) {
@@ -68,42 +65,78 @@ public final class UtilitiesForScenes {
         return str.substring(0, 1).toUpperCase(Locale.ROOT) + str.substring(1);
     }
 
-    public static void loadSceneElements(String fileName, String loadSectionName,
-            GraphicElementsRegistry currentSceneGraphicElements,
-            GraphicElementsRegistry graphicElements) throws IOException {
+    /**
+     * Loads dynamic elements from a scene data file into the current scene
+     * registry.
+     *
+     * @param fileName                    the name of the JSON file containing scene
+     *                                    data.
+     * @param loadSectionName             the section of dynamic objects to load.
+     * @param currentSceneGraphicElements the registry where elements will be
+     *                                    loaded.
+     * @param graphicElements             the source registry from which elements
+     *                                    are retrieved.
+     */
+    public static void loadSceneElements(final String fileName, final String loadSectionName,
+            final GraphicElementsRegistry currentSceneGraphicElements,
+            final GraphicElementsRegistry graphicElements) throws IOException {
 
-        JsonReader jsonReader = new JsonReaderImpl();
-        JSONObject root = jsonReader
+        final JsonReader jsonReader = new JsonReaderImpl();
+        final JSONObject root = jsonReader
                 .readJsonObject(Paths.get("src", "scene.data", fileName).toString());
 
-        JSONArray initArrayIndex = root.getJSONObject("dynamicObjects").getJSONArray(loadSectionName);
+        final JSONArray initArrayIndex = root.getJSONObject("dynamicObjects").getJSONArray(loadSectionName);
 
         for (int i = 0; i < initArrayIndex.length(); i++) {
-            int index = initArrayIndex.getInt(i);
+            final int index = initArrayIndex.getInt(i);
             currentSceneGraphicElements.put(index, graphicElements.getById(index));
 
         }
 
     }
 
+    /**
+     * Removes dynamic elements from the current scene registry based on a scene
+     * data file.
+     *
+     * @param fileName                    the name of the JSON file containing scene
+     *                                    data.
+     * @param loadSectionName             the section of dynamic objects to remove.
+     * @param currentSceneGraphicElements the registry from which elements will be
+     *                                    removed.
+     */
+    public static void removeSceneElements(final String fileName, final String loadSectionName,
+            final GraphicElementsRegistry currentSceneGraphicElements) throws IOException {
 
-    public static void removeSceneElements(String fileName, String loadSectionName,
-        GraphicElementsRegistry currentSceneGraphicElements) throws IOException {
-
-        JsonReader jsonReader = new JsonReaderImpl();
-        JSONObject root = jsonReader
+        final JsonReader jsonReader = new JsonReaderImpl();
+        final JSONObject root = jsonReader
                 .readJsonObject(Paths.get("src", "scene.data", fileName).toString());
 
-        JSONArray initArrayIndex = root.getJSONObject("dynamicObjects").getJSONArray(loadSectionName);
+        final JSONArray initArrayIndex = root.getJSONObject("dynamicObjects").getJSONArray(loadSectionName);
 
         for (int i = 0; i < initArrayIndex.length(); i++) {
-            int index = initArrayIndex.getInt(i);
+            final int index = initArrayIndex.getInt(i);
             currentSceneGraphicElements.removeById(index);
 
         }
 
     }
 
+    public static <T> T safeGetElementByName(final GraphicElementsRegistry registry, final String name,
+            final Class<T> type) {
+        final var element = registry.getByName(name);
+        if (!type.isInstance(element)) {
+            throw new IllegalStateException();
+        }
+        return type.cast(element);
+    }
 
-
+    public static <T> T safeGetElementById(final GraphicElementsRegistry registry, final int Id,
+            final Class<T> type) {
+        final var element = registry.getById(Id);
+        if (!type.isInstance(element)) {
+            throw new IllegalStateException();
+        }
+        return type.cast(element);
+    }
 }

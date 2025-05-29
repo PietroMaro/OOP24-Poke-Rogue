@@ -36,6 +36,8 @@ public final class SceneMenu extends Scene {
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GameEngine gameEngineInstance;
     private final SceneMenuView sceneMenuView;
+    private final GraphicElementsRegistry graphicElements;
+	private final Map<String, Integer> graphicElementNameToInt;
 
     /**
      * Constructs a new SceneMenu object, initializing necessary data structures and
@@ -49,6 +51,8 @@ public final class SceneMenu extends Scene {
             IOException,
             NoSuchMethodException {
         this.loadGraphicElements("sceneMenuElements.json");
+        this.graphicElementNameToInt = this.getGraphicElementNameToInt();
+        this.graphicElements = this.getGraphicElements();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
@@ -63,6 +67,7 @@ public final class SceneMenu extends Scene {
      * Updates the graphical state of the menu by toggling button selection
      * highlights.
      */
+    @Override
     public void updateGraphic() {
 
         for (int i = 0; i < 3; i++) {

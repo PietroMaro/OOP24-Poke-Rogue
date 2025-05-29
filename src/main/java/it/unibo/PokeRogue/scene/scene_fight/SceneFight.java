@@ -41,6 +41,8 @@ public class SceneFight extends Scene {
 
     private final BattleEngine battleEngineInstance;
     private final GenerateEnemy generateEnemyInstance;
+    private final GraphicElementsRegistry graphicElements;
+    private final Map<String, Integer> graphicElementNameToInt;
 
     /**
      * Constructor for SceneFight.
@@ -53,6 +55,8 @@ public class SceneFight extends Scene {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
+        this.graphicElementNameToInt = this.getGraphicElementNameToInt();
+        this.graphicElements = this.getGraphicElements();
         this.enemyTrainerInstance = new TrainerImpl();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);

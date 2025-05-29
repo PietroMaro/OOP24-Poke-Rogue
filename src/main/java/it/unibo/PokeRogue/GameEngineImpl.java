@@ -17,17 +17,16 @@ import it.unibo.PokeRogue.scene.sceneSave.SceneSave;
 
 import lombok.Setter;
 
+
 /**
- * Implementation of the {@link GameEngine} interface.
- * This class represents the actual game engine, managing the different
- * components of the game
- * such as the graphic engine and saving system.
- * It is a singleton, as it extends {@link SingletonImpl}, ensuring that only
- * one instance
- * of the game engine exists within the system.
+ * Concrete implementation of the {@link GameEngine} interface.
  * 
- * This class is responsible for managing the transition between scenes and
- * other game-related operations.
+ * This class serves as the central controller of the game, responsible for
+ * managing the current scene, responding to input, and interacting with
+ * the graphic engine to render scenes.
+ * 
+ * It is a singleton, as it extends Singleton, ensuring a single
+ * game engine instance exists throughout the application lifecycle.
  */
 public final class GameEngineImpl extends Singleton implements GameEngine {
 
@@ -39,20 +38,8 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
     @Setter
     private Integer fightLevel;
 
-    protected GameEngineImpl() {
-        super();
-    }
+  
 
-    /**
-     * Sets the current scene of the game.
-     * 
-     * This method handles the transition to a new scene, identified by the
-     * {@code newScene} parameter.
-     * It would involve updating the graphical interface and potentially loading
-     * relevant game data.
-     * 
-     * @param newScene the name of the new scene to load
-     */
     @Override
     public void setScene(final String newScene)
             throws IOException,
