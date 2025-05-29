@@ -60,35 +60,45 @@ public class SceneMoveView {
                 UtilitiesForScenes.loadSceneElements("sceneMoveElements.json", "init",
                                 currentSceneGraphicElements,
                                 this.graphicElements);
-                ((TextElementImpl) currentSceneGraphicElements.getByName("MOVE_1_BUTTON_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "MOVE_1_BUTTON_TEXT",
+                                                TextElementImpl.class)
                                 .setText(playerPokemon.getActualMoves().get(0).getName()
                                                 + PP_STRING
                                                 + playerPokemon.getActualMoves().get(0).getPp()
                                                                 .getCurrentValue()
                                                 + DAMAGE_STRING
                                                 + playerPokemon.getActualMoves().get(0).getBaseDamage());
-                ((TextElementImpl) currentSceneGraphicElements.getByName("MOVE_2_BUTTON_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "MOVE_2_BUTTON_TEXT",
+                                                TextElementImpl.class)
                                 .setText(playerPokemon.getActualMoves().get(1).getName()
                                                 + PP_STRING
                                                 + playerPokemon.getActualMoves().get(1).getPp()
                                                                 .getCurrentValue()
                                                 + DAMAGE_STRING
                                                 + playerPokemon.getActualMoves().get(1).getBaseDamage());
-                ((TextElementImpl) currentSceneGraphicElements.getByName("MOVE_3_BUTTON_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "MOVE_3_BUTTON_TEXT",
+                                                TextElementImpl.class)
                                 .setText(playerPokemon.getActualMoves().get(2).getName()
                                                 + PP_STRING
                                                 + playerPokemon.getActualMoves().get(2).getPp()
                                                                 .getCurrentValue()
                                                 + DAMAGE_STRING
                                                 + playerPokemon.getActualMoves().get(2).getBaseDamage());
-                ((TextElementImpl) currentSceneGraphicElements.getByName("MOVE_4_BUTTON_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "MOVE_4_BUTTON_TEXT",
+                                                TextElementImpl.class)
                                 .setText(playerPokemon.getActualMoves().get(3).getName()
                                                 + PP_STRING
                                                 + playerPokemon.getActualMoves().get(3).getPp()
                                                                 .getCurrentValue()
                                                 + DAMAGE_STRING
                                                 + playerPokemon.getActualMoves().get(3).getBaseDamage());
-                ((TextElementImpl) currentSceneGraphicElements.getByName("MOVE_5_BUTTON_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "MOVE_5_BUTTON_TEXT",
+                                                TextElementImpl.class)
                                 .setText(playerPokemon.getNewMoveToLearn().get().getName()
                                                 + PP_STRING
                                                 + playerPokemon
@@ -97,7 +107,9 @@ public class SceneMoveView {
                                                 + DAMAGE_STRING
                                                 + playerPokemon.getNewMoveToLearn().get()
                                                                 .getBaseDamage());
-                ((TextElementImpl) currentSceneGraphicElements.getByName("NEW_MOVE_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "NEW_MOVE_TEXT",
+                                                TextElementImpl.class)
                                 .setText(playerPokemon.getName() + " can learn a new move : ");
         }
 }

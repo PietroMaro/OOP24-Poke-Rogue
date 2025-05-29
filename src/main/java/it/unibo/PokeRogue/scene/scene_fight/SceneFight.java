@@ -13,7 +13,6 @@ import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.scene.GraphicElementsRegistryImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.scene.scene_fight.enums.DecisionTypeEnum;
-import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightStatusValuesEnum;
 import it.unibo.PokeRogue.trainers.TrainerImpl;
 import lombok.Getter;
 
@@ -54,6 +53,7 @@ public class SceneFight extends Scene {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
+        this.loadGraphicElements("sceneFightElements.json");
         this.graphicElementNameToInt = this.getGraphicElementNameToInt();
         this.graphicElements = this.getGraphicElements();
         this.enemyTrainerInstance = new TrainerImpl();
@@ -66,7 +66,7 @@ public class SceneFight extends Scene {
         this.generateEnemyInstance.generateEnemy();
         this.initStatus();
         this.sceneFightView = new SceneFightView(currentSceneGraphicElements, allPanelsElements, enemyTrainerInstance,
-                currentSelectedButton, newSelectedButton, this, this.graphicElements);
+                currentSelectedButton, newSelectedButton, this, this.graphicElements, this.graphicElementNameToInt);
         this.initGraphicElements();
     }
 
@@ -75,8 +75,8 @@ public class SceneFight extends Scene {
      * Sets the default button selection to "Fight".
      */
     private void initStatus() {
-        this.currentSelectedButton = SceneFightStatusValuesEnum.FIGHT_BUTTON.value();
-        this.newSelectedButton = SceneFightStatusValuesEnum.FIGHT_BUTTON.value();
+        this.currentSelectedButton = graphicElementNameToInt.get("FIGHT_BUTTON");
+        this.newSelectedButton = graphicElementNameToInt.get("FIGHT_BUTTON");
     }
 
     /**
@@ -129,19 +129,19 @@ public class SceneFight extends Scene {
                 break;
 
             case KeyEvent.VK_LEFT:
-                if (newSelectedButton == SceneFightStatusValuesEnum.BALL_BUTTON.value() ||
-                        newSelectedButton == SceneFightStatusValuesEnum.RUN_BUTTON.value() ||
-                        newSelectedButton == SceneFightStatusValuesEnum.MOVE_BUTTON_2.value() ||
-                        newSelectedButton == SceneFightStatusValuesEnum.MOVE_BUTTON_4.value()) {
+                if (newSelectedButton == graphicElementNameToInt.get("BALL_BUTTON") ||
+                        newSelectedButton == graphicElementNameToInt.get("RUN_BUTTON") ||
+                        newSelectedButton == graphicElementNameToInt.get("MOVE_BUTTON_2") ||
+                        newSelectedButton == graphicElementNameToInt.get("MOVE_BUTTON_4")) {
                     newSelectedButton -= 2;
                 }
                 break;
 
             case KeyEvent.VK_RIGHT:
-                if (newSelectedButton == SceneFightStatusValuesEnum.FIGHT_BUTTON.value() ||
-                        newSelectedButton == SceneFightStatusValuesEnum.POKEMON_BUTTON.value() ||
-                        newSelectedButton == SceneFightStatusValuesEnum.MOVE_BUTTON_1.value() ||
-                        newSelectedButton == SceneFightStatusValuesEnum.MOVE_BUTTON_3.value()) {
+                if (newSelectedButton == graphicElementNameToInt.get("FIGHT_BUTTON") ||
+                        newSelectedButton == graphicElementNameToInt.get("POKEMON_BUTTON") ||
+                        newSelectedButton == graphicElementNameToInt.get("MOVE_BUTTON_1") ||
+                        newSelectedButton == graphicElementNameToInt.get("MOVE_BUTTON_3")) {
                     newSelectedButton += 2;
                 }
                 break;
@@ -247,4 +247,3 @@ public class SceneFight extends Scene {
         this.currentSelectedButton = newVal;
     }
 }
-

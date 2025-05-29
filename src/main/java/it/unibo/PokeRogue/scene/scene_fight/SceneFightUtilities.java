@@ -136,14 +136,14 @@ public final class SceneFightUtilities {
             type = String.valueOf(move.getType());
             power = String.valueOf(move.getBaseDamage());
         }
-        ((TextElementImpl) currentSceneGraphicElements.getByName("MOVE_PP_TEXT"))
+        UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "MOVE_PP_TEXT", TextElementImpl.class)
                 .setText("PP: " + pp);
-        ((TextElementImpl) currentSceneGraphicElements.getByName("MOVE_TYPE_TEXT"))
+        UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "MOVE_TYPE_TEXT", TextElementImpl.class)
                 .setText("Type: " + type);
-        ((TextElementImpl) currentSceneGraphicElements.getByName("MOVE_POWER_TEXT"))
+        UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "MOVE_POWER_TEXT", TextElementImpl.class)
                 .setText("Power: " + power);
         if (move != null) {
-            ((BoxElementImpl) currentSceneGraphicElements.getByName("MOVE_TYPE"))
+            UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "MOVE_TYPE", BoxElementImpl.class)
                     .setMainColor(ColorTypeConversion.getColorForType(
                             move.getType()));
         } else {

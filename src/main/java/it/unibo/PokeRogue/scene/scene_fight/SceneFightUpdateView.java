@@ -7,8 +7,6 @@ import javax.swing.OverlayLayout;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
-import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightGraphicEnum;
-import it.unibo.PokeRogue.scene.scene_fight.enums.SceneFightStatusValuesEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 
@@ -34,6 +32,7 @@ public class SceneFightUpdateView {
         private final SceneFight sceneInstance;
         private Boolean alreadyInMainMenu;
         private final GraphicElementsRegistry graphicElements;
+        final Map<String, Integer> graphicElementNameToInt;
 
         /**
          * Constructs a new SceneFightUpdateView.
@@ -51,7 +50,7 @@ public class SceneFightUpdateView {
         public SceneFightUpdateView(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final int currentSelectedButton, final int newSelectedButton, final SceneFight sceneInstance,
-                        final GraphicElementsRegistry graphicElements) {
+                        final GraphicElementsRegistry graphicElements, final Map<String, Integer> graphicElementNameToInt) {
                 this.currentSelectedButton = currentSelectedButton;
                 this.newSelectedButton = newSelectedButton;
                 this.currentSceneGraphicElements = currentSceneGraphicElements;
@@ -60,6 +59,7 @@ public class SceneFightUpdateView {
                 this.sceneInstance = sceneInstance;
                 this.alreadyInMainMenu = true;
                 this.graphicElements = graphicElements;
+                this.graphicElementNameToInt = graphicElementNameToInt;
         }
 
         /**
@@ -92,8 +92,8 @@ public class SceneFightUpdateView {
         }
 
         private void updateMoves() throws IOException {
-                if (currentSelectedButton >= SceneFightStatusValuesEnum.MOVE_BUTTON_1.value()
-                                && currentSelectedButton < SceneFightStatusValuesEnum.CHANGE_POKEMON_1.value()) {
+                if (currentSelectedButton >= graphicElementNameToInt.get("MOVE_BUTTON_1")
+                                && currentSelectedButton < graphicElementNameToInt.get("CHANGE_POKEMON_1")) {
                         this.allPanelsElements.put(MOVE_PANEL_TEXT,
                                         new PanelElementImpl("firstPanel", new OverlayLayout(null)));
                         this.alreadyInMainMenu = false;
@@ -103,7 +103,6 @@ public class SceneFightUpdateView {
                                         currentSceneGraphicElements,
                                         this.graphicElements);
                         this.initMoveText();
-                        // TODO
                         SceneFightUtilities.updateMoveInfo(currentSelectedButton,
                                         currentSceneGraphicElements,
                                         playerTrainerInstance);
@@ -113,39 +112,47 @@ public class SceneFightUpdateView {
         }
 
         private void initMoveText() {
-                ((TextElementImpl) currentSceneGraphicElements.getByName("MOVE_1_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "MOVE_1_TEXT", TextElementImpl.class)
                                 .setText(SceneFightUtilities.getMoveNameOrPlaceholder(FIRST_POSITION,
                                                 playerTrainerInstance));
-                ((TextElementImpl) currentSceneGraphicElements.getByName("MOVE_2_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "MOVE_2_TEXT", TextElementImpl.class)
                                 .setText(SceneFightUtilities.getMoveNameOrPlaceholder(SECOND_POSITION,
                                                 playerTrainerInstance));
-                ((TextElementImpl) currentSceneGraphicElements.getByName("MOVE_3_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "MOVE_3_TEXT", TextElementImpl.class)
                                 .setText(SceneFightUtilities.getMoveNameOrPlaceholder(THIRD_POSITION,
                                                 playerTrainerInstance));
-                ((TextElementImpl) currentSceneGraphicElements.getByName("MOVE_4_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "MOVE_4_TEXT", TextElementImpl.class)
                                 .setText(SceneFightUtilities.getMoveNameOrPlaceholder(FOURTH_POSITION,
                                                 playerTrainerInstance));
         }
 
         private void updateBall() throws IOException {
-                if (currentSelectedButton >= SceneFightStatusValuesEnum.POKEBALL_BUTTON.value()
-                                && currentSelectedButton < SceneFightGraphicEnum.BACKGROUND.value()) {
+                if (currentSelectedButton >= graphicElementNameToInt.get("POKEBALL_BUTTON")
+                                && currentSelectedButton < graphicElementNameToInt.get("BACKGROUND")) {
                         this.alreadyInMainMenu = false;
                         UtilitiesForScenes.loadSceneElements("sceneFightElement.json", "pokeball",
                                         currentSceneGraphicElements,
                                         this.graphicElements);
                         this.allPanelsElements.put(BALL_PANEL_TEXT,
                                         new PanelElementImpl("firstPanel", new OverlayLayout(null)));
-                        ((TextElementImpl) currentSceneGraphicElements.getByName("POKEBALL_TEXT"))
+                        UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEBALL_TEXT",
+                                        TextElementImpl.class)
                                         .setText(playerTrainerInstance.getBall().get("pokeball")
                                                         + " x Poke Ball");
-                        ((TextElementImpl) currentSceneGraphicElements.getByName("MEGABALL_TEXT"))
+                        UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "MEGABALL_TEXT",
+                                        TextElementImpl.class)
                                         .setText(playerTrainerInstance.getBall().get("megaball")
                                                         + " x Mega Ball");
-                        ((TextElementImpl) currentSceneGraphicElements.getByName("ULTRABALL_TEXT"))
+                        UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "ULTRABALL_TEXT",
+                                        TextElementImpl.class)
                                         .setText(playerTrainerInstance.getBall().get("ultraball")
                                                         + " x Ulta Ball");
-                        ((TextElementImpl) currentSceneGraphicElements.getByName("MASTERBALL_TEXT"))
+                        UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "MASTERBALL_TEXT",
+                                        TextElementImpl.class)
                                         .setText(playerTrainerInstance.getBall()
                                                         .get("masterball") + " x Master Ball");
                         UtilitiesForScenes.setButtonStatus(currentSelectedButton, true,
@@ -154,8 +161,8 @@ public class SceneFightUpdateView {
         }
 
         private void pokemonChange() throws IOException {
-                if (currentSelectedButton >= SceneFightStatusValuesEnum.CHANGE_POKEMON_1.value()
-                                && currentSelectedButton < SceneFightStatusValuesEnum.POKEBALL_BUTTON.value()) {
+                if (currentSelectedButton >= graphicElementNameToInt.get("CHANGE_POKEMON_1")
+                                && currentSelectedButton < graphicElementNameToInt.get("POKEBALL_BUTTON")) {
                         this.alreadyInMainMenu = false;
                         this.allPanelsElements.put(CHANGE_PANEL_TEXT,
                                         new PanelElementImpl("firstPanel", new OverlayLayout(null)));
@@ -172,39 +179,51 @@ public class SceneFightUpdateView {
         }
 
         private void initChangeText() {
-                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_0_NAME_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "POKEMON_0_NAME_TEXT",
+                                                TextElementImpl.class)
                                 .setText(SceneFightUtilities.getPokemonNameAt(playerTrainerInstance,
                                                 FIRST_POSITION)
                                                 + " "
                                                 + SceneFightUtilities.getPokemonLifeText(FIRST_POSITION,
                                                                 playerTrainerInstance));
-                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_1_NAME_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "POKEMON_1_NAME_TEXT",
+                                                TextElementImpl.class)
                                 .setText(SceneFightUtilities.getPokemonNameAt(playerTrainerInstance,
                                                 SECOND_POSITION)
                                                 + " "
                                                 + SceneFightUtilities.getPokemonLifeText(SECOND_POSITION,
                                                                 playerTrainerInstance));
-                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_2_NAME_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "POKEMON_2_NAME_TEXT",
+                                                TextElementImpl.class)
                                 .setText(SceneFightUtilities.getPokemonNameAt(playerTrainerInstance,
                                                 THIRD_POSITION)
                                                 + " "
                                                 + SceneFightUtilities.getPokemonLifeText(THIRD_POSITION,
                                                                 playerTrainerInstance));
-                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_3_NAME_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "POKEMON_3_NAME_TEXT",
+                                                TextElementImpl.class)
                                 .setText(SceneFightUtilities.getPokemonNameAt(playerTrainerInstance,
                                                 FOURTH_POSITION)
                                                 + " "
                                                 + SceneFightUtilities.getPokemonLifeText(FOURTH_POSITION,
                                                                 playerTrainerInstance));
 
-                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_4_NAME_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "POKEMON_4_NAME_TEXT",
+                                                TextElementImpl.class)
                                 .setText(SceneFightUtilities.getPokemonNameAt(playerTrainerInstance,
                                                 FIFTH_POSITION)
                                                 + " "
                                                 + SceneFightUtilities.getPokemonLifeText(FIFTH_POSITION,
                                                                 playerTrainerInstance));
 
-                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_5_NAME_TEXT"))
+                UtilitiesForScenes
+                                .safeGetElementByName(currentSceneGraphicElements, "POKEMON_5_NAME_TEXT",
+                                                TextElementImpl.class)
                                 .setText(SceneFightUtilities.getPokemonNameAt(playerTrainerInstance,
                                                 SIXTH_POSITION)
                                                 + " "
@@ -213,8 +232,8 @@ public class SceneFightUpdateView {
         }
 
         private void mainMenu() throws IOException {
-                if ((this.currentSelectedButton <= SceneFightStatusValuesEnum.BALL_BUTTON.value() && !alreadyInMainMenu)
-                                || this.newSelectedButton == SceneFightStatusValuesEnum.RUN_BUTTON.value()) {
+                if ((this.currentSelectedButton <= graphicElementNameToInt.get("BALL_BUTTON") && !alreadyInMainMenu)
+                                || this.newSelectedButton == graphicElementNameToInt.get("RUN_BUTTON")) {
                         currentSceneGraphicElements.clear();
                         allPanelsElements.clear();
                         sceneInstance.setCurrentSelectedButton(currentSelectedButton);
@@ -224,4 +243,3 @@ public class SceneFightUpdateView {
         }
 
 }
-

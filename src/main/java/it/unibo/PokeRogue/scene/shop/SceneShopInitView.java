@@ -42,7 +42,6 @@ public class SceneShopInitView {
                                 new BackgroundElementImpl(FIRST_PANEL,
                                                 UtilitiesForScenes.getPathString("images", "sceneShopBgBar.png")));
 
-                // Set the first button as selected
                 UtilitiesForScenes.setButtonStatus(currentSelectedButton, true, sceneGraphicElements);
 
         }

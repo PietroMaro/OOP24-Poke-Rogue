@@ -54,6 +54,7 @@ public class SceneMove extends Scene {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
+        this.loadGraphicElements("sceneMoveElements.json");
         this.graphicElementNameToInt = this.getGraphicElementNameToInt();
         this.graphicElements = this.getGraphicElements();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
@@ -98,18 +99,18 @@ public class SceneMove extends Scene {
 
         switch (inputKey) {
             case KeyEvent.VK_UP:
-                if (this.currentSelectedButton == SceneMoveGraphicEnum.MOVE_1_BUTTON.value()) {
+                if (this.currentSelectedButton == graphicElementNameToInt.get("MOVE_1_BUTTON")) {
                     this.newSelectedButton = 4;
-                } else if (this.currentSelectedButton >= SceneMoveGraphicEnum.MOVE_1_BUTTON.value()
-                        && this.currentSelectedButton <= SceneMoveGraphicEnum.MOVE_5_BUTTON.value()) {
+                } else if (this.currentSelectedButton >= graphicElementNameToInt.get("MOVE_1_BUTTON")
+                        && this.currentSelectedButton <= graphicElementNameToInt.get("MOVE_5_BUTTON")) {
                     this.newSelectedButton -= 1;
                 }
                 break;
             case KeyEvent.VK_DOWN:
-                if (this.currentSelectedButton == SceneMoveGraphicEnum.MOVE_5_BUTTON.value()) {
+                if (this.currentSelectedButton == graphicElementNameToInt.get("MOVE_5_BUTTON")) {
                     this.newSelectedButton = 0;
-                } else if (this.currentSelectedButton >= SceneMoveGraphicEnum.MOVE_1_BUTTON.value()
-                        && this.currentSelectedButton <= SceneMoveGraphicEnum.MOVE_5_BUTTON.value()) {
+                } else if (this.currentSelectedButton >= graphicElementNameToInt.get("MOVE_1_BUTTON")
+                        && this.currentSelectedButton <= graphicElementNameToInt.get("MOVE_5_BUTTON")) {
                     this.newSelectedButton += 1;
                 }
                 break;
@@ -143,7 +144,7 @@ public class SceneMove extends Scene {
 
     private void initStatus() {
         this.newSelectedButton = 0;
-        this.currentSelectedButton = SceneMoveGraphicEnum.MOVE_1_BUTTON.value();
+        this.currentSelectedButton = graphicElementNameToInt.get("MOVE_1_BUTTON");
     }
 
 }
