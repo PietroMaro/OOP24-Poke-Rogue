@@ -63,7 +63,6 @@ public final class EnemyAiAttack {
 
     }
 
-   
     Decision whatAttackWillDo(final Optional<Weather> weather) {
         this.currentEnemyPokemon = this.enemyTrainer.getPokemon(0).get();
         this.currentEnemyPokemonMoves = this.currentEnemyPokemon.getActualMoves();

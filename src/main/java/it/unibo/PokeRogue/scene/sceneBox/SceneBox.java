@@ -16,7 +16,6 @@ import it.unibo.PokeRogue.scene.GraphicElementsRegistryImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
-import lombok.Getter;
 
 /**
  * Represents the Box scene where the player can view and manage stored
@@ -33,9 +32,7 @@ public class SceneBox extends Scene {
         private static final int UP_ARROW_BUTTON_POSITION = 0;
         private static final int DOWN_ARROW_BUTTON_POSITION = 1;
 
-        @Getter
         private final GraphicElementsRegistry currentSceneGraphicElements;
-        @Getter
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final GameEngine gameEngineInstance;
         private int boxIndex;
@@ -61,7 +58,7 @@ public class SceneBox extends Scene {
                         IllegalAccessException,
                         NoSuchMethodException,
                         InvocationTargetException {
-                
+
                 this.loadGraphicElements("sceneBoxElements.json");
                 this.graphicElementNameToInt = this.getGraphicElementNameToInt();
                 this.graphicElements = this.getGraphicElements();
@@ -70,7 +67,7 @@ public class SceneBox extends Scene {
                 this.allPanelsElements = new LinkedHashMap<>();
                 this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-                this.sceneBoxView = new SceneBoxView(this.graphicElements, this.graphicElementNameToInt);
+                this.sceneBoxView = new SceneBoxView();
                 this.sceneBoxModel = new SceneBoxLoad();
                 this.sceneBoxModel.setUpSave(savePath);
                 this.boxes = this.sceneBoxModel.getBoxes();
@@ -78,19 +75,6 @@ public class SceneBox extends Scene {
                 this.initGraphicElements();
         }
 
-        /**
-         * Handles user input to update the scene state.
-         * 
-         * This method manages navigation through the UI elements using directional keys
-         * (UP, DOWN, LEFT, RIGHT) and confirms actions via ENTER.
-         *
-         * UP/DOWN/LEFT/RIGHT: navigates through the Pokémon grid or buttons
-         * ENTER: triggers context-specific actions such as changing box,
-         * adding/removing Pokémon
-         * 
-         *
-         * @param inputKey the key event received from the user
-         */
         @Override
         public void updateStatus(final int inputKey) throws IOException,
                         InstantiationException,
@@ -188,26 +172,13 @@ public class SceneBox extends Scene {
 
         }
 
-        /**
-         * Updates all graphical components of the scene based on the current state.
-         * 
-         * This includes:
-         * 
-         * Highlighting the selected button
-         * Refreshing the displayed Pokémon box if changed
-         * Updating the player's Pokémon squad sprites
-         * Showing details of the selected Pokémon
-         * 
-         * External classes like {@link SceneBoxView} handle the actual rendering of
-         * graphical components.
-         * 
-         */
         @Override
         public void updateGraphic() throws IOException {
 
                 this.sceneBoxView.updateGraphic(this.currentSelectedButton, this.newSelectedButton, this.boxIndex,
                                 this.newBoxIndex, this.boxes,
-                                this.playerTrainerInstance, this.currentSceneGraphicElements);
+                                this.playerTrainerInstance, this.currentSceneGraphicElements,
+                                this.graphicElementNameToInt);
 
                 this.currentSelectedButton = this.newSelectedButton;
 
@@ -229,7 +200,8 @@ public class SceneBox extends Scene {
 
         private void initGraphicElements() throws IOException {
 
-                this.sceneBoxView.initGraphicElements(this.currentSceneGraphicElements, this.allPanelsElements);
+                this.sceneBoxView.initGraphicElements(this.currentSceneGraphicElements, this.allPanelsElements,
+                                this.graphicElements);
 
                 // Draw Pokemon sprites
                 this.currentBoxLength = this.sceneBoxView.loadPokemonSprites(boxes, boxIndex,
@@ -239,4 +211,11 @@ public class SceneBox extends Scene {
                 UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, this.currentSceneGraphicElements);
         }
 
+        public GraphicElementsRegistry getCurrentSceneGraphicElements() {
+                return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);
+        }
+
+        public Map<String, PanelElementImpl> getAllPanelsElements() {
+                return new LinkedHashMap<>(allPanelsElements);
+        }
 }

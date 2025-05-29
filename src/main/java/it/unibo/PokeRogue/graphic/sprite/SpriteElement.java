@@ -21,4 +21,39 @@ public interface SpriteElement {
      * @param image the Image to display
      */
     void setImage(Image image);
+
+    /**
+     * Returns the sprite image.
+     *
+     * @return the image used for the sprite.
+     */
+    Image getSpriteImage();
+
+    /**
+     * Returns the X coordinate of the upper-left corner of the sprite.
+     *
+     * @return the left-up X coordinate.
+     */
+    double getLeftUpX();
+
+    /**
+     * Returns the Y coordinate of the upper-left corner of the sprite.
+     *
+     * @return the left-up Y coordinate.
+     */
+    double getLeftUpY();
+
+    /**
+     * Returns the width of the sprite.
+     *
+     * @return the sprite width.
+     */
+    double getSpriteWidth();
+
+    /**
+     * Returns the height of the sprite.
+     *
+     * @return the sprite height.
+     */
+    double getSpriteHeight();
 }

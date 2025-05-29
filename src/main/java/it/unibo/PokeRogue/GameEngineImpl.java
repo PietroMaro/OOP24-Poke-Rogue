@@ -14,9 +14,7 @@ import it.unibo.PokeRogue.scene.sceneMenu.SceneMenu;
 import it.unibo.PokeRogue.scene.sceneMove.SceneMove;
 import it.unibo.PokeRogue.scene.sceneSave.SceneSave;
 
-
 import lombok.Setter;
-
 
 /**
  * Concrete implementation of the {@link GameEngine} interface.
@@ -38,7 +36,13 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
     @Setter
     private Integer fightLevel;
 
-  
+    /**
+     * Protected constructor for the GameEngineImpl.
+     */
+    protected GameEngineImpl() {
+        super();
+        this.graphicEngineInstance = null;
+    }
 
     @Override
     public void setScene(final String newScene)

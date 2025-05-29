@@ -71,4 +71,9 @@ public final class ButtonElementImpl extends GraphicElementImpl implements Butto
 
     }
 
+    public BoxElementImpl getButtonBox() {
+
+        return new BoxElementImpl(buttonBox);
+    }
+
 }

@@ -17,7 +17,6 @@ import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.scene.GraphicElementsRegistryImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
-import lombok.Getter;
 
 /**
  * {@code SceneLoad} represents the scene responsible for displaying and
@@ -28,22 +27,6 @@ import lombok.Getter;
  * or return to the main menu. It supports pagination to handle a large number
  * of saves, showing up to 10 saves per page.
  * 
- * Internally, the class manages graphical elements (buttons, texts,
- * backgrounds) using
- * {@link it.unibo.PokeRogue.graphic} components and delegates the creation of
- * visual elements
- * to {@link SceneLoadView}. It also handles user input (keyboard navigation and
- * selection)
- * to update the scene status and visuals accordingly.
- * 
- * Main Responsibilities:
- * Initialize and render save file entries and associated UI elements
- * Handle navigation through saves via keyboard input
- * Allow selection and loading of a save, or returning to the main menu
- * 
- * @see SceneLoadView
- * @see it.unibo.PokeRogue.savingSystem.SavingSystem
- * @see it.unibo.PokeRogue.utilities.UtilitiesForScenes
  */
 public final class SceneLoad extends Scene {
 
@@ -51,9 +34,8 @@ public final class SceneLoad extends Scene {
     private static final int LAST_SAVE_POSITION = 9;
     private static final int NUMBER_OF_SAVE_SHOWED = 10;
 
-    @Getter
     private final GraphicElementsRegistry currentSceneGraphicElements;
-    @Getter
+
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GameEngine gameEngineInstance;
     private final SavingSystem savingSystemInstance;
@@ -74,7 +56,7 @@ public final class SceneLoad extends Scene {
             InvocationTargetException,
             NoSuchMethodException,
             IOException {
-   
+
         this.loadGraphicElements("sceneLoadElements.json");
         this.graphicElementNameToInt = this.getGraphicElementNameToInt();
         this.graphicElements = this.getGraphicElements();
@@ -89,17 +71,7 @@ public final class SceneLoad extends Scene {
         this.initGraphicElements();
     }
 
-    /**
-     * Updates the graphic elements of the scene when navigating through the save
-     * list.
-     * It manages visual selection and pagination based on the difference between
-     * {@code selectedSave} and {@code newSelectedSave}.
-     * 
-     * When moving across pages (every 10 saves), this method triggers re-rendering
-     * of the visible saves. It also updates the visual state of the selected
-     * button.
-     * 
-     */
+ 
     @Override
     public void updateGraphic() throws IOException {
         UtilitiesForScenes.setButtonStatus(this.selectedSave % NUMBER_OF_SAVE_SHOWED, false,
@@ -126,14 +98,7 @@ public final class SceneLoad extends Scene {
 
     }
 
-    /**
-     * Updates the internal state of the scene in response to keyboard input.
-     * Handles navigation (UP/DOWN arrows) through the save list and triggers
-     * loading of a selected save when ENTER is pressed.
-     *
-     * @param inputKey the key event received from the user
-     * 
-     */
+
     @Override
     public void updateStatus(final int inputKey) throws InstantiationException,
             IllegalAccessException,
@@ -191,4 +156,11 @@ public final class SceneLoad extends Scene {
                 currentSceneGraphicElements);
     }
 
+    public GraphicElementsRegistry getCurrentSceneGraphicElements() {
+        return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);
+    }
+
+    public Map<String, PanelElementImpl> getAllPanelsElements() {
+        return new LinkedHashMap<>(allPanelsElements);
+    }
 }

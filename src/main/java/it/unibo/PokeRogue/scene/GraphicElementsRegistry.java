@@ -62,4 +62,11 @@ public interface GraphicElementsRegistry {
      */
     Map<Integer, GraphicElementImpl> getElements();
 
+    /**
+     * Returns the map map of element names to their integer IDs.
+     * 
+     * @return the  map of element names to their integer IDs.
+     */
+    public Map<String, Integer> getNameToId();
+
 }
