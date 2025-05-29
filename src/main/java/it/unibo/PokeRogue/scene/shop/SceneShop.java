@@ -59,11 +59,6 @@ public class SceneShop extends Scene {
     private final SceneShopView sceneShopView;
 
     /**
-     * Utility class providing logic related to item handling, prices, and effects.
-     */
-    private final SceneShopUtilities sceneShopUtilities;
-
-    /**
      * Factory for creating new item instances for the shop.
      */
     private final ItemFactoryImpl itemFactoryInstance;
