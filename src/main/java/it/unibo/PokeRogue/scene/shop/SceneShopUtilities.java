@@ -68,7 +68,8 @@ public class SceneShopUtilities {
 
         for (int i = 0; i < PRICY_ITEMS_SIZE; i++) {
             Item item = SceneShopUtilities.getShopItems(i);
-            double xPosition = 0.14 + (i * 0.29);
+            double xPosition = 0.15 + (i * 0.29);
+            double xPositionPrice = 0.25 + (i * 0.29);
 
             ((TextElementImpl) sceneGraphicElements.getById(PRICY_ITEM_1_NAME_POSITION + i))
                     .setText(item.getName());
@@ -78,12 +79,12 @@ public class SceneShopUtilities {
             ((TextElementImpl) sceneGraphicElements.getById(PRICY_ITEM_1_PRICE_POSITION + i))
                     .setText(String.valueOf(item.getPrice()));
             ((TextElementImpl) sceneGraphicElements.getById(PRICY_ITEM_1_PRICE_POSITION + i))
-                    .setLeftX(xPosition);
+                    .setLeftX(xPositionPrice);
         }
         for (int i = 0; i < FREE_ITEMS_SIZE; i++) {
             Item item = SceneShopUtilities.getShopItems(FREE_ITEMS_SIZE + i);
 
-            double xPosition = 0.14 + (i * 0.29);
+            double xPosition = 0.18 + (i * 0.29);
 
             ((TextElementImpl) sceneGraphicElements.getById(FREE_ITEM_1_NAME_POSITION + i))
                     .setText(item.getName());

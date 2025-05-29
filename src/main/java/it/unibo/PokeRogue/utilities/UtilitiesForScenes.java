@@ -49,8 +49,8 @@ public final class UtilitiesForScenes {
             GraphicElementsRegistry sceneGraphicElements) {
 
         final ButtonElementImpl selectedButton = (ButtonElementImpl) sceneGraphicElements.getById(buttonCode);
-        selectedButton.setSelected(status);
-
+        
+            selectedButton.setSelected(status);
     }
 
     /**
@@ -86,9 +86,8 @@ public final class UtilitiesForScenes {
 
     }
 
-
     public static void removeSceneElements(String fileName, String loadSectionName,
-        GraphicElementsRegistry currentSceneGraphicElements) throws IOException {
+            GraphicElementsRegistry currentSceneGraphicElements) throws IOException {
 
         JsonReader jsonReader = new JsonReaderImpl();
         JSONObject root = jsonReader
@@ -103,7 +102,5 @@ public final class UtilitiesForScenes {
         }
 
     }
-
-
 
 }

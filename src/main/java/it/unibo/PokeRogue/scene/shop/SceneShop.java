@@ -20,6 +20,7 @@ import it.unibo.PokeRogue.scene.GraphicElementsRegistryImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import lombok.Getter;
+import lombok.Setter;
 
 public class SceneShop extends Scene {
     @Getter
@@ -28,7 +29,9 @@ public class SceneShop extends Scene {
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final PlayerTrainerImpl playerTrainerInstance;
     private final GameEngineImpl gameEngineInstance;
+    @Setter
     private int newSelectedButton;
+    @Setter
     private int currentSelectedButton;
     private final SceneShopView sceneShopView;
     private final SceneShopUtilities sceneShopUtilities;
@@ -167,10 +170,6 @@ public class SceneShop extends Scene {
     public void updateGraphic() throws IOException {
         this.sceneShopView.updateGraphic(this.currentSelectedButton,this.newSelectedButton);
         this.currentSelectedButton = this.newSelectedButton;
-    }
-
-    public void setCurrentSelectedButton(final int newVal) {
-        this.newSelectedButton = newVal;
     }
 
     public void buyItem(final PlayerTrainerImpl trainer, final Item item, final SceneShopView sceneShopView,

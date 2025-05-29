@@ -49,16 +49,16 @@ public class SceneShopUpdateView {
                 this.sceneInstance = sceneInstance;
         }
 
-        protected void updateGraphic(final int currentSelectedButton,final int newSelectedButton) throws IOException {
+        protected void updateGraphic(final int currentSelectedButton, final int newSelectedButton) throws IOException {
                 this.newSelectedButton = newSelectedButton;
-                this.updateSelectedButton(currentSelectedButton,newSelectedButton);
+                this.updateSelectedButton(currentSelectedButton, newSelectedButton);
                 this.updateItemDescription();
-                this.updatePokemonSelection();
+                this.updatePokemonSelection(currentSelectedButton);
                 this.mainMenu();
 
         }
 
-        private void updatePokemonSelection() throws IOException {
+        private void updatePokemonSelection(final int currentSelectedButton) throws IOException {
                 if (this.newSelectedButton >= this.graphicElementNameToInt.get("CHANGE_POKEMON_1_BUTTON")
                                 && this.newSelectedButton <= this.graphicElementNameToInt
                                                 .get("CHANGE_POKEMON_BACK_BUTTON")
@@ -72,7 +72,7 @@ public class SceneShopUpdateView {
                                         this.graphicElements);
 
                         this.initPokemonSelectionText();
-
+                        sceneInstance.setCurrentSelectedButton(this.newSelectedButton);
                         UtilitiesForScenes.setButtonStatus(this.newSelectedButton, true, currentSceneGraphicElements);
                 }
         }
@@ -121,12 +121,14 @@ public class SceneShopUpdateView {
                                 .setText(SceneShopUtilities.getPokemonLifeText(SIXTH_POSITION, playerTrainerInstance));
         }
 
-        private void updateSelectedButton(final int currentSelectedButton,final int newSelectedButton) {
+        private void updateSelectedButton(final int currentSelectedButton, final int newSelectedButton) {
                 System.out.println(newSelectedButton);
                 System.out.println(this.currentSelectedButton);
                 System.out.println(currentSceneGraphicElements.getElements());
                 UtilitiesForScenes.setButtonStatus(currentSelectedButton, false, currentSceneGraphicElements);
-                UtilitiesForScenes.setButtonStatus(newSelectedButton, true, currentSceneGraphicElements);
+                if (this.currentSceneGraphicElements.getElements().containsKey(newSelectedButton)) {
+                        UtilitiesForScenes.setButtonStatus(newSelectedButton, true, currentSceneGraphicElements);
+                }
         }
 
         private void updateItemDescription() {
@@ -134,30 +136,7 @@ public class SceneShopUpdateView {
                 if (this.newSelectedButton >= this.graphicElementNameToInt.get("FREE_ITEM_1_BUTTON")
                                 && this.newSelectedButton <= this.graphicElementNameToInt.get("PRICY_ITEM_3_BUTTON")
                                 && alreadyInMainMenu) {
-
-                        switch (this.newSelectedButton) {
-                                case 1:
-                                        itemIndex = 3;
-                                        break;
-                                case 2:
-                                        itemIndex = 4;
-                                        break;
-                                case 3:
-                                        itemIndex = 5;
-                                        break;
-                                case 4:
-                                        itemIndex = 0;
-                                        break;
-                                case 5:
-                                        itemIndex = 1;
-                                        break;
-                                case 6:
-                                        itemIndex = 2;
-                                        break;
-                                default:
-                                        itemIndex = 0;
-                                        break;
-                        }
+                        itemIndex = (this.newSelectedButton + 2) % 6;
                         SceneShopUtilities.updateItemDescription(currentSceneGraphicElements,
                                         SceneShopUtilities.getShopItems(itemIndex));
                 }
@@ -172,6 +151,7 @@ public class SceneShopUpdateView {
                         this.currentSceneGraphicElements.clear();
                         this.allPanelsElements.clear();
                         sceneInstance.setCurrentSelectedButton(this.currentSelectedButton);
+                        sceneInstance.setNewSelectedButton(this.newSelectedButton);
                         sceneInstance.initGraphicElements();
                 }
         }

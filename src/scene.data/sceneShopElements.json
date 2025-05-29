@@ -183,10 +183,10 @@
             "mainColor": "#00FF00",
             "borderColor": "#f58442",
             "borderThickness": 1,
-            "leftX": 0.1,
-            "leftY": 0.635,
-            "width": 0.068,
-            "height": 0.03
+            "leftX": 0.9,
+            "leftY": 0.00,
+            "width": 0.1,
+            "height": 0.07
         },
         "102": {
             "type": "text",
@@ -203,7 +203,7 @@
             "text": "REROLL: 50",
             "textColor": "#000000",
             "textDimension": 0.055,
-            "leftX": 0.93,
+            "leftX": 0.02,
             "leftY": 0.68
         },
         "104": {
@@ -222,7 +222,7 @@
             "textColor": "#000000",
             "textDimension": 0.05,
             "leftX": 0.0,
-            "leftY": 0.85
+            "leftY": 0.15
         },
         "106": {
             "type": "text",
@@ -231,7 +231,7 @@
             "textColor": "#000000",
             "textDimension": 0.05,
             "leftX": 0.0,
-            "leftY": 0.85
+            "leftY": 0.15
         },
         "107": {
             "type": "text",
@@ -240,7 +240,7 @@
             "textColor": "#000000",
             "textDimension": 0.05,
             "leftX": 0.0,
-            "leftY": 0.85
+            "leftY": 0.15
         },
         "108": {
             "type": "text",
@@ -249,7 +249,7 @@
             "textColor": "#000000",
             "textDimension": 0.05,
             "leftX": 0.0,
-            "leftY": 0.85
+            "leftY": 0.35
         },
         "109": {
             "type": "text",
@@ -258,7 +258,7 @@
             "textColor": "#000000",
             "textDimension": 0.05,
             "leftX": 0.0,
-            "leftY": 0.85
+            "leftY": 0.35
         },
         "110": {
             "type": "text",
@@ -267,7 +267,7 @@
             "textColor": "#000000",
             "textDimension": 0.05,
             "leftX": 0.0,
-            "leftY": 0.85
+            "leftY": 0.35
         },
         "111": {
             "type": "text",
@@ -276,7 +276,7 @@
             "textColor": "#000000",
             "textDimension": 0.05,
             "leftX": 0.0,
-            "leftY": 0.85
+            "leftY": 0.15
         },
         "112": {
             "type": "text",
@@ -285,7 +285,7 @@
             "textColor": "#000000",
             "textDimension": 0.05,
             "leftX": 0.0,
-            "leftY": 0.85
+            "leftY": 0.15
         },
         "113": {
             "type": "text",
@@ -294,7 +294,7 @@
             "textColor": "#000000",
             "textDimension": 0.05,
             "leftX": 0.0,
-            "leftY": 0.85
+            "leftY": 0.15
         },
         "114": {
             "type": "text",
