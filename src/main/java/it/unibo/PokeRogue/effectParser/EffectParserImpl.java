@@ -24,18 +24,15 @@ public class EffectParserImpl extends Singleton implements EffectParser{
 	
 
 	private void parseEffect(final JSONObject effect) throws IOException {
-		JSONArray checks = new JSONArray("[]");
-		JSONArray activation = new JSONArray("[]");
-		checks = effect.getJSONArray("checks");
-		activation = effect.getJSONArray("activation");
+		final JSONArray checks = effect.getJSONArray("checks");
+		final JSONArray activation = effect.getJSONArray("activation");
 		if (computeChecks(checks)) {
 			activateActivations(activation);
 		}
 	}
 
-	private boolean computeChecks(JSONArray checks) {
+	private boolean computeChecks(final JSONArray checks) {
 		boolean result = true;
-
 		for (int checkIndex = 0; checkIndex < checks.length(); checkIndex++) {
 			result = result && computeSingleCheck(checks.getJSONArray(checkIndex));
 		}
@@ -43,37 +40,31 @@ public class EffectParserImpl extends Singleton implements EffectParser{
 		
 	}
 
-	private boolean computeSingleCheck(JSONArray check) {
+	private boolean computeSingleCheck(final JSONArray check) {
 		if (check.length() != 3) {
 			throw new IllegalArgumentException("CHECKS length have to be 3, but got: " + check.length());
 		}
-		String firstOperand = check.getString(0);
-		String secondOperand = check.getString(2);
+		final String firstOperand = check.getString(0);
+		final String secondOperand = check.getString(2);
 
-		String checkString = firstOperand + " " + check.getString(1) + " " + secondOperand;
+		final String checkString = firstOperand + " " + check.getString(1) + " " + secondOperand;
 		boolean result = false;
-		try {
-			result = (boolean) parseSingleExpression(checkString);
-		} catch (Exception ex) {
-			System.out.println("ERROR in");
-			ex.printStackTrace();
-			System.out.println("The check " + checkString);
-			throw ex;
+		final Optional<Object> resultParsing = parseSingleExpression(checkString);
+		if(resultParsing.isPresent()){
+			result = (boolean) resultParsing.get();
 		}
 		return result;
 	}
 
-	private Object parseSingleExpression(String expression) {
-		JexlEngine jexl = new JexlBuilder().create();
-		JexlExpression expr = jexl.createExpression(expression);
+	private Optional<Object> parseSingleExpression(final String expression) {
+		final JexlEngine jexl = new JexlBuilder().create();
+		final JexlExpression expr = jexl.createExpression(expression);
 		
-		Object result = null;
 		try {
-			result = expr.evaluate(createContext());
-		} catch (Exception e) {
-			e.printStackTrace();
+			return Optional.ofNullable(expr.evaluate(createContext()));
+		} catch (JexlException e) {
+			return Optional.empty();
 		}
-		return result;
 	}
 
 	private JexlContext createContext() {
@@ -104,7 +95,7 @@ public class EffectParserImpl extends Singleton implements EffectParser{
 		return context;
 	}
 
-	private void activateActivations(JSONArray activation) {
+	private void activateActivations(final JSONArray activation) {
 		for (int actIndex = 0; actIndex < activation.length(); actIndex++) {
 			parseSingleExpression(
 					activation.getJSONArray(actIndex).getString(0)
@@ -115,12 +106,12 @@ public class EffectParserImpl extends Singleton implements EffectParser{
 
 	@Override
     public void parseEffect (
-		JSONObject effect,
-		Pokemon us,
-		Pokemon enemy,
-		Optional<Move> attackUs,
-		Optional<Move> attackEnemy,
-		Optional<Weather> weather
+		final JSONObject effect,
+		final Pokemon us,
+		final Pokemon enemy,
+		final Optional<Move> attackUs,
+		final Optional<Move> attackEnemy,
+		final Optional<Weather> weather
 			) throws IOException {
 		this.us = Optional.of(us);
 		this.enemy = Optional.of(enemy);
@@ -131,7 +122,7 @@ public class EffectParserImpl extends Singleton implements EffectParser{
 	}
 
 	@Override
-	public void parseEffect(JSONObject effect, Pokemon pokemon) throws IOException {
+	public void parseEffect(final JSONObject effect, final Pokemon pokemon) throws IOException {
 		this.us = Optional.of(pokemon);
 		this.enemy = Optional.empty();
 		this.attackUs = Optional.empty();

@@ -42,7 +42,7 @@ public final class PokemonImpl implements Pokemon {
 	private Map<String, Range<Integer>> actualStats;
 	private Map<String, Range<Integer>> tempStatsBonus;
 	private Map<Integer, String> levelMovesLearn;
-	private List<Move> actualMoves = new ArrayList<Move>();
+	private List<Move> actualMoves = new ArrayList<>();
 	private String levelUpCurve; // https://m.bulbapedia.bulbagarden.net/wiki/Experience
 	private Map<String, Integer> givesEv;
 	private Range<Integer> exp;
@@ -79,7 +79,7 @@ public final class PokemonImpl implements Pokemon {
 		generateivs();
 		generateEvs();
 		this.nature = Nature.getRandomNature();
-		this.level = new RangeImpl<Integer>(1, 100, 1);
+		this.level = new RangeImpl<>(1, 100, 1);
 		calculateActualStats();
 		initTempStatsBonus();
 		initLevelMovesLearn(pokemonBlueprint.learnableMoves());
@@ -103,7 +103,7 @@ public final class PokemonImpl implements Pokemon {
 
 	private void generateivs() {
 		final int maxIv = 32;
-		this.iv = new HashMap<String, Integer>();
+		this.iv = new HashMap<>();
 		for (final String stat : statNames) {
 			this.iv.put(stat, random.nextInt(maxIv)); // iv tra 0 e 31
 		}
@@ -112,7 +112,7 @@ public final class PokemonImpl implements Pokemon {
 	private void generateEvs() {
 		final int maxEv = 252;
 		final int minEv = 0;
-		this.ev = new HashMap<String, Range<Integer>>();
+		this.ev = new HashMap<>();
 		for (final String stat : statNames) {
 			this.ev.put(stat, new RangeImpl<>(minEv, maxEv, minEv));
 		}
@@ -151,7 +151,7 @@ public final class PokemonImpl implements Pokemon {
 	}
 
 	private void initLevelMovesLearn(final Map<String, String> learnableMoves) {
-		this.levelMovesLearn = new HashMap<Integer, String>();
+		this.levelMovesLearn = new HashMap<>();
 		for (final String key : learnableMoves.keySet()) {
 			this.levelMovesLearn.put(Integer.parseInt(key), learnableMoves.get(key));
 		}
@@ -171,21 +171,21 @@ public final class PokemonImpl implements Pokemon {
 		final double positiveMultiplier = 1.1;
 		final double negativeMultiplier  = 0.9;
 		final int maxStat = 252;
-		actualStats = new HashMap<String, Range<Integer>>();
+		actualStats = new HashMap<>();
 
 		final int maxLife = (int) Math.floor(((2 * this.baseStats.get("hp") + this.iv.get("hp")
-				+ (this.ev.get("hp").getCurrentValue() / 4)) * this.level.getCurrentValue()) / 100)
+				+ this.ev.get("hp").getCurrentValue() / 4) * this.level.getCurrentValue()) / 100)
 				+ this.level.getCurrentValue() + 10;
 
-		final Range<Integer> rangeHp = new RangeImpl<Integer>(0, maxLife, maxLife);
+		final Range<Integer> rangeHp = new RangeImpl<>(0, maxLife, maxLife);
 		actualStats.put("hp", rangeHp);
 		for (final String stat : statNames.subList(1, statNames.size())) {
 
 			int statValue = (int) Math.round(
 					Math.floor(
-							((2 * baseStats.get(stat) 
+							(2 * baseStats.get(stat) 
 							  + iv.get(stat) 
-							  + (double) ev.get(stat).getCurrentValue() / 4)
+							  + (double) ev.get(stat).getCurrentValue() / 4
 									* level.getCurrentValue()) / 100.0))
 					+ constAdder;
 
@@ -195,7 +195,7 @@ public final class PokemonImpl implements Pokemon {
 				statValue *= negativeMultiplier;
 			}
 
-			final Range<Integer> rangeStat = new RangeImpl<Integer>(0, maxStat, statValue);
+			final Range<Integer> rangeStat = new RangeImpl<>(0, maxStat, statValue);
 			actualStats.put(stat, rangeStat);
 		}
 
@@ -209,7 +209,7 @@ public final class PokemonImpl implements Pokemon {
 		final double constMultiplier = 6 / 5;
 		final int currentLevel = this.level.getCurrentValue() + 1;
 		if ("fast".equals(this.levelUpCurve)) {
-			newRequiredExp = (int) ((4 * Math.pow(currentLevel, 3)) / constDivider);
+			newRequiredExp = (int) (4 * Math.pow(currentLevel, 3) / constDivider);
 		} else if ("medium".equals(this.levelUpCurve)) {
 			newRequiredExp = (int) Math.pow(currentLevel, 3);
 		} else if ("medium-slow".equals(this.levelUpCurve)) {
@@ -218,9 +218,9 @@ public final class PokemonImpl implements Pokemon {
 					* Math.pow(currentLevel, 2)
 					+ 100 * currentLevel - constAdder2);
 		} else if ("slow".equals(this.levelUpCurve)) {
-			newRequiredExp = (int) ((constDivider * Math.pow(currentLevel, 3)) / 4);
+			newRequiredExp = (int) (constDivider * Math.pow(currentLevel, 3) / 4);
 		}
-		this.exp = new RangeImpl<Integer>(0, newRequiredExp, 0);
+		this.exp = new RangeImpl<>(0, newRequiredExp, 0);
 	}
 
 
@@ -265,7 +265,7 @@ public final class PokemonImpl implements Pokemon {
 	@Override
 	public void increaseExp(final int amount, final boolean isPlayerPokemon) {
 		this.exp.increment(amount);
-		if (this.exp.getCurrentValue() == this.exp.getCurrentMax()) {
+		if (this.exp.getCurrentValue().equals(this.exp.getCurrentMax())) {
 			levelUp(isPlayerPokemon);
 		}
 	}

@@ -18,7 +18,7 @@ public class SavingSystemImpl extends Singleton implements SavingSystem {
 	private JSONArray savedPokemon = new JSONArray();
 
 	@Override
-	public void savePokemon(Pokemon pokemon) {
+	public void savePokemon(final Pokemon pokemon) {
 		for (int pokemonIndex = 0; pokemonIndex < this.savedPokemon.length(); pokemonIndex += 1) {
 			if (pokemon.getName().equals(this.savedPokemon.getString(pokemonIndex))) {
 				return;
@@ -28,12 +28,12 @@ public class SavingSystemImpl extends Singleton implements SavingSystem {
 	}
 
 	@Override
-	public void loadData(String path) throws IOException {
+	public void loadData(final String path) throws IOException {
 		this.savedPokemon = jsonReader.readJsonArray(path);
 	}
 
 	@Override
-	public void saveData(String path, String fileName) throws IOException {
+	public void saveData(final String path, final String fileName) throws IOException {
 		File file = new File(path, fileName);
 
 		try {
@@ -63,7 +63,7 @@ public class SavingSystemImpl extends Singleton implements SavingSystem {
 	}
 
 	@Override
-	public List<String> getSaveFilesName(String dirPath) {
+	public List<String> getSaveFilesName(final String dirPath) {
 		final List<String> jsonFiles = new ArrayList<>();
 		final File directory = new File(dirPath);
 

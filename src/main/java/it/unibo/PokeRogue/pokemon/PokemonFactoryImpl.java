@@ -32,8 +32,8 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory {
    	//make the access in memory and saves the information of all pokemon in local
 	private final JsonReader jsonReader = new JsonReaderImpl();
 	private final Random random = new Random();
-	private final Set<String> allPokemonSet = new HashSet<String>();
-	private final Map<String, PokemonBlueprint> pokemonBlueprints = new HashMap<String, PokemonBlueprint>();
+	private final Set<String> allPokemonSet = new HashSet<>();
+	private final Map<String, PokemonBlueprint> pokemonBlueprints = new HashMap<>();
 	
 	/**
 	 * The constructor initiate the factory making the access in memory.
@@ -67,23 +67,18 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory {
 		final Map<String, Integer> givesEV = jsonObjectToMap(pokemonJson.getJSONObject("givesEV"));
 		Optional<Image> newPokemonSpriteFront = Optional.empty();
 		Optional<Image> newPokemonSpriteBack = Optional.empty();
-		try {
-			newPokemonSpriteFront = Optional.of(ImageIO.read(new File(Paths
-							.get("src",
-								"pokemon_data",
-								"pokemon",
-								"sprites",
-								pokemonName + "_front.png").toString())));
-			newPokemonSpriteBack = Optional.of(ImageIO.read(new File(Paths
-							.get("src",
-								"pokemon_data",
-								"pokemon",
-								"sprites",
-								pokemonName + "_back.png").toString())));
-		} catch (final IOException e) {
-            System.out.println("error pokemon sprites " + pokemonName + " not found");
-            e.printStackTrace();
-        }
+		newPokemonSpriteFront = Optional.of(ImageIO.read(new File(Paths
+						.get("src",
+							"pokemon_data",
+							"pokemon",
+							"sprites",
+							pokemonName + "_front.png").toString())));
+		newPokemonSpriteBack = Optional.of(ImageIO.read(new File(Paths
+						.get("src",
+							"pokemon_data",
+							"pokemon",
+							"sprites",
+							pokemonName + "_back.png").toString())));
 		final PokemonBlueprint newPokemon = new PokemonBlueprint(
 			pokedexNumber,
 			types,	

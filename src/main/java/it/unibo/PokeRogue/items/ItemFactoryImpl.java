@@ -26,28 +26,27 @@ public class ItemFactoryImpl extends Singleton implements ItemFactory {
         init();
     }
 
-    @Override
-    public void init()  throws IOException{
-        JSONArray allItemJson;
-        allItemJson = jsonReader.readJsonArray(Paths.get("src", "items_data", "itemsList.json").toString());
+    private void init()  throws IOException{
+        final JSONArray allItemJson = jsonReader
+			.readJsonArray(Paths.get("src", "items_data", "itemsList.json").toString());
         for (int itemIndex = 0; itemIndex < allItemJson.length(); itemIndex += 1) {
             addItemToBlueprints(allItemJson.getString(itemIndex));
         }
     }
 
     private void addItemToBlueprints(final String itemName) throws IOException {
-        JSONObject itemJson;
-        itemJson = jsonReader.readJsonObject(Paths.get("src", "items_data", "items", "data", itemName + ".json").toString());
+        final JSONObject itemJson = jsonReader
+			.readJsonObject(Paths.get("src", "items_data", "items", "data", itemName + ".json").toString());
 
-        int id = itemJson.getInt("id");
-        String name = itemJson.getString("name");
-        String type = itemJson.getString("type");
-        String description = itemJson.getString("description");
-        int price = itemJson.getInt("price");
-        String rarity = itemJson.getString("rarity");
-        String category = itemJson.getString("category");
-        double captureRate = itemJson.getDouble("captureRate");
-        JSONObject effect = itemJson.getJSONObject("effect");
+        final int id = itemJson.getInt("id");
+        final String name = itemJson.getString("name");
+        final String type = itemJson.getString("type");
+        final String description = itemJson.getString("description");
+        final int price = itemJson.getInt("price");
+        final String rarity = itemJson.getString("rarity");
+        final String category = itemJson.getString("category");
+        final double captureRate = itemJson.getDouble("captureRate");
+        final JSONObject effect = itemJson.getJSONObject("effect");
 
         final ItemBlueprint newItem = new ItemBlueprint(
                 id,
@@ -66,7 +65,7 @@ public class ItemFactoryImpl extends Singleton implements ItemFactory {
 
     @Override
     public Item itemFromName(final String itemName) {
-        ItemBlueprint itemBlueprint = this.itemBlueprints.get(itemName);
+        final ItemBlueprint itemBlueprint = this.itemBlueprints.get(itemName);
         if (itemBlueprint == null) {
             throw new UnsupportedOperationException("The item " + itemName + " blueprint was not found. Is not present in itemList / Factory not initialized");
         }
@@ -75,7 +74,7 @@ public class ItemFactoryImpl extends Singleton implements ItemFactory {
 
     @Override
     public Item randomItem() {
-        String generatedName = (String) this.allItemSet.toArray()[random.nextInt(this.allItemSet.size())];
+        final String generatedName = (String) this.allItemSet.toArray()[random.nextInt(this.allItemSet.size())];
         return new ItemImpl(this.itemBlueprints.get(generatedName));
     }
 
