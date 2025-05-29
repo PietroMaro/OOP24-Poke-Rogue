@@ -17,37 +17,49 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 
-public class MoveFactoryImpl extends Singleton implements MoveFactory{
+/**
+ * Move factory implementation.
+ */
+public class MoveFactoryImpl extends Singleton implements MoveFactory {
 	
    	//make the access in memory and saves the information of all pokemon in local
-	final private JsonReader jsonReader = new JsonReaderImpl();
-	final private Map<String,Move> movesBlueprints = new HashMap<String,Move>();
+	private final JsonReader jsonReader = new JsonReaderImpl();
+	private final Map<String, Move> movesBlueprints = new HashMap<String, Move>();
 	
+	/**
+	 * Constructor initiate the factory.
+	 */
 	public MoveFactoryImpl() throws IOException {
 		init();
 	}
 
 	@Override
-    public void init() throws IOException {
-		JSONArray allMoveJson;
-		allMoveJson = jsonReader.readJsonArray(Paths.get("src", "pokemon_data", "movesList.json").toString());
+    public final void init() throws IOException {
+		final JSONArray allMoveJson = jsonReader
+			.readJsonArray(Paths
+					.get("src",
+						"pokemon_data",
+						"movesList.json").toString());
 		for (int moveIndex = 0; moveIndex < allMoveJson.length(); moveIndex += 1) {
 			addMoveToBlueprints(allMoveJson.getString(moveIndex));
 		}
 	}
 
 	private void addMoveToBlueprints(final String moveName) throws IOException {
-		JSONObject moveJson;
-		moveJson = jsonReader.readJsonObject(Paths.get("src", "pokemon_data", "moves", moveName + ".json").toString());
-		String name = moveName;
-		Range<Integer> pp = new RangeImpl<Integer>(0, moveJson.getInt("pp"), moveJson.getInt("pp"));
-		boolean isPhysical = moveJson.getBoolean("isPhysical");
-		JSONObject effect = moveJson.getJSONObject("effect");
-		int accuracy = moveJson.getInt("accuracy");
-		int critRate = moveJson.getInt("critRate");
-		int baseDamage = moveJson.getInt("baseDamage");
-		Type type = Type.fromString(moveJson.getString("type"));
-		int priority = moveJson.getInt("priority");
+		final JSONObject moveJson = jsonReader.readJsonObject(Paths
+				.get("src",
+					"pokemon_data",
+					"moves",
+					moveName + ".json").toString());
+		final String name = moveName;
+		final Range<Integer> pp = new RangeImpl<Integer>(0, moveJson.getInt("pp"), moveJson.getInt("pp"));
+		final boolean isPhysical = moveJson.getBoolean("isPhysical");
+		final JSONObject effect = moveJson.getJSONObject("effect");
+		final int accuracy = moveJson.getInt("accuracy");
+		final int critRate = moveJson.getInt("critRate");
+		final int baseDamage = moveJson.getInt("baseDamage");
+		final Type type = Type.fromString(moveJson.getString("type"));
+		final int priority = moveJson.getInt("priority");
 		final Move newMove = new Move(
 				name,
 				pp,
@@ -66,7 +78,7 @@ public class MoveFactoryImpl extends Singleton implements MoveFactory{
 	}
 
 	@Override
-	public Move moveFromName(final String moveName) {
+	public final Move moveFromName(final String moveName) {
 		Move move = this.movesBlueprints.get(moveName);
 		if (move == null) {
 			throw new UnsupportedOperationException("The move " + moveName

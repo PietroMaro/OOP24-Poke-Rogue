@@ -22,53 +22,66 @@ import java.io.IOException;
 import java.awt.Image;
 import javax.imageio.ImageIO;
 
-import java.lang.InstantiationException;
-import java.lang.IllegalAccessException;
-import java.lang.NoSuchMethodException;
 import java.lang.reflect.InvocationTargetException;
 
-public class PokemonFactoryImpl extends Singleton implements PokemonFactory{
+/**
+ * The implementation of PokemonFactory.
+ */
+public class PokemonFactoryImpl extends Singleton implements PokemonFactory {
 	
    	//make the access in memory and saves the information of all pokemon in local
-	final private JsonReader jsonReader = new JsonReaderImpl();
-	final private Random random = new Random();
-	final private Set<String> allPokemonSet = new HashSet<String>();
-	final private Map<String,PokemonBlueprint> pokemonBlueprints = new HashMap<String,PokemonBlueprint>();
+	private final JsonReader jsonReader = new JsonReaderImpl();
+	private final Random random = new Random();
+	private final Set<String> allPokemonSet = new HashSet<String>();
+	private final Map<String, PokemonBlueprint> pokemonBlueprints = new HashMap<String, PokemonBlueprint>();
 	
+	/**
+	 * The constructor initiate the factory making the access in memory.
+	 */
 	public PokemonFactoryImpl() throws IOException {
 		init();
 	}
 	
 	@Override
-    public void init() throws IOException {
-		JSONArray allPokemonJson;
-		allPokemonJson = jsonReader.readJsonArray(Paths.get("src","pokemon_data","pokemonList.json").toString());
-		for(int pokemonIndex = 0; pokemonIndex < allPokemonJson.length(); pokemonIndex +=1 ){
+    public final void init() throws IOException {
+		final JSONArray allPokemonJson = jsonReader
+			.readJsonArray(Paths.get("src", "pokemon_data", "pokemonList.json").toString());
+		for (int pokemonIndex = 0; pokemonIndex < allPokemonJson.length(); pokemonIndex += 1) {
 			addPokemonToBlueprints(allPokemonJson.getString(pokemonIndex));
 		}
 	}
 
 	private void addPokemonToBlueprints(final String pokemonName) throws IOException {
-		JSONObject pokemonJson;
-        pokemonJson = jsonReader.readJsonObject(Paths.get("src","pokemon_data","pokemon","data",pokemonName+".json").toString());
-		int pokedexNumber = pokemonJson.getInt("pokedexNumber");
-		List<String> types = jsonArrayToList(pokemonJson.getJSONArray("types"));
-		int captureRate = pokemonJson.getInt("captureRate");
-		int minLevelForEncounter = pokemonJson.getInt("minLevelForEncounter");
-		Map<String,Integer> stats = jsonObjectToMap(pokemonJson.getJSONObject("stats"));
-		Map<String,String> learnableMoves = jsonObjectToMap(pokemonJson.getJSONObject("moves"));
-		String growthRate = pokemonJson.getString("growthRate");
-		String name = pokemonJson.getString("name");
-		int weight = pokemonJson.getInt("weight");
-		List<String> possibleAbilities = jsonArrayToList(pokemonJson.getJSONArray("abilites"));
-		Map<String,Integer> givesEV = jsonObjectToMap(pokemonJson.getJSONObject("givesEV"));
+		final JSONObject pokemonJson = jsonReader
+			.readJsonObject(Paths.get("src", "pokemon_data", "pokemon", "data", pokemonName + ".json").toString());
+		final int pokedexNumber = pokemonJson.getInt("pokedexNumber");
+		final List<String> types = jsonArrayToList(pokemonJson.getJSONArray("types"));
+		final int captureRate = pokemonJson.getInt("captureRate");
+		final int minLevelForEncounter = pokemonJson.getInt("minLevelForEncounter");
+		final Map<String, Integer> stats = jsonObjectToMap(pokemonJson.getJSONObject("stats"));
+		final Map<String, String> learnableMoves = jsonObjectToMap(pokemonJson.getJSONObject("moves"));
+		final String growthRate = pokemonJson.getString("growthRate");
+		final String name = pokemonJson.getString("name");
+		final int weight = pokemonJson.getInt("weight");
+		final List<String> possibleAbilities = jsonArrayToList(pokemonJson.getJSONArray("abilites"));
+		final Map<String, Integer> givesEV = jsonObjectToMap(pokemonJson.getJSONObject("givesEV"));
 		Optional<Image> newPokemonSpriteFront = Optional.empty();
 		Optional<Image> newPokemonSpriteBack = Optional.empty();
 		try {
-			newPokemonSpriteFront =  Optional.of(ImageIO.read(new File(Paths.get("src","pokemon_data","pokemon","sprites",pokemonName+"_front.png").toString())));
-			newPokemonSpriteBack  =  Optional.of(ImageIO.read(new File(Paths.get("src","pokemon_data","pokemon","sprites",pokemonName+"_back.png").toString())));
-		} catch (IOException e) {
-            System.out.println("error pokemon sprites "+pokemonName+" not found");
+			newPokemonSpriteFront = Optional.of(ImageIO.read(new File(Paths
+							.get("src",
+								"pokemon_data",
+								"pokemon",
+								"sprites",
+								pokemonName + "_front.png").toString())));
+			newPokemonSpriteBack = Optional.of(ImageIO.read(new File(Paths
+							.get("src",
+								"pokemon_data",
+								"pokemon",
+								"sprites",
+								pokemonName + "_back.png").toString())));
+		} catch (final IOException e) {
+            System.out.println("error pokemon sprites " + pokemonName + " not found");
             e.printStackTrace();
         }
 		final PokemonBlueprint newPokemon = new PokemonBlueprint(
@@ -86,63 +99,62 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory{
 			newPokemonSpriteFront.get(),
 			newPokemonSpriteBack.get());
 
-		this.pokemonBlueprints.put(pokemonName,newPokemon);
+		this.pokemonBlueprints.put(pokemonName, newPokemon);
 		this.allPokemonSet.add(pokemonName);
 	}
 
 	@Override
-	public Pokemon pokemonFromName(final String pokemonName)
+	public final Pokemon pokemonFromName(final String pokemonName)
 		throws
 		InstantiationException,
 		IllegalAccessException,
 		NoSuchMethodException,
-		InvocationTargetException
-	{
-		PokemonBlueprint pokemonBlueprint = this.pokemonBlueprints.get(pokemonName);
-		if(pokemonBlueprint == null){
-			throw new UnsupportedOperationException("The pokemon "+pokemonName+" blueprint was not found. Is not present in pokemonList / Factory not initialized");
+		InvocationTargetException {
+		final PokemonBlueprint pokemonBlueprint = this.pokemonBlueprints.get(pokemonName);
+		if (pokemonBlueprint == null) {
+			throw new UnsupportedOperationException("The pokemon " 
+					+ pokemonName
+					+ " blueprint was not found. Is not present in pokemonList / Factory not initialized");
 
 		}
 		return new PokemonImpl(pokemonBlueprint);
 	}
 
 	@Override
-	public Pokemon randomPokemon(int level) throws 
+	public final Pokemon randomPokemon(final int level) throws 
 		InstantiationException,
 		IllegalAccessException,
 		NoSuchMethodException,
-		InvocationTargetException
-	{
-		String generatedName = (String)this.allPokemonSet.toArray()[random.nextInt(this.allPokemonSet.size())];
-		Pokemon result = new PokemonImpl(this.pokemonBlueprints.get(generatedName)); 
-		for(int x = 0 ; x < level; x+=1){
+		InvocationTargetException {
+		final String generatedName = (String) this.allPokemonSet.toArray()[random.nextInt(this.allPokemonSet.size())];
+		final Pokemon result = new PokemonImpl(this.pokemonBlueprints.get(generatedName)); 
+		for (int x = 0; x < level; x += 1) {
 			result.levelUp(false);
 		}
 		return result;
 	}
 
 	@Override
-	public Set<String> getAllPokemonList(){
+	public final Set<String> getAllPokemonList() {
 		return this.allPokemonSet;	
 	}
 
-	private <T> List<T> jsonArrayToList(final JSONArray jsonArray){
-		List<T> result = new ArrayList<>();	
-		for(int index = 0; index < jsonArray.length(); index+=1){
-			result.add(((T)jsonArray.get(index)));
+	private <T> List<T> jsonArrayToList(final JSONArray jsonArray) {
+		final List<T> result = new ArrayList<>();	
+		for (int index = 0; index < jsonArray.length(); index += 1) {
+			result.add(((T) jsonArray.get(index)));
 		}
 		return result;
 	}
 	
-	private <T> Map<String,T> jsonObjectToMap(final JSONObject jsonObject){
-		Map<String,T> result = new HashMap<>();	
-		Iterator<String> keys = jsonObject.keys();
+	private <T> Map<String, T> jsonObjectToMap(final JSONObject jsonObject) {
+		final Map<String, T> result = new HashMap<>();	
+		final Iterator<String> keys = jsonObject.keys();
         while (keys.hasNext()) {
-            String key = keys.next();
-            T value = (T) jsonObject.get(key);  // Casting to the generic type T
-            result.put(key, value);  // Put key-value pair into the map
+            final String key = keys.next();
+            final T value = (T) jsonObject.get(key);
+            result.put(key, value);
         }
 		return result;
 	}
-	
 }

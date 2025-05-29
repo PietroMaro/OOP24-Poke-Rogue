@@ -32,7 +32,7 @@ public final class SceneMenuView {
 
         }
 
-        void initGraphicElements(GraphicElementsRegistry currentSceneGraphicElements,
+        void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements)
                         throws IOException {
 

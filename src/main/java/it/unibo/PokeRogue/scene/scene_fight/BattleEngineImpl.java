@@ -129,7 +129,7 @@ public class BattleEngineImpl implements BattleEngine {
     }
 
     private void handleAttack(final Optional<Move> attackerMove, final Optional<Move> opponentMove,
-            final Pokemon attackerPokemon, final Pokemon defenderPokemon) {
+            final Pokemon attackerPokemon, final Pokemon defenderPokemon) throws IOException {
         if (attackerMove.get().getPp().getCurrentValue() <= 0) {
             return;
         }
@@ -226,7 +226,7 @@ public class BattleEngineImpl implements BattleEngine {
 
     private void handleAbilityEffects(final Ability ability, final Pokemon user, final Pokemon target,
             final Optional<Move> userMove,
-            final Optional<Move> targetMove, final AbilitySituationChecks situation) {
+            final Optional<Move> targetMove, final AbilitySituationChecks situation) throws IOException {
         if (ability.situationChecks() == situation) {
             this.effectParserInstance.parseEffect(ability.effect(), user, target, userMove, targetMove,
                     this.currentWeather);

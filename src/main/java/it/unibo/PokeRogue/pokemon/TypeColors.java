@@ -2,6 +2,9 @@ package it.unibo.PokeRogue.pokemon;
 
 import java.awt.Color;
 
+/**
+ * Enum representing Pokémon types with their associated display colors.
+ */
 public enum TypeColors {
 	BUG(new Color(169, 252, 3)),
 	DARK(new Color(60, 10, 10)),
@@ -24,10 +27,20 @@ public enum TypeColors {
 
 	private final Color typeColor;
 
+	/**
+	 * Constructs a TypeColors enum constant with the specified color.
+	 *
+	 * @param typeColor the Color associated with the Pokémon type
+	 */
 	TypeColors(final Color typeColor) {
 		this.typeColor = typeColor;
 	}
 
+	/**
+	 * Returns the Color associated with this Pokémon type.
+	 *
+	 * @return the color representing the Pokémon type
+	 */
 	public Color typeColor() {
 		return this.typeColor;
 	}

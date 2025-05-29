@@ -38,6 +38,8 @@ public class SceneMove extends Scene {
     private final SceneMoveView sceneMoveView;
     private int newSelectedButton;
     private final Pokemon playerPokemon;
+    private GraphicElementsRegistry graphicElements;
+    private Map<String, Integer> graphicElementNameToInt;
 
     /**
      * Constructs a new SceneMove.
@@ -52,7 +54,8 @@ public class SceneMove extends Scene {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
-        this.loadGraphicElements("sceneMoveElements.json");
+        this.graphicElementNameToInt = this.getGraphicElementNameToInt();
+        this.graphicElements = this.getGraphicElements();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();

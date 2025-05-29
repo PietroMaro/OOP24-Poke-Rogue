@@ -1,4 +1,7 @@
 package it.unibo.PokeRogue.graphic.panel;
 
-public interface PanelElement {    
+/**
+ * Marker interface for panel graphic elements.
+ */
+public interface PanelElement {
 }

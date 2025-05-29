@@ -2,8 +2,8 @@ package it.unibo.PokeRogue.effectParser;
 
 import it.unibo.PokeRogue.Weather;
 import it.unibo.PokeRogue.pokemon.Pokemon;
-import it.unibo.PokeRogue.trainers.PlayerTrainer;
 import it.unibo.PokeRogue.move.Move;
+import java.io.IOException;
 
 import java.util.Optional;
 
@@ -28,7 +28,7 @@ public interface EffectParser {
 		Optional<Move> attackUs,
 		Optional<Move> attackEnemy,
 		Optional<Weather> weather
-			);
+			) throws IOException;
 	/**
  	* parses the effect of a pokemObject and applies it autonomously
  	* using the getters and setters of the given classes.
@@ -39,5 +39,5 @@ public interface EffectParser {
 	void parseEffect(
 		JSONObject effect,
 		Pokemon pokemon
-			);
+			) throws IOException;
 }

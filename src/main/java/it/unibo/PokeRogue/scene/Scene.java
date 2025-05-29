@@ -19,26 +19,60 @@ import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 
+/**
+ * Abstract base class representing a generic scene in the game.
+ *
+ * This class provides common functionality to load and manage graphical
+ * elements
+ * for different scenes, as well as abstract methods for updating the scene's
+ * state and graphics.
+ *
+ */
 public abstract class Scene {
 
+	private GraphicElementsRegistry graphicElements;
+	private Map<String, Integer> graphicElementNameToInt;
+
+	/**
+	 * Updates the graphical representation of the scene.
+	 * 
+	 * Implementations should refresh or redraw the scene's visual components based
+	 * on the current state.
+	 * 
+	 * 
+	 */
 	public abstract void updateGraphic() throws IOException;
 
+	/**
+	 * Updates the scene's internal state in response to user input.
+	 * Implementations must define how to react to a key input event, such as moving
+	 * selections or triggering actions.
+	 * 
+	 * @param inputKey the key code of the user input event.
+	 */
 	public abstract void updateStatus(int inputKey) throws NoSuchMethodException,
 			IOException,
 			IllegalAccessException,
 			InvocationTargetException,
 			InstantiationException;
 
+	/**
+	 * Returns the registry of graphic elements currently used by the scene.
+	 * 
+	 * @return the current scene's graphic elements registry.
+	 */
 	public abstract GraphicElementsRegistry getCurrentSceneGraphicElements();
 
+	/**
+	 * Returns all panel elements present in the scene.
+	 * 
+	 * @return a map of panel names to their respective panel implementations.
+	 */
 	public abstract Map<String, PanelElementImpl> getAllPanelsElements();
 
-	protected GraphicElementsRegistry graphicElements;
-	protected Map<String, Integer> graphicElementNameToInt;
+	private GraphicElementImpl createGraphicElementFromJson(final JSONObject jsonElement) throws IOException {
 
-	private GraphicElementImpl createGraphicElementFromJson(JSONObject jsonElement) throws IOException {
-
-		GraphicElementImpl newGraphicElement;
+		final GraphicElementImpl newGraphicElement;
 
 		switch (jsonElement.getString("type")) {
 			case "button":
@@ -67,30 +101,49 @@ public abstract class Scene {
 
 	}
 
-	protected void loadGraphicElements(String fileName) throws IOException {
-		JsonReader jsonReader = new JsonReaderImpl();
-		JSONObject root = jsonReader.readJsonObject(Paths.get("src", "scene.data", fileName).toString());
+	protected final void loadGraphicElements(final String fileName) throws IOException {
+		final JsonReader jsonReader = new JsonReaderImpl();
+		final JSONObject root = jsonReader.readJsonObject(Paths.get("src", "scene.data", fileName).toString());
 		graphicElementNameToInt = new HashMap<>();
 
-		JSONObject mapper = root.getJSONObject("mapper");
+		final JSONObject mapper = root.getJSONObject("mapper");
 
-		for (String key : mapper.keySet()) {
-			int val = mapper.getInt(key);
+		for (final String key : mapper.keySet()) {
+			final int val = mapper.getInt(key);
 			graphicElementNameToInt.put(key, val);
 		}
 
 		graphicElements = new GraphicElementsRegistryImpl(new HashMap<>(), graphicElementNameToInt);
 
-		JSONObject metrics = root.getJSONObject("metrics");
-		for (String key : metrics.keySet()) {
-			int keyInt = Integer.parseInt(key);
-			JSONObject elemJson = metrics.getJSONObject(key);
+		final JSONObject metrics = root.getJSONObject("metrics");
+		for (final String key : metrics.keySet()) {
+			final int keyInt = Integer.parseInt(key);
+			final JSONObject elemJson = metrics.getJSONObject(key);
 
-			GraphicElementImpl elem = createGraphicElementFromJson(elemJson);
+			final GraphicElementImpl elem = createGraphicElementFromJson(elemJson);
 
 			graphicElements.put(keyInt, elem);
 		}
 
+	}
+
+	/**
+	 * Returns the registry containing the graphic elements.
+	 *
+	 * @return the graphic elements registry.
+	 */
+	public final GraphicElementsRegistry getGraphicElements() {
+		return this.graphicElements;
+	}
+
+	/**
+	 * Returns the mapping between graphic element names and their corresponding
+	 * IDs.
+	 *
+	 * @return a map from graphic element names to their integer IDs.
+	 */
+	public final Map<String, Integer> getGraphicElementNameToInt() {
+		return this.graphicElementNameToInt;
 	}
 
 }

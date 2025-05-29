@@ -21,7 +21,7 @@ import lombok.AccessLevel;
  * Each box can hold up to 81 Pokémon. If a box is full, a new one is created.
  * Pokémon can be loaded from a save file or initialized with default Pokémon.
  */
-public final class SceneBoxModel {
+public final class SceneBoxLoad {
 
     private final SavingSystem savingSystemInstance;
     private final PokemonFactory pokemonFactoryInstance;
@@ -33,7 +33,7 @@ public final class SceneBoxModel {
      * Constructs a new {@code SceneBoxModel} and initializes the saving system
      * and Pokémon factory instances.
      */
-    public SceneBoxModel() throws InstantiationException,
+    public SceneBoxLoad() throws InstantiationException,
             IllegalAccessException,
             InvocationTargetException,
             NoSuchMethodException {
@@ -44,14 +44,6 @@ public final class SceneBoxModel {
 
     }
 
-    /**
-     * Sets up the save system by either loading saved Pokémon data from a specified
-     * path
-     * or saving a set of default Pokémon if no save path is provided.
-     * 
-     * @param savePath The path to the save file. If empty, default Pokémon are
-     *                 saved.
-     */
     void setUpSave(final String savePath) throws InstantiationException,
             IllegalAccessException,
             InvocationTargetException,

@@ -38,13 +38,18 @@ public class SceneShopTemp extends Scene {
     private Item selectedUsableItem = null;
     private boolean BuyedItem = false;
     private final EffectParser effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
+    private GraphicElementsRegistry graphicElements;
+    private Map<String, Integer> graphicElementNameToInt;
 
     public SceneShopTemp() throws IOException,
             InstantiationException,
             IllegalAccessException,
             NoSuchMethodException,
             InvocationTargetException {
-        this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(), this.graphicElementNameToInt);
+        this.graphicElementNameToInt = this.getGraphicElementNameToInt();
+        this.graphicElements = this.getGraphicElements();
+        this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
+                this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.sceneShopUtilities = new SceneShopUtilities();
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
