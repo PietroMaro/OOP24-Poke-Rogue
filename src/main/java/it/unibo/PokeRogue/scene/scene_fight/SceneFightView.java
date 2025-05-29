@@ -1,4 +1,3 @@
-
 package it.unibo.PokeRogue.scene.scene_fight;
 
 import java.io.IOException;

@@ -45,7 +45,7 @@ public final class UtilitiesForScenes {
     public static void setButtonStatus(final int buttonCode, final boolean status,
             final GraphicElementsRegistry sceneGraphicElements) {
 
-        final ButtonElementImpl selectedButton = UtilitiesForScenes.safeGetElementById(sceneGraphicElements, buttonCode,
+        final ButtonElementImpl selectedButton = safeGetElementById(sceneGraphicElements, buttonCode,
                 ButtonElementImpl.class);
         selectedButton.setSelected(status);
 
@@ -131,9 +131,9 @@ public final class UtilitiesForScenes {
         return type.cast(element);
     }
 
-    public static <T> T safeGetElementById(final GraphicElementsRegistry registry, final int Id,
+    public static <T> T safeGetElementById(final GraphicElementsRegistry registry, final int id,
             final Class<T> type) {
-        final var element = registry.getById(Id);
+        final var element = registry.getById(id);
         if (!type.isInstance(element)) {
             throw new IllegalStateException();
         }

@@ -19,6 +19,7 @@ import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.scene.GraphicElementsRegistryImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
+import it.unibo.PokeRogue.pokemon.Pokemon;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -92,7 +93,19 @@ public class SceneShop extends Scene {
     /**
      * Mapping from graphic element names to their corresponding numeric IDs.
      */
-    private Map<String, Integer> graphicElementNameToInt;
+
+    private final Map<String, Integer> graphicElementNameToInt;
+
+	private final static String FREE_ITEM_1 = "FREE_ITEM_1_BUTTON";
+	private final static String FREE_ITEM_3 = "FREE_ITEM_3_BUTTON";
+	private final static String TEAM_LITTERAL = "TEAM_BUTTON";
+	private final static String REROL_LITTERAL = "REROL_BUTTON";
+	private final static String PRICY_ITEM_1 = "PRICY_ITEM_1_BUTTON";
+	private final static String PRICY_ITEM_3 = "PRICY_ITEM_3_BUTTON";
+ 	private final static String CHANGE_1 = "CHANGE_POKEMON_1_BUTTON";
+ 	private final static String CHANGE_2 = "CHANGE_POKEMON_2_BUTTON";
+ 	private final static String CHANGE_6 = "CHANGE_POKEMON_6_BUTTON";
+	private final static String CHANGE_BACK = "CHANGE_POKEMON_BACK_BUTTON";
 
     /**
      * Indicates whether a usable item has been selected for application.
@@ -103,7 +116,7 @@ public class SceneShop extends Scene {
      * Indicates whether an item was purchased but not yet confirmed (used for
      * compensation).
      */
-    private boolean BuyedItem;
+    private boolean buyedItem;
 
     /**
      * Stores the currently selected usable item, if any, to be applied to a
@@ -132,15 +145,14 @@ public class SceneShop extends Scene {
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
-        this.sceneShopUtilities = new SceneShopUtilities();
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
         this.itemFactoryInstance = new ItemFactoryImpl();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.initStatus();
         this.sceneShopView = new SceneShopView(currentSceneGraphicElements, this.graphicElements, allPanelsElements,
-                itemFactoryInstance, playerTrainerInstance,
+                itemFactoryInstance,
                 currentSelectedButton, newSelectedButton, this,
-                sceneShopUtilities, graphicElementNameToInt);
+                graphicElementNameToInt);
         this.initGraphicElements();
     }
 
@@ -161,92 +173,94 @@ public class SceneShop extends Scene {
             InvocationTargetException, NoSuchMethodException {
         switch (inputKey) {
             case KeyEvent.VK_UP:
-                if (this.newSelectedButton >= this.graphicElementNameToInt.get("FREE_ITEM_1_BUTTON")
-                        && this.newSelectedButton <= this.graphicElementNameToInt.get("FREE_ITEM_3_BUTTON")) {
+                if (this.newSelectedButton >= this.graphicElementNameToInt.get(FREE_ITEM_1)
+                        && this.newSelectedButton <= this.graphicElementNameToInt.get(FREE_ITEM_3)) {
                     this.newSelectedButton += 3;
-                } else if (this.newSelectedButton >= this.graphicElementNameToInt.get("CHANGE_POKEMON_2_BUTTON")
-                        && this.newSelectedButton <= this.graphicElementNameToInt.get("CHANGE_POKEMON_BACK_BUTTON")) {
+                } else if (this.newSelectedButton >= this.graphicElementNameToInt.get(CHANGE_2)
+                        && this.newSelectedButton <= this.graphicElementNameToInt.get(CHANGE_BACK)) {
                     this.newSelectedButton -= 1;
-                } else if (this.newSelectedButton == this.graphicElementNameToInt.get("TEAM_BUTTON")) {
-                    this.newSelectedButton = this.graphicElementNameToInt.get("FREE_ITEM_3_BUTTON");
-                } else if (this.newSelectedButton == this.graphicElementNameToInt.get("REROL_BUTTON")) {
-                    this.newSelectedButton = this.graphicElementNameToInt.get("FREE_ITEM_1_BUTTON");
+                } else if (this.newSelectedButton == this.graphicElementNameToInt.get(TEAM_LITTERAL)) {
+                    this.newSelectedButton = this.graphicElementNameToInt.get(FREE_ITEM_3);
+                } else if (this.newSelectedButton == this.graphicElementNameToInt.get(REROL_LITTERAL)) {
+                    this.newSelectedButton = this.graphicElementNameToInt.get(FREE_ITEM_1);
                 }
                 break;
 
             case KeyEvent.VK_DOWN:
-                if (this.newSelectedButton >= this.graphicElementNameToInt.get("PRICY_ITEM_1_BUTTON")
-                        && this.newSelectedButton <= this.graphicElementNameToInt.get("PRICY_ITEM_3_BUTTON")) {
+                if (this.newSelectedButton >= this.graphicElementNameToInt.get(PRICY_ITEM_1)
+                        && this.newSelectedButton <= this.graphicElementNameToInt.get(PRICY_ITEM_3)) {
                     this.newSelectedButton -= 3;
-                } else if (this.newSelectedButton >= this.graphicElementNameToInt.get("CHANGE_POKEMON_1_BUTTON")
-                        && this.newSelectedButton <= this.graphicElementNameToInt.get("CHANGE_POKEMON_6_BUTTON")) {
+                } else if (this.newSelectedButton >= this.graphicElementNameToInt.get(CHANGE_1)
+                        && this.newSelectedButton <= this.graphicElementNameToInt.get(CHANGE_6)) {
                     this.newSelectedButton += 1;
-                } else if (this.newSelectedButton == this.graphicElementNameToInt.get("FREE_ITEM_3_BUTTON")) {
-                    this.newSelectedButton = this.graphicElementNameToInt.get("TEAM_BUTTON");
-                } else if (this.newSelectedButton == this.graphicElementNameToInt.get("FREE_ITEM_1_BUTTON")
+                } else if (this.newSelectedButton == this.graphicElementNameToInt.get(FREE_ITEM_3)) {
+                    this.newSelectedButton = this.graphicElementNameToInt.get(TEAM_LITTERAL);
+                } else if (this.newSelectedButton == this.graphicElementNameToInt.get(FREE_ITEM_1)
                         || this.newSelectedButton == this.graphicElementNameToInt.get("FREE_ITEM_2_BUTTON")) {
-                    this.newSelectedButton = this.graphicElementNameToInt.get("REROL_BUTTON");
+                    this.newSelectedButton = this.graphicElementNameToInt.get(REROL_LITTERAL);
                 }
                 break;
 
             case KeyEvent.VK_LEFT:
-                if (this.newSelectedButton != this.graphicElementNameToInt.get("FREE_ITEM_1_BUTTON")
-                        && this.newSelectedButton != this.graphicElementNameToInt.get("PRICY_ITEM_1_BUTTON")
-                        && this.newSelectedButton != this.graphicElementNameToInt.get("REROL_BUTTON")
-                        && this.newSelectedButton < this.graphicElementNameToInt.get("CHANGE_POKEMON_1_BUTTON")) {
+                if (this.newSelectedButton != this.graphicElementNameToInt.get(FREE_ITEM_1)
+                        && this.newSelectedButton != this.graphicElementNameToInt.get(PRICY_ITEM_1)
+                        && this.newSelectedButton != this.graphicElementNameToInt.get(REROL_LITTERAL)
+                        && this.newSelectedButton < this.graphicElementNameToInt.get(CHANGE_1)) {
                     this.newSelectedButton -= 1;
                 }
                 break;
 
             case KeyEvent.VK_RIGHT:
-                if (this.newSelectedButton != this.graphicElementNameToInt.get("FREE_ITEM_3_BUTTON")
-                        && this.newSelectedButton != this.graphicElementNameToInt.get("PRICY_ITEM_3_BUTTON")
-                        && this.newSelectedButton != this.graphicElementNameToInt.get("TEAM_BUTTON")
-                        && this.newSelectedButton < this.graphicElementNameToInt.get("CHANGE_POKEMON_1_BUTTON")) {
+                if (this.newSelectedButton != this.graphicElementNameToInt.get(FREE_ITEM_3)
+                        && this.newSelectedButton != this.graphicElementNameToInt.get(PRICY_ITEM_3)
+                        && this.newSelectedButton != this.graphicElementNameToInt.get(TEAM_LITTERAL)
+                        && this.newSelectedButton < this.graphicElementNameToInt.get(CHANGE_1)) {
                     this.newSelectedButton += 1;
                 }
                 break;
 
             case KeyEvent.VK_ENTER:
-                if (this.newSelectedButton == this.graphicElementNameToInt.get("TEAM_BUTTON")) {
-                    this.newSelectedButton = this.graphicElementNameToInt.get("CHANGE_POKEMON_1_BUTTON");
-                } else if (this.newSelectedButton == this.graphicElementNameToInt.get("CHANGE_POKEMON_BACK_BUTTON")) {
-                    this.newSelectedButton = this.graphicElementNameToInt.get("PRICY_ITEM_1_BUTTON");
-                    if (BuyedItem) {
+                if (this.newSelectedButton == this.graphicElementNameToInt.get(TEAM_LITTERAL)) {
+                    this.newSelectedButton = this.graphicElementNameToInt.get(CHANGE_1);
+                } else if (this.newSelectedButton == this.graphicElementNameToInt.get(CHANGE_BACK)) {
+                    this.newSelectedButton = this.graphicElementNameToInt.get(PRICY_ITEM_1);
+                    if (buyedItem) {
                         compensation(playerTrainerInstance);
-                        BuyedItem = false;
+                        buyedItem = false;
                     }
                     this.selectedItemForUse = false;
-                    sceneShopView.updateGraphic(currentSelectedButton, newSelectedButton);
-                } else if ((this.newSelectedButton >= this.graphicElementNameToInt.get("CHANGE_POKEMON_1_BUTTON")
-                        && this.newSelectedButton <= this.graphicElementNameToInt.get("CHANGE_POKEMON_6_BUTTON"))
+                    sceneShopView.updateGraphic(currentSelectedButton,newSelectedButton);
+                } else if (this.newSelectedButton >= this.graphicElementNameToInt.get(CHANGE_1)
+                        && this.newSelectedButton <= this.graphicElementNameToInt.get(CHANGE_6)
                         && selectedItemForUse) {
                     this.initGraphicElements();
                     applyItemToPokemon(this.newSelectedButton - 200, playerTrainerInstance,
                             gameEngineInstance, effectParser);
-                    this.newSelectedButton = this.graphicElementNameToInt.get("PRICY_ITEM_1_BUTTON");
-                } else if (this.newSelectedButton >= this.graphicElementNameToInt.get("PRICY_ITEM_1_BUTTON") &&
-                        this.newSelectedButton <= this.graphicElementNameToInt.get("PRICY_ITEM_3_BUTTON")) {
-                    Item item = SceneShopUtilities.getShopItems(this.newSelectedButton - 4);
+                    this.newSelectedButton = this.graphicElementNameToInt.get(PRICY_ITEM_1);
+                } else if (this.newSelectedButton >= this.graphicElementNameToInt.get(PRICY_ITEM_1) &&
+                        this.newSelectedButton <= this.graphicElementNameToInt.get(PRICY_ITEM_3)) {
+                    final Item item = SceneShopUtilities.getShopItems(this.newSelectedButton - 4);
                     if (playerTrainerInstance.getMoney() >= item.getPrice()) {
                         this.selectedItemForUse = true;
                         buyItem(playerTrainerInstance, item, sceneShopView, gameEngineInstance);
-                        BuyedItem = true;
-                        this.newSelectedButton = this.graphicElementNameToInt.get("CHANGE_POKEMON_1_BUTTON");
-                        sceneShopView.updateGraphic(currentSelectedButton, newSelectedButton);
+                        buyedItem = true;
+                        this.newSelectedButton = this.graphicElementNameToInt.get(CHANGE_1);
+                        sceneShopView.updateGraphic(currentSelectedButton,newSelectedButton);
                     }
-                } else if (this.newSelectedButton >= this.graphicElementNameToInt.get("FREE_ITEM_1_BUTTON") &&
-                        this.newSelectedButton <= this.graphicElementNameToInt.get("FREE_ITEM_3_BUTTON")) {
+                } else if (this.newSelectedButton >= this.graphicElementNameToInt.get(FREE_ITEM_1) &&
+                        this.newSelectedButton <= this.graphicElementNameToInt.get(FREE_ITEM_3)) {
                     this.selectedItemForUse = true;
                     useOrHandleItem(playerTrainerInstance, gameEngineInstance,
                             SceneShopUtilities.getShopItems(this.newSelectedButton + 2));
-                    BuyedItem = false;
-                    this.newSelectedButton = this.graphicElementNameToInt.get("CHANGE_POKEMON_1_BUTTON");
-                    sceneShopView.updateGraphic(currentSelectedButton, newSelectedButton);
-                } else if (this.newSelectedButton == this.graphicElementNameToInt.get("REROL_BUTTON")) {
+                    buyedItem = false;
+                    this.newSelectedButton = this.graphicElementNameToInt.get(CHANGE_1);
+                    sceneShopView.updateGraphic(currentSelectedButton,newSelectedButton);
+                } else if (this.newSelectedButton == this.graphicElementNameToInt.get(REROL_LITTERAL)) {
                     rerollShopItems(playerTrainerInstance, itemFactoryInstance);
                 }
                 break;
+			default:
+				break;
         }
     }
 
@@ -254,16 +268,12 @@ public class SceneShop extends Scene {
      * Initializes the initial button selection state.
      */
     private void initStatus() {
-        this.currentSelectedButton = this.graphicElementNameToInt.get("PRICY_ITEM_1_BUTTON");
-        this.newSelectedButton = this.graphicElementNameToInt.get("PRICY_ITEM_1_BUTTON");
+        this.currentSelectedButton = this.graphicElementNameToInt.get(PRICY_ITEM_1);
+        this.newSelectedButton = this.graphicElementNameToInt.get(PRICY_ITEM_1);
+
     }
 
-    /**
-     * Initializes the graphic elements for the shop.
-     *
-     * @throws IOException if loading graphics fails
-     */
-    public void initGraphicElements() throws IOException {
+    public final void initGraphicElements() throws IOException {
         this.sceneShopView.initGraphicElements(this.newSelectedButton);
     }
 
@@ -312,18 +322,18 @@ public class SceneShop extends Scene {
      * @throws NoSuchMethodException     if method is not found
      */
     protected void useOrHandleItem(final PlayerTrainerImpl trainer, final GameEngineImpl gameEngineInstance,
-            final Item item) throws InstantiationException, IllegalAccessException,
-            InvocationTargetException, NoSuchMethodException, IOException {
-        if (item.getType().equalsIgnoreCase("Capture")) {
-            int countBall = trainer.getBall().get(item.getName());
+            final Item item) throws InstantiationException, IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException, IOException {
+        if ("Capture".equalsIgnoreCase(item.getType())) {
+            final int countBall = trainer.getBall().get(item.getName());
             trainer.getBall().put(item.getName(), countBall + 1);
             gameEngineInstance.setScene("fight");
-        } else if (item.getType().equalsIgnoreCase("Valuable")) {
-            Optional<JSONObject> itemEffect = item.getEffect();
+        } else if ("Valuable".equalsIgnoreCase(item.getType())) {
+            final Optional<JSONObject> itemEffect = item.getEffect();
             this.effectParser.parseEffect(itemEffect.get(), trainer.getPokemon(0).get());
             gameEngineInstance.setScene("fight");
-        } else if (item.getType().equalsIgnoreCase("Healing")
-                || item.getType().equalsIgnoreCase("Boost") || item.getType().equalsIgnoreCase("PPRestore")) {
+        } else if ("Healing".equalsIgnoreCase(item.getType())
+                || "Boost".equalsIgnoreCase(item.getType()) ||"PPRestore".equalsIgnoreCase(item.getType())) {
             this.selectedUsableItem = item;
         }
     }
@@ -345,12 +355,13 @@ public class SceneShop extends Scene {
             final GameEngineImpl gameEngineInstance, final EffectParser effectParser) throws InstantiationException,
             IllegalAccessException, InvocationTargetException, NoSuchMethodException, IOException {
         if (this.selectedUsableItem != null) {
-            Optional<it.unibo.PokeRogue.pokemon.Pokemon> selectedPokemon = trainer
+            final Optional<Pokemon> selectedPokemon = trainer
                     .getPokemon(pokemonIndex);
             if (selectedPokemon.isPresent()) {
-                it.unibo.PokeRogue.pokemon.Pokemon pokemon = selectedPokemon.get();
+                final Pokemon pokemon = selectedPokemon.get();
 
-                Optional<JSONObject> itemEffect = this.selectedUsableItem.getEffect();
+                // Ottieni l'effetto dell'item
+                final Optional<JSONObject> itemEffect = this.selectedUsableItem.getEffect();
 
                 if (itemEffect.isPresent()) {
                     effectParser.parseEffect(itemEffect.get(), pokemon);
@@ -361,23 +372,12 @@ public class SceneShop extends Scene {
         }
     }
 
-    /**
-     * Refunds a previously used item if not confirmed by user.
-     *
-     * @param playerTrainerInstance the player to refund
-     */
-    public void compensation(PlayerTrainerImpl playerTrainerInstance) {
+    public void compensation(final PlayerTrainerImpl playerTrainerInstance) {
         playerTrainerInstance.addMoney(selectedUsableItem.getPrice());
         selectedUsableItem = null;
     }
 
-    /**
-     * Rerolls the available items in the shop, costing the player in-game currency.
-     *
-     * @param playerTrainerInstance the player performing the reroll
-     * @param itemFactoryInstance   the item factory used to generate new items
-     */
-    public void rerollShopItems(PlayerTrainerImpl playerTrainerInstance, ItemFactoryImpl itemFactoryInstance) {
+    public void rerollShopItems(final PlayerTrainerImpl playerTrainerInstance, final ItemFactoryImpl itemFactoryInstance) {
         if (playerTrainerInstance.getMoney() >= 50) {
             playerTrainerInstance.addMoney(-50);
             SceneShopUtilities.updatePlayerMoneyText(currentSceneGraphicElements, playerTrainerInstance);

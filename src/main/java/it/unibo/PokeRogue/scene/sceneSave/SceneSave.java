@@ -24,6 +24,8 @@ import lombok.Getter;
  * </p>
  */
 public class SceneSave extends Scene {
+    private final static String EXIT_SAVE_LITTERAL = "EXIT_AND_SAVE_BUTTON";
+	private final static String CONTINUE_LITTERAL = "CONTINUE_GAME_BUTTON";
     /** Holds the graphic elements rendered in the current save scene. */
     @Getter
     private final GraphicElementsRegistry currentSceneGraphicElements;
@@ -40,15 +42,8 @@ public class SceneSave extends Scene {
 
     /** The button currently selected by the user. */
     private int newSelectedButton;
-
-    /** The button that was previously selected by the user. */
-    private int currentSelectedButton;
-
-    /** All the graphic elements loaded from configuration for this scene. */
-    private GraphicElementsRegistry graphicElements;
-
-    /** A mapping of UI element names to their corresponding numeric IDs. */
-    private Map<String, Integer> graphicElementNameToInt;
+    private final Map<String, Integer> graphicElementNameToInt;
+	
 
     /**
      * Constructs and initializes the save scene by loading its graphical elements,
@@ -67,14 +62,14 @@ public class SceneSave extends Scene {
             InvocationTargetException {
         this.loadGraphicElements("sceneSaveElements.json");
         this.graphicElementNameToInt = this.getGraphicElementNameToInt();
-        this.graphicElements = this.getGraphicElements();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.initStatus();
-        this.sceneSaveView = new SceneSaveView(this.currentSceneGraphicElements, this.graphicElements,
-                this.allPanelsElements, currentSelectedButton, newSelectedButton, this);
+        this.sceneSaveView = new SceneSaveView(this.currentSceneGraphicElements, this.getGraphicElements(), this.allPanelsElements
+				, this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL)
+				, newSelectedButton);
         this.initGraphicElements();
     }
 
@@ -95,25 +90,27 @@ public class SceneSave extends Scene {
             InvocationTargetException, NoSuchMethodException {
         switch (inputKey) {
             case KeyEvent.VK_RIGHT:
-                if (this.newSelectedButton == this.graphicElementNameToInt.get("EXIT_AND_SAVE_BUTTON")) {
-                    this.newSelectedButton = this.graphicElementNameToInt.get("CONTINUE_GAME_BUTTON");
+                if (this.newSelectedButton == this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL)) {
+                    this.newSelectedButton = this.graphicElementNameToInt.get(CONTINUE_LITTERAL);
                 }
                 break;
 
             case KeyEvent.VK_LEFT:
-                if (this.newSelectedButton == this.graphicElementNameToInt.get("CONTINUE_GAME_BUTTON")) {
-                    this.newSelectedButton = this.graphicElementNameToInt.get("EXIT_AND_SAVE_BUTTON");
+                if (this.newSelectedButton == this.graphicElementNameToInt.get(CONTINUE_LITTERAL)) {
+                    this.newSelectedButton = this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL);
                 }
                 break;
 
             case KeyEvent.VK_ENTER:
-                if (this.newSelectedButton == this.graphicElementNameToInt.get("CONTINUE_GAME_BUTTON")) {
+                if (this.newSelectedButton == this.graphicElementNameToInt.get(CONTINUE_LITTERAL)) {
                     gameEngineInstance.setScene("fight");
 
-                } else if (this.newSelectedButton == this.graphicElementNameToInt.get("EXIT_AND_SAVE_BUTTON")) {
+                } else if (this.newSelectedButton == this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL)) {
                     gameEngineInstance.setScene("main");
                 }
                 break;
+			default:
+				break;
         }
     }
 
@@ -122,17 +119,10 @@ public class SceneSave extends Scene {
      * "EXIT_AND_SAVE_BUTTON".
      */
     private void initStatus() {
-        this.currentSelectedButton = this.graphicElementNameToInt.get("EXIT_AND_SAVE_BUTTON");
-        this.newSelectedButton = this.graphicElementNameToInt.get("EXIT_AND_SAVE_BUTTON");
+        this.newSelectedButton = this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL);
     }
 
-    /**
-     * Initializes and renders all UI components for the scene using the current
-     * selection.
-     *
-     * @throws IOException if loading elements fails.
-     */
-    public void initGraphicElements() throws IOException {
+    private void initGraphicElements() throws IOException {
         this.sceneSaveView.initGraphicElements(this.newSelectedButton);
     }
 

@@ -71,8 +71,8 @@ public final class ButtonElementImpl extends GraphicElementImpl implements Butto
 
     }
 
+	@Override
     public BoxElementImpl getButtonBox() {
-
         return new BoxElementImpl(buttonBox);
     }
 

@@ -11,7 +11,7 @@ public enum Weather {
 	HAIL("hail");
 	private final String weatherName;
 
-    Weather(String weatherName) {
+    Weather(final String weatherName) {
         this.weatherName = weatherName;
     }
 	/**
@@ -27,8 +27,8 @@ public enum Weather {
 	* @param weather 
 	* @return the Weather
 	*/
-    public static Weather fromString(String weather) {
-        for (Weather t : Weather.values()) {
+    public static Weather fromString(final String weather) {
+        for (final Weather t : values()) {
             if (t.weatherName().equalsIgnoreCase(weather)) {
                 return t;
             }

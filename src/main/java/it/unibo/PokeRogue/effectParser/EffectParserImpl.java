@@ -68,7 +68,7 @@ public class EffectParserImpl extends Singleton implements EffectParser{
 	}
 
 	private JexlContext createContext() {
-		JexlContext context = new MapContext();
+		final JexlContext context = new MapContext();
 		if (!this.us.isEmpty()) {
 			context.set("us", this.us.get());
 		}

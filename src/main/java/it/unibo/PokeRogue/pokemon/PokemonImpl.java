@@ -134,7 +134,7 @@ public final class PokemonImpl implements Pokemon {
 		final int minTempStat = -6;
 		final int maxTempStat = 6;
 		final int defaultTempStat = 6;
-		this.tempStatsBonus = new HashMap<String, Range<Integer>>();
+		this.tempStatsBonus = new HashMap<>();
 		for (final String stat : statNames) {
 			this.tempStatsBonus.put(stat, new RangeImpl<>(minTempStat, maxTempStat, defaultTempStat));
 		}
@@ -173,8 +173,8 @@ public final class PokemonImpl implements Pokemon {
 		final int maxStat = 252;
 		actualStats = new HashMap<>();
 
-		final int maxLife = (int) Math.floor(((2 * this.baseStats.get("hp") + this.iv.get("hp")
-				+ this.ev.get("hp").getCurrentValue() / 4) * this.level.getCurrentValue()) / 100)
+		final int maxLife = (int) Math.floor((2 * this.baseStats.get("hp") + this.iv.get("hp")
+				+ this.ev.get("hp").getCurrentValue() / 4) * this.level.getCurrentValue() / 100)
 				+ this.level.getCurrentValue() + 10;
 
 		final Range<Integer> rangeHp = new RangeImpl<>(0, maxLife, maxLife);

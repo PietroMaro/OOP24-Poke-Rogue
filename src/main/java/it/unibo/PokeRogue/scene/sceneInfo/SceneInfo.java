@@ -74,13 +74,12 @@ public class SceneInfo extends Scene {
             InvocationTargetException {
         this.loadGraphicElements("sceneInfoElements.json");
         this.graphicElementNameToInt = this.getGraphicElementNameToInt();
-        this.graphicElements = this.getGraphicElements();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.initStatus();
-        this.sceneInfoView = new SceneInfoView(this.graphicElements);
+        this.sceneInfoView = new SceneInfoView(this.getGraphicElements());
         this.initGraphicElements();
     }
 
@@ -110,6 +109,8 @@ public class SceneInfo extends Scene {
                     gameEngineInstance.setScene("main");
                 }
                 break;
+			default:
+				break;
         }
     }
 

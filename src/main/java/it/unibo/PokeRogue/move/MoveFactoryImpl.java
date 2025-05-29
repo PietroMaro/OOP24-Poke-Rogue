@@ -24,7 +24,7 @@ public class MoveFactoryImpl extends Singleton implements MoveFactory {
 	
    	//make the access in memory and saves the information of all pokemon in local
 	private final JsonReader jsonReader = new JsonReaderImpl();
-	private final Map<String, Move> movesBlueprints = new HashMap<String, Move>();
+	private final Map<String, Move> movesBlueprints = new HashMap<>();
 	
 	/**
 	 * Constructor initiate the factory.
@@ -52,7 +52,7 @@ public class MoveFactoryImpl extends Singleton implements MoveFactory {
 					"moves",
 					moveName + ".json").toString());
 		final String name = moveName;
-		final Range<Integer> pp = new RangeImpl<Integer>(0, moveJson.getInt("pp"), moveJson.getInt("pp"));
+		final Range<Integer> pp = new RangeImpl<>(0, moveJson.getInt("pp"), moveJson.getInt("pp"));
 		final boolean isPhysical = moveJson.getBoolean("isPhysical");
 		final JSONObject effect = moveJson.getJSONObject("effect");
 		final int accuracy = moveJson.getInt("accuracy");

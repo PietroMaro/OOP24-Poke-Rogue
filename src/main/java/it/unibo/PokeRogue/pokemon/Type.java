@@ -101,7 +101,7 @@ public enum Type {
 	 * @return the Type with type as string value.
 	 */
     public static Type fromString(final String type) {
-        for (final Type t : Type.values()) {
+        for (final Type t : values()) {
             if (t.typeName().equalsIgnoreCase(type)) {
                 return t;
             }

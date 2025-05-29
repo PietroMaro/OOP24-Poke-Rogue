@@ -39,7 +39,7 @@ public class SceneMove extends Scene {
     private int newSelectedButton;
     private final Pokemon playerPokemon;
     private GraphicElementsRegistry graphicElements;
-    private Map<String, Integer> graphicElementNameToInt;
+    final private Map<String, Integer> graphicElementNameToInt;
 
     /**
      * Constructs a new SceneMove.
@@ -96,21 +96,23 @@ public class SceneMove extends Scene {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
+		final String move1Litteral = "MOVE_1_BUTTON";
+		final String move5Litteral = "MOVE_1_BUTTON";
 
         switch (inputKey) {
             case KeyEvent.VK_UP:
-                if (this.currentSelectedButton == graphicElementNameToInt.get("MOVE_1_BUTTON")) {
+                if (this.currentSelectedButton == graphicElementNameToInt.get(move1Litteral)) {
                     this.newSelectedButton = 4;
-                } else if (this.currentSelectedButton >= graphicElementNameToInt.get("MOVE_1_BUTTON")
-                        && this.currentSelectedButton <= graphicElementNameToInt.get("MOVE_5_BUTTON")) {
+                } else if (this.currentSelectedButton >= graphicElementNameToInt.get(move1Litteral)
+                        && this.currentSelectedButton <= graphicElementNameToInt.get(move5Litteral)) {
                     this.newSelectedButton -= 1;
                 }
                 break;
             case KeyEvent.VK_DOWN:
-                if (this.currentSelectedButton == graphicElementNameToInt.get("MOVE_5_BUTTON")) {
+                if (this.currentSelectedButton == graphicElementNameToInt.get(move5Litteral)) {
                     this.newSelectedButton = 0;
-                } else if (this.currentSelectedButton >= graphicElementNameToInt.get("MOVE_1_BUTTON")
-                        && this.currentSelectedButton <= graphicElementNameToInt.get("MOVE_5_BUTTON")) {
+                } else if (this.currentSelectedButton >= graphicElementNameToInt.get(move1Litteral)
+                        && this.currentSelectedButton <= graphicElementNameToInt.get(move5Litteral)) {
                     this.newSelectedButton += 1;
                 }
                 break;

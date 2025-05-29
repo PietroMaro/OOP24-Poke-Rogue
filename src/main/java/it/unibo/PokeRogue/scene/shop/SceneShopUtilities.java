@@ -13,19 +13,9 @@ import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 
-/**
- * Utility class for the SceneShop, providing methods to initialize and update
- * shop items, Pokémon stats display, item descriptions, and player money.
- * This class maintains a static list of shop items used in the current session.
- */
-public class SceneShopUtilities {
-    /** Fallback string when a Pokémon is not available or identifiable. */
+public final class SceneShopUtilities {
     private static final String QUESTION_MARK_STRING = "???";
-
-    /** Internal list holding current session's shop items. */
-    private static final List<Item> shopItems = new ArrayList<>();
-
-    /** Number of pricy items available in the shop. */
+    private static final List<Item> SHOP_ITEMS = new ArrayList<>();
     private static final Integer PRICY_ITEMS_SIZE = 3;
 
     /** Number of free items available in the shop. */
@@ -40,11 +30,8 @@ public class SceneShopUtilities {
     /** Base ID for the name text element of the first free item. */
     private static final Integer FREE_ITEM_1_NAME_POSITION = 108;
 
-    /**
-     * Constructor to prevent instantiation of utility class.
-     */
-    public SceneShopUtilities() {
-
+    private SceneShopUtilities() {
+		// Utility class shouldn't be instanciated
     }
 
     /**
@@ -84,41 +71,21 @@ public class SceneShopUtilities {
         return currentHp + " / " + maxHp;
     }
 
-    /**
-     * Initializes the static shop item list with a random set of pricy and free
-     * items.
-     *
-     * @param itemFactory Factory used to generate random items.
-     */
-    public static void initShopItems(ItemFactoryImpl itemFactory) {
-        shopItems.clear();
+    public static void initShopItems(final ItemFactoryImpl itemFactory) {
+        SHOP_ITEMS.clear();
         for (int i = 0; i < PRICY_ITEMS_SIZE; i++) {
-            shopItems.add(itemFactory.randomItem());
+            SHOP_ITEMS.add(itemFactory.randomItem());
         }
         for (int i = 0; i < FREE_ITEMS_SIZE; i++) {
-            shopItems.add(itemFactory.randomItem());
+            SHOP_ITEMS.add(itemFactory.randomItem());
         }
     }
 
-    /**
-     * Retrieves an item from the internal shop item list by index.
-     *
-     * @param index Index of the item in the list.
-     * @return The item at the specified index.
-     */
-    public static Item getShopItems(int index) {
-        return shopItems.get(index);
+    public static Item getShopItems(final int index) {
+        return SHOP_ITEMS.get(index);
     }
 
-    /**
-     * Updates the item description text in the UI with the description of a given
-     * item.
-     *
-     * @param sceneGraphicElements Registry containing the UI elements for the
-     *                             current scene.
-     * @param item                 The item whose description should be displayed.
-     */
-    public static void updateItemDescription(final GraphicElementsRegistry sceneGraphicElements, Item item) {
+    public static void updateItemDescription(final GraphicElementsRegistry sceneGraphicElements, final Item item) {
         ((TextElementImpl) sceneGraphicElements.getByName("ITEM_DESCRIPTION_TEXT"))
                 .setText(item.getDescription());
     }
@@ -133,9 +100,9 @@ public class SceneShopUtilities {
     public static void updateItemsText(final GraphicElementsRegistry sceneGraphicElements) {
 
         for (int i = 0; i < PRICY_ITEMS_SIZE; i++) {
-            Item item = SceneShopUtilities.getShopItems(i);
-            double xPosition = 0.15 + (i * 0.29);
-            double xPositionPrice = 0.25 + (i * 0.29);
+            final Item item = SceneShopUtilities.getShopItems(i);
+            final double xPosition = 0.15 + (i * 0.29);
+            final double xPositionPrice = 0.25 + (i * 0.29);
 
             UtilitiesForScenes.safeGetElementById(sceneGraphicElements, PRICY_ITEM_1_NAME_POSITION + i,
                     TextElementImpl.class)
@@ -152,9 +119,9 @@ public class SceneShopUtilities {
                     .setLeftX(xPositionPrice);
         }
         for (int i = 0; i < FREE_ITEMS_SIZE; i++) {
-            Item item = SceneShopUtilities.getShopItems(FREE_ITEMS_SIZE + i);
+            final Item item = getShopItems(FREE_ITEMS_SIZE + i);
 
-            double xPosition = 0.18 + (i * 0.29);
+            final double xPosition = 0.18 + (i * 0.29);
 
             UtilitiesForScenes.safeGetElementById(sceneGraphicElements, FREE_ITEM_1_NAME_POSITION + i,
                     TextElementImpl.class)

@@ -140,8 +140,8 @@ public enum Nature {
 		 */
 		public static Nature getRandomNature() {
        		final Random random = new Random();
-       		final int index = random.nextInt(Nature.values().length);
-       		return Nature.values()[index]; 
+       		final int index = random.nextInt(values().length);
+       		return values()[index]; 
     	}
 
 		/**

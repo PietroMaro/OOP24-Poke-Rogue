@@ -24,6 +24,7 @@ public class SceneFightUpdateView {
         private static final String MOVE_PANEL_TEXT = "movePanel";
         private static final String BALL_PANEL_TEXT = "ballPanel";
         private static final String CHANGE_PANEL_TEXT = "changePanel";
+		private static final String VIEW_FILE_NAME = "sceneFightElement.json";
         private final GraphicElementsRegistry currentSceneGraphicElements;
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final PlayerTrainerImpl playerTrainerInstance;
@@ -100,9 +101,9 @@ public class SceneFightUpdateView {
                         this.allPanelsElements.put(MOVE_PANEL_TEXT,
                                         new PanelElementImpl("firstPanel", new OverlayLayout(null)));
                         this.alreadyInMainMenu = false;
-                        UtilitiesForScenes.removeSceneElements("sceneFightElement.json", "movePreparation",
+                        UtilitiesForScenes.removeSceneElements(VIEW_FILE_NAME, "movePreparation",
                                         currentSceneGraphicElements);
-                        UtilitiesForScenes.loadSceneElements("sceneFightElement.json", "move",
+                        UtilitiesForScenes.loadSceneElements(VIEW_FILE_NAME, "move",
                                         currentSceneGraphicElements,
                                         this.graphicElements);
                         this.initMoveText();
@@ -137,7 +138,7 @@ public class SceneFightUpdateView {
                 if (currentSelectedButton >= graphicElementNameToInt.get("POKEBALL_BUTTON")
                                 && currentSelectedButton < graphicElementNameToInt.get("BACKGROUND")) {
                         this.alreadyInMainMenu = false;
-                        UtilitiesForScenes.loadSceneElements("sceneFightElement.json", "pokeball",
+                        UtilitiesForScenes.loadSceneElements(VIEW_FILE_NAME, "pokeball",
                                         currentSceneGraphicElements,
                                         this.graphicElements);
                         this.allPanelsElements.put(BALL_PANEL_TEXT,
@@ -169,9 +170,9 @@ public class SceneFightUpdateView {
                         this.alreadyInMainMenu = false;
                         this.allPanelsElements.put(CHANGE_PANEL_TEXT,
                                         new PanelElementImpl("firstPanel", new OverlayLayout(null)));
-                        UtilitiesForScenes.removeSceneElements("sceneFightElement.json", "init",
+                        UtilitiesForScenes.removeSceneElements(VIEW_FILE_NAME, "init",
                                         this.currentSceneGraphicElements);
-                        UtilitiesForScenes.loadSceneElements("sceneFightElement.json", "change",
+                        UtilitiesForScenes.loadSceneElements(VIEW_FILE_NAME, "change",
                                         this.currentSceneGraphicElements,
                                         this.graphicElements);
                         this.initChangeText();

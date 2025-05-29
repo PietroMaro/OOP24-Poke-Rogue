@@ -156,10 +156,12 @@ public final class SceneLoad extends Scene {
                 currentSceneGraphicElements);
     }
 
+	@Override
     public GraphicElementsRegistry getCurrentSceneGraphicElements() {
         return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);
     }
 
+	@Override
     public Map<String, PanelElementImpl> getAllPanelsElements() {
         return new LinkedHashMap<>(allPanelsElements);
     }
