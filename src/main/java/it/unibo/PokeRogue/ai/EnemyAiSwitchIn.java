@@ -63,14 +63,7 @@ public final class EnemyAiSwitchIn {
 
     }
 
-    /**
-     * Determines whether the enemy AI should switch Pokémon and returns the
-     * corresponding decision.
-     *
-     * @return a {@link Decision} indicating a switch-in with the target position,
-     *         or a fallback indicating no action
-     */
-    protected Decision willSwitchIn() {
+    Decision SwitchInDecisionMaker() {
 
         if (enemyTrainer.getPokemon(1).isPresent() && shouldSwitch()) {
 

@@ -18,7 +18,6 @@ import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
-import lombok.Getter;
 
 /**
  * Abstract base class representing a generic scene in the game.
@@ -29,7 +28,6 @@ import lombok.Getter;
  * state and graphics.
  *
  */
-@Getter
 public abstract class Scene {
 
 	private GraphicElementsRegistry graphicElements;
@@ -103,7 +101,7 @@ public abstract class Scene {
 
 	}
 
-	protected void loadGraphicElements(final String fileName) throws IOException {
+	protected final void loadGraphicElements(final String fileName) throws IOException {
 		final JsonReader jsonReader = new JsonReaderImpl();
 		final JSONObject root = jsonReader.readJsonObject(Paths.get("src", "scene.data", fileName).toString());
 		graphicElementNameToInt = new HashMap<>();
@@ -127,6 +125,25 @@ public abstract class Scene {
 			graphicElements.put(keyInt, elem);
 		}
 
+	}
+
+	/**
+	 * Returns the registry containing the graphic elements.
+	 *
+	 * @return the graphic elements registry.
+	 */
+	public final GraphicElementsRegistry getGraphicElements() {
+		return this.graphicElements;
+	}
+
+	/**
+	 * Returns the mapping between graphic element names and their corresponding
+	 * IDs.
+	 *
+	 * @return a map from graphic element names to their integer IDs.
+	 */
+	public final Map<String, Integer> getGraphicElementNameToInt() {
+		return this.graphicElementNameToInt;
 	}
 
 }

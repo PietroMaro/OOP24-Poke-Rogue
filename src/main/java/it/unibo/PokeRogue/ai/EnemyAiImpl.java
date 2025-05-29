@@ -77,8 +77,9 @@ public final class EnemyAiImpl implements EnemyAi {
      * @return a {@link Decision} object representing the chosen action and related
      *         data
      */
+    @Override
     public Decision nextMove(final Optional<Weather> weather) {
-        Decision decision = this.aiOfSwitchIn.willSwitchIn();
+        Decision decision = this.aiOfSwitchIn.SwitchInDecisionMaker();
 
         if (decision.moveType() == DecisionTypeEnum.SWITCH_IN) {
             return decision;
