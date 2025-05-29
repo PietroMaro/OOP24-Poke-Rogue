@@ -101,6 +101,11 @@ public abstract class Scene {
 
 	}
 
+	/**
+	 * Loads and initializes graphic elements from a JSON file.
+	 * 
+	 * @param fileName the name of the JSON file to load
+	 */
 	protected final void loadGraphicElements(final String fileName) throws IOException {
 		final JsonReader jsonReader = new JsonReaderImpl();
 		final JSONObject root = jsonReader.readJsonObject(Paths.get("src", "scene.data", fileName).toString());

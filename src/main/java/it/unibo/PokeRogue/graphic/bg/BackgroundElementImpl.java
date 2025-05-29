@@ -2,7 +2,6 @@ package it.unibo.PokeRogue.graphic.bg;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
-import lombok.Getter;
 import java.io.IOException;
 
 import org.json.JSONObject;
@@ -14,7 +13,6 @@ import org.json.JSONObject;
 public final class BackgroundElementImpl extends GraphicElementImpl implements BackgroundElement {
     private static final long serialVersionUID = 1L;
 
-    @Getter
     private final SpriteElementImpl backgroundSprite;
 
     /**
@@ -42,5 +40,9 @@ public final class BackgroundElementImpl extends GraphicElementImpl implements B
 
         super(jsonMetrix.getString("panelName"));
         backgroundSprite = new SpriteElementImpl(jsonMetrix);
+    }
+
+    public SpriteElementImpl getBackgroundSprite() {
+        return new SpriteElementImpl(backgroundSprite);
     }
 }

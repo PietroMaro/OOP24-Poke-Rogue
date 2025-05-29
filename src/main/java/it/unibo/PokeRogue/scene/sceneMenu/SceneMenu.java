@@ -12,7 +12,6 @@ import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.scene.GraphicElementsRegistryImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
-import lombok.Getter;
 
 /**
  * The {@code SceneMenu} class implements the main menu scene of the game.
@@ -30,14 +29,12 @@ import lombok.Getter;
 public final class SceneMenu extends Scene {
 
     private int currentSelectedButton;
-    @Getter
     private final GraphicElementsRegistry currentSceneGraphicElements;
-    @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GameEngine gameEngineInstance;
     private final SceneMenuView sceneMenuView;
     private final GraphicElementsRegistry graphicElements;
-	private final Map<String, Integer> graphicElementNameToInt;
+    private final Map<String, Integer> graphicElementNameToInt;
 
     /**
      * Constructs a new SceneMenu object, initializing necessary data structures and
@@ -63,10 +60,6 @@ public final class SceneMenu extends Scene {
 
     }
 
-    /**
-     * Updates the graphical state of the menu by toggling button selection
-     * highlights.
-     */
     @Override
     public void updateGraphic() {
 
@@ -78,11 +71,6 @@ public final class SceneMenu extends Scene {
 
     }
 
-    /**
-     * Updates the status of the scene based on a keyboard input.
-     *
-     * @param inputKey the key code from {@link KeyEvent}.
-     */
     @Override
     public void updateStatus(final int inputKey)
             throws IOException,
@@ -130,4 +118,11 @@ public final class SceneMenu extends Scene {
         this.currentSelectedButton = this.graphicElementNameToInt.get("LOAD_BUTTON");
     }
 
+    public GraphicElementsRegistry getCurrentSceneGraphicElements() {
+        return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);
+    }
+
+    public Map<String, PanelElementImpl> getAllPanelsElements() {
+        return new LinkedHashMap<>(allPanelsElements);
+    }
 }

@@ -34,8 +34,19 @@ public class SceneShopInitView {
                                 this.sceneGraphicElements,
                                 this.graphicElements);
                 this.initTextElements();
+<<<<<<< HEAD
                 SceneShopUtilities.updateItemDescription(this.sceneGraphicElements, SceneShopUtilities.getShopItems(4));
                 UtilitiesForScenes.setButtonStatus(currentSelectedButton, true, this.sceneGraphicElements);
+=======
+                this.initButtonElements();
+                this.initBoxElements();
+                SceneShopUtilities.updateItemDescription(sceneGraphicElements, SceneShopUtilities.getShopItems(4));
+                this.sceneGraphicElements.put(SceneShopEnum.BACKGROUND.value(),
+                                new BackgroundElementImpl(FIRST_PANEL,
+                                                UtilitiesForScenes.getPathString("images", "sceneShopBgBar.png")));
+
+                UtilitiesForScenes.setButtonStatus(currentSelectedButton, true, sceneGraphicElements);
+>>>>>>> e1b79adc6930fb3fd4768332a1103348e414bd53
 
         }
 

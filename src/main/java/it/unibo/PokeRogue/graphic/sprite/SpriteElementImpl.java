@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
+import lombok.Getter;
 
 /**
  * Implementation of a sprite graphic element that displays an image within a
@@ -18,41 +19,43 @@ import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
  * Supports loading images from file paths or JSON configuration,
  * positioning and scaling relative to the component size.
  */
+@Getter
 public final class SpriteElementImpl extends GraphicElementImpl implements SpriteElement {
     private static final long serialVersionUID = 1L;
 
     private Image spriteImage;
     private double leftUpX;
-    private double leftUpy;
-    private double width = 1;
-    private double height = 1;
+    private double leftUpY;
+    private double spriteWidth = 1;
+    private double spriteHeight = 1;
 
     /**
      * Constructs a SpriteElementImpl with the specified image path and layout
      * properties.
      * 
-     * @param panelName   the name of the panel this sprite belongs to
-     * @param pathToImage the file path to the sprite image
-     * @param leftUpX     the relative horizontal position (0.0 - 1.0) of the
-     *                    sprite's top-left corner
-     * @param leftUpy     the relative vertical position (0.0 - 1.0) of the sprite's
-     *                    top-left corner
-     * @param width       the relative width (0.0 - 1.0) of the sprite relative to
-     *                    the panel width
-     * @param height      the relative height (0.0 - 1.0) of the sprite relative to
-     *                    the panel height
+     * @param panelName    the name of the panel this sprite belongs to
+     * @param pathToImage  the file path to the sprite image
+     * @param leftUpX      the relative horizontal position (0.0 - 1.0) of the
+     *                     sprite's top-left corner
+     * @param leftUpY      the relative vertical position (0.0 - 1.0) of the
+     *                     sprite's
+     *                     top-left corner
+     * @param spriteWidth  the relative width (0.0 - 1.0) of the sprite relative to
+     *                     the panel width
+     * @param spriteHeight the relative height (0.0 - 1.0) of the sprite relative to
+     *                     the panel height
      */
     public SpriteElementImpl(final String panelName, final String pathToImage, final double leftUpX,
-            final double leftUpy, final double width,
-            final double height) throws IOException {
+            final double leftUpY, final double spriteWidth,
+            final double spriteHeight) throws IOException {
         super(panelName);
 
         this.spriteImage = ImageIO.read(new File(pathToImage));
 
         this.leftUpX = leftUpX;
-        this.leftUpy = leftUpy;
-        this.width = width;
-        this.height = height;
+        this.leftUpY = leftUpY;
+        this.spriteWidth = spriteWidth;
+        this.spriteHeight = spriteHeight;
 
     }
 
@@ -74,9 +77,9 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
 
         if (jsonMetrix.has("width")) {
             this.leftUpX = jsonMetrix.getDouble("leftX");
-            this.leftUpy = jsonMetrix.getDouble("leftY");
-            this.width = jsonMetrix.getDouble("width");
-            this.height = jsonMetrix.getDouble("height");
+            this.leftUpY = jsonMetrix.getDouble("leftY");
+            this.spriteWidth = jsonMetrix.getDouble("width");
+            this.spriteHeight = jsonMetrix.getDouble("height");
 
         }
 
@@ -86,26 +89,44 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
      * Constructs a SpriteElementImpl using a given Image instance and layout
      * properties.
      * 
-     * @param panelName the name of the panel this sprite belongs to
-     * @param image     the Image object to display
-     * @param leftUpX   the relative horizontal position of the sprite's top-left
-     *                  corner
-     * @param leftUpy   the relative vertical position of the sprite's top-left
-     *                  corner
-     * @param width     the relative width of the sprite
-     * @param height    the relative height of the sprite
+     * @param panelName    the name of the panel this sprite belongs to
+     * @param image        the Image object to display
+     * @param leftUpX      the relative horizontal position of the sprite's top-left
+     *                     corner
+     * @param leftUpY      the relative vertical position of the sprite's top-left
+     *                     corner
+     * @param width        the relative width of the sprite
+     * @param spriteHeight the relative height of the sprite
      */
-    public SpriteElementImpl(final String panelName, final Image image, final double leftUpX, final double leftUpy,
-            final double width,
-            final double height) {
+    public SpriteElementImpl(final String panelName, final Image image, final double leftUpX, final double leftUpY,
+            final double spriteWidth,
+            final double spriteHeight) {
         super(panelName);
 
         this.spriteImage = image;
 
         this.leftUpX = leftUpX;
-        this.leftUpy = leftUpy;
-        this.width = width;
-        this.height = height;
+        this.leftUpY = leftUpY;
+        this.spriteWidth = spriteWidth;
+        this.spriteHeight = spriteHeight;
+
+    }
+
+    /**
+     * Copy constructor.
+     * 
+     * Creates a new SpriteElementImpl instance by copying the
+     * properties from the given instanceToCopy.
+     * 
+     * @param instanceToCopy the SpriteElementImpl instance to copy from
+     */
+    public SpriteElementImpl(final SpriteElementImpl instanceToCopy) {
+        super(instanceToCopy.getPanelName());
+        this.spriteImage = instanceToCopy.getSpriteImage();
+        this.leftUpX = instanceToCopy.getLeftUpX();
+        this.leftUpY = instanceToCopy.getLeftUpY();
+        this.spriteWidth = instanceToCopy.getSpriteWidth();
+        this.spriteHeight = instanceToCopy.getSpriteHeight();
 
     }
 
@@ -113,6 +134,7 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
     public void setImage(final String pathToImage) throws IOException {
         this.spriteImage = ImageIO.read(new File(pathToImage));
     }
+
     @Override
     public void setImage(final Image image) {
         this.spriteImage = image;
@@ -121,8 +143,8 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
     @Override
     protected void paintComponent(final Graphics drawEngine) {
         super.paintComponent(drawEngine);
-        drawEngine.drawImage(this.spriteImage, (int) (getWidth() * this.leftUpX), (int) (getHeight() * this.leftUpy),
-                (int) (getWidth() * this.width), (int) (getHeight() * this.height), null);
+        drawEngine.drawImage(this.spriteImage, (int) (getWidth() * this.leftUpX), (int) (getHeight() * this.leftUpY),
+                (int) (getWidth() * this.spriteWidth), (int) (getHeight() * this.spriteHeight), null);
 
     }
 

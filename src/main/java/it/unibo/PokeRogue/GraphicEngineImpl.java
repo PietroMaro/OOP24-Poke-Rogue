@@ -17,18 +17,22 @@ import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 
 /**
  * Implementation of the {@link GraphicEngine} interface.
- * This class is responsible for rendering and displaying graphic elements
- * in the game, as well as handling the drawing of the current scene.
- * It ensures that all visual elements are presented according to the state
- * of the game.
+ *
+ * This class is responsible for managing the graphical rendering of the game.
+ * It creates panels, adds graphical elements to them, and handles full-scene
+ * drawing.
  * 
- * The class follows the Singleton pattern to maintain only one instance
- * of the graphic engine throughout the game.
+ * The engine is implemented as a singleton by extending {@link Singleton},
+ * ensuring that only one instance manages all visual output.
  */
 public final class GraphicEngineImpl extends Singleton implements GraphicEngine {
     private final JFrame gameWindow;
     private Map<String, PanelElementImpl> allPanelElements;
 
+    /**
+     * Constructs the graphic engine and initializes the game window.
+     * Sets up the layout, key listener, and basic window properties.
+     */
     public GraphicEngineImpl() {
         this.gameWindow = new JFrame("Pokérogue Lite");
         this.gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,23 +45,10 @@ public final class GraphicEngineImpl extends Singleton implements GraphicEngine 
     }
 
     /**
-     * Draws the current game scene by rendering the provided graphic elements.
-     * 
-     * This method takes a map of graphic elements, where the key is the identifier
-     * for each element, and the value is its visual representation (e.g., image
-     * path,
-     * text, etc.). The method is responsible for interpreting these elements and
-     * displaying them on the screen.
-     * 
-     * Currently, this method is unimplemented and will throw an
-     * {@link UnsupportedOperationException}
-     * until the logic for rendering the elements is provided.
-     * 
-     * @param allGraphicElements a map containing the identifiers and graphical
-     *                           representations
-     *                           of the elements to be drawn.
+     * Draws the current game scene by rendering all provided graphic elements.
+     *
+     * @param allGraphicElements a registry of all graphic elements to draw.
      */
-
     @Override
     public void drawScene(final GraphicElementsRegistry allGraphicElements) {
 
@@ -78,6 +69,13 @@ public final class GraphicEngineImpl extends Singleton implements GraphicEngine 
 
     }
 
+    /**
+     * Creates and adds all panels to the game window based on the provided mapping.
+     * Ensures nested panels are added correctly to their parents.
+     *
+     * @param panelElements a map of panel names to their corresponding panel
+     *                      elements.
+     */
     @Override
     public void createPanels(final Map<String, PanelElementImpl> panelElements) {
         this.gameWindow.getContentPane().removeAll();
@@ -98,7 +96,7 @@ public final class GraphicEngineImpl extends Singleton implements GraphicEngine 
     }
 
     private void drawBoxGraphicElement(final BoxElementImpl boxToDraw) {
-
+        
         allPanelElements.get(boxToDraw.getPanelName()).add(boxToDraw);
 
     }

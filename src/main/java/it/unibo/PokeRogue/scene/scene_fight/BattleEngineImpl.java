@@ -238,6 +238,7 @@ public class BattleEngineImpl implements BattleEngine {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
+                
         if (BattleUtilities.isTeamWipedOut(enemyTrainerInstance) || this.captured) {
             BattleRewards.awardBattleRewards(this.playerPokemon, this.enemyPokemon);
             this.newMoveToLearn(this.playerPokemon);
