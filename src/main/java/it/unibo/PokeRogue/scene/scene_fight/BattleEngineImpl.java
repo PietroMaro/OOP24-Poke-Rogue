@@ -28,9 +28,14 @@ import it.unibo.PokeRogue.utilities.PokemonBattleUtil;
 import it.unibo.PokeRogue.utilities.PokemonBattleUtilImpl;
 import lombok.Getter;
 
+/**
+ * Implementation of the {@link BattleEngine} interface.
+ * Manages the execution of battle turns, handling player and enemy actions,
+ * effects, weather, abilities, and AI decisions.
+ */
 public class BattleEngineImpl implements BattleEngine {
-    private final static Integer FIRST_POSITION = 0;
-    private final static Integer MAX_SQUAD = 6;
+    private static final Integer FIRST_POSITION = 0;
+    private static final Integer MAX_SQUAD = 6;
 
     private final TrainerImpl playerTrainerInstance;
     private final TrainerImpl enemyTrainerInstance;
@@ -86,10 +91,10 @@ public class BattleEngineImpl implements BattleEngine {
      * Pokémon's abilities, their moves, and any status effects or conditions that
      * apply.
      *
-     * @param type             the type of action (e.g., "SwitchIn", "Pokeball")
-     * @param playerMoveString the name of the player's move
-     * @param typeEnemy        the type of the enemy's action (e.g., "SwitchIn")
-     * @param enemyMoveString  the name of the enemy's move
+     * @param playerDecision the player's decision for this turn, including move or
+     *                       item usage
+     * @param enemyDecision  the enemy's decision for this turn, controlled either
+     *                       by AI or predefined logic
      */
     @Override
     public void runBattleTurn(final Decision playerDecision, final Decision enemyDecision) throws NoSuchMethodException,
@@ -238,7 +243,6 @@ public class BattleEngineImpl implements BattleEngine {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
-                
         if (BattleUtilities.isTeamWipedOut(enemyTrainerInstance) || this.captured) {
             BattleRewards.awardBattleRewards(this.playerPokemon, this.enemyPokemon);
             this.newMoveToLearn(this.playerPokemon);

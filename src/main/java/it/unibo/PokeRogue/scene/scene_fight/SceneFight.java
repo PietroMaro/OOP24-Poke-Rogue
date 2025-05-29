@@ -28,6 +28,16 @@ import lombok.Getter;
 
 public class SceneFight extends Scene {
 
+    private static final int ATTACK_0 = 100;
+    private static final int ATTACK_1 = 102;
+    private static final int ATTACK_2 = 101;
+    private static final int ATTACK_3 = 103;
+    private static final int USE_POKEBALL = 300;
+    private static final int USE_MEGABALL = 301;
+    private static final int USE_ULTRABALL = 302;
+    private static final int USE_MASTERBALL = 303;
+    private static final int DO_NOTHING = 4;
+
     @Getter
     private final GraphicElementsRegistry currentSceneGraphicElements;
     @Getter
@@ -70,10 +80,6 @@ public class SceneFight extends Scene {
         this.initGraphicElements();
     }
 
-    /**
-     * Initializes the status of the buttons for the battle scene.
-     * Sets the default button selection to "Fight".
-     */
     private void initStatus() {
         this.currentSelectedButton = graphicElementNameToInt.get("FIGHT_BUTTON");
         this.newSelectedButton = graphicElementNameToInt.get("FIGHT_BUTTON");
@@ -111,100 +117,99 @@ public class SceneFight extends Scene {
             InstantiationException {
         switch (inputKey) {
             case KeyEvent.VK_UP:
-                if (SceneFightUtilities.isButtonInRange(newSelectedButton, 2, 4) ||
-                        SceneFightUtilities.isButtonInRange(newSelectedButton, 101, 103) ||
-                        SceneFightUtilities.isButtonInRange(newSelectedButton, 201, 205) ||
-                        SceneFightUtilities.isButtonInRange(newSelectedButton, 301, 304)) {
+                if (SceneFightUtilities.isButtonInRange(newSelectedButton,
+                        graphicElementNameToInt.get("POKEMON_BUTTON"), graphicElementNameToInt.get("RUN_BUTTON"))
+                        || SceneFightUtilities.isButtonInRange(newSelectedButton,
+                                graphicElementNameToInt.get("MOVE_BUTTON_3"),
+                                graphicElementNameToInt.get("MOVE_BUTTON_4"))
+                        || SceneFightUtilities.isButtonInRange(newSelectedButton,
+                                graphicElementNameToInt.get("CHANGE_POKEMON_2"),
+                                graphicElementNameToInt.get("CHANGE_POKEMON_BACK"))
+                        || SceneFightUtilities.isButtonInRange(newSelectedButton,
+                                graphicElementNameToInt.get("MEGABALL_BUTTON"),
+                                graphicElementNameToInt.get("CANCEL_BUTTON"))) {
                     newSelectedButton--;
                 }
                 break;
 
             case KeyEvent.VK_DOWN:
-                if (SceneFightUtilities.isButtonInRange(newSelectedButton, 1, 3) ||
-                        SceneFightUtilities.isButtonInRange(newSelectedButton, 100, 102) ||
-                        SceneFightUtilities.isButtonInRange(newSelectedButton, 200, 204) ||
-                        SceneFightUtilities.isButtonInRange(newSelectedButton, 300, 303)) {
+                if (SceneFightUtilities.isButtonInRange(newSelectedButton, graphicElementNameToInt.get("FIGHT_BUTTON"),
+                        graphicElementNameToInt.get("BALL_BUTTON"))
+                        || SceneFightUtilities.isButtonInRange(newSelectedButton,
+                                graphicElementNameToInt.get("MOVE_BUTTON_1"),
+                                graphicElementNameToInt.get("MOVE_BUTTON_2"))
+                        || SceneFightUtilities.isButtonInRange(newSelectedButton,
+                                graphicElementNameToInt.get("CHANGE_POKEMON_1"),
+                                graphicElementNameToInt.get("CHANGE_POKEMON_5"))
+                        || SceneFightUtilities.isButtonInRange(newSelectedButton,
+                                graphicElementNameToInt.get("POKEBALL_BUTTON"),
+                                graphicElementNameToInt.get("MASTERBALL_BUTTON"))) {
                     newSelectedButton++;
                 }
                 break;
 
             case KeyEvent.VK_LEFT:
-                if (newSelectedButton == graphicElementNameToInt.get("BALL_BUTTON") ||
-                        newSelectedButton == graphicElementNameToInt.get("RUN_BUTTON") ||
-                        newSelectedButton == graphicElementNameToInt.get("MOVE_BUTTON_2") ||
-                        newSelectedButton == graphicElementNameToInt.get("MOVE_BUTTON_4")) {
+                if (newSelectedButton == graphicElementNameToInt.get("BALL_BUTTON")
+                        || newSelectedButton == graphicElementNameToInt.get("RUN_BUTTON")
+                        || newSelectedButton == graphicElementNameToInt.get("MOVE_BUTTON_2")
+                        || newSelectedButton == graphicElementNameToInt.get("MOVE_BUTTON_4")) {
                     newSelectedButton -= 2;
                 }
                 break;
 
             case KeyEvent.VK_RIGHT:
-                if (newSelectedButton == graphicElementNameToInt.get("FIGHT_BUTTON") ||
-                        newSelectedButton == graphicElementNameToInt.get("POKEMON_BUTTON") ||
-                        newSelectedButton == graphicElementNameToInt.get("MOVE_BUTTON_1") ||
-                        newSelectedButton == graphicElementNameToInt.get("MOVE_BUTTON_3")) {
+                if (newSelectedButton == graphicElementNameToInt.get("FIGHT_BUTTON")
+                        || newSelectedButton == graphicElementNameToInt.get("POKEMON_BUTTON")
+                        || newSelectedButton == graphicElementNameToInt.get("MOVE_BUTTON_1")
+                        || newSelectedButton == graphicElementNameToInt.get("MOVE_BUTTON_3")) {
                     newSelectedButton += 2;
                 }
                 break;
 
             case KeyEvent.VK_ENTER:
                 switch (newSelectedButton) {
-                    case 100:
+                    case ATTACK_0:
                         fightLoop(new Decision(DecisionTypeEnum.ATTACK, "0"));
                         break;
 
-                    case 101:
+                    case ATTACK_2:
                         fightLoop(new Decision(DecisionTypeEnum.ATTACK, "2"));
                         break;
 
-                    case 102:
+                    case ATTACK_1:
                         fightLoop(new Decision(DecisionTypeEnum.ATTACK, "1"));
                         break;
 
-                    case 103:
+                    case ATTACK_3:
                         fightLoop(new Decision(DecisionTypeEnum.ATTACK, "3"));
                         break;
 
-                    case 200:
-                        fightLoop(new Decision(DecisionTypeEnum.SWITCH_IN, "1"));
-                        break;
-
-                    case 201:
-                        fightLoop(new Decision(DecisionTypeEnum.SWITCH_IN, "2"));
-                        break;
-
-                    case 202:
-                        fightLoop(new Decision(DecisionTypeEnum.SWITCH_IN, "3"));
-                        break;
-
-                    case 203:
-                        fightLoop(new Decision(DecisionTypeEnum.SWITCH_IN, "4"));
-                        break;
-
-                    case 204:
-                        fightLoop(new Decision(DecisionTypeEnum.SWITCH_IN, "5"));
-                        break;
-                    case 300:
+                    case USE_POKEBALL:
                         fightLoop(new Decision(DecisionTypeEnum.POKEBALL, "pokeball"));
                         break;
 
-                    case 301:
+                    case USE_MEGABALL:
                         fightLoop(new Decision(DecisionTypeEnum.POKEBALL, "megaball"));
                         break;
 
-                    case 302:
+                    case USE_ULTRABALL:
                         fightLoop(new Decision(DecisionTypeEnum.POKEBALL, "ultraball"));
                         break;
 
-                    case 303:
+                    case USE_MASTERBALL:
                         fightLoop(new Decision(DecisionTypeEnum.POKEBALL, "masterball"));
                         break;
-                    case 4:
-                        fightLoop(new Decision(DecisionTypeEnum.NOTHING, ""));
 
-                        break;
-                    default:
+                    case DO_NOTHING:
+                        fightLoop(new Decision(DecisionTypeEnum.NOTHING, ""));
                         break;
                 }
+                if (newSelectedButton >= graphicElementNameToInt.get("CHANGE_POKEMON_1")
+                        && newSelectedButton <= graphicElementNameToInt.get("CHANGE_POKEMON_5")) {
+                    fightLoop(new Decision(DecisionTypeEnum.SWITCH_IN,
+                            String.valueOf(newSelectedButton - graphicElementNameToInt.get("CHANGE_POKEMON_1") + 1)));
+                }
+
                 if (SceneFightUtilities.isButtonInRange(newSelectedButton, 1, 3)) {
                     newSelectedButton = newSelectedButton * 100;
                 } else if (newSelectedButton == 4) {
@@ -217,16 +222,6 @@ public class SceneFight extends Scene {
                 break;
         }
     }
-
-    /**
-     * Executes the battle logic based on the player's move type and the selected
-     * move.
-     * This method simulates the battle between the player's Pokémon and the enemy's
-     * Pokémon.
-     * 
-     * @param playerMoveType the type of the move (e.g., "Attack", "SwitchIn", etc.)
-     * @param playerMove     the selected move from the player
-     */
 
     private void fightLoop(final Decision decision) throws NoSuchMethodException,
             IOException,

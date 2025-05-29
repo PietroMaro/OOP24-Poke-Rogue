@@ -46,8 +46,11 @@ import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 import it.unibo.PokeRogue.utilities.PokeEffectivenessCalc;
 import it.unibo.PokeRogue.utilities.PokeEffectivenessCalcImpl;
 
+/**
+ * TestAll class.
+ */
 public final class TestAll {
-
+	private static final int MAX_PP = 25;
 	private static final int MAX_LENGTH_OF_POKESQUAD = 6;
 	private static final int HIGH_EFFECTIVENESS = 160;
 	private static final int MEDIUM_EFFECTIVENESS = 120;
@@ -95,11 +98,13 @@ public final class TestAll {
 		final UnsupportedOperationException ex = assertThrows(UnsupportedOperationException.class, () -> {
 			moveFactory.moveFromName("nonExisting");
 		});
-		assertEquals(ex.getMessage(),
-				"The move nonExisting blueprint was not found. Is not present in moveList / Factory not initialized");
-		assertEquals(moveTest.getPp().getCurrentMax(), 25);
+		assertEquals(
+				ex.getMessage(),
+				"The move nonExisting blueprint was not found. "
+						+ "Is not present in moveList / Factory not initialized");
+		assertEquals(moveTest.getPp().getCurrentMax(), MAX_PP);
 		assertEquals(moveTest.getPp().getCurrentMin(), 0);
-		assertEquals(moveTest.getPp().getCurrentValue(), 25);
+		assertEquals(moveTest.getPp().getCurrentValue(), MAX_PP);
 		assertEquals(moveTest.isPhysical(), false);
 		assertEquals(moveTest.getAccuracy(), 100);
 		assertEquals(moveTest.getCritRate(), 0);
@@ -115,8 +120,11 @@ public final class TestAll {
 		final UnsupportedOperationException ex = assertThrows(UnsupportedOperationException.class, () -> {
 			abilityFactory.abilityFromName("nonExisting");
 		});
-		assertEquals(ex.getMessage(),
-				"The ability nonExisting blueprint was not found. Is not present in abilityList / Factory not initialized");
+		assertEquals(
+				ex.getMessage(),
+				"The ability nonExisting blueprint was not found. "
+						+ "Is not present in abilityList / Factory not initialized");
+
 		assertEquals(abilityTest.situationChecks(), AbilitySituationChecks.fromString("attack"));
 	}
 
@@ -140,21 +148,21 @@ public final class TestAll {
 		final PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
 		final EffectParserImpl effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
 
-		final Move moveTest1 = moveFactory.moveFromName("absorb");
-		final Move moveTest2 = moveFactory.moveFromName("absorb");
+		final Optional<Move> moveTest1 = Optional.of(moveFactory.moveFromName("absorb"));
+		final Optional<Move> moveTest2 = Optional.of(moveFactory.moveFromName("absorb"));
 		final Pokemon pok1 = pokeFactory.randomPokemon(3);
 		final Pokemon pok2 = pokeFactory.randomPokemon(3);
-		final Weather weather = Weather.SUNLIGHT;
+		final Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
 
 		final JsonReader jsonReader = new JsonReaderImpl();
 
 		final Path dirPath = Paths.get("src", "pokemon_data", "moves");
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
-			for (Path entry : stream) {
+			for (final Path entry : stream) {
 				if (Files.isRegularFile(entry)) {
 					final JSONObject moveJson = jsonReader.readJsonObject(entry.toString());
 					final JSONObject effect = moveJson.getJSONObject("effect");
-					// effectParser.parseEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
+					effectParser.parseEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
 				}
 			}
 		}
@@ -178,10 +186,10 @@ public final class TestAll {
 
 		final Path dirPath = Paths.get("src", "pokemon_data", "abilities");
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
-			for (Path entry : stream) {
+			for (final Path entry : stream) {
 				if (Files.isRegularFile(entry)) {
-					JSONObject moveJson = jsonReader.readJsonObject(entry.toString());
-					JSONObject effect = moveJson.getJSONObject("effect");
+					final JSONObject moveJson = jsonReader.readJsonObject(entry.toString());
+					final JSONObject effect = moveJson.getJSONObject("effect");
 					effectParser.parseEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
 				}
 			}
@@ -217,10 +225,10 @@ public final class TestAll {
 
 		final Path dirPath = Paths.get("src", "items_data", "items", "data");
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
-			for (Path entry : stream) {
+			for (final Path entry : stream) {
 				if (Files.isRegularFile(entry)) {
-					JSONObject itemJson = jsonReader.readJsonObject(entry.toString());
-					JSONObject effect = itemJson.getJSONObject("effect");
+					final JSONObject itemJson = jsonReader.readJsonObject(entry.toString());
+					final JSONObject effect = itemJson.getJSONObject("effect");
 					effectParser.parseEffect(effect, pok1);
 				}
 			}
@@ -287,7 +295,7 @@ public final class TestAll {
 		final BattleEngine battleEngine = new BattleEngineImpl(enemyTrainer, ai);
 		battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""),
 				new Decision(DecisionTypeEnum.ATTACK, "0"));
-		int afterLife = playerTrainer.getSquad().get(0).get().getActualStats().get("hp").getCurrentValue();
+		final int afterLife = playerTrainer.getSquad().get(0).get().getActualStats().get("hp").getCurrentValue();
 		assertTrue(beforeLife > afterLife);
 	}
 

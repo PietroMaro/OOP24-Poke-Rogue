@@ -4,10 +4,14 @@ import java.util.Map;
 
 import it.unibo.PokeRogue.pokemon.Pokemon;
 
+/**
+ * Represents the rewards earned after a battle,
+ * like experience, items, money, and other bonuses.
+ */
 public final class BattleRewards {
 
     /**
-     * empty constructor
+     * empty constructor.
      * 
      */
     private BattleRewards() {

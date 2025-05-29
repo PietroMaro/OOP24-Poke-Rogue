@@ -21,6 +21,8 @@ import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
  * for managing the fight scene in the game.
  */
 public final class SceneFightUtilities {
+    private static final int ATTACK_START_CODE = 100;
+    private static final int ATTACK_END_CODE = 103;
     private static final Integer FIRST_POSITION = 0;
     private static final String QUESTION_MARK_STRING = "???";
 
@@ -111,8 +113,8 @@ public final class SceneFightUtilities {
             final GraphicElementsRegistry currentSceneGraphicElements,
             final PlayerTrainerImpl playerTrainerInstance) throws IOException {
         final int[] indexMapping = { 0, 2, 1, 3 };
-        final int moveIndex = (currentSelectedButton >= 100 && currentSelectedButton <= 103)
-                ? indexMapping[currentSelectedButton - 100]
+        final int moveIndex = (currentSelectedButton >= ATTACK_START_CODE && currentSelectedButton <= ATTACK_END_CODE)
+                ? indexMapping[currentSelectedButton - ATTACK_START_CODE]
                 : -1;
 
         if (moveIndex == -1) {

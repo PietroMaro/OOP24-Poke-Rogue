@@ -16,6 +16,13 @@ import it.unibo.PokeRogue.pokemon.StatusCondition;
  * and stat changes.
  */
 public class StatusEffectImpl implements StatusEffect {
+    private static final double CONFUSION_CHARMED_FAIL_CHANCE = 0.5;
+    private static final double FLINCH_FAIL_CHANCE = 0.2;
+    private static final int DURATION_SHORT = 1;
+    private static final int DURATION_MEDIUM = 3;
+    private static final int DURATION_LONG = 5;
+    private static final int DURATION_VERY_LONG = 6;
+    private static final int DURATION_EXTRA_LONG = 8;
     private final Map<StatusCondition, Integer> statusMap;
 
     /**
@@ -31,17 +38,17 @@ public class StatusEffectImpl implements StatusEffect {
      * Initializes the duration for each status condition.
      */
     private void generateStatusMap() {
-        statusMap.put(StatusCondition.BURN, 5);
-        statusMap.put(StatusCondition.FREEZE, 6);
-        statusMap.put(StatusCondition.PARALYSIS, 8);
-        statusMap.put(StatusCondition.POISON, 8);
-        statusMap.put(StatusCondition.SLEEP, 5);
-        statusMap.put(StatusCondition.BOUND, 3);
-        statusMap.put(StatusCondition.CONFUSION, 3);
-        statusMap.put(StatusCondition.FLINCH, 1);
-        statusMap.put(StatusCondition.TRAPPED, 1);
-        statusMap.put(StatusCondition.CHARMED, 3);
-        statusMap.put(StatusCondition.SEEDED, 3);
+        statusMap.put(StatusCondition.BURN, DURATION_LONG);
+        statusMap.put(StatusCondition.FREEZE, DURATION_VERY_LONG);
+        statusMap.put(StatusCondition.PARALYSIS, DURATION_EXTRA_LONG);
+        statusMap.put(StatusCondition.POISON, DURATION_EXTRA_LONG);
+        statusMap.put(StatusCondition.SLEEP, DURATION_LONG);
+        statusMap.put(StatusCondition.BOUND, DURATION_MEDIUM);
+        statusMap.put(StatusCondition.CONFUSION, DURATION_MEDIUM);
+        statusMap.put(StatusCondition.FLINCH, DURATION_SHORT);
+        statusMap.put(StatusCondition.TRAPPED, DURATION_SHORT);
+        statusMap.put(StatusCondition.CHARMED, DURATION_MEDIUM);
+        statusMap.put(StatusCondition.SEEDED, DURATION_MEDIUM);
     }
 
     /**
@@ -64,9 +71,9 @@ public class StatusEffectImpl implements StatusEffect {
                 case StatusCondition.SLEEP:
                     return false;
                 case StatusCondition.CONFUSION, StatusCondition.CHARMED:
-                    return Math.random() >= 0.5;
+                    return Math.random() >= CONFUSION_CHARMED_FAIL_CHANCE;
                 case StatusCondition.FLINCH:
-                    return Math.random() >= 0.2;
+                    return Math.random() >= FLINCH_FAIL_CHANCE;
                 default:
                     return true;
             }
@@ -138,7 +145,7 @@ public class StatusEffectImpl implements StatusEffect {
                     break;
                 case StatusCondition.CHARMED:
                     pokemon.getActualStats().get("defense")
-                            .setCurrentValue(pokemon.getActualStats().get("defense").getCurrentValue() + 5);
+                            .setCurrentValue(pokemon.getActualStats().get("defense").getCurrentValue() + DURATION_LONG);
                     break;
                 case StatusCondition.SEEDED:
                     final int seededDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 16;
@@ -149,7 +156,6 @@ public class StatusEffectImpl implements StatusEffect {
         }
     }
 
-
     private void setTimeDuration(final Pokemon pokemon, final StatusCondition status) {
         if (pokemon.getStatusDuration().isEmpty() || !pokemon.getStatusDuration().containsKey(status)) {
             pokemon.getStatusDuration().clear();
@@ -157,16 +163,14 @@ public class StatusEffectImpl implements StatusEffect {
         }
     }
 
-
     private void decrementTimeDuration(final Pokemon pokemon, final StatusCondition status) {
-        final int turnLeft = pokemon.getStatusDuration().get(status) - 1;
+        final int turnLeft = pokemon.getStatusDuration().get(status) - DURATION_SHORT;
         pokemon.getStatusDuration().put(status, turnLeft);
         if (pokemon.getStatusDuration().get(status).equals(0)) {
             pokemon.getStatusDuration().clear();
             pokemon.setStatusCondition(Optional.empty());
         }
     }
-
 
     private void calculateDamage(final Pokemon pokemon, final int damage) {
         pokemon.getActualStats().get("hp").decrement(damage);

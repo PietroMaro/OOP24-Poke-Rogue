@@ -35,9 +35,10 @@ public class SceneMoveView {
          * elements will be stored. It also initializes the utility class and fetches
          * the player trainer and their first Pokemon.
          *
-         * @param currentSceneGraphicElements The map to store scene's graphical
-         *                                    elements.
-         * @param allPanelsElements           The map to store scene's panel elements.
+         * @param currentSceneGraphicElements the registry for the scene's graphical
+         *                                    elements
+         * @param allPanelsElements           the map for the scene's panel elements
+         * @param graphicElements             additional graphic elements registry
          */
         public SceneMoveView(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,

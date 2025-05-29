@@ -23,18 +23,26 @@ public class SceneFightView {
     /**
      * Constructs a new SceneFightView object.
      * 
-     * @param sceneGraphicElements  A map of graphic elements for the battle scene.
-     * @param allPanelsElements     A map of all panel elements in the scene.
-     * @param enemyTrainerInstance  The enemy trainer for the battle.
-     * @param currentSelectedButton The initial selected button in the UI.
-     * @param newSelectedButton     The new selected button in the UI after an
-     *                              update.
-     * @param scene                 The scene object containing information about
-     *                              the current battle.
+     * @param sceneGraphicElements    the registry containing all graphic elements
+     *                                used in the battle scene
+     * @param allPanelsElements       a map of all panel elements present in the UI
+     * @param enemyTrainerInstance    the enemy trainer involved in the current
+     *                                battle
+     * @param currentSelectedButton   the index of the currently selected button in
+     *                                the UI
+     * @param newSelectedButton       the index of the button that has been newly
+     *                                selected after an update
+     * @param scene                   the {@code SceneFight} instance representing
+     *                                the current battle scene
+     * @param graphicElements         additional registry of graphic elements for
+     *                                the scene
+     * @param graphicElementNameToInt a map linking graphic element names to their
+     *                                corresponding integer IDs
      */
     public SceneFightView(final GraphicElementsRegistry sceneGraphicElements,
             final Map<String, PanelElementImpl> allPanelsElements, final TrainerImpl enemyTrainerInstance,
-            final int currentSelectedButton, final int newSelectedButton, final SceneFight scene, final GraphicElementsRegistry graphicElements, final Map<String, Integer> graphicElementNameToInt) {
+            final int currentSelectedButton, final int newSelectedButton, final SceneFight scene,
+            final GraphicElementsRegistry graphicElements, final Map<String, Integer> graphicElementNameToInt) {
         this.sceneGraphicElements = sceneGraphicElements;
         this.sceneFightInitView = new SceneFightInitView(this.sceneGraphicElements, allPanelsElements,
                 enemyTrainerInstance, graphicElements);
@@ -65,4 +73,3 @@ public class SceneFightView {
     }
 
 }
-
