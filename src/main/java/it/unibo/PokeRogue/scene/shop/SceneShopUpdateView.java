@@ -81,12 +81,18 @@ public class SceneShopUpdateView {
                 this.newSelectedButton = newSelectedButton;
                 this.updateSelectedButton(currentSelectedButton, newSelectedButton);
                 this.updateItemDescription();
-                this.updatePokemonSelection(currentSelectedButton);
+                this.updatePokemonSelection();
                 this.mainMenu();
 
         }
 
-        private void updatePokemonSelection(final int currentSelectedButton) throws IOException {
+        /**
+         * Loads and displays the Pokémon selection UI if the new button corresponds
+         * to a Pokémon-related action and the user is in the main menu.
+         *
+         * @throws IOException If an error occurs while loading Pokémon UI elements.
+         */
+        private void updatePokemonSelection() throws IOException {
                 if (this.newSelectedButton >= this.graphicElementNameToInt.get("CHANGE_POKEMON_1_BUTTON")
                                 && this.newSelectedButton <= this.graphicElementNameToInt
                                                 .get("CHANGE_POKEMON_BACK_BUTTON")
@@ -100,7 +106,7 @@ public class SceneShopUpdateView {
                                         this.graphicElements);
 
                         this.initPokemonSelectionText();
-                        sceneInstance.setCurrentSelectedButton(this.newSelectedButton);
+                        sceneInstance.setCurrentSelectedButton(this.currentSelectedButton);
                         UtilitiesForScenes.setButtonStatus(this.newSelectedButton, true, currentSceneGraphicElements);
                 }
         }
@@ -151,7 +157,9 @@ public class SceneShopUpdateView {
         }
 
         private void updateSelectedButton(final int currentSelectedButton, final int newSelectedButton) {
-                UtilitiesForScenes.setButtonStatus(currentSelectedButton, false, currentSceneGraphicElements);
+                if(this.currentSceneGraphicElements.getElements().containsKey(currentSelectedButton)) {
+                        UtilitiesForScenes.setButtonStatus(currentSelectedButton, false, currentSceneGraphicElements);
+                }
                 if (this.currentSceneGraphicElements.getElements().containsKey(newSelectedButton)) {
                         UtilitiesForScenes.setButtonStatus(newSelectedButton, true, currentSceneGraphicElements);
                 }

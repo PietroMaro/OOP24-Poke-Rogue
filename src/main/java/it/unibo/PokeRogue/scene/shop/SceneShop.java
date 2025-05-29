@@ -52,7 +52,6 @@ public class SceneShop extends Scene {
     private int newSelectedButton;
     @Setter
     private int currentSelectedButton;
-    private GraphicElementsRegistry graphicElements;
     private final Map<String, Integer> graphicElementNameToInt;
     private boolean selectedItemForUse;
     private boolean buyedItem;
@@ -75,7 +74,6 @@ public class SceneShop extends Scene {
             InvocationTargetException {
         this.loadGraphicElements("sceneShopElements.json");
         this.graphicElementNameToInt = this.getGraphicElementNameToInt();
-        this.graphicElements = this.getGraphicElements();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
@@ -83,7 +81,7 @@ public class SceneShop extends Scene {
         this.itemFactoryInstance = new ItemFactoryImpl();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.initStatus();
-        this.sceneShopView = new SceneShopView(currentSceneGraphicElements, this.graphicElements, allPanelsElements,
+        this.sceneShopView = new SceneShopView(currentSceneGraphicElements,this.getGraphicElements(), allPanelsElements,
                 itemFactoryInstance,
                 currentSelectedButton, newSelectedButton, this,
                 graphicElementNameToInt);

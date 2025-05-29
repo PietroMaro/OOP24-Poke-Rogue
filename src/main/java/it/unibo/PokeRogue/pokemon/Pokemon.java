@@ -42,27 +42,22 @@ public interface Pokemon {
 	 * Increase exp.
 	 * @param increaseEv which and by how much
 	 */
-	void increaseEv(Map<String, Integer> increaseEv);
+	void increaseEv(Map<Stats, Integer> increaseEv);
 	/**
 	 * Simple getter.
 	 * @return the parameter
-	 */
-	int getTotalUsedEv();
-	/**
-	 * Simple setter.
-	 * @param newVal value to set
 	 */
 	void setTotalUsedEv(int newVal);
 	/**
 	 * Simple getter.
 	 * @return the parameter
 	 */
-	Map<String, Integer> getBaseStats();
+	Map<Stats, Integer> getBaseStats();
 	/**
 	 * Simple setter.
 	 * @param newVal value to set
 	 */
-	void setBaseStats(Map<String, Integer> newVal);
+	void setBaseStats(Map<Stats, Integer> newVal);
 	/**
 	 * Simple getter.
 	 * @return the parameter
@@ -77,22 +72,22 @@ public interface Pokemon {
 	 * Simple getter.
 	 * @return the parameter
 	 */
-	Map<String, Integer> getIv();
+	Map<Stats, Integer> getIv();
 	/**
 	 * Simple setter.
 	 * @param newVal value to set
 	 */
-	void setIv(Map<String, Integer> newVal);
+	void setIv(Map<Stats, Integer> newVal);
 	/**
 	 * Simple getter.
 	 * @return the parameter
 	 */
-	Map<String, Range<Integer>> getEv();
+	Map<Stats, Range<Integer>> getEv();
 	/**
 	 * Simple setter.
 	 * @param newVal value to set
 	 */
-	void setEv(Map<String, Range<Integer>> newVal);
+	void setEv(Map<Stats, Range<Integer>> newVal);
 	/**
 	 * Simple getter.
 	 * @return the parameter
@@ -107,22 +102,22 @@ public interface Pokemon {
 	 * Simple getter.
 	 * @return the parameter
 	 */
-	Map<String, Range<Integer>> getActualStats();
+	Map<Stats, Range<Integer>> getActualStats();
 	/**
 	 * Simple setter.
 	 * @param newVal value to set
 	 */
-	void setActualStats(Map<String, Range<Integer>> newVal);
+	void setActualStats(Map<Stats, Range<Integer>> newVal);
 	/**
 	 * Simple getter.
 	 * @return the parameter
 	 */
-	Map<String, Range<Integer>> getTempStatsBonus();
+	Map<Stats, Range<Integer>> getTempStatsBonus();
 	/**
 	 * Simple setter.
 	 * @param newVal value to set
 	 */
-	void setTempStatsBonus(Map<String, Range<Integer>> newVal);
+	void setTempStatsBonus(Map<Stats, Range<Integer>> newVal);
 	/**
 	 * Simple getter.
 	 * @return the parameter
@@ -157,12 +152,12 @@ public interface Pokemon {
 	 * Simple getter.
 	 * @return the parameter
 	 */
-	Map<String, Integer> getGivesEv();
+	Map<Stats, Integer> getGivesEv();
 	/**
 	 * Simple setter.
 	 * @param newVal value to set
 	 */
-	void setGivesEv(Map<String, Integer> newVal);
+	void setGivesEv(Map<Stats, Integer> newVal);
 	/**
 	 * Simple getter.
 	 * @return the parameter

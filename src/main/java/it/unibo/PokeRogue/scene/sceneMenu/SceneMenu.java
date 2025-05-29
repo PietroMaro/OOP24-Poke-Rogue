@@ -118,6 +118,7 @@ public final class SceneMenu extends Scene {
         this.currentSelectedButton = this.graphicElementNameToInt.get("LOAD_BUTTON");
     }
 
+	@Override
     public GraphicElementsRegistry getCurrentSceneGraphicElements() {
         return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);
     }

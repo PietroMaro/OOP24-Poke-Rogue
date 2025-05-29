@@ -29,9 +29,7 @@ public class SceneInfo extends Scene {
     private final SceneInfoView sceneInfoView;
     private final GameEngineImpl gameEngineInstance;
     private int newSelectedButton;
-    private int currentSelectedButton;
-    private GraphicElementsRegistry graphicElements;
-    private Map<String, Integer> graphicElementNameToInt;
+    private final Map<String, Integer> graphicElementNameToInt;
 
     /**
      * Constructs the Info Scene, loading graphic elements and initializing the
@@ -100,7 +98,7 @@ public class SceneInfo extends Scene {
      *
      * @throws IOException if graphic elements fail to initialize properly
      */
-    public void initGraphicElements() throws IOException {
+    public final void initGraphicElements() throws IOException {
         this.sceneInfoView.initGraphicElements(currentSceneGraphicElements, allPanelsElements);
     }
 

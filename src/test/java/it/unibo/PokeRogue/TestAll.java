@@ -1,11 +1,6 @@
 package it.unibo.PokeRogue;
 
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import it.unibo.PokeRogue.pokemon.Stats;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -45,6 +40,8 @@ import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 import it.unibo.PokeRogue.utilities.PokeEffectivenessCalc;
 import it.unibo.PokeRogue.utilities.PokeEffectivenessCalcImpl;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * TestAll class.
@@ -285,17 +282,18 @@ public final class TestAll {
 			InstantiationException, IOException {
 		final TrainerImpl enemyTrainer = new TrainerImpl();
 		final PokemonFactoryImpl factory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+		assertNotNull(factory);
 		final PlayerTrainerImpl playerTrainer = PlayerTrainerImpl.getTrainerInstance();
 		final Pokemon bulbasaur = factory.pokemonFromName("bulbasaur");
 		final Pokemon charmander = factory.pokemonFromName("charmander");
 		playerTrainer.addPokemon(bulbasaur, 1);
 		enemyTrainer.addPokemon(charmander, 1);
 		final EnemyAi ai = new EnemyAiImpl(enemyTrainer, 99);
-		final int beforeLife = playerTrainer.getSquad().get(0).get().getActualStats().get("hp").getCurrentValue();
+		final int beforeLife = playerTrainer.getSquad().get(0).get().getActualStats().get(Stats.HP).getCurrentValue();
 		final BattleEngine battleEngine = new BattleEngineImpl(enemyTrainer, ai);
 		battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""),
 				new Decision(DecisionTypeEnum.ATTACK, "0"));
-		final int afterLife = playerTrainer.getSquad().get(0).get().getActualStats().get("hp").getCurrentValue();
+		final int afterLife = playerTrainer.getSquad().get(0).get().getActualStats().get(Stats.HP).getCurrentValue();
 		assertTrue(beforeLife > afterLife);
 	}
 

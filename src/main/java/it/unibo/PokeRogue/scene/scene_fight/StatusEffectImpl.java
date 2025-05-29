@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.pokemon.Stats;
 import it.unibo.PokeRogue.pokemon.StatusCondition;
 
 /**
@@ -124,33 +125,33 @@ public class StatusEffectImpl implements StatusEffect {
                 case StatusCondition.FREEZE, StatusCondition.PARALYSIS, StatusCondition.SLEEP, StatusCondition.TRAPPED:
                     break;
                 case StatusCondition.BURN:
-                    final int burnDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 16;
+                    final int burnDamage = pokemon.getActualStats().get(Stats.HP).getCurrentMax() / 16;
                     calculateDamage(pokemon, burnDamage);
                     break;
                 case StatusCondition.POISON:
-                    final int poisonDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 8;
+                    final int poisonDamage = pokemon.getActualStats().get(Stats.HP).getCurrentMax() / 8;
                     calculateDamage(pokemon, poisonDamage);
                     break;
                 case StatusCondition.BOUND:
-                    final int boundDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 20;
+                    final int boundDamage = pokemon.getActualStats().get(Stats.HP).getCurrentMax() / 20;
                     calculateDamage(pokemon, boundDamage);
                     break;
                 case StatusCondition.CONFUSION:
-                    final int selfDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 10;
+                    final int selfDamage = pokemon.getActualStats().get(Stats.HP).getCurrentMax() / 10;
                     this.calculateDamage(pokemon, selfDamage);
                     break;
                 case StatusCondition.FLINCH:
-                    final int flinchDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 10;
+                    final int flinchDamage = pokemon.getActualStats().get(Stats.HP).getCurrentMax() / 10;
                     this.calculateDamage(pokemon, flinchDamage);
                     break;
                 case StatusCondition.CHARMED:
-                    pokemon.getActualStats().get("defense")
-                            .setCurrentValue(pokemon.getActualStats().get("defense").getCurrentValue() + DURATION_LONG);
+                    pokemon.getActualStats().get(Stats.DEFENSE)
+                            .setCurrentValue(pokemon.getActualStats().get(Stats.DEFENSE).getCurrentValue() + DURATION_LONG);
                     break;
                 case StatusCondition.SEEDED:
-                    final int seededDamage = pokemon.getActualStats().get("hp").getCurrentMax() / 16;
+                    final int seededDamage = pokemon.getActualStats().get(Stats.HP).getCurrentMax() / 16;
                     calculateDamage(pokemon, seededDamage);
-                    enemy.getActualStats().get("hp").increment(seededDamage);
+                    enemy.getActualStats().get(Stats.HP).increment(seededDamage);
                     break;
             }
         }
@@ -173,6 +174,6 @@ public class StatusEffectImpl implements StatusEffect {
     }
 
     private void calculateDamage(final Pokemon pokemon, final int damage) {
-        pokemon.getActualStats().get("hp").decrement(damage);
+        pokemon.getActualStats().get(Stats.HP).decrement(damage);
     }
 }

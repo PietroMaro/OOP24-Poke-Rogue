@@ -5,7 +5,6 @@ import it.unibo.PokeRogue.move.MoveFactoryImpl;
 import it.unibo.PokeRogue.utilities.Range;
 import it.unibo.PokeRogue.utilities.RangeImpl;
 import java.util.Optional;
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,20 +30,18 @@ public final class PokemonImpl implements Pokemon {
 	@Getter(AccessLevel.NONE)
 	private final Random random = new Random();
 	@Getter(AccessLevel.NONE)
-	private final List<String> statNames = new ArrayList<>(
-			Arrays.asList("hp", "attack", "defense", "specialAttack", "specialDefense", "speed"));
 	private int totalUsedEv;
-	private Map<String, Integer> baseStats;
+	private Map<Stats, Integer> baseStats;
 	private Nature nature;
-	private Map<String, Integer> iv; // 0-31 random when spawned
-	private Map<String, Range<Integer>> ev; // 0-255 the pokemon can have a total of 510
+	private Map<Stats, Integer> iv; // 0-31 random when spawned
+	private Map<Stats, Range<Integer>> ev; // 0-255 the pokemon can have a total of 510
 	private Range<Integer> level;
-	private Map<String, Range<Integer>> actualStats;
-	private Map<String, Range<Integer>> tempStatsBonus;
+	private Map<Stats, Range<Integer>> actualStats;
+	private Map<Stats, Range<Integer>> tempStatsBonus;
 	private Map<Integer, String> levelMovesLearn;
 	private List<Move> actualMoves = new ArrayList<>();
 	private String levelUpCurve; // https://m.bulbapedia.bulbagarden.net/wiki/Experience
-	private Map<String, Integer> givesEv;
+	private Map<Stats, Integer> givesEv;
 	private Range<Integer> exp;
 	private int pokedexNumber;
 	private int weight;
@@ -104,7 +101,7 @@ public final class PokemonImpl implements Pokemon {
 	private void generateivs() {
 		final int maxIv = 32;
 		this.iv = new HashMap<>();
-		for (final String stat : statNames) {
+		for (final Stats stat : Stats.values()) {
 			this.iv.put(stat, random.nextInt(maxIv)); // iv tra 0 e 31
 		}
 	}
@@ -113,7 +110,7 @@ public final class PokemonImpl implements Pokemon {
 		final int maxEv = 252;
 		final int minEv = 0;
 		this.ev = new HashMap<>();
-		for (final String stat : statNames) {
+		for (final Stats stat : Stats.values()) {
 			this.ev.put(stat, new RangeImpl<>(minEv, maxEv, minEv));
 		}
 	}
@@ -135,11 +132,11 @@ public final class PokemonImpl implements Pokemon {
 		final int maxTempStat = 6;
 		final int defaultTempStat = 6;
 		this.tempStatsBonus = new HashMap<>();
-		for (final String stat : statNames) {
+		for (final Stats stat : Stats.values()) {
 			this.tempStatsBonus.put(stat, new RangeImpl<>(minTempStat, maxTempStat, defaultTempStat));
 		}
-		this.tempStatsBonus.put("critRate", new RangeImpl<>(minTempStat, maxTempStat, defaultTempStat));
-		this.tempStatsBonus.put("accuracy", new RangeImpl<>(minTempStat, maxTempStat, defaultTempStat));
+		this.tempStatsBonus.put(Stats.CRIT_RATE, new RangeImpl<>(minTempStat, maxTempStat, defaultTempStat));
+		this.tempStatsBonus.put(Stats.ACCURACY, new RangeImpl<>(minTempStat, maxTempStat, defaultTempStat));
 	}
 
 	private void initTypes(final List<String> types) {
@@ -173,13 +170,17 @@ public final class PokemonImpl implements Pokemon {
 		final int maxStat = 252;
 		actualStats = new HashMap<>();
 
-		final int maxLife = (int) Math.floor((2 * this.baseStats.get("hp") + this.iv.get("hp")
-				+ this.ev.get("hp").getCurrentValue() / 4) * this.level.getCurrentValue() / 100)
+		final int maxLife = (int) Math.floor((2 * this.baseStats.get(Stats.HP) + this.iv.get(Stats.HP)
+				+ this.ev.get(Stats.HP).getCurrentValue() / 4) * this.level.getCurrentValue() / 100)
 				+ this.level.getCurrentValue() + 10;
 
 		final Range<Integer> rangeHp = new RangeImpl<>(0, maxLife, maxLife);
-		actualStats.put("hp", rangeHp);
-		for (final String stat : statNames.subList(1, statNames.size())) {
+		actualStats.put(Stats.HP, rangeHp);
+		for (final Stats stat : Stats.values()) {
+			if (stat == Stats.CRIT_RATE
+				|| stat == Stats.ACCURACY) {
+				continue;
+			}
 
 			int statValue = (int) Math.round(
 					Math.floor(
@@ -259,7 +260,7 @@ public final class PokemonImpl implements Pokemon {
 
 	@Override
 	public void inflictDamage(final int amount) {
-		this.actualStats.get("hp").decrement(amount);
+		this.actualStats.get(Stats.HP).decrement(amount);
 	}
 
 	@Override
@@ -271,9 +272,9 @@ public final class PokemonImpl implements Pokemon {
 	}
 
 	@Override
-	public void increaseEv(final Map<String, Integer> increaseEv) {
+	public void increaseEv(final Map<Stats, Integer> increaseEv) {
 		final int maxTotalEv = 510;
-		for (final String key : increaseEv.keySet()) {
+		for (final Stats key : increaseEv.keySet()) {
 			if (this.totalUsedEv + increaseEv.get(key) < maxTotalEv) {
 				this.ev.get(key).increment(increaseEv.get(key));
 			}

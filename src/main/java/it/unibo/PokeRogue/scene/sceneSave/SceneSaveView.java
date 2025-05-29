@@ -34,14 +34,13 @@ public class SceneSaveView {
      */
     public SceneSaveView(final GraphicElementsRegistry currentSceneGraphicElements,
             final GraphicElementsRegistry graphicElements,
-            final Map<String, PanelElementImpl> allPanelsElements, final int currentSelectedButton,
-            final int newSelectedButton) {
+            final Map<String, PanelElementImpl> allPanelsElements, final int currentSelectedButton) {
         this.currentSceneGraphicElements = currentSceneGraphicElements;
         this.graphicElements = graphicElements;
         this.sceneSaveInitView = new SceneSaveInitView(this.currentSceneGraphicElements, this.graphicElements,
                 allPanelsElements);
         this.sceneSaveUpdateView = new SceneSaveUpdateView(this.currentSceneGraphicElements,
-                currentSelectedButton, newSelectedButton);
+                currentSelectedButton);
     }
 
     /**

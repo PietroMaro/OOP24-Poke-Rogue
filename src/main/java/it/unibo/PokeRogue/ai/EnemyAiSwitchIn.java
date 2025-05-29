@@ -11,6 +11,7 @@ import java.util.Set;
 import java.io.IOException;
 
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.pokemon.Stats;
 import it.unibo.PokeRogue.scene.scene_fight.Decision;
 import it.unibo.PokeRogue.scene.scene_fight.enums.DecisionTypeEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
@@ -105,7 +106,7 @@ public final class EnemyAiSwitchIn {
         boolean canSwitch = false;
 
         for (final Optional<Pokemon> pokemon : enemyTrainer.getSquad().subList(1, MAX_TRAINER_SQUAD_SIZE)) {
-            if (pokemon.isPresent() && pokemon.get().getActualStats().get("hp").getCurrentValue() > 0) {
+            if (pokemon.isPresent() && pokemon.get().getActualStats().get(Stats.HP).getCurrentValue() > 0) {
                 canSwitch = true;
                 break;
             }
@@ -190,7 +191,7 @@ public final class EnemyAiSwitchIn {
     }
 
     private boolean isPokemonAlive(final int positionInSquad) {
-        return enemyTrainer.getPokemon(positionInSquad).get().getActualStats().get("hp").getCurrentValue() > 0;
+        return enemyTrainer.getPokemon(positionInSquad).get().getActualStats().get(Stats.HP).getCurrentValue() > 0;
     }
 
     private int calculateEffectivenessDifference(final int posEnemyPokemon, final int posPlayerPokemon) {

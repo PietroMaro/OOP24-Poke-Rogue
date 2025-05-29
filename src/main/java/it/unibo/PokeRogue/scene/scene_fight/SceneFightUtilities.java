@@ -10,6 +10,7 @@ import it.unibo.PokeRogue.graphic.box.BoxElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.pokemon.Stats;
 import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
@@ -69,8 +70,8 @@ public final class SceneFightUtilities {
         }
 
         final Pokemon pokemon = pokemonOpt.get();
-        final Integer currentHp = pokemon.getActualStats().get("hp").getCurrentValue();
-        final Integer maxHp = pokemon.getActualStats().get("hp").getCurrentMax();
+        final Integer currentHp = pokemon.getActualStats().get(Stats.HP).getCurrentValue();
+        final Integer maxHp = pokemon.getActualStats().get(Stats.HP).getCurrentMax();
 
         return currentHp + " / " + maxHp;
     }

@@ -18,12 +18,9 @@ public class SceneSaveUpdateView {
      * @param currentSceneGraphicElements the graphic elements registry for the
      *                                    current scene
      * @param currentSelectedButton       the initially selected button ID
-     * @param newSelectedButton           the newly selected button ID (not used in
-     *                                    constructor but relevant for update)
      */
     public SceneSaveUpdateView(final GraphicElementsRegistry currentSceneGraphicElements,
-            final int currentSelectedButton,
-            final int newSelectedButton) {
+            final int currentSelectedButton) {
         this.currentSelectedButton = currentSelectedButton;
         this.currentSceneGraphicElements = currentSceneGraphicElements;
     }

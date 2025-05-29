@@ -3,6 +3,7 @@ package it.unibo.PokeRogue.scene.scene_fight;
 import java.util.Map;
 
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.pokemon.Stats;
 
 /**
  * Represents the rewards earned after a battle,
@@ -40,7 +41,7 @@ public final class BattleRewards {
 
         winnerPokemon.increaseExp(gainedExp, true);
 
-        final Map<String, Integer> awardedEvs = defeatedPokemon.getGivesEv();
+        final Map<Stats, Integer> awardedEvs = defeatedPokemon.getGivesEv();
         winnerPokemon.increaseEv(awardedEvs);
     }
 
