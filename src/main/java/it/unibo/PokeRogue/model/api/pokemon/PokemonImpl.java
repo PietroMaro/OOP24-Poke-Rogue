@@ -182,7 +182,8 @@ public final class PokemonImpl implements Pokemon {
 		final Range<Integer> rangeHp = new RangeImpl<>(0, maxLife, maxLife);
 		actualStats.put(Stats.HP, rangeHp);
 		for (final Stats stat : Stats.values()) {
-			if (stat == Stats.CRIT_RATE
+			if (stat == Stats.HP
+				|| stat == Stats.CRIT_RATE
 				|| stat == Stats.ACCURACY) {
 				continue;
 			}
