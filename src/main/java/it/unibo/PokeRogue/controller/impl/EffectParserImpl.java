@@ -1,6 +1,11 @@
 package it.unibo.pokerogue.controller.impl;
 
-import org.apache.commons.jexl3.*;
+import org.apache.commons.jexl3.JexlBuilder;
+import org.apache.commons.jexl3.JexlEngine;
+import org.apache.commons.jexl3.JexlExpression;
+import org.apache.commons.jexl3.JexlContext;
+import org.apache.commons.jexl3.MapContext;
+import org.apache.commons.jexl3.JexlException;
 import org.json.JSONObject;
 
 import it.unibo.pokerogue.controller.api.EffectParser;
@@ -16,15 +21,18 @@ import org.json.JSONArray;
 import java.util.Optional;
 import java.io.IOException;
 
-public class EffectParserImpl extends Singleton implements EffectParser{
-
+/**
+ * A singleton implementation of the EffectParser interface.
+ * 
+ * Handles parsing and evaluation of effect-related expressions.
+ */
+public class EffectParserImpl extends Singleton implements EffectParser {
 	private Optional<Pokemon> us;
 	private Optional<Pokemon> enemy;
 	private Optional<Move> attackUs;
 	private Optional<Move> attackEnemy;
 	private Optional<Weather> weather;
 	private final PlayerTrainerImpl playerMoney = PlayerTrainerImpl.getTrainerInstance();
-	
 
 	private void parseEffect(final JSONObject effect) throws IOException {
 		final JSONArray checks = effect.getJSONArray("checks");
@@ -40,7 +48,7 @@ public class EffectParserImpl extends Singleton implements EffectParser{
 			result = result && computeSingleCheck(checks.getJSONArray(checkIndex));
 		}
 		return result;
-		
+
 	}
 
 	private boolean computeSingleCheck(final JSONArray check) {
@@ -53,7 +61,7 @@ public class EffectParserImpl extends Singleton implements EffectParser{
 		final String checkString = firstOperand + " " + check.getString(1) + " " + secondOperand;
 		boolean result = false;
 		final Optional<Object> resultParsing = parseSingleExpression(checkString);
-		if(resultParsing.isPresent()){
+		if (resultParsing.isPresent()) {
 			result = (boolean) resultParsing.get();
 		}
 		return result;
@@ -62,10 +70,10 @@ public class EffectParserImpl extends Singleton implements EffectParser{
 	private Optional<Object> parseSingleExpression(final String expression) {
 		final JexlEngine jexl = new JexlBuilder().create();
 		final JexlExpression expr = jexl.createExpression(expression);
-		
+
 		try {
 			return Optional.ofNullable(expr.evaluate(createContext()));
-		} catch (JexlException e) {
+		} catch (final JexlException e) {
 			return Optional.empty();
 		}
 	}
@@ -87,7 +95,7 @@ public class EffectParserImpl extends Singleton implements EffectParser{
 		if (!this.weather.isEmpty()) {
 			context.set("weather", this.weather.get());
 		}
-		
+
 		context.set("playerMoney", this.playerMoney);
 		context.set("Optional", Optional.class);
 		context.set("StatusCondition", StatusCondition.class);
@@ -102,30 +110,29 @@ public class EffectParserImpl extends Singleton implements EffectParser{
 		for (int actIndex = 0; actIndex < activation.length(); actIndex++) {
 			parseSingleExpression(
 					activation.getJSONArray(actIndex).getString(0)
-							+ " = " +
-							activation.getJSONArray(actIndex).getString(1));
+							+ " = " 
+							+ activation.getJSONArray(actIndex).getString(1));
 		}
 	}
 
 	@Override
-    public void parseEffect (
-		final JSONObject effect,
-		final Pokemon us,
-		final Pokemon enemy,
-		final Optional<Move> attackUs,
-		final Optional<Move> attackEnemy,
-		final Optional<Weather> weather
-			) throws IOException {
+	public final void parseEffect(
+			final JSONObject effect,
+			final Pokemon us,
+			final Pokemon enemy,
+			final Optional<Move> attackUs,
+			final Optional<Move> attackEnemy,
+			final Optional<Weather> weather) throws IOException {
 		this.us = Optional.of(us);
 		this.enemy = Optional.of(enemy);
 		this.attackUs = attackUs;
 		this.attackEnemy = attackEnemy;
 		this.weather = weather;
-		parseEffect(effect);	
+		parseEffect(effect);
 	}
 
 	@Override
-	public void parseEffect(final JSONObject effect, final Pokemon pokemon) throws IOException {
+	public final void parseEffect(final JSONObject effect, final Pokemon pokemon) throws IOException {
 		this.us = Optional.of(pokemon);
 		this.enemy = Optional.empty();
 		this.attackUs = Optional.empty();

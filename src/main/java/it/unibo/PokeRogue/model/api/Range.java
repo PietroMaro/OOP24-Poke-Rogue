@@ -1,49 +1,64 @@
 package it.unibo.pokerogue.model.api;
 
 /**
- * An utility class that defines a range with minimun and maximum values
- * that can't be crossed
+ * A utility interface that represents a range with a minimum, maximum,
+ * and current value. The current value cannot go below the minimum
+ * or above the maximum.
+ *
+ * @param <T> the type of value (e.g. Integer, Double)
  */
 public interface Range<T> {
 
-	/**
-	* Decrements the value in the range
-	* @param x how much to decrement
-	*/
+    /**
+     * Decreases the current value by the given amount.
+     * If the result goes below the minimum, it's set to the minimum.
+     *
+     * @param x how much to subtract
+     */
     void decrement(T x);
-	/**
-	* increments the value in the range
-	* @param x how much to inecrement
-	*/
+
+    /**
+     * Increases the current value by the given amount.
+     * If the result goes above the maximum, it's set to the maximum.
+     *
+     * @param x how much to add
+     */
     void increment(T x);
-	/**
-	* simple getter
-	* @return the minimum value setted in the range
-	*/
+
+    /**
+     * @return the minimum value of the range
+     */
     T getCurrentMin();
-	/**
-	* simple getter
-	* @return the maximum value setted in the range
-	*/
+
+    /**
+     * @return the maximum value of the range
+     */
     T getCurrentMax();
-	/**
-	* simple getter
-	* @return the current value of range
-	*/
+
+    /**
+     * @return the current value, always between min and max
+     */
     T getCurrentValue();
-	/**
-	* simple setter
-	*/
+
+    /**
+     * Sets the minimum value of the range.
+     *
+     * @param x the new minimum value
+     */
     void setCurrentMin(T x);
-	/**
-	* simple setter
-	*/
+
+    /**
+     * Sets the maximum value of the range.
+     *
+     * @param x the new maximum value
+     */
     void setCurrentMax(T x);
-	/**
-	* simple setter
-	* it doesn't let the value cross the limits, in case it does
-	* it sets it to max or min of the range
-	*/
+
+    /**
+     * Sets the current value.
+     * If the value is outside the range, it will be adjusted to stay within the limits.
+     *
+     * @param x the new value to set
+     */
     void setCurrentValue(T x);
-    
 }
