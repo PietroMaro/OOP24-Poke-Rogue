@@ -5,16 +5,13 @@ import it.unibo.PokeRogue.Singleton;
 import it.unibo.PokeRogue.Weather;
 import it.unibo.PokeRogue.pokemon.StatusCondition;
 import it.unibo.PokeRogue.pokemon.Type;
-import it.unibo.PokeRogue.trainers.PlayerTrainer;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.move.Move;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import java.util.Optional;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Optional;
+import java.io.IOException;
 
 public class EffectParserImpl extends Singleton implements EffectParser{
 
@@ -26,20 +23,13 @@ public class EffectParserImpl extends Singleton implements EffectParser{
 	private final PlayerTrainerImpl playerMoney = PlayerTrainerImpl.getTrainerInstance();
 	
 
-	private void parseEffect(JSONObject effect) {
+	private void parseEffect(final JSONObject effect) throws IOException {
 		JSONArray checks = new JSONArray("[]");
 		JSONArray activation = new JSONArray("[]");
-		try {
-			checks = effect.getJSONArray("checks");
-			activation = effect.getJSONArray("activation");
-		} catch (Exception ex) {
-			System.out.println("ERROR IN READING EFFECT JSON " + ex);
-		}
+		checks = effect.getJSONArray("checks");
+		activation = effect.getJSONArray("activation");
 		if (computeChecks(checks)) {
-			try{
 			activateActivations(activation);
-			} catch (Exception ex) {
-			}
 		}
 	}
 
@@ -124,14 +114,14 @@ public class EffectParserImpl extends Singleton implements EffectParser{
 	}
 
 	@Override
-    public void parseEffect(
+    public void parseEffect (
 		JSONObject effect,
 		Pokemon us,
 		Pokemon enemy,
 		Optional<Move> attackUs,
 		Optional<Move> attackEnemy,
 		Optional<Weather> weather
-			){
+			) throws IOException {
 		this.us = Optional.of(us);
 		this.enemy = Optional.of(enemy);
 		this.attackUs = attackUs;
@@ -141,7 +131,7 @@ public class EffectParserImpl extends Singleton implements EffectParser{
 	}
 
 	@Override
-	public void parseEffect(JSONObject effect, Pokemon pokemon) {
+	public void parseEffect(JSONObject effect, Pokemon pokemon) throws IOException {
 		this.us = Optional.of(pokemon);
 		this.enemy = Optional.empty();
 		this.attackUs = Optional.empty();
