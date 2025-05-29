@@ -23,23 +23,12 @@ import it.unibo.PokeRogue.utilities.ColorTypeConversion;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 
 /**
- * {@code SceneBoxView} handles the graphical representation of the SceneBox.
+ * Handles the graphical representation and layout setup of the Pokémon storage
+ * box scene.
  * 
- * It coordinates the initialization and dynamic updates of graphical elements
- * by delegating specific tasks to {@link SceneBoxInitView} and
- * {@link SceneBoxUpdateView}.
- * 
- * Responsibilities are split into two helper classes:
- * - {@link SceneBoxInitView}: responsible for initial layout and setup of the
- * UI.
- * - {@link SceneBoxUpdateView}: responsible for refreshing the UI during
- * runtime (e.g., after user input).
- * 
- * This design improves modularity and separates concerns between initial setup
- * and dynamic updates.
- * 
- * @see SceneBoxInitView
- * @see SceneBoxUpdateView
+ * This class is responsible for positioning buttons and panels dynamically
+ * based on constants,
+ * and organizing Pokémon-related UI elements.
  */
 public final class SceneBoxView {
         private static final int LENGTH_OF_POKEBOX = 81;
@@ -67,6 +56,15 @@ public final class SceneBoxView {
         private final GraphicElementsRegistry graphicElements;
         private final Map<String, Integer> graphicElementNameToInt;
 
+        /**
+         * Constructs a SceneBoxView with the given graphic elements and element
+         * mappings.
+         *
+         * @param graphicElements         the registry of all graphic elements loaded
+         *                                for the scene.
+         * @param graphicElementNameToInt a mapping of element names to their integer
+         *                                identifiers.
+         */
         public SceneBoxView(final GraphicElementsRegistry graphicElements,
                         final Map<String, Integer> graphicElementNameToInt) throws IOException {
                 this.graphicElementNameToInt = graphicElementNameToInt;
@@ -159,7 +157,7 @@ public final class SceneBoxView {
 
         private void updateDetailedPokemon(final int boxIndex, final int currentSelectedButton,
                         final List<List<Pokemon>> boxes,
-                        GraphicElementsRegistry currentSceneGraphicElements)
+                        final GraphicElementsRegistry currentSceneGraphicElements)
                         throws IOException {
                 final Pokemon selectedPokemon;
                 final Nature pokemonNature;

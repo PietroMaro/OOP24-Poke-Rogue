@@ -59,6 +59,8 @@ public final class SceneLoad extends Scene {
     private final SavingSystem savingSystemInstance;
     private final List<String> savesList;
     private final SceneLoadView sceneLoadView;
+    private final GraphicElementsRegistry graphicElements;
+    private final Map<String, Integer> graphicElementNameToInt;
 
     private int newSelectedSave;
     private int selectedSave;
@@ -72,6 +74,8 @@ public final class SceneLoad extends Scene {
             InvocationTargetException,
             NoSuchMethodException,
             IOException {
+        this.graphicElementNameToInt = this.getGraphicElementNameToInt();
+        this.graphicElements = this.getGraphicElements();
         this.loadGraphicElements("sceneLoadElements.json");
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);

@@ -5,22 +5,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The class from which every singleton extends.
+ * A generic base class for implementing singletons.
+ * All singleton classes should extend this class to ensure one shared instance
+ * per subclass.
  */
 public class Singleton {
 
     private static final Map<Class<? extends Singleton>, Singleton> INSTANCES = new HashMap<>();
 
-	/**
-	 * Shouldn't be instanciated.
-	 */
+    /**
+     * Protected constructor to prevent direct instantiation.
+     * Subclasses should rely on getInstance(Class) to obtain the singleton
+     * instance.
+     */
     protected Singleton() {
-		//Empty on purpose
+        // Empty on purpose
     }
 
-	/**
-	 * The getInstance function that will return the instance of the specific singleton.
-	 */
+    /**
+     * Returns the singleton instance of the specified subclass.
+     * If the instance does not exist yet, it will be created using its no-arg
+     * constructor.
+     *
+     * @param <T>   the type of the singleton subclass.
+     * @param clazz the class object of the singleton subclass.
+     * @return the singleton instance of the specified class.
+     */
     public static <T extends Singleton> T getInstance(final Class<T> clazz)
             throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         synchronized (INSTANCES) {

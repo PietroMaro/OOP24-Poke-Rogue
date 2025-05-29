@@ -24,29 +24,46 @@ public final class EnemyAiImpl implements EnemyAi {
     private static final int DEFAULT_SWITCH_FIRST_RATE_PERCENT = 60;
 
     private final Trainer enemyTrainer;
-    private final int battleLvl;
     private final EnemyAiSwitchIn aiOfSwitchIn;
     private final EnemyAiAttack aiOfAttack;
 
-    // Flags
-    private boolean scoreMoves;
-    private boolean hpAware;
-    private boolean considerSwitching;
-    private boolean usePokemonInOrder = true;
-    private int switchFirstRate = DEFAULT_SWITCH_FIRST_RATE_PERCENT;
-
     /**
-     * Constructs an EnemyAiImpl with behavior tailored to the given battle level.
-     *
+     * 
+     * Constructs an EnemyAiImpl instance with AI behavior configured according to
+     * the specified battle level.
+     * 
+     * The AI's strategy and decision-making complexity increase as the battle level
+     * rises.
+     * 
      * @param enemyTrainer the enemy trainer to control
      * @param battleLvl    the current battle difficulty level
      */
     public EnemyAiImpl(final Trainer enemyTrainer, final int battleLvl) throws IOException {
         this.enemyTrainer = enemyTrainer;
-        this.battleLvl = battleLvl;
-        this.initFlags();
+        boolean scoreMoves = false;
+        boolean hpAware = false;
+        boolean considerSwitching = false;
+        boolean usePokemonInOrder = true;
+        int switchFirstRate = DEFAULT_SWITCH_FIRST_RATE_PERCENT;
 
-        this.aiOfSwitchIn = new EnemyAiSwitchIn(this.usePokemonInOrder, this.considerSwitching, this.switchFirstRate,
+        if (battleLvl >= LOW_AI_THRESHOLD) {
+            scoreMoves = true;
+            usePokemonInOrder = false;
+
+        }
+
+        if (battleLvl > MEDIUM_AI_THRESHOLD) {
+            considerSwitching = true;
+            hpAware = true;
+
+        }
+
+        if (battleLvl > HIGH_AI_THRESHOLD) {
+            switchFirstRate = 90;
+
+        }
+
+        this.aiOfSwitchIn = new EnemyAiSwitchIn(usePokemonInOrder, considerSwitching, switchFirstRate,
                 this.enemyTrainer);
 
         this.aiOfAttack = new EnemyAiAttack(scoreMoves, hpAware, enemyTrainer);
@@ -74,27 +91,6 @@ public final class EnemyAiImpl implements EnemyAi {
         }
 
         return decision;
-    }
-
-    private void initFlags() {
-
-        if (battleLvl >= LOW_AI_THRESHOLD) {
-            this.scoreMoves = true;
-            this.usePokemonInOrder = false;
-
-        }
-
-        if (battleLvl > MEDIUM_AI_THRESHOLD) {
-            this.considerSwitching = true;
-            this.hpAware = true;
-
-        }
-
-        if (battleLvl > HIGH_AI_THRESHOLD) {
-            this.switchFirstRate = 90;
-
-        }
-
     }
 
 }

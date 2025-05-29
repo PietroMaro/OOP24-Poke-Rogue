@@ -18,27 +18,63 @@ import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
+import lombok.Getter;
 
+/**
+ * Abstract base class representing a generic scene in the game.
+ *
+ * This class provides common functionality to load and manage graphical
+ * elements
+ * for different scenes, as well as abstract methods for updating the scene's
+ * state and graphics.
+ *
+ */
+@Getter
 public abstract class Scene {
 
+	private GraphicElementsRegistry graphicElements;
+	private Map<String, Integer> graphicElementNameToInt;
+
+	/**
+	 * Updates the graphical representation of the scene.
+	 * 
+	 * Implementations should refresh or redraw the scene's visual components based
+	 * on the current state.
+	 * 
+	 * 
+	 */
 	public abstract void updateGraphic() throws IOException;
 
+	/**
+	 * Updates the scene's internal state in response to user input.
+	 * Implementations must define how to react to a key input event, such as moving
+	 * selections or triggering actions.
+	 * 
+	 * @param inputKey the key code of the user input event.
+	 */
 	public abstract void updateStatus(int inputKey) throws NoSuchMethodException,
 			IOException,
 			IllegalAccessException,
 			InvocationTargetException,
 			InstantiationException;
 
+	/**
+	 * Returns the registry of graphic elements currently used by the scene.
+	 * 
+	 * @return the current scene's graphic elements registry.
+	 */
 	public abstract GraphicElementsRegistry getCurrentSceneGraphicElements();
 
+	/**
+	 * Returns all panel elements present in the scene.
+	 * 
+	 * @return a map of panel names to their respective panel implementations.
+	 */
 	public abstract Map<String, PanelElementImpl> getAllPanelsElements();
 
-	protected GraphicElementsRegistry graphicElements;
-	protected Map<String, Integer> graphicElementNameToInt;
+	private GraphicElementImpl createGraphicElementFromJson(final JSONObject jsonElement) throws IOException {
 
-	private GraphicElementImpl createGraphicElementFromJson(JSONObject jsonElement) throws IOException {
-
-		GraphicElementImpl newGraphicElement;
+		final GraphicElementImpl newGraphicElement;
 
 		switch (jsonElement.getString("type")) {
 			case "button":
@@ -67,7 +103,7 @@ public abstract class Scene {
 
 	}
 
-	protected void loadGraphicElements(String fileName) throws IOException {
+	protected void loadGraphicElements(final String fileName) throws IOException {
 		final JsonReader jsonReader = new JsonReaderImpl();
 		final JSONObject root = jsonReader.readJsonObject(Paths.get("src", "scene.data", fileName).toString());
 		graphicElementNameToInt = new HashMap<>();
@@ -75,7 +111,7 @@ public abstract class Scene {
 		final JSONObject mapper = root.getJSONObject("mapper");
 
 		for (final String key : mapper.keySet()) {
-			int val = mapper.getInt(key);
+			final int val = mapper.getInt(key);
 			graphicElementNameToInt.put(key, val);
 		}
 
