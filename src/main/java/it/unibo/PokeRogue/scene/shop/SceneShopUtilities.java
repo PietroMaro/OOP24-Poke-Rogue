@@ -11,6 +11,7 @@ import it.unibo.PokeRogue.pokemon.Pokemon;
 import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
+import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 
 public class SceneShopUtilities {
     private static final String QUESTION_MARK_STRING = "???";
@@ -71,25 +72,31 @@ public class SceneShopUtilities {
             double xPosition = 0.15 + (i * 0.29);
             double xPositionPrice = 0.25 + (i * 0.29);
 
-            ((TextElementImpl) sceneGraphicElements.getById(PRICY_ITEM_1_NAME_POSITION + i))
-                    .setText(item.getName());
-            ((TextElementImpl) sceneGraphicElements.getById(PRICY_ITEM_1_NAME_POSITION + i))
-                    .setLeftX(xPosition);
-
-            ((TextElementImpl) sceneGraphicElements.getById(PRICY_ITEM_1_PRICE_POSITION + i))
-                    .setText(String.valueOf(item.getPrice()));
-            ((TextElementImpl) sceneGraphicElements.getById(PRICY_ITEM_1_PRICE_POSITION + i))
-                    .setLeftX(xPositionPrice);
+            UtilitiesForScenes.safeGetElementById(sceneGraphicElements, PRICY_ITEM_1_NAME_POSITION + i,
+                                        TextElementImpl.class)
+                                        .setText(item.getName());
+            UtilitiesForScenes.safeGetElementById(sceneGraphicElements, PRICY_ITEM_1_NAME_POSITION + i,
+                                        TextElementImpl.class)
+                                        .setLeftX(xPosition);
+            
+            UtilitiesForScenes.safeGetElementById(sceneGraphicElements, PRICY_ITEM_1_PRICE_POSITION + i,
+                                        TextElementImpl.class)
+                                        .setText(String.valueOf(item.getPrice()));
+            UtilitiesForScenes.safeGetElementById(sceneGraphicElements, PRICY_ITEM_1_PRICE_POSITION + i,
+                                        TextElementImpl.class)
+                                        .setLeftX(xPositionPrice);
         }
         for (int i = 0; i < FREE_ITEMS_SIZE; i++) {
             Item item = SceneShopUtilities.getShopItems(FREE_ITEMS_SIZE + i);
 
             double xPosition = 0.18 + (i * 0.29);
 
-            ((TextElementImpl) sceneGraphicElements.getById(FREE_ITEM_1_NAME_POSITION + i))
-                    .setText(item.getName());
-            ((TextElementImpl) sceneGraphicElements.getById(FREE_ITEM_1_NAME_POSITION + i))
-                    .setLeftX(xPosition);
+            UtilitiesForScenes.safeGetElementById(sceneGraphicElements, FREE_ITEM_1_NAME_POSITION + i,
+                                        TextElementImpl.class)
+                                        .setText(item.getName());
+            UtilitiesForScenes.safeGetElementById(sceneGraphicElements, FREE_ITEM_1_NAME_POSITION + i,
+                                        TextElementImpl.class)
+                                        .setLeftX(xPosition);
         }
     }
 

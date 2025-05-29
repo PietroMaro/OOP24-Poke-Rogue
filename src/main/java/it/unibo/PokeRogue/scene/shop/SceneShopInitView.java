@@ -31,17 +31,18 @@ public class SceneShopInitView {
                 this.sceneGraphicElements.clear();
                 this.allPanelsElements.put(FIRST_PANEL, new PanelElementImpl("", new OverlayLayout(null)));
                 UtilitiesForScenes.loadSceneElements("sceneShopElements.json", "init",
-                                sceneGraphicElements,
+                                this.sceneGraphicElements,
                                 this.graphicElements);
                 this.initTextElements();
-                SceneShopUtilities.updateItemDescription(sceneGraphicElements, SceneShopUtilities.getShopItems(4));
-                UtilitiesForScenes.setButtonStatus(currentSelectedButton, true, sceneGraphicElements);
+                SceneShopUtilities.updateItemDescription(this.sceneGraphicElements, SceneShopUtilities.getShopItems(4));
+                UtilitiesForScenes.setButtonStatus(currentSelectedButton, true, this.sceneGraphicElements);
 
         }
 
         private void initTextElements() {
-                SceneShopUtilities.updateItemsText(sceneGraphicElements);
-                ((TextElementImpl) sceneGraphicElements.getByName("PLAYER_MONEY_TEXT"))
-                                .setText("MONEY: " + playerTrainerInstance.getMoney());
+                SceneShopUtilities.updateItemsText(this.sceneGraphicElements);
+                UtilitiesForScenes.safeGetElementByName(this.sceneGraphicElements, "PLAYER_MONEY_TEXT",
+                                        TextElementImpl.class)
+                                        .setText("MONEY: " + playerTrainerInstance.getMoney());
         }
 }

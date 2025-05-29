@@ -30,6 +30,7 @@ public class SceneSave extends Scene {
             IllegalAccessException,
             NoSuchMethodException,
             InvocationTargetException {
+        this.loadGraphicElements("sceneSaveElements.json");
         this.graphicElementNameToInt = this.getGraphicElementNameToInt();
         this.graphicElements = this.getGraphicElements();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),

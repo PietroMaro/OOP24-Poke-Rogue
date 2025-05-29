@@ -30,6 +30,7 @@ public class SceneInfo extends Scene {
             IllegalAccessException,
             NoSuchMethodException,
             InvocationTargetException {
+        this.loadGraphicElements("sceneInfoElements.json");
         this.graphicElementNameToInt = this.getGraphicElementNameToInt();
         this.graphicElements = this.getGraphicElements();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),

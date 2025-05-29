@@ -48,6 +48,7 @@ public class SceneShop extends Scene {
             IllegalAccessException,
             NoSuchMethodException,
             InvocationTargetException {
+        this.loadGraphicElements("sceneShopElements.json");
         this.graphicElementNameToInt = this.getGraphicElementNameToInt();
         this.graphicElements = this.getGraphicElements();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
