@@ -33,7 +33,7 @@ public class SceneFightUpdateView {
         private final SceneFight sceneInstance;
         private Boolean alreadyInMainMenu;
         private final GraphicElementsRegistry graphicElements;
-        final Map<String, Integer> graphicElementNameToInt;
+        private final Map<String, Integer> graphicElementNameToInt;
 
         /**
          * Constructs a new SceneFightUpdateView.
@@ -45,13 +45,16 @@ public class SceneFightUpdateView {
          *                                    option
          * @param newSelectedButton           the newly selected menu option
          * @param sceneInstance               the instance of the scene this view
-         *                                    belongs
-         *                                    to
+         *                                    belongs to
+         * @param graphicElements             additional graphic elements registry
+         * @param graphicElementNameToInt     a map that associates graphic element
+         *                                    names with their integer IDs
          */
         public SceneFightUpdateView(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final int currentSelectedButton, final int newSelectedButton, final SceneFight sceneInstance,
-                        final GraphicElementsRegistry graphicElements, final Map<String, Integer> graphicElementNameToInt) {
+                        final GraphicElementsRegistry graphicElements,
+                        final Map<String, Integer> graphicElementNameToInt) {
                 this.currentSelectedButton = currentSelectedButton;
                 this.newSelectedButton = newSelectedButton;
                 this.currentSceneGraphicElements = currentSceneGraphicElements;

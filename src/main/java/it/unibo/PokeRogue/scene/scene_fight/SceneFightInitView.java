@@ -22,12 +22,13 @@ import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
  */
 public class SceneFightInitView {
 
+        private static final Integer FIRST_POSITION = 0;
+        private static final String FIRST_PANEL = "firstPanel";
+
         private final GraphicElementsRegistry currentSceneGraphicElements;
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final TrainerImpl playerTrainerInstance;
         private final TrainerImpl enemyTrainerInstance;
-        private final static Integer FIRST_POSITION = 0;
-        private static final String FIRST_PANEL = "firstPanel";
         private final GraphicElementsRegistry graphicElements;
 
         /**
@@ -36,7 +37,7 @@ public class SceneFightInitView {
          * @param currentSceneGraphicElements A map of graphic elements for the scene.
          * @param allPanelsElements           A map of all panel elements in the scene.
          * @param enemyTrainerInstance        The enemy trainer for the battle.
-         * @param currentSelectedButton       The initial selected button in the UI.
+         * @param graphicElements             A map of graphic elements for the scene.
          */
         public SceneFightInitView(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
@@ -121,8 +122,8 @@ public class SceneFightInitView {
                 UtilitiesForScenes
                                 .safeGetElementByName(currentSceneGraphicElements, "MY_POKEMON_ACTUAL_EXP_TEXT",
                                                 TextElementImpl.class)
-                                .setText("exp. " +
-                                                playerTrainerInstance.getPokemon(FIRST_POSITION).get()
+                                .setText("exp. "
+                                                + playerTrainerInstance.getPokemon(FIRST_POSITION).get()
                                                                 .getExp().getCurrentValue()
                                                 + " / "
                                                 + playerTrainerInstance
@@ -132,8 +133,8 @@ public class SceneFightInitView {
                 UtilitiesForScenes
                                 .safeGetElementByName(currentSceneGraphicElements, "MY_POKEMON_STATUS_TEXT",
                                                 TextElementImpl.class)
-                                .setText("Status: " +
-                                                (playerTrainerInstance.getPokemon(FIRST_POSITION).get()
+                                .setText("Status: "
+                                                + (playerTrainerInstance.getPokemon(FIRST_POSITION).get()
                                                                 .getStatusCondition().isPresent()
                                                                                 ? playerTrainerInstance.getPokemon(
                                                                                                 FIRST_POSITION).get()
@@ -143,8 +144,8 @@ public class SceneFightInitView {
                 UtilitiesForScenes
                                 .safeGetElementByName(currentSceneGraphicElements, "ENEMY_POKEMON_STATUS_TEXT",
                                                 TextElementImpl.class)
-                                .setText("Status: " +
-                                                (enemyTrainerInstance.getPokemon(FIRST_POSITION).get()
+                                .setText("Status: "
+                                                + (enemyTrainerInstance.getPokemon(FIRST_POSITION).get()
                                                                 .getStatusCondition().isPresent()
                                                                                 ? enemyTrainerInstance.getPokemon(
                                                                                                 FIRST_POSITION).get()

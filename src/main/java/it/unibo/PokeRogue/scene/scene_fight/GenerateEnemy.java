@@ -9,7 +9,6 @@ import java.lang.reflect.InvocationTargetException;
  * that can be used in a battle.
  */
 public interface GenerateEnemy {
-
     /**
      * Generates an enemy Pokémon for the battle.
      * Implementations should define the logic for creating an enemy Pokémon

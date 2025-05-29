@@ -18,12 +18,12 @@ import it.unibo.PokeRogue.trainers.TrainerImpl;
  */
 public class GenerateEnemyImpl implements GenerateEnemy {
 
-    private final static int ENEMY_TRAINER_SPAWN = 5;
+    private static final int ENEMY_TRAINER_SPAWN = 5;
+    private static final int MIN_LEVEL = 5;
 
     private final TrainerImpl enemyTrainerInstance;
     private final PokemonFactory pokemonFactory;
     private final Integer battleLevel;
-    private final static int MIN_LEVEL = 5;
 
     /**
      * Constructs a GenerateEnemyImpl instance with the specified battle level and
@@ -115,7 +115,7 @@ public class GenerateEnemyImpl implements GenerateEnemy {
     private int calculatePokemonLevel() {
 
         final double scalingFactor = 0.8;
-        return (int) Math.floor(1 + Math.pow(battleLevel, 0.8) * scalingFactor);
+        return (int) Math.floor(1 + Math.pow(battleLevel, scalingFactor) * scalingFactor);
 
     }
 }
