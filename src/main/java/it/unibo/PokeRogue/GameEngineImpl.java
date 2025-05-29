@@ -12,7 +12,7 @@ import it.unibo.PokeRogue.scene.sceneLoad.SceneLoad;
 import it.unibo.PokeRogue.scene.sceneMenu.SceneMenu;
 import it.unibo.PokeRogue.scene.sceneMove.SceneMove;
 import it.unibo.PokeRogue.scene.sceneSave.SceneSave;
-
+import it.unibo.PokeRogue.scene.scene_fight.SceneFight;
 import lombok.Setter;
 
 /**

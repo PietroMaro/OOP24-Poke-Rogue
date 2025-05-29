@@ -9,10 +9,7 @@ import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
  * specifically handling the selection state of buttons.
  */
 public class SceneSaveUpdateView {
-    /** Registry containing the graphic elements for the current save scene. */
     private final GraphicElementsRegistry currentSceneGraphicElements;
-
-    /** The currently selected button's identifier. */
     private int currentSelectedButton;
 
     /**
@@ -37,16 +34,9 @@ public class SceneSaveUpdateView {
      * @param newSelectedButton the ID of the button to be selected
      * @throws IOException if any I/O operation fails during update
      */
-    protected void updateGraphic(final int newSelectedButton) throws IOException {
+    public void updateGraphic(final int newSelectedButton) throws IOException {
         this.updateSelectedButton(newSelectedButton);
     }
-
-    /**
-     * Updates the button selection status in the UI by deselecting the previously
-     * selected button and selecting the new one.
-     *
-     * @param newSelectedButton the ID of the button to select
-     */
     private void updateSelectedButton(final int newSelectedButton) {
         UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, false, currentSceneGraphicElements);
         UtilitiesForScenes.setButtonStatus(newSelectedButton, true, currentSceneGraphicElements);

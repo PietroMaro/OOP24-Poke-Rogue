@@ -14,10 +14,7 @@ import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
  * specific to the Info scene.
  */
 public class SceneInfoView {
-    /** Identifier for the first panel in the scene. */
     private static final String FIRST_PANEL = "firstPanel";
-
-    /** Registry of all graphic elements available for this view. */
     private final GraphicElementsRegistry graphicElements;
 
     /**
@@ -41,7 +38,7 @@ public class SceneInfoView {
      * @throws IOException if there's an error reading the element configuration
      *                     file
      */
-    protected void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
+    public void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
             final Map<String, PanelElementImpl> allPanelsElements) throws IOException {
         allPanelsElements.put(FIRST_PANEL, new PanelElementImpl("", new OverlayLayout(null)));
         UtilitiesForScenes.loadSceneElements(

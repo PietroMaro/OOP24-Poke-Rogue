@@ -29,94 +29,33 @@ import lombok.Setter;
  * transactions.
  */
 public class SceneShop extends Scene {
-
-    /**
-     * Holds the registry for the current scene's graphical elements.
-     */
-    @Getter
+    private static final String FREE_ITEM_1 = "FREE_ITEM_1_BUTTON";
+    private static final String FREE_ITEM_3 = "FREE_ITEM_3_BUTTON";
+    private static final String TEAM_LITTERAL = "TEAM_BUTTON";
+    private static final String REROL_LITTERAL = "REROL_BUTTON";
+    private static final String PRICY_ITEM_1 = "PRICY_ITEM_1_BUTTON";
+    private static final String PRICY_ITEM_3 = "PRICY_ITEM_3_BUTTON";
+    private static final String CHANGE_1 = "CHANGE_POKEMON_1_BUTTON";
+    private static final String CHANGE_2 = "CHANGE_POKEMON_2_BUTTON";
+    private static final String CHANGE_6 = "CHANGE_POKEMON_6_BUTTON";
+    private static final String CHANGE_BACK = "CHANGE_POKEMON_BACK_BUTTON";
+    private static final int CHANGE_POKEMON_INITIAL_POSITION = 200;
+    private static final int REROL_COST = 50;
     private final GraphicElementsRegistry currentSceneGraphicElements;
-
-    /**
-     * Stores all panel elements used in the scene, mapped by their identifiers.
-     */
-    @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
-
-    /**
-     * Singleton instance representing the current player.
-     */
     private final PlayerTrainerImpl playerTrainerInstance;
-
-    /**
-     * Reference to the core game engine instance for scene transitions and game
-     * state.
-     */
     private final GameEngineImpl gameEngineInstance;
-
-    /**
-     * View component responsible for rendering and updating the shop interface.
-     */
     private final SceneShopView sceneShopView;
-
-    /**
-     * Factory for creating new item instances for the shop.
-     */
     private final ItemFactoryImpl itemFactoryInstance;
-
-    /**
-     * Effect parser used to interpret and apply JSON-based item effects.
-     */
     private final EffectParser effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
-
-    /**
-     * Index of the button the user is navigating to.
-     */
     @Setter
     private int newSelectedButton;
-
-    /**
-     * Index of the currently selected button in the shop menu.
-     */
     @Setter
     private int currentSelectedButton;
-
-    /**
-     * Global registry of graphic elements for the scene, shared across components.
-     */
     private GraphicElementsRegistry graphicElements;
-
-    /**
-     * Mapping from graphic element names to their corresponding numeric IDs.
-     */
-
     private final Map<String, Integer> graphicElementNameToInt;
-
-	private final static String FREE_ITEM_1 = "FREE_ITEM_1_BUTTON";
-	private final static String FREE_ITEM_3 = "FREE_ITEM_3_BUTTON";
-	private final static String TEAM_LITTERAL = "TEAM_BUTTON";
-	private final static String REROL_LITTERAL = "REROL_BUTTON";
-	private final static String PRICY_ITEM_1 = "PRICY_ITEM_1_BUTTON";
-	private final static String PRICY_ITEM_3 = "PRICY_ITEM_3_BUTTON";
- 	private final static String CHANGE_1 = "CHANGE_POKEMON_1_BUTTON";
- 	private final static String CHANGE_2 = "CHANGE_POKEMON_2_BUTTON";
- 	private final static String CHANGE_6 = "CHANGE_POKEMON_6_BUTTON";
-	private final static String CHANGE_BACK = "CHANGE_POKEMON_BACK_BUTTON";
-
-    /**
-     * Indicates whether a usable item has been selected for application.
-     */
     private boolean selectedItemForUse;
-
-    /**
-     * Indicates whether an item was purchased but not yet confirmed (used for
-     * compensation).
-     */
     private boolean buyedItem;
-
-    /**
-     * Stores the currently selected usable item, if any, to be applied to a
-     * Pokémon.
-     */
     private Item selectedUsableItem;
 
     /**
@@ -224,79 +163,52 @@ public class SceneShop extends Scene {
                         buyedItem = false;
                     }
                     this.selectedItemForUse = false;
-                    sceneShopView.updateGraphic(currentSelectedButton,newSelectedButton);
+                    sceneShopView.updateGraphic(currentSelectedButton, newSelectedButton);
                 } else if (this.newSelectedButton >= this.graphicElementNameToInt.get(CHANGE_1)
                         && this.newSelectedButton <= this.graphicElementNameToInt.get(CHANGE_6)
                         && selectedItemForUse) {
                     this.initGraphicElements();
-                    applyItemToPokemon(this.newSelectedButton - 200, playerTrainerInstance,
+                    applyItemToPokemon(this.newSelectedButton - CHANGE_POKEMON_INITIAL_POSITION, playerTrainerInstance,
                             gameEngineInstance, effectParser);
                     this.newSelectedButton = this.graphicElementNameToInt.get(PRICY_ITEM_1);
-                } else if (this.newSelectedButton >= this.graphicElementNameToInt.get(PRICY_ITEM_1) &&
-                        this.newSelectedButton <= this.graphicElementNameToInt.get(PRICY_ITEM_3)) {
+                } else if (this.newSelectedButton >= this.graphicElementNameToInt.get(PRICY_ITEM_1)
+                        && this.newSelectedButton <= this.graphicElementNameToInt.get(PRICY_ITEM_3)) {
                     final Item item = SceneShopUtilities.getShopItems(this.newSelectedButton - 4);
                     if (playerTrainerInstance.getMoney() >= item.getPrice()) {
                         this.selectedItemForUse = true;
                         buyItem(playerTrainerInstance, item, sceneShopView, gameEngineInstance);
                         buyedItem = true;
                         this.newSelectedButton = this.graphicElementNameToInt.get(CHANGE_1);
-                        sceneShopView.updateGraphic(currentSelectedButton,newSelectedButton);
+                        sceneShopView.updateGraphic(currentSelectedButton, newSelectedButton);
                     }
-                } else if (this.newSelectedButton >= this.graphicElementNameToInt.get(FREE_ITEM_1) &&
-                        this.newSelectedButton <= this.graphicElementNameToInt.get(FREE_ITEM_3)) {
+                } else if (this.newSelectedButton >= this.graphicElementNameToInt.get(FREE_ITEM_1)
+                        && this.newSelectedButton <= this.graphicElementNameToInt.get(FREE_ITEM_3)) {
                     this.selectedItemForUse = true;
                     useOrHandleItem(playerTrainerInstance, gameEngineInstance,
                             SceneShopUtilities.getShopItems(this.newSelectedButton + 2));
                     buyedItem = false;
                     this.newSelectedButton = this.graphicElementNameToInt.get(CHANGE_1);
-                    sceneShopView.updateGraphic(currentSelectedButton,newSelectedButton);
+                    sceneShopView.updateGraphic(currentSelectedButton, newSelectedButton);
                 } else if (this.newSelectedButton == this.graphicElementNameToInt.get(REROL_LITTERAL)) {
                     rerollShopItems(playerTrainerInstance, itemFactoryInstance);
                 }
                 break;
-			default:
-				break;
+            default:
+                break;
         }
     }
 
-    /**
-     * Initializes the initial button selection state.
-     */
     private void initStatus() {
         this.currentSelectedButton = this.graphicElementNameToInt.get(PRICY_ITEM_1);
         this.newSelectedButton = this.graphicElementNameToInt.get(PRICY_ITEM_1);
 
     }
 
-    public final void initGraphicElements() throws IOException {
+    private void initGraphicElements() throws IOException {
         this.sceneShopView.initGraphicElements(this.newSelectedButton);
     }
 
-    /**
-     * Updates the current graphics based on user interaction.
-     *
-     * @throws IOException if graphics update fails
-     */
-    @Override
-    public void updateGraphic() throws IOException {
-        this.sceneShopView.updateGraphic(this.currentSelectedButton, this.newSelectedButton);
-        this.currentSelectedButton = this.newSelectedButton;
-    }
-
-    /**
-     * Handles the logic for purchasing an item from the shop.
-     *
-     * @param trainer            the player buying the item
-     * @param item               the item to be bought
-     * @param sceneShopView      the view to update
-     * @param gameEngineInstance game engine instance to update scene
-     * @throws IOException               if an I/O error occurs
-     * @throws InstantiationException    if instantiation fails
-     * @throws IllegalAccessException    if illegal access occurs
-     * @throws InvocationTargetException if method invocation fails
-     * @throws NoSuchMethodException     if method is not found
-     */
-    public void buyItem(final PlayerTrainerImpl trainer, final Item item, final SceneShopView sceneShopView,
+    private void buyItem(final PlayerTrainerImpl trainer, final Item item, final SceneShopView sceneShopView,
             final GameEngineImpl gameEngineInstance) throws InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchMethodException, IOException {
         trainer.addMoney(-item.getPrice());
@@ -304,19 +216,7 @@ public class SceneShop extends Scene {
         useOrHandleItem(trainer, gameEngineInstance, item);
     }
 
-    /**
-     * Uses or handles the selected item based on its type.
-     *
-     * @param trainer            the player using the item
-     * @param gameEngineInstance the game engine
-     * @param item               the item to be used
-     * @throws IOException               if an I/O error occurs
-     * @throws InstantiationException    if instantiation fails
-     * @throws IllegalAccessException    if illegal access occurs
-     * @throws InvocationTargetException if method invocation fails
-     * @throws NoSuchMethodException     if method is not found
-     */
-    protected void useOrHandleItem(final PlayerTrainerImpl trainer, final GameEngineImpl gameEngineInstance,
+    private void useOrHandleItem(final PlayerTrainerImpl trainer, final GameEngineImpl gameEngineInstance,
             final Item item) throws InstantiationException, IllegalAccessException, InvocationTargetException,
             NoSuchMethodException, IOException {
         if ("Capture".equalsIgnoreCase(item.getType())) {
@@ -328,25 +228,12 @@ public class SceneShop extends Scene {
             this.effectParser.parseEffect(itemEffect.get(), trainer.getPokemon(0).get());
             gameEngineInstance.setScene("fight");
         } else if ("Healing".equalsIgnoreCase(item.getType())
-                || "Boost".equalsIgnoreCase(item.getType()) ||"PPRestore".equalsIgnoreCase(item.getType())) {
+                || "Boost".equalsIgnoreCase(item.getType()) || "PPRestore".equalsIgnoreCase(item.getType())) {
             this.selectedUsableItem = item;
         }
     }
 
-    /**
-     * Applies an item to a selected Pokémon.
-     *
-     * @param pokemonIndex       index of the Pokémon in the party
-     * @param trainer            the player using the item
-     * @param gameEngineInstance the game engine
-     * @param effectParser       parser to apply item effects
-     * @throws IOException               if an I/O error occurs
-     * @throws InstantiationException    if instantiation fails
-     * @throws IllegalAccessException    if illegal access occurs
-     * @throws InvocationTargetException if method invocation fails
-     * @throws NoSuchMethodException     if method is not found
-     */
-    public void applyItemToPokemon(final int pokemonIndex, final PlayerTrainerImpl trainer,
+    private void applyItemToPokemon(final int pokemonIndex, final PlayerTrainerImpl trainer,
             final GameEngineImpl gameEngineInstance, final EffectParser effectParser) throws InstantiationException,
             IllegalAccessException, InvocationTargetException, NoSuchMethodException, IOException {
         if (this.selectedUsableItem != null) {
@@ -367,17 +254,40 @@ public class SceneShop extends Scene {
         }
     }
 
-    public void compensation(final PlayerTrainerImpl playerTrainerInstance) {
+    private void compensation(final PlayerTrainerImpl playerTrainerInstance) {
         playerTrainerInstance.addMoney(selectedUsableItem.getPrice());
         selectedUsableItem = null;
     }
 
-    public void rerollShopItems(final PlayerTrainerImpl playerTrainerInstance, final ItemFactoryImpl itemFactoryInstance) {
-        if (playerTrainerInstance.getMoney() >= 50) {
-            playerTrainerInstance.addMoney(-50);
+    private void rerollShopItems(final PlayerTrainerImpl playerTrainerInstance,
+            final ItemFactoryImpl itemFactoryInstance) {
+        if (playerTrainerInstance.getMoney() >= REROL_COST) {
+            playerTrainerInstance.addMoney(-REROL_COST);
             SceneShopUtilities.updatePlayerMoneyText(currentSceneGraphicElements, playerTrainerInstance);
             SceneShopUtilities.initShopItems(itemFactoryInstance);
             SceneShopUtilities.updateItemsText(currentSceneGraphicElements);
         }
+    }
+
+    /**
+     * Updates the current graphics based on user interaction.
+     *
+     * @throws IOException if graphics update fails
+     */
+    @Override
+    public void updateGraphic() throws IOException {
+        this.sceneShopView.updateGraphic(this.currentSelectedButton, this.newSelectedButton);
+        this.currentSelectedButton = this.newSelectedButton;
+    }
+
+    /**
+     * Returns a copy of the map containing all panel elements.
+     *
+     * @return a new {@link LinkedHashMap} instance with the current panel elements,
+     *         ensuring the original map remains unmodified.
+     */
+    @Override
+    public Map<String, PanelElementImpl> getAllPanelsElements() {
+        return new LinkedHashMap<>(allPanelsElements);
     }
 }

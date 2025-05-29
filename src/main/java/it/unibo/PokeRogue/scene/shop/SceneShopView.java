@@ -15,30 +15,10 @@ import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
  * interactions.
  */
 public class SceneShopView {
-
-    /**
-     * Handles the initialization of shop-related graphical elements.
-     */
     private final SceneShopInitView sceneShopInitView;
-
-    /**
-     * Handles updates to graphical elements based on user interaction.
-     */
     private final SceneShopUpdateView sceneShopUpdateView;
-
-    /**
-     * Registry containing graphical elements specific to the shop scene.
-     */
     private final GraphicElementsRegistry sceneGraphicElements;
-
-    /**
-     * Shared registry of graphical elements across scenes.
-     */
     private final GraphicElementsRegistry graphicElements;
-
-    /**
-     * Factory responsible for creating item instances to be displayed in the shop.
-     */
     private final ItemFactoryImpl itemFactoryImpl;
 
     /**
@@ -88,7 +68,7 @@ public class SceneShopView {
      * @throws IOException If an error occurs while loading or initializing graphic
      *                     resources.
      */
-    protected void initGraphicElements(final int currentSelectedButton) throws IOException {
+    public void initGraphicElements(final int currentSelectedButton) throws IOException {
         this.sceneShopInitView.initGraphicElements(currentSelectedButton);
     }
 
@@ -99,7 +79,7 @@ public class SceneShopView {
      * @param newSelectedButton     The button that is now selected.
      * @throws IOException If the update process fails due to graphical issues.
      */
-    protected void updateGraphic(final int currentSelectedButton, final int newSelectedButton) throws IOException {
+    public void updateGraphic(final int currentSelectedButton, final int newSelectedButton) throws IOException {
         this.sceneShopUpdateView.updateGraphic(currentSelectedButton, newSelectedButton);
     }
 
@@ -112,15 +92,12 @@ public class SceneShopView {
      * @param playerTrainerInstance Player whose money amount should be reflected in
      *                              the UI.
      */
-    protected void updatePlayerMoneyText(final GraphicElementsRegistry sceneGraphicElements,
+    public void updatePlayerMoneyText(final GraphicElementsRegistry sceneGraphicElements,
             final GraphicElementsRegistry graphicElements,
             final PlayerTrainerImpl playerTrainerInstance) {
         SceneShopUtilities.updatePlayerMoneyText(sceneGraphicElements, playerTrainerInstance);
     }
 
-    /**
-     * Initializes and populates the shop with a new set of items.
-     */
     private void initShopItems() {
         SceneShopUtilities.initShopItems(itemFactoryImpl);
     }

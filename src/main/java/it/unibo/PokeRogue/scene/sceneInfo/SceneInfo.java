@@ -22,38 +22,15 @@ import lombok.Getter;
  * Extends the abstract {@link Scene} class.
  */
 public class SceneInfo extends Scene {
-
-    /** Registry of the graphic elements currently displayed in this scene. */
     @Getter
     private final GraphicElementsRegistry currentSceneGraphicElements;
-
-    /** Map of all panel elements keyed by their string identifiers. */
     @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
-
-    /**
-     * View component responsible for rendering and initializing graphic elements of
-     * this scene.
-     */
     private final SceneInfoView sceneInfoView;
-
-    /** Singleton instance of the main game engine. */
     private final GameEngineImpl gameEngineInstance;
-
-    /**
-     * Identifier of the button newly selected in the current input update cycle.
-     */
     private int newSelectedButton;
-
-    /**
-     * Identifier of the button currently selected before the latest input update.
-     */
     private int currentSelectedButton;
-
-    /** Registry holding graphic elements loaded from configuration. */
     private GraphicElementsRegistry graphicElements;
-
-    /** Map from graphic element names to their integer IDs. */
     private Map<String, Integer> graphicElementNameToInt;
 
     /**
@@ -113,11 +90,6 @@ public class SceneInfo extends Scene {
 				break;
         }
     }
-
-    /**
-     * Initializes the status of the scene, setting the default selected button.
-     * Typically called during construction to set the initial input focus.
-     */
     private void initStatus() {
         this.newSelectedButton = this.graphicElementNameToInt.get("BACK_BUTTON");
     }

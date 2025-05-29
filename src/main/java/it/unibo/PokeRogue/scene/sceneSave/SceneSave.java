@@ -24,26 +24,16 @@ import lombok.Getter;
  * </p>
  */
 public class SceneSave extends Scene {
-    private final static String EXIT_SAVE_LITTERAL = "EXIT_AND_SAVE_BUTTON";
-	private final static String CONTINUE_LITTERAL = "CONTINUE_GAME_BUTTON";
-    /** Holds the graphic elements rendered in the current save scene. */
+    private static final String EXIT_SAVE_LITTERAL = "EXIT_AND_SAVE_BUTTON";
+    private static final String CONTINUE_LITTERAL = "CONTINUE_GAME_BUTTON";
     @Getter
     private final GraphicElementsRegistry currentSceneGraphicElements;
-
-    /** Map storing all panel elements used in the scene, identified by name. */
     @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
-
-    /** Responsible for rendering and updating visual elements in the save scene. */
     private final SceneSaveView sceneSaveView;
-
-    /** Reference to the main game engine to handle scene switching. */
     private final GameEngineImpl gameEngineInstance;
-
-    /** The button currently selected by the user. */
     private int newSelectedButton;
     private final Map<String, Integer> graphicElementNameToInt;
-	
 
     /**
      * Constructs and initializes the save scene by loading its graphical elements,
@@ -67,9 +57,8 @@ public class SceneSave extends Scene {
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.initStatus();
-        this.sceneSaveView = new SceneSaveView(this.currentSceneGraphicElements, this.getGraphicElements(), this.allPanelsElements
-				, this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL)
-				, newSelectedButton);
+        this.sceneSaveView = new SceneSaveView(this.currentSceneGraphicElements, this.getGraphicElements(),
+                this.allPanelsElements, this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL), newSelectedButton);
         this.initGraphicElements();
     }
 
@@ -109,15 +98,11 @@ public class SceneSave extends Scene {
                     gameEngineInstance.setScene("main");
                 }
                 break;
-			default:
-				break;
+            default:
+                break;
         }
     }
 
-    /**
-     * Initializes the default button selection status to the
-     * "EXIT_AND_SAVE_BUTTON".
-     */
     private void initStatus() {
         this.newSelectedButton = this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL);
     }

@@ -14,16 +14,9 @@ import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
  * updates the visual state when the user interacts with the save menu.
  */
 public class SceneSaveView {
-    /** The registry holding the current scene's graphic elements. */
     private final GraphicElementsRegistry currentSceneGraphicElements;
-
-    /** Handles the initialization logic of the save scene view. */
     private final SceneSaveInitView sceneSaveInitView;
-
-    /** Handles updates to the save scene's view, such as button selection. */
     private final SceneSaveUpdateView sceneSaveUpdateView;
-
-    /** Registry of all graphic elements, possibly shared or global. */
     private final GraphicElementsRegistry graphicElements;
 
     /**
@@ -36,9 +29,8 @@ public class SceneSaveView {
      * @param allPanelsElements           a map of panel elements to manage scene
      *                                    panels
      * @param currentSelectedButton       the ID of the initially selected button
+     * 
      * @param newSelectedButton           the ID of the newly selected button
-     * @param scene                       the parent SceneSave instance, used for
-     *                                    context
      */
     public SceneSaveView(final GraphicElementsRegistry currentSceneGraphicElements,
             final GraphicElementsRegistry graphicElements,
@@ -58,7 +50,7 @@ public class SceneSaveView {
      * @param currentSelectedButton the button ID to mark as selected initially
      * @throws IOException if an error occurs during loading of scene elements
      */
-    protected void initGraphicElements(final int currentSelectedButton) throws IOException {
+    public void initGraphicElements(final int currentSelectedButton) throws IOException {
         this.sceneSaveInitView.initGraphicElements(currentSelectedButton);
     }
 
@@ -68,7 +60,7 @@ public class SceneSaveView {
      * @param newSelectedButton the button ID to mark as newly selected
      * @throws IOException if an error occurs during the update
      */
-    protected void updateGraphic(final int newSelectedButton) throws IOException {
+    public void updateGraphic(final int newSelectedButton) throws IOException {
         this.sceneSaveUpdateView.updateGraphic(newSelectedButton);
     }
 }

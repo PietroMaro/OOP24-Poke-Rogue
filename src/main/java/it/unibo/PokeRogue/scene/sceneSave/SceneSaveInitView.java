@@ -17,20 +17,9 @@ import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
  * </p>
  */
 public class SceneSaveInitView {
-        /** The identifier for the primary panel used in the save scene. */
         private static final String FIRST_PANEL = "firstPanel";
-
-        /** Registry for UI elements specific to the currently active save scene. */
         private final GraphicElementsRegistry currentSceneGraphicElements;
-
-        /**
-         * Registry for all preloaded graphic elements that can be reused across scenes.
-         */
         private final GraphicElementsRegistry graphicElements;
-
-        /**
-         * Map of all panel elements used in the save scene, mapped by their identifier.
-         */
         private final Map<String, PanelElementImpl> allPanelsElements;
 
         /**

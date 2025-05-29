@@ -17,19 +17,10 @@ import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
  */
 public class SceneShopInitView {
 
-        /** Constant representing the default panel identifier. */
         private static final String FIRST_PANEL = "firstPanel";
-
-        /** Registry containing the scene-specific graphic elements for the shop. */
         private final GraphicElementsRegistry sceneGraphicElements;
-
-        /** Shared registry of graphic elements used across different scenes. */
         private final GraphicElementsRegistry graphicElements;
-
-        /** Mapping of all panel elements to be displayed in the scene. */
         private final Map<String, PanelElementImpl> allPanelsElements;
-
-        /** Reference to the current player trainer instance. */
         private final PlayerTrainerImpl playerTrainerInstance;
 
         /**
@@ -67,10 +58,6 @@ public class SceneShopInitView {
                 SceneShopUtilities.updateItemDescription(this.sceneGraphicElements, SceneShopUtilities.getShopItems(4));
         }
 
-        /**
-         * Initializes and updates the text-based elements in the shop scene,
-         * such as item names and the player's money display.
-         */
         private void initTextElements() {
                 SceneShopUtilities.updateItemsText(this.sceneGraphicElements);
                 UtilitiesForScenes.safeGetElementByName(this.sceneGraphicElements, "PLAYER_MONEY_TEXT",
