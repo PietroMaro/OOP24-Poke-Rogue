@@ -13,18 +13,48 @@ import it.unibo.PokeRogue.scene.GraphicElementsRegistryImpl;
 import it.unibo.PokeRogue.scene.Scene;
 import lombok.Getter;
 
+/**
+ * Represents the save scene in the game where the player can choose to either
+ * continue playing or exit and save their progress.
+ * <p>
+ * This class handles the graphical elements and user interactions specific to
+ * the save scene,
+ * such as switching between buttons using the keyboard and triggering scene
+ * transitions.
+ * </p>
+ */
 public class SceneSave extends Scene {
+    private final static String EXIT_SAVE_LITTERAL = "EXIT_AND_SAVE_BUTTON";
+	private final static String CONTINUE_LITTERAL = "CONTINUE_GAME_BUTTON";
+    /** Holds the graphic elements rendered in the current save scene. */
     @Getter
     private final GraphicElementsRegistry currentSceneGraphicElements;
+
+    /** Map storing all panel elements used in the scene, identified by name. */
     @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
+
+    /** Responsible for rendering and updating visual elements in the save scene. */
     private final SceneSaveView sceneSaveView;
+
+    /** Reference to the main game engine to handle scene switching. */
     private final GameEngineImpl gameEngineInstance;
+
+    /** The button currently selected by the user. */
     private int newSelectedButton;
     private final Map<String, Integer> graphicElementNameToInt;
-	private final static String EXIT_SAVE_LITTERAL = "EXIT_AND_SAVE_BUTTON";
-	private final static String CONTINUE_LITTERAL = "CONTINUE_GAME_BUTTON";
+	
 
+    /**
+     * Constructs and initializes the save scene by loading its graphical elements,
+     * setting up initial button states, and preparing the view for rendering.
+     *
+     * @throws IOException               if loading scene data fails.
+     * @throws InstantiationException    if a required object can't be instantiated.
+     * @throws IllegalAccessException    if access to a constructor is denied.
+     * @throws NoSuchMethodException     if a method used via reflection is missing.
+     * @throws InvocationTargetException if a method call via reflection fails.
+     */
     public SceneSave() throws IOException,
             InstantiationException,
             IllegalAccessException,
@@ -42,6 +72,18 @@ public class SceneSave extends Scene {
         this.initGraphicElements();
     }
 
+    /**
+     * Updates the scene's status in response to user input.
+     * Arrow keys toggle button focus; Enter activates the selected option.
+     *
+     * @param inputKey The key code of the user input.
+     * @throws IOException               if a scene transition fails due to IO
+     *                                   error.
+     * @throws InstantiationException    if a required object can't be instantiated.
+     * @throws IllegalAccessException    if reflection access fails.
+     * @throws InvocationTargetException if a reflective method call fails.
+     * @throws NoSuchMethodException     if a reflective method is missing.
+     */
     @Override
     public void updateStatus(final int inputKey) throws IOException, InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchMethodException {
@@ -71,6 +113,10 @@ public class SceneSave extends Scene {
         }
     }
 
+    /**
+     * Initializes the default button selection status to the
+     * "EXIT_AND_SAVE_BUTTON".
+     */
     private void initStatus() {
         this.newSelectedButton = this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL);
     }
@@ -79,6 +125,11 @@ public class SceneSave extends Scene {
         this.sceneSaveView.initGraphicElements(this.newSelectedButton);
     }
 
+    /**
+     * Refreshes the UI graphics based on the current state and selected button.
+     *
+     * @throws IOException if an error occurs during update rendering.
+     */
     @Override
     public void updateGraphic() throws IOException {
         this.sceneSaveView.updateGraphic(this.newSelectedButton);

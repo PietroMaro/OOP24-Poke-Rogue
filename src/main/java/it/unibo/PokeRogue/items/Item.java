@@ -3,6 +3,7 @@ package it.unibo.PokeRogue.items;
 import java.util.Optional;
 
 import org.json.JSONObject;
+
 /**
  * Represents an item that can be used in the game.
  * <p>

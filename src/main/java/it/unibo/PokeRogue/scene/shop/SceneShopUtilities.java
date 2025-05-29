@@ -18,21 +18,46 @@ public final class SceneShopUtilities {
     private static final String QUESTION_MARK_STRING = "???";
     private static final List<Item> SHOP_ITEMS = new ArrayList<>();
     private static final Integer PRICY_ITEMS_SIZE = 3;
+
+    /** Number of free items available in the shop. */
     private static final Integer FREE_ITEMS_SIZE = 3;
+
+    /** Base ID for the name text element of the first pricy item. */
     private static final Integer PRICY_ITEM_1_NAME_POSITION = 111;
+
+    /** Base ID for the price text element of the first pricy item. */
     private static final Integer PRICY_ITEM_1_PRICE_POSITION = 105;
+
+    /** Base ID for the name text element of the first free item. */
     private static final Integer FREE_ITEM_1_NAME_POSITION = 108;
 
     private SceneShopUtilities() {
 		// Utility class shouldn't be instanciated
     }
 
+    /**
+     * Retrieves the name of the Pokémon at a given position in the trainer's team.
+     *
+     * @param trainer  The trainer whose Pokémon list is queried.
+     * @param position The index in the team.
+     * @return The name of the Pokémon or "???" if not present.
+     */
     public static String getPokemonNameAt(final Trainer trainer, final int position) {
         return trainer.getPokemon(position)
                 .map(Pokemon::getName)
                 .orElse(QUESTION_MARK_STRING);
     }
 
+    /**
+     * Builds a string representing the current and maximum HP of a Pokémon at a
+     * specific team position.
+     *
+     * @param position              Index of the Pokémon in the team.
+     * @param playerTrainerInstance The player trainer instance containing the
+     *                              Pokémon team.
+     * @return A string in the format "current / max", or "??? / ???" if
+     *         unavailable.
+     */
     public static String getPokemonLifeText(final int position, final PlayerTrainerImpl playerTrainerInstance) {
         final Optional<Pokemon> pokemonOpt = playerTrainerInstance.getPokemon(position);
 
@@ -66,6 +91,13 @@ public final class SceneShopUtilities {
                 .setText(item.getDescription());
     }
 
+    /**
+     * Updates the names and prices of all shop items in the UI.
+     * Also sets their X positions dynamically based on their index.
+     *
+     * @param sceneGraphicElements Registry containing the UI elements to be
+     *                             updated.
+     */
     public static void updateItemsText(final GraphicElementsRegistry sceneGraphicElements) {
 
         for (int i = 0; i < PRICY_ITEMS_SIZE; i++) {
@@ -74,18 +106,18 @@ public final class SceneShopUtilities {
             final double xPositionPrice = 0.25 + (i * 0.29);
 
             UtilitiesForScenes.safeGetElementById(sceneGraphicElements, PRICY_ITEM_1_NAME_POSITION + i,
-                                        TextElementImpl.class)
-                                        .setText(item.getName());
+                    TextElementImpl.class)
+                    .setText(item.getName());
             UtilitiesForScenes.safeGetElementById(sceneGraphicElements, PRICY_ITEM_1_NAME_POSITION + i,
-                                        TextElementImpl.class)
-                                        .setLeftX(xPosition);
-            
+                    TextElementImpl.class)
+                    .setLeftX(xPosition);
+
             UtilitiesForScenes.safeGetElementById(sceneGraphicElements, PRICY_ITEM_1_PRICE_POSITION + i,
-                                        TextElementImpl.class)
-                                        .setText(String.valueOf(item.getPrice()));
+                    TextElementImpl.class)
+                    .setText(String.valueOf(item.getPrice()));
             UtilitiesForScenes.safeGetElementById(sceneGraphicElements, PRICY_ITEM_1_PRICE_POSITION + i,
-                                        TextElementImpl.class)
-                                        .setLeftX(xPositionPrice);
+                    TextElementImpl.class)
+                    .setLeftX(xPositionPrice);
         }
         for (int i = 0; i < FREE_ITEMS_SIZE; i++) {
             final Item item = getShopItems(FREE_ITEMS_SIZE + i);
@@ -93,14 +125,21 @@ public final class SceneShopUtilities {
             final double xPosition = 0.18 + (i * 0.29);
 
             UtilitiesForScenes.safeGetElementById(sceneGraphicElements, FREE_ITEM_1_NAME_POSITION + i,
-                                        TextElementImpl.class)
-                                        .setText(item.getName());
+                    TextElementImpl.class)
+                    .setText(item.getName());
             UtilitiesForScenes.safeGetElementById(sceneGraphicElements, FREE_ITEM_1_NAME_POSITION + i,
-                                        TextElementImpl.class)
-                                        .setLeftX(xPosition);
+                    TextElementImpl.class)
+                    .setLeftX(xPosition);
         }
     }
 
+    /**
+     * Updates the displayed amount of money the player has.
+     *
+     * @param sceneGraphicElements  Registry containing the UI elements for the
+     *                              scene.
+     * @param playerTrainerInstance The player whose money value is displayed.
+     */
     public static void updatePlayerMoneyText(final GraphicElementsRegistry sceneGraphicElements,
             final PlayerTrainerImpl playerTrainerInstance) {
         ((TextElementImpl) sceneGraphicElements.getByName("PLAYER_MONEY_TEXT"))
