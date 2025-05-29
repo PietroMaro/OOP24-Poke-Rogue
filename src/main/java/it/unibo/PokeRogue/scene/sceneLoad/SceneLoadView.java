@@ -26,7 +26,6 @@ public final class SceneLoadView {
         private static final String POKEMON_PANEL_NAME = "savesPanel";
         private final GraphicElementsRegistry graphicElements;
 
-      
         public SceneLoadView(final GraphicElementsRegistry graphicElements) throws IOException {
                 this.graphicElements = graphicElements;
         }
@@ -46,6 +45,7 @@ public final class SceneLoadView {
                         final GraphicElementsRegistry sceneGraphicElements) throws IOException {
                 String savesName;
                 int boxPokemonNumber;
+                String text;
                 for (int x = 0; x < 10; x++) {
 
                         if (savesList.size() > x + savesListStart) {
@@ -56,16 +56,15 @@ public final class SceneLoadView {
 
                                 savesName = savesName.substring(0, savesName.length() - 5); // removing the extension
 
-                                ((TextElementImpl) sceneGraphicElements.getById(x + 10))
-                                                .setText("Salvataggio: " + savesName + ", Grandezza Box: "
-                                                                + boxPokemonNumber);
+                                text = "Salvataggio: " + savesName + ", Grandezza Box: " + boxPokemonNumber;
 
                         } else {
 
-                                ((TextElementImpl) sceneGraphicElements.getById(x + 10))
-                                                .setText("Salvataggio: Nessuno, Grandezza Box: 0 ");
-
+                                text = "Salvataggio: Nessuno, Grandezza Box: 0 ";
                         }
+
+                        UtilitiesForScenes.safeGetElementById(sceneGraphicElements, x + 10, TextElementImpl.class)
+                                        .setText(text);
                 }
 
         }

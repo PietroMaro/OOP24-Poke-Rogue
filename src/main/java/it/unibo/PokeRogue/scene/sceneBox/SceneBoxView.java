@@ -124,8 +124,8 @@ public final class SceneBoxView {
         private void updateShowedPokeBox(final int newBoxIndex,
                         final GraphicElementsRegistry currentSceneGraphicElements) {
 
-                ((TextElementImpl) currentSceneGraphicElements.getByName("CURRENT_BOX_TEXT"))
-                                .setText(String.valueOf(newBoxIndex + 1));
+                UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "CURRENT_BOX_TEXT",
+                                TextElementImpl.class).setText(String.valueOf(newBoxIndex + 1));
 
         }
 
@@ -142,13 +142,16 @@ public final class SceneBoxView {
                                                         - this.graphicElementNameToInt
                                                                         .get("POKEMON_SPRITE_SELECTED_0"));
                         if (pokemon.isEmpty()) {
-                                ((SpriteElementImpl) currentSceneGraphicElements.getById(squadPosition)).setImage(
-                                                UtilitiesForScenes.getPathString("box", "pokeSquadEmpty.png"));
+
+                                UtilitiesForScenes.safeGetElementById(currentSceneGraphicElements, squadPosition,
+                                                SpriteElementImpl.class).setImage(
+                                                                UtilitiesForScenes.getPathString("box",
+                                                                                "pokeSquadEmpty.png"));
 
                         } else {
 
-                                ((SpriteElementImpl) currentSceneGraphicElements.getById(squadPosition))
-                                                .setImage(pokemon.get().getSpriteFront());
+                                UtilitiesForScenes.safeGetElementById(currentSceneGraphicElements, squadPosition,
+                                                SpriteElementImpl.class).setImage(pokemon.get().getSpriteFront());
 
                         }
 
@@ -161,12 +164,13 @@ public final class SceneBoxView {
                         throws IOException {
                 final Pokemon selectedPokemon;
                 final Nature pokemonNature;
+                final String genderPathImage;
 
-                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_TYPE_2"))
-                                .setText("");
+                UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_TYPE_2",
+                                TextElementImpl.class).setText("");
 
-                ((BoxElementImpl) currentSceneGraphicElements.getByName("POKEMON_BOX_TYPE_2"))
-                                .setMainColor(null);
+                UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_BOX_TYPE_2",
+                                BoxElementImpl.class).setMainColor(null);
 
                 // Showing selected pokemon details
                 if (currentSelectedButton > START_BUTTON_POSITION) {
@@ -174,68 +178,81 @@ public final class SceneBoxView {
                                         .get(currentSelectedButton - FIRST_POKEMON_BUTTON_POSITION);
                         pokemonNature = selectedPokemon.getNature();
 
-                        ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_NUMBER_TEXT"))
+                        UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_NUMBER_TEXT",
+                                        TextElementImpl.class)
                                         .setText(String.valueOf(currentSelectedButton - START_BUTTON_POSITION
                                                         + boxIndex * LENGTH_OF_POKEBOX));
 
-                        ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_NAME"))
+                        UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_NAME",
+                                        TextElementImpl.class)
                                         .setText(UtilitiesForScenes
                                                         .capitalizeFirst(selectedPokemon.getName()));
 
-                        ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_ABILITY"))
+                        UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_ABILITY",
+                                        TextElementImpl.class)
                                         .setText("Ability: " + UtilitiesForScenes.capitalizeFirst(
                                                         selectedPokemon.getAbilityName()));
 
-                        ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_NATURE"))
+                        UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_NATURE",
+                                        TextElementImpl.class)
                                         .setText("Nature: " + pokemonNature + " (+"
                                                         + pokemonNature.statIncrease()
                                                         + "/-" + pokemonNature.statDecrease() + ")");
 
-                        ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_TYPE_1"))
+                        UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_TYPE_1",
+                                        TextElementImpl.class)
                                         .setText(selectedPokemon.getTypes().get(0).typeName()
                                                         .toUpperCase(Locale.ROOT));
 
-                        ((BoxElementImpl) currentSceneGraphicElements.getByName("POKEMON_BOX_TYPE_1"))
-                                        .setMainColor(ColorTypeConversion.getColorForType(
-                                                        selectedPokemon.getTypes().get(0)));
+                        UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_BOX_TYPE_1",
+                                        BoxElementImpl.class).setMainColor(
+                                                        ColorTypeConversion.getColorForType(
+                                                                        selectedPokemon.getTypes().get(0)));
 
                         if (selectedPokemon.getTypes().size() > 1) {
 
-                                ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_TYPE_2"))
+                                UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_TYPE_2",
+                                                TextElementImpl.class)
                                                 .setText(selectedPokemon.getTypes().get(1).typeName()
                                                                 .toUpperCase(Locale.ROOT));
 
-                                ((BoxElementImpl) currentSceneGraphicElements.getByName("POKEMON_BOX_TYPE_2"))
-                                                .setMainColor(ColorTypeConversion.getColorForType(
-                                                                selectedPokemon.getTypes().get(1)));
+                                UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements,
+                                                "POKEMON_BOX_TYPE_2",
+                                                BoxElementImpl.class).setMainColor(
+                                                                ColorTypeConversion.getColorForType(
+                                                                                selectedPokemon.getTypes().get(1)));
 
                         }
 
-                        ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_GROWTH_RATE"))
+                        UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_GROWTH_RATE",
+                                        TextElementImpl.class)
                                         .setText("Growth Rate: " + UtilitiesForScenes.capitalizeFirst(
                                                         selectedPokemon.getLevelUpCurve()));
 
                         if ("male".equals(selectedPokemon.getGender())) {
 
-                                ((SpriteElementImpl) currentSceneGraphicElements.getByName("POKEMON_GENDER"))
-                                                .setImage(UtilitiesForScenes.getPathString("box",
-                                                                "maleSymbolSprite.png"));
+                                genderPathImage = "maleSymbolSprite.png";
 
                         } else {
-                                ((SpriteElementImpl) currentSceneGraphicElements.getByName("POKEMON_GENDER"))
-                                                .setImage(UtilitiesForScenes.getPathString("box",
-                                                                "femaleSymbolSprite.png"));
+                                genderPathImage = "femaleSymbolSprite.png";
 
                         }
 
-                        ((TextElementImpl) currentSceneGraphicElements.getByName("POKEMON_MOVE_1"))
-                                        .setText(UtilitiesForScenes.capitalizeFirst(
-                                                        selectedPokemon.getActualMoves().get(0)
-                                                                        .getName()));
-                        ((BoxElementImpl) currentSceneGraphicElements.getByName("POKEMON_MOVE_BOX_1"))
-                                        .setMainColor(Color.GRAY);
+                        UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_GENDER",
+                                        SpriteElementImpl.class)
+                                        .setImage(UtilitiesForScenes.getPathString("box",
+                                                        genderPathImage));
 
-                        ((SpriteElementImpl) currentSceneGraphicElements.getByName("POKEMON_DETAIL_SPRITE"))
+                        UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_MOVE_1",
+                                        TextElementImpl.class)
+                                        .setText(UtilitiesForScenes.capitalizeFirst(
+                                                        selectedPokemon.getActualMoves().get(0).getName()));
+
+                        UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_MOVE_BOX_1",
+                                        BoxElementImpl.class).setMainColor(Color.GRAY);
+
+                        UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_DETAIL_SPRITE",
+                                        SpriteElementImpl.class)
                                         .setImage(selectedPokemon.getSpriteFront());
 
                 }
