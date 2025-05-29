@@ -13,12 +13,12 @@ public interface SpriteElement {
      * @param pathToImage the path of the image file to load
      * @throws IOException if loading the image fails
      */
-    void setImage(final String pathToImage) throws IOException;
+    void setImage(String pathToImage) throws IOException;
 
     /**
      * Sets the sprite image directly by providing an Image object.
      * 
      * @param image the Image to display
      */
-    void setImage(final Image image);
+    void setImage(Image image);
 }

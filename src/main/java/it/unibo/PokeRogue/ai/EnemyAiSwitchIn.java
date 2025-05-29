@@ -63,7 +63,7 @@ public final class EnemyAiSwitchIn {
 
     }
 
-    Decision SwitchInDecisionMaker() {
+    Decision switchInDecisionMaker() {
 
         if (enemyTrainer.getPokemon(1).isPresent() && shouldSwitch()) {
 

@@ -74,9 +74,10 @@ public final class SceneLoad extends Scene {
             InvocationTargetException,
             NoSuchMethodException,
             IOException {
+   
+        this.loadGraphicElements("sceneLoadElements.json");
         this.graphicElementNameToInt = this.getGraphicElementNameToInt();
         this.graphicElements = this.getGraphicElements();
-        this.loadGraphicElements("sceneLoadElements.json");
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();

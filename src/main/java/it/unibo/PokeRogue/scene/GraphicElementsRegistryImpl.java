@@ -32,7 +32,7 @@ public final class GraphicElementsRegistryImpl implements GraphicElementsRegistr
 
     @Override
     public GraphicElementImpl getByName(final String name) {
-        Integer id = nameToId.get(name);
+        final Integer id = nameToId.get(name);
         return id != null ? elements.get(id) : null;
     }
 
@@ -54,7 +54,7 @@ public final class GraphicElementsRegistryImpl implements GraphicElementsRegistr
 
     @Override
     public void removeByName(final String name) {
-        Integer id = nameToId.get(name);
+        final Integer id = nameToId.get(name);
         elements.remove(id);
     }
 

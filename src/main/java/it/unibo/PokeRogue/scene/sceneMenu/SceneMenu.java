@@ -67,6 +67,7 @@ public final class SceneMenu extends Scene {
      * Updates the graphical state of the menu by toggling button selection
      * highlights.
      */
+    @Override
     public void updateGraphic() {
 
         for (int i = 0; i < 3; i++) {

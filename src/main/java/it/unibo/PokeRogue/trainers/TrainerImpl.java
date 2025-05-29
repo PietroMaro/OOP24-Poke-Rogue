@@ -66,7 +66,7 @@ public class TrainerImpl implements Trainer {
         return squad.get(pos);
     }
 
-    private final Boolean isPokemonInSquad(final Pokemon pokemon) {
+    private Boolean isPokemonInSquad(final Pokemon pokemon) {
         return squad.contains(Optional.of(pokemon));
     }
 

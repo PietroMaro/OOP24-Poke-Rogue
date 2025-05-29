@@ -79,7 +79,7 @@ public final class EnemyAiImpl implements EnemyAi {
      */
     @Override
     public Decision nextMove(final Optional<Weather> weather) {
-        Decision decision = this.aiOfSwitchIn.SwitchInDecisionMaker();
+        Decision decision = this.aiOfSwitchIn.switchInDecisionMaker();
 
         if (decision.moveType() == DecisionTypeEnum.SWITCH_IN) {
             return decision;

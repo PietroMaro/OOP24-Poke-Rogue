@@ -61,9 +61,10 @@ public class SceneBox extends Scene {
                         IllegalAccessException,
                         NoSuchMethodException,
                         InvocationTargetException {
+                
+                this.loadGraphicElements("sceneBoxElements.json");
                 this.graphicElementNameToInt = this.getGraphicElementNameToInt();
                 this.graphicElements = this.getGraphicElements();
-                this.loadGraphicElements("sceneBoxElements.json");
                 this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                                 this.graphicElementNameToInt);
                 this.allPanelsElements = new LinkedHashMap<>();

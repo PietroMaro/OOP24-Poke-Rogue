@@ -108,10 +108,11 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
 
     }
 
+    @Override
     public void setImage(final String pathToImage) throws IOException {
         this.spriteImage = ImageIO.read(new File(pathToImage));
     }
-
+    @Override
     public void setImage(final Image image) {
         this.spriteImage = image;
     }
