@@ -5,8 +5,10 @@ import java.util.Map;
 import java.util.Optional;
 
 import it.unibo.pokerogue.model.api.pokemon.Pokemon;
+
 /**
- * Represents a trainer in the game with a squad of Pokemons, Pokeballs, and other attributes.
+ * Represents a trainer in the game with a squad of Pokemons, Pokeballs, and
+ * other attributes.
  */
 public interface Trainer {
 
@@ -74,7 +76,22 @@ public interface Trainer {
 	 */
 	int getMoney();
 
+	/**
+	 * Returns whether this trainer is considered a wild trainer.
+	 * A wild trainer typically represents wild Pokémon (e.g., untamed or not
+	 * player-controlled).
+	 *
+	 * @return true if this trainer is wild, false otherwise
+	 */
 	boolean isWild();
 
+	/**
+	 * Sets the wild status of this trainer.
+	 * This can be used to flag the trainer as wild (e.g., for AI-controlled
+	 * trainers or wild Pokémon encounters).
+	 *
+	 * @param wild true to mark the trainer as wild, false to mark as non-wild
+	 */
 	void setWild(boolean wild);
+
 }
