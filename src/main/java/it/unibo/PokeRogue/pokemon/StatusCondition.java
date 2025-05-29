@@ -15,7 +15,7 @@ public enum StatusCondition{
 
 	private final String statusName;
 
-    StatusCondition(String statusName) {
+    StatusCondition(final String statusName) {
         this.statusName = statusName;
     }
 
@@ -23,8 +23,8 @@ public enum StatusCondition{
         return this.statusName;
     }
 
-    public static StatusCondition fromString(String status) {
-        for (StatusCondition s : StatusCondition.values()) {
+    public static StatusCondition fromString(final String status) {
+        for (final StatusCondition s : values()) {
             if (s.statusName().equalsIgnoreCase(status)) {
                 return s;
             }

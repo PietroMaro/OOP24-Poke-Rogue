@@ -122,6 +122,7 @@ public final class SceneMenu extends Scene {
         return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);
     }
 
+	@Override
     public Map<String, PanelElementImpl> getAllPanelsElements() {
         return new LinkedHashMap<>(allPanelsElements);
     }

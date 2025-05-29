@@ -54,19 +54,6 @@ public final class SceneBoxView {
         private static final String FIRST_PANEL_NAME = "firstPanel";
         private static final String POKEMON_PANEL_NAME = "pokemonPanel";
 
-        /**
-         * Constructs a SceneBoxView with the given graphic elements and element
-         * mappings.
-         *
-         * @param graphicElements         the registry of all graphic elements loaded
-         *                                for the scene.
-         * @param graphicElementNameToInt a mapping of element names to their integer
-         *                                identifiers.
-         */
-        public SceneBoxView() {
-
-        }
-
         void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final GraphicElementsRegistry graphicElements) throws IOException {

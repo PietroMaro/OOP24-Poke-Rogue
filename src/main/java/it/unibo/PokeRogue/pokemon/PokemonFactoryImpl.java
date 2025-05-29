@@ -34,6 +34,8 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory {
 	private final Random random = new Random();
 	private final Set<String> allPokemonSet = new HashSet<>();
 	private final Map<String, PokemonBlueprint> pokemonBlueprints = new HashMap<>();
+	private final static String SRC_LITTERAL = "src";
+	private final static String POKEMON_DATA = "pokemon_data";
 	
 	/**
 	 * The constructor initiate the factory making the access in memory.
@@ -45,7 +47,7 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory {
 	@Override
     public final void init() throws IOException {
 		final JSONArray allPokemonJson = jsonReader
-			.readJsonArray(Paths.get("src", "pokemon_data", "pokemonList.json").toString());
+			.readJsonArray(Paths.get(SRC_LITTERAL, POKEMON_DATA, "pokemonList.json").toString());
 		for (int pokemonIndex = 0; pokemonIndex < allPokemonJson.length(); pokemonIndex += 1) {
 			addPokemonToBlueprints(allPokemonJson.getString(pokemonIndex));
 		}
@@ -53,7 +55,7 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory {
 
 	private void addPokemonToBlueprints(final String pokemonName) throws IOException {
 		final JSONObject pokemonJson = jsonReader
-			.readJsonObject(Paths.get("src", "pokemon_data", "pokemon", "data", pokemonName + ".json").toString());
+			.readJsonObject(Paths.get(SRC_LITTERAL, POKEMON_DATA, "pokemon", "data", pokemonName + ".json").toString());
 		final int pokedexNumber = pokemonJson.getInt("pokedexNumber");
 		final List<String> types = jsonArrayToList(pokemonJson.getJSONArray("types"));
 		final int captureRate = pokemonJson.getInt("captureRate");
@@ -65,17 +67,15 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory {
 		final int weight = pokemonJson.getInt("weight");
 		final List<String> possibleAbilities = jsonArrayToList(pokemonJson.getJSONArray("abilites"));
 		final Map<String, Integer> givesEV = jsonObjectToMap(pokemonJson.getJSONObject("givesEV"));
-		Optional<Image> newPokemonSpriteFront = Optional.empty();
-		Optional<Image> newPokemonSpriteBack = Optional.empty();
-		newPokemonSpriteFront = Optional.of(ImageIO.read(new File(Paths
-						.get("src",
-							"pokemon_data",
+		final Optional<Image> newPokemonSpriteFront = Optional.of(ImageIO.read(new File(Paths
+						.get(SRC_LITTERAL,
+							POKEMON_DATA,
 							"pokemon",
 							"sprites",
 							pokemonName + "_front.png").toString())));
-		newPokemonSpriteBack = Optional.of(ImageIO.read(new File(Paths
-						.get("src",
-							"pokemon_data",
+		final Optional<Image> newPokemonSpriteBack = Optional.of(ImageIO.read(new File(Paths
+						.get(SRC_LITTERAL,
+							POKEMON_DATA,
 							"pokemon",
 							"sprites",
 							pokemonName + "_back.png").toString())));
@@ -137,7 +137,7 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory {
 	private <T> List<T> jsonArrayToList(final JSONArray jsonArray) {
 		final List<T> result = new ArrayList<>();	
 		for (int index = 0; index < jsonArray.length(); index += 1) {
-			result.add(((T) jsonArray.get(index)));
+			result.add((T) jsonArray.get(index));
 		}
 		return result;
 	}

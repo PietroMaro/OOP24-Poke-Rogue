@@ -13,17 +13,17 @@ import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
 import it.unibo.PokeRogue.utilities.UtilitiesForScenes;
 
-public class SceneShopUtilities {
+public final class SceneShopUtilities {
     private static final String QUESTION_MARK_STRING = "???";
-    private static final List<Item> shopItems = new ArrayList<>();
+    private static final List<Item> SHOP_ITEMS = new ArrayList<>();
     private static final Integer PRICY_ITEMS_SIZE = 3;
     private static final Integer FREE_ITEMS_SIZE = 3;
     private static final Integer PRICY_ITEM_1_NAME_POSITION = 111;
     private static final Integer PRICY_ITEM_1_PRICE_POSITION = 105;
     private static final Integer FREE_ITEM_1_NAME_POSITION = 108;
 
-    public SceneShopUtilities() {
-
+    private SceneShopUtilities() {
+		// Utility class shouldn't be instanciated
     }
 
     public static String getPokemonNameAt(final Trainer trainer, final int position) {
@@ -46,21 +46,21 @@ public class SceneShopUtilities {
         return currentHp + " / " + maxHp;
     }
 
-    public static void initShopItems(ItemFactoryImpl itemFactory) {
-        shopItems.clear();
+    public static void initShopItems(final ItemFactoryImpl itemFactory) {
+        SHOP_ITEMS.clear();
         for (int i = 0; i < PRICY_ITEMS_SIZE; i++) {
-            shopItems.add(itemFactory.randomItem());
+            SHOP_ITEMS.add(itemFactory.randomItem());
         }
         for (int i = 0; i < FREE_ITEMS_SIZE; i++) {
-            shopItems.add(itemFactory.randomItem());
+            SHOP_ITEMS.add(itemFactory.randomItem());
         }
     }
 
-    public static Item getShopItems(int index) {
-        return shopItems.get(index);
+    public static Item getShopItems(final int index) {
+        return SHOP_ITEMS.get(index);
     }
 
-    public static void updateItemDescription(final GraphicElementsRegistry sceneGraphicElements, Item item) {
+    public static void updateItemDescription(final GraphicElementsRegistry sceneGraphicElements, final Item item) {
         ((TextElementImpl) sceneGraphicElements.getByName("ITEM_DESCRIPTION_TEXT"))
                 .setText(item.getDescription());
     }
@@ -68,9 +68,9 @@ public class SceneShopUtilities {
     public static void updateItemsText(final GraphicElementsRegistry sceneGraphicElements) {
 
         for (int i = 0; i < PRICY_ITEMS_SIZE; i++) {
-            Item item = SceneShopUtilities.getShopItems(i);
-            double xPosition = 0.15 + (i * 0.29);
-            double xPositionPrice = 0.25 + (i * 0.29);
+            final Item item = SceneShopUtilities.getShopItems(i);
+            final double xPosition = 0.15 + (i * 0.29);
+            final double xPositionPrice = 0.25 + (i * 0.29);
 
             UtilitiesForScenes.safeGetElementById(sceneGraphicElements, PRICY_ITEM_1_NAME_POSITION + i,
                                         TextElementImpl.class)
@@ -87,9 +87,9 @@ public class SceneShopUtilities {
                                         .setLeftX(xPositionPrice);
         }
         for (int i = 0; i < FREE_ITEMS_SIZE; i++) {
-            Item item = SceneShopUtilities.getShopItems(FREE_ITEMS_SIZE + i);
+            final Item item = getShopItems(FREE_ITEMS_SIZE + i);
 
-            double xPosition = 0.18 + (i * 0.29);
+            final double xPosition = 0.18 + (i * 0.29);
 
             UtilitiesForScenes.safeGetElementById(sceneGraphicElements, FREE_ITEM_1_NAME_POSITION + i,
                                         TextElementImpl.class)

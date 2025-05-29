@@ -21,9 +21,7 @@ public class SceneInfo extends Scene {
     private final SceneInfoView sceneInfoView;
     private final GameEngineImpl gameEngineInstance;
     private int newSelectedButton;
-    private int currentSelectedButton;
-    private GraphicElementsRegistry graphicElements;
-    private Map<String, Integer> graphicElementNameToInt;
+    final private Map<String, Integer> graphicElementNameToInt;
 
     public SceneInfo() throws IOException,
             InstantiationException,
@@ -32,13 +30,12 @@ public class SceneInfo extends Scene {
             InvocationTargetException {
         this.loadGraphicElements("sceneInfoElements.json");
         this.graphicElementNameToInt = this.getGraphicElementNameToInt();
-        this.graphicElements = this.getGraphicElements();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.initStatus();
-        this.sceneInfoView = new SceneInfoView(this.graphicElements);
+        this.sceneInfoView = new SceneInfoView(this.getGraphicElements());
         this.initGraphicElements();
     }
 
@@ -51,6 +48,8 @@ public class SceneInfo extends Scene {
                     gameEngineInstance.setScene("main");
                 }
                 break;
+			default:
+				break;
         }
     }
 
@@ -58,7 +57,7 @@ public class SceneInfo extends Scene {
         this.newSelectedButton = this.graphicElementNameToInt.get("BACK_BUTTON");
     }
 
-    public void initGraphicElements() throws IOException {
+    private void initGraphicElements() throws IOException {
         this.sceneInfoView.initGraphicElements(currentSceneGraphicElements, allPanelsElements);
     }
 

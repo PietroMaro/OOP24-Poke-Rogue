@@ -83,7 +83,7 @@ public class SceneFight extends Scene {
      * Initializes the graphic elements displayed in the scene.
      * This method sets up the UI components for the battle interface.
      */
-    protected void initGraphicElements() throws IOException {
+    protected final void initGraphicElements() throws IOException {
         this.sceneFightView.initGraphicElements(this.currentSelectedButton);
     }
 

@@ -35,7 +35,7 @@ public final class GraphicElementsRegistryImpl implements GraphicElementsRegistr
      * 
      * @param instanceToCopy the GraphicElementsRegistry to copy from
      */
-    public GraphicElementsRegistryImpl(GraphicElementsRegistry instanceToCopy) {
+    public GraphicElementsRegistryImpl(final GraphicElementsRegistry instanceToCopy) {
         this.elements = instanceToCopy.getElements();
         this.nameToId = instanceToCopy.getNameToId();
     }
@@ -73,10 +73,12 @@ public final class GraphicElementsRegistryImpl implements GraphicElementsRegistr
         this.elements.clear();
     }
 
+	@Override
     public Map<Integer, GraphicElementImpl> getElements() {
         return new LinkedHashMap<>(this.elements);
     }
 
+	@Override
     public Map<String, Integer> getNameToId() {
         return new HashMap<>(this.nameToId);
     }

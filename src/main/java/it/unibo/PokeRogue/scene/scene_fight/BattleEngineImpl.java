@@ -47,7 +47,7 @@ public class BattleEngineImpl implements BattleEngine {
     private boolean captured;
     private Pokemon playerPokemon;
     private Pokemon enemyPokemon;
-    private ItemFactory itemFactoryInstance;
+    final private ItemFactory itemFactoryInstance;
 
     /**
      * Constructor for the BattleEngineImpl class that initializes the battle engine

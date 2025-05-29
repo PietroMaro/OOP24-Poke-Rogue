@@ -1,6 +1,13 @@
 package it.unibo.PokeRogue;
 
-public class Main {
+import java.lang.reflect.InvocationTargetException;
+import java.io.IOException;
+
+public final class Main {
+
+	private Main(){
+		// Shouldn't be instanciated
+	}
 
 	public static void main(String[] args) {
 
@@ -10,7 +17,11 @@ public class Main {
 
 			mainGameEngine.setGraphicEngine(mainGraphicEngine);
 			mainGameEngine.setScene("main");
-		} catch (Exception e) {
+		} catch (InstantiationException 
+				| IllegalAccessException 
+				| InvocationTargetException 
+				| IOException
+				| NoSuchMethodException e) {
 			e.printStackTrace();
 			
 		}

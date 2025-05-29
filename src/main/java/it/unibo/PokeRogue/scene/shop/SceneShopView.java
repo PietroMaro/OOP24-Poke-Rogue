@@ -19,8 +19,8 @@ public class SceneShopView {
     public SceneShopView(final GraphicElementsRegistry sceneGraphicElements,
             final GraphicElementsRegistry graphicElements,
             final Map<String, PanelElementImpl> allPanelsElements, final ItemFactoryImpl itemFactoryImpl,
-            final PlayerTrainerImpl playerTrainerInstance, final int currentSelectedButton,
-            final int newSelectedButton, final SceneShop scene, final SceneShopUtilities sceneShopUtilities,
+            final int currentSelectedButton,
+            final int newSelectedButton, final SceneShop scene,
             final Map<String, Integer> graphicElementNameToInt) {
         this.itemFactoryImpl = itemFactoryImpl;
         this.sceneGraphicElements = sceneGraphicElements;
@@ -30,7 +30,7 @@ public class SceneShopView {
                 allPanelsElements);
         this.sceneShopUpdateView = new SceneShopUpdateView(this.sceneGraphicElements, this.graphicElements,
                 allPanelsElements, currentSelectedButton,
-                newSelectedButton, scene, sceneShopUtilities, graphicElementNameToInt);
+                newSelectedButton, scene, graphicElementNameToInt);
     }
 
     protected void initGraphicElements(final int currentSelectedButton) throws IOException {

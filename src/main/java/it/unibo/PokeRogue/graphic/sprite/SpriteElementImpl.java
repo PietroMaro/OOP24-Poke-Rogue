@@ -69,7 +69,6 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
      */
     public SpriteElementImpl(final JSONObject jsonMetrix) throws IOException {
         super(jsonMetrix.getString("panelName"));
-        System.out.println(jsonMetrix.getString("imageFileName"));
         if (!"null".equals(jsonMetrix.getString("imageFileName"))) {
             this.spriteImage = ImageIO.read(new File(UtilitiesForScenes
                     .getPathString(jsonMetrix.getString("dirToImage"), jsonMetrix.getString("imageFileName"))));

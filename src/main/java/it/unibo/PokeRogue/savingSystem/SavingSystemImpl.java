@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import org.json.JSONArray;
+import java.util.Locale;
 
 import it.unibo.PokeRogue.Singleton;
 import it.unibo.PokeRogue.pokemon.Pokemon;
@@ -34,14 +35,8 @@ public class SavingSystemImpl extends Singleton implements SavingSystem {
 
 	@Override
 	public void saveData(final String path, final String fileName) throws IOException {
-		File file = new File(path, fileName);
-
-		try {
-			file.createNewFile();
-		} catch (Exception e) {
-			throw new IllegalAccessError("Error in file creation");
-		}
-
+		final File file = new File(path, fileName);
+		file.createNewFile();
 		jsonReader.dumpJsonToFile(Paths.get(path, fileName).toString(), this.savedPokemon);
 	}
 
@@ -56,7 +51,7 @@ public class SavingSystemImpl extends Singleton implements SavingSystem {
 			}
 			newBox.add(this.savedPokemon.getString(pokemonIndex));
 		}
-		if (newBox.size() > 0) {
+		if (!newBox.isEmpty()) {
 			result.add(newBox);
 		}
 		return result;
@@ -68,9 +63,9 @@ public class SavingSystemImpl extends Singleton implements SavingSystem {
 		final File directory = new File(dirPath);
 
 		if (directory.exists() && directory.isDirectory()) {
-			File[] files = directory.listFiles((dir, name) -> name.toLowerCase().endsWith(".json"));
+			final File[] files = directory.listFiles((dir, name) -> name.toLowerCase(Locale.ROOT).endsWith(".json"));
 			if (files != null) {
-				for (File file : files) {
+				for (final File file : files) {
 					jsonFiles.add(file.getName());
 				}
 			}

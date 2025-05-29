@@ -26,7 +26,7 @@ public class Move{
 	public Move deepCopy() {
 	    return new Move(
 			this.name,
-			new RangeImpl<Integer>(this.pp.getCurrentMin(),this.pp.getCurrentValue(),this.pp.getCurrentMax()),
+			new RangeImpl<>(this.pp.getCurrentMin(),this.pp.getCurrentValue(),this.pp.getCurrentMax()),
 	        this.isPhysical,
 	        new JSONObject(this.effect.toString()), 
 			this.accuracy,

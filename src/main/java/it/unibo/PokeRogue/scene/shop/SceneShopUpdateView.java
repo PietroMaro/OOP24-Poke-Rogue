@@ -27,7 +27,7 @@ public class SceneShopUpdateView {
         private final Map<String, Integer> graphicElementNameToInt;
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final PlayerTrainerImpl playerTrainerInstance;
-        private int currentSelectedButton;
+        private final int currentSelectedButton;
         private int newSelectedButton;
         private final SceneShop sceneInstance;
         private Boolean alreadyInMainMenu = true;
@@ -36,7 +36,7 @@ public class SceneShopUpdateView {
                         final GraphicElementsRegistry graphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final int currentSelectedButton, final int newSelectedButton,
-                        final SceneShop sceneInstance, final SceneShopUtilities sceneShopUtilities,
+                        final SceneShop sceneInstance, 
                         final Map<String, Integer> graphicElementNameToInt) {
 
                 this.currentSelectedButton = currentSelectedButton;
@@ -122,9 +122,6 @@ public class SceneShopUpdateView {
         }
 
         private void updateSelectedButton(final int currentSelectedButton, final int newSelectedButton) {
-                System.out.println(newSelectedButton);
-                System.out.println(this.currentSelectedButton);
-                System.out.println(currentSceneGraphicElements.getElements());
                 UtilitiesForScenes.setButtonStatus(currentSelectedButton, false, currentSceneGraphicElements);
                 if (this.currentSceneGraphicElements.getElements().containsKey(newSelectedButton)) {
                         UtilitiesForScenes.setButtonStatus(newSelectedButton, true, currentSceneGraphicElements);
@@ -132,11 +129,10 @@ public class SceneShopUpdateView {
         }
 
         private void updateItemDescription() {
-                int itemIndex;
                 if (this.newSelectedButton >= this.graphicElementNameToInt.get("FREE_ITEM_1_BUTTON")
                                 && this.newSelectedButton <= this.graphicElementNameToInt.get("PRICY_ITEM_3_BUTTON")
                                 && alreadyInMainMenu) {
-                        itemIndex = (this.newSelectedButton + 2) % 6;
+                        final int itemIndex = (this.newSelectedButton + 2) % 6;
                         SceneShopUtilities.updateItemDescription(currentSceneGraphicElements,
                                         SceneShopUtilities.getShopItems(itemIndex));
                 }
@@ -146,7 +142,6 @@ public class SceneShopUpdateView {
                 if (this.newSelectedButton >= this.graphicElementNameToInt.get("FREE_ITEM_1_BUTTON")
                                 && this.newSelectedButton <= this.graphicElementNameToInt.get("TEAM_BUTTON")
                                 && !alreadyInMainMenu) {
-                        System.out.println("ENTRATO IN MAIN MENU");
                         alreadyInMainMenu = true;
                         this.currentSceneGraphicElements.clear();
                         this.allPanelsElements.clear();

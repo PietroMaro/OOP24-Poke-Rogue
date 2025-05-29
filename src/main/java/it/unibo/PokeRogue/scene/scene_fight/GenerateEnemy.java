@@ -20,5 +20,5 @@ public interface GenerateEnemy {
 		IOException,
 		IllegalAccessException,
 		InvocationTargetException,
-		InstantiationException;;
+		InstantiationException;
 }
