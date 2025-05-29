@@ -204,6 +204,13 @@ public class SceneShop extends Scene {
 
     }
 
+    /**
+     * Initializes the graphic elements for the shop scene based on the current
+     * button selection.
+     *
+     * @throws IOException if an I/O error occurs during the loading of graphic
+     *                     elements.
+     */
     public void initGraphicElements() throws IOException {
         this.sceneShopView.initGraphicElements(this.newSelectedButton);
     }
@@ -291,6 +298,14 @@ public class SceneShop extends Scene {
         return new LinkedHashMap<>(allPanelsElements);
     }
 
+    /**
+     * Returns a new instance of {@link GraphicElementsRegistry} containing the
+     * current scene's graphic elements.
+     * This ensures encapsulation by avoiding direct exposure of the internal
+     * registry.
+     *
+     * @return a copy of the current scene's {@code GraphicElementsRegistry}.
+     */
     @Override
     public GraphicElementsRegistry getCurrentSceneGraphicElements() {
         return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);

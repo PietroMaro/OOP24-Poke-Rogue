@@ -50,8 +50,7 @@ public class SceneShopUpdateView {
          * @param currentSelectedButton       Button that is currently selected.
          * @param newSelectedButton           Button that has been newly selected.
          * @param sceneInstance               Reference to the scene logic instance.
-         * @param sceneShopUtilities          Utility class for shop-related logic
-         *                                    (unused here).
+         * 
          * @param graphicElementNameToInt     Mapping from graphic element names to
          *                                    their identifiers.
          */
@@ -160,7 +159,7 @@ public class SceneShopUpdateView {
         }
 
         private void updateSelectedButton(final int currentSelectedButton, final int newSelectedButton) {
-                if(this.currentSceneGraphicElements.getElements().containsKey(currentSelectedButton)) {
+                if (this.currentSceneGraphicElements.getElements().containsKey(currentSelectedButton)) {
                         UtilitiesForScenes.setButtonStatus(currentSelectedButton, false, currentSceneGraphicElements);
                 }
                 if (this.currentSceneGraphicElements.getElements().containsKey(newSelectedButton)) {
