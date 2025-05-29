@@ -1,6 +1,12 @@
-package it.unibo.PokeRogue;
+package it.unibo.pokerogue;
 
 import java.lang.reflect.InvocationTargetException;
+
+import it.unibo.pokerogue.controller.api.GameEngine;
+import it.unibo.pokerogue.controller.api.GraphicEngine;
+import it.unibo.pokerogue.controller.impl.GameEngineImpl;
+import it.unibo.pokerogue.controller.impl.GraphicEngineImpl;
+
 import java.io.IOException;
 
 public final class Main {

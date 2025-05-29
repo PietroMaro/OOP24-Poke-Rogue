@@ -1,4 +1,4 @@
-package it.unibo.PokeRogue.utilities;
+package it.unibo.pokerogue.utilities;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -7,8 +7,10 @@ import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import it.unibo.PokeRogue.graphic.button.ButtonElementImpl;
-import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
+import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
+import it.unibo.pokerogue.model.impl.graphic.ButtonElementImpl;
+import it.unibo.pokerogue.utilities.api.JsonReader;
+import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
 
 /**
  * Utility class for managing scene-related file paths, button states,
@@ -29,7 +31,7 @@ public final class UtilitiesForScenes {
      */
     public static String getPathString(final String sceneDirName, final String fileName) {
 
-        return Paths.get("src", "sceneImages", sceneDirName, fileName).toString();
+        return Paths.get("src", "main","resources","sceneImages", sceneDirName, fileName).toString();
 
     }
 
@@ -83,7 +85,7 @@ public final class UtilitiesForScenes {
 
         final JsonReader jsonReader = new JsonReaderImpl();
         final JSONObject root = jsonReader
-                .readJsonObject(Paths.get("src", "scene.data", fileName).toString());
+                .readJsonObject(Paths.get("src", "main","resources", "sceneData", fileName).toString());
 
         final JSONArray initArrayIndex = root.getJSONObject("dynamicObjects").getJSONArray(loadSectionName);
 
@@ -110,7 +112,7 @@ public final class UtilitiesForScenes {
 
         final JsonReader jsonReader = new JsonReaderImpl();
         final JSONObject root = jsonReader
-                .readJsonObject(Paths.get("src", "scene.data", fileName).toString());
+                .readJsonObject(Paths.get("src","main","resources", "sceneData", fileName).toString());
 
         final JSONArray initArrayIndex = root.getJSONObject("dynamicObjects").getJSONArray(loadSectionName);
 

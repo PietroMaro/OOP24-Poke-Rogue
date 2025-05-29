@@ -1,9 +1,9 @@
-package it.unibo.PokeRogue.utilities;
+package it.unibo.pokerogue.utilities;
 
 import java.awt.Color;
 
-import it.unibo.PokeRogue.pokemon.Type;
-import it.unibo.PokeRogue.pokemon.TypeColors;
+import it.unibo.pokerogue.model.enums.Type;
+import it.unibo.pokerogue.model.enums.TypeColors;
 
 /**
  * Utility class for converting a Pokemon {@link Type} into its corresponding

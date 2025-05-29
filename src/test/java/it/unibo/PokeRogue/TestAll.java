@@ -1,8 +1,35 @@
-package it.unibo.PokeRogue;
+package it.unibo.pokerogue;
 
-import it.unibo.PokeRogue.pokemon.Stats;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import it.unibo.pokerogue.controller.api.EnemyAi;
+import it.unibo.pokerogue.controller.api.scene.fight.BattleEngine;
+import it.unibo.pokerogue.controller.impl.EffectParserImpl;
+import it.unibo.pokerogue.controller.impl.ai.EnemyAiImpl;
+import it.unibo.pokerogue.controller.impl.scene.fight.BattleEngineImpl;
+import it.unibo.pokerogue.model.api.Decision;
+import it.unibo.pokerogue.model.api.ability.Ability;
+import it.unibo.pokerogue.model.api.ability.AbilityFactory;
+import it.unibo.pokerogue.model.api.move.Move;
+import it.unibo.pokerogue.model.api.move.MoveFactory;
+import it.unibo.pokerogue.model.api.pokemon.Pokemon;
+import it.unibo.pokerogue.model.enums.AbilitySituationChecks;
+import it.unibo.pokerogue.model.enums.DecisionTypeEnum;
+import it.unibo.pokerogue.model.enums.Stats;
+import it.unibo.pokerogue.model.enums.Type;
+import it.unibo.pokerogue.model.enums.Weather;
+import it.unibo.pokerogue.model.impl.AbilityFactoryImpl;
+import it.unibo.pokerogue.model.impl.GenerateEnemyImpl;
+import it.unibo.pokerogue.model.impl.MoveFactoryImpl;
+import it.unibo.pokerogue.model.impl.pokemon.PokemonFactoryImpl;
+import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
+import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
+import it.unibo.pokerogue.utilities.BattleRewards;
+import it.unibo.pokerogue.utilities.api.JsonReader;
+import it.unibo.pokerogue.utilities.api.PokeEffectivenessCalc;
+import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
+import it.unibo.pokerogue.utilities.impl.PokeEffectivenessCalcImpl;
 
 import org.json.JSONObject;
 
@@ -13,33 +40,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
-
-import it.unibo.PokeRogue.pokemon.Pokemon;
-import it.unibo.PokeRogue.pokemon.PokemonFactoryImpl;
-import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
-import it.unibo.PokeRogue.trainers.TrainerImpl;
-import it.unibo.PokeRogue.move.Move;
-import it.unibo.PokeRogue.move.MoveFactory;
-import it.unibo.PokeRogue.move.MoveFactoryImpl;
-
-import it.unibo.PokeRogue.ability.Ability;
-import it.unibo.PokeRogue.ability.AbilityFactory;
-import it.unibo.PokeRogue.ability.AbilityFactoryImpl;
-import it.unibo.PokeRogue.ability.AbilitySituationChecks;
-import it.unibo.PokeRogue.ai.EnemyAi;
-import it.unibo.PokeRogue.ai.EnemyAiImpl;
-import it.unibo.PokeRogue.effectParser.EffectParserImpl;
-import it.unibo.PokeRogue.pokemon.Type;
-import it.unibo.PokeRogue.scene.scene_fight.BattleEngine;
-import it.unibo.PokeRogue.scene.scene_fight.BattleEngineImpl;
-import it.unibo.PokeRogue.scene.scene_fight.BattleRewards;
-import it.unibo.PokeRogue.scene.scene_fight.Decision;
-import it.unibo.PokeRogue.scene.scene_fight.GenerateEnemyImpl;
-import it.unibo.PokeRogue.scene.scene_fight.enums.DecisionTypeEnum;
-import it.unibo.PokeRogue.utilities.JsonReader;
-import it.unibo.PokeRogue.utilities.JsonReaderImpl;
-import it.unibo.PokeRogue.utilities.PokeEffectivenessCalc;
-import it.unibo.PokeRogue.utilities.PokeEffectivenessCalcImpl;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -153,7 +153,7 @@ public final class TestAll {
 
 		final JsonReader jsonReader = new JsonReaderImpl();
 
-		final Path dirPath = Paths.get("src", "pokemon_data", "moves");
+		final Path dirPath = Paths.get("src", "main","resources","pokemonData", "moves");
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
 			for (final Path entry : stream) {
 				if (Files.isRegularFile(entry)) {
@@ -181,7 +181,7 @@ public final class TestAll {
 
 		final JsonReader jsonReader = new JsonReaderImpl();
 
-		final Path dirPath = Paths.get("src", "pokemon_data", "abilities");
+		final Path dirPath = Paths.get("src", "main","resources","pokemonData", "abilities");
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
 			for (final Path entry : stream) {
 				if (Files.isRegularFile(entry)) {
@@ -220,7 +220,7 @@ public final class TestAll {
 		final JsonReader jsonReader = new JsonReaderImpl();
 		final Pokemon pok1 = pokeFactory.randomPokemon(3);
 
-		final Path dirPath = Paths.get("src", "items_data", "items", "data");
+		final Path dirPath = Paths.get("src", "main","resources","itemsData", "items", "data");
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
 			for (final Path entry : stream) {
 				if (Files.isRegularFile(entry)) {

@@ -1,0 +1,127 @@
+package it.unibo.pokerogue.controller.impl;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import it.unibo.pokerogue.controller.api.GameEngine;
+import it.unibo.pokerogue.controller.api.GraphicEngine;
+import it.unibo.pokerogue.controller.api.scene.Scene;
+import it.unibo.pokerogue.controller.impl.scene.SceneBox;
+import it.unibo.pokerogue.controller.impl.scene.SceneInfo;
+import it.unibo.pokerogue.controller.impl.scene.SceneLoad;
+import it.unibo.pokerogue.controller.impl.scene.SceneMenu;
+import it.unibo.pokerogue.controller.impl.scene.SceneMove;
+import it.unibo.pokerogue.controller.impl.scene.SceneSave;
+import it.unibo.pokerogue.controller.impl.scene.SceneShop;
+import it.unibo.pokerogue.controller.impl.scene.fight.SceneFight;
+import it.unibo.pokerogue.model.impl.Singleton;
+import lombok.Setter;
+
+/**
+ * Concrete implementation of the {@link GameEngine} interface.
+ * 
+ * This class serves as the central controller of the game, responsible for
+ * managing the current scene, responding to input, and interacting with
+ * the graphic engine to render scenes.
+ * 
+ * It is a singleton, as it extends Singleton, ensuring a single
+ * game engine instance exists throughout the application lifecycle.
+ */
+public final class GameEngineImpl extends Singleton implements GameEngine {
+
+    private static final Logger LOGGER = Logger.getLogger(GameEngineImpl.class.getName());
+
+    private GraphicEngine graphicEngineInstance;
+    private Scene currentScene;
+    private String fileToLoadName;
+    @Setter
+    private Integer fightLevel;
+
+    /**
+     * Protected constructor for the GameEngineImpl.
+     */
+    public  GameEngineImpl() {
+        super();
+        this.graphicEngineInstance = null;
+    }
+
+    @Override
+    public void setScene(final String newScene)
+            throws IOException,
+            InstantiationException,
+            IllegalAccessException,
+            InvocationTargetException,
+            NoSuchMethodException {
+        switch (newScene) {
+            case "main":
+                currentScene = new SceneMenu();
+                break;
+
+            case "load":
+                currentScene = new SceneLoad();
+                break;
+            case "box":
+                currentScene = new SceneBox(this.fileToLoadName);
+                break;
+            case "fight":
+                if (fightLevel == null) {
+                    fightLevel = 0;
+                } else {
+                    fightLevel = fightLevel + 1;
+                }
+                currentScene = new SceneFight(fightLevel);
+                break;
+            case "shop":
+                currentScene = new SceneShop();
+                break;
+            case "move":
+                currentScene = new SceneMove();
+                break;
+            case "info":
+                currentScene = new SceneInfo();
+                break;
+            case "save":
+                currentScene = new SceneSave();
+                break;
+            default:
+                break;
+        }
+
+        graphicEngineInstance.createPanels(currentScene.getAllPanelsElements());
+        graphicEngineInstance.drawScene(currentScene.getCurrentSceneGraphicElements());
+
+    }
+
+    @Override
+    public void keyPressedToScene(final int keyCode)
+            throws IOException,
+            InstantiationException,
+            IllegalAccessException,
+            NoSuchMethodException,
+            InvocationTargetException {
+        if (this.currentScene == null) {
+            LOGGER.log(Level.WARNING, "No active scene");
+
+            return;
+        }
+        this.currentScene.updateStatus(keyCode);
+        currentScene.updateGraphic();
+        graphicEngineInstance.createPanels(currentScene.getAllPanelsElements());
+        graphicEngineInstance.drawScene(currentScene.getCurrentSceneGraphicElements());
+
+    }
+
+    @Override
+    public void setGraphicEngine(final GraphicEngine graphicEngine) {
+
+        this.graphicEngineInstance = graphicEngine;
+
+    }
+
+    @Override
+    public void setFileToLoad(final String fileName) {
+        this.fileToLoadName = fileName;
+    }
+}

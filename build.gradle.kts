@@ -50,7 +50,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("it.unibo.PokeRogue.Main")
+    mainClass.set("it.unibo.pokerogue.Main")
 }
 
 tasks.test {
