@@ -73,11 +73,6 @@ public final class SceneFightUtilities {
         return currentHp + " / " + maxHp;
     }
 
-    private static void clearMoveInfo(final GraphicElementsRegistry currentSceneGraphicElements) throws IOException {
-        UtilitiesForScenes.removeSceneElements("sceneFightElement.json", "clearMoveInfo",
-                currentSceneGraphicElements);
-    }
-
     /**
      * Updates the display of move information based on the currently selected
      * button.
@@ -115,7 +110,6 @@ public final class SceneFightUtilities {
     public static void updateMoveInfo(final int currentSelectedButton,
             final GraphicElementsRegistry currentSceneGraphicElements,
             final PlayerTrainerImpl playerTrainerInstance) throws IOException {
-        clearMoveInfo(currentSceneGraphicElements);
         final int[] indexMapping = { 0, 2, 1, 3 };
         final int moveIndex = (currentSelectedButton >= 100 && currentSelectedButton <= 103)
                 ? indexMapping[currentSelectedButton - 100]
@@ -152,6 +146,9 @@ public final class SceneFightUtilities {
             ((BoxElementImpl) currentSceneGraphicElements.getByName("MOVE_TYPE"))
                     .setMainColor(ColorTypeConversion.getColorForType(
                             move.getType()));
+        } else {
+            UtilitiesForScenes.removeSceneElements("sceneFightElement.json", "clearMoveInfo",
+                    currentSceneGraphicElements);
         }
     }
 

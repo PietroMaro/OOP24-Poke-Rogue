@@ -1,0 +1,149 @@
+{
+	"metrics": {
+		"101": {
+			"type": "text",
+			"panelName": "firstPanel",
+			"text": "",
+			"textColor": "#FFFFFF",
+			"textDimension": 0.05,
+			"leftX": 0.35,
+			"leftY": 0.11
+		},
+		"102": {
+			"type": "text",
+			"panelName": "firstPanel",
+			"text": "",
+			"textColor": "#FFFFFF",
+			"textDimension": 0.05,
+			"leftX": 0.35,
+			"leftY": 0.31
+		},
+		"103": {
+			"type": "text",
+			"panelName": "firstPanel",
+			"text": "",
+			"textColor": "#FFFFFF",
+			"textDimension": 0.05,
+			"leftX": 0.35,
+			"leftY": 0.51
+		},
+		"104": {
+			"type": "text",
+			"panelName": "firstPanel",
+			"text": "",
+			"textColor": "#FFFFFF",
+			"textDimension": 0.05,
+			"leftX": 0.35,
+			"leftY": 0.71
+		},
+		"105": {
+			"type": "text",
+			"panelName": "firstPanel",
+			"text": "",
+			"textColor": "#FFFFFF",
+			"textDimension": 0.05,
+			"leftX": 0.35,
+			"leftY": 0.91
+		},
+		"106": {
+			"type": "text",
+			"panelName": "firstPanel",
+			"text": "",
+			"textColor": "#FFFFFF",
+			"textDimension": 0.08,
+			"leftX": 0.35,
+			"leftY": 0.84
+		},
+		"0": {
+			"type": "button",
+			"panelName": "firstPanel",
+			"mainColor": "#4a4a4a",
+			"borderColor": "#FFFFFF",
+			"borderThickness": 0,
+			"leftX": 0.35,
+			"leftY": 0.05,
+			"width": 0.3,
+			"height": 0.1
+		},
+		"1": {
+			"type": "button",
+			"panelName": "firstPanel",
+			"mainColor": "#4A4A4A",
+			"borderColor": "#FFFFFF",
+			"borderThickness": 0,
+			"leftX": 0.35,
+			"leftY": 0.25,
+			"width": 0.3,
+			"height": 0.1
+		},
+		"2": {
+			"type": "button",
+			"panelName": "firstPanel",
+			"mainColor": "#4A4A4A",
+			"borderColor": "#FFFFFF",
+			"borderThickness": 0,
+			"leftX": 0.35,
+			"leftY": 0.45,
+			"width": 0.3,
+			"height": 0.1
+		},
+		"3": {
+			"type": "button",
+			"panelName": "firstPanel",
+			"mainColor": "#4A4A4A",
+			"borderColor": "#FFFFFF",
+			"borderThickness": 0,
+			"leftX": 0.35,
+			"leftY": 0.65,
+			"width": 0.3,
+			"height": 0.1
+		},
+		"4": {
+			"type": "button",
+			"panelName": "firstPanel",
+			"mainColor": "#4A4A4A",
+			"borderColor": "#FFFFFF",
+			"borderThickness": 0,
+			"leftX": 0.35,
+			"leftY": 0.85,
+			"width": 0.3,
+			"height": 0.1
+		},
+		"100": {
+			"type": "background",
+			"panelName": "firstPanel",
+			"dirToImage": "move",
+			"imageFileName": "bg.png"
+		}
+	},
+	"mapper": {
+		"MOVE_1_BUTTON": 0,
+		"MOVE_2_BUTTON": 1,
+		"MOVE_3_BUTTON": 2,
+		"MOVE_4_BUTTON": 3,
+		"MOVE_5_BUTTON": 4,
+		"BACKGROUND": 100,
+		"MOVE_1_BUTTON_TEXT": 101,
+		"MOVE_2_BUTTON_TEXT": 102,
+		"MOVE_3_BUTTON_TEXT": 103,
+		"MOVE_4_BUTTON_TEXT": 104,
+		"MOVE_5_BUTTON_TEXT": 105,
+		"NEW_MOVE_TEXT": 106
+	},
+	"dynamicObjects": {
+		"init": [
+			101,
+			102,
+			103,
+			104,
+			105,
+			106,
+			0,
+			1,
+			2,
+			3,
+			4,
+			100
+		]
+	}
+}

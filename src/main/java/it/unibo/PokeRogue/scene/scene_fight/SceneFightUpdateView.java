@@ -103,10 +103,10 @@ public class SceneFightUpdateView {
                                         currentSceneGraphicElements,
                                         this.graphicElements);
                         this.initMoveText();
-                        //TODO
-                        // not working
-                        // SceneFightUtilities.updateMoveInfo(currentSelectedButton, currentSceneGraphicElements,
-                        //                 playerTrainerInstance);
+                        // TODO
+                        SceneFightUtilities.updateMoveInfo(currentSelectedButton,
+                                        currentSceneGraphicElements,
+                                        playerTrainerInstance);
                         UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true,
                                         this.currentSceneGraphicElements);
                 }
@@ -142,7 +142,7 @@ public class SceneFightUpdateView {
                         ((TextElementImpl) currentSceneGraphicElements.getByName("MEGABALL_TEXT"))
                                         .setText(playerTrainerInstance.getBall().get("megaball")
                                                         + " x Mega Ball");
-                        ((TextElementImpl) currentSceneGraphicElements.getByName("MEGABALL_TEXT"))
+                        ((TextElementImpl) currentSceneGraphicElements.getByName("ULTRABALL_TEXT"))
                                         .setText(playerTrainerInstance.getBall().get("ultraball")
                                                         + " x Ulta Ball");
                         ((TextElementImpl) currentSceneGraphicElements.getByName("MASTERBALL_TEXT"))
@@ -150,25 +150,19 @@ public class SceneFightUpdateView {
                                                         .get("masterball") + " x Master Ball");
                         UtilitiesForScenes.setButtonStatus(currentSelectedButton, true,
                                         this.currentSceneGraphicElements);
-
                 }
         }
 
-        /**
-         * Handles the logic for changing Pokemon in the fight scene.
-         * Clears current elements, initializes change-specific UI,
-         * and sets the button status.
-         */
         private void pokemonChange() throws IOException {
                 if (currentSelectedButton >= SceneFightStatusValuesEnum.CHANGE_POKEMON_1.value()
                                 && currentSelectedButton < SceneFightStatusValuesEnum.POKEBALL_BUTTON.value()) {
                         this.alreadyInMainMenu = false;
-                        UtilitiesForScenes.removeSceneElements("sceneFightElement.json", "init",
-                                        currentSceneGraphicElements);
                         this.allPanelsElements.put(CHANGE_PANEL_TEXT,
                                         new PanelElementImpl("firstPanel", new OverlayLayout(null)));
-                        UtilitiesForScenes.loadSceneElements("sceneFightElement.json", "move",
-                                        currentSceneGraphicElements,
+                        UtilitiesForScenes.removeSceneElements("sceneFightElement.json", "init",
+                                        this.currentSceneGraphicElements);
+                        UtilitiesForScenes.loadSceneElements("sceneFightElement.json", "change",
+                                        this.currentSceneGraphicElements,
                                         this.graphicElements);
                         this.initChangeText();
                         UtilitiesForScenes.setButtonStatus(currentSelectedButton, true,
@@ -218,10 +212,6 @@ public class SceneFightUpdateView {
                                                                 playerTrainerInstance));
         }
 
-        /**
-         * Handles the transition back to the main fight menu if the conditions are met.
-         * Clears current UI elements and re-initializes the main menu graphics.
-         */
         private void mainMenu() throws IOException {
                 if ((this.currentSelectedButton <= SceneFightStatusValuesEnum.BALL_BUTTON.value() && !alreadyInMainMenu)
                                 || this.newSelectedButton == SceneFightStatusValuesEnum.RUN_BUTTON.value()) {
@@ -234,3 +224,4 @@ public class SceneFightUpdateView {
         }
 
 }
+

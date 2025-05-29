@@ -425,7 +425,7 @@
             "text": "",
             "textColor": "#FFFFFF",
             "textDimension": 0.06,
-            "leftX": 0.06,
+            "leftX": 0.6,
             "leftY": 0.86
         },
         "430": {
@@ -434,7 +434,7 @@
             "text": "",
             "textColor": "#FFFFFF",
             "textDimension": 0.06,
-            "leftX": 0.06,
+            "leftX": 0.6,
             "leftY": 0.79
         },
         "433": {
@@ -504,7 +504,7 @@
         },
         "465": {
             "type": "box",
-            "panelName": "movePanel",
+            "panelName": "changePanel",
             "mainColor": "#808080",
             "borderColor": "#FFFFFF",
             "borderThickness": 1,
@@ -525,7 +525,7 @@
         "471": {
             "type": "box",
             "panelName": "ballPanel",
-            "mainColor": "#808080",
+            "mainColor": "#266666",
             "borderColor": "#FFFFFF",
             "borderThickness": 0,
             "leftX": 0.62,
@@ -592,18 +592,6 @@
             "panelName": "changePanel",
             "dirToImage": "fight",
             "imageFileName": "bg.png"
-        },
-        "484": {
-            "type": "background",
-            "panelName": "ballPanel",
-            "dirToImage": "fight",
-            "imageFileName": "bgBar.png"
-        },
-        "485": {
-            "type": "background",
-            "panelName": "movePanel",
-            "dirToImage": "fight",
-            "imageFileName": "bgBar.png"
         }
     },
     "mapper": {
@@ -667,9 +655,7 @@
         "MASTERBALL_TEXT": 478,
         "CANCEL_TEXT": 480,
         "BACK_TEXT": 482,
-        "BACKGROUND_CHANGE": 483,
-        "BACKGROUND_BALL": 484,
-        "BACKGROUND_MOVE": 485
+        "BACKGROUND_CHANGE": 483
     },
     "dynamicObjects": {
         "init": [
@@ -709,9 +695,6 @@
             406
         ],
         "clearMoveInfo": [
-            428,
-            430,
-            433,
             481
         ],
         "move": [
@@ -734,11 +717,12 @@
             476,
             478,
             480,
-            471,
             300,
             301,
             302,
-            303
+            303,
+            304,
+            471
         ],
         "change": [
             482,

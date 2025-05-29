@@ -244,3 +244,4 @@ public class SceneFight extends Scene {
         this.currentSelectedButton = newVal;
     }
 }
+
