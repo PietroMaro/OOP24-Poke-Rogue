@@ -102,7 +102,7 @@ public final class SceneBoxView {
                 for (int pokemonIndex = 0; pokemonIndex < LENGTH_OF_POKEBOX; pokemonIndex++) {
                         if (pokemonIndex < currentBoxLength) {
                                 currentSceneGraphicElements.put(pokemonIndex + POKEMON_TO_BUTTON_OFFSET,
-                                                new SpriteElementImpl("pokemonPanel",
+                                                Optional.ofNullable(new SpriteElementImpl("pokemonPanel",
                                                                 currentBox.get(pokemonIndex)
                                                                                 .getSpriteFront(),
                                                                 POKEMON_START_X + (pokemonIndex % POKE_BOX_ROW_LENGTH
@@ -110,7 +110,7 @@ public final class SceneBoxView {
                                                                 POKEMON_START_Y + (pokemonIndex / POKE_BOX_ROW_LENGTH
                                                                                 * OFFSET_Y),
                                                                 POKEMON_SPRITE_WIDTH,
-                                                                POKEMON_SPRITE_HEIGHT));
+                                                                POKEMON_SPRITE_HEIGHT)));
 
                         } else {
                                 currentSceneGraphicElements.removeById(pokemonIndex + POKEMON_TO_BUTTON_OFFSET);
