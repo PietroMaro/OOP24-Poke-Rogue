@@ -93,8 +93,8 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory {
 				weight,
 				possibleAbilities,
 				givesEV,
-				newPokemonSpriteFront.get(),
-				newPokemonSpriteBack.get());
+				newPokemonSpriteFront,
+				newPokemonSpriteBack);
 
 		this.pokemonBlueprints.put(pokemonName, newPokemon);
 		this.allPokemonSet.add(pokemonName);

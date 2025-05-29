@@ -291,22 +291,22 @@ public interface Pokemon {
 	 * Simple getter.
 	 * @return the parameter
 	 */
-	Image getSpriteFront();
+	Optional<Image> getSpriteFront();
 	/**
 	 * Simple setter.
 	 * @param newVal value to set
 	 */
-	void setSpriteFront(Image newVal);
+	void setSpriteFront(Optional<Image> newVal);
 	/**
 	 * Simple getter.
 	 * @return the parameter
 	 */
-	Image getSpriteBack();
+	Optional<Image> getSpriteBack();
 	/**
 	 * Simple setter.
 	 * @param newVal value to set
 	 */
-	void setSpriteBack(Image newVal);
+	void setSpriteBack(Optional<Image> newVal);
 	/**
 	 * Simple getter.
 	 * @return the parameter

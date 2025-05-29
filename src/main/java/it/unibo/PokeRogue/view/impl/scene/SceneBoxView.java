@@ -138,7 +138,7 @@ public final class SceneBoxView {
                         } else {
 
                                 UtilitiesForScenes.safeGetElementById(currentSceneGraphicElements, squadPosition,
-                                                SpriteElementImpl.class).setImage(pokemon.get().getSpriteFront());
+                                                SpriteElementImpl.class).setImage(pokemon.get().getSpriteFront().get());
 
                         }
 
@@ -240,7 +240,7 @@ public final class SceneBoxView {
 
                         UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_DETAIL_SPRITE",
                                         SpriteElementImpl.class)
-                                        .setImage(selectedPokemon.getSpriteFront());
+                                        .setImage(selectedPokemon.getSpriteFront().get());
 
                 }
 
@@ -256,7 +256,7 @@ public final class SceneBoxView {
                                 currentSceneGraphicElements.put(pokemonIndex + POKEMON_TO_BUTTON_OFFSET,
                                                 new SpriteElementImpl("pokemonPanel",
                                                                 currentBox.get(pokemonIndex)
-                                                                                .getSpriteFront(),
+                                                                                .getSpriteFront().get(),
                                                                 POKEMON_START_X + (pokemonIndex % POKE_BOX_ROW_LENGTH
                                                                                 * OFFSET_X),
                                                                 POKEMON_START_Y + (pokemonIndex / POKE_BOX_ROW_LENGTH

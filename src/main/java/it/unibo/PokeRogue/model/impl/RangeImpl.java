@@ -70,4 +70,7 @@ public class RangeImpl<T extends Number> implements Range<T> {
         }
     }
 
+	public Range<T> copyOf(){
+		return new RangeImpl<T>(this.getCurrentMin(),this.getCurrentValue(),this.getCurrentMax());
+	}
 }

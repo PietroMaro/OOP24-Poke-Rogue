@@ -45,5 +45,10 @@ public interface Range<T> {
 	* it sets it to max or min of the range
 	*/
     void setCurrentValue(T x);
+
+	/**
+	 * 	Returns a copy of x.
+	 */
+	Range<T> copyOf();
     
 }

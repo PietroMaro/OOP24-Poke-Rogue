@@ -23,6 +23,10 @@ public class Move{
 	private Type type;
 	private int priority;
 
+	public Move() {
+			pp = pp.copyOf();
+    	}
+
 	public Move deepCopy() {
 	    return new Move(
 			this.name,
