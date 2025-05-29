@@ -22,6 +22,7 @@ import org.json.JSONObject;
  */
 @Setter
 public final class TextElementImpl extends GraphicElementImpl {
+    private static final long serialVersionUID = 1L;
 
     @Getter
     private String text;

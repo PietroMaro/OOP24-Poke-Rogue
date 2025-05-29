@@ -23,6 +23,8 @@ import lombok.AccessLevel;
  */
 public final class SceneBoxLoad {
 
+    private static final int LENGTH_OF_POKEBOX = 81;
+
     private final SavingSystem savingSystemInstance;
     private final PokemonFactory pokemonFactoryInstance;
 
@@ -77,7 +79,7 @@ public final class SceneBoxLoad {
             this.boxes.add(new ArrayList<>());
         }
 
-        if (this.boxes.get(this.boxes.size() - 1).size() == 81) {
+        if (this.boxes.get(this.boxes.size() - 1).size() == LENGTH_OF_POKEBOX) {
             this.boxes.add(new ArrayList<>());
 
         }

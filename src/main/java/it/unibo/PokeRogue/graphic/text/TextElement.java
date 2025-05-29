@@ -15,7 +15,7 @@ public interface TextElement {
     /**
      * Sets the text content of the element.
      * 
-     * @param text the new text to display
+     * 
      */
     void setText();
 

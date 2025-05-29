@@ -48,8 +48,13 @@ import it.unibo.PokeRogue.utilities.PokeEffectivenessCalcImpl;
 
 public final class TestAll {
 
+	private static final int MAX_LENGTH_OF_POKESQUAD = 6;
+	private static final int HIGH_EFFECTIVENESS = 160;
+	private static final int MEDIUM_EFFECTIVENESS = 120;
+	private static final int VERY_LOW_EFFECTIVENESS = 20;
+
 	@BeforeEach
-	public void resetSingletons() {
+	private void resetSingletons() {
 		PlayerTrainerImpl.resetInstance();
 	}
 
@@ -195,14 +200,14 @@ public final class TestAll {
 		final Pokemon venusaur = pokeFactory.pokemonFromName("venusaur");
 		final Pokemon poliwag = pokeFactory.pokemonFromName("poliwag");
 
-		assertEquals(160, calculator.calculateEffectiveness(charmander, venusaur));
-		assertEquals(120, calculator.calculateEffectiveness(venusaur, poliwag));
-		assertEquals(20, calculator.calculateEffectiveness(charmander, poliwag));
+		assertEquals(HIGH_EFFECTIVENESS, calculator.calculateEffectiveness(charmander, venusaur));
+		assertEquals(MEDIUM_EFFECTIVENESS, calculator.calculateEffectiveness(venusaur, poliwag));
+		assertEquals(VERY_LOW_EFFECTIVENESS, calculator.calculateEffectiveness(charmander, poliwag));
 
 	}
 
 	@Test
-	public void testAllItemEffect() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+	void testAllItemEffect() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
 			InstantiationException, IOException {
 		final PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
 		final EffectParserImpl effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
@@ -223,7 +228,7 @@ public final class TestAll {
 	}
 
 	@Test
-	public void testAi() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+	void testAi() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
 			InstantiationException, IOException {
 		final PokemonFactoryImpl pokeFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
 		final PlayerTrainerImpl playerTrainerImpl = PlayerTrainerImpl.getTrainerInstance();
@@ -234,19 +239,19 @@ public final class TestAll {
 		final Pokemon venusaur = pokeFactory.pokemonFromName("venusaur");
 		final Pokemon poliwag = pokeFactory.pokemonFromName("poliwag");
 
-		playerTrainerImpl.addPokemon(poliwag, 6);
-		enemyTrainer.addPokemon(charmander, 6);
+		playerTrainerImpl.addPokemon(poliwag, MAX_LENGTH_OF_POKESQUAD);
+		enemyTrainer.addPokemon(charmander, MAX_LENGTH_OF_POKESQUAD);
 
 		assertEquals(ai.nextMove(weather), new Decision(DecisionTypeEnum.ATTACK, "0"));
 
-		enemyTrainer.addPokemon(venusaur, 6);
+		enemyTrainer.addPokemon(venusaur, MAX_LENGTH_OF_POKESQUAD);
 
 		assertEquals(ai.nextMove(weather), new Decision(DecisionTypeEnum.SWITCH_IN, "1"));
 
 	}
 
 	@Test
-	public void testBattleRewards() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+	void testBattleRewards() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
 			InstantiationException, IOException {
 		final PokemonFactoryImpl factory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
 		final Pokemon charmander = factory.pokemonFromName("charmander");
@@ -259,7 +264,7 @@ public final class TestAll {
 	}
 
 	@Test
-	public void testGenerateEnemy() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+	void testGenerateEnemy() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
 			InstantiationException, IOException {
 		final TrainerImpl enemyTrainer = new TrainerImpl();
 		final GenerateEnemyImpl generateEnemyInstance = new GenerateEnemyImpl(5, enemyTrainer);
@@ -268,7 +273,7 @@ public final class TestAll {
 	}
 
 	@Test
-	public void testBattleEngine() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+	void testBattleEngine() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
 			InstantiationException, IOException {
 		final TrainerImpl enemyTrainer = new TrainerImpl();
 		final PokemonFactoryImpl factory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);

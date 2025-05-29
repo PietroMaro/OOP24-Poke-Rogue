@@ -1,9 +1,10 @@
 package it.unibo.PokeRogue.scene;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import it.unibo.PokeRogue.graphic.GraphicElementImpl;
-import lombok.Getter;
 
 /**
  * Implementation of the {@link GraphicElementsRegistry} interface.
@@ -13,7 +14,6 @@ import lombok.Getter;
  *
  */
 public final class GraphicElementsRegistryImpl implements GraphicElementsRegistry {
-    @Getter
     private final Map<Integer, GraphicElementImpl> elements;
     private final Map<String, Integer> nameToId;
 
@@ -25,41 +25,59 @@ public final class GraphicElementsRegistryImpl implements GraphicElementsRegistr
      */
     public GraphicElementsRegistryImpl(final Map<Integer, GraphicElementImpl> elements,
             final Map<String, Integer> nameToId) {
-        this.elements = elements;
-        this.nameToId = nameToId;
+        this.elements = new LinkedHashMap<>(elements);
+        this.nameToId = new HashMap<>(nameToId);
     }
 
+    /**
+     * Creates a new GraphicElementsRegistryImpl by copying the data from
+     * another GraphicElementsRegistry instance.
+     * 
+     * @param instanceToCopy the GraphicElementsRegistry to copy from
+     */
+    public GraphicElementsRegistryImpl(GraphicElementsRegistry instanceToCopy) {
+        this.elements = instanceToCopy.getElements();
+        this.nameToId = instanceToCopy.getNameToId();
+    }
 
     @Override
     public GraphicElementImpl getByName(final String name) {
-        final Integer id = nameToId.get(name);
-        return id != null ? elements.get(id) : null;
+        final Integer id = this.nameToId.get(name);
+        return id != null ? this.elements.get(id) : null;
     }
 
     @Override
     public GraphicElementImpl getById(final int id) {
-        return elements.get(id);
+        return this.elements.get(id);
     }
 
     @Override
 
     public void put(final int id, final GraphicElementImpl element) {
-        elements.put(id, element);
+        this.elements.put(id, element);
     }
 
     @Override
     public void removeById(final int id) {
-        elements.remove(id);
+        this.elements.remove(id);
     }
 
     @Override
     public void removeByName(final String name) {
-        final Integer id = nameToId.get(name);
-        elements.remove(id);
+        final Integer id = this.nameToId.get(name);
+        this.elements.remove(id);
     }
 
     @Override
     public void clear() {
-        elements.clear();
+        this.elements.clear();
+    }
+
+    public Map<Integer, GraphicElementImpl> getElements() {
+        return new LinkedHashMap<>(this.elements);
+    }
+
+    public Map<String, Integer> getNameToId() {
+        return new HashMap<>(this.nameToId);
     }
 }

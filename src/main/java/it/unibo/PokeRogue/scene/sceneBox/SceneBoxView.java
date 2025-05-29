@@ -53,8 +53,6 @@ public final class SceneBoxView {
 
         private static final String FIRST_PANEL_NAME = "firstPanel";
         private static final String POKEMON_PANEL_NAME = "pokemonPanel";
-        private final GraphicElementsRegistry graphicElements;
-        private final Map<String, Integer> graphicElementNameToInt;
 
         /**
          * Constructs a SceneBoxView with the given graphic elements and element
@@ -65,14 +63,13 @@ public final class SceneBoxView {
          * @param graphicElementNameToInt a mapping of element names to their integer
          *                                identifiers.
          */
-        public SceneBoxView(final GraphicElementsRegistry graphicElements,
-                        final Map<String, Integer> graphicElementNameToInt) throws IOException {
-                this.graphicElementNameToInt = graphicElementNameToInt;
-                this.graphicElements = graphicElements;
+        public SceneBoxView() {
+
         }
 
         void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
-                        final Map<String, PanelElementImpl> allPanelsElements) throws IOException {
+                        final Map<String, PanelElementImpl> allPanelsElements,
+                        final GraphicElementsRegistry graphicElements) throws IOException {
 
                 // Panels
                 allPanelsElements.put(FIRST_PANEL_NAME, new PanelElementImpl("", new OverlayLayout(null)));
@@ -96,21 +93,22 @@ public final class SceneBoxView {
                 }
 
                 UtilitiesForScenes.loadSceneElements("sceneBoxElements.json", "init", currentSceneGraphicElements,
-                                this.graphicElements);
+                                graphicElements);
 
         }
 
         void updateGraphic(final int currentSelectedButton, final int newSelectedButton, final int boxIndex,
                         final int newBoxIndex, final List<List<Pokemon>> boxes,
                         final PlayerTrainerImpl playerTrainerInstance,
-                        final GraphicElementsRegistry currentSceneGraphicElements)
+                        final GraphicElementsRegistry currentSceneGraphicElements,
+                        final Map<String, Integer> graphicElementNameToInt)
                         throws IOException {
 
                 this.updateSelectedButton(currentSelectedButton, newSelectedButton, currentSceneGraphicElements);
 
                 this.updateShowedPokeBox(newBoxIndex, currentSceneGraphicElements);
 
-                this.updatePokeSquad(playerTrainerInstance, currentSceneGraphicElements);
+                this.updatePokeSquad(playerTrainerInstance, currentSceneGraphicElements, graphicElementNameToInt);
 
                 this.updateDetailedPokemon(newBoxIndex, newSelectedButton, boxes, currentSceneGraphicElements);
         }
@@ -130,16 +128,17 @@ public final class SceneBoxView {
         }
 
         private void updatePokeSquad(final PlayerTrainerImpl playerTrainerInstance,
-                        final GraphicElementsRegistry currentSceneGraphicElements) throws IOException {
+                        final GraphicElementsRegistry currentSceneGraphicElements,
+                        final Map<String, Integer> graphicElementNameToInt) throws IOException {
 
-                for (int squadPosition = this.graphicElementNameToInt
-                                .get("POKEMON_SPRITE_SELECTED_0"); squadPosition < this.graphicElementNameToInt
+                for (int squadPosition = graphicElementNameToInt
+                                .get("POKEMON_SPRITE_SELECTED_0"); squadPosition < graphicElementNameToInt
                                                 .get("POKEMON_SPRITE_SELECTED_2")
                                                 + 1; squadPosition++) {
 
                         final Optional<Pokemon> pokemon = playerTrainerInstance
                                         .getPokemon(squadPosition
-                                                        - this.graphicElementNameToInt
+                                                        - graphicElementNameToInt
                                                                         .get("POKEMON_SPRITE_SELECTED_0"));
                         if (pokemon.isEmpty()) {
 
