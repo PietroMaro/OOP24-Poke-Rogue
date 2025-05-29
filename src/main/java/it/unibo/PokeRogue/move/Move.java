@@ -18,7 +18,7 @@ public class Move{
 	private int critRate;
 	private int baseDamage;
 	private int calculatedDamage;
-	private double STAB;
+	private double stab;
 	private boolean isCrit;
 	private Type type;
 	private int priority;
@@ -33,7 +33,7 @@ public class Move{
 	        this.critRate,
 	        this.baseDamage,
 			this.calculatedDamage,
-			this.STAB,
+			this.stab,
 			this.isCrit,
 	        this.type,
 	        this.priority

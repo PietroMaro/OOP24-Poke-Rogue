@@ -2,6 +2,8 @@ package it.unibo.PokeRogue.pokemon;
 
 import java.util.Random;
 
+import static it.unibo.PokeRogue.pokemon.Stats.*;
+
 
 /**
  * Pokemon nature enumerator.
@@ -10,109 +12,109 @@ public enum Nature {
 		/**
 		 * + attack | - specialAttack.
 		 */
-		ADAMANT("attack", "specialAttack"),
+		ADAMANT(ATTACK, SPECIAL_ATTACK),
 		/**
 		 * neutral.
 		 */
-		BASHFUL("specialAttack", "specialAttack"),
+		BASHFUL(SPECIAL_ATTACK, SPECIAL_ATTACK),
 		/**
 		 * + defense | - attack.
 		 */
-		BOLD("defense", "attack"),
+		BOLD(DEFENSE, ATTACK),
 		/**
 		 * + attack | - speed.
 		 */
-		BRAVE("attack", "speed"),
+		BRAVE(ATTACK, SPEED),
 		/**
 		 * + specialDefense | - attack.
 		 */
-		CALM("specialDefense", "attack"),
+		CALM(SPECIAL_DEFENSE, ATTACK),
 		/**
 		 * + specialDefense | - specialAttack.
 		 */
-		CAREFUL("specialDefense", "specialAttack"),
+		CAREFUL(SPECIAL_DEFENSE, SPECIAL_ATTACK),
 		/**
 		 * neutral.
 		 */
-		DOCILE("defense", "defense"),
+		DOCILE(DEFENSE, DEFENSE),
 		/**
 		 * + specialDefense | - defense.
 		 */
-		GENTLE("specialDefense", "defense"),
+		GENTLE(SPECIAL_DEFENSE, DEFENSE),
 		/**
 		 * neutral.
 		 */
-		HARDY("attack", "attack"),
+		HARDY(ATTACK, ATTACK),
 		/**
 		 * + speed | - defense.
 		 */
-		HASTY("speed", "defense"),
+		HASTY(SPEED, DEFENSE),
 		/**
 		 * + defense | - specialAttack.
 		 */
-		IMPISH("defense", "specialAttack"),
+		IMPISH(DEFENSE, SPECIAL_ATTACK),
 		/**
 		 * + speed | - specialAttack.
 		 */
-		JOLLY("speed", "specialAttack"),
+		JOLLY(SPEED, SPECIAL_ATTACK),
 		/**
 		 * + defense | - specialDefense.
 		 */
-		LAX("defense", "specialDefense"),
+		LAX(DEFENSE, SPECIAL_DEFENSE),
 		/**
 		 * + attack  | - defense.
 		 */
-		LONELY("attack", "defense"),
+		LONELY(ATTACK, DEFENSE),
 		/**
 		 * + specialAttack | - defense.
 		 */
-		MILD("specialAttack", "defense"),
+		MILD(SPECIAL_ATTACK, DEFENSE),
 		/**
 		 * + specialAttack | - attack.
 		 */
-		MODEST("specialAttack", "attack"),
+		MODEST(SPECIAL_ATTACK, ATTACK),
 		/**
 		 * + speed | - specialDefense.
 		 */
-		NAIVE("speed", "specialDefense"),
+		NAIVE(SPEED, SPECIAL_DEFENSE),
 		/**
 		 * + attack | - specialDefense.
 		 */
-		NAUGHTY("attack", "specialDefense"),
+		NAUGHTY(ATTACK, SPECIAL_DEFENSE),
 		/**
 		 * + specialAttack | - speed.
 		 */
-		QUIET("specialAttack", "speed"),
+		QUIET(SPECIAL_ATTACK, SPEED),
 		/**
 		 * neutral.
 		 */
-		QUIRKY("specialDefense", "specialDefense"),
+		QUIRKY(SPECIAL_DEFENSE, SPECIAL_DEFENSE),
 		/**
 		 * + specialAttack | - specialDefense.
 		 */
-		RASH("specialAttack", "specialDefense"),
+		RASH(SPECIAL_ATTACK, SPECIAL_DEFENSE),
 		/**
 		 * + defense  | - speed.
 		 */
-		RELAXED("defense", "speed"),
+		RELAXED(DEFENSE, SPEED),
 		/**
 		 * + specialDefense | - speed.
 		 */
-		SASSY("specialDefense", "speed"),
+		SASSY(SPECIAL_DEFENSE, SPEED),
 		/**
 		 * neutral.
 		 */
-		SERIOUS("speed", "speed"),
+		SERIOUS(SPEED, SPEED),
 		/**
 		 * + speed | - attack.
 		 */
-		TIMID("speed", "attack");
+		TIMID(SPEED, ATTACK);
 
-		private final String statIncrease; // Statistica che aumenta.
-		private final String statDecrease; // Statistica che diminuisce
+		private final Stats statIncrease; // Statistica che aumenta.
+		private final Stats statDecrease; // Statistica che diminuisce
 
 		// Costruttore per inizializzare i campi
-		Nature(final String statIncrease, final String statDecrease) {
+		Nature(final Stats statIncrease, final Stats statDecrease) {
 			this.statIncrease = statIncrease;
 			this.statDecrease = statDecrease;
 		}
@@ -122,7 +124,7 @@ public enum Nature {
 		 * Simple getter.
 		 * @return The stat increase
 		 */
-		public String statIncrease() {
+		public Stats statIncrease() {
 			return this.statIncrease;
 		}
 
@@ -130,7 +132,7 @@ public enum Nature {
 		 * Simple getter.
 		 * @return The stat decrease
 		 */
-		public String statDecrease() {
+		public Stats statDecrease() {
 			return this.statDecrease;
 		}
 
@@ -150,7 +152,7 @@ public enum Nature {
 		 * @param stat The statistic you want to check
 		 * @return true if the stat is increased by the nature 
 		 */
-		public static boolean checkStatIncrease(final Nature nature, final String stat) {
+		public static boolean checkStatIncrease(final Nature nature, final Stats stat) {
     		return nature.statIncrease.equals(stat);
         }
 
@@ -160,7 +162,7 @@ public enum Nature {
 		 * @param stat The statistic you want to check
 		 * @return true if the stat is decreased by the nature 
 		 */
-		public static boolean checkStatDecrease(final Nature nature, final String stat) {
+		public static boolean checkStatDecrease(final Nature nature, final Stats stat) {
     		return nature.statDecrease.equals(stat);
         }
 	}

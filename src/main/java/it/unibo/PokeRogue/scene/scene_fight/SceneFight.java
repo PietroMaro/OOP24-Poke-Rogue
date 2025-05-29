@@ -38,6 +38,8 @@ public class SceneFight extends Scene {
     private static final int USE_MASTERBALL = 303;
     private static final int DO_NOTHING = 4;
 
+    private static final String FIGHT_BUTTON = "FIGHT_BUTTON";
+
     @Getter
     private final GraphicElementsRegistry currentSceneGraphicElements;
     @Getter
@@ -81,8 +83,8 @@ public class SceneFight extends Scene {
     }
 
     private void initStatus() {
-        this.currentSelectedButton = graphicElementNameToInt.get("FIGHT_BUTTON");
-        this.newSelectedButton = graphicElementNameToInt.get("FIGHT_BUTTON");
+        this.currentSelectedButton = graphicElementNameToInt.get(FIGHT_BUTTON);
+        this.newSelectedButton = graphicElementNameToInt.get(FIGHT_BUTTON);
     }
 
     /**
@@ -133,7 +135,7 @@ public class SceneFight extends Scene {
                 break;
 
             case KeyEvent.VK_DOWN:
-                if (SceneFightUtilities.isButtonInRange(newSelectedButton, graphicElementNameToInt.get("FIGHT_BUTTON"),
+                if (SceneFightUtilities.isButtonInRange(newSelectedButton, graphicElementNameToInt.get(FIGHT_BUTTON),
                         graphicElementNameToInt.get("BALL_BUTTON"))
                         || SceneFightUtilities.isButtonInRange(newSelectedButton,
                                 graphicElementNameToInt.get("MOVE_BUTTON_1"),
@@ -158,7 +160,7 @@ public class SceneFight extends Scene {
                 break;
 
             case KeyEvent.VK_RIGHT:
-                if (newSelectedButton == graphicElementNameToInt.get("FIGHT_BUTTON")
+                if (newSelectedButton == graphicElementNameToInt.get(FIGHT_BUTTON)
                         || newSelectedButton == graphicElementNameToInt.get("POKEMON_BUTTON")
                         || newSelectedButton == graphicElementNameToInt.get("MOVE_BUTTON_1")
                         || newSelectedButton == graphicElementNameToInt.get("MOVE_BUTTON_3")) {
@@ -203,6 +205,8 @@ public class SceneFight extends Scene {
                     case DO_NOTHING:
                         fightLoop(new Decision(DecisionTypeEnum.NOTHING, ""));
                         break;
+					default:
+						break;
                 }
                 if (newSelectedButton >= graphicElementNameToInt.get("CHANGE_POKEMON_1")
                         && newSelectedButton <= graphicElementNameToInt.get("CHANGE_POKEMON_5")) {

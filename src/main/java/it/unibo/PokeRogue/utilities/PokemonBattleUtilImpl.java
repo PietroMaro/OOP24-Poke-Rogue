@@ -7,6 +7,7 @@ import java.io.IOException;
 import it.unibo.PokeRogue.Weather;
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.pokemon.Stats;
 import it.unibo.PokeRogue.pokemon.Type;
 
 /**
@@ -69,7 +70,7 @@ public final class PokemonBattleUtilImpl implements PokemonBattleUtil {
     }
 
     private int computeOffenseDefenseRatio(final Pokemon attackingPokemon, final Pokemon defendingPokemon,
-            final String attackStatName, final String defenseStatName) {
+            final Stats attackStatName, final Stats defenseStatName) {
 
         if (defendingPokemon.getActualStats().get(defenseStatName).getCurrentValue() == 0) {
             return attackingPokemon.getActualStats().get(attackStatName).getCurrentValue();
@@ -87,12 +88,12 @@ public final class PokemonBattleUtilImpl implements PokemonBattleUtil {
         final int attackDefenseDifference;
 
         if (attackChosen.isPhysical()) {
-            attackDefenseDifference = this.computeOffenseDefenseRatio(attackingPokemon, defendingPokemon, "attack",
-                    "defense");
+            attackDefenseDifference = this.computeOffenseDefenseRatio(attackingPokemon, defendingPokemon, Stats.ATTACK,
+                    Stats.DEFENSE);
         } else {
             attackDefenseDifference = this.computeOffenseDefenseRatio(attackingPokemon, defendingPokemon,
-                    "specialAttack",
-                    "specialDefense");
+                    Stats.SPECIAL_ATTACK,
+                    Stats.SPECIAL_DEFENSE);
 
         }
 

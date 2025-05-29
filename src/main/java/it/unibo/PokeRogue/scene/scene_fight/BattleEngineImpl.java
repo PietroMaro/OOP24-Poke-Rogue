@@ -19,6 +19,7 @@ import it.unibo.PokeRogue.items.ItemFactory;
 import it.unibo.PokeRogue.items.ItemFactoryImpl;
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.pokemon.Stats;
 import it.unibo.PokeRogue.savingSystem.SavingSystem;
 import it.unibo.PokeRogue.savingSystem.SavingSystemImpl;
 import it.unibo.PokeRogue.scene.scene_fight.enums.DecisionTypeEnum;
@@ -142,7 +143,7 @@ public class BattleEngineImpl implements BattleEngine {
         final int finalDamage = pokemonBattleUtilInstance.calculateDamage(attackerPokemon, defenderPokemon,
                 attackerMove.get(),
                 this.currentWeather);
-        defenderPokemon.getActualStats().get("hp").decrement(finalDamage);
+        defenderPokemon.getActualStats().get(Stats.HP).decrement(finalDamage);
         this.effectParserInstance.parseEffect(attackerMove.get().getEffect(), attackerPokemon, defenderPokemon,
                 attackerMove, opponentMove, this.currentWeather);
     }
@@ -153,8 +154,8 @@ public class BattleEngineImpl implements BattleEngine {
             InvocationTargetException,
             InstantiationException {
         final int countBall = playerTrainerInstance.getBall().get(pokeballName);
-        final int maxHP = enemyPokemon.getActualStats().get("hp").getCurrentMax();
-        final int currentHP = enemyPokemon.getActualStats().get("hp").getCurrentValue();
+        final int maxHP = enemyPokemon.getActualStats().get(Stats.HP).getCurrentMax();
+        final int currentHP = enemyPokemon.getActualStats().get(Stats.HP).getCurrentValue();
         final int baseCaptureRate = enemyPokemon.getCaptureRate();
         final double ballModifier = itemFactoryInstance.itemFromName(pokeballName).getCaptureRate();
         final Pokemon enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
@@ -247,7 +248,7 @@ public class BattleEngineImpl implements BattleEngine {
             BattleRewards.awardBattleRewards(this.playerPokemon, this.enemyPokemon);
             this.newMoveToLearn(this.playerPokemon);
             this.gameEngineInstance.setScene("shop");
-        } else if (this.enemyPokemon.getActualStats().get("hp").getCurrentValue() <= 0) {
+        } else if (this.enemyPokemon.getActualStats().get(Stats.HP).getCurrentValue() <= 0) {
             final Decision enemyChoose = enemyAiInstance.nextMove(this.getCurrentWeather());
             this.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""), enemyChoose);
             BattleRewards.awardBattleRewards(playerPokemon, enemyPokemon);
@@ -257,7 +258,7 @@ public class BattleEngineImpl implements BattleEngine {
             PlayerTrainerImpl.resetInstance();
             gameEngineInstance.setFightLevel(0);
             this.gameEngineInstance.setScene("main");
-        } else if (playerPokemon.getActualStats().get("hp").getCurrentValue() <= 0) {
+        } else if (playerPokemon.getActualStats().get(Stats.HP).getCurrentValue() <= 0) {
             playerTrainerInstance.switchPokemonPosition(FIRST_POSITION,
                     BattleUtilities.findFirstUsablePokemon(playerTrainerInstance));
         }
@@ -273,9 +274,9 @@ public class BattleEngineImpl implements BattleEngine {
         return playerMove.get().getPriority() > enemyMove.get().getPriority()
                 || playerTrainerInstance.getPokemon(FIRST_POSITION).isPresent()
                         && enemyTrainerInstance.getPokemon(FIRST_POSITION).isPresent()
-                        && playerTrainerInstance.getPokemon(FIRST_POSITION).get().getActualStats().get("speed")
+                        && playerTrainerInstance.getPokemon(FIRST_POSITION).get().getActualStats().get(Stats.SPEED)
                                 .getCurrentValue() > enemyTrainerInstance.getPokemon(FIRST_POSITION).get()
-                                        .getActualStats().get("speed").getCurrentValue();
+                                        .getActualStats().get(Stats.SPEED).getCurrentValue();
     }
 
     private void switchIn(final String move, final TrainerImpl trainer) {

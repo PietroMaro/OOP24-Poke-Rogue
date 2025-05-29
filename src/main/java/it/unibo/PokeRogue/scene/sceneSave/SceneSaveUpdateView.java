@@ -8,7 +8,7 @@ public class SceneSaveUpdateView {
     private final GraphicElementsRegistry currentSceneGraphicElements;
     private int currentSelectedButton;
     public SceneSaveUpdateView(final GraphicElementsRegistry currentSceneGraphicElements,
-            final int currentSelectedButton, final int newSelectedButton) {
+            final int currentSelectedButton) {
 
         this.currentSelectedButton = currentSelectedButton;
         this.currentSceneGraphicElements = currentSceneGraphicElements;

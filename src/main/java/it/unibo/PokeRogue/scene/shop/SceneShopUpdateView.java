@@ -53,12 +53,12 @@ public class SceneShopUpdateView {
                 this.newSelectedButton = newSelectedButton;
                 this.updateSelectedButton(currentSelectedButton, newSelectedButton);
                 this.updateItemDescription();
-                this.updatePokemonSelection(currentSelectedButton);
+                this.updatePokemonSelection();
                 this.mainMenu();
 
         }
 
-        private void updatePokemonSelection(final int currentSelectedButton) throws IOException {
+        private void updatePokemonSelection() throws IOException {
                 if (this.newSelectedButton >= this.graphicElementNameToInt.get("CHANGE_POKEMON_1_BUTTON")
                                 && this.newSelectedButton <= this.graphicElementNameToInt
                                                 .get("CHANGE_POKEMON_BACK_BUTTON")

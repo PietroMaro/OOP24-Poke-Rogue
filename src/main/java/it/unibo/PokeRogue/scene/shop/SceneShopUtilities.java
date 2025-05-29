@@ -8,6 +8,7 @@ import it.unibo.PokeRogue.graphic.text.TextElementImpl;
 import it.unibo.PokeRogue.items.Item;
 import it.unibo.PokeRogue.items.ItemFactoryImpl;
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.pokemon.Stats;
 import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.Trainer;
@@ -40,8 +41,8 @@ public final class SceneShopUtilities {
         }
 
         final Pokemon pokemon = pokemonOpt.get();
-        final Integer currentHp = pokemon.getActualStats().get("hp").getCurrentValue();
-        final Integer maxHp = pokemon.getActualStats().get("hp").getCurrentMax();
+        final Integer currentHp = pokemon.getActualStats().get(Stats.HP).getCurrentValue();
+        final Integer maxHp = pokemon.getActualStats().get(Stats.HP).getCurrentMax();
 
         return currentHp + " / " + maxHp;
     }
@@ -68,7 +69,7 @@ public final class SceneShopUtilities {
     public static void updateItemsText(final GraphicElementsRegistry sceneGraphicElements) {
 
         for (int i = 0; i < PRICY_ITEMS_SIZE; i++) {
-            final Item item = SceneShopUtilities.getShopItems(i);
+            final Item item = getShopItems(i);
             final double xPosition = 0.15 + (i * 0.29);
             final double xPositionPrice = 0.25 + (i * 0.29);
 

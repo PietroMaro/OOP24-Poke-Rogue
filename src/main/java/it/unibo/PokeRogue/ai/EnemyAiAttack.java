@@ -11,6 +11,7 @@ import java.io.IOException;
 import it.unibo.PokeRogue.Weather;
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.pokemon.Stats;
 import it.unibo.PokeRogue.scene.scene_fight.Decision;
 import it.unibo.PokeRogue.scene.scene_fight.enums.DecisionTypeEnum;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
@@ -198,7 +199,7 @@ public final class EnemyAiAttack {
 
             }
 
-            if (moveDamage > this.currentPlayerPokemon.getActualStats().get("hp").getCurrentValue()) {
+            if (moveDamage > this.currentPlayerPokemon.getActualStats().get(Stats.HP).getCurrentValue()) {
                 actualMoveScore += 4;
                 this.scoresOfMoves.put(moveIndex, actualMoveScore);
             }

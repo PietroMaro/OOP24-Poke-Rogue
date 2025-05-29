@@ -8,6 +8,7 @@ import javax.swing.OverlayLayout;
 import it.unibo.PokeRogue.graphic.panel.PanelElementImpl;
 import it.unibo.PokeRogue.graphic.sprite.SpriteElementImpl;
 import it.unibo.PokeRogue.graphic.text.TextElementImpl;
+import it.unibo.PokeRogue.pokemon.Stats;
 import it.unibo.PokeRogue.scene.GraphicElementsRegistry;
 import it.unibo.PokeRogue.trainers.PlayerTrainerImpl;
 import it.unibo.PokeRogue.trainers.TrainerImpl;
@@ -102,21 +103,21 @@ public class SceneFightInitView {
                                 .safeGetElementByName(currentSceneGraphicElements, "MY_POKEMON_ACTUAL_LIFE_TEXT",
                                                 TextElementImpl.class)
                                 .setText(playerTrainerInstance.getPokemon(FIRST_POSITION).get()
-                                                .getActualStats().get("hp").getCurrentValue()
+                                                .getActualStats().get(Stats.HP).getCurrentValue()
                                                 + " / "
                                                 + playerTrainerInstance
                                                                 .getPokemon(FIRST_POSITION).get()
-                                                                .getActualStats().get("hp")
+                                                                .getActualStats().get(Stats.HP)
                                                                 .getCurrentMax());
                 UtilitiesForScenes
                                 .safeGetElementByName(currentSceneGraphicElements, "ENEMY_POKEMON_ACTUAL_LIFE_TEXT",
                                                 TextElementImpl.class)
                                 .setText(enemyTrainerInstance.getPokemon(FIRST_POSITION).get()
-                                                .getActualStats().get("hp").getCurrentValue()
+                                                .getActualStats().get(Stats.HP).getCurrentValue()
                                                 + " / "
                                                 + enemyTrainerInstance
                                                                 .getPokemon(FIRST_POSITION).get()
-                                                                .getActualStats().get("hp")
+                                                                .getActualStats().get(Stats.HP)
                                                                 .getCurrentMax());
                 // TEXT EXP
                 UtilitiesForScenes

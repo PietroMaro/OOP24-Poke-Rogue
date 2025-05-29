@@ -18,7 +18,7 @@ public class SceneInfoView {
         this.graphicElements = graphicElements;
     }
 
-    protected void initGraphicElements(GraphicElementsRegistry currentSceneGraphicElements,
+    protected void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
             final Map<String, PanelElementImpl> allPanelsElements) throws IOException {
         allPanelsElements.put(FIRST_PANEL, new PanelElementImpl("", new OverlayLayout(null)));
         UtilitiesForScenes.loadSceneElements("sceneInfoElements.json", "init", currentSceneGraphicElements,

@@ -38,8 +38,7 @@ public class SceneSave extends Scene {
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.initStatus();
         this.sceneSaveView = new SceneSaveView(this.currentSceneGraphicElements, this.getGraphicElements(), this.allPanelsElements
-				, this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL)
-				, newSelectedButton);
+				, this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL));
         this.initGraphicElements();
     }
 

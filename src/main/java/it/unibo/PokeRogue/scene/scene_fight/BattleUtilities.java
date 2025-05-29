@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import it.unibo.PokeRogue.move.Move;
 import it.unibo.PokeRogue.pokemon.Pokemon;
+import it.unibo.PokeRogue.pokemon.Stats;
 import it.unibo.PokeRogue.trainers.Trainer;
 import it.unibo.PokeRogue.trainers.TrainerImpl;
 
@@ -38,7 +39,7 @@ public final class BattleUtilities {
         for (final Optional<Pokemon> optionalPokemon : trainer.getSquad()) {
             if (optionalPokemon.isPresent()) {
                 final Pokemon pokemon = optionalPokemon.get();
-                if (pokemon.getActualStats().get("hp").getCurrentValue() > 0) {
+                if (pokemon.getActualStats().get(Stats.HP).getCurrentValue() > 0) {
                     return false;
                 }
             }
@@ -59,7 +60,7 @@ public final class BattleUtilities {
             final Optional<Pokemon> optionalPokemon = trainer.getPokemon(i);
             if (optionalPokemon.isPresent()) {
                 final Pokemon pokemon = optionalPokemon.get();
-                if (pokemon.getActualStats().get("hp").getCurrentValue() > 0) {
+                if (pokemon.getActualStats().get(Stats.HP).getCurrentValue() > 0) {
                     return i;
                 }
             }
@@ -79,7 +80,7 @@ public final class BattleUtilities {
     public static boolean canSwitch(final TrainerImpl trainer, final int switchPokemonPosition) {
         return switchPokemonPosition < trainer.getSquad().size()
                 && trainer.getPokemon(switchPokemonPosition)
-                        .map(pokemon -> pokemon.getActualStats().get("hp").getCurrentValue() > 0)
+                        .map(pokemon -> pokemon.getActualStats().get(Stats.HP).getCurrentValue() > 0)
                         .orElse(false);
     }
 

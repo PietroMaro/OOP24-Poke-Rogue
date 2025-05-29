@@ -4,15 +4,7 @@ import it.unibo.PokeRogue.Singleton;
 import it.unibo.PokeRogue.utilities.JsonReader;
 import it.unibo.PokeRogue.utilities.JsonReaderImpl;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Iterator;
-import java.util.Random;
-import java.util.Optional;
+import java.util.*;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -60,13 +52,13 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory {
 		final List<String> types = jsonArrayToList(pokemonJson.getJSONArray("types"));
 		final int captureRate = pokemonJson.getInt("captureRate");
 		final int minLevelForEncounter = pokemonJson.getInt("minLevelForEncounter");
-		final Map<String, Integer> stats = jsonObjectToMap(pokemonJson.getJSONObject("stats"));
+		final Map<Stats, Integer> stats = statsMap(pokemonJson.getJSONObject("stats"));
 		final Map<String, String> learnableMoves = jsonObjectToMap(pokemonJson.getJSONObject("moves"));
 		final String growthRate = pokemonJson.getString("growthRate");
 		final String name = pokemonJson.getString("name");
 		final int weight = pokemonJson.getInt("weight");
 		final List<String> possibleAbilities = jsonArrayToList(pokemonJson.getJSONArray("abilites"));
-		final Map<String, Integer> givesEV = jsonObjectToMap(pokemonJson.getJSONObject("givesEV"));
+		final Map<Stats, Integer> givesEV = statsMap(pokemonJson.getJSONObject("givesEV"));
 		final Optional<Image> newPokemonSpriteFront = Optional.of(ImageIO.read(new File(Paths
 						.get(SRC_LITTERAL,
 							POKEMON_DATA,
@@ -151,5 +143,24 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory {
             result.put(key, value);
         }
 		return result;
+	}
+
+	private Map<Stats,Integer> statsMap(final JSONObject jsonObject){
+		final Map<String, Integer> startMap = jsonObjectToMap(jsonObject);
+		final Map<Stats, Integer> ris = new HashMap<>();
+		for(final String key : startMap.keySet()){
+			switch (key){
+				case "hp" -> ris.put(Stats.HP,startMap.get(key));
+				case "specialAttack" -> ris.put(Stats.SPECIAL_ATTACK,startMap.get(key));
+				case "specialDefense" -> ris.put(Stats.SPECIAL_DEFENSE,startMap.get(key));
+				case "attack" -> ris.put(Stats.ATTACK,startMap.get(key));
+				case "defense" -> ris.put(Stats.DEFENSE,startMap.get(key));
+				case "speed" -> ris.put(Stats.SPEED,startMap.get(key));
+				case "accuracy" -> ris.put(Stats.ACCURACY,startMap.get(key));
+				case "critRate" -> ris.put(Stats.CRIT_RATE,startMap.get(key));
+				default -> {}
+			}
+		}
+		return ris;
 	}
 }
