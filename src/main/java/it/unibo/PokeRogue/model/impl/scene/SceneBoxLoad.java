@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
-import lombok.Getter;
-
 /**
  * The {@code SceneBoxModel} class represents the data model for handling
  * Pokémon storage boxes in a scene. It integrates with a saving system to
@@ -29,7 +27,6 @@ public final class SceneBoxLoad {
     private final SavingSystem savingSystemInstance;
     private final PokemonFactory pokemonFactoryInstance;
 
-    @Getter
     private final List<List<Pokemon>> boxes;
 
     /**
@@ -47,7 +44,13 @@ public final class SceneBoxLoad {
 
     }
 
-    public final void setUpSave(final String savePath) throws InstantiationException,
+    /**
+     * Initializes the save system by loading Pokémon data.
+     * 
+     * @param savePath the path to the save file; if empty, initializes default
+     *                 starters
+     */
+    public void setUpSave(final String savePath) throws InstantiationException,
             IllegalAccessException,
             InvocationTargetException,
             NoSuchMethodException,
@@ -61,7 +64,7 @@ public final class SceneBoxLoad {
             this.addPokemonToBox(pokemonFactoryInstance.pokemonFromName("squirtle"));
 
         } else {
-            this.savingSystemInstance.loadData(Paths.get("src", "main","resources","saves", savePath).toString());
+            this.savingSystemInstance.loadData(Paths.get("src", "main", "resources", "saves", savePath).toString());
 
             for (final var box : this.savingSystemInstance.getSavedPokemon()) {
                 for (final String pokemonName : box) {
@@ -72,6 +75,18 @@ public final class SceneBoxLoad {
             }
         }
 
+    }
+
+    /**
+     * Returns a defensive copy of the current list of Pokémon boxes.
+     *
+     * 
+     * @return a new list of Pokémon boxes, each box itself a new list of
+     *         Pokemon
+     */
+    public List<List<Pokemon>> getBoxes() {
+
+        return new ArrayList<>(boxes);
     }
 
     private void addPokemonToBox(final Pokemon pokemon) {

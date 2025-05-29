@@ -31,7 +31,17 @@ public final class SceneMenuView {
 
         }
 
-        public final void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
+        /**
+         * Initializes the graphic elements for the menu scene, including the base
+         * panel.
+         * Loads additional elements from a JSON file specific to the menu scene.
+         *
+         * @param currentSceneGraphicElements the registry where menu-specific graphic
+         *                                    elements will be registered
+         * @param allPanelsElements           a map storing the panel elements used in
+         *                                    the menu scene
+         */
+        public void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements)
                         throws IOException {
 

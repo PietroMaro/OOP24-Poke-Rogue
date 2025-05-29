@@ -13,6 +13,18 @@ import it.unibo.pokerogue.model.impl.graphic.TextElementImpl;
 import it.unibo.pokerogue.model.impl.item.ItemFactoryImpl;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 
+/**
+ * Utility class for handling various helper functions and constants used in the
+ * SceneShop.
+ * This includes managing shop item generation, updating UI elements like item
+ * names,
+ * prices, and player-related display texts.
+ *
+ * <p>
+ * This class is not meant to be instantiated and contains only static methods
+ * and constants.
+ * </p>
+ */
 public final class SceneShopUtilities {
     private static final String QUESTION_MARK_STRING = "???";
     private static final List<Item> SHOP_ITEMS = new ArrayList<>();

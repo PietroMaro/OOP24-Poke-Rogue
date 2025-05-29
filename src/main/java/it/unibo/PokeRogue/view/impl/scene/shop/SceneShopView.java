@@ -34,14 +34,10 @@ public class SceneShopView {
      * @param allPanelsElements       Mapping of panel elements by name.
      * @param itemFactoryImpl         Factory for generating items to populate the
      *                                shop.
-     * @param playerTrainerInstance   Reference to the current player trainer
-     *                                instance.
      * @param currentSelectedButton   Button currently selected in the UI.
      * @param newSelectedButton       Button the user is navigating to.
      * @param scene                   Reference to the main shop scene for
      *                                interaction handling.
-     * @param sceneShopUtilities      Utility class for common shop operations and
-     *                                logic.
      * @param graphicElementNameToInt Mapping of graphic element names to their
      *                                identifiers.
      */

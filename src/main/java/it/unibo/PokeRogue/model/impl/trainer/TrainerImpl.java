@@ -89,4 +89,20 @@ public class TrainerImpl implements Trainer {
         this.money += amount;
     }
 
+    @Override
+    public final List<Optional<Pokemon>> getSquad() {
+        return new ArrayList<>(squad);
+
+    }
+
+    public void setSquad(final List<Optional<Pokemon>> squad) {
+        this.squad = new ArrayList<>(squad);
+
+    }
+
+    @Override
+    public final Map<String, Integer> getBall() {
+        return new HashMap<>(ball);
+    };
+
 }
