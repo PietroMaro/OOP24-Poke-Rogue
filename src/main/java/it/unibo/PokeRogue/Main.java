@@ -9,13 +9,22 @@ import it.unibo.pokerogue.controller.impl.GraphicEngineImpl;
 
 import java.io.IOException;
 
+/**
+ * The entry point of the application.
+ * This class contains the main method used to start the program.
+ */
 public final class Main {
 
-	private Main(){
+	private Main() {
 		// Shouldn't be instanciated
 	}
 
-	public static void main(String[] args) {
+	/**
+	 * Starts the program.
+	 *
+	 * @param args command-line arguments (not used)
+	 */
+	public static void main(final String[] args) {
 
 		try {
 			final GameEngine mainGameEngine = GameEngineImpl.getInstance(GameEngineImpl.class);
@@ -23,13 +32,13 @@ public final class Main {
 
 			mainGameEngine.setGraphicEngine(mainGraphicEngine);
 			mainGameEngine.setScene("main");
-		} catch (InstantiationException 
-				| IllegalAccessException 
-				| InvocationTargetException 
+		} catch (InstantiationException
+				| IllegalAccessException
+				| InvocationTargetException
 				| IOException
 				| NoSuchMethodException e) {
 			e.printStackTrace();
-			
+
 		}
 
 	}
