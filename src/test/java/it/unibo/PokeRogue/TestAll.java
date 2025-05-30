@@ -153,7 +153,7 @@ public final class TestAll {
 
 		final JsonReader jsonReader = new JsonReaderImpl();
 
-		final Path dirPath = Paths.get("src", "main","resources","pokemonData", "moves");
+		final Path dirPath = Paths.get("src", "main", "resources", "pokemonData", "moves");
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
 			for (final Path entry : stream) {
 				if (Files.isRegularFile(entry)) {
@@ -181,7 +181,7 @@ public final class TestAll {
 
 		final JsonReader jsonReader = new JsonReaderImpl();
 
-		final Path dirPath = Paths.get("src", "main","resources","pokemonData", "abilities");
+		final Path dirPath = Paths.get("src", "main", "resources", "pokemonData", "abilities");
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
 			for (final Path entry : stream) {
 				if (Files.isRegularFile(entry)) {
@@ -220,7 +220,7 @@ public final class TestAll {
 		final JsonReader jsonReader = new JsonReaderImpl();
 		final Pokemon pok1 = pokeFactory.randomPokemon(3);
 
-		final Path dirPath = Paths.get("src", "main","resources","itemsData", "items", "data");
+		final Path dirPath = Paths.get("src", "main", "resources", "itemsData", "items", "data");
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
 			for (final Path entry : stream) {
 				if (Files.isRegularFile(entry)) {
@@ -239,7 +239,7 @@ public final class TestAll {
 		final PlayerTrainerImpl playerTrainerImpl = PlayerTrainerImpl.getTrainerInstance();
 		final TrainerImpl enemyTrainer = new TrainerImpl();
 		final Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
-		final EnemyAi ai = new EnemyAiImpl(enemyTrainer, 99);
+		final EnemyAi ai = new EnemyAiImpl(99);
 		final Pokemon charmander = pokeFactory.pokemonFromName("charmander");
 		final Pokemon venusaur = pokeFactory.pokemonFromName("venusaur");
 		final Pokemon poliwag = pokeFactory.pokemonFromName("poliwag");
@@ -247,11 +247,11 @@ public final class TestAll {
 		playerTrainerImpl.addPokemon(poliwag, MAX_LENGTH_OF_POKESQUAD);
 		enemyTrainer.addPokemon(charmander, MAX_LENGTH_OF_POKESQUAD);
 
-		assertEquals(ai.nextMove(weather), new Decision(DecisionTypeEnum.ATTACK, "0"));
+		assertEquals(ai.nextMove(weather, enemyTrainer), new Decision(DecisionTypeEnum.ATTACK, "0"));
 
 		enemyTrainer.addPokemon(venusaur, MAX_LENGTH_OF_POKESQUAD);
 
-		assertEquals(ai.nextMove(weather), new Decision(DecisionTypeEnum.SWITCH_IN, "1"));
+		assertEquals(ai.nextMove(weather, enemyTrainer), new Decision(DecisionTypeEnum.SWITCH_IN, "1"));
 
 	}
 
@@ -288,7 +288,7 @@ public final class TestAll {
 		final Pokemon charmander = factory.pokemonFromName("charmander");
 		playerTrainer.addPokemon(bulbasaur, 1);
 		enemyTrainer.addPokemon(charmander, 1);
-		final EnemyAi ai = new EnemyAiImpl(enemyTrainer, 99);
+		final EnemyAi ai = new EnemyAiImpl(99);
 		final int beforeLife = playerTrainer.getSquad().get(0).get().getActualStats().get(Stats.HP).getCurrentValue();
 		final BattleEngine battleEngine = new BattleEngineImpl(enemyTrainer, ai);
 		battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""),

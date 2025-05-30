@@ -12,7 +12,6 @@ import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.view.impl.scene.SceneInfoView;
-import lombok.Getter;
 
 /**
  * Scene representing the "Info" screen of the game.
@@ -23,9 +22,7 @@ import lombok.Getter;
  * Extends the abstract {@link Scene} class.
  */
 public class SceneInfo extends Scene {
-    @Getter
     private final GraphicElementsRegistry currentSceneGraphicElements;
-    @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final SceneInfoView sceneInfoView;
     private final GameEngineImpl gameEngineInstance;
@@ -85,10 +82,11 @@ public class SceneInfo extends Scene {
                     gameEngineInstance.setScene("main");
                 }
                 break;
-			default:
-				break;
+            default:
+                break;
         }
     }
+
     private void initStatus() {
         this.newSelectedButton = this.graphicElementNameToInt.get("BACK_BUTTON");
     }
@@ -113,5 +111,15 @@ public class SceneInfo extends Scene {
     @Override
     public void updateGraphic() throws IOException {
         // No graphical update logic implemented yet
+    }
+
+    @Override
+    public GraphicElementsRegistry getCurrentSceneGraphicElements() {
+        return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);
+    }
+
+    @Override
+    public Map<String, PanelElementImpl> getAllPanelsElements() {
+        return new LinkedHashMap<>(this.allPanelsElements);
     }
 }

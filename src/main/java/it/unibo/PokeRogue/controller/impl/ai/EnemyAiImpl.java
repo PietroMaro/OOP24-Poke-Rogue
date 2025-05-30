@@ -25,7 +25,6 @@ public final class EnemyAiImpl implements EnemyAi {
     private static final int HIGH_AI_THRESHOLD = 75;
     private static final int DEFAULT_SWITCH_FIRST_RATE_PERCENT = 60;
 
-    private final Trainer enemyTrainer;
     private final EnemyAiSwitchIn aiOfSwitchIn;
     private final EnemyAiAttack aiOfAttack;
 
@@ -40,8 +39,7 @@ public final class EnemyAiImpl implements EnemyAi {
      * @param enemyTrainer the enemy trainer to control
      * @param battleLvl    the current battle difficulty level
      */
-    public EnemyAiImpl(final Trainer enemyTrainer, final int battleLvl) throws IOException {
-        this.enemyTrainer = enemyTrainer;
+    public EnemyAiImpl(final int battleLvl) throws IOException {
         boolean scoreMoves = false;
         boolean hpAware = false;
         boolean considerSwitching = false;
@@ -65,29 +63,29 @@ public final class EnemyAiImpl implements EnemyAi {
 
         }
 
-        this.aiOfSwitchIn = new EnemyAiSwitchIn(usePokemonInOrder, considerSwitching, switchFirstRate,
-                this.enemyTrainer);
+        this.aiOfSwitchIn = new EnemyAiSwitchIn(usePokemonInOrder, considerSwitching, switchFirstRate);
 
-        this.aiOfAttack = new EnemyAiAttack(scoreMoves, hpAware, enemyTrainer);
+        this.aiOfAttack = new EnemyAiAttack(scoreMoves, hpAware);
     }
 
     /**
      * Determines the next move the AI should take, either switching Pokémon or
      * attacking, based on internal strategy and the current weather.
      *
-     * @param weather an optional of the current battle weather
+     * @param weather      an optional of the current battle weather
+     * @param enemyTrainer the enemy trainer
      * @return a {@link Decision} object representing the chosen action and related
      *         data
      */
     @Override
-    public Decision nextMove(final Optional<Weather> weather) {
-        Decision decision = this.aiOfSwitchIn.switchInDecisionMaker();
+    public Decision nextMove(final Optional<Weather> weather, final Trainer enemyTrainer) {
+        Decision decision = this.aiOfSwitchIn.switchInDecisionMaker(enemyTrainer);
 
         if (decision.moveType() == DecisionTypeEnum.SWITCH_IN) {
             return decision;
         }
 
-        decision = this.aiOfAttack.whatAttackWillDo(weather);
+        decision = this.aiOfAttack.whatAttackWillDo(weather, enemyTrainer);
 
         if (decision.moveType() == DecisionTypeEnum.ATTACK) {
             return decision;
