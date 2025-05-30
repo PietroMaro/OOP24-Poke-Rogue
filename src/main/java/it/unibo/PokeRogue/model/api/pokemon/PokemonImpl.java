@@ -330,30 +330,17 @@ public final class PokemonImpl implements Pokemon {
 	
 	@Override
 	public Map<Stats, Range<Integer>> getEv() {
-	    if (ev == null) return null;
-	    Map<Stats, Range<Integer>> copy = new HashMap<>();
-	    for (Map.Entry<Stats, Range<Integer>> entry : ev.entrySet()) {
-	        copy.put(entry.getKey(), entry.getValue().copyOf());
-	    }
-	    return Map.copyOf(copy);
+	    return Map.copyOf(this.ev);
 	}
 	
 	@Override
 	public void setEv(Map<Stats, Range<Integer>> ev) {
-	    if (ev == null) {
-	        this.ev = null;
-	    } else {
-	        Map<Stats, Range<Integer>> copy = new HashMap<>();
-	        for (Map.Entry<Stats, Range<Integer>> entry : ev.entrySet()) {
-	            copy.put(entry.getKey(), entry.getValue().copyOf());
-	        }
-	        this.ev = Map.copyOf(copy);
-	    }
+	        this.ev = Map.copyOf(ev);
 	}
 	
 	@Override
 	public Range<Integer> getLevel() {
-	    return level == null ? null : level.copyOf();
+	    return this.level == null ? null : this.level.copyOf();
 	}
 	
 	@Override
@@ -363,48 +350,22 @@ public final class PokemonImpl implements Pokemon {
 	
 	@Override
 	public Map<Stats, Range<Integer>> getActualStats() {
-	    if (actualStats == null) return null;
-	    Map<Stats, Range<Integer>> copy = new HashMap<>();
-	    for (Map.Entry<Stats, Range<Integer>> entry : actualStats.entrySet()) {
-	        copy.put(entry.getKey(), entry.getValue().copyOf());
-	    }
-	    return Map.copyOf(copy);
+	    return Map.copyOf(this.actualStats);
 	}
 	
 	@Override
-	public void setActualStats(Map<Stats, Range<Integer>> actualStats) {
-	    if (actualStats == null) {
-	        this.actualStats = null;
-	    } else {
-	        Map<Stats, Range<Integer>> copy = new HashMap<>();
-	        for (Map.Entry<Stats, Range<Integer>> entry : actualStats.entrySet()) {
-	            copy.put(entry.getKey(), entry.getValue().copyOf());
-	        }
-	        this.actualStats = Map.copyOf(copy);
-	    }
+	public void setActualStats(Map<Stats, Range<Integer>> newVal) {
+	        this.actualStats = Map.copyOf(newVal);
 	}
 	
 	@Override
 	public Map<Stats, Range<Integer>> getTempStatsBonus() {
-	    if (tempStatsBonus == null) return null;
-	    Map<Stats, Range<Integer>> copy = new HashMap<>();
-	    for (Map.Entry<Stats, Range<Integer>> entry : tempStatsBonus.entrySet()) {
-	        copy.put(entry.getKey(), entry.getValue().copyOf());
-	    }
-	    return Map.copyOf(copy);
+	    return Map.copyOf(this.tempStatsBonus);
 	}
 	
 	@Override
 	public void setTempStatsBonus(Map<Stats, Range<Integer>> tempStatsBonus) {
-	    if (tempStatsBonus == null) {
-	        this.tempStatsBonus = null;
-	    } else {
-	        Map<Stats, Range<Integer>> copy = new HashMap<>();
-	        for (Map.Entry<Stats, Range<Integer>> entry : tempStatsBonus.entrySet()) {
-	            copy.put(entry.getKey(), entry.getValue().copyOf());
-	        }
-	        this.tempStatsBonus = Map.copyOf(copy);
-	    }
+	    this.tempStatsBonus = Map.copyOf(tempStatsBonus);
 	}
 	
 	@Override
