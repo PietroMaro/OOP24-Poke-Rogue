@@ -78,6 +78,26 @@ public class SceneBox extends Scene {
                 this.initGraphicElements();
         }
 
+        /**
+         * Updates the status of the scene based on the user input key.
+         * Handles the navigation and interaction within the Pokémon box UI,
+         * including moving the selection cursor, switching boxes, and adding/removing
+         * Pokémon.
+         *
+         * @param inputKey the key code of the pressed key (e.g., KeyEvent.VK_UP,
+         *                 VK_DOWN, VK_ENTER, etc.)
+         * @throws IOException               if an I/O error occurs during scene changes
+         *                                   or updates.
+         * @throws InstantiationException    if a class for a new scene cannot be
+         *                                   instantiated.
+         * @throws IllegalAccessException    if the currently executing method does not
+         *                                   have access to the definition of the
+         *                                   specified class.
+         * @throws InvocationTargetException if the underlying method throws an
+         *                                   exception.
+         * @throws NoSuchMethodException     if a method expected for instantiation is
+         *                                   not found.
+         */
         @Override
         public void updateStatus(final int inputKey) throws IOException,
                         InstantiationException,

@@ -62,7 +62,8 @@ public class SceneMove extends Scene {
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
-        this.sceneMoveView = new SceneMoveView(currentSceneGraphicElements, allPanelsElements, this.getGraphicElements());
+        this.sceneMoveView = new SceneMoveView(currentSceneGraphicElements, allPanelsElements,
+                this.getGraphicElements());
         this.playerPokemon = PlayerTrainerImpl.getTrainerInstance().getPokemon(0).get();
         this.initStatus();
         this.initGraphicElements();
@@ -97,8 +98,8 @@ public class SceneMove extends Scene {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
-		final String move1Litteral = "MOVE_1_BUTTON";
-		final String move5Litteral = "MOVE_1_BUTTON";
+        final String move1Litteral = "MOVE_1_BUTTON";
+        final String move5Litteral = "MOVE_1_BUTTON";
 
         switch (inputKey) {
             case KeyEvent.VK_UP:

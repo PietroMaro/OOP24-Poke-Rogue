@@ -74,12 +74,12 @@ public final class GraphicElementsRegistryImpl implements GraphicElementsRegistr
         this.elements.clear();
     }
 
-	@Override
+    @Override
     public Map<Integer, GraphicElementImpl> getElements() {
         return new LinkedHashMap<>(this.elements);
     }
 
-	@Override
+    @Override
     public Map<String, Integer> getNameToId() {
         return new HashMap<>(this.nameToId);
     }

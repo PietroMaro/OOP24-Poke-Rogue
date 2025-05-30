@@ -27,28 +27,28 @@ import java.awt.Image;
  * @param spriteBack           pokemon spriteBack
  */
 public record PokemonBlueprint(
-		int pokedexNumber,
-		List<String> types,
-		int captureRate,
-		int minLevelForEncounter,
-		Map<Stats, Integer> stats,
-		Map<String, String> learnableMoves,
-		String growthRate,
-		String name,
-		int weight,
-		List<String> possibleAbilities,
-		Map<Stats, Integer> givesEv,
-		Optional<Image> spriteFront,
-		Optional<Image> spriteBack) {
-	/**
-	 * Compact constructor that defensively copies input collections
-	 * to ensure the record is immutable.
-	 */
-	public PokemonBlueprint {
-		types = List.copyOf(types);
-		stats = Map.copyOf(stats);
-		learnableMoves = Map.copyOf(learnableMoves);
-		possibleAbilities = List.copyOf(possibleAbilities);
-		givesEv = Map.copyOf(givesEv);
-	}
+        int pokedexNumber,
+        List<String> types,
+        int captureRate,
+        int minLevelForEncounter,
+        Map<Stats, Integer> stats,
+        Map<String, String> learnableMoves,
+        String growthRate,
+        String name,
+        int weight,
+        List<String> possibleAbilities,
+        Map<Stats, Integer> givesEv,
+        Optional<Image> spriteFront,
+        Optional<Image> spriteBack) {
+    /**
+     * Compact constructor that defensively copies input collections
+     * to ensure the record is immutable.
+     */
+    public PokemonBlueprint {
+        types = List.copyOf(types);
+        stats = Map.copyOf(stats);
+        learnableMoves = Map.copyOf(learnableMoves);
+        possibleAbilities = List.copyOf(possibleAbilities);
+        givesEv = Map.copyOf(givesEv);
+    }
 }

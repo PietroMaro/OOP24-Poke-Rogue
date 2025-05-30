@@ -62,7 +62,7 @@ public final class JsonReaderImpl implements JsonReader {
 		final String prettyJson = (jsonFile instanceof JSONArray)
 				? ((JSONArray) jsonFile).toString(4)
 				: ((JSONObject) jsonFile).toString(4);
-		try (final BufferedWriter writer = Files.newBufferedWriter(Path.of(filePath), StandardCharsets.UTF_8)) {
+		try (BufferedWriter writer = Files.newBufferedWriter(Path.of(filePath), StandardCharsets.UTF_8)) {
         	writer.write(prettyJson);
     	}
 	}

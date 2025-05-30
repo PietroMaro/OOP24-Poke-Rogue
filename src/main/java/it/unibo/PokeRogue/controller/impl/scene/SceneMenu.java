@@ -22,7 +22,8 @@ import it.unibo.pokerogue.view.impl.scene.SceneMenuView;
  * The class manages graphical elements, panels, and button states, and updates
  * them based on user input via keyboard.
  * 
- * Internally, it uses {@link it.unibo.pokerogue.model.impl.graphic} elements for the
+ * Internally, it uses {@link it.unibo.pokerogue.model.impl.graphic} elements
+ * for the
  * graphical
  * representation and delegates the setup of UI components to
  * {@link SceneMenuView}.
@@ -120,12 +121,12 @@ public final class SceneMenu extends Scene {
         this.currentSelectedButton = this.graphicElementNameToInt.get("LOAD_BUTTON");
     }
 
-	@Override
+    @Override
     public GraphicElementsRegistry getCurrentSceneGraphicElements() {
         return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);
     }
 
-	@Override
+    @Override
     public Map<String, PanelElementImpl> getAllPanelsElements() {
         return new LinkedHashMap<>(allPanelsElements);
     }

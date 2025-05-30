@@ -13,36 +13,35 @@ import it.unibo.pokerogue.controller.api.GameEngine;
  * This class extends KeyAdapter to override only the needed key events.
  */
 public final class InputHandlerImpl extends KeyAdapter {
+    private final GameEngine gameEngine;
 
-	private final GameEngine gameEngine;
+    /**
+     * Constructs the input handler and initializes the game engine instance.
+     *
+     */
+    public InputHandlerImpl() {
+        try {
+            gameEngine = GameEngineImpl.getInstance(GameEngineImpl.class);
+        } catch (InstantiationException
+                | IllegalAccessException
+                | InvocationTargetException
+                | JexlException
+                | NoSuchMethodException e) {
+            e.printStackTrace();
+            throw new IllegalStateException("GameEngine has not been initialized");
+        }
+    }
 
-	/**
-	 * Constructs the input handler and initializes the game engine instance.
-	 *
-	 */
-	public InputHandlerImpl() {
-		try {
-			gameEngine = GameEngineImpl.getInstance(GameEngineImpl.class);
-		} catch (InstantiationException 
-				| IllegalAccessException 
-				| InvocationTargetException 
-				| JexlException 
-				| NoSuchMethodException e) {
-			e.printStackTrace();
-			throw new IllegalStateException("GameEngine has not been initialized");
-		}
-	}
-
-	@Override
-	public void keyPressed(final KeyEvent event) {
-		try {
-			gameEngine.keyPressedToScene(event.getKeyCode());
-		} catch (InstantiationException 
-				| IllegalAccessException 
-				| InvocationTargetException 
-				| IOException
-				| NoSuchMethodException e) {
-			e.printStackTrace();
-		}
-	}
+    @Override
+    public void keyPressed(final KeyEvent event) {
+        try {
+            gameEngine.keyPressedToScene(event.getKeyCode());
+        } catch (InstantiationException
+                | IllegalAccessException
+                | InvocationTargetException
+                | IOException
+                | NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+    }
 }

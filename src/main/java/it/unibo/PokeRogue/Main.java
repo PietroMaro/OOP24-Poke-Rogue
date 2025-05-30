@@ -15,31 +15,31 @@ import java.io.IOException;
  */
 public final class Main {
 
-	private Main() {
-		// Shouldn't be instanciated
-	}
+    private Main() {
+        // Shouldn't be instanciated
+    }
 
-	/**
-	 * Starts the program.
-	 *
-	 * @param args command-line arguments (not used)
-	 */
-	public static void main(final String[] args) {
+    /**
+     * Starts the program.
+     *
+     * @param args command-line arguments (not used)
+     */
+    public static void main(final String[] args) {
 
-		try {
-			final GameEngine mainGameEngine = GameEngineImpl.getInstance(GameEngineImpl.class);
-			final GraphicEngine mainGraphicEngine = GraphicEngineImpl.getInstance(GraphicEngineImpl.class);
+        try {
+            final GameEngine mainGameEngine = GameEngineImpl.getInstance(GameEngineImpl.class);
+            final GraphicEngine mainGraphicEngine = GraphicEngineImpl.getInstance(GraphicEngineImpl.class);
 
-			mainGameEngine.setGraphicEngine(mainGraphicEngine);
-			mainGameEngine.setScene("main");
-		} catch (InstantiationException
-				| IllegalAccessException
-				| InvocationTargetException
-				| IOException
-				| NoSuchMethodException e) {
-			e.printStackTrace();
+            mainGameEngine.setGraphicEngine(mainGraphicEngine);
+            mainGameEngine.setScene("main");
+        } catch (InstantiationException
+                | IllegalAccessException
+                | InvocationTargetException
+                | IOException
+                | NoSuchMethodException e) {
+            e.printStackTrace();
 
-		}
+        }
 
-	}
+    }
 }

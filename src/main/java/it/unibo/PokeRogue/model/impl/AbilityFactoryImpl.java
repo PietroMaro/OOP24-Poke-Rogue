@@ -21,7 +21,6 @@ import org.json.JSONArray;
  * The ability factory.
  */
 public class AbilityFactoryImpl extends Singleton implements AbilityFactory {
-
 	// make the access in memory and saves the information of all pokemon in local
 	private final JsonReader jsonReader = new JsonReaderImpl();
 	private final Map<String, Ability> abilityBlueprints = new HashMap<>();
@@ -56,8 +55,7 @@ public class AbilityFactoryImpl extends Singleton implements AbilityFactory {
 		final JSONObject effect = abilityJson.getJSONObject("effect");
 		final Ability newAbility = new Ability(
 				situationChecks,
-				Optional.ofNullable(effect)
-			);
+				Optional.ofNullable(effect));
 
 		this.abilityBlueprints.put(abilityName, newAbility);
 	}

@@ -27,12 +27,10 @@ public class SceneShopView {
      * Constructs the shop view and initializes its internal components for
      * rendering and updating.
      *
-     * @param graphicElements    Registry of elements specific to the current
+     * @param graphicElements         Registry of elements specific to the current
      * 
      * @param sceneGraphicElements    Registry of elements specific to the current
      *                                shop scene.
-     * @param graphicElements         Global graphic element registry shared with
-     *                                other scenes.
      * @param allPanelsElements       Mapping of panel elements by name.
      * @param itemFactoryImpl         Factory for generating items to populate the
      *                                shop.
