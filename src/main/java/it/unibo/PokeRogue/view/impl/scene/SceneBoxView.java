@@ -68,10 +68,10 @@ public final class SceneBoxView {
                         currentSceneGraphicElements.put(pokemonIndex + FIRST_POKEMON_BUTTON_POSITION,
                                         new ButtonElementImpl(FIRST_PANEL_NAME, null, Color.BLACK, 0,
                                                         POKEMON_BUTTON_START_X
-                                                                        + (pokemonIndex % (double) POKE_BOX_ROW_LENGTH
+                                                                        + (pokemonIndex % POKE_BOX_ROW_LENGTH
                                                                                         * OFFSET_X),
                                                         POKEMON_BUTTON_START_Y
-                                                                        + (pokemonIndex / (double) POKE_BOX_ROW_LENGTH
+                                                                        + (pokemonIndex / POKE_BOX_ROW_LENGTH
                                                                                         * OFFSET_Y),
                                                         POKEMON_BUTTON_WIDTH,
                                                         POKEMON_BUTTON_HEIGHT));

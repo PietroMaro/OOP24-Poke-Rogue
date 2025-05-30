@@ -237,6 +237,6 @@ public class SceneBox extends Scene {
          */
         @Override
         public Map<String, PanelElementImpl> getAllPanelsElements() {
-                return new LinkedHashMap<>(allPanelsElements);
+                return new LinkedHashMap<>(this.allPanelsElements);
         }
 }

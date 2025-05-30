@@ -3,6 +3,7 @@ package it.unibo.pokerogue.controller.api;
 import java.util.Optional;
 
 import it.unibo.pokerogue.model.api.Decision;
+import it.unibo.pokerogue.model.api.trainer.Trainer;
 import it.unibo.pokerogue.model.enums.Weather;
 
 /**
@@ -18,5 +19,5 @@ public interface EnemyAi {
      * @param weather the current weather condition in battle, if any.
      * @return the Decision representing the enemy's next action.
      */
-    Decision nextMove(Optional<Weather> weather);
+    Decision nextMove(Optional<Weather> weather, final Trainer enemyTrainer);
 }

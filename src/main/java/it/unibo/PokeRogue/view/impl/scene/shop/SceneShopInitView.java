@@ -20,9 +20,7 @@ import it.unibo.pokerogue.utilities.UtilitiesForScenes;
 public class SceneShopInitView {
 
         private static final String FIRST_PANEL = "firstPanel";
-        private final GraphicElementsRegistry sceneGraphicElements;
-        private final GraphicElementsRegistry graphicElements;
-        private final Map<String, PanelElementImpl> allPanelsElements;
+
         private final PlayerTrainerImpl playerTrainerInstance;
 
         /**
@@ -36,9 +34,6 @@ public class SceneShopInitView {
         public SceneShopInitView(final GraphicElementsRegistry sceneGraphicElements,
                         final GraphicElementsRegistry graphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements) {
-                this.sceneGraphicElements = sceneGraphicElements;
-                this.graphicElements = graphicElements;
-                this.allPanelsElements = allPanelsElements;
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
         }
 
@@ -48,21 +43,23 @@ public class SceneShopInitView {
          * loading.
          *
          * @param currentSelectedButton The button currently selected by the player.
-         * @throws IOException If an error occurs while loading the graphical resources.
          */
-        public void initGraphicElements(final int currentSelectedButton) throws IOException {
-                this.sceneGraphicElements.clear();
-                this.allPanelsElements.put(FIRST_PANEL, new PanelElementImpl("", new OverlayLayout(null)));
+        public void initGraphicElements(final int currentSelectedButton,
+                        final GraphicElementsRegistry sceneGraphicElements,
+                        final GraphicElementsRegistry graphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements) throws IOException {
+                sceneGraphicElements.clear();
+                allPanelsElements.put(FIRST_PANEL, new PanelElementImpl("", new OverlayLayout(null)));
                 UtilitiesForScenes.loadSceneElements("sceneShopElements.json", "init",
-                                this.sceneGraphicElements,
-                                this.graphicElements);
-                this.initTextElements();
-                SceneShopUtilities.updateItemDescription(this.sceneGraphicElements, SceneShopUtilities.getShopItems(4));
+                                sceneGraphicElements,
+                                graphicElements);
+                this.initTextElements(sceneGraphicElements);
+                SceneShopUtilities.updateItemDescription(sceneGraphicElements, SceneShopUtilities.getShopItems(4));
         }
 
-        private void initTextElements() {
-                SceneShopUtilities.updateItemsText(this.sceneGraphicElements);
-                UtilitiesForScenes.safeGetElementByName(this.sceneGraphicElements, "PLAYER_MONEY_TEXT",
+        private void initTextElements(final GraphicElementsRegistry sceneGraphicElements) {
+                SceneShopUtilities.updateItemsText(sceneGraphicElements);
+                UtilitiesForScenes.safeGetElementByName(sceneGraphicElements, "PLAYER_MONEY_TEXT",
                                 TextElementImpl.class)
                                 .setText("MONEY: " + playerTrainerInstance.getMoney());
         }

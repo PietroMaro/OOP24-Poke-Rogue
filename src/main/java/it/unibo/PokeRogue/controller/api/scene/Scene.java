@@ -74,7 +74,7 @@ public abstract class Scene {
 
 	private GraphicElementImpl createGraphicElementFromJson(final JSONObject jsonElement) throws IOException {
 
-		final GraphicElementImpl newGraphicElement;
+		GraphicElementImpl newGraphicElement = null;
 
 		switch (jsonElement.getString("type")) {
 			case "button":
@@ -85,7 +85,6 @@ public abstract class Scene {
 				break;
 			case "background":
 				newGraphicElement = new BackgroundElementImpl(jsonElement);
-
 				break;
 			case "sprite":
 				newGraphicElement = new SpriteElementImpl(jsonElement);
@@ -93,9 +92,7 @@ public abstract class Scene {
 			case "box":
 				newGraphicElement = new BoxElementImpl(jsonElement);
 				break;
-
 			default:
-				newGraphicElement = new BackgroundElementImpl(jsonElement);
 				break;
 		}
 

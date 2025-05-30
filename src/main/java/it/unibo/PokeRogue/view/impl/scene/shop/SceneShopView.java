@@ -66,8 +66,8 @@ public class SceneShopView {
      * @throws IOException If an error occurs while loading or initializing graphic
      *                     resources.
      */
-    public void initGraphicElements(final int currentSelectedButton) throws IOException {
-        this.sceneShopInitView.initGraphicElements(currentSelectedButton);
+    public void initGraphicElements(final int currentSelectedButton, Map<String, PanelElementImpl> allPanelsElements) throws IOException {
+        this.sceneShopInitView.initGraphicElements(currentSelectedButton, this.sceneGraphicElements,this.graphicElements, allPanelsElements);
     }
 
     /**
