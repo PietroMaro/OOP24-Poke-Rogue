@@ -14,16 +14,15 @@ import it.unibo.pokerogue.view.api.scene.save.SaveView;
  * It coordinates the initialization of the scene's UI components and
  * updates the visual state when the user interacts with the save menu.
  */
-public class SceneSaveView implements SaveView {
+public final class SceneSaveView implements SaveView {
     private final SceneSaveInitView sceneSaveInitView;
     private final SceneSaveUpdateView sceneSaveUpdateView;
 
     /**
      * Constructs the SceneSaveView.
      *
-     * @param currentSceneGraphicElements the graphic elements registry for the
-     *                                    current scene
-     * @param currentSelectedButton       the ID of the initially selected button
+     * 
+     * @param currentSelectedButton the ID of the initially selected button
      * 
      */
     public SceneSaveView(final int currentSelectedButton) {
@@ -31,13 +30,15 @@ public class SceneSaveView implements SaveView {
         this.sceneSaveUpdateView = new SceneSaveUpdateView(currentSelectedButton);
     }
 
-    public void initGraphicElements(final int currentSelectedButton, GraphicElementsRegistry graphicElements,
+    @Override
+    public void initGraphicElements(final int currentSelectedButton, final GraphicElementsRegistry graphicElements,
             final Map<String, PanelElementImpl> allPanelsElements,
             final GraphicElementsRegistry currentSceneGraphicElements) throws IOException {
         this.sceneSaveInitView.initGraphicElements(currentSelectedButton, graphicElements, allPanelsElements,
                 currentSceneGraphicElements);
     }
 
+    @Override
     public void updateGraphic(final int newSelectedButton,
             final GraphicElementsRegistry currentSceneGraphicElements)
             throws IOException {

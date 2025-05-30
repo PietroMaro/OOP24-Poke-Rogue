@@ -13,7 +13,7 @@ import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 public interface InfoView {
 
     /**
-     * Initializes the graphic elements for the Info scene
+     * Initializes the graphic elements for the Info scene.
      * 
      * @param currentSceneGraphicElements the registry to be filled with the
      *                                    initialized elements for the current scene

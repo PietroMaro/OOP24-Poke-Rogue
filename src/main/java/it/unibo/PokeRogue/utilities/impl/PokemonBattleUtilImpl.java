@@ -75,9 +75,9 @@ public final class PokemonBattleUtilImpl implements PokemonBattleUtil {
 
     }
 
-    private int computeDefenseAttackBonus(final Pokemon pokemon, final Stats StatName) {
+    private int computeDefenseAttackBonus(final Pokemon pokemon, final Stats statName) {
 
-        return pokemon.getTempStatsBonus().get(StatName).getCurrentValue() * 10;
+        return pokemon.getTempStatsBonus().get(statName).getCurrentValue() * 10;
 
     }
 

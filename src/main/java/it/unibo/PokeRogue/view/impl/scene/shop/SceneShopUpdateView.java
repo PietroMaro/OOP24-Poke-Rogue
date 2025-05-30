@@ -21,7 +21,7 @@ import it.unibo.pokerogue.view.api.scene.shop.ShopUpdateView;
  * switching between the main menu and Pokémon selection views, and managing UI
  * state.
  */
-public class SceneShopUpdateView implements ShopUpdateView {
+public final class SceneShopUpdateView implements ShopUpdateView {
         private static final Integer FIRST_POSITION = 0;
         private static final Integer SECOND_POSITION = 1;
         private static final Integer THIRD_POSITION = 2;
@@ -35,20 +35,11 @@ public class SceneShopUpdateView implements ShopUpdateView {
         private Boolean alreadyInMainMenu = true;
 
         /**
-         * Constructs a SceneShopUpdateView to manage update logic and UI transitions
-         * for the shop scene.
-         *
-         * @param currentSceneGraphicElements Registry of graphic elements in the
-         *                                    current scene.
-         * @param graphicElements             Shared registry for reusable graphic
-         *                                    elements.
-         * @param allPanelsElements           All panel components present in the scene.
-         * @param currentSelectedButton       Button that is currently selected.
-         * @param newSelectedButton           Button that has been newly selected.
-         * @param sceneInstance               Reference to the scene logic instance.
+         * Constructs a SceneShopUpdateView to manage update logic and UI transitions.
          * 
-         * @param graphicElementNameToInt     Mapping from graphic element names to
-         *                                    their identifiers.
+         * @param currentSelectedButton Button that is currently selected.
+         * @param newSelectedButton     Button that has been newly selected.
+         * 
          */
         public SceneShopUpdateView(final int currentSelectedButton, final int newSelectedButton) {
 
@@ -56,7 +47,7 @@ public class SceneShopUpdateView implements ShopUpdateView {
                 this.newSelectedButton = newSelectedButton;
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
         }
-
+        @Override
         public void updateGraphic(final int currentSelectedButton, final int newSelectedButton,
                         final GraphicElementsRegistry currentSceneGraphicElements,
                         final GraphicElementsRegistry graphicElements,
@@ -74,7 +65,6 @@ public class SceneShopUpdateView implements ShopUpdateView {
                                 sceneViewInstance);
 
         }
-
         private void updatePokemonSelection(final GraphicElementsRegistry currentSceneGraphicElements,
                         final GraphicElementsRegistry graphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,

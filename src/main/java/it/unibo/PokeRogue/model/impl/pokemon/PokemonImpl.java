@@ -29,7 +29,7 @@ import java.lang.reflect.InvocationTargetException;
  */
 @ToString
 public final class PokemonImpl implements Pokemon {
-    private MoveFactoryImpl moveFactoryInstance;
+    private final MoveFactoryImpl moveFactoryInstance;
     private final Random random = new Random();
     @Getter
     @Setter

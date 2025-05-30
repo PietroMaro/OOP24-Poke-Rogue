@@ -108,6 +108,6 @@ public class TrainerImpl implements Trainer {
     @Override
     public final Map<String, Integer> getBall() {
         return new HashMap<>(ball);
-    };
+    }
 
 }

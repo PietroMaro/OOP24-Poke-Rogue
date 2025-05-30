@@ -15,7 +15,7 @@ import it.unibo.pokerogue.view.impl.scene.shop.SceneShopView;
  */
 public interface ShopUpdateView {
         /**
-         * Updates the graphic view based on user input
+         * Updates the graphic view based on user input.
          * 
          * @param currentSelectedButton       The previously selected button index.
          * @param newSelectedButton           The newly selected button index.

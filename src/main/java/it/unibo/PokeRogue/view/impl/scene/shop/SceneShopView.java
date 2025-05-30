@@ -17,7 +17,7 @@ import it.unibo.pokerogue.view.api.scene.shop.ShopView;
  * to subcomponents responsible for rendering elements and updating UI
  * interactions.
  */
-public class SceneShopView implements ShopView {
+public final class SceneShopView implements ShopView {
     private final SceneShopInitView sceneShopInitView;
     private final SceneShopUpdateView sceneShopUpdateView;
 
@@ -25,19 +25,10 @@ public class SceneShopView implements ShopView {
      * Constructs the shop view and initializes its internal components for
      * rendering and updating.
      *
-     * @param graphicElements         Registry of elements specific to the current
      * 
-     * @param sceneGraphicElements    Registry of elements specific to the current
-     *                                shop scene.
-     * @param allPanelsElements       Mapping of panel elements by name.
-     * @param itemFactoryImpl         Factory for generating items to populate the
-     *                                shop.
-     * @param currentSelectedButton   Button currently selected in the UI.
-     * @param newSelectedButton       Button the user is navigating to.
-     * @param scene                   Reference to the main shop scene for
-     *                                interaction handling.
-     * @param graphicElementNameToInt Mapping of graphic element names to their
-     *                                identifiers.
+     * @param currentSelectedButton Button currently selected in the UI.
+     * @param newSelectedButton     Button the user is navigating to.
+     * 
      */
     public SceneShopView(final int currentSelectedButton,
             final int newSelectedButton)
@@ -48,7 +39,7 @@ public class SceneShopView implements ShopView {
         this.sceneShopUpdateView = new SceneShopUpdateView(currentSelectedButton, newSelectedButton);
     }
 
-
+    @Override
     public void initGraphicElements(final int currentSelectedButton,
             final Map<String, PanelElementImpl> allPanelsElements, final GraphicElementsRegistry sceneGraphicElements,
             final GraphicElementsRegistry graphicElements)
@@ -57,7 +48,7 @@ public class SceneShopView implements ShopView {
                 graphicElements, allPanelsElements);
     }
 
-   
+    @Override
     public void updateGraphic(final int currentSelectedButton, final int newSelectedButton,
             final GraphicElementsRegistry sceneGraphicElements,
             final GraphicElementsRegistry graphicElements, final Map<String, PanelElementImpl> allPanelsElements,
@@ -67,7 +58,7 @@ public class SceneShopView implements ShopView {
                 graphicElements, allPanelsElements, graphicElementNameToInt, sceneInstance, this);
     }
 
-  
+    @Override
     public void updatePlayerMoneyText(final GraphicElementsRegistry sceneGraphicElements,
             final GraphicElementsRegistry graphicElements,
             final PlayerTrainerImpl playerTrainerInstance) {

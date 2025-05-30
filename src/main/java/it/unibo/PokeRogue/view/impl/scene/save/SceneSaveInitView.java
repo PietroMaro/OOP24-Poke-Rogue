@@ -16,9 +16,10 @@ import it.unibo.pokerogue.view.api.scene.save.SaveInitView;
  * when the save scene is first displayed. It interacts with the panel system
  * and scene registry.
  */
-public class SceneSaveInitView implements SaveInitView {
+public final class SceneSaveInitView implements SaveInitView {
         private static final String FIRST_PANEL = "firstPanel";
 
+        @Override
         public void initGraphicElements(final int currentSelectedButton, final GraphicElementsRegistry graphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final GraphicElementsRegistry currentSceneGraphicElements) throws IOException {

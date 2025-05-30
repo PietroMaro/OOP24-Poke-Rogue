@@ -46,6 +46,7 @@ public final class SceneFightUpdateView implements FightUpdateView {
                 this.alreadyInMainMenu = true;
         }
 
+        @Override
         public void updateGraphic(final int currentSelectedButton, final int newSelectedButton,
                         final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,

@@ -60,7 +60,7 @@ public interface ShopView {
          * @param playerTrainerInstance Player whose money amount should be reflected in
          *                              the UI.
          */
-        public void updatePlayerMoneyText(GraphicElementsRegistry sceneGraphicElements,
+        void updatePlayerMoneyText(GraphicElementsRegistry sceneGraphicElements,
                         GraphicElementsRegistry graphicElements,
                         PlayerTrainerImpl playerTrainerInstance);
 }
