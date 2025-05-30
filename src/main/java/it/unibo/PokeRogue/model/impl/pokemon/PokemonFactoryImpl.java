@@ -1,6 +1,21 @@
 package it.unibo.pokerogue.model.impl.pokemon;
 
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Random;
+import java.util.Set;
+
+import java.awt.Image;
+import javax.imageio.ImageIO;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,26 +28,18 @@ import it.unibo.pokerogue.model.impl.Singleton;
 import it.unibo.pokerogue.utilities.api.JsonReader;
 import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
 
-import java.io.File;
-import java.nio.file.Paths;
-import java.io.IOException;
-import java.awt.Image;
-import javax.imageio.ImageIO;
-
-import java.lang.reflect.InvocationTargetException;
-
 /**
  * The implementation of PokemonFactory.
  */
 public class PokemonFactoryImpl extends Singleton implements PokemonFactory {
 
 	// make the access in memory and saves the information of all pokemon in local
+	private static final String SRC_LITTERAL = "src";
+	private static final String POKEMON_DATA = "pokemonData";
 	private final JsonReader jsonReader = new JsonReaderImpl();
 	private final Random random = new Random();
 	private final Set<String> allPokemonSet = new HashSet<>();
 	private final Map<String, PokemonBlueprint> pokemonBlueprints = new HashMap<>();
-	private final static String SRC_LITTERAL = "src";
-	private final static String POKEMON_DATA = "pokemonData";
 
 	/**
 	 * The constructor initiate the factory making the access in memory.
@@ -45,7 +52,8 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory {
 	public final void init() throws IOException {
 		final JSONArray allPokemonJson = jsonReader
 				.readJsonArray(
-						Paths.get(SRC_LITTERAL, "main", "resources", POKEMON_DATA, "pokemonList.json").toString());
+						Paths.get(SRC_LITTERAL, "main", "resources",
+								POKEMON_DATA, "pokemonList.json").toString());
 		for (int pokemonIndex = 0; pokemonIndex < allPokemonJson.length(); pokemonIndex += 1) {
 			addPokemonToBlueprints(allPokemonJson.getString(pokemonIndex));
 		}
@@ -54,7 +62,8 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory {
 	private void addPokemonToBlueprints(final String pokemonName) throws IOException {
 		final JSONObject pokemonJson = jsonReader
 				.readJsonObject(Paths
-						.get(SRC_LITTERAL, "main", "resources", POKEMON_DATA, "pokemon", "data", pokemonName + ".json")
+						.get(SRC_LITTERAL, "main", "resources",
+								POKEMON_DATA, "pokemon", "data", pokemonName + ".json")
 						.toString());
 		final int pokedexNumber = pokemonJson.getInt("pokedexNumber");
 		final List<String> types = jsonArrayToList(pokemonJson.getJSONArray("types"));

@@ -1,4 +1,5 @@
 package it.unibo.pokerogue.model.api.move;
+
 import org.json.JSONObject;
 
 import it.unibo.pokerogue.model.api.Range;
@@ -8,9 +9,13 @@ import java.util.Optional;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 
+/**
+ * Represents a Pokémon move, with information like damage, accuracy, and
+ * effects.
+ */
 @Data
 @AllArgsConstructor
-public class Move{
+public class Move {
 	private String name;
 	private Range<Integer> pp;
 	private boolean isPhysical;	
@@ -23,7 +28,6 @@ public class Move{
 	private boolean isCrit;
 	private Type type;
 	private int priority;
-
 
 	public Move deepCopy() {
 	    return new Move(

@@ -17,7 +17,6 @@ import it.unibo.pokerogue.model.impl.MoveFactoryImpl;
 import it.unibo.pokerogue.model.impl.RangeImpl;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.AccessLevel;
 import lombok.ToString;
 import java.awt.Image;
 
@@ -30,10 +29,12 @@ import java.lang.reflect.InvocationTargetException;
 public final class PokemonImpl implements Pokemon {
 	private MoveFactoryImpl moveFactoryInstance;
 	private final Random random = new Random();
-	@Getter @Setter
+	@Getter
+	@Setter
 	private int totalUsedEv;
 	private Map<Stats, Integer> baseStats;
-	@Getter @Setter
+	@Getter
+	@Setter
 	private Nature nature;
 	private Map<Stats, Integer> iv; // 0-31 random when spawned
 	private Map<Stats, Range<Integer>> ev; // 0-255 the pokemon can have a total of 510
@@ -42,50 +43,64 @@ public final class PokemonImpl implements Pokemon {
 	private Map<Stats, Range<Integer>> tempStatsBonus;
 	private Map<Integer, String> levelMovesLearn;
 	private List<Move> actualMoves = new ArrayList<>();
-	@Getter @Setter
+	@Getter
+	@Setter
 	private String levelUpCurve; // https://m.bulbapedia.bulbagarden.net/wiki/Experience
 	private Map<Stats, Integer> givesEv;
 	private Range<Integer> exp;
-	@Getter @Setter
+	@Getter
+	@Setter
 	private int pokedexNumber;
-	@Getter @Setter
+	@Getter
+	@Setter
 	private int weight;
-	@Getter @Setter
+	@Getter
+	@Setter
 	private String name;
-	@Getter @Setter
+	@Getter
+	@Setter
 	private Type type1;
 	@Setter
 	private Optional<Type> type2;
-	@Getter @Setter
+	@Getter
+	@Setter
 	private int captureRate;
-	@Getter @Setter
+	@Getter
+	@Setter
 	private String gender;
-	@Getter @Setter
+	@Getter
+	@Setter
 	private Optional<String> holdingObject;
-	@Getter @Setter
+	@Getter
+	@Setter
 	private String abilityName;
-	@Getter @Setter
+	@Getter
+	@Setter
 	private Optional<StatusCondition> statusCondition;
-    private Map<StatusCondition, Integer> statusDuration;
-	@Getter @Setter
+	private Map<StatusCondition, Integer> statusDuration;
+	@Getter
+	@Setter
 	private boolean hasToLearnMove;
-	@Getter @Setter
+	@Getter
+	@Setter
 	private Optional<Move> newMoveToLearn = Optional.empty();
 
-	@Getter @Setter
+	@Getter
+	@Setter
 	private Optional<Image> spriteFront;
-	@Getter @Setter
+	@Getter
+	@Setter
 	private Optional<Image> spriteBack;
 
 	/**
 	 * The construct takes the blueprint and adds the random values.
+	 * 
 	 * @param pokemonBlueprint the blueprint of the pokemon you want to create
 	 */
-	public PokemonImpl(final PokemonBlueprint pokemonBlueprint) throws 
-		InstantiationException,
-		IllegalAccessException,
-		NoSuchMethodException,
-		InvocationTargetException {
+	public PokemonImpl(final PokemonBlueprint pokemonBlueprint) throws InstantiationException,
+			IllegalAccessException,
+			NoSuchMethodException,
+			InvocationTargetException {
 		this.moveFactoryInstance = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
 		this.baseStats = Map.copyOf(pokemonBlueprint.stats());
 		generateivs();
@@ -181,7 +196,7 @@ public final class PokemonImpl implements Pokemon {
 	private void calculateActualStats() {
 		final int constAdder = 5;
 		final double positiveMultiplier = 1.1;
-		final double negativeMultiplier  = 0.9;
+		final double negativeMultiplier = 0.9;
 		final int maxStat = 252;
 		actualStats = new HashMap<>();
 
@@ -193,17 +208,18 @@ public final class PokemonImpl implements Pokemon {
 		actualStats.put(Stats.HP, rangeHp);
 		for (final Stats stat : Stats.values()) {
 			if (stat == Stats.HP
-				|| stat == Stats.CRIT_RATE
-				|| stat == Stats.ACCURACY) {
+					|| stat == Stats.CRIT_RATE
+					|| stat == Stats.ACCURACY) {
 				continue;
 			}
 
 			int statValue = (int) Math.round(
 					Math.floor(
-							(2 * baseStats.get(stat) 
-							  + iv.get(stat) 
-							  + (double) ev.get(stat).getCurrentValue() / 4
-									* level.getCurrentValue()) / 100.0))
+							(2 * baseStats.get(stat)
+									+ iv.get(stat)
+									+ (double) ev.get(stat).getCurrentValue() / 4
+											* level.getCurrentValue())
+									/ 100.0))
 					+ constAdder;
 
 			if (Nature.checkStatIncrease(this.nature, stat)) {
@@ -230,16 +246,15 @@ public final class PokemonImpl implements Pokemon {
 		} else if ("medium".equals(this.levelUpCurve)) {
 			newRequiredExp = (int) Math.pow(currentLevel, 3);
 		} else if ("medium-slow".equals(this.levelUpCurve)) {
-			newRequiredExp = (int) ((constMultiplier  * Math.pow(currentLevel, 3)) 
+			newRequiredExp = (int) ((constMultiplier * Math.pow(currentLevel, 3))
 					- constAdder
-					* Math.pow(currentLevel, 2)
+							* Math.pow(currentLevel, 2)
 					+ 100 * currentLevel - constAdder2);
 		} else if ("slow".equals(this.levelUpCurve)) {
 			newRequiredExp = (int) (constDivider * Math.pow(currentLevel, 3) / 4);
 		}
 		this.exp = new RangeImpl<>(0, newRequiredExp, 0);
 	}
-
 
 	@Override
 	public void levelUp(final boolean isPlayerPokemon) {
@@ -308,113 +323,120 @@ public final class PokemonImpl implements Pokemon {
 	}
 
 	@Override
-	public void setStatusDuration(Map<StatusCondition, Integer> newVal){
+	public void setStatusDuration(final Map<StatusCondition, Integer> newVal) {
 		this.statusDuration = Map.copyOf(newVal);
 	}
 
 	@Override
-	public Map<StatusCondition, Integer> getStatusDuration(){
+	public Map<StatusCondition, Integer> getStatusDuration() {
 		return Map.copyOf(this.statusDuration);
 	}
 
-
 	@Override
 	public Map<Stats, Integer> getIv() {
-	    return iv == null ? null : Map.copyOf(iv);
+		return iv == null ? null : Map.copyOf(iv);
 	}
-	
+
 	@Override
-	public void setIv(Map<Stats, Integer> iv) {
-	    this.iv = iv == null ? null : Map.copyOf(iv);
+	public void setIv(final Map<Stats, Integer> iv) {
+		this.iv = iv == null ? null : Map.copyOf(iv);
 	}
-	
+
 	@Override
 	public Map<Stats, Range<Integer>> getEv() {
 	    return Map.copyOf(this.ev);
 	}
-	
+
 	@Override
-	public void setEv(Map<Stats, Range<Integer>> ev) {
-	        this.ev = Map.copyOf(ev);
+	public void setEv(final Map<Stats, Range<Integer>> ev) {
+	    if (ev == null) {
+	        this.ev = null;
+	    } else {
+	        final Map<Stats, Range<Integer>> copy = new HashMap<>();
+	        for (final Map.Entry<Stats, Range<Integer>> entry : ev.entrySet()) {
+	            copy.put(entry.getKey(), entry.getValue().copyOf());
+	        }
+	        this.ev = Map.copyOf(copy);
+	    }
 	}
-	
+
 	@Override
 	public Range<Integer> getLevel() {
 	    return this.level == null ? null : this.level.copyOf();
 	}
-	
+
 	@Override
-	public void setLevel(Range<Integer> level) {
-	    this.level = level == null ? null : level.copyOf();
+	public void setLevel(final Range<Integer> level) {
+		this.level = level == null ? null : level.copyOf();
 	}
-	
+
 	@Override
 	public Map<Stats, Range<Integer>> getActualStats() {
 	    return Map.copyOf(this.actualStats);
 	}
-	
+
 	@Override
-	public void setActualStats(Map<Stats, Range<Integer>> newVal) {
+	public void setActualStats(final Map<Stats, Range<Integer>> newVal) {
 	        this.actualStats = Map.copyOf(newVal);
 	}
-	
+
 	@Override
 	public Map<Stats, Range<Integer>> getTempStatsBonus() {
 	    return Map.copyOf(this.tempStatsBonus);
 	}
-	
+
 	@Override
-	public void setTempStatsBonus(Map<Stats, Range<Integer>> tempStatsBonus) {
+	public void setTempStatsBonus(final Map<Stats, Range<Integer>> tempStatsBonus) {
 	    this.tempStatsBonus = Map.copyOf(tempStatsBonus);
 	}
-	
+
 	@Override
 	public Map<Integer, String> getLevelMovesLearn() {
-	    return levelMovesLearn == null ? null : Map.copyOf(levelMovesLearn);
+		return levelMovesLearn == null ? null : Map.copyOf(levelMovesLearn);
 	}
-	
+
 	@Override
-	public void setLevelMovesLearn(Map<Integer, String> levelMovesLearn) {
-	    this.levelMovesLearn = levelMovesLearn == null ? null : Map.copyOf(levelMovesLearn);
+	public void setLevelMovesLearn(final Map<Integer, String> levelMovesLearn) {
+		this.levelMovesLearn = levelMovesLearn == null ? null : Map.copyOf(levelMovesLearn);
 	}
-	
+
 	@Override
 	public List<Move> getActualMoves() {
-	    return actualMoves == null ? null : List.copyOf(actualMoves);
+		return actualMoves == null ? null : List.copyOf(actualMoves);
 	}
-	
+
 	@Override
-	public void setActualMoves(List<Move> actualMoves) {
-	    this.actualMoves = actualMoves == null ? null : List.copyOf(actualMoves);
+	public void setActualMoves(final List<Move> actualMoves) {
+		this.actualMoves = actualMoves == null ? null : List.copyOf(actualMoves);
 	}
 
 	@Override
 	public Range<Integer> getExp() {
-	    return exp == null ? null : exp.copyOf();
+		return exp == null ? null : exp.copyOf();
 	}
-	
+
 	@Override
-	public void setExp(Range<Integer> exp) {
-	    this.exp = exp == null ? null : exp.copyOf();
+	public void setExp(final Range<Integer> exp) {
+		this.exp = exp == null ? null : exp.copyOf();
 	}
 
 	@Override
 	public Map<Stats, Integer> getGivesEv() {
-	    return givesEv == null ? null : Map.copyOf(givesEv);
+		return givesEv == null ? null : Map.copyOf(givesEv);
 	}
-	
+
 	@Override
-	public void setGivesEv(Map<Stats, Integer> givesEv) {
-	    this.givesEv = givesEv == null ? null : Map.copyOf(givesEv);
+	public void setGivesEv(final Map<Stats, Integer> givesEv) {
+		this.givesEv = givesEv == null ? null : Map.copyOf(givesEv);
 	}
 
 	@Override
 	public Map<Stats, Integer> getBaseStats() {
-	    return baseStats == null ? null : Map.copyOf(baseStats);
+		return baseStats == null ? null : Map.copyOf(baseStats);
 	}
-	
+
 	@Override
-	public void setBaseStats(Map<Stats, Integer> baseStats) {
-	    this.baseStats = baseStats == null ? null : Map.copyOf(baseStats);
+	public void setBaseStats(final Map<Stats, Integer> baseStats) {
+		this.baseStats = baseStats == null ? null : Map.copyOf(baseStats);
 	}
 }

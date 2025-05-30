@@ -55,8 +55,8 @@ public final class JsonReaderImpl implements JsonReader {
 	public void dumpJsonToFile(final String filePath, final Object jsonFile) throws IOException {
 		if (!(jsonFile instanceof JSONArray) && !(jsonFile instanceof JSONObject)) {
 			throw new IllegalArgumentException(
-					"Object dumped must be JSONArray or JSONObject, but was: " 
-					+ jsonFile.getClass().getName());
+					"Object dumped must be JSONArray or JSONObject, but was: "
+							+ jsonFile.getClass().getName());
 		}
 
 		final String prettyJson = (jsonFile instanceof JSONArray)
