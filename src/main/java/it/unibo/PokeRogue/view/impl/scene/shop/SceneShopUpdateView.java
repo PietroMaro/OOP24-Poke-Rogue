@@ -68,14 +68,17 @@ public class SceneShopUpdateView {
                         final GraphicElementsRegistry currentSceneGraphicElements,
                         final GraphicElementsRegistry graphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
-                        final Map<String, Integer> graphicElementNameToInt, final SceneShop sceneInstance)
+                        final Map<String, Integer> graphicElementNameToInt, final SceneShop sceneInstance,
+                        final SceneShopView sceneViewInstance)
                         throws IOException {
                 this.newSelectedButton = newSelectedButton;
                 this.updateSelectedButton(currentSelectedButton, newSelectedButton, currentSceneGraphicElements);
                 this.updateItemDescription(currentSceneGraphicElements, graphicElementNameToInt);
                 this.updatePokemonSelection(currentSceneGraphicElements, graphicElements, allPanelsElements,
                                 graphicElementNameToInt, sceneInstance);
-                this.mainMenu(currentSceneGraphicElements, allPanelsElements, graphicElementNameToInt, sceneInstance);
+                this.mainMenu(currentSceneGraphicElements, allPanelsElements, graphicElementNameToInt, graphicElements,
+                                sceneInstance,
+                                sceneViewInstance);
 
         }
 
@@ -176,7 +179,10 @@ public class SceneShopUpdateView {
 
         private void mainMenu(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
-                        final Map<String, Integer> graphicElementNameToInt, final SceneShop sceneInstance)
+                        final Map<String, Integer> graphicElementNameToInt, 
+                        final GraphicElementsRegistry graphicElements,
+                        final SceneShop sceneInstance, 
+                        final SceneShopView sceneViewInstance)
                         throws IOException {
                 if (this.newSelectedButton >= graphicElementNameToInt.get("FREE_ITEM_1_BUTTON")
                                 && this.newSelectedButton <= graphicElementNameToInt.get("TEAM_BUTTON")
@@ -186,7 +192,7 @@ public class SceneShopUpdateView {
                         allPanelsElements.clear();
                         sceneInstance.setCurrentSelectedButton(this.currentSelectedButton);
                         sceneInstance.setNewSelectedButton(this.newSelectedButton);
-                        sceneInstance.initGraphicElements();
+                        sceneViewInstance.initGraphicElements(this.newSelectedButton,allPanelsElements,currentSceneGraphicElements,graphicElements);
                 }
         }
 }

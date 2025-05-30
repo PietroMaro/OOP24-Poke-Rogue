@@ -199,14 +199,7 @@ public class SceneShop extends Scene {
 
     }
 
-    /**
-     * Initializes the graphic elements for the shop scene based on the current
-     * button selection.
-     *
-     * @throws IOException if an I/O error occurs during the loading of graphic
-     *                     elements.
-     */
-    public void initGraphicElements() throws IOException {
+    private void initGraphicElements() throws IOException {
         this.sceneShopView.initGraphicElements(this.newSelectedButton, this.allPanelsElements,
                 this.currentSceneGraphicElements,
                 this.graphicElements);

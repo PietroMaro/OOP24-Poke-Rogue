@@ -10,7 +10,6 @@ import it.unibo.pokerogue.utilities.UtilitiesForScenes;
  * specifically handling the selection state of buttons.
  */
 public class SceneSaveUpdateView {
-    private final GraphicElementsRegistry currentSceneGraphicElements;
     private int currentSelectedButton;
 
     /**
@@ -20,10 +19,8 @@ public class SceneSaveUpdateView {
      *                                    current scene
      * @param currentSelectedButton       the initially selected button ID
      */
-    public SceneSaveUpdateView(final GraphicElementsRegistry currentSceneGraphicElements,
-            final int currentSelectedButton) {
+    public SceneSaveUpdateView(final int currentSelectedButton) {
         this.currentSelectedButton = currentSelectedButton;
-        this.currentSceneGraphicElements = currentSceneGraphicElements;
     }
 
     /**
@@ -32,10 +29,14 @@ public class SceneSaveUpdateView {
      * @param newSelectedButton the ID of the button to be selected
      * @throws IOException if any I/O operation fails during update
      */
-    public void updateGraphic(final int newSelectedButton) throws IOException {
-        this.updateSelectedButton(newSelectedButton);
+    public void updateGraphic(final int newSelectedButton,
+            final GraphicElementsRegistry currentSceneGraphicElements)
+            throws IOException {
+        this.updateSelectedButton(newSelectedButton, currentSceneGraphicElements);
     }
-    private void updateSelectedButton(final int newSelectedButton) {
+
+    private void updateSelectedButton(final int newSelectedButton,
+            final GraphicElementsRegistry currentSceneGraphicElements) {
         UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, false, currentSceneGraphicElements);
         UtilitiesForScenes.setButtonStatus(newSelectedButton, true, currentSceneGraphicElements);
         this.currentSelectedButton = newSelectedButton;

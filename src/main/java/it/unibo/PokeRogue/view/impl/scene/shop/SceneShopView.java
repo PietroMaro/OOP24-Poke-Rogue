@@ -77,7 +77,7 @@ public class SceneShopView {
             final Map<String, Integer> graphicElementNameToInt, final SceneShop sceneInstance)
             throws IOException {
         this.sceneShopUpdateView.updateGraphic(currentSelectedButton, newSelectedButton, sceneGraphicElements,
-                graphicElements, allPanelsElements, graphicElementNameToInt, sceneInstance);
+                graphicElements, allPanelsElements, graphicElementNameToInt, sceneInstance, this);
     }
 
     /**

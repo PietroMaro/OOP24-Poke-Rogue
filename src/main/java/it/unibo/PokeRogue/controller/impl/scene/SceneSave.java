@@ -27,6 +27,7 @@ public class SceneSave extends Scene {
     private static final String EXIT_SAVE_LITTERAL = "EXIT_AND_SAVE_BUTTON";
     private static final String CONTINUE_LITTERAL = "CONTINUE_GAME_BUTTON";
     private final GraphicElementsRegistry currentSceneGraphicElements;
+    private final GraphicElementsRegistry graphicElements;
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final SceneSaveView sceneSaveView;
     private final GameEngineImpl gameEngineInstance;
@@ -52,11 +53,11 @@ public class SceneSave extends Scene {
         this.graphicElementNameToInt = this.getGraphicElementNameToInt();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
+        this.graphicElements = this.getGraphicElements();
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.initStatus();
-        this.sceneSaveView = new SceneSaveView(this.currentSceneGraphicElements, this.getGraphicElements(),
-                this.allPanelsElements, this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL));
+        this.sceneSaveView = new SceneSaveView(this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL));
         this.initGraphicElements();
     }
 
@@ -106,7 +107,7 @@ public class SceneSave extends Scene {
     }
 
     private void initGraphicElements() throws IOException {
-        this.sceneSaveView.initGraphicElements(this.newSelectedButton);
+        this.sceneSaveView.initGraphicElements(this.newSelectedButton,this.graphicElements,this.allPanelsElements,this.currentSceneGraphicElements);
     }
 
     /**
@@ -116,7 +117,7 @@ public class SceneSave extends Scene {
      */
     @Override
     public void updateGraphic() throws IOException {
-        this.sceneSaveView.updateGraphic(this.newSelectedButton);
+        this.sceneSaveView.updateGraphic(this.newSelectedButton,this.currentSceneGraphicElements);
     }
 
     /**

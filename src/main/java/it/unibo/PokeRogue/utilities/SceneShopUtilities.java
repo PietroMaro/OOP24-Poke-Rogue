@@ -128,7 +128,8 @@ public final class SceneShopUtilities {
      *                             displayed
      */
     public static void updateItemDescription(final GraphicElementsRegistry sceneGraphicElements, final Item item) {
-        ((TextElementImpl) sceneGraphicElements.getByName("ITEM_DESCRIPTION_TEXT"))
+        UtilitiesForScenes.safeGetElementByName(sceneGraphicElements, "ITEM_DESCRIPTION_TEXT",
+                TextElementImpl.class)
                 .setText(item.getDescription());
     }
 
@@ -183,7 +184,8 @@ public final class SceneShopUtilities {
      */
     public static void updatePlayerMoneyText(final GraphicElementsRegistry sceneGraphicElements,
             final PlayerTrainerImpl playerTrainerInstance) {
-        ((TextElementImpl) sceneGraphicElements.getByName("PLAYER_MONEY_TEXT"))
+        UtilitiesForScenes.safeGetElementByName(sceneGraphicElements, "PLAYER_MONEY_TEXT",
+                TextElementImpl.class)
                 .setText("MONEY: " + playerTrainerInstance.getMoney());
     }
 
