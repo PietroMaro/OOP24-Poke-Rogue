@@ -162,7 +162,7 @@ public final class PokemonImpl implements Pokemon {
     private void initTempStatsBonus() {
         final int minTempStat = -6;
         final int maxTempStat = 6;
-        final int defaultTempStat = 6;
+        final int defaultTempStat = 0;
         this.tempStatsBonus = new HashMap<>();
         for (final Stats stat : Stats.values()) {
             this.tempStatsBonus.put(stat, new RangeImpl<>(minTempStat, maxTempStat, defaultTempStat));

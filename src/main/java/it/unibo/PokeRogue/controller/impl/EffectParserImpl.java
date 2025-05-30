@@ -18,8 +18,11 @@ import it.unibo.pokerogue.model.impl.Singleton;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 
 import org.json.JSONArray;
+
 import java.util.Optional;
 import java.io.IOException;
+
+import it.unibo.pokerogue.model.enums.Stats;
 
 /**
  * A singleton implementation of the EffectParser interface.
@@ -37,7 +40,7 @@ public class EffectParserImpl extends Singleton implements EffectParser {
     private void parseEffect(final JSONObject effect) throws IOException {
         final JSONArray checks = effect.getJSONArray("checks");
         final JSONArray activation = effect.getJSONArray("activation");
-        if (computeChecks(checks)) {
+        if (computeChecks(checks) || true) {
             activateActivations(activation);
         }
     }
@@ -74,6 +77,9 @@ public class EffectParserImpl extends Singleton implements EffectParser {
         try {
             return Optional.ofNullable(expr.evaluate(createContext()));
         } catch (final JexlException e) {
+            System.out.println("**********************************************************************************");
+            e.printStackTrace();
+            System.exit(1);
             return Optional.empty();
         }
     }
@@ -103,6 +109,14 @@ public class EffectParserImpl extends Singleton implements EffectParser {
         context.set("Weather", Weather.class);
         context.set("MATH", Math.class);
         context.set("EMPTY", Optional.empty());
+        context.set("hp", Stats.HP);
+        context.set("speed", Stats.SPEED);
+        context.set("defense", Stats.DEFENSE);
+        context.set("attack", Stats.ATTACK);
+        context.set("special_attack", Stats.SPECIAL_ATTACK);
+        context.set("special_defense", Stats.SPECIAL_DEFENSE);
+        context.set("crit_rate", Stats.CRIT_RATE);
+        context.set("accuracy", Stats.ACCURACY);
         return context;
     }
 
