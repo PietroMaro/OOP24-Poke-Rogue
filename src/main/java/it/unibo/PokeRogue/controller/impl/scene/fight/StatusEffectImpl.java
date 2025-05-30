@@ -63,7 +63,6 @@ public class StatusEffectImpl implements StatusEffect {
     public Boolean checkStatusAttack(final Pokemon pokemon) {
 
         final Optional<StatusCondition> status = pokemon.getStatusCondition();
-
         if (status.isPresent()) {
             switch (status.get()) {
                 case StatusCondition.FREEZE:

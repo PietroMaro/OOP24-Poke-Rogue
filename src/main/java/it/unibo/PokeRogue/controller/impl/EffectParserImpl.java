@@ -75,9 +75,6 @@ public class EffectParserImpl extends Singleton implements EffectParser {
         try {
             return Optional.ofNullable(expr.evaluate(createContext()));
         } catch (final JexlException e) {
-            System.out.println("**********************************************************************************");
-            e.printStackTrace();
-            System.exit(1);
             return Optional.empty();
         }
     }
