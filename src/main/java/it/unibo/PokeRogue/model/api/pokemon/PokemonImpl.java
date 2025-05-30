@@ -348,12 +348,12 @@ public final class PokemonImpl implements Pokemon {
 	}
 
 	@Override
-	public void setEv(Map<Stats, Range<Integer>> ev) {
+	public void setEv(final Map<Stats, Range<Integer>> ev) {
 	    if (ev == null) {
 	        this.ev = null;
 	    } else {
-	        Map<Stats, Range<Integer>> copy = new HashMap<>();
-	        for (Map.Entry<Stats, Range<Integer>> entry : ev.entrySet()) {
+	        final Map<Stats, Range<Integer>> copy = new HashMap<>();
+	        for (final Map.Entry<Stats, Range<Integer>> entry : ev.entrySet()) {
 	            copy.put(entry.getKey(), entry.getValue().copyOf());
 	        }
 	        this.ev = Map.copyOf(copy);
@@ -376,7 +376,7 @@ public final class PokemonImpl implements Pokemon {
 	}
 
 	@Override
-	public void setActualStats(Map<Stats, Range<Integer>> newVal) {
+	public void setActualStats(final Map<Stats, Range<Integer>> newVal) {
 	        this.actualStats = Map.copyOf(newVal);
 	}
 
@@ -386,7 +386,7 @@ public final class PokemonImpl implements Pokemon {
 	}
 
 	@Override
-	public void setTempStatsBonus(Map<Stats, Range<Integer>> tempStatsBonus) {
+	public void setTempStatsBonus(final Map<Stats, Range<Integer>> tempStatsBonus) {
 	    this.tempStatsBonus = Map.copyOf(tempStatsBonus);
 	}
 
