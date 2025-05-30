@@ -34,7 +34,7 @@ public class Move {
 			this.name,
 			new RangeImpl<>(this.pp.getCurrentMin(),this.pp.getCurrentValue(),this.pp.getCurrentMax()),
 	        this.isPhysical,
-	        Optional.of(new JSONObject(this.effect.toString())), 
+	        Optional.of(new JSONObject(this.effect.get().toString())), 
 			this.accuracy,
 	        this.critRate,
 	        this.baseDamage,
