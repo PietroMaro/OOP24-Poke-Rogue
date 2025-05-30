@@ -5,6 +5,7 @@ import java.util.Map;
 
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
+import it.unibo.pokerogue.view.api.scene.save.SaveView;
 
 /**
  * Class responsible for managing the initialization and update views
@@ -13,7 +14,7 @@ import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
  * It coordinates the initialization of the scene's UI components and
  * updates the visual state when the user interacts with the save menu.
  */
-public class SceneSaveView {
+public class SceneSaveView implements SaveView {
     private final SceneSaveInitView sceneSaveInitView;
     private final SceneSaveUpdateView sceneSaveUpdateView;
 
@@ -30,12 +31,6 @@ public class SceneSaveView {
         this.sceneSaveUpdateView = new SceneSaveUpdateView(currentSelectedButton);
     }
 
-    /**
-     * Initializes the graphical elements for the save scene.
-     *
-     * @param currentSelectedButton the button ID to mark as selected initially
-     * @throws IOException if an error occurs during loading of scene elements
-     */
     public void initGraphicElements(final int currentSelectedButton, GraphicElementsRegistry graphicElements,
             final Map<String, PanelElementImpl> allPanelsElements,
             final GraphicElementsRegistry currentSceneGraphicElements) throws IOException {
@@ -43,15 +38,9 @@ public class SceneSaveView {
                 currentSceneGraphicElements);
     }
 
-    /**
-     * Updates the graphical view to reflect changes such as button selection.
-     *
-     * @param newSelectedButton the button ID to mark as newly selected
-     * @throws IOException if an error occurs during the update
-     */
     public void updateGraphic(final int newSelectedButton,
             final GraphicElementsRegistry currentSceneGraphicElements)
             throws IOException {
-        this.sceneSaveUpdateView.updateGraphic(newSelectedButton,currentSceneGraphicElements);
+        this.sceneSaveUpdateView.updateGraphic(newSelectedButton, currentSceneGraphicElements);
     }
 }

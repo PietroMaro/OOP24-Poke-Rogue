@@ -8,27 +8,17 @@ import javax.swing.OverlayLayout;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.utilities.UtilitiesForScenes;
+import it.unibo.pokerogue.view.api.scene.InfoView;
 
 /**
  * View class responsible for initializing and managing graphic elements
  * specific to the Info scene.
  */
-public class SceneInfoView {
+public class SceneInfoView implements InfoView{
     private static final String FIRST_PANEL = "firstPanel";
 
 
-    /**
-     * Initializes the graphic elements for the Info scene by loading layout
-     * elements
-     * and creating necessary panels.
-     *
-     * @param currentSceneGraphicElements the registry to be filled with the
-     *                                    initialized elements for the current scene
-     * @param allPanelsElements           the map where the scene's panel elements
-     *                                    will be stored
-     * @throws IOException if there's an error reading the element configuration
-     *                     file
-     */
+ 
     public void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
             final Map<String, PanelElementImpl> allPanelsElements,final GraphicElementsRegistry graphicElements) throws IOException {
         allPanelsElements.put(FIRST_PANEL, new PanelElementImpl("", new OverlayLayout(null)));

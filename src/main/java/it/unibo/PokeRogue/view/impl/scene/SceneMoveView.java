@@ -11,16 +11,14 @@ import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.model.impl.graphic.TextElementImpl;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 import it.unibo.pokerogue.utilities.UtilitiesForScenes;
+import it.unibo.pokerogue.view.api.scene.MoveView;
 
 /**
  * Represents the graphical view component for the SceneMove.
  * This class is responsible for initializing and arranging the visual elements
- * displayed to the user when the "Move" scene is active, such as buttons, text
- * labels
- * displaying move information, and the background. It works in conjunction with
- * the SceneMove class to present the appropriate user interface.
+ * displayed to the user when the "Move" scene is active.
  */
-public class SceneMoveView {
+public final class SceneMoveView implements MoveView {
         private static final String FIRST_PANEL_STRING = "firstPanel";
         private static final String PP_STRING = " PP : ";
         private static final String DAMAGE_STRING = " Damage : ";
@@ -43,14 +41,7 @@ public class SceneMoveView {
 
         }
 
-        /**
-         * Initializes and populates the graphical elements and panels for the
-         * SceneMove.
-         * This includes creating and adding panels, text elements displaying Pokemon
-         * move names, PP, and damage, buttons for selecting moves, and the background.
-         * The elements are added to the maps provided during construction.
-         */
-        public final void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
+        public void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final GraphicElementsRegistry graphicElements) throws IOException {
                 allPanelsElements.put(FIRST_PANEL_STRING, new PanelElementImpl("", new OverlayLayout(null)));

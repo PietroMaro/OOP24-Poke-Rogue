@@ -71,19 +71,30 @@ public final class PokemonBattleUtilImpl implements PokemonBattleUtil {
 
         totalDamage = damageWithEnvironment * criticalBonus * randomNumber * moveTypeBonus * stabBonus;
 
-        return Math.max(1, (int) totalDamage);
+        return Math.max(1, (int) Math.floor(totalDamage));
+
+    }
+
+    private int computeDefenseAttackBonus(final Pokemon pokemon, final Stats StatName) {
+
+        return pokemon.getTempStatsBonus().get(StatName).getCurrentValue() * 10;
 
     }
 
     private int computeOffenseDefenseRatio(final Pokemon attackingPokemon, final Pokemon defendingPokemon,
             final Stats attackStatName, final Stats defenseStatName) {
 
-        if (defendingPokemon.getActualStats().get(defenseStatName).getCurrentValue() == 0) {
-            return attackingPokemon.getActualStats().get(attackStatName).getCurrentValue();
+        int pokemonDefenseStat = defendingPokemon.getActualStats().get(defenseStatName).getCurrentValue();
+        int pokemonAttackStat = attackingPokemon.getActualStats().get(attackStatName).getCurrentValue();
+
+        pokemonDefenseStat += this.computeDefenseAttackBonus(defendingPokemon, defenseStatName);
+        pokemonAttackStat += this.computeDefenseAttackBonus(attackingPokemon, attackStatName);
+
+        if (pokemonDefenseStat == 0) {
+            return pokemonAttackStat;
         } else {
 
-            return attackingPokemon.getActualStats().get(attackStatName).getCurrentValue()
-                    / defendingPokemon.getActualStats().get(defenseStatName).getCurrentValue();
+            return pokemonAttackStat / pokemonDefenseStat;
 
         }
     }

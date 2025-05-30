@@ -12,6 +12,7 @@ import it.unibo.pokerogue.model.impl.graphic.TextElementImpl;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 import it.unibo.pokerogue.utilities.SceneShopUtilities;
 import it.unibo.pokerogue.utilities.UtilitiesForScenes;
+import it.unibo.pokerogue.view.api.scene.shop.ShopUpdateView;
 
 /**
  * Handles the dynamic update logic of the shop scene view in response to user
@@ -20,7 +21,7 @@ import it.unibo.pokerogue.utilities.UtilitiesForScenes;
  * switching between the main menu and Pokémon selection views, and managing UI
  * state.
  */
-public class SceneShopUpdateView {
+public class SceneShopUpdateView implements ShopUpdateView {
         private static final Integer FIRST_POSITION = 0;
         private static final Integer SECOND_POSITION = 1;
         private static final Integer THIRD_POSITION = 2;
@@ -56,14 +57,6 @@ public class SceneShopUpdateView {
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
         }
 
-        /**
-         * Updates the graphic view based on user input by handling button selection,
-         * item descriptions, and menu transitions.
-         *
-         * @param currentSelectedButton The previously selected button index.
-         * @param newSelectedButton     The newly selected button index.
-         * @throws IOException If an error occurs during element loading.
-         */
         public void updateGraphic(final int currentSelectedButton, final int newSelectedButton,
                         final GraphicElementsRegistry currentSceneGraphicElements,
                         final GraphicElementsRegistry graphicElements,
@@ -82,12 +75,6 @@ public class SceneShopUpdateView {
 
         }
 
-        /**
-         * Loads and displays the Pokémon selection UI if the new button corresponds
-         * to a Pokémon-related action and the user is in the main menu.
-         *
-         * @throws IOException If an error occurs while loading Pokémon UI elements.
-         */
         private void updatePokemonSelection(final GraphicElementsRegistry currentSceneGraphicElements,
                         final GraphicElementsRegistry graphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
@@ -179,9 +166,9 @@ public class SceneShopUpdateView {
 
         private void mainMenu(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
-                        final Map<String, Integer> graphicElementNameToInt, 
+                        final Map<String, Integer> graphicElementNameToInt,
                         final GraphicElementsRegistry graphicElements,
-                        final SceneShop sceneInstance, 
+                        final SceneShop sceneInstance,
                         final SceneShopView sceneViewInstance)
                         throws IOException {
                 if (this.newSelectedButton >= graphicElementNameToInt.get("FREE_ITEM_1_BUTTON")
@@ -192,7 +179,8 @@ public class SceneShopUpdateView {
                         allPanelsElements.clear();
                         sceneInstance.setCurrentSelectedButton(this.currentSelectedButton);
                         sceneInstance.setNewSelectedButton(this.newSelectedButton);
-                        sceneViewInstance.initGraphicElements(this.newSelectedButton,allPanelsElements,currentSceneGraphicElements,graphicElements);
+                        sceneViewInstance.initGraphicElements(this.newSelectedButton, allPanelsElements,
+                                        currentSceneGraphicElements, graphicElements);
                 }
         }
 }

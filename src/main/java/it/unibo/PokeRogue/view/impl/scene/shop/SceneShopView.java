@@ -9,6 +9,7 @@ import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 import it.unibo.pokerogue.utilities.SceneShopUtilities;
+import it.unibo.pokerogue.view.api.scene.shop.ShopView;
 
 /**
  * Handles the view layer for the shop scene, delegating initialization and
@@ -16,7 +17,7 @@ import it.unibo.pokerogue.utilities.SceneShopUtilities;
  * to subcomponents responsible for rendering elements and updating UI
  * interactions.
  */
-public class SceneShopView {
+public class SceneShopView implements ShopView {
     private final SceneShopInitView sceneShopInitView;
     private final SceneShopUpdateView sceneShopUpdateView;
 
@@ -47,15 +48,7 @@ public class SceneShopView {
         this.sceneShopUpdateView = new SceneShopUpdateView(currentSelectedButton, newSelectedButton);
     }
 
-    /**
-     * Initializes the graphical elements for the shop scene UI.
-     *
-     * @param currentSelectedButton The currently selected button during
-     *                              initialization.
-     * @param allPanelsElements     A map holding panel elements used in the scene.
-     * @throws IOException If an error occurs while loading or initializing graphic
-     *                     resources.
-     */
+
     public void initGraphicElements(final int currentSelectedButton,
             final Map<String, PanelElementImpl> allPanelsElements, final GraphicElementsRegistry sceneGraphicElements,
             final GraphicElementsRegistry graphicElements)
@@ -64,13 +57,7 @@ public class SceneShopView {
                 graphicElements, allPanelsElements);
     }
 
-    /**
-     * Updates the graphical interface to reflect the latest user interaction.
-     *
-     * @param currentSelectedButton The button that was previously selected.
-     * @param newSelectedButton     The button that is now selected.
-     * @throws IOException If the update process fails due to graphical issues.
-     */
+   
     public void updateGraphic(final int currentSelectedButton, final int newSelectedButton,
             final GraphicElementsRegistry sceneGraphicElements,
             final GraphicElementsRegistry graphicElements, final Map<String, PanelElementImpl> allPanelsElements,
@@ -80,15 +67,7 @@ public class SceneShopView {
                 graphicElements, allPanelsElements, graphicElementNameToInt, sceneInstance, this);
     }
 
-    /**
-     * Updates the displayed text showing the player's current money in the shop UI.
-     *
-     * @param sceneGraphicElements  Registry containing the shop-specific UI
-     *                              elements.
-     * @param graphicElements       Shared graphical registry.
-     * @param playerTrainerInstance Player whose money amount should be reflected in
-     *                              the UI.
-     */
+  
     public void updatePlayerMoneyText(final GraphicElementsRegistry sceneGraphicElements,
             final GraphicElementsRegistry graphicElements,
             final PlayerTrainerImpl playerTrainerInstance) {
