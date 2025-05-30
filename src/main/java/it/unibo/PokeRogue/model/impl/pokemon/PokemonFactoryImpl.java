@@ -1,6 +1,21 @@
 package it.unibo.pokerogue.model.impl.pokemon;
 
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Random;
+import java.util.Set;
+
+import java.awt.Image;
+import javax.imageio.ImageIO;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,14 +27,6 @@ import it.unibo.pokerogue.model.enums.Stats;
 import it.unibo.pokerogue.model.impl.Singleton;
 import it.unibo.pokerogue.utilities.api.JsonReader;
 import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
-
-import java.io.File;
-import java.nio.file.Paths;
-import java.io.IOException;
-import java.awt.Image;
-import javax.imageio.ImageIO;
-
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * The implementation of PokemonFactory.
