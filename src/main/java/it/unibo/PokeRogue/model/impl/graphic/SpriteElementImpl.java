@@ -103,8 +103,7 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
             final double spriteHeight) {
         super(panelName);
 
-        this.spriteImage = image;
-
+        this.spriteImage = this.copyImage(image);
         this.leftUpX = leftUpX;
         this.leftUpY = leftUpY;
         this.spriteWidth = spriteWidth;
@@ -132,13 +131,7 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
 
     @Override
     public Image getSpriteImage() {
-        final int width = spriteImage.getWidth(null);
-        final int height = spriteImage.getHeight(null);
-        final BufferedImage copy = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        final Graphics g = copy.getGraphics();
-        g.drawImage(spriteImage, 0, 0, null);
-        g.dispose();
-        return copy;
+        return this.copyImage(spriteImage);
 
     }
 
@@ -149,14 +142,8 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
 
     @Override
     public void setImage(final Image image) {
-        final BufferedImage bufferedCopy = new BufferedImage(
-                image.getWidth(null),
-                image.getHeight(null),
-                BufferedImage.TYPE_INT_ARGB);
-        final Graphics g = bufferedCopy.getGraphics();
-        g.drawImage(image, 0, 0, null);
-        g.dispose();
-        this.spriteImage = bufferedCopy;
+
+        this.spriteImage = this.copyImage(image);
     }
 
     @Override
@@ -164,6 +151,18 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
         super.paintComponent(drawEngine);
         drawEngine.drawImage(this.spriteImage, (int) (getWidth() * this.leftUpX), (int) (getHeight() * this.leftUpY),
                 (int) (getWidth() * this.spriteWidth), (int) (getHeight() * this.spriteHeight), null);
+
+    }
+
+    private Image copyImage(final Image image) {
+        final BufferedImage bufferedCopy = new BufferedImage(
+                image.getWidth(null),
+                image.getHeight(null),
+                BufferedImage.TYPE_INT_ARGB);
+        final Graphics g = bufferedCopy.getGraphics();
+        g.drawImage(image, 0, 0, null);
+        g.dispose();
+        return bufferedCopy;
 
     }
 

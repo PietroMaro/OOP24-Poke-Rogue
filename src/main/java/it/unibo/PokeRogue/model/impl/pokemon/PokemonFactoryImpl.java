@@ -22,7 +22,6 @@ import org.json.JSONObject;
 
 import it.unibo.pokerogue.model.api.pokemon.Pokemon;
 import it.unibo.pokerogue.model.api.pokemon.PokemonBlueprint;
-import it.unibo.pokerogue.model.api.pokemon.PokemonImpl;
 import it.unibo.pokerogue.model.enums.Stats;
 import it.unibo.pokerogue.model.impl.Singleton;
 import it.unibo.pokerogue.utilities.api.JsonReader;
