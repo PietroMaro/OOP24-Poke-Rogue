@@ -20,7 +20,6 @@ import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
 import it.unibo.pokerogue.utilities.SceneFightUtilities;
 import it.unibo.pokerogue.view.impl.scene.fight.SceneFightView;
-import lombok.Getter;
 
 /**
  * The SceneFight class represents the battle scene in the game.
@@ -46,9 +45,7 @@ public class SceneFight extends Scene {
 
     private static final String FIGHT_BUTTON = "FIGHT_BUTTON";
 
-    @Getter
     private final GraphicElementsRegistry currentSceneGraphicElements;
-    @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private int currentSelectedButton;
     private final TrainerImpl enemyTrainerInstance;
@@ -79,12 +76,11 @@ public class SceneFight extends Scene {
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.enemyAiInstance = new EnemyAiImpl(battleLevel);
-        this.battleEngineInstance = new BattleEngineImpl(enemyTrainerInstance, enemyAiInstance);
-        this.generateEnemyInstance = new GenerateEnemyImpl(battleLevel, enemyTrainerInstance);
-        this.generateEnemyInstance.generateEnemy();
+        this.battleEngineInstance = new BattleEngineImpl(enemyAiInstance);
+        this.generateEnemyInstance = new GenerateEnemyImpl(battleLevel);
+        this.generateEnemyInstance.generateEnemy(this.enemyTrainerInstance);
         this.initStatus();
-        this.sceneFightView = new SceneFightView(currentSceneGraphicElements, allPanelsElements, enemyTrainerInstance,
-                currentSelectedButton, newSelectedButton, this, this.graphicElements, this.graphicElementNameToInt);
+        this.sceneFightView = new SceneFightView(currentSelectedButton, newSelectedButton);
         this.initGraphicElements();
     }
 
@@ -98,7 +94,8 @@ public class SceneFight extends Scene {
      * This method sets up the UI components for the battle interface.
      */
     public final void initGraphicElements() throws IOException {
-        this.sceneFightView.initGraphicElements(this.currentSelectedButton);
+        this.sceneFightView.initGraphicElements(this.currentSelectedButton, this.currentSceneGraphicElements,
+                this.allPanelsElements, this.graphicElements, this.enemyTrainerInstance);
     }
 
     /**
@@ -107,7 +104,9 @@ public class SceneFight extends Scene {
      */
     @Override
     public void updateGraphic() throws IOException {
-        this.sceneFightView.updateGraphic(currentSelectedButton, newSelectedButton);
+        this.sceneFightView.updateGraphic(this.currentSelectedButton, this.newSelectedButton,
+                this.currentSceneGraphicElements,
+                this.allPanelsElements, this.graphicElements, this.graphicElementNameToInt, this);
     }
 
     /**
@@ -240,7 +239,7 @@ public class SceneFight extends Scene {
             InstantiationException {
         final Decision enemyChoose = enemyAiInstance.nextMove(battleEngineInstance.getCurrentWeather(),
                 this.enemyTrainerInstance);
-        this.battleEngineInstance.runBattleTurn(decision, enemyChoose);
+        this.battleEngineInstance.runBattleTurn(decision, enemyChoose, this.enemyTrainerInstance);
 
     }
 
@@ -251,5 +250,25 @@ public class SceneFight extends Scene {
      */
     public void setCurrentSelectedButton(final int newVal) {
         this.currentSelectedButton = newVal;
+    }
+
+    /**
+     * Returns a copy of the current scene's graphical elements registry.
+     *
+     * @return a copy of the current GraphicElementsRegistry.
+     */
+    @Override
+    public GraphicElementsRegistry getCurrentSceneGraphicElements() {
+        return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);
+    }
+
+    /**
+     * Returns a map containing all panel elements currently loaded in the scene.
+     *
+     * @return a LinkedHashMap of all PanelElementImpl objects.
+     */
+    @Override
+    public Map<String, PanelElementImpl> getAllPanelsElements() {
+        return new LinkedHashMap<>(this.allPanelsElements);
     }
 }

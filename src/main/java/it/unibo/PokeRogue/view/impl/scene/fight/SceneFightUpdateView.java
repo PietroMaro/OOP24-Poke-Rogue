@@ -27,15 +27,10 @@ public class SceneFightUpdateView {
         private static final String BALL_PANEL_TEXT = "ballPanel";
         private static final String CHANGE_PANEL_TEXT = "changePanel";
         private static final String VIEW_FILE_NAME = "sceneFightElement.json";
-        private final GraphicElementsRegistry currentSceneGraphicElements;
-        private final Map<String, PanelElementImpl> allPanelsElements;
         private final PlayerTrainerImpl playerTrainerInstance;
         private int currentSelectedButton;
         private int newSelectedButton;
-        private final SceneFight sceneInstance;
         private Boolean alreadyInMainMenu;
-        private final GraphicElementsRegistry graphicElements;
-        private final Map<String, Integer> graphicElementNameToInt;
 
         /**
          * Constructs a new SceneFightUpdateView.
@@ -52,20 +47,11 @@ public class SceneFightUpdateView {
          * @param graphicElementNameToInt     a map that associates graphic element
          *                                    names with their integer IDs
          */
-        public SceneFightUpdateView(final GraphicElementsRegistry currentSceneGraphicElements,
-                        final Map<String, PanelElementImpl> allPanelsElements,
-                        final int currentSelectedButton, final int newSelectedButton, final SceneFight sceneInstance,
-                        final GraphicElementsRegistry graphicElements,
-                        final Map<String, Integer> graphicElementNameToInt) {
+        public SceneFightUpdateView(final int currentSelectedButton, final int newSelectedButton) {
                 this.currentSelectedButton = currentSelectedButton;
                 this.newSelectedButton = newSelectedButton;
-                this.currentSceneGraphicElements = currentSceneGraphicElements;
-                this.allPanelsElements = allPanelsElements;
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-                this.sceneInstance = sceneInstance;
                 this.alreadyInMainMenu = true;
-                this.graphicElements = graphicElements;
-                this.graphicElementNameToInt = graphicElementNameToInt;
         }
 
         /**
@@ -79,45 +65,57 @@ public class SceneFightUpdateView {
          * @param newSelectedButton     the index of the newly selected button after
          *                              user input
          */
-        protected void updateGraphic(final int currentSelectedButton, final int newSelectedButton) throws IOException {
+        protected void updateGraphic(final int currentSelectedButton, final int newSelectedButton,
+                        final GraphicElementsRegistry currentSceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements,
+                        final GraphicElementsRegistry graphicElements,
+                        final Map<String, Integer> graphicElementNameToInt, final SceneFight scene) throws IOException {
                 this.newSelectedButton = newSelectedButton;
-                this.updateSelectedButton(newSelectedButton);
-                this.updateMoves();
-                this.updateBall();
-                this.pokemonChange();
-                this.mainMenu();
+                this.updateSelectedButton(newSelectedButton, currentSceneGraphicElements);
+                this.updateMoves(currentSceneGraphicElements, allPanelsElements, graphicElements,
+                                graphicElementNameToInt);
+                this.updateBall(currentSceneGraphicElements, allPanelsElements, graphicElements,
+                                graphicElementNameToInt);
+                this.pokemonChange(currentSceneGraphicElements, allPanelsElements, graphicElements,
+                                graphicElementNameToInt);
+                this.mainMenu(currentSceneGraphicElements, allPanelsElements,
+                                graphicElementNameToInt, scene);
 
         }
 
-        private void updateSelectedButton(final int newSelectedButton) {
-                UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, false, this.currentSceneGraphicElements);
-                if (this.currentSceneGraphicElements.getElements().containsKey(newSelectedButton)) {
-                        UtilitiesForScenes.setButtonStatus(newSelectedButton, true, this.currentSceneGraphicElements);
+        private void updateSelectedButton(final int newSelectedButton,
+                        final GraphicElementsRegistry currentSceneGraphicElements) {
+                UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, false, currentSceneGraphicElements);
+                if (currentSceneGraphicElements.getElements().containsKey(newSelectedButton)) {
+                        UtilitiesForScenes.setButtonStatus(newSelectedButton, true, currentSceneGraphicElements);
                 }
                 this.currentSelectedButton = newSelectedButton;
         }
 
-        private void updateMoves() throws IOException {
+        private void updateMoves(final GraphicElementsRegistry currentSceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements,
+                        final GraphicElementsRegistry graphicElements,
+                        final Map<String, Integer> graphicElementNameToInt) throws IOException {
                 if (currentSelectedButton >= graphicElementNameToInt.get("MOVE_BUTTON_1")
                                 && currentSelectedButton < graphicElementNameToInt.get("CHANGE_POKEMON_1")) {
-                        this.allPanelsElements.put(MOVE_PANEL_TEXT,
+                        allPanelsElements.put(MOVE_PANEL_TEXT,
                                         new PanelElementImpl("firstPanel", new OverlayLayout(null)));
                         this.alreadyInMainMenu = false;
                         UtilitiesForScenes.removeSceneElements(VIEW_FILE_NAME, "movePreparation",
                                         currentSceneGraphicElements);
                         UtilitiesForScenes.loadSceneElements(VIEW_FILE_NAME, "move",
                                         currentSceneGraphicElements,
-                                        this.graphicElements);
-                        this.initMoveText();
+                                        graphicElements);
+                        this.initMoveText(currentSceneGraphicElements);
                         SceneFightUtilities.updateMoveInfo(currentSelectedButton,
                                         currentSceneGraphicElements,
                                         playerTrainerInstance);
                         UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true,
-                                        this.currentSceneGraphicElements);
+                                        currentSceneGraphicElements);
                 }
         }
 
-        private void initMoveText() {
+        private void initMoveText(final GraphicElementsRegistry currentSceneGraphicElements) {
                 UtilitiesForScenes
                                 .safeGetElementByName(currentSceneGraphicElements, "MOVE_1_TEXT", TextElementImpl.class)
                                 .setText(SceneFightUtilities.getMoveNameOrPlaceholder(FIRST_POSITION,
@@ -136,14 +134,17 @@ public class SceneFightUpdateView {
                                                 playerTrainerInstance));
         }
 
-        private void updateBall() throws IOException {
+        private void updateBall(final GraphicElementsRegistry currentSceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements,
+                        final GraphicElementsRegistry graphicElements,
+                        final Map<String, Integer> graphicElementNameToInt) throws IOException {
                 if (currentSelectedButton >= graphicElementNameToInt.get("POKEBALL_BUTTON")
                                 && currentSelectedButton < graphicElementNameToInt.get("BACKGROUND")) {
                         this.alreadyInMainMenu = false;
                         UtilitiesForScenes.loadSceneElements(VIEW_FILE_NAME, "pokeball",
                                         currentSceneGraphicElements,
-                                        this.graphicElements);
-                        this.allPanelsElements.put(BALL_PANEL_TEXT,
+                                        graphicElements);
+                        allPanelsElements.put(BALL_PANEL_TEXT,
                                         new PanelElementImpl("firstPanel", new OverlayLayout(null)));
                         UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEBALL_TEXT",
                                         TextElementImpl.class)
@@ -162,29 +163,32 @@ public class SceneFightUpdateView {
                                         .setText(playerTrainerInstance.getBall()
                                                         .get("masterball") + " x Master Ball");
                         UtilitiesForScenes.setButtonStatus(currentSelectedButton, true,
-                                        this.currentSceneGraphicElements);
+                                        currentSceneGraphicElements);
                 }
         }
 
-        private void pokemonChange() throws IOException {
+        private void pokemonChange(final GraphicElementsRegistry currentSceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements,
+                        final GraphicElementsRegistry graphicElements,
+                        final Map<String, Integer> graphicElementNameToInt) throws IOException {
                 if (currentSelectedButton >= graphicElementNameToInt.get("CHANGE_POKEMON_1")
                                 && currentSelectedButton < graphicElementNameToInt.get("POKEBALL_BUTTON")) {
                         this.alreadyInMainMenu = false;
-                        this.allPanelsElements.put(CHANGE_PANEL_TEXT,
+                        allPanelsElements.put(CHANGE_PANEL_TEXT,
                                         new PanelElementImpl("firstPanel", new OverlayLayout(null)));
                         UtilitiesForScenes.removeSceneElements(VIEW_FILE_NAME, "init",
-                                        this.currentSceneGraphicElements);
+                                        currentSceneGraphicElements);
                         UtilitiesForScenes.loadSceneElements(VIEW_FILE_NAME, "change",
-                                        this.currentSceneGraphicElements,
-                                        this.graphicElements);
-                        this.initChangeText();
+                                        currentSceneGraphicElements,
+                                        graphicElements);
+                        this.initChangeText(currentSceneGraphicElements);
                         UtilitiesForScenes.setButtonStatus(currentSelectedButton, true,
-                                        this.currentSceneGraphicElements);
+                                        currentSceneGraphicElements);
 
                 }
         }
 
-        private void initChangeText() {
+        private void initChangeText(final GraphicElementsRegistry currentSceneGraphicElements) {
                 UtilitiesForScenes
                                 .safeGetElementByName(currentSceneGraphicElements, "POKEMON_0_NAME_TEXT",
                                                 TextElementImpl.class)
@@ -237,7 +241,10 @@ public class SceneFightUpdateView {
                                                                 playerTrainerInstance));
         }
 
-        private void mainMenu() throws IOException {
+        private void mainMenu(final GraphicElementsRegistry currentSceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements,
+                        final Map<String, Integer> graphicElementNameToInt, final SceneFight sceneInstance)
+                        throws IOException {
                 if ((this.currentSelectedButton <= graphicElementNameToInt.get("BALL_BUTTON") && !alreadyInMainMenu)
                                 || this.newSelectedButton == graphicElementNameToInt.get("RUN_BUTTON")) {
                         currentSceneGraphicElements.clear();

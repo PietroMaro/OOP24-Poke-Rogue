@@ -3,7 +3,6 @@ package it.unibo.pokerogue.model.impl;
 import java.util.List;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import org.json.JSONArray;
 
@@ -61,8 +60,9 @@ public class SavingSystemImpl extends Singleton implements SavingSystem {
 	@Override
 	public void saveData(final String path, final String fileName) throws IOException {
 		final File file = new File(path, fileName);
-		file.createNewFile();
-		jsonReader.dumpJsonToFile(Paths.get(path, fileName).toString(), this.savedPokemon);
+		if (file.exists() || file.createNewFile()) {
+			jsonReader.dumpJsonToFile(file.getAbsolutePath(), this.savedPokemon);
+		}
 	}
 
 	/**

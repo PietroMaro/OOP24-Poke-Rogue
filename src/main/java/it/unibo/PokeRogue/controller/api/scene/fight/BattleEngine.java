@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import it.unibo.pokerogue.model.api.Decision;
 import it.unibo.pokerogue.model.enums.Weather;
+import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
 
 /**
  * Represents the engine responsible for managing and executing battle logic
@@ -30,7 +31,8 @@ public interface BattleEngine {
      * @throws InstantiationException    if an error occurs while instantiating a
      *                                   class
      */
-    void runBattleTurn(Decision playerDecision, Decision enemyDecision) throws NoSuchMethodException,
+    void runBattleTurn(Decision playerDecision, Decision enemyDecision, TrainerImpl enemyTrainerInstance)
+            throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
             InvocationTargetException,

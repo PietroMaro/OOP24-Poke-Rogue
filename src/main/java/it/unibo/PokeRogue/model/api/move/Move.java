@@ -7,7 +7,6 @@ import it.unibo.pokerogue.model.enums.Type;
 import it.unibo.pokerogue.model.impl.RangeImpl;
 import java.util.Optional;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -19,7 +18,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@EqualsAndHashCode
 @RequiredArgsConstructor
 public class Move {
 	private String name;

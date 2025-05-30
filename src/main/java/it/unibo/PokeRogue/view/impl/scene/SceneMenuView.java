@@ -19,19 +19,6 @@ import java.io.IOException;
 public final class SceneMenuView {
 
         private static final String FIRST_PANEL_NAME = "firstPanel";
-        private final GraphicElementsRegistry graphicElements;
-
-        /**
-         * Constructs a new {@code SceneMenuView} instance.
-         * 
-         * @param graphicElements the registry of graphic elements used in this scene
-         * 
-         * 
-         */
-        public SceneMenuView(final GraphicElementsRegistry graphicElements) throws IOException {
-                this.graphicElements = graphicElements;
-
-        }
 
         /**
          * Initializes the graphic elements for the menu scene, including the base
@@ -47,13 +34,14 @@ public final class SceneMenuView {
          * @throws IOException if an I/O error occurs while loading the JSON file
          */
         public void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
-                        final Map<String, PanelElementImpl> allPanelsElements)
+                        final Map<String, PanelElementImpl> allPanelsElements,
+                        final GraphicElementsRegistry graphicElements)
                         throws IOException {
 
                 allPanelsElements.put(FIRST_PANEL_NAME, new PanelElementImpl("", new OverlayLayout(null)));
 
                 UtilitiesForScenes.loadSceneElements("sceneMenuElements.json", "init", currentSceneGraphicElements,
-                                this.graphicElements);
+                                graphicElements);
 
         }
 }

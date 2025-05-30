@@ -37,7 +37,7 @@ public final class SceneBoxView {
         private static final double POKEMON_BUTTON_START_Y = 0.125;
         private static final int START_BUTTON_POSITION = 5;
         private static final int FIRST_POKEMON_BUTTON_POSITION = 6;
-        private static final int POKE_BOX_ROW_LENGTH = 9;
+        private static final double POKE_BOX_ROW_LENGTH = 9;
         private static final int POKEMON_TO_BUTTON_OFFSET = 206;
         private static final String FIRST_PANEL_NAME = "firstPanel";
         private static final String POKEMON_PANEL_NAME = "pokemonPanel";
