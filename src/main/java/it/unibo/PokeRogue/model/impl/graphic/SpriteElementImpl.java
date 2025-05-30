@@ -24,7 +24,7 @@ import lombok.Getter;
 public final class SpriteElementImpl extends GraphicElementImpl implements SpriteElement {
     private static final long serialVersionUID = 1L;
 
-    private Image spriteImage;
+    private transient Image spriteImage;
     private double leftUpX;
     private double leftUpY;
     private double spriteWidth = 1;

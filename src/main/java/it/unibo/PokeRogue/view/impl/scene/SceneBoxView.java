@@ -68,11 +68,11 @@ public final class SceneBoxView {
                         currentSceneGraphicElements.put(pokemonIndex + FIRST_POKEMON_BUTTON_POSITION,
                                         new ButtonElementImpl(FIRST_PANEL_NAME, null, Color.BLACK, 0,
                                                         POKEMON_BUTTON_START_X
-                                                                        + (pokemonIndex % (double) (POKE_BOX_ROW_LENGTH
-                                                                                        * OFFSET_X)),
+                                                                        + (pokemonIndex % (double) POKE_BOX_ROW_LENGTH
+                                                                                        * OFFSET_X),
                                                         POKEMON_BUTTON_START_Y
-                                                                        + (pokemonIndex / (double) (POKE_BOX_ROW_LENGTH
-                                                                                        * OFFSET_Y)),
+                                                                        + (pokemonIndex / (double) POKE_BOX_ROW_LENGTH
+                                                                                        * OFFSET_Y),
                                                         POKEMON_BUTTON_WIDTH,
                                                         POKEMON_BUTTON_HEIGHT));
 
@@ -104,7 +104,7 @@ public final class SceneBoxView {
                                 currentSceneGraphicElements.put(pokemonIndex + POKEMON_TO_BUTTON_OFFSET,
                                                 new SpriteElementImpl("pokemonPanel",
                                                                 currentBox.get(pokemonIndex)
-                                                                                .getSpriteFront(),
+                                                                                .getSpriteFront().get(),
                                                                 POKEMON_START_X + (pokemonIndex % POKE_BOX_ROW_LENGTH
                                                                                 * OFFSET_X),
                                                                 POKEMON_START_Y + (pokemonIndex / POKE_BOX_ROW_LENGTH
