@@ -47,7 +47,7 @@ public class SceneFightView {
         this.sceneFightInitView = new SceneFightInitView(this.sceneGraphicElements, allPanelsElements,
                 enemyTrainerInstance, graphicElements);
         this.sceneFightUpdateView = new SceneFightUpdateView(this.sceneGraphicElements, allPanelsElements,
-                currentSelectedButton, newSelectedButton, scene, graphicElements, graphicElementNameToInt);
+                currentSelectedButton, newSelectedButton, graphicElements, graphicElementNameToInt);
 
     }
 

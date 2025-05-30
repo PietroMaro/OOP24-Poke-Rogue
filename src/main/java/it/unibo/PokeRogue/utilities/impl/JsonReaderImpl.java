@@ -30,12 +30,15 @@ public final class JsonReaderImpl implements JsonReader {
 	 */
 	@Override
 	public String readJsonStringFromFile(final String filePath) throws IOException {
-		final Path path = Path.of(filePath);
-		if (Files.notExists(path)) {
-			Files.createDirectories(path.getParent());
-			Files.writeString(path, "[]", StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
-		}
-		return Files.readString(Path.of(filePath), StandardCharsets.UTF_8);
+    	final Path path = Path.of(filePath);
+    	if (Files.notExists(path)) {
+    	    final Path parent = path.getParent();
+    	    if (parent != null) {
+    	        Files.createDirectories(parent);
+    	    }
+    	    Files.writeString(path, "[]", StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
+    	}
+    	return Files.readString(path, StandardCharsets.UTF_8);
 	}
 
 	@Override
@@ -56,11 +59,12 @@ public final class JsonReaderImpl implements JsonReader {
 					+ jsonFile.getClass().getName());
 		}
 
-		final BufferedWriter writer = Files.newBufferedWriter(Path.of(filePath), StandardCharsets.UTF_8);
 		final String prettyJson = (jsonFile instanceof JSONArray)
 				? ((JSONArray) jsonFile).toString(4)
 				: ((JSONObject) jsonFile).toString(4);
-		writer.write(prettyJson);
+		try (final BufferedWriter writer = Files.newBufferedWriter(Path.of(filePath), StandardCharsets.UTF_8)) {
+        	writer.write(prettyJson);
+    	}
 	}
 
 	@Override

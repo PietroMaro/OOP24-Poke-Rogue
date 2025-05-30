@@ -2,6 +2,7 @@ package it.unibo.pokerogue.model.impl;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Optional;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -55,7 +56,7 @@ public class AbilityFactoryImpl extends Singleton implements AbilityFactory {
 		final JSONObject effect = abilityJson.getJSONObject("effect");
 		final Ability newAbility = new Ability(
 				situationChecks,
-				effect
+				Optional.ofNullable(effect)
 			);
 
 		this.abilityBlueprints.put(abilityName, newAbility);

@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import it.unibo.pokerogue.model.api.Range;
 import it.unibo.pokerogue.model.enums.Type;
 import it.unibo.pokerogue.model.impl.RangeImpl;
+import java.util.Optional;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 
@@ -13,7 +14,7 @@ public class Move{
 	private String name;
 	private Range<Integer> pp;
 	private boolean isPhysical;	
-	private JSONObject effect;
+	private Optional<JSONObject> effect;
 	private int accuracy;
 	private int critRate;
 	private int baseDamage;
@@ -23,16 +24,13 @@ public class Move{
 	private Type type;
 	private int priority;
 
-	public Move() {
-			pp = pp.copyOf();
-    	}
 
 	public Move deepCopy() {
 	    return new Move(
 			this.name,
 			new RangeImpl<>(this.pp.getCurrentMin(),this.pp.getCurrentValue(),this.pp.getCurrentMax()),
 	        this.isPhysical,
-	        new JSONObject(this.effect.toString()), 
+	        Optional.of(new JSONObject(this.effect.toString())), 
 			this.accuracy,
 	        this.critRate,
 	        this.baseDamage,

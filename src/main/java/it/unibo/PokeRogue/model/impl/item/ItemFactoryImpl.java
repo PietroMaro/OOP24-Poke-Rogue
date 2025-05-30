@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import java.util.Optional;
 
 import it.unibo.pokerogue.model.api.item.Item;
 import it.unibo.pokerogue.model.api.item.ItemBlueprint;
@@ -92,7 +93,7 @@ public class ItemFactoryImpl extends Singleton implements ItemFactory {
         final JSONObject effect = itemJson.getJSONObject("effect");
 
         final ItemBlueprint newItem = new ItemBlueprint(
-                id, name, type, description, price, rarity, category, captureRate, effect);
+                id, name, type, description, price, rarity, category, captureRate, Optional.ofNullable(effect));
 
         this.itemBlueprints.put(name, newItem);
         this.allItemSet.add(name);

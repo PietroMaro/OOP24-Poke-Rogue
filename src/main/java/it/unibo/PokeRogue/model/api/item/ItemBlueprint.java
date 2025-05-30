@@ -1,6 +1,7 @@
 package it.unibo.pokerogue.model.api.item;
 
 import org.json.JSONObject;
+import java.util.Optional;
 
 /**
  * Represents a blueprint for creating an in-game item.
@@ -28,5 +29,5 @@ public record ItemBlueprint(
                 String rarity,
                 String category,
                 double captureRate,
-                JSONObject effect) {
+                Optional<JSONObject> effect) {
 }
