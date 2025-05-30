@@ -3,7 +3,7 @@ package it.unibo.pokerogue.model.api.graphic;
 import it.unibo.pokerogue.model.impl.graphic.BoxElementImpl;
 
 /**
- * Interface defining the basic behavior of a button graphic element,
+ * Interface defining the basic behavior of a button graphic element.
  */
 public interface ButtonElement {
     /**
@@ -18,7 +18,7 @@ public interface ButtonElement {
      * 
      * @return true if selected, false otherwise
      */
-    //boolean isSelected();
+    // boolean isSelected();
 
     /**
      * Returns the underlying BoxElementImpl representing the button's visuals.
