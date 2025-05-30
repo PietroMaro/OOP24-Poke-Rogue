@@ -22,18 +22,21 @@ import it.unibo.pokerogue.utilities.UtilitiesForScenes;
  */
 
 public final class SceneLoadView {
-
+        private static final int REMOVE_EXTENSION = 5;
         private static final String POKEMON_PANEL_NAME = "savesPanel";
 
         /**
-         * Initializes the graphic elements for the scene load view, including base
-         * panels.
-         * Loads additional scene elements from a JSON configuration file.
+         * Initializes the graphic elements used in the scene load view.
+         * It creates and registers the base panel elements required for the scene,
+         * and loads additional elements from a JSON file.
          *
-         * @param allPanelsElements    a map storing the panel elements used in this
+         * @param allPanelsElements    a map to store panel elements created for this
          *                             scene
-         * @param sceneGraphicElements the registry where the scene-specific graphic
-         *                             elements are added
+         * @param sceneGraphicElements the registry to hold scene-specific graphic
+         *                             elements
+         * @param graphicElements      the global registry containing all available
+         *                             graphic elements
+         * @throws IOException if the JSON configuration file cannot be read
          */
         public void initGraphicElements(final Map<String, PanelElementImpl> allPanelsElements,
                         final GraphicElementsRegistry sceneGraphicElements,
@@ -77,7 +80,7 @@ public final class SceneLoadView {
                                                                 .get("src", "main", "resources", "saves", savesName)
                                                                 .toString());
 
-                                savesName = savesName.substring(0, savesName.length() - 5); // removing the extension
+                                savesName = savesName.substring(0, savesName.length() - REMOVE_EXTENSION); 
 
                                 text = "Salvataggio: " + savesName + ", Grandezza Box: " + boxPokemonNumber;
 
