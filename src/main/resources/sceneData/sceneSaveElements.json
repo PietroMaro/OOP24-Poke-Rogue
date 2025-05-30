@@ -36,7 +36,7 @@
             "textColor": "#000000",
             "textDimension": 0.05,
             "leftX": 0.23,
-            "leftY": 0.505
+            "leftY": 0.495
         },
         "5": {
             "type": "button",
@@ -60,6 +60,15 @@
             "width": 0.20,
             "height": 0.1
         },
+        "7": {
+            "type": "text",
+            "panelName": "firstPanel",
+            "text": "",
+            "textColor": "#000000",
+            "textDimension": 0.05,
+            "leftX": 0.25,
+            "leftY": 0.525
+        },
         "100": {
             "type": "background",
             "panelName": "firstPanel",
@@ -74,6 +83,7 @@
         "EXIT_AND_SAVE_TEXT": 4,
         "EXIT_AND_SAVE_BUTTON": 5,
         "CONTINUE_GAME_BUTTON": 6,
+        "SAVE_NAME_TEXT": 7,
         "BACKGROUND":100
     },
     "dynamicObjects": {
@@ -81,6 +91,7 @@
             2,
             3,
             4,
+            7,
             5,
             6,
             1,

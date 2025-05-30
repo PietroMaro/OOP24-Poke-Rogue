@@ -20,97 +20,97 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 public class Move {
-	private String name;
-	private Range<Integer> pp;
-	private boolean isPhysical;
-	private Optional<JSONObject> effect;
-	private int accuracy;
-	private int critRate;
-	private int baseDamage;
-	private int calculatedDamage;
-	private double stab;
-	private boolean isCrit;
-	private Type type;
-	private int priority;
+    private String name;
+    private Range<Integer> pp;
+    private boolean isPhysical;
+    private Optional<JSONObject> effect;
+    private int accuracy;
+    private int critRate;
+    private int baseDamage;
+    private int calculatedDamage;
+    private double stab;
+    private boolean isCrit;
+    private Type type;
+    private int priority;
 
-	/**
-	 * Constructs a new Move instance with the specified attributes.
-	 *
-	 * @param name             the name of the move
-	 * @param pp               the range of Power Points (PP) for the move
-	 * @param isPhysical       whether the move is physical (true) or special
-	 *                         (false)
-	 * @param effect           an optional JSON object representing any additional
-	 *                         effects of the move
-	 * @param accuracy         the accuracy percentage of the move
-	 * @param critRate         the critical hit rate of the move
-	 * @param baseDamage       the base damage value of the move
-	 * @param calculatedDamage the calculated damage value after modifications
-	 * @param stab             the Same-Type Attack Bonus multiplier
-	 * @param isCrit           whether the move is a critical hit
-	 * @param type             the elemental type of the move
-	 * @param priority         the priority level of the move in battle
-	 */
-	public Move(final String name, final Range<Integer> pp, final boolean isPhysical, final Optional<JSONObject> effect,
-			final int accuracy, final int critRate, final int baseDamage, final int calculatedDamage,
-			final double stab, final boolean isCrit, final Type type, final int priority) {
-		this.name = name;
-		this.pp = new RangeImpl<>(pp.getCurrentMin(), pp.getCurrentValue(), pp.getCurrentMax());
-		this.isPhysical = isPhysical;
-		this.effect = effect.map(json -> new JSONObject(json.toString()));
-		this.accuracy = accuracy;
-		this.critRate = critRate;
-		this.baseDamage = baseDamage;
-		this.calculatedDamage = calculatedDamage;
-		this.stab = stab;
-		this.isCrit = isCrit;
-		this.type = type;
-		this.priority = priority;
-	}
+    /**
+     * Constructs a new Move instance with the specified attributes.
+     *
+     * @param name             the name of the move
+     * @param pp               the range of Power Points (PP) for the move
+     * @param isPhysical       whether the move is physical (true) or special
+     *                         (false)
+     * @param effect           an optional JSON object representing any additional
+     *                         effects of the move
+     * @param accuracy         the accuracy percentage of the move
+     * @param critRate         the critical hit rate of the move
+     * @param baseDamage       the base damage value of the move
+     * @param calculatedDamage the calculated damage value after modifications
+     * @param stab             the Same-Type Attack Bonus multiplier
+     * @param isCrit           whether the move is a critical hit
+     * @param type             the elemental type of the move
+     * @param priority         the priority level of the move in battle
+     */
+    public Move(final String name, final Range<Integer> pp, final boolean isPhysical, final Optional<JSONObject> effect,
+            final int accuracy, final int critRate, final int baseDamage, final int calculatedDamage,
+            final double stab, final boolean isCrit, final Type type, final int priority) {
+        this.name = name;
+        this.pp = new RangeImpl<>(pp.getCurrentMin(), pp.getCurrentValue(), pp.getCurrentMax());
+        this.isPhysical = isPhysical;
+        this.effect = effect.map(json -> new JSONObject(json.toString()));
+        this.accuracy = accuracy;
+        this.critRate = critRate;
+        this.baseDamage = baseDamage;
+        this.calculatedDamage = calculatedDamage;
+        this.stab = stab;
+        this.isCrit = isCrit;
+        this.type = type;
+        this.priority = priority;
+    }
 
-	/**
-	 * Returns the current PP range of the move.
-	 *
-	 * @return a Range representing the current minimum, current value,
-	 *         and maximum PP of the move.
-	 */
-	public Range<Integer> getPp() {
-		return new RangeImpl<>(this.pp.getCurrentMin(), this.pp.getCurrentValue(), this.pp.getCurrentMax());
-	}
+    /**
+     * Returns the current PP range of the move.
+     *
+     * @return a Range representing the current minimum, current value,
+     *         and maximum PP of the move.
+     */
+    public Range<Integer> getPp() {
+        return new RangeImpl<>(this.pp.getCurrentMin(), this.pp.getCurrentValue(), this.pp.getCurrentMax());
+    }
 
-	/**
-	 * Sets the PP range of the move.
-	 *
-	 * @param ppToSet the Range containing the new minimum, current value,
-	 *                and maximum PP to assign.
-	 */
-	public void setPp(final Range<Integer> ppToSet) {
-		this.pp = new RangeImpl<>(ppToSet.getCurrentMin(), ppToSet.getCurrentValue(), ppToSet.getCurrentMax());
-	}
+    /**
+     * Sets the PP range of the move.
+     *
+     * @param ppToSet the Range containing the new minimum, current value,
+     *                and maximum PP to assign.
+     */
+    public void setPp(final Range<Integer> ppToSet) {
+        this.pp = new RangeImpl<>(ppToSet.getCurrentMin(), ppToSet.getCurrentValue(), ppToSet.getCurrentMax());
+    }
 
-	/**
-	 * Creates and returns a deep copy of this Move object.
-	 * This method duplicates all fields, including making a new copy of the PP
-	 * range
-	 * and a new JSONObject for the effect, ensuring the copy is independent of the
-	 * original.
-	 *
-	 * @return a new Move object that is a deep copy of this instance
-	 */
-	public final Move deepCopy() {
-		return new Move(
-				this.name,
-				new RangeImpl<>(this.pp.getCurrentMin(), this.pp.getCurrentValue(), this.pp.getCurrentMax()),
-				this.isPhysical,
-				Optional.of(new JSONObject(this.effect.get().toString())),
-				this.accuracy,
-				this.critRate,
-				this.baseDamage,
-				this.calculatedDamage,
-				this.stab,
-				this.isCrit,
-				this.type,
-				this.priority);
-	}
+    /**
+     * Creates and returns a deep copy of this Move object.
+     * This method duplicates all fields, including making a new copy of the PP
+     * range
+     * and a new JSONObject for the effect, ensuring the copy is independent of the
+     * original.
+     *
+     * @return a new Move object that is a deep copy of this instance
+     */
+    public final Move deepCopy() {
+        return new Move(
+                this.name,
+                new RangeImpl<>(this.pp.getCurrentMin(), this.pp.getCurrentValue(), this.pp.getCurrentMax()),
+                this.isPhysical,
+                Optional.of(new JSONObject(this.effect.get().toString())),
+                this.accuracy,
+                this.critRate,
+                this.baseDamage,
+                this.calculatedDamage,
+                this.stab,
+                this.isCrit,
+                this.type,
+                this.priority);
+    }
 
 }

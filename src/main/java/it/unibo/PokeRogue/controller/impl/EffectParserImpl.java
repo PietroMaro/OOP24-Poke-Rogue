@@ -38,7 +38,7 @@ public class EffectParserImpl extends Singleton implements EffectParser {
     private void parseEffect(final JSONObject effect) throws IOException {
         final JSONArray checks = effect.getJSONArray("checks");
         final JSONArray activation = effect.getJSONArray("activation");
-        if (computeChecks(checks) || true) {
+        if (computeChecks(checks)) {
             activateActivations(activation);
         }
     }

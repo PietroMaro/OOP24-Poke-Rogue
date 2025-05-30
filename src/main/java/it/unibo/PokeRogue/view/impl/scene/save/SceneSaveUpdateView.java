@@ -3,6 +3,7 @@ package it.unibo.pokerogue.view.impl.scene.save;
 import java.io.IOException;
 
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
+import it.unibo.pokerogue.model.impl.graphic.TextElementImpl;
 import it.unibo.pokerogue.utilities.UtilitiesForScenes;
 import it.unibo.pokerogue.view.api.scene.save.SaveUpdateView;
 
@@ -16,9 +17,7 @@ public class SceneSaveUpdateView implements SaveUpdateView {
     /**
      * Constructs a SceneSaveUpdateView instance.
      *
-     * @param currentSceneGraphicElements the graphic elements registry for the
-     *                                    current scene
-     * @param currentSelectedButton       the initially selected button ID
+     * @param currentSelectedButton the initially selected button ID
      */
     public SceneSaveUpdateView(final int currentSelectedButton) {
         this.currentSelectedButton = currentSelectedButton;
@@ -28,6 +27,14 @@ public class SceneSaveUpdateView implements SaveUpdateView {
             final GraphicElementsRegistry currentSceneGraphicElements)
             throws IOException {
         this.updateSelectedButton(newSelectedButton, currentSceneGraphicElements);
+    }
+
+    public void updateInputText(String typedSaveName,
+            final GraphicElementsRegistry currentSceneGraphicElements) {
+        System.out.println("scritta attuale:" + typedSaveName);
+        UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "SAVE_NAME_TEXT",
+                TextElementImpl.class)
+                .setText(typedSaveName);
     }
 
     private void updateSelectedButton(final int newSelectedButton,

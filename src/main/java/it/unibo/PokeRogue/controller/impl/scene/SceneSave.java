@@ -27,11 +27,15 @@ import it.unibo.pokerogue.view.impl.scene.save.SceneSaveView;
 public class SceneSave extends Scene {
     private static final String EXIT_SAVE_LITTERAL = "EXIT_AND_SAVE_BUTTON";
     private static final String CONTINUE_LITTERAL = "CONTINUE_GAME_BUTTON";
+    private static final String SAVE_PATH = "src\\main\\resources\\saves";
+    private static final int MAX_NAME_LENGTH = 12;
     private final GraphicElementsRegistry currentSceneGraphicElements;
     private final GraphicElementsRegistry graphicElements;
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final SceneSaveView sceneSaveView;
     private final GameEngineImpl gameEngineInstance;
+    private final SavingSystemImpl savingSystem;
+    private String typedSaveName = "";
     private int newSelectedButton;
     private final Map<String, Integer> graphicElementNameToInt;
 
@@ -57,6 +61,7 @@ public class SceneSave extends Scene {
         this.graphicElements = this.getGraphicElements();
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
+        this.savingSystem = SavingSystemImpl.getInstance(SavingSystemImpl.class);
         this.initStatus();
         this.sceneSaveView = new SceneSaveView(this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL));
         this.initGraphicElements();
@@ -77,6 +82,9 @@ public class SceneSave extends Scene {
     @Override
     public void updateStatus(final int inputKey) throws IOException, InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchMethodException {
+
+        this.handleTextInput(inputKey);
+
         switch (inputKey) {
             case KeyEvent.VK_RIGHT:
                 if (this.newSelectedButton == this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL)) {
@@ -92,11 +100,10 @@ public class SceneSave extends Scene {
 
             case KeyEvent.VK_ENTER:
                 if (this.newSelectedButton == this.graphicElementNameToInt.get(CONTINUE_LITTERAL)) {
-                    gameEngineInstance.setScene("fight");
+                    this.gameEngineInstance.setScene("main");
 
                 } else if (this.newSelectedButton == this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL)) {
-                    gameEngineInstance.setScene("main");
-                    // SavingSystemImpl.saveData();
+                    this.savingCheck();
                 }
                 break;
             default:
@@ -111,6 +118,39 @@ public class SceneSave extends Scene {
     private void initGraphicElements() throws IOException {
         this.sceneSaveView.initGraphicElements(this.newSelectedButton, this.graphicElements, this.allPanelsElements,
                 this.currentSceneGraphicElements);
+    }
+
+    private void handleTextInput(final int inputKey)
+            throws IOException, InstantiationException,
+            IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+        if (inputKey == KeyEvent.VK_BACK_SPACE && !typedSaveName.isEmpty()) {
+            typedSaveName = typedSaveName.substring(0, typedSaveName.length() - 1);
+        }
+        if (typedSaveName.length() < MAX_NAME_LENGTH) {
+            if (inputKey >= KeyEvent.VK_A && inputKey <= KeyEvent.VK_Z) {
+                final char c = (char) inputKey;
+                final char lowercase = Character.toLowerCase(c);
+                typedSaveName += lowercase;
+            } else if (inputKey >= KeyEvent.VK_0 && inputKey <= KeyEvent.VK_9) {
+                typedSaveName += (char) inputKey;
+            } else if (inputKey == KeyEvent.VK_SPACE) {
+                typedSaveName += " ";
+            }
+            sceneSaveView.updateInputText(typedSaveName, this.currentSceneGraphicElements);
+
+        }
+    }
+
+    private void savingCheck() throws IOException, InstantiationException,
+            IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+        if (savingSystem.getSaveFilesName(SAVE_PATH).contains(typedSaveName + ".json")) {
+            typedSaveName = "already present";
+             sceneSaveView.updateInputText(typedSaveName, this.currentSceneGraphicElements);
+        } else {
+            savingSystem.saveData(SAVE_PATH, typedSaveName + ".json");
+            this.gameEngineInstance.setScene("main");
+        }
+
     }
 
     /**

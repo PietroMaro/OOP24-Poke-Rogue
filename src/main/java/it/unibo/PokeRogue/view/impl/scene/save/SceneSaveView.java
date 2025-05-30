@@ -31,6 +31,7 @@ public class SceneSaveView implements SaveView {
         this.sceneSaveUpdateView = new SceneSaveUpdateView(currentSelectedButton);
     }
 
+    @Override
     public void initGraphicElements(final int currentSelectedButton, GraphicElementsRegistry graphicElements,
             final Map<String, PanelElementImpl> allPanelsElements,
             final GraphicElementsRegistry currentSceneGraphicElements) throws IOException {
@@ -38,9 +39,15 @@ public class SceneSaveView implements SaveView {
                 currentSceneGraphicElements);
     }
 
+    @Override
     public void updateGraphic(final int newSelectedButton,
             final GraphicElementsRegistry currentSceneGraphicElements)
             throws IOException {
         this.sceneSaveUpdateView.updateGraphic(newSelectedButton, currentSceneGraphicElements);
+    }
+
+    public void updateInputText(String typedSaveName,
+            final GraphicElementsRegistry currentSceneGraphicElements) {
+        this.sceneSaveUpdateView.updateInputText(typedSaveName, currentSceneGraphicElements);
     }
 }
