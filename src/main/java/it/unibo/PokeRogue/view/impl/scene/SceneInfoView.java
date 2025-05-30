@@ -44,4 +44,6 @@ public class SceneInfoView {
         UtilitiesForScenes.loadSceneElements(
                 "sceneInfoElements.json", "init", currentSceneGraphicElements, this.graphicElements);
     }
+
+ 
 }

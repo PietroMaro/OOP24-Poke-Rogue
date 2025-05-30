@@ -131,6 +131,19 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
     }
 
     @Override
+    public Image getSpriteImage() {
+        final int width = spriteImage.getWidth(null);
+        final int height = spriteImage.getHeight(null);
+        final BufferedImage copy = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        final Graphics g = copy.getGraphics();
+        g.drawImage(spriteImage, 0, 0, null);
+        g.dispose();
+        return copy;
+
+
+    }
+
+    @Override
     public void setImage(final String pathToImage) throws IOException {
         this.spriteImage = ImageIO.read(new File(pathToImage));
     }

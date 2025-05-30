@@ -78,7 +78,7 @@ public class SceneFight extends Scene {
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
-        this.enemyAiInstance = new EnemyAiImpl(enemyTrainerInstance, battleLevel);
+        this.enemyAiInstance = new EnemyAiImpl(battleLevel);
         this.battleEngineInstance = new BattleEngineImpl(enemyTrainerInstance, enemyAiInstance);
         this.generateEnemyInstance = new GenerateEnemyImpl(battleLevel, enemyTrainerInstance);
         this.generateEnemyInstance.generateEnemy();
@@ -211,8 +211,8 @@ public class SceneFight extends Scene {
                     case DO_NOTHING:
                         fightLoop(new Decision(DecisionTypeEnum.NOTHING, ""));
                         break;
-					default:
-						break;
+                    default:
+                        break;
                 }
                 if (newSelectedButton >= graphicElementNameToInt.get("CHANGE_POKEMON_1")
                         && newSelectedButton <= graphicElementNameToInt.get("CHANGE_POKEMON_5")) {
@@ -238,7 +238,7 @@ public class SceneFight extends Scene {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
-        final Decision enemyChoose = enemyAiInstance.nextMove(battleEngineInstance.getCurrentWeather());
+        final Decision enemyChoose = enemyAiInstance.nextMove(battleEngineInstance.getCurrentWeather(),this.enemyTrainerInstance);
         this.battleEngineInstance.runBattleTurn(decision, enemyChoose);
 
     }
