@@ -1,6 +1,5 @@
 package it.unibo.pokerogue.controller.impl.scene.fight;
 
-
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -46,7 +45,6 @@ public class BattleEngineImpl implements BattleEngine {
     private static final Integer MAX_SQUAD = 6;
 
     private final TrainerImpl playerTrainerInstance;
-    private final TrainerImpl enemyTrainerInstance;
 
     private final EffectParser effectParserInstance;
     @Getter
@@ -71,13 +69,12 @@ public class BattleEngineImpl implements BattleEngine {
      * @param enemyTrainerInstance the enemy trainer instance involved in the battle
      * @param enemyAiInstance      the AI instance controlling the enemy's strategy
      */
-    public BattleEngineImpl(final TrainerImpl enemyTrainerInstance, final EnemyAi enemyAiInstance)
+    public BattleEngineImpl(final EnemyAi enemyAiInstance)
             throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
-        this.enemyTrainerInstance = enemyTrainerInstance;
         this.pokemonBattleUtilInstance = new PokemonBattleUtilImpl();
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
         this.effectParserInstance = EffectParserImpl.getInstance(EffectParserImpl.class);
@@ -105,7 +102,8 @@ public class BattleEngineImpl implements BattleEngine {
      *                       by AI or predefined logic
      */
     @Override
-    public void runBattleTurn(final Decision playerDecision, final Decision enemyDecision) throws NoSuchMethodException,
+    public void runBattleTurn(final Decision playerDecision, final Decision enemyDecision,
+            final TrainerImpl enemyTrainerInstance) throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
             InvocationTargetException,
@@ -121,23 +119,23 @@ public class BattleEngineImpl implements BattleEngine {
         this.applyStatusForAllPokemon(playerTrainerInstance.getSquad(), enemyPokemon);
         this.applyStatusForAllPokemon(enemyTrainerInstance.getSquad(), playerPokemon);
         if (playerDecision.moveType().priority() >= enemyDecision.moveType().priority()
-                && playerHasPriority(playerMove, enemyMove)) {
+                && playerHasPriority(playerMove, enemyMove, enemyTrainerInstance)) {
             this.executeDecision(playerDecision, playerTrainerInstance, enemyTrainerInstance, playerMove, enemyMove,
-                    abilityPlayer, abilityEnemy);
+                    abilityPlayer, abilityEnemy, enemyTrainerInstance);
             this.executeDecision(enemyDecision, enemyTrainerInstance, playerTrainerInstance, enemyMove, playerMove,
-                    abilityEnemy, abilityPlayer);
+                    abilityEnemy, abilityPlayer, enemyTrainerInstance);
 
         } else {
             this.executeDecision(enemyDecision, enemyTrainerInstance, playerTrainerInstance, enemyMove, playerMove,
-                    abilityEnemy, abilityPlayer);
+                    abilityEnemy, abilityPlayer, enemyTrainerInstance);
             this.executeDecision(playerDecision, playerTrainerInstance, enemyTrainerInstance, playerMove, enemyMove,
-                    abilityPlayer, abilityEnemy);
+                    abilityPlayer, abilityEnemy, enemyTrainerInstance);
         }
         this.handleAbilityEffects(abilityPlayer, playerPokemon, enemyPokemon, playerMove, enemyMove,
                 AbilitySituationChecks.NEUTRAL);
         this.handleAbilityEffects(abilityEnemy, enemyPokemon, playerPokemon, enemyMove, playerMove,
                 AbilitySituationChecks.NEUTRAL);
-        this.newEnemyCheck();
+        this.newEnemyCheck(enemyTrainerInstance);
 
     }
 
@@ -158,7 +156,8 @@ public class BattleEngineImpl implements BattleEngine {
                 attackerMove, opponentMove, this.currentWeather);
     }
 
-    private void handlePokeball(final String pokeballName) throws NoSuchMethodException,
+    private void handlePokeball(final String pokeballName, final TrainerImpl enemyTrainerInstance)
+            throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
             InvocationTargetException,
@@ -178,7 +177,7 @@ public class BattleEngineImpl implements BattleEngine {
                     playerTrainerInstance.addPokemon(enemyPokemon, MAX_SQUAD);
                     this.savingSystemInstance.savePokemon(enemyPokemon);
                     this.captured = true;
-                    this.newEnemyCheck();
+                    this.newEnemyCheck(enemyTrainerInstance);
                 } else {
                     this.savingSystemInstance.savePokemon(enemyPokemon);
                 }
@@ -190,7 +189,7 @@ public class BattleEngineImpl implements BattleEngine {
             final TrainerImpl defenderTrainer, final Optional<Move> atteckerMove,
             final Optional<Move> defenderMove,
             final Ability attackerAbility,
-            final Ability defenderAbility) throws NoSuchMethodException,
+            final Ability defenderAbility, final TrainerImpl enemyTrainerInstance) throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
             InvocationTargetException,
@@ -204,10 +203,10 @@ public class BattleEngineImpl implements BattleEngine {
             this.switchIn(decision.subType(), attackerTrainer);
             this.handleAbilityEffects(attackerAbility, attackerPokemon, defenderPokemon, atteckerMove, defenderMove,
                     AbilitySituationChecks.SWITCHIN);
-            this.refreshActivePokemons();
+            this.refreshActivePokemons(enemyTrainerInstance);
         }
         if (decision.moveType() == DecisionTypeEnum.POKEBALL) {
-            this.handlePokeball(decision.subType());
+            this.handlePokeball(decision.subType(), enemyTrainerInstance);
         }
         if (decision.moveType() == DecisionTypeEnum.ATTACK && statusEffectInstance.checkStatusAttack(attackerPokemon)
                 && BattleUtilities.knowsMove(attackerPokemon, Integer.parseInt(decision.subType()))) {
@@ -219,7 +218,7 @@ public class BattleEngineImpl implements BattleEngine {
         }
     }
 
-    private void refreshActivePokemons() {
+    private void refreshActivePokemons(final TrainerImpl enemyTrainerInstance) {
         this.playerPokemon = playerTrainerInstance.getPokemon(FIRST_POSITION).get();
         this.enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
     }
@@ -249,7 +248,7 @@ public class BattleEngineImpl implements BattleEngine {
         }
     }
 
-    private void newEnemyCheck() throws NoSuchMethodException,
+    private void newEnemyCheck(final TrainerImpl enemyTrainerInstance) throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
             InvocationTargetException,
@@ -259,8 +258,8 @@ public class BattleEngineImpl implements BattleEngine {
             this.newMoveToLearn(this.playerPokemon);
             this.gameEngineInstance.setScene("shop");
         } else if (this.enemyPokemon.getActualStats().get(Stats.HP).getCurrentValue() <= 0) {
-            final Decision enemyChoose = enemyAiInstance.nextMove(this.getCurrentWeather(), this.enemyTrainerInstance);
-            this.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""), enemyChoose);
+            final Decision enemyChoose = enemyAiInstance.nextMove(this.getCurrentWeather(), enemyTrainerInstance);
+            this.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""), enemyChoose, enemyTrainerInstance);
             BattleRewards.awardBattleRewards(playerPokemon, enemyPokemon);
             this.newMoveToLearn(playerPokemon);
         }
@@ -274,7 +273,8 @@ public class BattleEngineImpl implements BattleEngine {
         }
     }
 
-    private Boolean playerHasPriority(final Optional<Move> playerMove, final Optional<Move> enemyMove) {
+    private Boolean playerHasPriority(final Optional<Move> playerMove, final Optional<Move> enemyMove,
+            final TrainerImpl enemyTrainerInstance) {
         if (playerMove.isEmpty()) {
             return true;
         }

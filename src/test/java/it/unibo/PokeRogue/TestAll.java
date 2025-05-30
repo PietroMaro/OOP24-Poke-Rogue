@@ -279,8 +279,8 @@ public final class TestAll {
 	void testGenerateEnemy() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
 			InstantiationException, IOException {
 		final TrainerImpl enemyTrainer = new TrainerImpl();
-		final GenerateEnemyImpl generateEnemyInstance = new GenerateEnemyImpl(5, enemyTrainer);
-		generateEnemyInstance.generateEnemy();
+		final GenerateEnemyImpl generateEnemyInstance = new GenerateEnemyImpl(5);
+		generateEnemyInstance.generateEnemy(enemyTrainer);
 		assertTrue(enemyTrainer.getSquad().size() > 1);
 	}
 
@@ -297,9 +297,9 @@ public final class TestAll {
 		enemyTrainer.addPokemon(charmander, 1);
 		final EnemyAi ai = new EnemyAiImpl(99);
 		final int beforeLife = playerTrainer.getSquad().get(0).get().getActualStats().get(Stats.HP).getCurrentValue();
-		final BattleEngine battleEngine = new BattleEngineImpl(enemyTrainer, ai);
+		final BattleEngine battleEngine = new BattleEngineImpl(ai);
 		battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""),
-				new Decision(DecisionTypeEnum.ATTACK, "0"));
+				new Decision(DecisionTypeEnum.ATTACK, "0"), enemyTrainer);
 		final int afterLife = playerTrainer.getSquad().get(0).get().getActualStats().get(Stats.HP).getCurrentValue();
 		assertTrue(beforeLife > afterLife);
 	}

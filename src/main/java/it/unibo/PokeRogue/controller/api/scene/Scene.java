@@ -137,7 +137,7 @@ public abstract class Scene {
      * @return the graphic elements registry.
      */
     public final GraphicElementsRegistry getGraphicElements() {
-        return this.graphicElements;
+        return new GraphicElementsRegistryImpl(this.graphicElements);
     }
 
     /**
@@ -147,7 +147,8 @@ public abstract class Scene {
      * @return a map from graphic element names to their integer IDs.
      */
     public final Map<String, Integer> getGraphicElementNameToInt() {
-        return this.graphicElementNameToInt;
+        return new HashMap<>(this.graphicElementNameToInt);
+
     }
 
 }

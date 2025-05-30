@@ -5,7 +5,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
 import it.unibo.pokerogue.model.api.GenerateEnemy;
-import it.unibo.pokerogue.model.api.pokemon.Pokemon;
 import it.unibo.pokerogue.model.impl.pokemon.PokemonFactory;
 import it.unibo.pokerogue.model.impl.pokemon.PokemonFactoryImpl;
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
@@ -17,11 +16,10 @@ import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
  * or an enemy trainer with a team of Pokémon.
  */
 public class GenerateEnemyImpl implements GenerateEnemy {
-
+    private static final Random RANDOM = new Random();
     private static final int ENEMY_TRAINER_SPAWN = 5;
     private static final int MIN_LEVEL = 5;
 
-    private final TrainerImpl enemyTrainerInstance;
     private final PokemonFactory pokemonFactory;
     private final Integer battleLevel;
 
@@ -34,62 +32,44 @@ public class GenerateEnemyImpl implements GenerateEnemy {
      * @param enemyTrainerInstance the enemy trainer instance that will hold the
      *                             generated Pokémon
      */
-    public GenerateEnemyImpl(final Integer battleLevel, final TrainerImpl enemyTrainerInstance)
+    public GenerateEnemyImpl(final Integer battleLevel)
             throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
         this.battleLevel = battleLevel;
-        this.enemyTrainerInstance = enemyTrainerInstance;
         this.pokemonFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
     }
 
-    /**
-     * Generates an enemy based on the battle level. The method decides whether to
-     * generate a wild Pokémon or an enemy trainer's team.
-     * If the battle level is divisible by the ENEMY_TRAINER_SPAWN constant, a
-     * trainer team is generated; otherwise, a wild Pokémon is generated.
-     */
     @Override
-    public void generateEnemy() throws NoSuchMethodException,
+    public void generateEnemy(final TrainerImpl enemyTrainerInstance) throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
         if (battleLevel % ENEMY_TRAINER_SPAWN == 0) {
-            this.generateTrainerTeam();
+            this.generateTrainerTeam(enemyTrainerInstance);
         } else {
-            this.enemyTrainerInstance.setWild(true);
-            this.generateWildPokemon();
+            enemyTrainerInstance.setWild(true);
+            this.generateWildPokemon(enemyTrainerInstance);
         }
     }
 
-    /**
-     * Generates a wild Pokémon with a level based on the current battle level, with
-     * slight random variance.
-     * The Pokémon is then added to the enemy trainer's team.
-     */
-    private void generateWildPokemon() throws NoSuchMethodException,
+    private void generateWildPokemon(final TrainerImpl enemyTrainerInstance) throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
         final int baseLevel = calculatePokemonLevel();
 
-        final int variance = new Random().nextInt(3) - 2;
+        final int variance = RANDOM.nextInt(3) - 2;
 
         final int level = Math.max(0, Math.min(baseLevel + variance < 1 ? 0 : baseLevel + variance, 100));
-        final Pokemon wild = pokemonFactory.randomPokemon(level);
-        this.enemyTrainerInstance.addPokemon(wild, 1);
+        enemyTrainerInstance.addPokemon(pokemonFactory.randomPokemon(level), 1);
     }
 
-    /**
-     * Generates a team of enemy trainer's Pokémon. The size of the team depends on
-     * the battle level,
-     * and each Pokémon's level is calculated with slight variance.
-     */
-    private void generateTrainerTeam() throws NoSuchMethodException,
+    private void generateTrainerTeam(final TrainerImpl enemyTrainerInstance) throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
             InvocationTargetException,
@@ -98,20 +78,13 @@ public class GenerateEnemyImpl implements GenerateEnemy {
         final int baseLevel = calculatePokemonLevel();
         for (int i = 1; i <= teamSize; i++) {
 
-            final int variance = new Random().nextInt(3) - 2;
+            final int variance = RANDOM.nextInt(3) - 2;
 
             final int level = Math.max(0, Math.min(baseLevel + variance < MIN_LEVEL ? 0 : baseLevel + variance, 100));
-            final Pokemon teamPokemon = pokemonFactory.randomPokemon(level);
-            enemyTrainerInstance.addPokemon(teamPokemon, i);
+            enemyTrainerInstance.addPokemon(pokemonFactory.randomPokemon(level), i);
         }
     }
 
-    /**
-     * Calculates the base level of a Pokémon based on the battle level.
-     * The calculation uses a scaling factor to determine the Pokémon's level.
-     *
-     * @return the calculated level for the generated Pokémon
-     */
     private int calculatePokemonLevel() {
 
         final double scalingFactor = 0.8;

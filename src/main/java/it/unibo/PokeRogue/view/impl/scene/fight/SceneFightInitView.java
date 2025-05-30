@@ -27,11 +27,7 @@ public class SceneFightInitView {
         private static final Integer FIRST_POSITION = 0;
         private static final String FIRST_PANEL = "firstPanel";
 
-        private final GraphicElementsRegistry currentSceneGraphicElements;
-        private final Map<String, PanelElementImpl> allPanelsElements;
         private final TrainerImpl playerTrainerInstance;
-        private final TrainerImpl enemyTrainerInstance;
-        private final GraphicElementsRegistry graphicElements;
 
         /**
          * Constructs a new SceneFightInitView object.
@@ -41,14 +37,10 @@ public class SceneFightInitView {
          * @param enemyTrainerInstance        The enemy trainer for the battle.
          * @param graphicElements             A map of graphic elements for the scene.
          */
-        public SceneFightInitView(final GraphicElementsRegistry currentSceneGraphicElements,
-                        final Map<String, PanelElementImpl> allPanelsElements,
-                        final TrainerImpl enemyTrainerInstance, final GraphicElementsRegistry graphicElements) {
-                this.currentSceneGraphicElements = currentSceneGraphicElements;
-                this.allPanelsElements = allPanelsElements;
+        public SceneFightInitView() {
+
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-                this.enemyTrainerInstance = enemyTrainerInstance;
-                this.graphicElements = graphicElements;
+
         }
 
         /**
@@ -57,13 +49,18 @@ public class SceneFightInitView {
          *
          * @param currentSelectedButton The currently selected button in the UI.
          */
-        protected void initGraphicElements(final int currentSelectedButton) throws IOException {
-                this.allPanelsElements.put(FIRST_PANEL, new PanelElementImpl("", new OverlayLayout(null)));
+        protected void initGraphicElements(final int currentSelectedButton,
+                        final GraphicElementsRegistry currentSceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements,
+                        final GraphicElementsRegistry graphicElements, TrainerImpl enemyTrainerInstance)
+                        throws IOException {
+                allPanelsElements.put(FIRST_PANEL, new PanelElementImpl("", new OverlayLayout(null)));
                 UtilitiesForScenes.loadSceneElements("sceneFightElement.json", "init", currentSceneGraphicElements,
-                                this.graphicElements);
-                this.initTextElements();
-                this.initSpriteElements();
-                UtilitiesForScenes.setButtonStatus(currentSelectedButton, true, this.currentSceneGraphicElements);
+                                graphicElements);
+                this.initTextElements(currentSceneGraphicElements, allPanelsElements, graphicElements,
+                                enemyTrainerInstance);
+                this.initSpriteElements(currentSceneGraphicElements, enemyTrainerInstance);
+                UtilitiesForScenes.setButtonStatus(currentSelectedButton, true, currentSceneGraphicElements);
         }
 
         /**
@@ -71,7 +68,9 @@ public class SceneFightInitView {
          * options.
          * It includes text for Pokémon names, levels, HP, and status conditions.
          */
-        private void initTextElements() {
+        private void initTextElements(final GraphicElementsRegistry currentSceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements,
+                        final GraphicElementsRegistry graphicElements, TrainerImpl enemyTrainerInstance) {
                 UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "DETAILS_CONTAINER_TEXT",
                                 TextElementImpl.class).setText(
                                                 "What will "
@@ -156,7 +155,8 @@ public class SceneFightInitView {
                                                                                 : "NONE"));
         }
 
-        private void initSpriteElements() {
+        private void initSpriteElements(final GraphicElementsRegistry currentSceneGraphicElements,
+                        TrainerImpl enemyTrainerInstance) {
                 UtilitiesForScenes
                                 .safeGetElementByName(currentSceneGraphicElements, "MY_POKEMON_SPRITE",
                                                 SpriteElementImpl.class)

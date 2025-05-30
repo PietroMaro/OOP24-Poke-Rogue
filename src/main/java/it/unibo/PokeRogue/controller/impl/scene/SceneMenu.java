@@ -57,7 +57,7 @@ public final class SceneMenu extends Scene {
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
-        this.sceneMenuView = new SceneMenuView(this.graphicElements);
+        this.sceneMenuView = new SceneMenuView();
         this.initStatus();
         this.initGraphicElements();
 
@@ -112,7 +112,7 @@ public final class SceneMenu extends Scene {
     }
 
     private void initGraphicElements() throws IOException {
-        this.sceneMenuView.initGraphicElements(currentSceneGraphicElements, allPanelsElements);
+        this.sceneMenuView.initGraphicElements(currentSceneGraphicElements, allPanelsElements, this.graphicElements);
 
         UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, currentSceneGraphicElements);
     }
@@ -121,13 +121,23 @@ public final class SceneMenu extends Scene {
         this.currentSelectedButton = this.graphicElementNameToInt.get("LOAD_BUTTON");
     }
 
+    /**
+     * Returns a copy of the current scene's graphical elements registry.
+     *
+     * @return a copy of the current GraphicElementsRegistry.
+     */
     @Override
     public GraphicElementsRegistry getCurrentSceneGraphicElements() {
         return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);
     }
 
+    /**
+     * Returns a map containing all panel elements currently loaded in the scene.
+     *
+     * @return a LinkedHashMap of all PanelElementImpl objects.
+     */
     @Override
     public Map<String, PanelElementImpl> getAllPanelsElements() {
-        return new LinkedHashMap<>(allPanelsElements);
+        return new LinkedHashMap<>(this.allPanelsElements);
     }
 }
