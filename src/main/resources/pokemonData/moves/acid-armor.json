@@ -11,8 +11,8 @@
         ],
         "activation": [
             [
-                "us.tempStatsBonus.defense.currentValue",
-                "us.tempStatsBonus.defense.currentValue + 2"
+                "us.tempStatsBonus[defense].currentValue",
+                "us.tempStatsBonus[defense].currentValue + 2"
             ]
         ]
     },

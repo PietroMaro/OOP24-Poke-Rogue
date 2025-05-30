@@ -241,10 +241,7 @@ public class SceneShop extends Scene {
 
                 // Ottieni l'effetto dell'item
                 final Optional<JSONObject> itemEffect = this.selectedUsableItem.getEffect();
-
-                if (itemEffect.isPresent()) {
-                    effectParser.parseEffect(itemEffect.get(), pokemon);
-                }
+                effectParser.parseEffect(itemEffect.get(), pokemon);
                 this.selectedUsableItem = null;
                 gameEngineInstance.setScene("fight");
             }
