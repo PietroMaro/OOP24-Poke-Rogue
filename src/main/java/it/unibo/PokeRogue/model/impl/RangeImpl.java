@@ -92,7 +92,8 @@ public class RangeImpl<T extends Number> implements Range<T> {
      * @return a new Range&lt;T&gt; object with the same current minimum, value, and
      *         maximum.
      */
+    @Override
     public Range<T> copyOf() {
-        return new RangeImpl<T>(this.getCurrentMin(), this.getCurrentMax(), this.getCurrentValue());
+        return new RangeImpl<>(this.getCurrentMin(), this.getCurrentMax(), this.getCurrentValue());
     }
 }

@@ -44,6 +44,7 @@ public final class SceneBoxView implements BoxView {
         private static final String FIRST_PANEL_NAME = "firstPanel";
         private static final String POKEMON_PANEL_NAME = "pokemonPanel";
 
+        @Override
         public void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final GraphicElementsRegistry graphicElements) throws IOException {
@@ -73,6 +74,7 @@ public final class SceneBoxView implements BoxView {
 
         }
 
+        @Override
         public int loadPokemonSprites(final List<List<Pokemon>> boxes, final int boxIndex,
                         final GraphicElementsRegistry currentSceneGraphicElements) {
                 final int currentBoxLength = boxes.get(boxIndex).size();
@@ -101,6 +103,7 @@ public final class SceneBoxView implements BoxView {
 
         }
 
+        @Override
         public void updateGraphic(final int currentSelectedButton, final int newSelectedButton,
                         final int boxIndex,
                         final int newBoxIndex, final List<List<Pokemon>> boxes,

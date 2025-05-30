@@ -14,7 +14,7 @@ import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
 public interface FightView {
 
         /**
-         * Initializes the graphic elements for the battle scene
+         * Initializes the graphic elements for the battle scene.
          *
          * @param currentSelectedButton       the initially selected button in the UI
          * @param currentSceneGraphicElements the registry of graphic elements for the
@@ -31,7 +31,7 @@ public interface FightView {
                         GraphicElementsRegistry graphicElements, TrainerImpl enemyTrainerInstance) throws IOException;
 
         /**
-         * Updates the graphical elements for the battle scene
+         * Updates the graphical elements for the battle scene.
          * 
          * @param currentSelectedButton       the currently selected button in the UI
          * @param newSelectedButton           the newly selected button after an update

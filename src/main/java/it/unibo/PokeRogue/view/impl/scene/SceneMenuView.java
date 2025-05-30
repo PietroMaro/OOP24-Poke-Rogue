@@ -21,6 +21,7 @@ public final class SceneMenuView implements MenuView {
 
         private static final String FIRST_PANEL_NAME = "firstPanel";
 
+        @Override
         public void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final GraphicElementsRegistry graphicElements)

@@ -21,30 +21,13 @@ public final class SceneFightView implements FightView {
     private final SceneFightUpdateView sceneFightUpdateView;
 
     /**
-     * Constructs a new SceneFightView object.
-     * 
-     * @param currentSceneGraphicElements the registry containing all graphic
-     *                                    elements
-     *                                    used in the battle scene
-     * @param allPanelsElements           a map of all panel elements present in the
-     *                                    UI
-     * @param enemyTrainerInstance        the enemy trainer involved in the current
-     *                                    battle
-     * @param currentSelectedButton       the index of the currently selected button
-     *                                    in
-     *                                    the UI
-     * @param newSelectedButton           the index of the button that has been
-     *                                    newly
-     *                                    selected after an update
-     * @param scene                       the {@code SceneFight} instance
-     *                                    representing
-     *                                    the current battle scene
-     * @param graphicElements             additional registry of graphic elements
-     *                                    for
-     *                                    the scene
-     * @param graphicElementNameToInt     a map linking graphic element names to
-     *                                    their
-     *                                    corresponding integer IDs
+     * Constructs a new SceneFightView object, initializing internal view
+     * components.
+     *
+     * @param currentSelectedButton the index of the currently selected button in
+     *                              the UI
+     * @param newSelectedButton     the index of the newly selected button after an
+     *                              update
      */
     public SceneFightView(final int currentSelectedButton, final int newSelectedButton) {
         this.sceneFightInitView = new SceneFightInitView();
@@ -52,14 +35,16 @@ public final class SceneFightView implements FightView {
 
     }
 
+    @Override
     public void initGraphicElements(final int currentSelectedButton,
             final GraphicElementsRegistry currentSceneGraphicElements,
             final Map<String, PanelElementImpl> allPanelsElements,
-            final GraphicElementsRegistry graphicElements, TrainerImpl enemyTrainerInstance) throws IOException {
+            final GraphicElementsRegistry graphicElements, final TrainerImpl enemyTrainerInstance) throws IOException {
         this.sceneFightInitView.initGraphicElements(currentSelectedButton, currentSceneGraphicElements,
                 allPanelsElements, graphicElements, enemyTrainerInstance);
     }
 
+    @Override
     public void updateGraphic(final int currentSelectedButton, final int newSelectedButton,
             final GraphicElementsRegistry currentSceneGraphicElements,
             final Map<String, PanelElementImpl> allPanelsElements,

@@ -22,10 +22,11 @@ import it.unibo.pokerogue.view.api.scene.LoadView;
  * interaction buttons dynamically based on existing saves.
  */
 
-public final class SceneLoadView implements LoadView{
+public final class SceneLoadView implements LoadView {
         private static final int REMOVE_EXTENSION = 5;
         private static final String POKEMON_PANEL_NAME = "savesPanel";
 
+        @Override
         public void initGraphicElements(final Map<String, PanelElementImpl> allPanelsElements,
                         final GraphicElementsRegistry sceneGraphicElements,
                         final GraphicElementsRegistry graphicElements) throws IOException {
@@ -37,6 +38,7 @@ public final class SceneLoadView implements LoadView{
 
         }
 
+        @Override
         public void showSaves(final int savesListStart, final List<String> savesList,
                         final SavingSystem savingSystemInstance, final Map<String, PanelElementImpl> allPanelsElements,
                         final GraphicElementsRegistry sceneGraphicElements) throws IOException {

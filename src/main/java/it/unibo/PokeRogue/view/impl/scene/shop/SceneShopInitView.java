@@ -18,7 +18,7 @@ import it.unibo.pokerogue.view.api.scene.shop.ShopInitView;
  * It prepares UI components such as panels, item texts, and player money
  * display.
  */
-public class SceneShopInitView implements ShopInitView {
+public final class SceneShopInitView implements ShopInitView {
 
         private static final String FIRST_PANEL = "firstPanel";
 
@@ -27,15 +27,13 @@ public class SceneShopInitView implements ShopInitView {
         /**
          * Constructs a SceneShopInitView that manages the initialization
          * of shop-specific graphical UI elements.
-         *
-         * @param sceneGraphicElements The registry for the current scene's UI elements.
-         * @param graphicElements      The global registry for shared UI elements.
-         * @param allPanelsElements    A mapping of panel elements used in the scene.
+         * 
          */
         public SceneShopInitView() {
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
         }
 
+        @Override
         public void initGraphicElements(final int currentSelectedButton,
                         final GraphicElementsRegistry sceneGraphicElements,
                         final GraphicElementsRegistry graphicElements,

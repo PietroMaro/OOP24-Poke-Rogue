@@ -62,7 +62,7 @@ public interface BoxView {
          * @param graphicElementNameToInt     a mapping from element names to their
          *                                    integer identifiers
          */
-        public void updateGraphic(int currentSelectedButton, int newSelectedButton, int boxIndex,
+        void updateGraphic(int currentSelectedButton, int newSelectedButton, int boxIndex,
                         int newBoxIndex, List<List<Pokemon>> boxes, PlayerTrainerImpl playerTrainerInstance,
                         GraphicElementsRegistry currentSceneGraphicElements,
                         Map<String, Integer> graphicElementNameToInt)

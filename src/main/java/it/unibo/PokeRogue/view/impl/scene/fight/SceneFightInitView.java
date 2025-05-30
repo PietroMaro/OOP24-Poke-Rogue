@@ -23,7 +23,7 @@ import it.unibo.pokerogue.view.api.scene.fight.FightInitView;
  * background for the player's and enemy's Pokémon.
  * It also manages the layout and positioning of these elements on the screen.
  */
-public class SceneFightInitView implements FightInitView {
+public final class SceneFightInitView implements FightInitView {
 
         private static final Integer FIRST_POSITION = 0;
         private static final String FIRST_PANEL = "firstPanel";
@@ -33,10 +33,6 @@ public class SceneFightInitView implements FightInitView {
         /**
          * Constructs a new SceneFightInitView object.
          * 
-         * @param currentSceneGraphicElements A map of graphic elements for the scene.
-         * @param allPanelsElements           A map of all panel elements in the scene.
-         * @param enemyTrainerInstance        The enemy trainer for the battle.
-         * @param graphicElements             A map of graphic elements for the scene.
          */
         public SceneFightInitView() {
 
@@ -44,6 +40,7 @@ public class SceneFightInitView implements FightInitView {
 
         }
 
+        @Override
         public void initGraphicElements(final int currentSelectedButton,
                         final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
@@ -52,15 +49,13 @@ public class SceneFightInitView implements FightInitView {
                 allPanelsElements.put(FIRST_PANEL, new PanelElementImpl("", new OverlayLayout(null)));
                 UtilitiesForScenes.loadSceneElements("sceneFightElement.json", "init", currentSceneGraphicElements,
                                 graphicElements);
-                this.initTextElements(currentSceneGraphicElements, allPanelsElements, graphicElements,
-                                enemyTrainerInstance);
+                this.initTextElements(currentSceneGraphicElements, enemyTrainerInstance);
                 this.initSpriteElements(currentSceneGraphicElements, enemyTrainerInstance);
                 UtilitiesForScenes.setButtonStatus(currentSelectedButton, true, currentSceneGraphicElements);
         }
 
         private void initTextElements(final GraphicElementsRegistry currentSceneGraphicElements,
-                        final Map<String, PanelElementImpl> allPanelsElements,
-                        final GraphicElementsRegistry graphicElements, final TrainerImpl enemyTrainerInstance) {
+                        final TrainerImpl enemyTrainerInstance) {
                 UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "DETAILS_CONTAINER_TEXT",
                                 TextElementImpl.class).setText(
                                                 "What will "

@@ -18,7 +18,6 @@ import it.unibo.pokerogue.model.api.item.Item;
 import it.unibo.pokerogue.model.api.pokemon.Pokemon;
 import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
-import it.unibo.pokerogue.model.impl.item.ItemFactoryImpl;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 import it.unibo.pokerogue.utilities.SceneShopUtilities;
 import it.unibo.pokerogue.view.impl.scene.shop.SceneShopView;
@@ -48,7 +47,6 @@ public class SceneShop extends Scene {
     private final PlayerTrainerImpl playerTrainerInstance;
     private final GameEngineImpl gameEngineInstance;
     private final SceneShopView sceneShopView;
-    private final ItemFactoryImpl itemFactoryInstance;
     private final EffectParser effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
     @Setter
     private int newSelectedButton;
@@ -80,7 +78,6 @@ public class SceneShop extends Scene {
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
-        itemFactoryInstance = ItemFactoryImpl.getInstance(ItemFactoryImpl.class);
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.initStatus();
@@ -173,7 +170,7 @@ public class SceneShop extends Scene {
                     final Item item = SceneShopUtilities.getShopItems(this.newSelectedButton - 4);
                     if (playerTrainerInstance.getMoney() >= item.getPrice()) {
                         this.selectedItemForUse = true;
-                        buyItem(playerTrainerInstance, item, sceneShopView, gameEngineInstance);
+                        buyItem(playerTrainerInstance, item, gameEngineInstance);
                         buyedItem = true;
                         this.newSelectedButton = this.graphicElementNameToInt.get(CHANGE_1);
                     }
@@ -185,7 +182,7 @@ public class SceneShop extends Scene {
                     buyedItem = false;
                     this.newSelectedButton = this.graphicElementNameToInt.get(CHANGE_1);
                 } else if (this.newSelectedButton == this.graphicElementNameToInt.get(REROL_LITTERAL)) {
-                    rerollShopItems(playerTrainerInstance, itemFactoryInstance);
+                    rerollShopItems(playerTrainerInstance);
                 }
                 break;
             default:
@@ -205,8 +202,8 @@ public class SceneShop extends Scene {
                 this.graphicElements);
     }
 
-    private void buyItem(final PlayerTrainerImpl trainer, final Item item, final SceneShopView sceneShopView,
-            final GameEngineImpl gameEngineInstance) throws InstantiationException, IllegalAccessException,
+    private void buyItem(final PlayerTrainerImpl trainer, final Item item, final GameEngineImpl gameEngineInstance)
+            throws InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchMethodException, IOException {
         trainer.addMoney(-item.getPrice());
         SceneShopUtilities.updatePlayerMoneyText(currentSceneGraphicElements, trainer);
@@ -253,8 +250,7 @@ public class SceneShop extends Scene {
         selectedUsableItem = null;
     }
 
-    private void rerollShopItems(final PlayerTrainerImpl playerTrainerInstance,
-            final ItemFactoryImpl itemFactoryInstance) throws IOException,
+    private void rerollShopItems(final PlayerTrainerImpl playerTrainerInstance) throws IOException,
             InstantiationException,
             IllegalAccessException,
             NoSuchMethodException,

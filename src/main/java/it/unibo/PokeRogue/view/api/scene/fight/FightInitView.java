@@ -7,6 +7,9 @@ import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
 
+/**
+ * Interface representing the initialization logic for the fight scene UI.
+ */
 public interface FightInitView {
     /**
      * Initializes the graphic elements for the battle scene.
