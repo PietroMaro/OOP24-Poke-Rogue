@@ -16,39 +16,41 @@ import lombok.AllArgsConstructor;
 @Data
 @AllArgsConstructor
 public class Move {
-    private String name;
-    private Range<Integer> pp;
-    private boolean isPhysical;
-    private Optional<JSONObject> effect;
-    private int accuracy;
-    private int critRate;
-    private int baseDamage;
-    private int calculatedDamage;
-    private double stab;
-    private boolean isCrit;
-    private Type type;
-    private int priority;
+	private String name;
+	private Range<Integer> pp;
+	private boolean isPhysical;
+	private Optional<JSONObject> effect;
+	private int accuracy;
+	private int critRate;
+	private int baseDamage;
+	private int calculatedDamage;
+	private double stab;
+	private boolean isCrit;
+	private Type type;
+	private int priority;
 
-    /**
-     * Creates and returns a deep copy of this move.
-     * This includes cloning mutable fields such as the PP range
-     * and the optional effect JSON object.
-     *
-     * @return a new {@code Move} instance with the same values as this one.
-     */
-    public Move deepCopy() {
-        return new Move(
-                this.name,
-                new RangeImpl<>(this.pp.getCurrentMin(), this.pp.getCurrentValue(), this.pp.getCurrentMax()),
-                this.isPhysical,
-                Optional.of(new JSONObject(this.effect.get().toString())),
-                this.accuracy,
-                this.critRate,
-                this.baseDamage,
-                this.calculatedDamage,
-                this.stab,
-                this.isCrit,
-                this.type,
-                this.priority);
-    }
+	/**
+	 * Creates and returns a deep copy of this Move object.
+	 * This method duplicates all fields, including making a new copy of the PP
+	 * range
+	 * and a new JSONObject for the effect, ensuring the copy is independent of the
+	 * original.
+	 *
+	 * @return a new Move object that is a deep copy of this instance
+	 */
+	public final Move deepCopy() {
+		return new Move(
+				this.name,
+				new RangeImpl<>(this.pp.getCurrentMin(), this.pp.getCurrentValue(), this.pp.getCurrentMax()),
+				this.isPhysical,
+				Optional.of(new JSONObject(this.effect.get().toString())),
+				this.accuracy,
+				this.critRate,
+				this.baseDamage,
+				this.calculatedDamage,
+				this.stab,
+				this.isCrit,
+				this.type,
+				this.priority);
+	}
 }
