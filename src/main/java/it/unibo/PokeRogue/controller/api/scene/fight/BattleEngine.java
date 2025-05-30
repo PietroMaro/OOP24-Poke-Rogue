@@ -21,15 +21,10 @@ public interface BattleEngine {
      * Executes a single turn of the battle between the player and the enemy,
      * based on the provided decisions.
      *
-     * @param playerDecision the player's decision for this turn
-     * @param enemyDecision  the enemy's decision for this turn
-     * @throws NoSuchMethodException     if a required method cannot be found
-     * @throws IOException               if an I/O error occurs during execution
-     * @throws IllegalAccessException    if access to a method or constructor is
-     *                                   denied
-     * @throws InvocationTargetException if the invoked method throws an exception
-     * @throws InstantiationException    if an error occurs while instantiating a
-     *                                   class
+     * @param playerDecision       the player's decision for this turn
+     * @param enemyDecision        the enemy's decision for this turn
+     * @param enemyTrainerInstance the instance of the enemy trainer involved in the
+     *                             battle
      */
     void runBattleTurn(Decision playerDecision, Decision enemyDecision, TrainerImpl enemyTrainerInstance)
             throws NoSuchMethodException,

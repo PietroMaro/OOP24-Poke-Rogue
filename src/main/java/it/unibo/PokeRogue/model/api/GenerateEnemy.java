@@ -5,10 +5,17 @@ import java.lang.reflect.InvocationTargetException;
 
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
 
-
+/**
+ * Interface for generating enemy trainers.
+ */
 public interface GenerateEnemy {
 
-  void generateEnemy(final TrainerImpl enemyTrainerInstance) throws NoSuchMethodException,
+  /**
+   * Generates an enemy trainer instance.
+   *
+   * @param enemyTrainerInstance the instance of the enemy trainer to be generated
+   */
+  void generateEnemy(TrainerImpl enemyTrainerInstance) throws NoSuchMethodException,
       IOException,
       IllegalAccessException,
       InvocationTargetException,

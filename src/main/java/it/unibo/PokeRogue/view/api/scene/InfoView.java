@@ -13,19 +13,16 @@ import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 public interface InfoView {
 
     /**
-     * Initializes the graphic elements for the Info scene by loading layout
-     * elements
-     * and creating necessary panels.
-     *
+     * Initializes the graphic elements for the Info scene
+     * 
      * @param currentSceneGraphicElements the registry to be filled with the
      *                                    initialized elements for the current scene
      * @param allPanelsElements           the map where the scene's panel elements
      *                                    will be stored
-     * @throws IOException if there's an error reading the element configuration
-     *                     file
+     * @param graphicElements             the global graphic elements registry
      */
-    public void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
-            final Map<String, PanelElementImpl> allPanelsElements, final GraphicElementsRegistry graphicElements)
+    void initGraphicElements(GraphicElementsRegistry currentSceneGraphicElements,
+            Map<String, PanelElementImpl> allPanelsElements, GraphicElementsRegistry graphicElements)
             throws IOException;
 
 }

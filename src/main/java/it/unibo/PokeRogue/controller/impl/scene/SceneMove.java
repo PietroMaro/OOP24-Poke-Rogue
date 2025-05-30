@@ -139,7 +139,8 @@ public class SceneMove extends Scene {
     }
 
     private void initGraphicElements() throws IOException {
-        this.sceneMoveView.initGraphicElements(this.currentSceneGraphicElements,this.allPanelsElements,this.graphicElements);
+        this.sceneMoveView.initGraphicElements(this.currentSceneGraphicElements, this.allPanelsElements,
+                this.graphicElements);
         UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, this.currentSceneGraphicElements);
     }
 

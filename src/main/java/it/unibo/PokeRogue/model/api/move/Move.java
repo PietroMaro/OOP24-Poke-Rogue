@@ -33,9 +33,27 @@ public class Move {
 	private Type type;
 	private int priority;
 
-	public Move(String name, Range<Integer> pp, boolean isPhysical, Optional<JSONObject> effect,
-			int accuracy, int critRate, int baseDamage, int calculatedDamage,
-			double stab, boolean isCrit, Type type, int priority) {
+	/**
+	 * Constructs a new Move instance with the specified attributes.
+	 *
+	 * @param name             the name of the move
+	 * @param pp               the range of Power Points (PP) for the move
+	 * @param isPhysical       whether the move is physical (true) or special
+	 *                         (false)
+	 * @param effect           an optional JSON object representing any additional
+	 *                         effects of the move
+	 * @param accuracy         the accuracy percentage of the move
+	 * @param critRate         the critical hit rate of the move
+	 * @param baseDamage       the base damage value of the move
+	 * @param calculatedDamage the calculated damage value after modifications
+	 * @param stab             the Same-Type Attack Bonus multiplier
+	 * @param isCrit           whether the move is a critical hit
+	 * @param type             the elemental type of the move
+	 * @param priority         the priority level of the move in battle
+	 */
+	public Move(final String name, final Range<Integer> pp, final boolean isPhysical, final Optional<JSONObject> effect,
+			final int accuracy, final int critRate, final int baseDamage, final int calculatedDamage,
+			final double stab, final boolean isCrit, final Type type, final int priority) {
 		this.name = name;
 		this.pp = new RangeImpl<>(pp.getCurrentMin(), pp.getCurrentValue(), pp.getCurrentMax());
 		this.isPhysical = isPhysical;

@@ -96,7 +96,7 @@ public class SceneSave extends Scene {
 
                 } else if (this.newSelectedButton == this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL)) {
                     gameEngineInstance.setScene("main");
-                    //SavingSystemImpl.saveData();
+                    // SavingSystemImpl.saveData();
                 }
                 break;
             default:
@@ -109,7 +109,8 @@ public class SceneSave extends Scene {
     }
 
     private void initGraphicElements() throws IOException {
-        this.sceneSaveView.initGraphicElements(this.newSelectedButton,this.graphicElements,this.allPanelsElements,this.currentSceneGraphicElements);
+        this.sceneSaveView.initGraphicElements(this.newSelectedButton, this.graphicElements, this.allPanelsElements,
+                this.currentSceneGraphicElements);
     }
 
     /**
@@ -119,7 +120,7 @@ public class SceneSave extends Scene {
      */
     @Override
     public void updateGraphic() throws IOException {
-        this.sceneSaveView.updateGraphic(this.newSelectedButton,this.currentSceneGraphicElements);
+        this.sceneSaveView.updateGraphic(this.newSelectedButton, this.currentSceneGraphicElements);
     }
 
     /**

@@ -100,7 +100,7 @@ public class SceneInfo extends Scene {
      * @throws IOException if graphic elements fail to initialize properly
      */
     public final void initGraphicElements() throws IOException {
-        this.sceneInfoView.initGraphicElements(currentSceneGraphicElements, allPanelsElements,this.graphicElements);
+        this.sceneInfoView.initGraphicElements(currentSceneGraphicElements, allPanelsElements, this.graphicElements);
     }
 
     /**

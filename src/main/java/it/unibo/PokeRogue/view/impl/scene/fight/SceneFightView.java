@@ -7,6 +7,7 @@ import it.unibo.pokerogue.controller.impl.scene.fight.SceneFight;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
+import it.unibo.pokerogue.view.api.scene.fight.FightView;
 
 /**
  * This class represents the view for the battle scene in the game. It acts as a
@@ -15,7 +16,7 @@ import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
  * `SceneFightInitView` to initialize the elements and
  * `SceneFightUpdateView` to update them as the battle progresses.
  */
-public class SceneFightView {
+public final class SceneFightView implements FightView {
     private final SceneFightInitView sceneFightInitView;
     private final SceneFightUpdateView sceneFightUpdateView;
 
@@ -51,13 +52,7 @@ public class SceneFightView {
 
     }
 
-    /**
-     * Initializes the graphic elements for the battle scene by calling the init
-     * method of `SceneFightInitView`.
-     * 
-     * @param currentSelectedButton The initially selected button in the UI.
-     */
-    public final void initGraphicElements(final int currentSelectedButton,
+    public void initGraphicElements(final int currentSelectedButton,
             final GraphicElementsRegistry currentSceneGraphicElements,
             final Map<String, PanelElementImpl> allPanelsElements,
             final GraphicElementsRegistry graphicElements, TrainerImpl enemyTrainerInstance) throws IOException {
@@ -65,14 +60,7 @@ public class SceneFightView {
                 allPanelsElements, graphicElements, enemyTrainerInstance);
     }
 
-    /**
-     * Updates the graphical elements for the battle scene by calling the update
-     * method of `SceneFightUpdateView`.
-     * 
-     * @param currentSelectedButton The currently selected button in the UI.
-     * @param newSelectedButton     The new selected button after an update.
-     */
-    public final void updateGraphic(final int currentSelectedButton, final int newSelectedButton,
+    public void updateGraphic(final int currentSelectedButton, final int newSelectedButton,
             final GraphicElementsRegistry currentSceneGraphicElements,
             final Map<String, PanelElementImpl> allPanelsElements,
             final GraphicElementsRegistry graphicElements,

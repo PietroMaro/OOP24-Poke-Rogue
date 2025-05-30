@@ -15,7 +15,7 @@ import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
  * Depending on the battle level, this class can generate either a wild Pokémon
  * or an enemy trainer with a team of Pokémon.
  */
-public class GenerateEnemyImpl implements GenerateEnemy {
+public final class GenerateEnemyImpl implements GenerateEnemy {
     private static final Random RANDOM = new Random();
     private static final int ENEMY_TRAINER_SPAWN = 5;
     private static final int MIN_LEVEL = 5;
@@ -27,10 +27,9 @@ public class GenerateEnemyImpl implements GenerateEnemy {
      * Constructs a GenerateEnemyImpl instance with the specified battle level and
      * enemy trainer.
      *
-     * @param battleLevel          the level of the battle, which influences the
-     *                             difficulty and strength of the generated enemy
-     * @param enemyTrainerInstance the enemy trainer instance that will hold the
-     *                             generated Pokémon
+     * @param battleLevel the level of the battle, which influences the
+     *                    difficulty and strength of the generated enemy
+     * 
      */
     public GenerateEnemyImpl(final Integer battleLevel)
             throws NoSuchMethodException,

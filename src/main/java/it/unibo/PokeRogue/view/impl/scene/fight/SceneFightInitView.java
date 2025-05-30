@@ -14,6 +14,7 @@ import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
 import it.unibo.pokerogue.utilities.SceneFightUtilities;
 import it.unibo.pokerogue.utilities.UtilitiesForScenes;
+import it.unibo.pokerogue.view.api.scene.fight.FightInitView;
 
 /**
  * This class is responsible for initializing and managing the graphical
@@ -22,7 +23,7 @@ import it.unibo.pokerogue.utilities.UtilitiesForScenes;
  * background for the player's and enemy's Pokémon.
  * It also manages the layout and positioning of these elements on the screen.
  */
-public class SceneFightInitView {
+public class SceneFightInitView implements FightInitView {
 
         private static final Integer FIRST_POSITION = 0;
         private static final String FIRST_PANEL = "firstPanel";
@@ -43,16 +44,10 @@ public class SceneFightInitView {
 
         }
 
-        /**
-         * Initializes the graphic elements for the battle scene.
-         * This includes setting up panels, buttons, sprites, and text elements.
-         *
-         * @param currentSelectedButton The currently selected button in the UI.
-         */
-        protected void initGraphicElements(final int currentSelectedButton,
+        public void initGraphicElements(final int currentSelectedButton,
                         final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
-                        final GraphicElementsRegistry graphicElements, TrainerImpl enemyTrainerInstance)
+                        final GraphicElementsRegistry graphicElements, final TrainerImpl enemyTrainerInstance)
                         throws IOException {
                 allPanelsElements.put(FIRST_PANEL, new PanelElementImpl("", new OverlayLayout(null)));
                 UtilitiesForScenes.loadSceneElements("sceneFightElement.json", "init", currentSceneGraphicElements,
@@ -63,14 +58,9 @@ public class SceneFightInitView {
                 UtilitiesForScenes.setButtonStatus(currentSelectedButton, true, currentSceneGraphicElements);
         }
 
-        /**
-         * Initializes text elements for displaying Pokémon stats, status, and battle
-         * options.
-         * It includes text for Pokémon names, levels, HP, and status conditions.
-         */
         private void initTextElements(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
-                        final GraphicElementsRegistry graphicElements, TrainerImpl enemyTrainerInstance) {
+                        final GraphicElementsRegistry graphicElements, final TrainerImpl enemyTrainerInstance) {
                 UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "DETAILS_CONTAINER_TEXT",
                                 TextElementImpl.class).setText(
                                                 "What will "
@@ -156,7 +146,7 @@ public class SceneFightInitView {
         }
 
         private void initSpriteElements(final GraphicElementsRegistry currentSceneGraphicElements,
-                        TrainerImpl enemyTrainerInstance) {
+                        final TrainerImpl enemyTrainerInstance) {
                 UtilitiesForScenes
                                 .safeGetElementByName(currentSceneGraphicElements, "MY_POKEMON_SPRITE",
                                                 SpriteElementImpl.class)

@@ -66,8 +66,8 @@ public class BattleEngineImpl implements BattleEngine {
      * instances,
      * move factory, weather conditions, and other battle-related utilities.
      *
-     * @param enemyTrainerInstance the enemy trainer instance involved in the battle
-     * @param enemyAiInstance      the AI instance controlling the enemy's strategy
+     * 
+     * @param enemyAiInstance the AI instance controlling the enemy's strategy
      */
     public BattleEngineImpl(final EnemyAi enemyAiInstance)
             throws NoSuchMethodException,

@@ -11,12 +11,13 @@ import it.unibo.pokerogue.model.impl.graphic.TextElementImpl;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 import it.unibo.pokerogue.utilities.SceneFightUtilities;
 import it.unibo.pokerogue.utilities.UtilitiesForScenes;
+import it.unibo.pokerogue.view.api.scene.fight.FightUpdateView;
 
 /**
  * Class responsible for handling the update logic of the fight scene view.
  * It manages UI changes that occur when the user interacts with fight options.
  */
-public class SceneFightUpdateView {
+public final class SceneFightUpdateView implements FightUpdateView {
         private static final Integer FIRST_POSITION = 0;
         private static final Integer SECOND_POSITION = 1;
         private static final Integer THIRD_POSITION = 2;
@@ -33,19 +34,10 @@ public class SceneFightUpdateView {
         private Boolean alreadyInMainMenu;
 
         /**
-         * Constructs a new SceneFightUpdateView.
+         * Constructs a new SceneFightUpdateView with the given button selections.
          *
-         * @param currentSceneGraphicElements a map of all graphic elements in the scene
-         * @param allPanelsElements           a map of all panel elements used in the UI
-         *                                    (used for dependency)
-         * @param currentSelectedButton       the currently highlighted/selected menu
-         *                                    option
-         * @param newSelectedButton           the newly selected menu option
-         * @param sceneInstance               the instance of the scene this view
-         *                                    belongs to
-         * @param graphicElements             additional graphic elements registry
-         * @param graphicElementNameToInt     a map that associates graphic element
-         *                                    names with their integer IDs
+         * @param currentSelectedButton the currently highlighted/selected menu option
+         * @param newSelectedButton     the newly selected menu option
          */
         public SceneFightUpdateView(final int currentSelectedButton, final int newSelectedButton) {
                 this.currentSelectedButton = currentSelectedButton;
@@ -54,18 +46,7 @@ public class SceneFightUpdateView {
                 this.alreadyInMainMenu = true;
         }
 
-        /**
-         * Updates the graphic elements of the fight scene based on the change in the
-         * selected button.
-         * This includes updating the selected button highlight, moves, Pokéball
-         * display, Pokémon switching,
-         * and handling navigation back to the main menu if needed.
-         *
-         * @param currentSelectedButton the index of the currently selected button
-         * @param newSelectedButton     the index of the newly selected button after
-         *                              user input
-         */
-        protected void updateGraphic(final int currentSelectedButton, final int newSelectedButton,
+        public void updateGraphic(final int currentSelectedButton, final int newSelectedButton,
                         final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final GraphicElementsRegistry graphicElements,

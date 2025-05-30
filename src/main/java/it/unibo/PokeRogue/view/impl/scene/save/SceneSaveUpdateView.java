@@ -4,12 +4,13 @@ import java.io.IOException;
 
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.utilities.UtilitiesForScenes;
+import it.unibo.pokerogue.view.api.scene.save.SaveUpdateView;
 
 /**
  * Responsible for managing and updating the visual state of the save scene UI,
  * specifically handling the selection state of buttons.
  */
-public class SceneSaveUpdateView {
+public class SceneSaveUpdateView implements SaveUpdateView {
     private int currentSelectedButton;
 
     /**
@@ -23,12 +24,6 @@ public class SceneSaveUpdateView {
         this.currentSelectedButton = currentSelectedButton;
     }
 
-    /**
-     * Updates the graphical selection to reflect the newly selected button.
-     *
-     * @param newSelectedButton the ID of the button to be selected
-     * @throws IOException if any I/O operation fails during update
-     */
     public void updateGraphic(final int newSelectedButton,
             final GraphicElementsRegistry currentSceneGraphicElements)
             throws IOException {

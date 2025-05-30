@@ -34,6 +34,13 @@ import it.unibo.pokerogue.utilities.impl.PokeEffectivenessCalcImpl;
 
 import org.json.JSONObject;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.DirectoryStream;
@@ -41,8 +48,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * TestAll class.
@@ -95,7 +100,7 @@ public final class TestAll {
 		Move moveTest = null;
 		try {
 			moveTest = moveFactory.moveFromName("absorb");
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 		final UnsupportedOperationException ex = assertThrows(UnsupportedOperationException.class, () -> {

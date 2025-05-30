@@ -113,9 +113,10 @@ public enum Nature {
      */
     TIMID(SPEED, ATTACK);
 
+    private static final Random RANDOM = new Random();
+
     private final Stats statIncrease; // Statistica che aumenta.
     private final Stats statDecrease; // Statistica che diminuisce
-    private static final Random RANDOM = new Random();
 
     // Costruttore per inizializzare i campi
     Nature(final Stats statIncrease, final Stats statDecrease) {

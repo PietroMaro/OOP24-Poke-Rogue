@@ -166,7 +166,7 @@ public class StatusEffectImpl implements StatusEffect {
             pokemonStatusDurations.clear();
             pokemonStatusDurations.put(status, statusMap.get(status));
             pokemon.setStatusDuration(pokemonStatusDurations);
-            ;
+
         }
     }
 
