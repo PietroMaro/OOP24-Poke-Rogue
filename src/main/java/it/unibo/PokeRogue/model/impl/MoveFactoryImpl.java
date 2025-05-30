@@ -17,16 +17,15 @@ import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
 
 import org.json.JSONArray;
 
-
 /**
  * Move factory implementation.
  */
 public class MoveFactoryImpl extends Singleton implements MoveFactory {
-	
-   	//make the access in memory and saves the information of all pokemon in local
+
+	// make the access in memory and saves the information of all pokemon in local
 	private final JsonReader jsonReader = new JsonReaderImpl();
 	private final Map<String, Move> movesBlueprints = new HashMap<>();
-	
+
 	/**
 	 * Constructor initiate the factory.
 	 */
@@ -35,12 +34,13 @@ public class MoveFactoryImpl extends Singleton implements MoveFactory {
 	}
 
 	@Override
-    public final void init() throws IOException {
+	public final void init() throws IOException {
 		final JSONArray allMoveJson = jsonReader
-			.readJsonArray(Paths
-					.get("src","main","resources",
-						"pokemonData",
-						"movesList.json").toString());
+				.readJsonArray(Paths
+						.get("src", "main", "resources",
+								"pokemonData",
+								"movesList.json")
+						.toString());
 		for (int moveIndex = 0; moveIndex < allMoveJson.length(); moveIndex += 1) {
 			addMoveToBlueprints(allMoveJson.getString(moveIndex));
 		}
@@ -48,10 +48,11 @@ public class MoveFactoryImpl extends Singleton implements MoveFactory {
 
 	private void addMoveToBlueprints(final String moveName) throws IOException {
 		final JSONObject moveJson = jsonReader.readJsonObject(Paths
-				.get("src","main","resources",
-					"pokemonData",
-					"moves",
-					moveName + ".json").toString());
+				.get("src", "main", "resources",
+						"pokemonData",
+						"moves",
+						moveName + ".json")
+				.toString());
 		final String name = moveName;
 		final Range<Integer> pp = new RangeImpl<>(0, moveJson.getInt("pp"), moveJson.getInt("pp"));
 		final boolean isPhysical = moveJson.getBoolean("isPhysical");

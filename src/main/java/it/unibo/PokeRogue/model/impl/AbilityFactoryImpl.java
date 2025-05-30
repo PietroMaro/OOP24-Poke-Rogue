@@ -16,29 +16,29 @@ import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
 
 import org.json.JSONArray;
 
-
 /**
  * The ability factory.
  */
 public class AbilityFactoryImpl extends Singleton implements AbilityFactory {
-	
-   	//make the access in memory and saves the information of all pokemon in local
+
+	// make the access in memory and saves the information of all pokemon in local
 	private final JsonReader jsonReader = new JsonReaderImpl();
 	private final Map<String, Ability> abilityBlueprints = new HashMap<>();
-	
+
 	/**
 	 * initiate the factory.
 	 */
 	public AbilityFactoryImpl() throws IOException {
 		init();
 	}
-	
-    private void init() throws IOException {
+
+	private void init() throws IOException {
 		final JSONArray allAbilityJson;
 		allAbilityJson = jsonReader.readJsonArray(Paths
-				.get("src","main","resources",
-					"pokemonData",
-					"abilitiesList.json").toString());
+				.get("src", "main", "resources",
+						"pokemonData",
+						"abilitiesList.json")
+				.toString());
 		for (int abilityIndex = 0; abilityIndex < allAbilityJson.length(); abilityIndex += 1) {
 			addAbilityToBlueprints(allAbilityJson.getString(abilityIndex));
 		}
@@ -46,23 +46,23 @@ public class AbilityFactoryImpl extends Singleton implements AbilityFactory {
 
 	private void addAbilityToBlueprints(final String abilityName) throws IOException {
 		final JSONObject abilityJson = jsonReader
-			.readJsonObject(Paths.get("src","main","resources",
+				.readJsonObject(Paths.get("src", "main", "resources",
 						"pokemonData",
 						"abilities",
 						abilityName + ".json").toString());
 		final AbilitySituationChecks situationChecks = AbilitySituationChecks
-			.fromString(abilityJson.getString("situationChecks"));
+				.fromString(abilityJson.getString("situationChecks"));
 		final JSONObject effect = abilityJson.getJSONObject("effect");
 		final Ability newAbility = new Ability(
 				situationChecks,
-				effect
-			);
+				effect);
 
 		this.abilityBlueprints.put(abilityName, newAbility);
 	}
 
 	/**
 	 * return the ability with that string value.
+	 * 
 	 * @param abilityName the ability string value
 	 * @return the ability
 	 */

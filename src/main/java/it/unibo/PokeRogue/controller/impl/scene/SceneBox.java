@@ -175,6 +175,12 @@ public class SceneBox extends Scene {
 
         }
 
+        /**
+         * Updates the graphical representation of the current box scene,
+         * including the selected Pokémon and the box view.
+         *
+         * @throws IOException if an I/O error occurs while loading resources.
+         */
         @Override
         public void updateGraphic() throws IOException {
 
@@ -214,11 +220,21 @@ public class SceneBox extends Scene {
                 UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, this.currentSceneGraphicElements);
         }
 
+        /**
+         * Returns a copy of the current scene's graphical elements registry.
+         *
+         * @return a copy of the current GraphicElementsRegistry.
+         */
         @Override
         public GraphicElementsRegistry getCurrentSceneGraphicElements() {
                 return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);
         }
 
+        /**
+         * Returns a map containing all panel elements currently loaded in the scene.
+         *
+         * @return a LinkedHashMap of all PanelElementImpl objects.
+         */
         @Override
         public Map<String, PanelElementImpl> getAllPanelsElements() {
                 return new LinkedHashMap<>(allPanelsElements);
