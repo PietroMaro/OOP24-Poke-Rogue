@@ -31,7 +31,7 @@ public final class UtilitiesForScenes {
      */
     public static String getPathString(final String sceneDirName, final String fileName) {
 
-        return Paths.get("src", "main","resources","sceneImages", sceneDirName, fileName).toString();
+        return Paths.get("src", "main", "resources", "sceneImages", sceneDirName, fileName).toString();
 
     }
 
@@ -85,7 +85,7 @@ public final class UtilitiesForScenes {
 
         final JsonReader jsonReader = new JsonReaderImpl();
         final JSONObject root = jsonReader
-                .readJsonObject(Paths.get("src", "main","resources", "sceneData", fileName).toString());
+                .readJsonObject(Paths.get("src", "main", "resources", "sceneData", fileName).toString());
 
         final JSONArray initArrayIndex = root.getJSONObject("dynamicObjects").getJSONArray(loadSectionName);
 
@@ -112,7 +112,7 @@ public final class UtilitiesForScenes {
 
         final JsonReader jsonReader = new JsonReaderImpl();
         final JSONObject root = jsonReader
-                .readJsonObject(Paths.get("src","main","resources", "sceneData", fileName).toString());
+                .readJsonObject(Paths.get("src", "main", "resources", "sceneData", fileName).toString());
 
         final JSONArray initArrayIndex = root.getJSONObject("dynamicObjects").getJSONArray(loadSectionName);
 
@@ -124,6 +124,16 @@ public final class UtilitiesForScenes {
 
     }
 
+    /**
+     * Safely gets an element from the registry by its name and checks its type.
+     *
+     * @param registry the registry to search in
+     * @param name     the name of the element to look for
+     * @param type     the expected class type of the element
+     * @param <T>      the type of the expected element
+     * @return the element casted to the specified type
+     * @throws IllegalStateException if the element is not of the expected type
+     */
     public static <T> T safeGetElementByName(final GraphicElementsRegistry registry, final String name,
             final Class<T> type) {
         final var element = registry.getByName(name);
@@ -133,6 +143,16 @@ public final class UtilitiesForScenes {
         return type.cast(element);
     }
 
+    /**
+     * Safely gets an element from the registry by its ID and checks its type.
+     *
+     * @param registry the registry to search in
+     * @param id       the ID of the element to look for
+     * @param type     the expected class type of the element
+     * @param <T>      the type of the expected element
+     * @return the element casted to the specified type
+     * @throws IllegalStateException if the element is not of the expected type
+     */
     public static <T> T safeGetElementById(final GraphicElementsRegistry registry, final int id,
             final Class<T> type) {
         final var element = registry.getById(id);
