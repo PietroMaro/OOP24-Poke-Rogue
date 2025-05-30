@@ -93,6 +93,6 @@ public class RangeImpl<T extends Number> implements Range<T> {
      *         maximum.
      */
     public Range<T> copyOf() {
-        return new RangeImpl<T>(this.getCurrentMin(), this.getCurrentValue(), this.getCurrentMax());
+        return new RangeImpl<T>(this.getCurrentMin(), this.getCurrentMax(), this.getCurrentValue());
     }
 }

@@ -22,6 +22,7 @@ import it.unibo.pokerogue.model.enums.Weather;
 import it.unibo.pokerogue.model.impl.AbilityFactoryImpl;
 import it.unibo.pokerogue.model.impl.GenerateEnemyImpl;
 import it.unibo.pokerogue.model.impl.MoveFactoryImpl;
+import it.unibo.pokerogue.model.impl.RangeImpl;
 import it.unibo.pokerogue.model.impl.pokemon.PokemonFactoryImpl;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
@@ -92,9 +93,9 @@ public final class TestAll {
 			InstantiationException {
 		final MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
 		Move moveTest = null;
-		try{
-		moveTest = moveFactory.moveFromName("absorb");
-		} catch(Exception e){
+		try {
+			moveTest = moveFactory.moveFromName("absorb");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		final UnsupportedOperationException ex = assertThrows(UnsupportedOperationException.class, () -> {
@@ -136,7 +137,8 @@ public final class TestAll {
 		final MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
 		final Move moveTest1 = moveFactory.moveFromName("absorb");
 		final Move moveTest2 = moveFactory.moveFromName("absorb");
-		moveTest1.getPp().setCurrentValue(0);
+		moveTest1.setPp(new RangeImpl<Integer>(moveTest1.getPp().getCurrentMin(), moveTest1.getPp().getCurrentMax(),
+				0));
 		assertNotSame(moveTest1, moveTest2);
 		assertNotSame(moveTest2.getPp().getCurrentValue(), 0);
 		assertEquals(moveTest1.getPp().getCurrentValue(), 0);

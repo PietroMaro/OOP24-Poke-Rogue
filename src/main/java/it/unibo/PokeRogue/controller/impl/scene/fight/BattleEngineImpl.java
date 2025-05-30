@@ -1,5 +1,6 @@
 package it.unibo.pokerogue.controller.impl.scene.fight;
 
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -24,6 +25,7 @@ import it.unibo.pokerogue.model.enums.DecisionTypeEnum;
 import it.unibo.pokerogue.model.enums.Stats;
 import it.unibo.pokerogue.model.enums.Weather;
 import it.unibo.pokerogue.model.impl.AbilityFactoryImpl;
+import it.unibo.pokerogue.model.api.Range;
 import it.unibo.pokerogue.model.impl.SavingSystemImpl;
 import it.unibo.pokerogue.model.impl.item.ItemFactoryImpl;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
@@ -144,6 +146,9 @@ public class BattleEngineImpl implements BattleEngine {
         if (attackerMove.get().getPp().getCurrentValue() <= 0) {
             return;
         }
+        final Range<Integer> movePp = attackerMove.get().getPp();
+        movePp.decrement(1);
+        attackerMove.get().setPp(movePp);
         attackerMove.get().getPp().decrement(1);
         final int finalDamage = pokemonBattleUtilInstance.calculateDamage(attackerPokemon, defenderPokemon,
                 attackerMove.get(),

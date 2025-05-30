@@ -68,7 +68,7 @@ public class Move {
 	 * @param ppToSet the Range containing the new minimum, current value,
 	 *                and maximum PP to assign.
 	 */
-	public void setPP(final Range<Integer> ppToSet) {
+	public void setPp(final Range<Integer> ppToSet) {
 		this.pp = new RangeImpl<>(ppToSet.getCurrentMin(), ppToSet.getCurrentValue(), ppToSet.getCurrentMax());
 	}
 

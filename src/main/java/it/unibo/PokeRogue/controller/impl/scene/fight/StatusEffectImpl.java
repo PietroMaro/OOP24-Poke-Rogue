@@ -147,7 +147,8 @@ public class StatusEffectImpl implements StatusEffect {
                     break;
                 case StatusCondition.CHARMED:
                     pokemon.getActualStats().get(Stats.DEFENSE)
-                            .setCurrentValue(pokemon.getActualStats().get(Stats.DEFENSE).getCurrentValue() + DURATION_LONG);
+                            .setCurrentValue(
+                                    pokemon.getActualStats().get(Stats.DEFENSE).getCurrentValue() + DURATION_LONG);
                     break;
                 case StatusCondition.SEEDED:
                     final int seededDamage = pokemon.getActualStats().get(Stats.HP).getCurrentMax() / 16;
@@ -160,16 +161,24 @@ public class StatusEffectImpl implements StatusEffect {
 
     private void setTimeDuration(final Pokemon pokemon, final StatusCondition status) {
         if (pokemon.getStatusDuration().isEmpty() || !pokemon.getStatusDuration().containsKey(status)) {
-            pokemon.getStatusDuration().clear();
-            pokemon.getStatusDuration().put(status, statusMap.get(status));
+
+            final Map<StatusCondition, Integer> pokemonStatusDurations = pokemon.getStatusDuration();
+            pokemonStatusDurations.clear();
+            pokemonStatusDurations.put(status, statusMap.get(status));
+            pokemon.setStatusDuration(pokemonStatusDurations);
+            ;
         }
     }
 
     private void decrementTimeDuration(final Pokemon pokemon, final StatusCondition status) {
-        final int turnLeft = pokemon.getStatusDuration().get(status) - DURATION_SHORT;
-        pokemon.getStatusDuration().put(status, turnLeft);
-        if (pokemon.getStatusDuration().get(status).equals(0)) {
-            pokemon.getStatusDuration().clear();
+        final Map<StatusCondition, Integer> pokemonStatusDurations = pokemon.getStatusDuration();
+        final int turnLeft = pokemonStatusDurations.get(status) - DURATION_SHORT;
+
+        pokemonStatusDurations.put(status, turnLeft);
+        pokemon.setStatusDuration(pokemonStatusDurations);
+        if (pokemonStatusDurations.get(status).equals(0)) {
+            pokemonStatusDurations.clear();
+            pokemon.setStatusDuration(pokemonStatusDurations);
             pokemon.setStatusCondition(Optional.empty());
         }
     }
