@@ -1,0 +1,144 @@
+> Task :clean
+
+> Task :compileJava
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :processResources
+> Task :classes
+> Task :jar
+> Task :startScripts
+> Task :distTar
+> Task :distZip
+> Task :shadowJar
+> Task :startShadowScripts
+> Task :shadowDistTar
+> Task :shadowDistZip
+> Task :assemble
+> Task :generateCheckstyleConfiguration
+> Task :compileTestJava
+> Task :processTestResources NO-SOURCE
+> Task :testClasses
+> Task :cpdCheck SKIPPED
+> Task :populateDefaultSpotBugsExcludes
+
+> Task :test
+
+TestAll > testMoveFactory() STARTED
+
+TestAll > testMoveFactory() PASSED
+
+TestAll > testBattleEngine() STARTED
+
+TestAll > testBattleEngine() PASSED
+
+TestAll > testAllItemEffect() STARTED
+
+TestAll > testAllItemEffect() PASSED
+
+TestAll > testAi() STARTED
+
+TestAll > testAi() PASSED
+
+TestAll > testPlayerTrainer() STARTED
+
+TestAll > testPlayerTrainer() PASSED
+
+TestAll > testGenerateEnemy() STARTED
+
+TestAll > testGenerateEnemy() PASSED
+
+TestAll > testBattleRewards() STARTED
+
+TestAll > testBattleRewards() PASSED
+
+TestAll > testEffectivenessCalculator() STARTED
+
+TestAll > testEffectivenessCalculator() PASSED
+
+TestAll > testMoveCopy() STARTED
+
+TestAll > testMoveCopy() PASSED
+
+TestAll > testAbilityFactory() STARTED
+
+TestAll > testAbilityFactory() PASSED
+
+TestAll > testAllAbilityEffect() STARTED
+
+TestAll > testAllAbilityEffect() PASSED
+
+TestAll > testAllMovesEffect() STARTED
+
+TestAll > testAllMovesEffect() PASSED
+
+> Task :checkstyleTest
+> Task :spotbugsTest
+C:\Users\Pietro\Desktop\provaproge\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\Main.java:40:	AvoidPrintStackTrace:	Avoid printStackTrace(); use a logger call instead.
+> Task :checkstyleMain
+C:\Users\Pietro\Desktop\provaproge\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:65:	UnusedPrivateMethod:	Avoid unused private methods such as 'resetSingletons()'.
+C:\Users\Pietro\Desktop\provaproge\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:105:	AvoidCatchingGenericException:	Avoid catching generic exceptions such as NullPointerException, RuntimeException, Exception in try-catch block
+C:\Users\Pietro\Desktop\provaproge\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:106:	AvoidPrintStackTrace:	Avoid printStackTrace(); use a logger call instead.
+> Task :pmdTest FAILED
+C:\Users\Pietro\Desktop\provaproge\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\InputHandlerImpl.java:30:	AvoidPrintStackTrace:	Avoid printStackTrace(); use a logger call instead.
+C:\Users\Pietro\Desktop\provaproge\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\InputHandlerImpl.java:31:	PreserveStackTrace:	Thrown exception does not preserve the stack trace of exception 'e' on all code paths
+C:\Users\Pietro\Desktop\provaproge\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\InputHandlerImpl.java:44:	AvoidPrintStackTrace:	Avoid printStackTrace(); use a logger call instead.
+
+> Task :spotbugsMain
+M V MS: Public static it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl.getTrainerInstance() may expose internal representation by returning PlayerTrainerImpl.instanceOfTrainer  At PlayerTrainerImpl.java:[line 33]
+M C SING: Class (it.unibo.pokerogue.model.impl.Singleton) using singleton design pattern has non-private constructor.  At Singleton.java:[lines 21-23]
+M D ICAST: Integral division result cast to double or float in it.unibo.pokerogue.model.impl.pokemon.PokemonImpl.calculateActualStats()  At PokemonImpl.java:[line 208]
+
+C:\Users\Pietro\Desktop\provaproge\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\model\impl\Singleton.java:12:	UseUtilityClass:	This utility class has a non-private constructor
+
+> Task :pmdMain FAILED
+> Task :spotbugsMain FAILED
+
+[Incubating] Problems report is available at: file:///C:/Users/Pietro/Desktop/provaproge/OOP24-Poke-Rogue/build/reports/problems/problems-report.html
+
+FAILURE: Build completed with 3 failures.
+
+1: Task failed with an exception.
+-----------
+* What went wrong:
+Execution failed for task ':pmdTest'.
+> A failure occurred while executing org.gradle.api.plugins.quality.internal.PmdAction
+   > 3 PMD rule violations were found. See the report at: file:///C:/Users/Pietro/Desktop/provaproge/OOP24-Poke-Rogue/build/reports/pmd/test.html
+
+* Try:
+> Run with --scan to get full insights.
+==============================================================================
+
+2: Task failed with an exception.
+-----------
+* What went wrong:
+Execution failed for task ':pmdMain'.
+> A failure occurred while executing org.gradle.api.plugins.quality.internal.PmdAction
+   > 5 PMD rule violations were found. See the report at: file:///C:/Users/Pietro/Desktop/provaproge/OOP24-Poke-Rogue/build/reports/pmd/main.html
+
+* Try:
+> Run with --scan to get full insights.
+==============================================================================
+
+3: Task failed with an exception.
+-----------
+* What went wrong:
+Execution failed for task ':spotbugsMain'.
+> A failure occurred while executing com.github.spotbugs.snom.internal.SpotBugsRunnerForHybrid$SpotBugsExecutor
+   > Verification failed: SpotBugs ended with exit code 1.
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+==============================================================================
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.12.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 17s
+21 actionable tasks: 21 executed

@@ -2,6 +2,7 @@ package it.unibo.pokerogue.model.impl.pokemon;
 
 import java.util.Optional;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -104,7 +105,8 @@ public final class PokemonImpl implements Pokemon {
             NoSuchMethodException,
             InvocationTargetException {
         this.moveFactoryInstance = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
-        this.baseStats = new HashMap<>(pokemonBlueprint.stats());
+        this.baseStats = new EnumMap<>(Stats.class);
+        this.baseStats.putAll(pokemonBlueprint.stats());
         generateivs();
         generateEvs();
         this.nature = Nature.getRandomNature();
@@ -127,12 +129,12 @@ public final class PokemonImpl implements Pokemon {
         this.statusCondition = Optional.empty();
         this.spriteFront = pokemonBlueprint.spriteFront();
         this.spriteBack = pokemonBlueprint.spriteBack();
-        this.statusDuration = new HashMap<>();
+        this.statusDuration = new EnumMap<>(StatusCondition.class);
     }
 
     private void generateivs() {
         final int maxIv = 32;
-        this.iv = new HashMap<>();
+        this.iv = new EnumMap<>(Stats.class);
         for (final Stats stat : Stats.values()) {
             this.iv.put(stat, random.nextInt(maxIv)); // iv tra 0 e 31
         }
@@ -141,7 +143,7 @@ public final class PokemonImpl implements Pokemon {
     private void generateEvs() {
         final int maxEv = 252;
         final int minEv = 0;
-        this.ev = new HashMap<>();
+        this.ev = new EnumMap<>(Stats.class);
         for (final Stats stat : Stats.values()) {
             this.ev.put(stat, new RangeImpl<>(minEv, maxEv, minEv));
         }
@@ -163,7 +165,7 @@ public final class PokemonImpl implements Pokemon {
         final int minTempStat = -6;
         final int maxTempStat = 6;
         final int defaultTempStat = 0;
-        this.tempStatsBonus = new HashMap<>();
+        this.tempStatsBonus = new EnumMap<>(Stats.class);
         for (final Stats stat : Stats.values()) {
             this.tempStatsBonus.put(stat, new RangeImpl<>(minTempStat, maxTempStat, defaultTempStat));
         }
@@ -200,7 +202,7 @@ public final class PokemonImpl implements Pokemon {
         final double positiveMultiplier = 1.1;
         final double negativeMultiplier = 0.9;
         final int maxStat = 252;
-        actualStats = new HashMap<>();
+        actualStats = new EnumMap<>(Stats.class);
 
         final int maxLife = (int) Math.floor((2 * this.baseStats.get(Stats.HP) + this.iv.get(Stats.HP)
                 + this.ev.get(Stats.HP).getCurrentValue() / 4) * this.level.getCurrentValue() / 100)
@@ -328,27 +330,27 @@ public final class PokemonImpl implements Pokemon {
 
     @Override
     public void setStatusDuration(final Map<StatusCondition, Integer> newVal) {
-        this.statusDuration = new HashMap<>(newVal);
+        this.statusDuration = new EnumMap<>(StatusCondition.class);
     }
 
     @Override
     public Map<StatusCondition, Integer> getStatusDuration() {
-        return new HashMap<>(this.statusDuration);
+        return new EnumMap<>(this.statusDuration);
     }
 
     @Override
     public Map<Stats, Integer> getIv() {
-        return iv == null ? null : new HashMap<>(iv);
+        return iv == null ? null : new EnumMap<>(iv);
     }
 
     @Override
     public void setIv(final Map<Stats, Integer> iv) {
-        this.iv = iv == null ? null : new HashMap<>(iv);
+        this.iv = iv == null ? null : new EnumMap<>(iv);
     }
 
     @Override
     public Map<Stats, Range<Integer>> getEv() {
-        return new HashMap<>(this.ev);
+        return new EnumMap<>(this.ev);
     }
 
     @Override
@@ -356,11 +358,11 @@ public final class PokemonImpl implements Pokemon {
         if (ev == null) {
             this.ev = null;
         } else {
-            final Map<Stats, Range<Integer>> copy = new HashMap<>();
+            final Map<Stats, Range<Integer>> copy = new EnumMap<>(Stats.class);
             for (final Map.Entry<Stats, Range<Integer>> entry : ev.entrySet()) {
                 copy.put(entry.getKey(), entry.getValue().copyOf());
             }
-            this.ev = new HashMap<>(copy);
+            this.ev = new EnumMap<>(copy);
         }
     }
 
@@ -376,22 +378,22 @@ public final class PokemonImpl implements Pokemon {
 
     @Override
     public Map<Stats, Range<Integer>> getActualStats() {
-        return new HashMap<>(this.actualStats);
+        return new EnumMap<>(this.actualStats);
     }
 
     @Override
     public void setActualStats(final Map<Stats, Range<Integer>> newVal) {
-        this.actualStats = new HashMap<>(newVal);
+        this.actualStats = new EnumMap<>(newVal);
     }
 
     @Override
     public Map<Stats, Range<Integer>> getTempStatsBonus() {
-        return new HashMap<>(this.tempStatsBonus);
+        return new EnumMap<>(this.tempStatsBonus);
     }
 
     @Override
     public void setTempStatsBonus(final Map<Stats, Range<Integer>> tempStatsBonus) {
-        this.tempStatsBonus = new HashMap<>(tempStatsBonus);
+        this.tempStatsBonus = new EnumMap<>(tempStatsBonus);
     }
 
     @Override
@@ -427,21 +429,21 @@ public final class PokemonImpl implements Pokemon {
 
     @Override
     public Map<Stats, Integer> getGivesEv() {
-        return givesEv == null ? null : new HashMap<>(givesEv);
+        return givesEv == null ? null : new EnumMap<>(givesEv);
     }
 
     @Override
     public void setGivesEv(final Map<Stats, Integer> givesEv) {
-        this.givesEv = givesEv == null ? null : new HashMap<>(givesEv);
+        this.givesEv = givesEv == null ? null : new EnumMap<>(givesEv);
     }
 
     @Override
     public Map<Stats, Integer> getBaseStats() {
-        return baseStats == null ? null : new HashMap<>(baseStats);
+        return baseStats == null ? null : new EnumMap<>(baseStats);
     }
 
     @Override
     public void setBaseStats(final Map<Stats, Integer> baseStats) {
-        this.baseStats = baseStats == null ? null : new HashMap<>(baseStats);
+        this.baseStats = baseStats == null ? null : new EnumMap<>(baseStats);
     }
 }

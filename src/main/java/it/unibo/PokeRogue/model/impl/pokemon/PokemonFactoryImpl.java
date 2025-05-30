@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -165,7 +166,7 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory {
 
     private Map<Stats, Integer> statsMap(final JSONObject jsonObject) {
         final Map<String, Integer> startMap = jsonObjectToMap(jsonObject);
-        final Map<Stats, Integer> ris = new HashMap<>();
+        final Map<Stats, Integer> ris = new EnumMap<>(Stats.class);
         for (final Map.Entry<String, Integer> entry : startMap.entrySet()) {
             switch (entry.getKey()) {
                 case "hp" -> ris.put(Stats.HP, entry.getValue());
