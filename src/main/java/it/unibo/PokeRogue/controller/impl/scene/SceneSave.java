@@ -10,6 +10,7 @@ import it.unibo.pokerogue.controller.api.scene.Scene;
 import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
+import it.unibo.pokerogue.model.impl.SavingSystemImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.view.impl.scene.save.SceneSaveView;
 
@@ -95,6 +96,7 @@ public class SceneSave extends Scene {
 
                 } else if (this.newSelectedButton == this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL)) {
                     gameEngineInstance.setScene("main");
+                    //SavingSystemImpl.saveData();
                 }
                 break;
             default:

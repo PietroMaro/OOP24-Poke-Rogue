@@ -100,7 +100,6 @@ public final class PokemonBattleUtilImpl implements PokemonBattleUtil {
             attackDefenseDifference = this.computeOffenseDefenseRatio(attackingPokemon, defendingPokemon,
                     Stats.SPECIAL_ATTACK,
                     Stats.SPECIAL_DEFENSE);
-
         }
 
         return attackDefenseDifference;
