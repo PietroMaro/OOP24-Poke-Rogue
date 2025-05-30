@@ -23,7 +23,9 @@ public final class SceneMenuView {
 
         /**
          * Constructs a new {@code SceneMenuView} instance.
-         *
+         * 
+         * @param graphicElements the registry of graphic elements used in this scene
+         * 
          * 
          */
         public SceneMenuView(final GraphicElementsRegistry graphicElements) throws IOException {

@@ -18,7 +18,7 @@ import lombok.AllArgsConstructor;
 public class Move {
 	private String name;
 	private Range<Integer> pp;
-	private boolean isPhysical;	
+	private boolean isPhysical;
 	private Optional<JSONObject> effect;
 	private int accuracy;
 	private int critRate;
@@ -29,20 +29,28 @@ public class Move {
 	private Type type;
 	private int priority;
 
-	public Move deepCopy() {
-	    return new Move(
-			this.name,
-			new RangeImpl<>(this.pp.getCurrentMin(),this.pp.getCurrentValue(),this.pp.getCurrentMax()),
-	        this.isPhysical,
-	        Optional.of(new JSONObject(this.effect.get().toString())), 
-			this.accuracy,
-	        this.critRate,
-	        this.baseDamage,
-			this.calculatedDamage,
-			this.stab,
-			this.isCrit,
-	        this.type,
-	        this.priority
-	    );
+	/**
+	 * Creates and returns a deep copy of this Move object.
+	 * This method duplicates all fields, including making a new copy of the PP
+	 * range
+	 * and a new JSONObject for the effect, ensuring the copy is independent of the
+	 * original.
+	 *
+	 * @return a new Move object that is a deep copy of this instance
+	 */
+	public final Move deepCopy() {
+		return new Move(
+				this.name,
+				new RangeImpl<>(this.pp.getCurrentMin(), this.pp.getCurrentValue(), this.pp.getCurrentMax()),
+				this.isPhysical,
+				Optional.of(new JSONObject(this.effect.get().toString())),
+				this.accuracy,
+				this.critRate,
+				this.baseDamage,
+				this.calculatedDamage,
+				this.stab,
+				this.isCrit,
+				this.type,
+				this.priority);
 	}
 }
