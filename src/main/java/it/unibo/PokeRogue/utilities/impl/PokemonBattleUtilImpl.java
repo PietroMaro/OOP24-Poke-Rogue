@@ -22,7 +22,10 @@ import java.io.IOException;
  * for use within the PokeRogue battle system.
  */
 public final class PokemonBattleUtilImpl implements PokemonBattleUtil {
-
+    private static final int DAMAGE_CALCULATOR_0 = 85;
+    private static final int DAMAGE_CALCULATOR_1 = 5;
+    private static final int DAMAGE_CALCULATOR_2 = 50;
+    private static final double DAMAGE_CALCULATOR_3 = 1.5;
     private final Random random;
     private final PokeEffectivenessCalc pokeEffectivenessCalc;
 
@@ -53,7 +56,7 @@ public final class PokemonBattleUtilImpl implements PokemonBattleUtil {
 
         stabBonus = this.stabMultiplier(attackingPokemon, attackChosen);
         moveTypeBonus = this.pokeEffectivenessCalc.calculateAttackEffectiveness(attackChosen, defendingPokemon);
-        randomNumber = (this.random.nextInt(16) + 85) / 100.0;
+        randomNumber = (this.random.nextInt(16) + DAMAGE_CALCULATOR_0) / 100.0;
         criticalBonus = this.criticalBonus(attackingPokemon, attackChosen);
         weatherEffect = this.calculateWeatherEffect(attackChosen, currentWeather);
         burn = this.checkBurn(attackingPokemon, attackChosen);
@@ -61,14 +64,14 @@ public final class PokemonBattleUtilImpl implements PokemonBattleUtil {
         attackDefenseDifference = calculateAttackDefenseDifference(attackingPokemon, defendingPokemon,
                 attackChosen);
 
-        baseDamage = (2 * attackingPokemon.getLevel().getCurrentValue() / 5 + 2)
-                * attackChosen.getBaseDamage() * attackDefenseDifference / 50;
+        baseDamage = (2 * attackingPokemon.getLevel().getCurrentValue() / DAMAGE_CALCULATOR_1 + 2)
+                * attackChosen.getBaseDamage() * attackDefenseDifference / DAMAGE_CALCULATOR_2;
 
         damageWithEnvironment = baseDamage * burn * weatherEffect + 2;
 
         totalDamage = damageWithEnvironment * criticalBonus * randomNumber * moveTypeBonus * stabBonus;
 
-        return Math.max(1, (int) totalDamage); 
+        return Math.max(1, (int) totalDamage);
 
     }
 
@@ -128,13 +131,13 @@ public final class PokemonBattleUtilImpl implements PokemonBattleUtil {
                 if ("rain".equals(weather)) {
                     return 0.5;
                 } else if ("sunlight".equals(weather)) {
-                    return 1.5;
+                    return DAMAGE_CALCULATOR_3;
                 }
             }
 
             if ("water".equals(attackType)) {
                 if ("rain".equals(weather)) {
-                    return 1.5;
+                    return DAMAGE_CALCULATOR_3;
                 } else if ("sunlight".equals(weather)) {
                     return 0.5;
                 }
@@ -165,7 +168,7 @@ public final class PokemonBattleUtilImpl implements PokemonBattleUtil {
 
         for (final Type type : attackingPokemon.getTypes()) {
             if (attackChosen.getType().equals(type)) {
-                return 1.5;
+                return DAMAGE_CALCULATOR_3;
             }
         }
 
