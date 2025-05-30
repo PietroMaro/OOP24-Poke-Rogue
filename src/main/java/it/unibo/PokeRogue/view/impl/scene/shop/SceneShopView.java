@@ -27,6 +27,8 @@ public class SceneShopView {
      * Constructs the shop view and initializes its internal components for
      * rendering and updating.
      *
+     * @param graphicElements    Registry of elements specific to the current
+     * 
      * @param sceneGraphicElements    Registry of elements specific to the current
      *                                shop scene.
      * @param graphicElements         Global graphic element registry shared with
@@ -63,11 +65,15 @@ public class SceneShopView {
      *
      * @param currentSelectedButton The currently selected button during
      *                              initialization.
+     * @param allPanelsElements     A map holding panel elements used in the scene.
      * @throws IOException If an error occurs while loading or initializing graphic
      *                     resources.
      */
-    public void initGraphicElements(final int currentSelectedButton, Map<String, PanelElementImpl> allPanelsElements) throws IOException {
-        this.sceneShopInitView.initGraphicElements(currentSelectedButton, this.sceneGraphicElements,this.graphicElements, allPanelsElements);
+    public void initGraphicElements(final int currentSelectedButton,
+            final Map<String, PanelElementImpl> allPanelsElements)
+            throws IOException {
+        this.sceneShopInitView.initGraphicElements(currentSelectedButton, this.sceneGraphicElements,
+                this.graphicElements, allPanelsElements);
     }
 
     /**

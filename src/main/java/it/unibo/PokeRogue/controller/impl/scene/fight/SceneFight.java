@@ -238,7 +238,8 @@ public class SceneFight extends Scene {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
-        final Decision enemyChoose = enemyAiInstance.nextMove(battleEngineInstance.getCurrentWeather(),this.enemyTrainerInstance);
+        final Decision enemyChoose = enemyAiInstance.nextMove(battleEngineInstance.getCurrentWeather(),
+                this.enemyTrainerInstance);
         this.battleEngineInstance.runBattleTurn(decision, enemyChoose);
 
     }

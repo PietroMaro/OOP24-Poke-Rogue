@@ -36,7 +36,6 @@ public final class EnemyAiImpl implements EnemyAi {
      * The AI's strategy and decision-making complexity increase as the battle level
      * rises.
      * 
-     * @param enemyTrainer the enemy trainer to control
      * @param battleLvl    the current battle difficulty level
      */
     public EnemyAiImpl(final int battleLvl) throws IOException {

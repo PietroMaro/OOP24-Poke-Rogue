@@ -42,7 +42,13 @@ public class SceneShopInitView {
          * item descriptions, and player money. It clears any existing elements before
          * loading.
          *
-         * @param currentSelectedButton The button currently selected by the player.
+         * @param currentSelectedButton the index of the button currently selected by
+         *                              the player
+         * @param sceneGraphicElements  the registry for scene-specific graphical
+         *                              elements
+         * @param graphicElements       the global registry of all graphical elements
+         * @param allPanelsElements     a map to store panel elements for the scene
+         * @throws IOException if there is an error loading the JSON configuration file
          */
         public void initGraphicElements(final int currentSelectedButton,
                         final GraphicElementsRegistry sceneGraphicElements,

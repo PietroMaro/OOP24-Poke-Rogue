@@ -49,7 +49,6 @@ public final class EnemyAiSwitchIn {
      * @param usePokemonInOrder whether the AI should switch in Pokémon in order
      * @param considerSwitching whether the AI should evaluate switching logic
      * @param switchFirstRate   chance (0-100) to prefer top switch candidate
-     * @param enemyTrainer      the AI-controlled trainer
      */
     public EnemyAiSwitchIn(final boolean usePokemonInOrder, final boolean considerSwitching, final int switchFirstRate)
             throws IOException {
@@ -77,7 +76,7 @@ public final class EnemyAiSwitchIn {
     private boolean shouldSwitch(final Trainer enemyTrainer) {
         this.calculateEffectivenessOfSquad(enemyTrainer);
 
-        if (!this.isPokemonAlive(0,enemyTrainer)) {
+        if (!this.isPokemonAlive(0, enemyTrainer)) {
 
             if (this.usePokemonInOrder) {
                 this.orderSwitchIn(enemyTrainer);
@@ -89,7 +88,7 @@ public final class EnemyAiSwitchIn {
         }
 
         if (canSwitch(enemyTrainer) && this.isBetterOptionInSquad()
-                && this.calculateEffectivenessDifference(0, 0,enemyTrainer) <= ACCEPTED_EFFECTIVENESS_DIFFERENCE) {
+                && this.calculateEffectivenessDifference(0, 0, enemyTrainer) <= ACCEPTED_EFFECTIVENESS_DIFFERENCE) {
             this.typeBasedSwitchIn();
 
             return true;
@@ -135,7 +134,7 @@ public final class EnemyAiSwitchIn {
 
     private void orderSwitchIn(final Trainer enemyTrainer) {
         for (int pokePos = 1; pokePos < MAX_TRAINER_SQUAD_SIZE; pokePos++) {
-            if (this.isPokemonAlive(pokePos,enemyTrainer)) {
+            if (this.isPokemonAlive(pokePos, enemyTrainer)) {
                 switchPosition = pokePos;
                 break;
             }
@@ -168,8 +167,8 @@ public final class EnemyAiSwitchIn {
         int effectiveness;
 
         for (int pokePos = 1; pokePos < MAX_TRAINER_SQUAD_SIZE; pokePos++) {
-            if (enemyTrainer.getPokemon(pokePos).isPresent() && this.isPokemonAlive(pokePos,enemyTrainer)) {
-                effectiveness = this.calculateEffectivenessDifference(pokePos, 0,enemyTrainer);
+            if (enemyTrainer.getPokemon(pokePos).isPresent() && this.isPokemonAlive(pokePos, enemyTrainer)) {
+                effectiveness = this.calculateEffectivenessDifference(pokePos, 0, enemyTrainer);
                 if (!this.pokeInSquadScore.containsKey(effectiveness) || random.nextBoolean()) {
 
                     this.pokeInSquadScore.put(effectiveness, pokePos);
@@ -189,11 +188,12 @@ public final class EnemyAiSwitchIn {
 
     }
 
-    private boolean isPokemonAlive(final int positionInSquad,final Trainer enemyTrainer) {
+    private boolean isPokemonAlive(final int positionInSquad, final Trainer enemyTrainer) {
         return enemyTrainer.getPokemon(positionInSquad).get().getActualStats().get(Stats.HP).getCurrentValue() > 0;
     }
 
-    private int calculateEffectivenessDifference(final int posEnemyPokemon, final int posPlayerPokemon, final Trainer enemyTrainer) {
+    private int calculateEffectivenessDifference(final int posEnemyPokemon, final int posPlayerPokemon,
+            final Trainer enemyTrainer) {
         return this.pokeEffectivenessCalculator.calculateEffectiveness(enemyTrainer.getPokemon(posEnemyPokemon).get(),
                 playerTrainerInstance.getPokemon(posPlayerPokemon).get());
     }

@@ -29,8 +29,6 @@ import java.io.IOException;
  * depending on configuration flags.
  */
 public final class EnemyAiAttack {
-
-   
     private final PlayerTrainerImpl playerTrainerInstance;
     private int attackChosen;
     private Pokemon currentEnemyPokemon;
@@ -51,7 +49,6 @@ public final class EnemyAiAttack {
      *
      * @param scoreMoves   if true, the AI will evaluate move effectiveness
      * @param hpAware      if true, the AI will take into account potential damage
-     * @param enemyTrainer the Trainer object representing the enemy's team
      */
     public EnemyAiAttack(final boolean scoreMoves, final boolean hpAware) throws IOException {
         this.random = new Random();
@@ -63,7 +60,7 @@ public final class EnemyAiAttack {
 
     }
 
-    Decision whatAttackWillDo(final Optional<Weather> weather,final Trainer enemyTrainer) {
+    Decision whatAttackWillDo(final Optional<Weather> weather, final Trainer enemyTrainer) {
         this.currentEnemyPokemon = enemyTrainer.getPokemon(0).get();
         this.currentEnemyPokemonMoves = this.currentEnemyPokemon.getActualMoves();
         this.currentPlayerPokemon = this.playerTrainerInstance.getPokemon(0).get();
