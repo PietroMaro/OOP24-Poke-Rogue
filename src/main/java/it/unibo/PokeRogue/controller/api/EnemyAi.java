@@ -20,5 +20,5 @@ public interface EnemyAi {
      * @param enemyTrainer the current enemy trainer in battle
      * @return the Decision representing the enemy's next action.
      */
-    Decision nextMove(Optional<Weather> weather, final Trainer enemyTrainer);
+    Decision nextMove(Optional<Weather> weather, Trainer enemyTrainer);
 }
