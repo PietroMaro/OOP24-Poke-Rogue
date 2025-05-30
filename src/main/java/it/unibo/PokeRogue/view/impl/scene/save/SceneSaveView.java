@@ -45,7 +45,17 @@ public final class SceneSaveView implements SaveView {
         this.sceneSaveUpdateView.updateGraphic(newSelectedButton, currentSceneGraphicElements);
     }
 
-    public void updateInputText(String typedSaveName,
+    /**
+     * Delegates the update of the on-screen save name text to the
+     * SceneSaveUpdateView.
+     * This method ensures that the currently typed save name is displayed in the UI
+     * through the underlying view component.
+     *
+     * @param typedSaveName               the name currently being typed by the user
+     * @param currentSceneGraphicElements the registry of the current scene's
+     *                                    graphical elements
+     */
+    public void updateInputText(final String typedSaveName,
             final GraphicElementsRegistry currentSceneGraphicElements) {
         this.sceneSaveUpdateView.updateInputText(typedSaveName, currentSceneGraphicElements);
     }

@@ -30,14 +30,33 @@ public final class SceneSaveUpdateView implements SaveUpdateView {
         this.updateSelectedButton(newSelectedButton, currentSceneGraphicElements);
     }
 
-    public void updateInputText(String typedSaveName,
+    /**
+     * Updates the on-screen text element to reflect the currently typed save name.
+     * This method is typically called during the save name input process to provide
+     * visual feedback to the user as they type.
+     *
+     * @param typedSaveName               the string currently typed by the user as
+     *                                    the save name
+     * @param currentSceneGraphicElements the registry containing the current
+     *                                    scene's graphic elements
+     */
+    public void updateInputText(final String typedSaveName,
             final GraphicElementsRegistry currentSceneGraphicElements) {
-        System.out.println("scritta attuale:" + typedSaveName);
         UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "SAVE_NAME_TEXT",
                 TextElementImpl.class)
                 .setText(typedSaveName);
     }
 
+    /**
+     * Updates the visual state of the currently selected button.
+     * This method deactivates the previously selected button and activates the new
+     * one,
+     * reflecting the change visually in the UI.
+     *
+     * @param newSelectedButton           the ID of the newly selected button
+     * @param currentSceneGraphicElements the registry containing the current
+     *                                    scene's graphic elements
+     */
     private void updateSelectedButton(final int newSelectedButton,
             final GraphicElementsRegistry currentSceneGraphicElements) {
         UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, false, currentSceneGraphicElements);
