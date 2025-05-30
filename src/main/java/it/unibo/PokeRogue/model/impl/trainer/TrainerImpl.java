@@ -95,6 +95,11 @@ public class TrainerImpl implements Trainer {
 
     }
 
+    /**
+     * Sets the player's squad with the given list of optional Pokémon.
+     *
+     * @param squad a list of Optional containing the Pokémon in the squad
+     */
     public void setSquad(final List<Optional<Pokemon>> squad) {
         this.squad = new ArrayList<>(squad);
 

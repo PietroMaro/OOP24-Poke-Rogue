@@ -18,8 +18,8 @@ public final class PanelElementImpl extends GraphicElementImpl implements PanelE
     /**
      * Constructs a new PanelElementImpl with the given panel name and layout
      * manager.
-
      *
+     * 
      * @param panelName the name identifying the panel
      * @param layout    the layout manager to use for this panel
      */

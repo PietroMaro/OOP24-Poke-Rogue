@@ -113,11 +113,27 @@ public class SceneInfo extends Scene {
         // No graphical update logic implemented yet
     }
 
+    /**
+     * Returns a new instance of {@link GraphicElementsRegistry} containing
+     * the current scene's graphic elements. This ensures encapsulation by not
+     * exposing
+     * internal references.
+     *
+     * @return a copy of the current scene's graphic elements registry
+     */
     @Override
     public GraphicElementsRegistry getCurrentSceneGraphicElements() {
         return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);
     }
 
+    /**
+     * Returns a new {@link LinkedHashMap} containing all panel elements in the
+     * scene.
+     * This method returns a copy to prevent external modification of internal
+     * state.
+     *
+     * @return a map of all panel elements keyed by their string identifiers
+     */
     @Override
     public Map<String, PanelElementImpl> getAllPanelsElements() {
         return new LinkedHashMap<>(this.allPanelsElements);

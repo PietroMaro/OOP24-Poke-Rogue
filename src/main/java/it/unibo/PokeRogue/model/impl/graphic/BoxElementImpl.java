@@ -39,7 +39,7 @@ public final class BoxElementImpl extends GraphicElementImpl implements BoxEleme
      * @param leftX           relative x position (0.0 - 1.0)
      * @param leftY           relative y position (0.0 - 1.0)
      * @param boxWidth        relative width(0.0 - 1.0)
-     * @param height          relative height (0.0 - 1.0)
+     * @param boxHeight       relative height (0.0 - 1.0)
      */
     public BoxElementImpl(final String panelName, final Color mainColor, final Color borderColor,
             final int borderThickness, final double leftX, final double leftY,

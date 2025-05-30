@@ -56,13 +56,17 @@ public interface Range<T> {
 
     /**
      * Sets the current value.
-     * If the value is outside the range, it will be adjusted to stay within the limits.
+     * If the value is outside the range, it will be adjusted to stay within the
+     * limits.
      *
      * @param x the new value to set
      */
     void setCurrentValue(T x);
-	/**
-	 * 	Returns a copy of x.
-	 */
-	Range<T> copyOf();
+
+    /**
+     * Returns a copy of this range.
+     *
+     * @return a new Range object with the same current minimum, value, and maximum
+     */
+    Range<T> copyOf();
 }
