@@ -41,7 +41,8 @@ public final class PokeEffectivenessCalcImpl implements PokeEffectivenessCalc {
     public PokeEffectivenessCalcImpl() throws IOException {
         final JsonReader jsonReader = new JsonReaderImpl();
         final JSONObject root = jsonReader
-                .readJsonObject(Paths.get("src", "main","resources","pokemonData", "pokemonEffectiveness.json").toString());
+                .readJsonObject(
+                        Paths.get("src", "main", "resources", "pokemonData", "pokemonEffectiveness.json").toString());
 
         for (final String attacker : root.keySet()) {
             final JSONObject inner = root.getJSONObject(attacker);

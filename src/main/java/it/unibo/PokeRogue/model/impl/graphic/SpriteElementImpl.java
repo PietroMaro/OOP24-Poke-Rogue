@@ -95,7 +95,7 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
      *                     corner
      * @param leftUpY      the relative vertical position of the sprite's top-left
      *                     corner
-     * @param width        the relative width of the sprite
+     * @param spriteWidth  the relative width of the sprite
      * @param spriteHeight the relative height of the sprite
      */
     public SpriteElementImpl(final String panelName, final Image image, final double leftUpX, final double leftUpY,
@@ -139,7 +139,6 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
         g.drawImage(spriteImage, 0, 0, null);
         g.dispose();
         return copy;
-
 
     }
 

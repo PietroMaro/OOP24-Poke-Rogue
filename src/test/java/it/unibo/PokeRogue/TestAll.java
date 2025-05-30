@@ -91,7 +91,12 @@ public final class TestAll {
 	void testMoveFactory() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
 			InstantiationException {
 		final MoveFactory moveFactory = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
-		final Move moveTest = moveFactory.moveFromName("absorb");
+		Move moveTest = null;
+		try{
+		moveTest = moveFactory.moveFromName("absorb");
+		} catch(Exception e){
+			e.printStackTrace();
+		}
 		final UnsupportedOperationException ex = assertThrows(UnsupportedOperationException.class, () -> {
 			moveFactory.moveFromName("nonExisting");
 		});

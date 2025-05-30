@@ -42,7 +42,7 @@ public final class BackgroundElementImpl extends GraphicElementImpl implements B
         backgroundSprite = new SpriteElementImpl(jsonMetrix);
     }
 
-	@Override
+    @Override
     public SpriteElementImpl getBackgroundSprite() {
         return new SpriteElementImpl(backgroundSprite);
     }

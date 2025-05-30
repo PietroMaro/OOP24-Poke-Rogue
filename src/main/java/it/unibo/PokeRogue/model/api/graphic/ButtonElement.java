@@ -18,7 +18,7 @@ public interface ButtonElement {
      * 
      * @return true if selected, false otherwise
      */
-    boolean isSelected();
+    //boolean isSelected();
 
     /**
      * Returns the underlying BoxElementImpl representing the button's visuals.

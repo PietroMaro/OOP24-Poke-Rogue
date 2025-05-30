@@ -85,7 +85,7 @@ public final class TextElementImpl extends GraphicElementImpl {
         try {
 
             customFont = Font.createFont(Font.TRUETYPE_FONT,
-                    new File(Paths.get("src", "main","resources","font", "pixelFont.ttf").toString()));
+                    new File(Paths.get("src", "main", "resources", "font", "pixelFont.ttf").toString()));
             customFont = customFont.deriveFont(Font.PLAIN,
                     Math.min((int) (getWidth() * this.textDimension) / 3, (int) (getHeight() * this.textDimension)));
         } catch (final IOException | FontFormatException e) {

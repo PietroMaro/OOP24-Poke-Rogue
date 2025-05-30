@@ -149,7 +149,7 @@ public class BattleEngineImpl implements BattleEngine {
                 attackerMove.get(),
                 this.currentWeather);
         defenderPokemon.getActualStats().get(Stats.HP).decrement(finalDamage);
-        this.effectParserInstance.parseEffect(attackerMove.get().getEffect(), attackerPokemon, defenderPokemon,
+        this.effectParserInstance.parseEffect(attackerMove.get().getEffect().get(), attackerPokemon, defenderPokemon,
                 attackerMove, opponentMove, this.currentWeather);
     }
 
@@ -239,7 +239,7 @@ public class BattleEngineImpl implements BattleEngine {
             final Optional<Move> userMove,
             final Optional<Move> targetMove, final AbilitySituationChecks situation) throws IOException {
         if (ability.situationChecks() == situation) {
-            this.effectParserInstance.parseEffect(ability.effect(), user, target, userMove, targetMove,
+            this.effectParserInstance.parseEffect(ability.effect().get(), user, target, userMove, targetMove,
                     this.currentWeather);
         }
     }

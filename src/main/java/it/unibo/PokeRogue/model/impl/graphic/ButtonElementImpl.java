@@ -19,7 +19,7 @@ public final class ButtonElementImpl extends GraphicElementImpl implements Butto
     private static final long serialVersionUID = 1L;
 
     private final BoxElementImpl buttonBox;
-    private final boolean selected = false;
+    //private final boolean selected = false;
 
     @Getter(AccessLevel.NONE)
     private final int borderThickness;
@@ -70,7 +70,7 @@ public final class ButtonElementImpl extends GraphicElementImpl implements Butto
 
     }
 
-	@Override
+    @Override
     public BoxElementImpl getButtonBox() {
         return new BoxElementImpl(buttonBox);
     }
