@@ -43,6 +43,7 @@ public class SceneShop extends Scene {
     private static final int CHANGE_POKEMON_INITIAL_POSITION = 200;
     private static final int REROL_COST = 50;
     private final GraphicElementsRegistry currentSceneGraphicElements;
+    private final GraphicElementsRegistry graphicElements;
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final PlayerTrainerImpl playerTrainerInstance;
     private final GameEngineImpl gameEngineInstance;
@@ -74,19 +75,16 @@ public class SceneShop extends Scene {
             NoSuchMethodException,
             InvocationTargetException {
         this.loadGraphicElements("sceneShopElements.json");
+        this.graphicElements = this.getGraphicElements();
         this.graphicElementNameToInt = this.getGraphicElementNameToInt();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
+        itemFactoryInstance = ItemFactoryImpl.getInstance(ItemFactoryImpl.class);
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-        this.itemFactoryInstance = new ItemFactoryImpl();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.initStatus();
-        this.sceneShopView = new SceneShopView(currentSceneGraphicElements, this.getGraphicElements(),
-                allPanelsElements,
-                itemFactoryInstance,
-                currentSelectedButton, newSelectedButton, this,
-                graphicElementNameToInt);
+        this.sceneShopView = new SceneShopView(this.currentSelectedButton, this.newSelectedButton);
         this.initGraphicElements();
     }
 
@@ -163,7 +161,6 @@ public class SceneShop extends Scene {
                         buyedItem = false;
                     }
                     this.selectedItemForUse = false;
-                    sceneShopView.updateGraphic(currentSelectedButton, newSelectedButton);
                 } else if (this.newSelectedButton >= this.graphicElementNameToInt.get(CHANGE_1)
                         && this.newSelectedButton <= this.graphicElementNameToInt.get(CHANGE_6)
                         && selectedItemForUse) {
@@ -179,7 +176,6 @@ public class SceneShop extends Scene {
                         buyItem(playerTrainerInstance, item, sceneShopView, gameEngineInstance);
                         buyedItem = true;
                         this.newSelectedButton = this.graphicElementNameToInt.get(CHANGE_1);
-                        sceneShopView.updateGraphic(currentSelectedButton, newSelectedButton);
                     }
                 } else if (this.newSelectedButton >= this.graphicElementNameToInt.get(FREE_ITEM_1)
                         && this.newSelectedButton <= this.graphicElementNameToInt.get(FREE_ITEM_3)) {
@@ -188,7 +184,6 @@ public class SceneShop extends Scene {
                             SceneShopUtilities.getShopItems(this.newSelectedButton + 2));
                     buyedItem = false;
                     this.newSelectedButton = this.graphicElementNameToInt.get(CHANGE_1);
-                    sceneShopView.updateGraphic(currentSelectedButton, newSelectedButton);
                 } else if (this.newSelectedButton == this.graphicElementNameToInt.get(REROL_LITTERAL)) {
                     rerollShopItems(playerTrainerInstance, itemFactoryInstance);
                 }
@@ -212,7 +207,9 @@ public class SceneShop extends Scene {
      *                     elements.
      */
     public void initGraphicElements() throws IOException {
-        this.sceneShopView.initGraphicElements(this.newSelectedButton, this.allPanelsElements);
+        this.sceneShopView.initGraphicElements(this.newSelectedButton, this.allPanelsElements,
+                this.currentSceneGraphicElements,
+                this.graphicElements);
     }
 
     private void buyItem(final PlayerTrainerImpl trainer, final Item item, final SceneShopView sceneShopView,
@@ -267,11 +264,15 @@ public class SceneShop extends Scene {
     }
 
     private void rerollShopItems(final PlayerTrainerImpl playerTrainerInstance,
-            final ItemFactoryImpl itemFactoryInstance) {
+            final ItemFactoryImpl itemFactoryInstance) throws IOException,
+            InstantiationException,
+            IllegalAccessException,
+            NoSuchMethodException,
+            InvocationTargetException {
         if (playerTrainerInstance.getMoney() >= REROL_COST) {
             playerTrainerInstance.addMoney(-REROL_COST);
             SceneShopUtilities.updatePlayerMoneyText(currentSceneGraphicElements, playerTrainerInstance);
-            SceneShopUtilities.initShopItems(itemFactoryInstance);
+            SceneShopUtilities.initShopItems();
             SceneShopUtilities.updateItemsText(currentSceneGraphicElements);
         }
     }
@@ -283,7 +284,9 @@ public class SceneShop extends Scene {
      */
     @Override
     public void updateGraphic() throws IOException {
-        this.sceneShopView.updateGraphic(this.currentSelectedButton, this.newSelectedButton);
+        this.sceneShopView.updateGraphic(this.currentSelectedButton, this.newSelectedButton,
+                this.currentSceneGraphicElements,
+                this.graphicElements, this.allPanelsElements, this.graphicElementNameToInt, this);
         this.currentSelectedButton = this.newSelectedButton;
     }
 
@@ -295,7 +298,7 @@ public class SceneShop extends Scene {
      */
     @Override
     public Map<String, PanelElementImpl> getAllPanelsElements() {
-        return new LinkedHashMap<>(allPanelsElements);
+        return new LinkedHashMap<>(this.allPanelsElements);
     }
 
     /**

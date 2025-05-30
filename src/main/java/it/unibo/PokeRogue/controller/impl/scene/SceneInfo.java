@@ -24,6 +24,7 @@ import it.unibo.pokerogue.view.impl.scene.SceneInfoView;
 public class SceneInfo extends Scene {
     private final GraphicElementsRegistry currentSceneGraphicElements;
     private final Map<String, PanelElementImpl> allPanelsElements;
+    private final GraphicElementsRegistry graphicElements;
     private final SceneInfoView sceneInfoView;
     private final GameEngineImpl gameEngineInstance;
     private int newSelectedButton;
@@ -47,12 +48,13 @@ public class SceneInfo extends Scene {
             InvocationTargetException {
         this.loadGraphicElements("sceneInfoElements.json");
         this.graphicElementNameToInt = this.getGraphicElementNameToInt();
+        this.graphicElements = this.getGraphicElements();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.initStatus();
-        this.sceneInfoView = new SceneInfoView(this.getGraphicElements());
+        this.sceneInfoView = new SceneInfoView();
         this.initGraphicElements();
     }
 
@@ -98,7 +100,7 @@ public class SceneInfo extends Scene {
      * @throws IOException if graphic elements fail to initialize properly
      */
     public final void initGraphicElements() throws IOException {
-        this.sceneInfoView.initGraphicElements(currentSceneGraphicElements, allPanelsElements);
+        this.sceneInfoView.initGraphicElements(currentSceneGraphicElements, allPanelsElements,this.graphicElements);
     }
 
     /**

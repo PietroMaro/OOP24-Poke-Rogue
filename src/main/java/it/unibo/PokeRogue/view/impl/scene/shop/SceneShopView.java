@@ -1,12 +1,12 @@
 package it.unibo.pokerogue.view.impl.scene.shop;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import it.unibo.pokerogue.controller.impl.scene.SceneShop;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
-import it.unibo.pokerogue.model.impl.item.ItemFactoryImpl;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 import it.unibo.pokerogue.utilities.SceneShopUtilities;
 
@@ -19,15 +19,12 @@ import it.unibo.pokerogue.utilities.SceneShopUtilities;
 public class SceneShopView {
     private final SceneShopInitView sceneShopInitView;
     private final SceneShopUpdateView sceneShopUpdateView;
-    private final GraphicElementsRegistry sceneGraphicElements;
-    private final GraphicElementsRegistry graphicElements;
-    private final ItemFactoryImpl itemFactoryImpl;
 
     /**
      * Constructs the shop view and initializes its internal components for
      * rendering and updating.
      *
-     * @param graphicElements    Registry of elements specific to the current
+     * @param graphicElements         Registry of elements specific to the current
      * 
      * @param sceneGraphicElements    Registry of elements specific to the current
      *                                shop scene.
@@ -43,21 +40,13 @@ public class SceneShopView {
      * @param graphicElementNameToInt Mapping of graphic element names to their
      *                                identifiers.
      */
-    public SceneShopView(final GraphicElementsRegistry sceneGraphicElements,
-            final GraphicElementsRegistry graphicElements,
-            final Map<String, PanelElementImpl> allPanelsElements, final ItemFactoryImpl itemFactoryImpl,
-            final int currentSelectedButton,
-            final int newSelectedButton, final SceneShop scene,
-            final Map<String, Integer> graphicElementNameToInt) {
-        this.itemFactoryImpl = itemFactoryImpl;
-        this.sceneGraphicElements = sceneGraphicElements;
-        this.graphicElements = graphicElements;
+    public SceneShopView(final int currentSelectedButton,
+            final int newSelectedButton)
+            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+            InstantiationException, IOException {
         this.initShopItems();
-        this.sceneShopInitView = new SceneShopInitView(this.sceneGraphicElements, this.graphicElements,
-                allPanelsElements);
-        this.sceneShopUpdateView = new SceneShopUpdateView(this.sceneGraphicElements, this.graphicElements,
-                allPanelsElements, currentSelectedButton,
-                newSelectedButton, scene, graphicElementNameToInt);
+        this.sceneShopInitView = new SceneShopInitView();
+        this.sceneShopUpdateView = new SceneShopUpdateView(currentSelectedButton, newSelectedButton);
     }
 
     /**
@@ -70,10 +59,11 @@ public class SceneShopView {
      *                     resources.
      */
     public void initGraphicElements(final int currentSelectedButton,
-            final Map<String, PanelElementImpl> allPanelsElements)
+            final Map<String, PanelElementImpl> allPanelsElements, final GraphicElementsRegistry sceneGraphicElements,
+            final GraphicElementsRegistry graphicElements)
             throws IOException {
-        this.sceneShopInitView.initGraphicElements(currentSelectedButton, this.sceneGraphicElements,
-                this.graphicElements, allPanelsElements);
+        this.sceneShopInitView.initGraphicElements(currentSelectedButton, sceneGraphicElements,
+                graphicElements, allPanelsElements);
     }
 
     /**
@@ -83,8 +73,13 @@ public class SceneShopView {
      * @param newSelectedButton     The button that is now selected.
      * @throws IOException If the update process fails due to graphical issues.
      */
-    public void updateGraphic(final int currentSelectedButton, final int newSelectedButton) throws IOException {
-        this.sceneShopUpdateView.updateGraphic(currentSelectedButton, newSelectedButton);
+    public void updateGraphic(final int currentSelectedButton, final int newSelectedButton,
+            final GraphicElementsRegistry sceneGraphicElements,
+            final GraphicElementsRegistry graphicElements, final Map<String, PanelElementImpl> allPanelsElements,
+            final Map<String, Integer> graphicElementNameToInt, final SceneShop sceneInstance)
+            throws IOException {
+        this.sceneShopUpdateView.updateGraphic(currentSelectedButton, newSelectedButton, sceneGraphicElements,
+                graphicElements, allPanelsElements, graphicElementNameToInt, sceneInstance);
     }
 
     /**
@@ -102,7 +97,11 @@ public class SceneShopView {
         SceneShopUtilities.updatePlayerMoneyText(sceneGraphicElements, playerTrainerInstance);
     }
 
-    private void initShopItems() {
-        SceneShopUtilities.initShopItems(itemFactoryImpl);
+    private void initShopItems() throws IOException,
+            InstantiationException,
+            IllegalAccessException,
+            NoSuchMethodException,
+            InvocationTargetException {
+        SceneShopUtilities.initShopItems();
     }
 }

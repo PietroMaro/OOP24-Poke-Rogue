@@ -19,8 +19,6 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
-import lombok.Getter;
-
 /**
  * Represents the scene where the player can manage or learn new moves for their
  * Pokemon.
@@ -33,10 +31,9 @@ import lombok.Getter;
 public class SceneMove extends Scene {
 
     private int currentSelectedButton;
-    @Getter
     private final GraphicElementsRegistry currentSceneGraphicElements;
-    @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
+    private final GraphicElementsRegistry graphicElements;
     private final GameEngine gameEngineInstance;
     private final SceneMoveView sceneMoveView;
     private int newSelectedButton;
@@ -58,11 +55,12 @@ public class SceneMove extends Scene {
             InstantiationException {
         this.loadGraphicElements("sceneMoveElements.json");
         this.graphicElementNameToInt = this.getGraphicElementNameToInt();
+        this.graphicElements = this.getGraphicElements();
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
-        this.sceneMoveView = new SceneMoveView(currentSceneGraphicElements, allPanelsElements, this.getGraphicElements());
+        this.sceneMoveView = new SceneMoveView();
         this.playerPokemon = PlayerTrainerImpl.getTrainerInstance().getPokemon(0).get();
         this.initStatus();
         this.initGraphicElements();
@@ -97,8 +95,8 @@ public class SceneMove extends Scene {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
-		final String move1Litteral = "MOVE_1_BUTTON";
-		final String move5Litteral = "MOVE_1_BUTTON";
+        final String move1Litteral = "MOVE_1_BUTTON";
+        final String move5Litteral = "MOVE_1_BUTTON";
 
         switch (inputKey) {
             case KeyEvent.VK_UP:
@@ -141,7 +139,7 @@ public class SceneMove extends Scene {
     }
 
     private void initGraphicElements() throws IOException {
-        this.sceneMoveView.initGraphicElements();
+        this.sceneMoveView.initGraphicElements(this.currentSceneGraphicElements,this.allPanelsElements,this.graphicElements);
         UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, this.currentSceneGraphicElements);
     }
 
@@ -150,4 +148,23 @@ public class SceneMove extends Scene {
         this.currentSelectedButton = graphicElementNameToInt.get("MOVE_1_BUTTON");
     }
 
+    /**
+     * Returns a copy of the current scene's graphical elements registry.
+     *
+     * @return a copy of the current GraphicElementsRegistry.
+     */
+    @Override
+    public GraphicElementsRegistry getCurrentSceneGraphicElements() {
+        return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);
+    }
+
+    /**
+     * Returns a map containing all panel elements currently loaded in the scene.
+     *
+     * @return a LinkedHashMap of all PanelElementImpl objects.
+     */
+    @Override
+    public Map<String, PanelElementImpl> getAllPanelsElements() {
+        return new LinkedHashMap<>(this.allPanelsElements);
+    }
 }
