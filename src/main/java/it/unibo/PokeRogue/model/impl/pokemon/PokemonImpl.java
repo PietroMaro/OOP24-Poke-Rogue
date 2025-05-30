@@ -204,9 +204,9 @@ public final class PokemonImpl implements Pokemon {
         final int maxStat = 252;
         actualStats = new EnumMap<>(Stats.class);
 
-        final int maxLife = (int) Math.floor((2 * this.baseStats.get(Stats.HP) + this.iv.get(Stats.HP)
-                + this.ev.get(Stats.HP).getCurrentValue() / 4) * this.level.getCurrentValue() / 100)
-                + this.level.getCurrentValue() + 10;
+        final int maxLife = (int) (Math.floor((2 * this.baseStats.get(Stats.HP) + this.iv.get(Stats.HP)
+                + this.ev.get(Stats.HP).getCurrentValue() / 4.0) * this.level.getCurrentValue() / 100.0)
+                + this.level.getCurrentValue() + 10.0);
 
         final Range<Integer> rangeHp = new RangeImpl<>(0, maxLife, maxLife);
         actualStats.put(Stats.HP, rangeHp);
@@ -221,7 +221,7 @@ public final class PokemonImpl implements Pokemon {
                     Math.floor(
                             (2 * baseStats.get(stat)
                                     + iv.get(stat)
-                                    + ev.get(stat).getCurrentValue() / 4
+                                    + ev.get(stat).getCurrentValue() / 4.0
                                             * level.getCurrentValue())
                                     / 100.0))
                     + constAdder;
