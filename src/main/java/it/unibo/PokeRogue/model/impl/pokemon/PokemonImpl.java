@@ -1,4 +1,4 @@
-package it.unibo.pokerogue.model.api.pokemon;
+package it.unibo.pokerogue.model.impl.pokemon;
 
 import java.util.Optional;
 import java.util.ArrayList;
@@ -9,6 +9,8 @@ import java.util.Random;
 
 import it.unibo.pokerogue.model.api.Range;
 import it.unibo.pokerogue.model.api.move.Move;
+import it.unibo.pokerogue.model.api.pokemon.Pokemon;
+import it.unibo.pokerogue.model.api.pokemon.PokemonBlueprint;
 import it.unibo.pokerogue.model.enums.Nature;
 import it.unibo.pokerogue.model.enums.Stats;
 import it.unibo.pokerogue.model.enums.StatusCondition;
@@ -102,7 +104,7 @@ public final class PokemonImpl implements Pokemon {
             NoSuchMethodException,
             InvocationTargetException {
         this.moveFactoryInstance = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
-        this.baseStats = Map.copyOf(pokemonBlueprint.stats());
+        this.baseStats =  new HashMap<>(pokemonBlueprint.stats());
         generateivs();
         generateEvs();
         this.nature = Nature.getRandomNature();
@@ -179,16 +181,16 @@ public final class PokemonImpl implements Pokemon {
 
     private void initLevelMovesLearn(final Map<String, String> learnableMoves) {
         this.levelMovesLearn = new HashMap<>();
-        for (final String key : learnableMoves.keySet()) {
-            this.levelMovesLearn.put(Integer.parseInt(key), learnableMoves.get(key));
+        for (final Map.Entry<String, String> entry : learnableMoves.entrySet()) {
+            this.levelMovesLearn.put(Integer.parseInt(entry.getKey()), entry.getValue());
         }
     }
 
     private void initActualMoves() {
         final int firstMoveKey = 1;
-        for (final int key : this.levelMovesLearn.keySet()) {
-            if (key == firstMoveKey) {
-                this.actualMoves.add(moveFactoryInstance.moveFromName(this.levelMovesLearn.get(key)));
+        for (final Map.Entry<Integer, String> entry : this.levelMovesLearn.entrySet()) {
+            if (entry.getKey() == firstMoveKey) {
+                this.actualMoves.add(moveFactoryInstance.moveFromName(entry.getValue()));
             }
         }
     }
@@ -217,7 +219,7 @@ public final class PokemonImpl implements Pokemon {
                     Math.floor(
                             (2 * baseStats.get(stat)
                                     + iv.get(stat)
-                                    + (double) ev.get(stat).getCurrentValue() / 4
+                                    +  ev.get(stat).getCurrentValue() / 4
                                             * level.getCurrentValue())
                                     / 100.0))
                     + constAdder;
@@ -305,9 +307,11 @@ public final class PokemonImpl implements Pokemon {
     @Override
     public void increaseEv(final Map<Stats, Integer> increaseEv) {
         final int maxTotalEv = 510;
-        for (final Stats key : increaseEv.keySet()) {
-            if (this.totalUsedEv + increaseEv.get(key) < maxTotalEv) {
-                this.ev.get(key).increment(increaseEv.get(key));
+        for (final Map.Entry<Stats, Integer> entry : increaseEv.entrySet()) {
+            final Stats stat = entry.getKey();
+            final int increment = entry.getValue();
+            if (this.totalUsedEv + increment < maxTotalEv) {
+                this.ev.get(stat).increment(increment);
             }
         }
     }
@@ -324,27 +328,27 @@ public final class PokemonImpl implements Pokemon {
 
     @Override
     public void setStatusDuration(final Map<StatusCondition, Integer> newVal) {
-        this.statusDuration = Map.copyOf(newVal);
+        this.statusDuration =  new HashMap<>(newVal);
     }
 
     @Override
     public Map<StatusCondition, Integer> getStatusDuration() {
-        return Map.copyOf(this.statusDuration);
+        return new HashMap<>(this.statusDuration);
     }
 
     @Override
     public Map<Stats, Integer> getIv() {
-        return iv == null ? null : Map.copyOf(iv);
+        return iv == null ? null :  new HashMap<>(iv);
     }
 
     @Override
     public void setIv(final Map<Stats, Integer> iv) {
-        this.iv = iv == null ? null : Map.copyOf(iv);
+        this.iv = iv == null ? null :  new HashMap<>(iv);
     }
 
     @Override
     public Map<Stats, Range<Integer>> getEv() {
-        return Map.copyOf(this.ev);
+        return  new HashMap<>(this.ev);
     }
 
     @Override
@@ -356,7 +360,7 @@ public final class PokemonImpl implements Pokemon {
             for (final Map.Entry<Stats, Range<Integer>> entry : ev.entrySet()) {
                 copy.put(entry.getKey(), entry.getValue().copyOf());
             }
-            this.ev = Map.copyOf(copy);
+            this.ev =  new HashMap<>(copy);
         }
     }
 
@@ -372,42 +376,43 @@ public final class PokemonImpl implements Pokemon {
 
     @Override
     public Map<Stats, Range<Integer>> getActualStats() {
-        return Map.copyOf(this.actualStats);
+        return  new HashMap<>(this.actualStats);
     }
 
     @Override
     public void setActualStats(final Map<Stats, Range<Integer>> newVal) {
-        this.actualStats = Map.copyOf(newVal);
+        this.actualStats =  new HashMap<>(newVal);
     }
 
     @Override
     public Map<Stats, Range<Integer>> getTempStatsBonus() {
-        return Map.copyOf(this.tempStatsBonus);
+        return  new HashMap<>(this.tempStatsBonus);
     }
 
     @Override
     public void setTempStatsBonus(final Map<Stats, Range<Integer>> tempStatsBonus) {
-        this.tempStatsBonus = Map.copyOf(tempStatsBonus);
+        this.tempStatsBonus =  new HashMap<>(tempStatsBonus);
     }
 
     @Override
     public Map<Integer, String> getLevelMovesLearn() {
-        return levelMovesLearn == null ? null : Map.copyOf(levelMovesLearn);
+        return levelMovesLearn == null ? null :  new HashMap<>(levelMovesLearn);
     }
 
     @Override
     public void setLevelMovesLearn(final Map<Integer, String> levelMovesLearn) {
-        this.levelMovesLearn = levelMovesLearn == null ? null : Map.copyOf(levelMovesLearn);
+        this.levelMovesLearn = levelMovesLearn == null ? null :  new HashMap<>(levelMovesLearn);
     }
 
     @Override
     public List<Move> getActualMoves() {
-        return actualMoves == null ? null : List.copyOf(actualMoves);
+        return actualMoves == null ? null : new ArrayList<>(actualMoves);
     }
 
     @Override
     public void setActualMoves(final List<Move> actualMoves) {
-        this.actualMoves = actualMoves == null ? null : List.copyOf(actualMoves);
+        this.actualMoves = actualMoves == null ? null : new ArrayList<>(actualMoves);
+       
     }
 
     @Override
@@ -422,21 +427,21 @@ public final class PokemonImpl implements Pokemon {
 
     @Override
     public Map<Stats, Integer> getGivesEv() {
-        return givesEv == null ? null : Map.copyOf(givesEv);
+        return givesEv == null ? null :  new HashMap<>(givesEv);
     }
 
     @Override
     public void setGivesEv(final Map<Stats, Integer> givesEv) {
-        this.givesEv = givesEv == null ? null : Map.copyOf(givesEv);
+        this.givesEv = givesEv == null ? null :  new HashMap<>(givesEv);
     }
 
     @Override
     public Map<Stats, Integer> getBaseStats() {
-        return baseStats == null ? null : Map.copyOf(baseStats);
+        return baseStats == null ? null :  new HashMap<>(baseStats);
     }
 
     @Override
     public void setBaseStats(final Map<Stats, Integer> baseStats) {
-        this.baseStats = baseStats == null ? null : Map.copyOf(baseStats);
-    }
+        this.baseStats = baseStats == null ? null :   new HashMap<>(baseStats);
+        }
 }

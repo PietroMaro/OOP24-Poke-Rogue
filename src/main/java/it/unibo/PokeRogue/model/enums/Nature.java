@@ -115,6 +115,7 @@ public enum Nature {
 
     private final Stats statIncrease; // Statistica che aumenta.
     private final Stats statDecrease; // Statistica che diminuisce
+    private static final Random RANDOM = new Random();
 
     // Costruttore per inizializzare i campi
     Nature(final Stats statIncrease, final Stats statDecrease) {
@@ -146,8 +147,7 @@ public enum Nature {
      * @return a random nature
      */
     public static Nature getRandomNature() {
-        final Random random = new Random();
-        final int index = random.nextInt(values().length);
+        final int index = RANDOM.nextInt(values().length);
         return values()[index];
     }
 
