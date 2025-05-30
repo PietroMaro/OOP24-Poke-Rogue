@@ -30,7 +30,6 @@ public class SceneSaveView {
      *                                    panels
      * @param currentSelectedButton       the ID of the initially selected button
      * 
-     * @param newSelectedButton           the ID of the newly selected button
      */
     public SceneSaveView(final GraphicElementsRegistry currentSceneGraphicElements,
             final GraphicElementsRegistry graphicElements,

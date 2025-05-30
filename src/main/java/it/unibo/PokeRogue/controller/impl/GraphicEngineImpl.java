@@ -1,6 +1,7 @@
 package it.unibo.pokerogue.controller.impl;
 
 import java.awt.GridLayout;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.swing.JFrame;
@@ -42,6 +43,7 @@ public final class GraphicEngineImpl extends Singleton implements GraphicEngine 
         this.gameWindow.setLayout(new GridLayout());
         this.gameWindow.addKeyListener(new InputHandlerImpl());
         this.gameWindow.setVisible(true);
+        this.allPanelElements = null;
 
     }
 
@@ -81,7 +83,7 @@ public final class GraphicEngineImpl extends Singleton implements GraphicEngine 
     public void createPanels(final Map<String, PanelElementImpl> panelElements) {
         this.gameWindow.getContentPane().removeAll();
 
-        this.allPanelElements = panelElements;
+        this.allPanelElements = new LinkedHashMap<>(panelElements);
 
         for (final Map.Entry<String, PanelElementImpl> entry : allPanelElements.entrySet()) {
             final PanelElementImpl panel = entry.getValue();

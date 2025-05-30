@@ -61,4 +61,8 @@ public interface Range<T> {
      * @param x the new value to set
      */
     void setCurrentValue(T x);
+	/**
+	 * 	Returns a copy of x.
+	 */
+	Range<T> copyOf();
 }

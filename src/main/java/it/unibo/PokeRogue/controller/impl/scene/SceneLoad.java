@@ -68,7 +68,7 @@ public final class SceneLoad extends Scene {
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.savingSystemInstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
         this.savesList = savingSystemInstance.getSaveFilesName(Paths.get("src", "main","resources","saves").toString());
-        this.sceneLoadView = new SceneLoadView(this.graphicElements);
+        this.sceneLoadView = new SceneLoadView();
         this.initStatus();
         this.initGraphicElements();
     }
@@ -146,7 +146,7 @@ public final class SceneLoad extends Scene {
 
     private void initGraphicElements() throws IOException {
 
-        this.sceneLoadView.initGraphicElements(allPanelsElements, currentSceneGraphicElements);
+        this.sceneLoadView.initGraphicElements(allPanelsElements, currentSceneGraphicElements,this.graphicElements);
 
         this.showSaves(this.selectedSave);
         UtilitiesForScenes.setButtonStatus(this.selectedSave, true, currentSceneGraphicElements);

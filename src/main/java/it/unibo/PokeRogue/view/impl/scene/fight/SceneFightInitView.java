@@ -161,11 +161,11 @@ public class SceneFightInitView {
                                 .safeGetElementByName(currentSceneGraphicElements, "MY_POKEMON_SPRITE",
                                                 SpriteElementImpl.class)
                                 .setImage(playerTrainerInstance
-                                                .getPokemon(FIRST_POSITION).get().getSpriteBack());
+                                                .getPokemon(FIRST_POSITION).get().getSpriteBack().get());
                 UtilitiesForScenes
                                 .safeGetElementByName(currentSceneGraphicElements, "ENEMY_POKEMON_SPRITE",
                                                 SpriteElementImpl.class)
                                 .setImage(enemyTrainerInstance
-                                                .getPokemon(FIRST_POSITION).get().getSpriteFront());
+                                                .getPokemon(FIRST_POSITION).get().getSpriteFront().get());
         }
 }

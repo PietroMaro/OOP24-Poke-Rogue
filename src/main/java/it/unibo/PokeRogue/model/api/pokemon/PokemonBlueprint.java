@@ -1,6 +1,7 @@
 package it.unibo.pokerogue.model.api.pokemon;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import it.unibo.pokerogue.model.enums.Stats;
 
@@ -33,5 +34,14 @@ public record PokemonBlueprint(
 		int weight,
 		List<String> possibleAbilities,
 		Map<Stats, Integer> givesEv,
-		Image spriteFront,
-		Image spriteBack) { }
+		Optional<Image> spriteFront,
+		Optional<Image> spriteBack) { 
+
+		public PokemonBlueprint {
+        	types = List.copyOf(types);
+        	stats = Map.copyOf(stats);
+        	learnableMoves = Map.copyOf(learnableMoves);
+        	possibleAbilities = List.copyOf(possibleAbilities);
+        	givesEv = Map.copyOf(givesEv);
+    	}
+	}

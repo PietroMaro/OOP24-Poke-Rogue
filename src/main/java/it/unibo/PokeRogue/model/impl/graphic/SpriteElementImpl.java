@@ -2,6 +2,7 @@ package it.unibo.pokerogue.model.impl.graphic;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -23,7 +24,7 @@ import lombok.Getter;
 public final class SpriteElementImpl extends GraphicElementImpl implements SpriteElement {
     private static final long serialVersionUID = 1L;
 
-    private Image spriteImage;
+    private transient Image spriteImage;
     private double leftUpX;
     private double leftUpY;
     private double spriteWidth = 1;
@@ -136,7 +137,14 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
 
     @Override
     public void setImage(final Image image) {
-        this.spriteImage = image;
+        final BufferedImage bufferedCopy = new BufferedImage(
+                image.getWidth(null),
+                image.getHeight(null),
+                BufferedImage.TYPE_INT_ARGB);
+        final Graphics g = bufferedCopy.getGraphics();
+        g.drawImage(image, 0, 0, null);
+        g.dispose();
+        this.spriteImage = bufferedCopy;
     }
 
     @Override
