@@ -16,6 +16,8 @@ import it.unibo.pokerogue.model.impl.graphic.TextElementImpl;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 import it.unibo.pokerogue.utilities.ColorTypeConversion;
 import it.unibo.pokerogue.utilities.UtilitiesForScenes;
+import it.unibo.pokerogue.view.api.scene.BoxView;
+
 import java.io.IOException;
 import java.awt.Color;
 
@@ -23,7 +25,7 @@ import java.awt.Color;
  * Handles the graphical representation and layout setup of the Pokémon storage
  * box scene.
  */
-public final class SceneBoxView {
+public final class SceneBoxView implements BoxView {
         private static final int LENGTH_OF_POKEBOX = 81;
         private static final double POKEMON_BUTTON_WIDTH = 0.03;
         private static final double POKEMON_BUTTON_HEIGHT = 0.05;
@@ -42,17 +44,6 @@ public final class SceneBoxView {
         private static final String FIRST_PANEL_NAME = "firstPanel";
         private static final String POKEMON_PANEL_NAME = "pokemonPanel";
 
-        /**
-         * Initializes the graphic elements for the current scene, including panels and
-         * Pokémon buttons.
-         *
-         * @param currentSceneGraphicElements the registry where new graphic elements
-         *                                    will be registered
-         * @param allPanelsElements           a map storing the panel elements used in
-         *                                    the scene
-         * @param graphicElements             a shared registry used to store loaded
-         *                                    graphic elements
-         */
         public void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final GraphicElementsRegistry graphicElements) throws IOException {
@@ -82,18 +73,6 @@ public final class SceneBoxView {
 
         }
 
-        /**
-         * Loads and displays the Pokémon sprites from a specified box into the current
-         * scene's graphic elements.
-         *
-         * 
-         * @param boxes                       the list of all Pokémon boxes
-         * @param boxIndex                    the index of the box to load the sprites
-         *                                    from
-         * @param currentSceneGraphicElements the registry of graphic elements where
-         *                                    sprites will be added/removed
-         * @return the number of Pokémon present in the selected box
-         */
         public int loadPokemonSprites(final List<List<Pokemon>> boxes, final int boxIndex,
                         final GraphicElementsRegistry currentSceneGraphicElements) {
                 final int currentBoxLength = boxes.get(boxIndex).size();
@@ -122,23 +101,6 @@ public final class SceneBoxView {
 
         }
 
-        /**
-         * Updates the graphics in the scene to reflect changes in the selected Pokémon
-         * button, the displayed box, the player's squad, and the detailed Pokémon view.
-         *
-         * @param currentSelectedButton       the index of the previously selected
-         *                                    Pokémon button
-         * @param newSelectedButton           the index of the newly selected Pokémon
-         *                                    button
-         * @param boxIndex                    the index of the currently displayed box
-         * @param newBoxIndex                 the index of the box to display
-         * @param boxes                       a list of all Pokémon boxes
-         * @param playerTrainerInstance       the current player trainer instance
-         * @param currentSceneGraphicElements the registry containing scene graphic
-         *                                    elements
-         * @param graphicElementNameToInt     a mapping from element names to their
-         *                                    integer identifiers
-         */
         public void updateGraphic(final int currentSelectedButton, final int newSelectedButton,
                         final int boxIndex,
                         final int newBoxIndex, final List<List<Pokemon>> boxes,

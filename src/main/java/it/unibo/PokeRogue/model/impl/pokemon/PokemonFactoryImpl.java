@@ -139,7 +139,7 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory {
 
 	@Override
 	public final Set<String> getAllPokemonList() {
-		return this.allPokemonSet;
+		return new HashSet<>(this.allPokemonSet);
 	}
 
 	private <T> List<T> jsonArrayToList(final JSONArray jsonArray) {
@@ -164,20 +164,21 @@ public class PokemonFactoryImpl extends Singleton implements PokemonFactory {
 	private Map<Stats, Integer> statsMap(final JSONObject jsonObject) {
 		final Map<String, Integer> startMap = jsonObjectToMap(jsonObject);
 		final Map<Stats, Integer> ris = new HashMap<>();
-		for (final String key : startMap.keySet()) {
-			switch (key) {
-				case "hp" -> ris.put(Stats.HP, startMap.get(key));
-				case "specialAttack" -> ris.put(Stats.SPECIAL_ATTACK, startMap.get(key));
-				case "specialDefense" -> ris.put(Stats.SPECIAL_DEFENSE, startMap.get(key));
-				case "attack" -> ris.put(Stats.ATTACK, startMap.get(key));
-				case "defense" -> ris.put(Stats.DEFENSE, startMap.get(key));
-				case "speed" -> ris.put(Stats.SPEED, startMap.get(key));
-				case "accuracy" -> ris.put(Stats.ACCURACY, startMap.get(key));
-				case "critRate" -> ris.put(Stats.CRIT_RATE, startMap.get(key));
+		for (final Map.Entry<String, Integer> entry : startMap.entrySet()) {
+			switch (entry.getKey()) {
+				case "hp" -> ris.put(Stats.HP, entry.getValue());
+				case "specialAttack" -> ris.put(Stats.SPECIAL_ATTACK, entry.getValue());
+				case "specialDefense" -> ris.put(Stats.SPECIAL_DEFENSE, entry.getValue());
+				case "attack" -> ris.put(Stats.ATTACK, entry.getValue());
+				case "defense" -> ris.put(Stats.DEFENSE, entry.getValue());
+				case "speed" -> ris.put(Stats.SPEED, entry.getValue());
+				case "accuracy" -> ris.put(Stats.ACCURACY, entry.getValue());
+				case "critRate" -> ris.put(Stats.CRIT_RATE, entry.getValue());
 				default -> {
 				}
 			}
 		}
 		return ris;
 	}
+
 }

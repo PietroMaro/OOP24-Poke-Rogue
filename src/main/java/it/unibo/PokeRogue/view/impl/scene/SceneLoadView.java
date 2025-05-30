@@ -12,6 +12,7 @@ import it.unibo.pokerogue.model.api.SavingSystem;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.model.impl.graphic.TextElementImpl;
 import it.unibo.pokerogue.utilities.UtilitiesForScenes;
+import it.unibo.pokerogue.view.api.scene.LoadView;
 
 /**
  * The {@code SceneLoadView} class is responsible for initializing and managing
@@ -21,23 +22,10 @@ import it.unibo.pokerogue.utilities.UtilitiesForScenes;
  * interaction buttons dynamically based on existing saves.
  */
 
-public final class SceneLoadView {
+public final class SceneLoadView implements LoadView{
         private static final int REMOVE_EXTENSION = 5;
         private static final String POKEMON_PANEL_NAME = "savesPanel";
 
-        /**
-         * Initializes the graphic elements used in the scene load view.
-         * It creates and registers the base panel elements required for the scene,
-         * and loads additional elements from a JSON file.
-         *
-         * @param allPanelsElements    a map to store panel elements created for this
-         *                             scene
-         * @param sceneGraphicElements the registry to hold scene-specific graphic
-         *                             elements
-         * @param graphicElements      the global registry containing all available
-         *                             graphic elements
-         * @throws IOException if the JSON configuration file cannot be read
-         */
         public void initGraphicElements(final Map<String, PanelElementImpl> allPanelsElements,
                         final GraphicElementsRegistry sceneGraphicElements,
                         final GraphicElementsRegistry graphicElements) throws IOException {
@@ -49,21 +37,6 @@ public final class SceneLoadView {
 
         }
 
-        /**
-         * Displays a paginated list of save game slots with their respective box sizes.
-         * Updates the text elements in the scene to reflect save data or mark empty
-         * slots.
-         *
-         * @param savesListStart       the index offset in the full save list to begin
-         *                             displaying from
-         * @param savesList            the list of available save file names
-         * @param savingSystemInstance an instance of the saving system used to retrieve
-         *                             save data
-         * @param allPanelsElements    a map of panel elements in the scene (unused in
-         *                             this method but passed in)
-         * @param sceneGraphicElements the registry containing all scene elements,
-         *                             including text fields to update
-         */
         public void showSaves(final int savesListStart, final List<String> savesList,
                         final SavingSystem savingSystemInstance, final Map<String, PanelElementImpl> allPanelsElements,
                         final GraphicElementsRegistry sceneGraphicElements) throws IOException {
@@ -80,7 +53,7 @@ public final class SceneLoadView {
                                                                 .get("src", "main", "resources", "saves", savesName)
                                                                 .toString());
 
-                                savesName = savesName.substring(0, savesName.length() - REMOVE_EXTENSION); 
+                                savesName = savesName.substring(0, savesName.length() - REMOVE_EXTENSION);
 
                                 text = "Salvataggio: " + savesName + ", Grandezza Box: " + boxPokemonNumber;
 

@@ -136,6 +136,6 @@ public class ItemFactoryImpl extends Singleton implements ItemFactory {
      */
     @Override
     public Set<String> getAllItemList() {
-        return this.allItemSet;
+        return new HashSet<>(this.allItemSet);
     }
 }
