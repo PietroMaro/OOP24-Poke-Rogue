@@ -5,8 +5,8 @@
         "checks": [],
         "activation": [
             [
-                "us.actualStats.hp.currentValue",
-                "us.actualStats.hp.currentMax"
+                "us.actualStats[hp].currentValue",
+                "us.actualStats[hp].currentMax"
             ]
         ]
     },

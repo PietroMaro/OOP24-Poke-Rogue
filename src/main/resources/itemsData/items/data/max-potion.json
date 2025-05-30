@@ -2,23 +2,21 @@
     "id": 8,
     "name": "Max Potion",
     "type": "Healing",
-    "description": "Completely restores of a single Pokémon.",
+    "description": "Completely restores of a single Pok\u00c3\u00a9mon.",
     "price": 2500,
     "rarity": "Rare",
     "category": "Consumable",
     "captureRate": 0,
     "effect": {
-        "checks": [
-            
-        ],
+        "checks": [],
         "activation": [
             [
-                "us.actualStats.hp.currentValue",
-                "us.actualStats.hp.currentMax"
+                "us.actualStats[hp].currentValue",
+                "us.actualStats[hp].currentMax"
             ],
             [
                 "us.statusCondition",
-                "EMPTY" 
+                "EMPTY"
             ]
         ]
     }

@@ -2,14 +2,16 @@
     "pp": 10,
     "isPhysical": false,
     "effect": {
-        "checks": [[
-            "enemy.actualStats.hp.currentValue",
-            "==",
-            "0"]
+        "checks": [
+            [
+                "enemy.actualStats[hp].currentValue",
+                "==",
+                "0"
+            ]
         ],
         "activation": [
             [
-                "enemy.actualStats.hp.currentValue",
+                "enemy.actualStats[hp].currentValue",
                 "1"
             ]
         ]

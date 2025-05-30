@@ -3,35 +3,35 @@
     "effect": {
         "checks": [
             [
-                "us.tempStatsBonus.attack.currentValue",
+                "us.tempStatsBonus[attack].currentValue",
                 "<",
                 "0"
             ],
             [
-                "us.tempStatsBonus.defense.currentValue",
+                "us.tempStatsBonus[defense].currentValue",
                 "<",
                 "0"
             ],
             [
-                "us.tempStatsBonus.specialAttack.currentValue",
+                "us.tempStatsBonus[specialAttack].currentValue",
                 "<",
                 "0"
             ],
             [
-                "us.tempStatsBonus.specialDefense.currentValue",
+                "us.tempStatsBonus[specialDefense].currentValue",
                 "<",
                 "0"
             ],
             [
-                "us.tempStatsBonus.speed.currentValue",
+                "us.tempStatsBonus[speed].currentValue",
                 "<",
                 "0"
             ]
         ],
         "activation": [
             [
-                "us.tempStatsBonus.specialAttack.currentValue",
-                "us.tempStatsBonus.specialAttack.currentValue + 2"
+                "us.tempStatsBonus[specialAttack].currentValue",
+                "us.tempStatsBonus[specialAttack].currentValue + 2"
             ]
         ]
     }

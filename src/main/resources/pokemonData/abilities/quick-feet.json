@@ -10,8 +10,8 @@
         ],
         "activation": [
             [
-                "us.actualStats.speed.currentValue",
-                "us.actualStats.speed.currentValue * 1.5"
+                "us.actualStats[speed].currentValue",
+                "us.actualStats[speed].currentValue * 1.5"
             ]
         ]
     }

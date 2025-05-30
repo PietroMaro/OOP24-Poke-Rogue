@@ -1,10 +1,12 @@
 {
     "situationChecks": "attack",
     "effect": {
-        "checks": [
-        ],
-        "activation":[
-            ["attackUs.STAB","2"]
+        "checks": [],
+        "activation": [
+            [
+                "attackUs.stab",
+                "2"
+            ]
         ]
     }
 }

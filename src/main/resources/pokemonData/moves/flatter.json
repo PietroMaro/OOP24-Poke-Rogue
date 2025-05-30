@@ -9,8 +9,8 @@
                 "Optional.of(StatusCondition.CONFUSION)"
             ],
             [
-                "enemy.tempStatsBonus.specialAttack.currentValue",
-                "enemy.tempStatsBonus.specialAttack.currentValue + 1"
+                "enemy.tempStatsBonus[specialAttack].currentValue",
+                "enemy.tempStatsBonus[specialAttack].currentValue + 1"
             ]
         ]
     },

@@ -11,8 +11,8 @@
         ],
         "activation": [
             [
-                "us.actualStats.hp.currentValue",
-                "us.actualStats.hp.currentValue - 25"
+                "us.actualStats[hp].currentValue",
+                "us.actualStats[hp].currentValue - 25"
             ]
         ]
     },

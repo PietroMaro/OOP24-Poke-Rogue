@@ -11,8 +11,8 @@
         ],
         "activation": [
             [
-                "enemy.actualStats.hp.currentValue",
-                "enemy.actualStats.hp.currentValue-100"
+                "enemy.actualStats[hp].currentValue",
+                "enemy.actualStats[hp].currentValue-100"
             ]
         ]
     },

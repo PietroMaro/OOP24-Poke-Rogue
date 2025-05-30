@@ -8,15 +8,15 @@
                 "'bug'"
             ],
             [
-                "us.actualStats.hp.currentValue",
+                "us.actualStats[hp].currentValue",
                 "<=",
                 "us.actualStats.hp.currentMax / 3"
             ]
         ],
         "activation": [
             [
-                "us.actualStats.attack.currentValue",
-                "us.actualStats.attack.currentValue * 1.3"
+                "us.actualStats[attack].currentValue",
+                "us.actualStats[attack].currentValue * 1.3"
             ]
         ]
     }

@@ -11,8 +11,8 @@
         ],
         "activation": [
             [
-                "enemy.tempStatsBonus.speed.currentValue",
-                "enemy.tempStatsBonus.speed.currentValue - 1"
+                "enemy.tempStatsBonus[speed].currentValue",
+                "enemy.tempStatsBonus[speed].currentValue - 1"
             ]
         ]
     },

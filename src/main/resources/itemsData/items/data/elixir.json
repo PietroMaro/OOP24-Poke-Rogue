@@ -2,14 +2,13 @@
     "id": 13,
     "name": "Elixir",
     "type": "PPRestore",
-    "description": "Restores 10 PP to each of a Pokémon's moves.",
+    "description": "Restores 10 PP to each of a Pok\u00c3\u00a9mon's moves.",
     "price": 3000,
     "rarity": "Great",
     "category": "Consumable",
     "captureRate": 0,
     "effect": {
-        "checks": [
-        ],
+        "checks": [],
         "activation": [
             [
                 "us.actualMoves[0].pp.currentValue",

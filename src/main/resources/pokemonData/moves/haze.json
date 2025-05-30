@@ -5,55 +5,55 @@
         "checks": [],
         "activation": [
             [
-                "us.tempStatsBonus.hp.currentValue",
+                "us.tempStatsBonus[hp].currentValue",
                 "0"
             ],
             [
-                "us.tempStatsBonus.attack.currentValue",
+                "us.tempStatsBonus[attack].currentValue",
                 "0"
             ],
             [
-                "us.tempStatsBonus.defense.currentValue",
+                "us.tempStatsBonus[defense].currentValue",
                 "0"
             ],
             [
-                "us.tempStatsBonus.specialAttack.currentValue",
+                "us.tempStatsBonus[specialAttack].currentValue",
                 "0"
             ],
             [
-                "us.tempStatsBonus.specialDefense.currentValue",
+                "us.tempStatsBonus[specialDefense].currentValue",
                 "0"
             ],
             [
-                "us.tempStatsBonus.speed.currentValue",
+                "us.tempStatsBonus[speed].currentValue",
                 "0"
             ],
             [
-                "us.tempStatsBonus.accuracy.currentValue",
+                "us.tempStatsBonus[accuracy].currentValue",
                 "0"
             ],
             [
-                "enemy.tempStatsBonus.hp.currentValue",
+                "enemy.tempStatsBonus[hp].currentValue",
                 "0"
             ],
             [
-                "enemy.tempStatsBonus.attack.currentValue",
+                "enemy.tempStatsBonus[attack].currentValue",
                 "0"
             ],
             [
-                "enemy.tempStatsBonus.defense.currentValue",
+                "enemy.tempStatsBonus[defense].currentValue",
                 "0"
             ],
             [
-                "enemy.tempStatsBonus.specialAttack.currentValue",
+                "enemy.tempStatsBonus[specialAttack].currentValue",
                 "0"
             ],
             [
-                "enemy.tempStatsBonus.specialDefense.currentValue",
+                "enemy.tempStatsBonus[specialDefense].currentValue",
                 "0"
             ],
             [
-                "enemy.tempStatsBonus.speed.currentValue",
+                "enemy.tempStatsBonus[speed].currentValue",
                 "0"
             ]
         ]

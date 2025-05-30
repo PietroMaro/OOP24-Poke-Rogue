@@ -8,13 +8,11 @@
     "category": "Consumable",
     "captureRate": 0,
     "effect": {
-        "checks": [
-            
-        ],
+        "checks": [],
         "activation": [
             [
-                "us.tempStatsBonus.defense.currentValue",
-                "us.tempStatsBonus.defense.currentValue + 1"
+                "us.tempStatsBonus[defense].currentValue",
+                "us.tempStatsBonus[defense].currentValue + 1"
             ]
         ]
     }

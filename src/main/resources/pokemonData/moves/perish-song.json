@@ -5,11 +5,11 @@
         "checks": [],
         "activation": [
             [
-                "us.actualStats.hp.currentValue",
+                "us.actualStats[hp].currentValue",
                 "0"
             ],
             [
-                "enemy.actualStats.hp.currentValue",
+                "enemy.actualStats[hp].currentValue",
                 "0"
             ]
         ]

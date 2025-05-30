@@ -5,12 +5,12 @@
         "checks": [],
         "activation": [
             [
-                "us.tempStatsBonus.defense.currentValue",
-                "us.tempStatsBonus.defense.currentValue + 1"
+                "us.tempStatsBonus[defense].currentValue",
+                "us.tempStatsBonus[defense].currentValue + 1"
             ],
             [
-                "us.tempStatsBonus.specialDefense.currentValue",
-                "us.tempStatsBonus.specialDefense.currentValue + 1"
+                "us.tempStatsBonus[specialDefense].currentValue",
+                "us.tempStatsBonus[specialDefense].currentValue + 1"
             ]
         ]
     },

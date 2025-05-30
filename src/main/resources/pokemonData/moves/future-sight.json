@@ -11,8 +11,8 @@
         ],
         "activation": [
             [
-                "enemy.actualStats.hp.currentValue",
-                "enemy.actualStats.hp.currentValue - attackEnemy.calculatedDamage"
+                "enemy.actualStats[hp].currentValue",
+                "enemy.actualStats[hp].currentValue - attackEnemy.calculatedDamage"
             ]
         ]
     },

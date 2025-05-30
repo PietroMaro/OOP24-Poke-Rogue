@@ -8,8 +8,7 @@
     "category": "Treasure",
     "captureRate": 0,
     "effect": {
-        "checks": [
-        ],
+        "checks": [],
         "activation": [
             [
                 "playerMoney.money",

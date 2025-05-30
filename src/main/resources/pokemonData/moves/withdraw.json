@@ -5,8 +5,8 @@
         "checks": [],
         "activation": [
             [
-                "us.actualStats.defense.currentValue",
-                "us.actualStats.defense.currentValue + 3"
+                "us.actualStats[defense].currentValue",
+                "us.actualStats[defense].currentValue + 3"
             ]
         ]
     },

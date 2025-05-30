@@ -2,17 +2,13 @@
     "id": 6,
     "name": "ultraball",
     "type": "Capture",
-    "description": "A Poké Ball with high capture rate.",
+    "description": "A Pok\u00c3\u00a9 Ball with high capture rate.",
     "price": 1200,
     "rarity": "Ultra",
     "category": "Consumable",
     "captureRate": 2.0,
     "effect": {
-        "checks": [
-            
-        ],
-        "activation": [
-            
-        ]
+        "checks": [],
+        "activation": []
     }
 }

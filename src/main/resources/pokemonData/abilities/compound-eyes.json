@@ -1,8 +1,7 @@
 {
     "situationChecks": "neutral",
     "effect": {
-        "checks": [
-        ],
+        "checks": [],
         "activation": [
             [
                 "attackUs.accuracy",

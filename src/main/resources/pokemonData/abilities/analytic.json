@@ -3,9 +3,9 @@
     "effect": {
         "checks": [
             [
-                "us.actualStats.speed.currentValue",
+                "us.actualStats[speed].currentValue",
                 "<=",
-                "enemy.actualStats.speed.currentValue"
+                "enemy.actualStats[speed].currentValue"
             ]
         ],
         "activation": [

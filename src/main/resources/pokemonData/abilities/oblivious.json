@@ -3,15 +3,15 @@
     "effect": {
         "checks": [
             [
-            "us.statusCondition",
-            "==",
-            "Optional.of(StatusCondition.CHARMED)"
+                "us.statusCondition",
+                "==",
+                "Optional.of(StatusCondition.CHARMED)"
             ]
         ],
         "activation": [
             [
-            "us.statusCondition",
-            "EMPTY"
+                "us.statusCondition",
+                "EMPTY"
             ]
         ]
     }

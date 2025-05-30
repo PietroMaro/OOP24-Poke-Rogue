@@ -3,7 +3,7 @@
     "effect": {
         "checks": [
             [
-                "us.actualStats.hp.currentValue",
+                "us.actualStats[hp].currentValue",
                 "==",
                 "0"
             ],
@@ -16,7 +16,7 @@
         "activation": [
             [
                 "attackEnemy.calculatedDamage",
-                "MATH.floor(us.actualStats.hp.currentMax * 0.25).intValue()"
+                "MATH.floor(us.actualStats[hp].currentMax * 0.25).intValue()"
             ]
         ]
     }

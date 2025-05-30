@@ -5,8 +5,8 @@
         "checks": [],
         "activation": [
             [
-                "us.tempStatsBonus.critRate.currentValue",
-                "us.tempStatsBonus.critRate.currentValue + 1"
+                "us.tempStatsBonus[critRate].currentValue",
+                "us.tempStatsBonus[critRate].currentValue + 1"
             ]
         ]
     },

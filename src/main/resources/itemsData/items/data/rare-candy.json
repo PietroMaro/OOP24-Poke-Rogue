@@ -2,7 +2,7 @@
     "id": 21,
     "name": "Rare Candy",
     "type": "Boost",
-    "description": "Used to increase a Pokémon's level by 1.",
+    "description": "Used to increase a Pok\u00c3\u00a9mon's level by 1.",
     "price": 5000,
     "rarity": "Common",
     "category": "Consumable",

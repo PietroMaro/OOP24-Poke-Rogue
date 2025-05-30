@@ -166,12 +166,7 @@ public final class TestAll {
 				if (Files.isRegularFile(entry)) {
 					final JSONObject moveJson = jsonReader.readJsonObject(entry.toString());
 					final JSONObject effect = moveJson.getJSONObject("effect");
-					System.out.println(entry);
-					System.out.println(pok1.getTempStatsBonus().get(Stats.DEFENSE));
-					System.out.println(pok2.getTempStatsBonus().get(Stats.DEFENSE));
 					effectParser.parseEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
-					System.out.println(pok1.getTempStatsBonus().get(Stats.DEFENSE));
-					System.out.println(pok2.getTempStatsBonus().get(Stats.DEFENSE));
 				}
 			}
 		}

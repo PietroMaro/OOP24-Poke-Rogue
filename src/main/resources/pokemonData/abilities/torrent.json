@@ -8,7 +8,7 @@
                 "Type.WATER"
             ],
             [
-                "us.actualStats.hp.currentValue",
+                "us.actualStats[hp].currentValue",
                 "<=",
                 "us.actualStats.hp.currentMax / 3"
             ]

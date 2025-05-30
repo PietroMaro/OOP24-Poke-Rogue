@@ -11,28 +11,28 @@
         "checks": [],
         "activation": [
             [
-                "us.actualStats.hp.currentMax",
-                "MATH.floor(us.actualStats.hp.currentMax * 1.1).intValue()"
+                "us.actualStats[hp].currentValue",
+                "MATH.floor(us.actualStats[hp].currentValue * 1.1).intValue()"
             ],
             [
-                "us.actualStats.attack.currentMax",
-                "MATH.floor(us.actualStats.attack.currentMax * 1.1).intValue()"
+                "us.actualStats[attack].currentValue",
+                "MATH.floor(us.actualStats[attack].currentValue * 1.1).intValue()"
             ],
             [
-                "us.actualStats.defense.currentMax",
-                "MATH.floor(us.actualStats.defense.currentMax * 1.1).intValue()"
+                "us.actualStats[defense].currentValue",
+                "MATH.floor(us.actualStats[defense].currentValue * 1.1).intValue()"
             ],
             [
-                "us.actualStats.specialAttack.currentMax",
-                "MATH.floor(us.actualStats.specialAttack.currentMax * 1.1).intValue()"
+                "us.actualStats[specialAttack].currentValue",
+                "MATH.floor(us.actualStats[specialAttack].currentValue * 1.1).intValue()"
             ],
             [
-                "us.actualStats.specialDefense.currentMax",
-                "MATH.floor(us.actualStats.specialDefense.currentMax * 1.1).intValue()"
+                "us.actualStats[specialDefense].currentValue",
+                "MATH.floor(us.actualStats[specialDefense].currentValue * 1.1).intValue()"
             ],
             [
-                "us.actualStats.speed.currentMax",
-                "MATH.floor(us.actualStats.speed.currentMax * 1.1).intValue()"
+                "us.actualStats[speed].currentValue",
+                "MATH.floor(us.actualStats[speed].currentValue * 1.1).intValue()"
             ]
         ]
     }

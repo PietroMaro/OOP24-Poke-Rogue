@@ -4,18 +4,18 @@
     "effect": {
         "checks": [
             [
-                "us.actualStats.hp.currentValue",
+                "us.actualStats[hp].currentValue",
                 ">",
                 "1"
             ]
         ],
         "activation": [
             [
-                "us.tempStatsBonus.attack.currentValue",
-                "us.tempStatsBonus.attack.currentValue + 6"
+                "us.tempStatsBonus[attack].currentValue",
+                "us.tempStatsBonus[attack].currentValue + 6"
             ],
             [
-                "us.actualStats.hp.currentValue",
+                "us.actualStats[hp].currentValue",
                 "1"
             ]
         ]

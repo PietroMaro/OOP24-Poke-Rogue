@@ -2,7 +2,7 @@
     "id": 4,
     "name": "Potion",
     "type": "Healing",
-    "description": "Restores 20 HP to a single Pokémon.",
+    "description": "Restores 20 HP to a single Pok\u00c3\u00a9mon.",
     "price": 300,
     "rarity": "Common",
     "category": "Consumable",
@@ -11,8 +11,8 @@
         "checks": [],
         "activation": [
             [
-                "us.actualStats.hp.currentValue",
-                "MATH.min(us.actualStats.hp.currentMax, us.actualStats.hp.currentValue + 20)"
+                "us.actualStats[hp].currentValue",
+                "MATH.min(us.actualStats[hp].currentMax, us.actualStats[hp].currentValue + 20)"
             ]
         ]
     }

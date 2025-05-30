@@ -5,8 +5,8 @@
         "checks": [],
         "activation": [
             [
-                "enemy.actualStats.speed.currentValue",
-                "enemy.actualStats.speed.currentValue - 1"
+                "enemy.actualStats[speed].currentValue",
+                "enemy.actualStats[speed].currentValue - 1"
             ]
         ]
     },

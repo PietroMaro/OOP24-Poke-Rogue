@@ -10,7 +10,7 @@
         ],
         "activation": [
             [
-                "attackEnemy.pp",
+                "attackEnemy.pp.currentValue",
                 "0"
             ]
         ]

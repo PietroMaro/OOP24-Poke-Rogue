@@ -3,15 +3,15 @@
     "effect": {
         "checks": [
             [
-                "enemy.actualStats.attack.currentValue",
+                "enemy.actualStats[attack].currentValue",
                 "<",
-                "enemy.actualStats.defense.currentValue"
+                "enemy.actualStats[defense].currentValue"
             ]
         ],
         "activation": [
             [
-                "us.actualStats.defense.currentValue",
-                "us.actualStats.defense.currentValue + 1"
+                "us.actualStats[defense].currentValue",
+                "us.actualStats[defense].currentValue + 1"
             ]
         ]
     }

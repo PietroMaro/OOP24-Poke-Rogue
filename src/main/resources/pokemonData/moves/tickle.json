@@ -5,12 +5,12 @@
         "checks": [],
         "activation": [
             [
-                "enemy.actualStats.attack.currentValue",
-                "enemy.actualStats.attack.currentValue - 2"
+                "enemy.actualStats[attack].currentValue",
+                "enemy.actualStats[attack].currentValue - 2"
             ],
             [
-                "enemy.actualStats.defense.currentValue",
-                "enemy.actualStats.defense.currentValue - 2"
+                "enemy.actualStats[defense].currentValue",
+                "enemy.actualStats[defense].currentValue - 2"
             ]
         ]
     },

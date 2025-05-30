@@ -1,28 +1,26 @@
 package it.unibo.pokerogue.controller.impl;
 
+import java.io.IOException;
+import java.util.Optional;
+
 import org.apache.commons.jexl3.JexlBuilder;
-import org.apache.commons.jexl3.JexlEngine;
-import org.apache.commons.jexl3.JexlExpression;
 import org.apache.commons.jexl3.JexlContext;
-import org.apache.commons.jexl3.MapContext;
+import org.apache.commons.jexl3.JexlEngine;
 import org.apache.commons.jexl3.JexlException;
+import org.apache.commons.jexl3.JexlExpression;
+import org.apache.commons.jexl3.MapContext;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import it.unibo.pokerogue.controller.api.EffectParser;
 import it.unibo.pokerogue.model.api.move.Move;
 import it.unibo.pokerogue.model.api.pokemon.Pokemon;
+import it.unibo.pokerogue.model.enums.Stats;
 import it.unibo.pokerogue.model.enums.StatusCondition;
 import it.unibo.pokerogue.model.enums.Type;
 import it.unibo.pokerogue.model.enums.Weather;
 import it.unibo.pokerogue.model.impl.Singleton;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
-
-import org.json.JSONArray;
-
-import java.util.Optional;
-import java.io.IOException;
-
-import it.unibo.pokerogue.model.enums.Stats;
 
 /**
  * A singleton implementation of the EffectParser interface.
@@ -113,9 +111,9 @@ public class EffectParserImpl extends Singleton implements EffectParser {
         context.set("speed", Stats.SPEED);
         context.set("defense", Stats.DEFENSE);
         context.set("attack", Stats.ATTACK);
-        context.set("special_attack", Stats.SPECIAL_ATTACK);
-        context.set("special_defense", Stats.SPECIAL_DEFENSE);
-        context.set("crit_rate", Stats.CRIT_RATE);
+        context.set("specialAttack", Stats.SPECIAL_ATTACK);
+        context.set("specialDefense", Stats.SPECIAL_DEFENSE);
+        context.set("critRate", Stats.CRIT_RATE);
         context.set("accuracy", Stats.ACCURACY);
         return context;
     }

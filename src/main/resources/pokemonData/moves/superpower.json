@@ -5,24 +5,24 @@
         "checks": [],
         "activation": [
             [
-                "us.actualStats.attack.currentValue",
-                "us.actualStats.attack.currentValue * 2"
+                "us.actualStats[attack].currentValue",
+                "us.actualStats[attack].currentValue * 2"
             ],
             [
-                "us.actualStats.specialAttack.currentValue",
-                "us.actualStats.specialAttack.currentValue * 0.5"
+                "us.actualStats[specialAttack].currentValue",
+                "us.actualStats[specialAttack].currentValue * 0.5"
             ],
             [
-                "us.actualStats.defense.currentValue",
-                "us.actualStats.defense.currentValue * 0.5"
+                "us.actualStats[defense].currentValue",
+                "us.actualStats[defense].currentValue * 0.5"
             ],
             [
-                "us.actualStats.specialDefense.currentValue",
-                "us.actualStats.specialDefense.currentValue * 0.5"
+                "us.actualStats[specialDefense].currentValue",
+                "us.actualStats[specialDefense].currentValue * 0.5"
             ],
             [
-                "us.actualStats.speed.currentValue",
-                "us.actualStats.speed.currentValue * 0.5"
+                "us.actualStats[speed].currentValue",
+                "us.actualStats[speed].currentValue * 0.5"
             ]
         ]
     },

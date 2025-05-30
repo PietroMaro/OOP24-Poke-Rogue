@@ -11,24 +11,24 @@
         ],
         "activation": [
             [
-                "us.tempStatsBonus.attack.currentValue",
-                "us.tempStatsBonus.attack.currentValue + 1"
+                "us.tempStatsBonus[attack].currentValue",
+                "us.tempStatsBonus[attack].currentValue + 1"
             ],
             [
-                "us.tempStatsBonus.defense.currentValue",
-                "us.tempStatsBonus.defense.currentValue + 1"
+                "us.tempStatsBonus[defense].currentValue",
+                "us.tempStatsBonus[defense].currentValue + 1"
             ],
             [
-                "us.tempStatsBonus.specialAttack.currentValue",
-                "us.tempStatsBonus.specialAttack.currentValue + 1"
+                "us.tempStatsBonus[specialAttack].currentValue",
+                "us.tempStatsBonus[specialAttack].currentValue + 1"
             ],
             [
-                "us.tempStatsBonus.specialDefense.currentValue",
-                "us.tempStatsBonus.specialDefense.currentValue + 1"
+                "us.tempStatsBonus[specialDefense].currentValue",
+                "us.tempStatsBonus[specialDefense].currentValue + 1"
             ],
             [
-                "us.tempStatsBonus.speed.currentValue",
-                "us.tempStatsBonus.speed.currentValue + 1"
+                "us.tempStatsBonus[speed].currentValue",
+                "us.tempStatsBonus[speed].currentValue + 1"
             ]
         ]
     },

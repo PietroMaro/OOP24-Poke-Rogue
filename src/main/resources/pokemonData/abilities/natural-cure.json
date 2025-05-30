@@ -1,8 +1,7 @@
 {
     "situationChecks": "switchIn",
     "effect": {
-        "checks": [
-        ],
+        "checks": [],
         "activation": [
             [
                 "us.statusCondition",

@@ -3,8 +3,7 @@
     "isPhysical": false,
     "effect": {
         "checks": [],
-        "activation": [
-        ]
+        "activation": []
     },
     "accuracy": 100,
     "critRate": 0,

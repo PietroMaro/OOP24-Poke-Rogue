@@ -9,8 +9,8 @@
                 "Optional.of(StatusCondition.CONFUSION)"
             ],
             [
-                "us.actualStats.attack.currentValue",
-                "us.actualStats.attack.currentValue + 10"
+                "us.actualStats[attack].currentValue",
+                "us.actualStats[attack].currentValue + 10"
             ]
         ]
     },

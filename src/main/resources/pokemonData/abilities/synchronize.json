@@ -1,8 +1,7 @@
 {
     "situationChecks": "attacked",
     "effect": {
-        "checks": [
-        ],
+        "checks": [],
         "activation": [
             [
                 "enemy.statusCondition",

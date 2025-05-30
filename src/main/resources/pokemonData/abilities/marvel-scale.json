@@ -10,8 +10,8 @@
         ],
         "activation": [
             [
-                "us.actualStats.defense.currentValue",
-                "us.actualStats.defense.currentValue * 1.5"
+                "us.actualStats[defense].currentValue",
+                "us.actualStats[defense].currentValue * 1.5"
             ]
         ]
     }

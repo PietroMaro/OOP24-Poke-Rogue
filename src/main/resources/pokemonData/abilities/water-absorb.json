@@ -10,8 +10,8 @@
         ],
         "activation": [
             [
-                "us.actualStats.hp.currentValue",
-                "us.actualStats.hp.currentValue + (us.actualStats.hp.currentMax * 0.4)"
+                "us.actualStats[hp].currentValue",
+                "us.actualStats[hp].currentValue + (us.actualStats[hp].currentMax * 0.4)"
             ]
         ]
     }
