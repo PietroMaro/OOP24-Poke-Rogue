@@ -30,7 +30,7 @@ import java.io.IOException;
  */
 public final class EnemyAiAttack {
 
-    private final Trainer enemyTrainer;
+   
     private final PlayerTrainerImpl playerTrainerInstance;
     private int attackChosen;
     private Pokemon currentEnemyPokemon;
@@ -53,20 +53,18 @@ public final class EnemyAiAttack {
      * @param hpAware      if true, the AI will take into account potential damage
      * @param enemyTrainer the Trainer object representing the enemy's team
      */
-    public EnemyAiAttack(final boolean scoreMoves, final boolean hpAware,
-            final Trainer enemyTrainer) throws IOException {
+    public EnemyAiAttack(final boolean scoreMoves, final boolean hpAware) throws IOException {
         this.random = new Random();
         this.damageCalculator = new PokemonBattleUtilImpl();
         this.pokeEffectivenessCalculator = new PokeEffectivenessCalcImpl();
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-        this.enemyTrainer = enemyTrainer;
         this.scoreMoves = scoreMoves;
         this.hpAware = hpAware;
 
     }
 
-    Decision whatAttackWillDo(final Optional<Weather> weather) {
-        this.currentEnemyPokemon = this.enemyTrainer.getPokemon(0).get();
+    Decision whatAttackWillDo(final Optional<Weather> weather,final Trainer enemyTrainer) {
+        this.currentEnemyPokemon = enemyTrainer.getPokemon(0).get();
         this.currentEnemyPokemonMoves = this.currentEnemyPokemon.getActualMoves();
         this.currentPlayerPokemon = this.playerTrainerInstance.getPokemon(0).get();
         this.scoresOfMoves = new HashMap<>();

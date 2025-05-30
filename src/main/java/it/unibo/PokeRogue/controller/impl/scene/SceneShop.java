@@ -212,7 +212,7 @@ public class SceneShop extends Scene {
      *                     elements.
      */
     public void initGraphicElements() throws IOException {
-        this.sceneShopView.initGraphicElements(this.newSelectedButton);
+        this.sceneShopView.initGraphicElements(this.newSelectedButton, this.allPanelsElements);
     }
 
     private void buyItem(final PlayerTrainerImpl trainer, final Item item, final SceneShopView sceneShopView,

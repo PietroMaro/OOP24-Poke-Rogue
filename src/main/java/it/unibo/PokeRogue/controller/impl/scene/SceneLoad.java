@@ -67,13 +67,13 @@ public final class SceneLoad extends Scene {
         this.allPanelsElements = new LinkedHashMap<>();
         this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.savingSystemInstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
-        this.savesList = savingSystemInstance.getSaveFilesName(Paths.get("src", "main","resources","saves").toString());
+        this.savesList = savingSystemInstance
+                .getSaveFilesName(Paths.get("src", "main", "resources", "saves").toString());
         this.sceneLoadView = new SceneLoadView();
         this.initStatus();
         this.initGraphicElements();
     }
 
- 
     @Override
     public void updateGraphic() throws IOException {
         UtilitiesForScenes.setButtonStatus(this.selectedSave % NUMBER_OF_SAVE_SHOWED, false,
@@ -99,7 +99,6 @@ public final class SceneLoad extends Scene {
                 true, currentSceneGraphicElements);
 
     }
-
 
     @Override
     public void updateStatus(final int inputKey) throws InstantiationException,
@@ -146,7 +145,7 @@ public final class SceneLoad extends Scene {
 
     private void initGraphicElements() throws IOException {
 
-        this.sceneLoadView.initGraphicElements(allPanelsElements, currentSceneGraphicElements,this.graphicElements);
+        this.sceneLoadView.initGraphicElements(allPanelsElements, currentSceneGraphicElements, this.graphicElements);
 
         this.showSaves(this.selectedSave);
         UtilitiesForScenes.setButtonStatus(this.selectedSave, true, currentSceneGraphicElements);
@@ -158,12 +157,12 @@ public final class SceneLoad extends Scene {
                 currentSceneGraphicElements);
     }
 
-	@Override
+    @Override
     public GraphicElementsRegistry getCurrentSceneGraphicElements() {
         return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);
     }
 
-	@Override
+    @Override
     public Map<String, PanelElementImpl> getAllPanelsElements() {
         return new LinkedHashMap<>(allPanelsElements);
     }

@@ -254,7 +254,7 @@ public class BattleEngineImpl implements BattleEngine {
             this.newMoveToLearn(this.playerPokemon);
             this.gameEngineInstance.setScene("shop");
         } else if (this.enemyPokemon.getActualStats().get(Stats.HP).getCurrentValue() <= 0) {
-            final Decision enemyChoose = enemyAiInstance.nextMove(this.getCurrentWeather());
+            final Decision enemyChoose = enemyAiInstance.nextMove(this.getCurrentWeather(), this.enemyTrainerInstance);
             this.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""), enemyChoose);
             BattleRewards.awardBattleRewards(playerPokemon, enemyPokemon);
             this.newMoveToLearn(playerPokemon);

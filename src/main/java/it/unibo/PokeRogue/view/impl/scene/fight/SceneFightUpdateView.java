@@ -26,7 +26,7 @@ public class SceneFightUpdateView {
         private static final String MOVE_PANEL_TEXT = "movePanel";
         private static final String BALL_PANEL_TEXT = "ballPanel";
         private static final String CHANGE_PANEL_TEXT = "changePanel";
-		private static final String VIEW_FILE_NAME = "sceneFightElement.json";
+        private static final String VIEW_FILE_NAME = "sceneFightElement.json";
         private final GraphicElementsRegistry currentSceneGraphicElements;
         private final Map<String, PanelElementImpl> allPanelsElements;
         private final PlayerTrainerImpl playerTrainerInstance;
