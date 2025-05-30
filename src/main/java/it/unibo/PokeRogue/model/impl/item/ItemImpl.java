@@ -69,7 +69,7 @@ public class ItemImpl implements Item {
         this.rarity = blueprint.rarity();
         this.category = blueprint.category();
         this.captureRate = blueprint.captureRate();
-        this.effect = Optional.ofNullable(blueprint.effect());
+        this.effect = Optional.ofNullable(blueprint.effect().get());
     }
 
     /**

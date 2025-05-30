@@ -3,6 +3,7 @@ package it.unibo.pokerogue.model.impl;
 import java.io.IOException;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Optional;
 
 import java.nio.file.Paths;
 
@@ -66,7 +67,7 @@ public class MoveFactoryImpl extends Singleton implements MoveFactory {
 				name,
 				pp,
 				isPhysical,
-				effect,
+				Optional.of(effect),
 				accuracy,
 				critRate,
 				baseDamage,
