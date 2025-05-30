@@ -172,7 +172,7 @@
             "imageFileName": "sceneShopBgBar.png"
         },
         "100": {
-            "type": "backgroundChange",
+            "type": "background",
             "panelName": "pokemonSelection",
             "dirToImage": "shop",
             "imageFileName": "sceneShopBg.png"

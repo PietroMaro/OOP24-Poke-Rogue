@@ -24,10 +24,8 @@ public class SceneMoveView {
         private static final String FIRST_PANEL_STRING = "firstPanel";
         private static final String PP_STRING = " PP : ";
         private static final String DAMAGE_STRING = " Damage : ";
-        private final GraphicElementsRegistry currentSceneGraphicElements;
-        private final Map<String, PanelElementImpl> allPanelsElements;
+
         private final Pokemon playerPokemon;
-        private final GraphicElementsRegistry graphicElements;
 
         /**
          * Constructs a new SceneMoveView.
@@ -40,13 +38,9 @@ public class SceneMoveView {
          * @param allPanelsElements           the map for the scene's panel elements
          * @param graphicElements             additional graphic elements registry
          */
-        public SceneMoveView(final GraphicElementsRegistry currentSceneGraphicElements,
-                        final Map<String, PanelElementImpl> allPanelsElements,
-                        final GraphicElementsRegistry graphicElements) {
+        public SceneMoveView() {
                 this.playerPokemon = PlayerTrainerImpl.getTrainerInstance().getPokemon(0).get();
-                this.currentSceneGraphicElements = currentSceneGraphicElements;
-                this.allPanelsElements = allPanelsElements;
-                this.graphicElements = graphicElements;
+
         }
 
         /**
@@ -56,11 +50,13 @@ public class SceneMoveView {
          * move names, PP, and damage, buttons for selecting moves, and the background.
          * The elements are added to the maps provided during construction.
          */
-        public final void initGraphicElements() throws IOException {
-                this.allPanelsElements.put(FIRST_PANEL_STRING, new PanelElementImpl("", new OverlayLayout(null)));
+        public final void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements,
+                        final GraphicElementsRegistry graphicElements) throws IOException {
+                allPanelsElements.put(FIRST_PANEL_STRING, new PanelElementImpl("", new OverlayLayout(null)));
                 UtilitiesForScenes.loadSceneElements("sceneMoveElements.json", "init",
                                 currentSceneGraphicElements,
-                                this.graphicElements);
+                                graphicElements);
                 UtilitiesForScenes
                                 .safeGetElementByName(currentSceneGraphicElements, "MOVE_1_BUTTON_TEXT",
                                                 TextElementImpl.class)

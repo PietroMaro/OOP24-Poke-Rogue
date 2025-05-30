@@ -12,7 +12,6 @@ import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.view.impl.scene.save.SceneSaveView;
-import lombok.Getter;
 
 /**
  * Represents the save scene in the game where the player can choose to either
@@ -27,9 +26,7 @@ import lombok.Getter;
 public class SceneSave extends Scene {
     private static final String EXIT_SAVE_LITTERAL = "EXIT_AND_SAVE_BUTTON";
     private static final String CONTINUE_LITTERAL = "CONTINUE_GAME_BUTTON";
-    @Getter
     private final GraphicElementsRegistry currentSceneGraphicElements;
-    @Getter
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final SceneSaveView sceneSaveView;
     private final GameEngineImpl gameEngineInstance;
@@ -120,5 +117,25 @@ public class SceneSave extends Scene {
     @Override
     public void updateGraphic() throws IOException {
         this.sceneSaveView.updateGraphic(this.newSelectedButton);
+    }
+
+    /**
+     * Returns a copy of the current scene's graphical elements registry.
+     *
+     * @return a copy of the current GraphicElementsRegistry.
+     */
+    @Override
+    public GraphicElementsRegistry getCurrentSceneGraphicElements() {
+        return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);
+    }
+
+    /**
+     * Returns a map containing all panel elements currently loaded in the scene.
+     *
+     * @return a LinkedHashMap of all PanelElementImpl objects.
+     */
+    @Override
+    public Map<String, PanelElementImpl> getAllPanelsElements() {
+        return new LinkedHashMap<>(this.allPanelsElements);
     }
 }

@@ -31,9 +31,7 @@ public class SceneShopInitView {
          * @param graphicElements      The global registry for shared UI elements.
          * @param allPanelsElements    A mapping of panel elements used in the scene.
          */
-        public SceneShopInitView(final GraphicElementsRegistry sceneGraphicElements,
-                        final GraphicElementsRegistry graphicElements,
-                        final Map<String, PanelElementImpl> allPanelsElements) {
+        public SceneShopInitView() {
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
         }
 

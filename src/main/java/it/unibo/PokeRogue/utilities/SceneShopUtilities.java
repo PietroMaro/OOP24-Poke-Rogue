@@ -1,5 +1,7 @@
 package it.unibo.pokerogue.utilities;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -86,7 +88,13 @@ public final class SceneShopUtilities {
      * @param itemFactory the {@link ItemFactoryImpl} instance used to generate
      *                    random items
      */
-    public static void initShopItems(final ItemFactoryImpl itemFactory) {
+    public static void initShopItems() throws IOException,
+            InstantiationException,
+            IllegalAccessException,
+            NoSuchMethodException,
+            InvocationTargetException {
+        final ItemFactoryImpl itemFactory = ItemFactoryImpl.getInstance(ItemFactoryImpl.class);
+
         SHOP_ITEMS.clear();
         for (int i = 0; i < PRICY_ITEMS_SIZE; i++) {
             SHOP_ITEMS.add(itemFactory.randomItem());

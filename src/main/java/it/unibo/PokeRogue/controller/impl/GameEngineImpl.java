@@ -107,9 +107,10 @@ public final class GameEngineImpl extends Singleton implements GameEngine {
             return;
         }
         this.currentScene.updateStatus(keyCode);
-        currentScene.updateGraphic();
-        graphicEngineInstance.createPanels(currentScene.getAllPanelsElements());
-        graphicEngineInstance.drawScene(currentScene.getCurrentSceneGraphicElements());
+        this.currentScene.updateGraphic();
+
+        this.graphicEngineInstance.createPanels(this.currentScene.getAllPanelsElements());
+        this.graphicEngineInstance.drawScene(this.currentScene.getCurrentSceneGraphicElements());
 
     }
 

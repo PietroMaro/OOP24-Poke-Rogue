@@ -28,14 +28,9 @@ public class SceneShopUpdateView {
         private static final Integer FIFTH_POSITION = 4;
         private static final Integer SIXTH_POSITION = 5;
         private static final String POKEMON_PANEL_TEXT = "pokemonSelection";
-        private final GraphicElementsRegistry currentSceneGraphicElements;
-        private final GraphicElementsRegistry graphicElements;
-        private final Map<String, Integer> graphicElementNameToInt;
-        private final Map<String, PanelElementImpl> allPanelsElements;
         private final PlayerTrainerImpl playerTrainerInstance;
         private final int currentSelectedButton;
         private int newSelectedButton;
-        private final SceneShop sceneInstance;
         private Boolean alreadyInMainMenu = true;
 
         /**
@@ -54,21 +49,11 @@ public class SceneShopUpdateView {
          * @param graphicElementNameToInt     Mapping from graphic element names to
          *                                    their identifiers.
          */
-        public SceneShopUpdateView(final GraphicElementsRegistry currentSceneGraphicElements,
-                        final GraphicElementsRegistry graphicElements,
-                        final Map<String, PanelElementImpl> allPanelsElements,
-                        final int currentSelectedButton, final int newSelectedButton,
-                        final SceneShop sceneInstance,
-                        final Map<String, Integer> graphicElementNameToInt) {
+        public SceneShopUpdateView(final int currentSelectedButton, final int newSelectedButton) {
 
                 this.currentSelectedButton = currentSelectedButton;
                 this.newSelectedButton = newSelectedButton;
-                this.currentSceneGraphicElements = currentSceneGraphicElements;
-                this.graphicElements = graphicElements;
-                this.graphicElementNameToInt = graphicElementNameToInt;
-                this.allPanelsElements = allPanelsElements;
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-                this.sceneInstance = sceneInstance;
         }
 
         /**
@@ -79,12 +64,18 @@ public class SceneShopUpdateView {
          * @param newSelectedButton     The newly selected button index.
          * @throws IOException If an error occurs during element loading.
          */
-        public void updateGraphic(final int currentSelectedButton, final int newSelectedButton) throws IOException {
+        public void updateGraphic(final int currentSelectedButton, final int newSelectedButton,
+                        final GraphicElementsRegistry currentSceneGraphicElements,
+                        final GraphicElementsRegistry graphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements,
+                        final Map<String, Integer> graphicElementNameToInt, final SceneShop sceneInstance)
+                        throws IOException {
                 this.newSelectedButton = newSelectedButton;
-                this.updateSelectedButton(currentSelectedButton, newSelectedButton);
-                this.updateItemDescription();
-                this.updatePokemonSelection();
-                this.mainMenu();
+                this.updateSelectedButton(currentSelectedButton, newSelectedButton, currentSceneGraphicElements);
+                this.updateItemDescription(currentSceneGraphicElements, graphicElementNameToInt);
+                this.updatePokemonSelection(currentSceneGraphicElements, graphicElements, allPanelsElements,
+                                graphicElementNameToInt, sceneInstance);
+                this.mainMenu(currentSceneGraphicElements, allPanelsElements, graphicElementNameToInt, sceneInstance);
 
         }
 
@@ -94,82 +85,88 @@ public class SceneShopUpdateView {
          *
          * @throws IOException If an error occurs while loading Pokémon UI elements.
          */
-        private void updatePokemonSelection() throws IOException {
-                if (this.newSelectedButton >= this.graphicElementNameToInt.get("CHANGE_POKEMON_1_BUTTON")
-                                && this.newSelectedButton <= this.graphicElementNameToInt
+        private void updatePokemonSelection(final GraphicElementsRegistry currentSceneGraphicElements,
+                        final GraphicElementsRegistry graphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements,
+                        final Map<String, Integer> graphicElementNameToInt, final SceneShop sceneInstance)
+                        throws IOException {
+                if (this.newSelectedButton >= graphicElementNameToInt.get("CHANGE_POKEMON_1_BUTTON")
+                                && this.newSelectedButton <= graphicElementNameToInt
                                                 .get("CHANGE_POKEMON_BACK_BUTTON")
                                 && this.alreadyInMainMenu) {
                         this.alreadyInMainMenu = false;
-                        this.currentSceneGraphicElements.clear();
-                        this.allPanelsElements.put(POKEMON_PANEL_TEXT,
+                        currentSceneGraphicElements.clear();
+                        allPanelsElements.put(POKEMON_PANEL_TEXT,
                                         new PanelElementImpl("firstPanel", new OverlayLayout(null)));
                         UtilitiesForScenes.loadSceneElements("sceneShopElements.json", "pokeChange",
                                         currentSceneGraphicElements,
-                                        this.graphicElements);
+                                        graphicElements);
 
-                        this.initPokemonSelectionText();
+                        this.initPokemonSelectionText(currentSceneGraphicElements);
                         sceneInstance.setCurrentSelectedButton(this.currentSelectedButton);
                         UtilitiesForScenes.setButtonStatus(this.newSelectedButton, true, currentSceneGraphicElements);
                 }
         }
 
-        private void initPokemonSelectionText() {
-                UtilitiesForScenes.safeGetElementByName(this.currentSceneGraphicElements, "POKEMON_1_NAME_TEXT",
+        private void initPokemonSelectionText(final GraphicElementsRegistry currentSceneGraphicElements) {
+                UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_1_NAME_TEXT",
                                 TextElementImpl.class)
                                 .setText(SceneShopUtilities.getPokemonNameAt(playerTrainerInstance, FIRST_POSITION));
-                UtilitiesForScenes.safeGetElementByName(this.currentSceneGraphicElements, "POKEMON_1_LIFE_TEXT",
+                UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_1_LIFE_TEXT",
                                 TextElementImpl.class)
                                 .setText(SceneShopUtilities.getPokemonLifeText(FIRST_POSITION, playerTrainerInstance));
 
-                UtilitiesForScenes.safeGetElementByName(this.currentSceneGraphicElements, "POKEMON_2_NAME_TEXT",
+                UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_2_NAME_TEXT",
                                 TextElementImpl.class)
                                 .setText(SceneShopUtilities.getPokemonNameAt(playerTrainerInstance, SECOND_POSITION));
-                UtilitiesForScenes.safeGetElementByName(this.currentSceneGraphicElements, "POKEMON_2_LIFE_TEXT",
+                UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_2_LIFE_TEXT",
                                 TextElementImpl.class)
                                 .setText(SceneShopUtilities.getPokemonLifeText(SECOND_POSITION, playerTrainerInstance));
 
-                UtilitiesForScenes.safeGetElementByName(this.currentSceneGraphicElements, "POKEMON_3_NAME_TEXT",
+                UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_3_NAME_TEXT",
                                 TextElementImpl.class)
                                 .setText(SceneShopUtilities.getPokemonNameAt(playerTrainerInstance, THIRD_POSITION));
-                UtilitiesForScenes.safeGetElementByName(this.currentSceneGraphicElements, "POKEMON_3_LIFE_TEXT",
+                UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_3_LIFE_TEXT",
                                 TextElementImpl.class)
                                 .setText(SceneShopUtilities.getPokemonLifeText(THIRD_POSITION, playerTrainerInstance));
 
-                UtilitiesForScenes.safeGetElementByName(this.currentSceneGraphicElements, "POKEMON_4_NAME_TEXT",
+                UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_4_NAME_TEXT",
                                 TextElementImpl.class)
                                 .setText(SceneShopUtilities.getPokemonNameAt(playerTrainerInstance, FOURTH_POSITION));
-                UtilitiesForScenes.safeGetElementByName(this.currentSceneGraphicElements, "POKEMON_4_LIFE_TEXT",
+                UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_4_LIFE_TEXT",
                                 TextElementImpl.class)
                                 .setText(SceneShopUtilities.getPokemonLifeText(FOURTH_POSITION, playerTrainerInstance));
 
-                UtilitiesForScenes.safeGetElementByName(this.currentSceneGraphicElements, "POKEMON_5_NAME_TEXT",
+                UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_5_NAME_TEXT",
                                 TextElementImpl.class)
                                 .setText(SceneShopUtilities.getPokemonNameAt(playerTrainerInstance, FIFTH_POSITION));
-                UtilitiesForScenes.safeGetElementByName(this.currentSceneGraphicElements, "POKEMON_5_LIFE_TEXT",
+                UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_5_LIFE_TEXT",
                                 TextElementImpl.class)
                                 .setText(SceneShopUtilities.getPokemonLifeText(FIFTH_POSITION, playerTrainerInstance));
 
-                UtilitiesForScenes.safeGetElementByName(this.currentSceneGraphicElements, "POKEMON_6_NAME_TEXT",
+                UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_6_NAME_TEXT",
                                 TextElementImpl.class)
                                 .setText(SceneShopUtilities.getPokemonNameAt(playerTrainerInstance, SIXTH_POSITION));
-                UtilitiesForScenes.safeGetElementByName(this.currentSceneGraphicElements, "POKEMON_6_LIFE_TEXT",
+                UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_6_LIFE_TEXT",
                                 TextElementImpl.class)
                                 .setText(SceneShopUtilities.getPokemonLifeText(SIXTH_POSITION, playerTrainerInstance));
 
         }
 
-        private void updateSelectedButton(final int currentSelectedButton, final int newSelectedButton) {
-                if (this.currentSceneGraphicElements.getElements().containsKey(currentSelectedButton)) {
+        private void updateSelectedButton(final int currentSelectedButton, final int newSelectedButton,
+                        final GraphicElementsRegistry currentSceneGraphicElements) {
+                if (currentSceneGraphicElements.getElements().containsKey(currentSelectedButton)) {
                         UtilitiesForScenes.setButtonStatus(currentSelectedButton, false, currentSceneGraphicElements);
                 }
-                if (this.currentSceneGraphicElements.getElements().containsKey(newSelectedButton)) {
+                if (currentSceneGraphicElements.getElements().containsKey(newSelectedButton)) {
                         UtilitiesForScenes.setButtonStatus(newSelectedButton, true, currentSceneGraphicElements);
                 }
         }
 
-        private void updateItemDescription() {
-                if (this.newSelectedButton >= this.graphicElementNameToInt.get("FREE_ITEM_1_BUTTON")
-                                && this.newSelectedButton <= this.graphicElementNameToInt.get("PRICY_ITEM_3_BUTTON")
+        private void updateItemDescription(final GraphicElementsRegistry currentSceneGraphicElements,
+                        final Map<String, Integer> graphicElementNameToInt) {
+                if (this.newSelectedButton >= graphicElementNameToInt.get("FREE_ITEM_1_BUTTON")
+                                && this.newSelectedButton <= graphicElementNameToInt.get("PRICY_ITEM_3_BUTTON")
                                 && alreadyInMainMenu) {
                         final int itemIndex = (this.newSelectedButton + 2) % 6;
                         SceneShopUtilities.updateItemDescription(currentSceneGraphicElements,
@@ -177,13 +174,16 @@ public class SceneShopUpdateView {
                 }
         }
 
-        private void mainMenu() throws IOException {
-                if (this.newSelectedButton >= this.graphicElementNameToInt.get("FREE_ITEM_1_BUTTON")
-                                && this.newSelectedButton <= this.graphicElementNameToInt.get("TEAM_BUTTON")
+        private void mainMenu(final GraphicElementsRegistry currentSceneGraphicElements,
+                        final Map<String, PanelElementImpl> allPanelsElements,
+                        final Map<String, Integer> graphicElementNameToInt, final SceneShop sceneInstance)
+                        throws IOException {
+                if (this.newSelectedButton >= graphicElementNameToInt.get("FREE_ITEM_1_BUTTON")
+                                && this.newSelectedButton <= graphicElementNameToInt.get("TEAM_BUTTON")
                                 && !alreadyInMainMenu) {
                         alreadyInMainMenu = true;
-                        this.currentSceneGraphicElements.clear();
-                        this.allPanelsElements.clear();
+                        currentSceneGraphicElements.clear();
+                        allPanelsElements.clear();
                         sceneInstance.setCurrentSelectedButton(this.currentSelectedButton);
                         sceneInstance.setNewSelectedButton(this.newSelectedButton);
                         sceneInstance.initGraphicElements();

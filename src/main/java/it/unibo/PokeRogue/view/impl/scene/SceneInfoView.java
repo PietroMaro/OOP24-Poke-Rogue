@@ -15,16 +15,7 @@ import it.unibo.pokerogue.utilities.UtilitiesForScenes;
  */
 public class SceneInfoView {
     private static final String FIRST_PANEL = "firstPanel";
-    private final GraphicElementsRegistry graphicElements;
 
-    /**
-     * Constructs a new SceneInfoView with the given graphic elements registry.
-     *
-     * @param graphicElements the registry of graphic elements shared across scenes
-     */
-    public SceneInfoView(final GraphicElementsRegistry graphicElements) {
-        this.graphicElements = graphicElements;
-    }
 
     /**
      * Initializes the graphic elements for the Info scene by loading layout
@@ -39,10 +30,10 @@ public class SceneInfoView {
      *                     file
      */
     public void initGraphicElements(final GraphicElementsRegistry currentSceneGraphicElements,
-            final Map<String, PanelElementImpl> allPanelsElements) throws IOException {
+            final Map<String, PanelElementImpl> allPanelsElements,final GraphicElementsRegistry graphicElements) throws IOException {
         allPanelsElements.put(FIRST_PANEL, new PanelElementImpl("", new OverlayLayout(null)));
         UtilitiesForScenes.loadSceneElements(
-                "sceneInfoElements.json", "init", currentSceneGraphicElements, this.graphicElements);
+                "sceneInfoElements.json", "init", currentSceneGraphicElements, graphicElements);
     }
 
  
