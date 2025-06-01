@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import it.unibo.pokerogue.controller.api.scene.fight.StatusEffect;
+import it.unibo.pokerogue.model.api.Range;
 import it.unibo.pokerogue.model.api.pokemon.Pokemon;
 import it.unibo.pokerogue.model.enums.Stats;
 import it.unibo.pokerogue.model.enums.StatusCondition;
@@ -151,8 +152,10 @@ public class StatusEffectImpl implements StatusEffect {
                     break;
                 case StatusCondition.SEEDED:
                     final int seededDamage = pokemon.getActualStats().get(Stats.HP).getCurrentMax() / 16;
+                    final Map<Stats, Range<Integer>> enemyStats = enemy.getActualStats();
                     calculateDamage(pokemon, seededDamage);
-                    enemy.getActualStats().get(Stats.HP).increment(seededDamage);
+                    enemyStats.get(Stats.HP).increment(seededDamage);
+                    pokemon.setActualStats(enemyStats);
                     break;
             }
         }
@@ -183,6 +186,9 @@ public class StatusEffectImpl implements StatusEffect {
     }
 
     private void calculateDamage(final Pokemon pokemon, final int damage) {
-        pokemon.getActualStats().get(Stats.HP).decrement(damage);
+        final Map<Stats, Range<Integer>> pokemonStats = pokemon.getActualStats();
+        pokemonStats.get(Stats.HP).decrement(damage);
+
+        pokemon.setActualStats(pokemonStats);
     }
 }

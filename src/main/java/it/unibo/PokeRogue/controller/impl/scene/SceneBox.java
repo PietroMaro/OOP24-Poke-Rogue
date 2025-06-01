@@ -2,6 +2,7 @@ package it.unibo.pokerogue.controller.impl.scene;
 
 import java.awt.event.KeyEvent;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -9,16 +10,20 @@ import it.unibo.pokerogue.controller.api.GameEngine;
 import it.unibo.pokerogue.controller.api.scene.Scene;
 import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
+import it.unibo.pokerogue.model.api.SavingSystem;
 import it.unibo.pokerogue.model.api.pokemon.Pokemon;
 import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
+import it.unibo.pokerogue.model.impl.SavingSystemImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
-import it.unibo.pokerogue.model.impl.scene.SceneBoxLoad;
+import it.unibo.pokerogue.model.impl.pokemon.PokemonFactory;
+import it.unibo.pokerogue.model.impl.pokemon.PokemonFactoryImpl;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 import it.unibo.pokerogue.utilities.UtilitiesForScenes;
 import it.unibo.pokerogue.view.impl.scene.SceneBoxView;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Paths;
 
 /**
  * Represents the Box scene where the player can view and manage stored
@@ -34,6 +39,7 @@ public class SceneBox extends Scene {
         private static final int POKE_BOX_ROW_LENGTH = 9;
         private static final int UP_ARROW_BUTTON_POSITION = 0;
         private static final int DOWN_ARROW_BUTTON_POSITION = 1;
+        private static final int LENGTH_OF_POKEBOX = 81;
 
         private final GraphicElementsRegistry currentSceneGraphicElements;
         private final Map<String, PanelElementImpl> allPanelsElements;
@@ -43,12 +49,14 @@ public class SceneBox extends Scene {
         private final PlayerTrainerImpl playerTrainerInstance;
         private final List<List<Pokemon>> boxes;
         private final SceneBoxView sceneBoxView;
-        private final SceneBoxLoad sceneBoxModel;
         private int currentBoxLength;
         private int newSelectedButton;
         private int newBoxIndex;
         private final GraphicElementsRegistry graphicElements;
         private final Map<String, Integer> graphicElementNameToInt;
+
+        private final SavingSystem savingSystemInstance;
+        private final PokemonFactory pokemonFactoryInstance;
 
         /**
          * Constructs a new SceneBox instance.
@@ -68,12 +76,14 @@ public class SceneBox extends Scene {
                 this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                                 this.graphicElementNameToInt);
                 this.allPanelsElements = new LinkedHashMap<>();
+                this.savingSystemInstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
+                this.pokemonFactoryInstance = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
                 this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
+                this.boxes = new ArrayList<>();
                 this.sceneBoxView = new SceneBoxView();
-                this.sceneBoxModel = new SceneBoxLoad();
-                this.sceneBoxModel.setUpSave(savePath);
-                this.boxes = this.sceneBoxModel.getBoxes();
+                this.setUpSave(savePath);
+
                 this.initStatus();
                 this.initGraphicElements();
         }
@@ -258,5 +268,48 @@ public class SceneBox extends Scene {
         @Override
         public Map<String, PanelElementImpl> getAllPanelsElements() {
                 return new LinkedHashMap<>(this.allPanelsElements);
+        }
+
+        private void setUpSave(final String savePath) throws InstantiationException,
+                        IllegalAccessException,
+                        InvocationTargetException,
+                        NoSuchMethodException,
+                        IOException {
+                if ("".equals(savePath)) {
+                        this.savingSystemInstance.savePokemon(pokemonFactoryInstance.pokemonFromName("bulbasaur"));
+                        this.savingSystemInstance.savePokemon(pokemonFactoryInstance.pokemonFromName("charmander"));
+                        this.savingSystemInstance.savePokemon(pokemonFactoryInstance.pokemonFromName("squirtle"));
+                        this.addPokemonToBox(pokemonFactoryInstance.pokemonFromName("bulbasaur"));
+                        this.addPokemonToBox(pokemonFactoryInstance.pokemonFromName("charmander"));
+                        this.addPokemonToBox(pokemonFactoryInstance.pokemonFromName("squirtle"));
+
+                } else {
+                        this.savingSystemInstance
+                                        .loadData(Paths.get("src", "main", "resources", "saves", savePath).toString());
+
+                        for (final var box : this.savingSystemInstance.getSavedPokemon()) {
+                                for (final String pokemonName : box) {
+                                        this.addPokemonToBox(pokemonFactoryInstance.pokemonFromName(pokemonName));
+
+                                }
+
+                        }
+                }
+
+        }
+
+        private void addPokemonToBox(final Pokemon pokemon) {
+
+                if (this.boxes.isEmpty()) {
+                        this.boxes.add(new ArrayList<>());
+                }
+
+                if (this.boxes.get(this.boxes.size() - 1).size() == LENGTH_OF_POKEBOX) {
+                        this.boxes.add(new ArrayList<>());
+
+                }
+
+                this.boxes.get(this.boxes.size() - 1).add(pokemon);
+
         }
 }
