@@ -10,7 +10,6 @@ import it.unibo.pokerogue.controller.api.scene.Scene;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.api.SavingSystem;
 import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
-import it.unibo.pokerogue.model.impl.SavingSystemImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.utilities.UtilitiesForScenes;
 import it.unibo.pokerogue.view.impl.scene.SceneLoadView;
@@ -50,8 +49,10 @@ public final class SceneLoad extends Scene {
     /**
      * Constructs a new {@code SceneLoad} object, initializing internal structures
      * and retrieving the list of saves.
+	 *
+	 * @param savingSystemInstance the main saving system
      */
-    public SceneLoad(SavingSystem savingSystemInstance) throws InstantiationException,
+    public SceneLoad(final SavingSystem savingSystemInstance) throws InstantiationException,
             IllegalAccessException,
             InvocationTargetException,
             NoSuchMethodException,

@@ -21,7 +21,6 @@ import it.unibo.pokerogue.model.enums.Stats;
 import it.unibo.pokerogue.model.enums.Weather;
 import it.unibo.pokerogue.model.impl.AbilityFactory;
 import it.unibo.pokerogue.model.api.Range;
-import it.unibo.pokerogue.model.impl.SavingSystemImpl;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
 import it.unibo.pokerogue.utilities.BattleRewards;
@@ -60,6 +59,7 @@ public class BattleEngineImpl implements BattleEngine {
      *
      * 
      * @param enemyAiInstance the AI instance controlling the enemy's strategy
+	 * @param savingSystem the main saving system
      */
     public BattleEngineImpl(final EnemyAi enemyAiInstance, final SavingSystem savingSystem)
             throws NoSuchMethodException,

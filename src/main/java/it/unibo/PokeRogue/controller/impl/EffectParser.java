@@ -25,13 +25,17 @@ import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
  * 
  * Handles parsing and evaluation of effect-related expressions.
  */
-public class EffectParser {
+public final class EffectParser {
     private static Optional<Pokemon> us;
     private static Optional<Pokemon> enemy;
     private static Optional<Move> attackUs;
     private static Optional<Move> attackEnemy;
     private static Optional<Weather> weather;
-    private static final PlayerTrainerImpl playerMoney = PlayerTrainerImpl.getTrainerInstance();
+    private static final PlayerTrainerImpl PLAYER_MONEY = PlayerTrainerImpl.getTrainerInstance();
+
+	private EffectParser() {
+		//This shouldn't be instanciated.
+	} 
 
     private static void parseEffect(final JSONObject effect) throws IOException {
         final JSONArray checks = effect.getJSONArray("checks");
@@ -95,7 +99,7 @@ public class EffectParser {
             context.set("weather", weather.get());
         }
 
-        context.set("playerMoney", playerMoney);
+        context.set("PLAYER_MONEY", PLAYER_MONEY);
         context.set("Optional", Optional.class);
         context.set("StatusCondition", StatusCondition.class);
         context.set("Type", Type.class);
@@ -133,7 +137,7 @@ public class EffectParser {
      * @param newAttackEnemy the move used by the enemy pokémon.
      * @param newWeather     the current weather condition.
      */
-    public static final void parseEffect(
+    public static void parseEffect(
             final JSONObject newEffect,
             final Pokemon newUs,
             final Pokemon newEnemy,
@@ -155,7 +159,7 @@ public class EffectParser {
      * @param effect  the json object representing the effect.
      * @param pokemon the pokemon to which the effect should be applied.
      */
-    public static final void parseEffect(final JSONObject effect, final Pokemon pokemon) throws IOException {
+    public static void parseEffect(final JSONObject effect, final Pokemon pokemon) throws IOException {
         us = Optional.of(pokemon);
         enemy = Optional.empty();
         attackUs = Optional.empty();

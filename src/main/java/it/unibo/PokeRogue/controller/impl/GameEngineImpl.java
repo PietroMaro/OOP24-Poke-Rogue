@@ -28,7 +28,8 @@ public final class GameEngineImpl implements GameEngine {
     private GraphicEngine graphicEngineInstance;
 	@Setter
     private Scene currentScene;
-	@Setter @Getter
+	@Setter 
+	@Getter
     private String fileToLoadName;
     @Setter
     private Integer fightLevel;
@@ -41,8 +42,6 @@ public final class GameEngineImpl implements GameEngine {
         this.graphicEngineInstance = null;
     }
 
-    
-
     @Override
     public void keyPressedToScene(final int keyCode)
             throws IOException,
@@ -52,7 +51,6 @@ public final class GameEngineImpl implements GameEngine {
             InvocationTargetException {
         if (this.currentScene == null) {
             LOGGER.log(Level.WARNING, "No active scene");
-
             return;
         }
         this.currentScene.updateStatus(keyCode);

@@ -9,12 +9,10 @@ import java.util.Map;
 import it.unibo.pokerogue.controller.api.scene.Scene;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
-import it.unibo.pokerogue.model.impl.SavingSystemImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.view.impl.scene.save.SceneSaveView;
 import it.unibo.pokerogue.utilities.SceneChanger;
 import it.unibo.pokerogue.model.api.SavingSystem;
-import it.unibo.pokerogue.model.impl.SavingSystemImpl;
 
 /**
  * Represents the save scene in the game where the player can choose to either
@@ -44,13 +42,14 @@ public class SceneSave extends Scene {
      * Constructs and initializes the save scene by loading its graphical elements,
      * setting up initial button states, and preparing the view for rendering.
      *
+	 * @param savingSystem the main saving system
      * @throws IOException               if loading scene data fails.
      * @throws InstantiationException    if a required object can't be instantiated.
      * @throws IllegalAccessException    if access to a constructor is denied.
      * @throws NoSuchMethodException     if a method used via reflection is missing.
      * @throws InvocationTargetException if a method call via reflection fails.
      */
-    public SceneSave(SavingSystem savingSystem) throws IOException,
+    public SceneSave(final SavingSystem savingSystem) throws IOException,
             InstantiationException,
             IllegalAccessException,
             NoSuchMethodException,

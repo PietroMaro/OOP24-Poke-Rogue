@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.swing.JFrame;
 
 import it.unibo.pokerogue.controller.api.GameEngine;
-import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.controller.api.GraphicEngine;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.impl.graphic.BackgroundElementImpl;
@@ -35,8 +34,10 @@ public final class GraphicEngineImpl implements GraphicEngine {
     /**
      * Constructs the graphic engine and initializes the game window.
      * Sets up the layout, key listener, and basic window properties.
+	 *
+	 * @param gameEngine the main game engine
      */
-    public GraphicEngineImpl(GameEngine gameEngine) {
+    public GraphicEngineImpl(final GameEngine gameEngine) {
         this.gameWindow = new JFrame("Pokérogue Lite");
         this.gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.gameWindow.setResizable(true);

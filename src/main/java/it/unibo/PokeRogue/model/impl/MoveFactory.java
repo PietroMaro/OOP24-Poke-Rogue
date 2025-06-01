@@ -20,14 +20,21 @@ import org.json.JSONArray;
 /**
  * Move factory implementation.
  */
-public class MoveFactory {
+public final class MoveFactory {
 
     // make the access in memory and saves the information of all pokemon in local
-    private static final JsonReader jsonReader = new JsonReaderImpl();
-    private static final Map<String, Move> movesBlueprints = new HashMap<>();
+    private static final JsonReader JSON_READER = new JsonReaderImpl();
+    private static final Map<String, Move> MOVES_BLUEPRINTS = new HashMap<>();
 
-    public static final void init() throws IOException {
-        final JSONArray allMoveJson = jsonReader
+	private MoveFactory() {
+		//Shouldn't be instanciated
+	}
+
+	/**
+	 * Initialize the factory reading in memory.
+	 */
+    public static void init() throws IOException {
+        final JSONArray allMoveJson = JSON_READER
                 .readJsonArray(Paths
                         .get("src", "main", "resources",
                                 "pokemonData",
@@ -39,7 +46,7 @@ public class MoveFactory {
     }
 
     private static void addMoveToBlueprints(final String moveName) throws IOException {
-        final JSONObject moveJson = jsonReader.readJsonObject(Paths
+        final JSONObject moveJson = JSON_READER.readJsonObject(Paths
                 .get("src", "main", "resources",
                         "pokemonData",
                         "moves",
@@ -68,11 +75,17 @@ public class MoveFactory {
                 type,
                 priority);
 
-        movesBlueprints.put(moveName, newMove);
+        MOVES_BLUEPRINTS.put(moveName, newMove);
     }
 
-    public static final Move moveFromName(final String moveName) {
-        Move move = movesBlueprints.get(moveName);
+	/**
+	 * Generate a name with the givven name.
+	 *
+	 * @param moveName the name of the move
+	 * @return the move
+	 */
+    public static Move moveFromName(final String moveName) {
+        Move move = MOVES_BLUEPRINTS.get(moveName);
         if (move == null) {
             throw new UnsupportedOperationException("The move " + moveName
                     + " blueprint was not found. Is not present in moveList / Factory not initialized");

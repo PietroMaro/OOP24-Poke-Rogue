@@ -29,19 +29,23 @@ import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
  * Extends {@link Singleton} to enforce a single shared instance (if managed by
  * the superclass).
  */
-public class ItemFactory {
+public final class ItemFactory {
 
     /** JSON reader used to parse item data from files. */
-    private static final JsonReader jsonReader = new JsonReaderImpl();
+    private static final JsonReader JSON_READER = new JsonReaderImpl();
 
     /** Random generator used for item selection. */
-    private static final Random random = new Random();
+    private static final Random RANDOM = new Random();
 
     /** Set of all item names available in the factory. */
-    private static final Set<String> allItemSet = new HashSet<>();
+    private static final Set<String> ALL_ITEM_SET = new HashSet<>();
 
     /** Map containing item names and their corresponding {@link ItemBlueprint}. */
-    private static final Map<String, ItemBlueprint> itemBlueprints = new HashMap<>();
+    private static final Map<String, ItemBlueprint> ITEM_BLUEPRINTS = new HashMap<>();
+
+	private ItemFactory() {
+		//Shouldn't be instanciated
+	}
 
     /**
      * Initializes the factory by reading all item names and their corresponding
@@ -51,7 +55,7 @@ public class ItemFactory {
      * @throws IOException if an error occurs while reading item files
      */
     public static void init() throws IOException {
-        final JSONArray allItemJson = jsonReader
+        final JSONArray allItemJson = JSON_READER
                 .readJsonArray(Paths.get("src", "main", "resources", "itemsData", "itemsList.json").toString());
         for (int itemIndex = 0; itemIndex < allItemJson.length(); itemIndex += 1) {
             addItemToBlueprints(allItemJson.getString(itemIndex));
@@ -66,7 +70,7 @@ public class ItemFactory {
      * @throws IOException if the item's JSON file cannot be read
      */
     private static void addItemToBlueprints(final String itemName) throws IOException {
-        final JSONObject itemJson = jsonReader
+        final JSONObject itemJson = JSON_READER
                 .readJsonObject(Paths.get("src", "main", "resources", "itemsData", "items", "data", itemName + ".json")
                         .toString());
 
@@ -83,8 +87,8 @@ public class ItemFactory {
         final ItemBlueprint newItem = new ItemBlueprint(
                 id, name, type, description, price, rarity, category, captureRate, Optional.ofNullable(effect));
 
-        itemBlueprints.put(name, newItem);
-        allItemSet.add(name);
+        ITEM_BLUEPRINTS.put(name, newItem);
+        ALL_ITEM_SET.add(name);
     }
 
     /**
@@ -96,7 +100,7 @@ public class ItemFactory {
      *                                       blueprint map
      */
     public static Item itemFromName(final String itemName) {
-        final ItemBlueprint itemBlueprint = itemBlueprints.get(itemName);
+        final ItemBlueprint itemBlueprint = ITEM_BLUEPRINTS.get(itemName);
         if (itemBlueprint == null) {
             throw new UnsupportedOperationException(
                     "The item " + itemName + " blueprint was not found. "
@@ -106,13 +110,13 @@ public class ItemFactory {
     }
 
     /**
-     * Generates a random {@link Item} from the list of all available items.
+     * Generates a RANDOM {@link Item} from the list of all available items.
      *
-     * @return a randomly selected {@code Item}
+     * @return a RANDOMly selected {@code Item}
      */
     public static Item randomItem() {
-        final String generatedName = (String) allItemSet.toArray()[random.nextInt(allItemSet.size())];
-        return new ItemImpl(itemBlueprints.get(generatedName));
+        final String generatedName = (String) ALL_ITEM_SET.toArray()[RANDOM.nextInt(ALL_ITEM_SET.size())];
+        return new ItemImpl(ITEM_BLUEPRINTS.get(generatedName));
     }
 
     /**
@@ -121,6 +125,6 @@ public class ItemFactory {
      * @return a {@code Set} of all item names
      */
     public static Set<String> getAllItemList() {
-        return new HashSet<>(allItemSet);
+        return new HashSet<>(ALL_ITEM_SET);
     }
 }

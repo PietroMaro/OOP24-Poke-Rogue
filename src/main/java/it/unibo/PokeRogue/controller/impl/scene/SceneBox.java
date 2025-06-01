@@ -16,7 +16,6 @@ import it.unibo.pokerogue.utilities.UtilitiesForScenes;
 import it.unibo.pokerogue.view.impl.scene.SceneBoxView;
 import it.unibo.pokerogue.utilities.SceneChanger;
 import it.unibo.pokerogue.model.api.SavingSystem;
-import it.unibo.pokerogue.model.impl.SavingSystemImpl;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -54,7 +53,7 @@ public class SceneBox extends Scene {
          * Constructs a new SceneBox instance.
          *
          * @param savePath the path to the save file used to load stored Pokémon boxes.
-         * 
+		 * @param savingSystem the main save system
          */
         public SceneBox(final String savePath, final SavingSystem savingSystem) throws IOException,
                         InstantiationException,

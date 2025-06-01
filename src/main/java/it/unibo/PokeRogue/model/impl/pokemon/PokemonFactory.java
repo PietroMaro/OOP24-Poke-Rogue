@@ -30,20 +30,27 @@ import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
 /**
  * The factory that generates all pokemons.
  */
-public class PokemonFactory {
+public final class PokemonFactory {
 
     private static final String SRC_LITTERAL = "src";
     private static final String POKEMON_DATA = "pokemonData";
     private static final String MAIN_LITTERAL = "main";
     private static final String RESOURCES_LITTERAL = "resources";
 
-    private static final JsonReader jsonReader = new JsonReaderImpl();
-    private static final Random random = new Random();
-    private static final Set<String> allPokemonSet = new HashSet<>();
-    private static final Map<String, PokemonBlueprint> pokemonBlueprints = new HashMap<>();
+    private static final JsonReader JSON_READER = new JsonReaderImpl();
+    private static final Random RANDOM = new Random();
+    private static final Set<String> ALL_POKEMON_SET = new HashSet<>();
+    private static final Map<String, PokemonBlueprint> POKEMON_BLUEPRINTS = new HashMap<>();
 
-    public static final void init() throws IOException {
-        final JSONArray allPokemonJson = jsonReader
+	private PokemonFactory() {
+		//Shouldn't be instanciated
+	}
+
+	/**
+ 	* Initate the factory loading from memory.
+ 	*/
+    public static void init() throws IOException {
+        final JSONArray allPokemonJson = JSON_READER
                 .readJsonArray(
                         Paths.get(SRC_LITTERAL, MAIN_LITTERAL, RESOURCES_LITTERAL,
                                 POKEMON_DATA, "pokemonList.json").toString());
@@ -53,7 +60,7 @@ public class PokemonFactory {
     }
 
     private static void addPokemonToBlueprints(final String pokemonName) throws IOException {
-        final JSONObject pokemonJson = jsonReader
+        final JSONObject pokemonJson = JSON_READER
                 .readJsonObject(Paths
                         .get(SRC_LITTERAL, MAIN_LITTERAL, RESOURCES_LITTERAL,
                                 POKEMON_DATA, "pokemon", "data", pokemonName + ".json")
@@ -98,16 +105,23 @@ public class PokemonFactory {
                 newPokemonSpriteFront,
                 newPokemonSpriteBack);
 
-        pokemonBlueprints.put(pokemonName, newPokemon);
-        allPokemonSet.add(pokemonName);
+        POKEMON_BLUEPRINTS.put(pokemonName, newPokemon);
+        ALL_POKEMON_SET.add(pokemonName);
     }
 
-    public static final Pokemon pokemonFromName(final String pokemonName)
+
+	 /**
+	 * generates a random pokemon with the given name.
+	 *
+	 * @param pokemonName the pokemon name 
+	 * @return the pokemon
+	 */
+    public static Pokemon pokemonFromName(final String pokemonName)
             throws InstantiationException,
             IllegalAccessException,
             NoSuchMethodException,
             InvocationTargetException {
-        final PokemonBlueprint pokemonBlueprint = pokemonBlueprints.get(pokemonName);
+        final PokemonBlueprint pokemonBlueprint = POKEMON_BLUEPRINTS.get(pokemonName);
         if (pokemonBlueprint == null) {
             throw new UnsupportedOperationException("The pokemon "
                     + pokemonName
@@ -117,20 +131,31 @@ public class PokemonFactory {
         return new PokemonImpl(pokemonBlueprint);
     }
 
-    public static final Pokemon randomPokemon(final int level) throws InstantiationException,
+	/**
+	 * generates a random pokemon at the given level.
+	 *
+	 * @param level the level of the pokemon
+	 * @return the pokemon
+	 */
+    public static Pokemon randomPokemon(final int level) throws InstantiationException,
             IllegalAccessException,
             NoSuchMethodException,
             InvocationTargetException {
-        final String generatedName = (String) allPokemonSet.toArray()[random.nextInt(allPokemonSet.size())];
-        final Pokemon result = new PokemonImpl(pokemonBlueprints.get(generatedName));
+        final String generatedName = (String) ALL_POKEMON_SET.toArray()[RANDOM.nextInt(ALL_POKEMON_SET.size())];
+        final Pokemon result = new PokemonImpl(POKEMON_BLUEPRINTS.get(generatedName));
         for (int x = 0; x < level; x += 1) {
             result.levelUp(false);
         }
         return result;
     }
 
-    public static final Set<String> getAllPokemonList() {
-        return new HashSet<>(allPokemonSet);
+	/**
+	 * Gives all the pokemon initiated.
+	 * 
+	 * @return the set
+	 */
+    public static Set<String> getAllPokemonList() {
+        return new HashSet<>(ALL_POKEMON_SET);
     }
 
     private static <T> List<T> jsonArrayToList(final JSONArray jsonArray) {

@@ -21,7 +21,6 @@ import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
 import it.unibo.pokerogue.utilities.SceneFightUtilities;
 import it.unibo.pokerogue.view.impl.scene.fight.SceneFightView;
 import it.unibo.pokerogue.model.api.SavingSystem;
-import it.unibo.pokerogue.model.impl.SavingSystemImpl;
 
 /**
  * The SceneFight class represents the battle scene in the game.
@@ -65,6 +64,7 @@ public class SceneFight extends Scene {
      * enemy trainer, AI, and battle engine.
      * 
      * @param battleLevel the level of the battle
+	 * @param savingSystem the main saving system
      */
     public SceneFight(final Integer battleLevel, final SavingSystem savingSystem) throws IOException, NoSuchMethodException,
             IllegalAccessException,

@@ -24,7 +24,7 @@ public final class SceneChanger {
 	private static GraphicEngine graphicEngine;
 	private static int fightLevel;
 	private static String fileToLoadName;
-	private static final SavingSystem savingSystem = new SavingSystemImpl();
+	private static final SavingSystem SAVING_SYSTEM = new SavingSystemImpl();
 
 	private SceneChanger() {
 		//Shouldn't be instanciated.
@@ -36,7 +36,7 @@ public final class SceneChanger {
    * @param ge the game engine of the game.
    * @param gre the graphic engine of the game.
    */
-	public static void init(GameEngine ge,GraphicEngine gre) {
+	public static void init(final GameEngine ge, final GraphicEngine gre) {
 		gameEngine = ge;
 		graphicEngine = gre;
 	}
@@ -46,7 +46,7 @@ public final class SceneChanger {
 	*
 	* @param newfileToLoadName the new value
 	*/
-	public static void setFileToLoadName(String newfileToLoadName) {
+	public static void setFileToLoadName(final String newfileToLoadName) {
 		fileToLoadName = newfileToLoadName;
 	}
 
@@ -55,7 +55,7 @@ public final class SceneChanger {
 	*
 	* @param fl the new value
 	*/
-	public static void setFightLevel(int fl) {
+	public static void setFightLevel(final int fl) {
 		fightLevel = fl;
 	}
 
@@ -65,7 +65,7 @@ public final class SceneChanger {
    * This method switches the game to a new scene, creating it based on the given
    * name.
    * 
-   * @param newScene the identifier of the new scene to load.
+   * @param newSceneName the identifier of the new scene to load.
    */
     public static void setScene(final String newSceneName)
             throws IOException,
@@ -80,14 +80,14 @@ public final class SceneChanger {
                 break;
 
             case "load":
-                newScene = new SceneLoad(savingSystem);
+                newScene = new SceneLoad(SAVING_SYSTEM);
                 break;
             case "box":
-                newScene = new SceneBox(fileToLoadName, savingSystem);
+                newScene = new SceneBox(fileToLoadName, SAVING_SYSTEM);
                 break;
             case "fight":
                 fightLevel = fightLevel + 1;
-                newScene = new SceneFight(fightLevel, savingSystem);
+                newScene = new SceneFight(fightLevel, SAVING_SYSTEM);
                 break;
             case "shop":
                 newScene = new SceneShop();
@@ -99,7 +99,7 @@ public final class SceneChanger {
                 newScene = new SceneInfo();
                 break;
             case "save":
-                newScene = new SceneSave(savingSystem);
+                newScene = new SceneSave(SAVING_SYSTEM);
                 break;
             default:
                 break;

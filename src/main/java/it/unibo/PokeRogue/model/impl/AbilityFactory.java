@@ -19,10 +19,14 @@ import org.json.JSONArray;
 /**
  * The ability factory.
  */
-public class AbilityFactory {
+public final class AbilityFactory {
     // make the access in memory and saves the information of all pokemon in local
-    private static final JsonReader jsonReader = new JsonReaderImpl();
-    private static final Map<String, Ability> abilityBlueprints = new HashMap<>();
+    private static final JsonReader JSON_READER = new JsonReaderImpl();
+    private static final Map<String, Ability> ABILITY_BLUEPRINTS = new HashMap<>();
+
+	private AbilityFactory() {
+		//Shouldn't be instantiated	
+	}
 
 	 /**
      * Initializes the factory by reading all Ability names and their corresponding
@@ -33,7 +37,7 @@ public class AbilityFactory {
      */
     public static void init() throws IOException {
         final JSONArray allAbilityJson;
-        allAbilityJson = jsonReader.readJsonArray(Paths
+        allAbilityJson = JSON_READER.readJsonArray(Paths
                 .get("src", "main", "resources",
                         "pokemonData",
                         "abilitiesList.json")
@@ -44,7 +48,7 @@ public class AbilityFactory {
     }
 
     private static void addAbilityToBlueprints(final String abilityName) throws IOException {
-        final JSONObject abilityJson = jsonReader
+        final JSONObject abilityJson = JSON_READER
                 .readJsonObject(Paths.get("src", "main", "resources",
                         "pokemonData",
                         "abilities",
@@ -56,7 +60,7 @@ public class AbilityFactory {
                 situationChecks,
                 Optional.ofNullable(effect));
 
-        abilityBlueprints.put(abilityName, newAbility);
+        ABILITY_BLUEPRINTS.put(abilityName, newAbility);
     }
 
     /**
@@ -66,7 +70,7 @@ public class AbilityFactory {
      * @return the ability
      */
     public static Ability abilityFromName(final String abilityName) {
-        final Ability ability = abilityBlueprints.get(abilityName);
+        final Ability ability = ABILITY_BLUEPRINTS.get(abilityName);
         if (ability == null) {
             throw new UnsupportedOperationException("The ability "
                     + abilityName

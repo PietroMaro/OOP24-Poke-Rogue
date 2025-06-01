@@ -5,7 +5,6 @@ import java.util.List;
 
 import it.unibo.pokerogue.model.api.SavingSystem;
 import it.unibo.pokerogue.model.api.pokemon.Pokemon;
-import it.unibo.pokerogue.model.impl.SavingSystemImpl;
 import it.unibo.pokerogue.model.impl.pokemon.PokemonFactory;
 
 import java.util.ArrayList;
@@ -30,6 +29,8 @@ public final class SceneBoxLoad {
     /**
      * Constructs a new {@code SceneBoxModel} and initializes the saving system
      * and Pokémon factory instances.
+	 *
+	 * @param savingSystem the instance of the saving sytem used
      */
     public SceneBoxLoad(final SavingSystem savingSystem) throws InstantiationException,
             IllegalAccessException,
