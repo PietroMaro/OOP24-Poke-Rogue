@@ -12,13 +12,13 @@ import org.json.JSONObject;
 import it.unibo.pokerogue.controller.api.EffectParser;
 import it.unibo.pokerogue.controller.api.scene.Scene;
 import it.unibo.pokerogue.controller.impl.EffectParserImpl;
-import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.api.item.Item;
 import it.unibo.pokerogue.model.api.pokemon.Pokemon;
 import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
+import it.unibo.pokerogue.utilities.SceneChanger;
 import it.unibo.pokerogue.utilities.SceneShopUtilities;
 import it.unibo.pokerogue.view.impl.scene.shop.SceneShopView;
 import lombok.Setter;
@@ -45,7 +45,6 @@ public class SceneShop extends Scene {
     private final GraphicElementsRegistry graphicElements;
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final PlayerTrainerImpl playerTrainerInstance;
-    private final GameEngineImpl gameEngineInstance;
     private final SceneShopView sceneShopView;
     private final EffectParser effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
     @Setter
@@ -79,7 +78,6 @@ public class SceneShop extends Scene {
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-        this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.initStatus();
         this.sceneShopView = new SceneShopView(this.currentSelectedButton, this.newSelectedButton);
         this.initGraphicElements();
@@ -163,21 +161,21 @@ public class SceneShop extends Scene {
                         && selectedItemForUse) {
                     this.initGraphicElements();
                     applyItemToPokemon(this.newSelectedButton - CHANGE_POKEMON_INITIAL_POSITION, playerTrainerInstance,
-                            gameEngineInstance, effectParser);
+                            effectParser);
                     this.newSelectedButton = this.graphicElementNameToInt.get(PRICY_ITEM_1);
                 } else if (this.newSelectedButton >= this.graphicElementNameToInt.get(PRICY_ITEM_1)
                         && this.newSelectedButton <= this.graphicElementNameToInt.get(PRICY_ITEM_3)) {
                     final Item item = SceneShopUtilities.getShopItems(this.newSelectedButton - 4);
                     if (playerTrainerInstance.getMoney() >= item.getPrice()) {
                         this.selectedItemForUse = true;
-                        buyItem(playerTrainerInstance, item, gameEngineInstance);
+                        buyItem(playerTrainerInstance, item);
                         buyedItem = true;
                         this.newSelectedButton = this.graphicElementNameToInt.get(CHANGE_1);
                     }
                 } else if (this.newSelectedButton >= this.graphicElementNameToInt.get(FREE_ITEM_1)
                         && this.newSelectedButton <= this.graphicElementNameToInt.get(FREE_ITEM_3)) {
                     this.selectedItemForUse = true;
-                    useOrHandleItem(playerTrainerInstance, gameEngineInstance,
+                    useOrHandleItem(playerTrainerInstance,
                             SceneShopUtilities.getShopItems(this.newSelectedButton + 2));
                     buyedItem = false;
                     this.newSelectedButton = this.graphicElementNameToInt.get(CHANGE_1);
@@ -202,25 +200,25 @@ public class SceneShop extends Scene {
                 this.graphicElements);
     }
 
-    private void buyItem(final PlayerTrainerImpl trainer, final Item item, final GameEngineImpl gameEngineInstance)
+    private void buyItem(final PlayerTrainerImpl trainer, final Item item)
             throws InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchMethodException, IOException {
         trainer.addMoney(-item.getPrice());
         SceneShopUtilities.updatePlayerMoneyText(currentSceneGraphicElements, trainer);
-        useOrHandleItem(trainer, gameEngineInstance, item);
+        useOrHandleItem(trainer, item);
     }
 
-    private void useOrHandleItem(final PlayerTrainerImpl trainer, final GameEngineImpl gameEngineInstance,
+    private void useOrHandleItem(final PlayerTrainerImpl trainer,
             final Item item) throws InstantiationException, IllegalAccessException, InvocationTargetException,
             NoSuchMethodException, IOException {
         if ("Capture".equalsIgnoreCase(item.getType())) {
             final int countBall = trainer.getBall().get(item.getName());
             trainer.getBall().put(item.getName(), countBall + 1);
-            gameEngineInstance.setScene("fight");
+            SceneChanger.setScene("fight");
         } else if ("Valuable".equalsIgnoreCase(item.getType())) {
             final Optional<JSONObject> itemEffect = item.getEffect();
             this.effectParser.parseEffect(itemEffect.get(), trainer.getPokemon(0).get());
-            gameEngineInstance.setScene("fight");
+            SceneChanger.setScene("fight");
         } else if ("Healing".equalsIgnoreCase(item.getType())
                 || "Boost".equalsIgnoreCase(item.getType()) || "PPRestore".equalsIgnoreCase(item.getType())) {
             this.selectedUsableItem = item;
@@ -228,7 +226,7 @@ public class SceneShop extends Scene {
     }
 
     private void applyItemToPokemon(final int pokemonIndex, final PlayerTrainerImpl trainer,
-            final GameEngineImpl gameEngineInstance, final EffectParser effectParser) throws InstantiationException,
+            final EffectParser effectParser) throws InstantiationException,
             IllegalAccessException, InvocationTargetException, NoSuchMethodException, IOException {
         if (this.selectedUsableItem != null) {
             final Optional<Pokemon> selectedPokemon = trainer
@@ -240,7 +238,7 @@ public class SceneShop extends Scene {
                 final Optional<JSONObject> itemEffect = this.selectedUsableItem.getEffect();
                 effectParser.parseEffect(itemEffect.get(), pokemon);
                 this.selectedUsableItem = null;
-                gameEngineInstance.setScene("fight");
+                SceneChanger.setScene("fight");
             }
         }
     }

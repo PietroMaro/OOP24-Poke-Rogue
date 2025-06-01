@@ -7,11 +7,9 @@ import java.util.Optional;
 
 import it.unibo.pokerogue.controller.api.EffectParser;
 import it.unibo.pokerogue.controller.api.EnemyAi;
-import it.unibo.pokerogue.controller.api.GameEngine;
 import it.unibo.pokerogue.controller.api.scene.fight.BattleEngine;
 import it.unibo.pokerogue.controller.api.scene.fight.StatusEffect;
 import it.unibo.pokerogue.controller.impl.EffectParserImpl;
-import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.model.api.Decision;
 import it.unibo.pokerogue.model.api.SavingSystem;
 import it.unibo.pokerogue.model.api.ability.Ability;
@@ -31,6 +29,7 @@ import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
 import it.unibo.pokerogue.utilities.BattleRewards;
 import it.unibo.pokerogue.utilities.BattleUtilities;
+import it.unibo.pokerogue.utilities.SceneChanger;
 import it.unibo.pokerogue.utilities.api.PokemonBattleUtil;
 import it.unibo.pokerogue.utilities.impl.PokemonBattleUtilImpl;
 import lombok.Getter;
@@ -53,7 +52,6 @@ public class BattleEngineImpl implements BattleEngine {
     private final AbilityFactory abilityFactoryInstance;
     private final StatusEffect statusEffectInstance;
     private final EnemyAi enemyAiInstance;
-    private final GameEngine gameEngineInstance;
     private final SavingSystem savingSystemInstance;
     private boolean captured;
     private Pokemon playerPokemon;
@@ -82,7 +80,6 @@ public class BattleEngineImpl implements BattleEngine {
         this.abilityFactoryInstance = AbilityFactoryImpl.getInstance(AbilityFactoryImpl.class);
         this.statusEffectInstance = new StatusEffectImpl();
         this.enemyAiInstance = enemyAiInstance;
-        this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.savingSystemInstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
         this.itemFactoryInstance = new ItemFactoryImpl();
         this.captured = false;
@@ -256,7 +253,7 @@ public class BattleEngineImpl implements BattleEngine {
         if (BattleUtilities.isTeamWipedOut(enemyTrainerInstance) || this.captured) {
             BattleRewards.awardBattleRewards(this.playerPokemon, this.enemyPokemon);
             this.newMoveToLearn(this.playerPokemon);
-            this.gameEngineInstance.setScene("shop");
+            SceneChanger.setScene("shop");
         } else if (this.enemyPokemon.getActualStats().get(Stats.HP).getCurrentValue() <= 0) {
             final Decision enemyChoose = enemyAiInstance.nextMove(this.getCurrentWeather(), enemyTrainerInstance);
             this.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""), enemyChoose, enemyTrainerInstance);
@@ -265,8 +262,8 @@ public class BattleEngineImpl implements BattleEngine {
         }
         if (BattleUtilities.isTeamWipedOut(playerTrainerInstance)) {
             PlayerTrainerImpl.resetInstance();
-            gameEngineInstance.setFightLevel(0);
-            this.gameEngineInstance.setScene("main");
+            SceneChanger.setFightLevel(0);
+            SceneChanger.setScene("main");
         } else if (playerPokemon.getActualStats().get(Stats.HP).getCurrentValue() <= 0) {
             playerTrainerInstance.switchPokemonPosition(FIRST_POSITION,
                     BattleUtilities.findFirstUsablePokemon(playerTrainerInstance));
@@ -299,7 +296,7 @@ public class BattleEngineImpl implements BattleEngine {
             InvocationTargetException,
             InstantiationException {
         if (playerPokemon.isHasToLearnMove()) {
-            this.gameEngineInstance.setScene("move");
+            SceneChanger.setScene("move");
         }
     }
 }

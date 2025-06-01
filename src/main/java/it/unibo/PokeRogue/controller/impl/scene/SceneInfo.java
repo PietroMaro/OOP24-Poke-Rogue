@@ -12,6 +12,7 @@ import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.view.impl.scene.SceneInfoView;
+import it.unibo.pokerogue.utilities.SceneChanger;
 
 /**
  * Scene representing the "Info" screen of the game.
@@ -26,7 +27,6 @@ public class SceneInfo extends Scene {
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GraphicElementsRegistry graphicElements;
     private final SceneInfoView sceneInfoView;
-    private final GameEngineImpl gameEngineInstance;
     private int newSelectedButton;
     private final Map<String, Integer> graphicElementNameToInt;
 
@@ -52,7 +52,6 @@ public class SceneInfo extends Scene {
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
-        this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.initStatus();
         this.sceneInfoView = new SceneInfoView();
         this.initGraphicElements();
@@ -81,7 +80,7 @@ public class SceneInfo extends Scene {
         switch (inputKey) {
             case KeyEvent.VK_ENTER:
                 if (this.newSelectedButton == this.graphicElementNameToInt.get("BACK_BUTTON")) {
-                    gameEngineInstance.setScene("main");
+                    SceneChanger.setScene("main");
                 }
                 break;
             default:

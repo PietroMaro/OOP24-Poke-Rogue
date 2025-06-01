@@ -7,12 +7,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import it.unibo.pokerogue.controller.api.scene.Scene;
-import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
 import it.unibo.pokerogue.model.impl.SavingSystemImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.view.impl.scene.save.SceneSaveView;
+import it.unibo.pokerogue.utilities.SceneChanger;
 
 /**
  * Represents the save scene in the game where the player can choose to either
@@ -33,7 +33,6 @@ public class SceneSave extends Scene {
     private final GraphicElementsRegistry graphicElements;
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final SceneSaveView sceneSaveView;
-    private final GameEngineImpl gameEngineInstance;
     private final SavingSystemImpl savingSystem;
     private String typedSaveName = "";
     private int newSelectedButton;
@@ -60,7 +59,6 @@ public class SceneSave extends Scene {
                 this.graphicElementNameToInt);
         this.graphicElements = this.getGraphicElements();
         this.allPanelsElements = new LinkedHashMap<>();
-        this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.savingSystem = SavingSystemImpl.getInstance(SavingSystemImpl.class);
         this.initStatus();
         this.sceneSaveView = new SceneSaveView(this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL));
@@ -100,7 +98,7 @@ public class SceneSave extends Scene {
 
             case KeyEvent.VK_ENTER:
                 if (this.newSelectedButton == this.graphicElementNameToInt.get(CONTINUE_LITTERAL)) {
-                    this.gameEngineInstance.setScene("main");
+                    SceneChanger.setScene("main");
 
                 } else if (this.newSelectedButton == this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL)) {
                     this.savingCheck();
@@ -148,7 +146,7 @@ public class SceneSave extends Scene {
              sceneSaveView.updateInputText(typedSaveName, this.currentSceneGraphicElements);
         } else {
             savingSystem.saveData(SAVE_PATH, typedSaveName + ".json");
-            this.gameEngineInstance.setScene("main");
+            SceneChanger.setScene("main");
         }
 
     }

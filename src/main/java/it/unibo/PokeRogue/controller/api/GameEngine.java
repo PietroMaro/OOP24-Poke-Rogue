@@ -2,6 +2,7 @@ package it.unibo.pokerogue.controller.api;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import it.unibo.pokerogue.controller.api.scene.Scene;
 
 import it.unibo.pokerogue.model.impl.Singleton;
 
@@ -16,21 +17,6 @@ import it.unibo.pokerogue.model.impl.Singleton;
  * used.
  */
 public interface GameEngine {
-  /**
-   * Changes the current scene of the game.
-   * 
-   * This method switches the game to a new scene, creating it based on the given
-   * name.
-   * 
-   * @param newScene the identifier of the new scene to load.
-   */
-  void setScene(String newScene) throws 
-      IOException,
-      InstantiationException,
-      IllegalAccessException,
-      InvocationTargetException,
-      NoSuchMethodException;
-
   /**
    * Passes a key press event to the currently active scene.
    * 
@@ -49,13 +35,6 @@ public interface GameEngine {
    */
   void setGraphicEngine(GraphicEngine graphicEngine);
 
-  /**
-   * Sets the file path that should be used for loading content or saving
-   * progress.
-   * 
-   * @param fileName the name or path of the file to load.
-   */
-  void setFileToLoad(String fileName);
 
   /**
    * Sets the current difficulty level of the battle.
@@ -63,4 +42,11 @@ public interface GameEngine {
    * @param newVal an integer representing the new fight level.
    */
   void setFightLevel(Integer newVal);
+
+  /**
+   * Sets the current scene.
+   * 
+   * @param newScene the new current scene.
+   */
+  void setCurrentScene(Scene newScene);
 }

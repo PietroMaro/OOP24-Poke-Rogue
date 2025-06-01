@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import it.unibo.pokerogue.controller.api.GameEngine;
 import it.unibo.pokerogue.controller.api.scene.Scene;
-import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.api.pokemon.Pokemon;
 import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
@@ -16,6 +14,7 @@ import it.unibo.pokerogue.model.impl.scene.SceneBoxLoad;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 import it.unibo.pokerogue.utilities.UtilitiesForScenes;
 import it.unibo.pokerogue.view.impl.scene.SceneBoxView;
+import it.unibo.pokerogue.utilities.SceneChanger;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -37,7 +36,6 @@ public class SceneBox extends Scene {
 
         private final GraphicElementsRegistry currentSceneGraphicElements;
         private final Map<String, PanelElementImpl> allPanelsElements;
-        private final GameEngine gameEngineInstance;
         private int boxIndex;
         private int currentSelectedButton;
         private final PlayerTrainerImpl playerTrainerInstance;
@@ -68,7 +66,6 @@ public class SceneBox extends Scene {
                 this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                                 this.graphicElementNameToInt);
                 this.allPanelsElements = new LinkedHashMap<>();
-                this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
                 this.sceneBoxView = new SceneBoxView();
                 this.sceneBoxModel = new SceneBoxLoad();
@@ -164,7 +161,7 @@ public class SceneBox extends Scene {
 
                         case KeyEvent.VK_ENTER:
                                 if (this.currentSelectedButton == START_BUTTON_POSITION) {
-                                        this.gameEngineInstance.setScene("fight");
+                                        SceneChanger.setScene("fight");
                                 }
 
                                 if (this.currentSelectedButton == UP_ARROW_BUTTON_POSITION && this.boxIndex > 0) {

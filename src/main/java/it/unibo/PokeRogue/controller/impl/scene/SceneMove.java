@@ -18,6 +18,7 @@ import it.unibo.pokerogue.view.impl.scene.SceneMoveView;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import it.unibo.pokerogue.utilities.SceneChanger;
 
 /**
  * Represents the scene where the player can manage or learn new moves for their
@@ -34,7 +35,6 @@ public class SceneMove extends Scene {
     private final GraphicElementsRegistry currentSceneGraphicElements;
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GraphicElementsRegistry graphicElements;
-    private final GameEngine gameEngineInstance;
     private final SceneMoveView sceneMoveView;
     private int newSelectedButton;
     private final Pokemon playerPokemon;
@@ -59,7 +59,6 @@ public class SceneMove extends Scene {
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
-        this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.sceneMoveView = new SceneMoveView();
         this.playerPokemon = PlayerTrainerImpl.getTrainerInstance().getPokemon(0).get();
         this.initStatus();
@@ -135,7 +134,7 @@ public class SceneMove extends Scene {
             InvocationTargetException,
             InstantiationException {
         playerPokemon.learnNewMove(Optional.of(currentSelectedButton));
-        this.gameEngineInstance.setScene("fight");
+        SceneChanger.setScene("fight");
     }
 
     private void initGraphicElements() throws IOException {

@@ -16,6 +16,7 @@ import it.unibo.pokerogue.model.impl.SavingSystemImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.utilities.UtilitiesForScenes;
 import it.unibo.pokerogue.view.impl.scene.SceneLoadView;
+import it.unibo.pokerogue.utilities.SceneChanger;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -39,7 +40,6 @@ public final class SceneLoad extends Scene {
     private final GraphicElementsRegistry currentSceneGraphicElements;
 
     private final Map<String, PanelElementImpl> allPanelsElements;
-    private final GameEngine gameEngineInstance;
     private final SavingSystem savingSystemInstance;
     private final List<String> savesList;
     private final SceneLoadView sceneLoadView;
@@ -65,7 +65,6 @@ public final class SceneLoad extends Scene {
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
-        this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.savingSystemInstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
         this.savesList = savingSystemInstance
                 .getSaveFilesName(Paths.get("src", "main", "resources", "saves").toString());
@@ -123,12 +122,12 @@ public final class SceneLoad extends Scene {
 
             case KeyEvent.VK_ENTER:
                 if (!this.savesList.isEmpty()) {
-                    this.gameEngineInstance.setFileToLoad(this.savesList.get(this.selectedSave));
-                    this.gameEngineInstance.setScene("box");
+                    SceneChanger.setFileToLoadName(this.savesList.get(this.selectedSave));
+                    SceneChanger.setScene("box");
                 }
                 break;
             case KeyEvent.VK_BACK_SPACE:
-                this.gameEngineInstance.setScene("main");
+                SceneChanger.setScene("main");
                 break;
 
             default:

@@ -6,6 +6,7 @@ import it.unibo.pokerogue.controller.api.GameEngine;
 import it.unibo.pokerogue.controller.api.GraphicEngine;
 import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.controller.impl.GraphicEngineImpl;
+import it.unibo.pokerogue.utilities.SceneChanger;
 
 import java.io.IOException;
 
@@ -31,7 +32,8 @@ public final class Main {
             final GraphicEngine mainGraphicEngine = GraphicEngineImpl.getInstance(GraphicEngineImpl.class);
 
             mainGameEngine.setGraphicEngine(mainGraphicEngine);
-            mainGameEngine.setScene("main");
+			SceneChanger.init(mainGameEngine,mainGraphicEngine);
+            SceneChanger.setScene("main");
         } catch (InstantiationException
                 | IllegalAccessException
                 | InvocationTargetException
