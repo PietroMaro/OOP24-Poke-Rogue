@@ -26,10 +26,10 @@ public final class GameEngineImpl implements GameEngine {
     private static final Logger LOGGER = Logger.getLogger(GameEngineImpl.class.getName());
 
     private GraphicEngine graphicEngineInstance;
-	@Setter
+    @Setter
     private Scene currentScene;
-	@Setter 
-	@Getter
+    @Setter 
+    @Getter
     private String fileToLoadName;
     @Setter
     private Integer fightLevel;

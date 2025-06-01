@@ -29,8 +29,8 @@ public final class SceneBoxLoad {
     /**
      * Constructs a new {@code SceneBoxModel} and initializes the saving system
      * and Pokémon factory instances.
-	 *
-	 * @param savingSystem the instance of the saving sytem used
+     *
+     * @param savingSystem the instance of the saving sytem used
      */
     public SceneBoxLoad(final SavingSystem savingSystem) throws InstantiationException,
             IllegalAccessException,

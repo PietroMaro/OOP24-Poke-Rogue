@@ -64,7 +64,7 @@ public class SceneFight extends Scene {
      * enemy trainer, AI, and battle engine.
      * 
      * @param battleLevel the level of the battle
-	 * @param savingSystem the main saving system
+     * @param savingSystem the main saving system
      */
     public SceneFight(final Integer battleLevel, final SavingSystem savingSystem) throws IOException, NoSuchMethodException,
             IllegalAccessException,

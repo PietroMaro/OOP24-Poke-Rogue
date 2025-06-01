@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import it.unibo.pokerogue.controller.api.scene.Scene;
 
-import it.unibo.pokerogue.model.impl.Singleton;
 
 /**
  * Interface representing the main game engine.

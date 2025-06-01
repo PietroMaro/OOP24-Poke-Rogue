@@ -43,9 +43,9 @@ public final class ItemFactory {
     /** Map containing item names and their corresponding {@link ItemBlueprint}. */
     private static final Map<String, ItemBlueprint> ITEM_BLUEPRINTS = new HashMap<>();
 
-	private ItemFactory() {
-		//Shouldn't be instanciated
-	}
+    private ItemFactory() {
+        //Shouldn't be instanciated
+    }
 
     /**
      * Initializes the factory by reading all item names and their corresponding

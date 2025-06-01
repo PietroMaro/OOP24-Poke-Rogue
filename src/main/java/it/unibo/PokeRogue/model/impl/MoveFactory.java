@@ -26,13 +26,13 @@ public final class MoveFactory {
     private static final JsonReader JSON_READER = new JsonReaderImpl();
     private static final Map<String, Move> MOVES_BLUEPRINTS = new HashMap<>();
 
-	private MoveFactory() {
-		//Shouldn't be instanciated
-	}
+    private MoveFactory() {
+        //Shouldn't be instanciated
+    }
 
-	/**
-	 * Initialize the factory reading in memory.
-	 */
+    /**
+     * Initialize the factory reading in memory.
+     */
     public static void init() throws IOException {
         final JSONArray allMoveJson = JSON_READER
                 .readJsonArray(Paths
@@ -78,12 +78,12 @@ public final class MoveFactory {
         MOVES_BLUEPRINTS.put(moveName, newMove);
     }
 
-	/**
-	 * Generate a name with the givven name.
-	 *
-	 * @param moveName the name of the move
-	 * @return the move
-	 */
+    /**
+     * Generate a name with the givven name.
+     *
+     * @param moveName the name of the move
+     * @return the move
+     */
     public static Move moveFromName(final String moveName) {
         Move move = MOVES_BLUEPRINTS.get(moveName);
         if (move == null) {

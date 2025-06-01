@@ -32,16 +32,16 @@ public final class Main {
     public static void main(final String[] args) {
 
         try {
-			ItemFactory.init();
-			MoveFactory.init();
-			AbilityFactory.init();
-			PokemonFactory.init();
+            ItemFactory.init();
+            MoveFactory.init();
+            AbilityFactory.init();
+            PokemonFactory.init();
 
             final GameEngine mainGameEngine = new GameEngineImpl();
             final GraphicEngine mainGraphicEngine = new GraphicEngineImpl(mainGameEngine);
 
             mainGameEngine.setGraphicEngine(mainGraphicEngine);
-			SceneChanger.init(mainGameEngine, mainGraphicEngine);
+            SceneChanger.init(mainGameEngine, mainGraphicEngine);
             SceneChanger.setScene("main");
         } catch (InstantiationException
                 | IllegalAccessException

@@ -53,7 +53,7 @@ public class SceneBox extends Scene {
          * Constructs a new SceneBox instance.
          *
          * @param savePath the path to the save file used to load stored Pokémon boxes.
-		 * @param savingSystem the main save system
+                 * @param savingSystem the main save system
          */
         public SceneBox(final String savePath, final SavingSystem savingSystem) throws IOException,
                         InstantiationException,

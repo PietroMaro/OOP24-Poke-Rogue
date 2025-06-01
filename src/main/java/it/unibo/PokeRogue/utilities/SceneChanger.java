@@ -20,60 +20,60 @@ import java.io.IOException;
  * The utility class to change scenes.
  */
 public final class SceneChanger {
-	private static GameEngine gameEngine;
-	private static GraphicEngine graphicEngine;
-	private static int fightLevel;
-	private static String fileToLoadName;
-	private static final SavingSystem SAVING_SYSTEM = new SavingSystemImpl();
+    private static GameEngine gameEngine;
+    private static GraphicEngine graphicEngine;
+    private static int fightLevel;
+    private static String fileToLoadName;
+    private static final SavingSystem SAVING_SYSTEM = new SavingSystemImpl();
 
-	private SceneChanger() {
-		//Shouldn't be instanciated.
-	}
+    private SceneChanger() {
+        // Shouldn't be instanciated.
+    }
 
-   /**
-   * Init the SceneChanger passing the necessary engines.
-   * 
-   * @param ge the game engine of the game.
-   * @param gre the graphic engine of the game.
-   */
-	public static void init(final GameEngine ge, final GraphicEngine gre) {
-		gameEngine = ge;
-		graphicEngine = gre;
-	}
+    /**
+     * Init the SceneChanger passing the necessary engines.
+     * 
+     * @param ge  the game engine of the game.
+     * @param gre the graphic engine of the game.
+     */
+    public static void init(final GameEngine ge, final GraphicEngine gre) {
+        gameEngine = ge;
+        graphicEngine = gre;
+    }
 
-	/**
-	* Set the file to load name.
-	*
-	* @param newfileToLoadName the new value
-	*/
-	public static void setFileToLoadName(final String newfileToLoadName) {
-		fileToLoadName = newfileToLoadName;
-	}
+    /**
+     * Set the file to load name.
+     *
+     * @param newfileToLoadName the new value
+     */
+    public static void setFileToLoadName(final String newfileToLoadName) {
+        fileToLoadName = newfileToLoadName;
+    }
 
-	/**
-	* Set the fight level.
-	*
-	* @param fl the new value
-	*/
-	public static void setFightLevel(final int fl) {
-		fightLevel = fl;
-	}
+    /**
+     * Set the fight level.
+     *
+     * @param fl the new value
+     */
+    public static void setFightLevel(final int fl) {
+        fightLevel = fl;
+    }
 
-   /**
-   * Changes the current scene of the game.
-   * 
-   * This method switches the game to a new scene, creating it based on the given
-   * name.
-   * 
-   * @param newSceneName the identifier of the new scene to load.
-   */
+    /**
+     * Changes the current scene of the game.
+     * 
+     * This method switches the game to a new scene, creating it based on the given
+     * name.
+     * 
+     * @param newSceneName the identifier of the new scene to load.
+     */
     public static void setScene(final String newSceneName)
             throws IOException,
             InstantiationException,
             IllegalAccessException,
             InvocationTargetException,
             NoSuchMethodException {
-	 	Scene newScene = null;
+        Scene newScene = null;
         switch (newSceneName) {
             case "main":
                 newScene = new SceneMenu();
@@ -104,9 +104,9 @@ public final class SceneChanger {
             default:
                 break;
         }
-		gameEngine.setCurrentScene(newScene);
+        gameEngine.setCurrentScene(newScene);
         graphicEngine.createPanels(newScene.getAllPanelsElements());
         graphicEngine.drawScene(newScene.getCurrentSceneGraphicElements());
     }
-	
+
 }

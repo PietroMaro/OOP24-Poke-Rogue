@@ -59,7 +59,7 @@ public class BattleEngineImpl implements BattleEngine {
      *
      * 
      * @param enemyAiInstance the AI instance controlling the enemy's strategy
-	 * @param savingSystem the main saving system
+     * @param savingSystem the main saving system
      */
     public BattleEngineImpl(final EnemyAi enemyAiInstance, final SavingSystem savingSystem)
             throws NoSuchMethodException,

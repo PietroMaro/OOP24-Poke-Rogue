@@ -18,11 +18,11 @@ public final class InputHandlerImpl extends KeyAdapter {
     /**
      * Constructs the input handler and initializes the game engine instance.
      *
-	 * @param gameEngine the main game engine
+     * @param gameEngine the main game engine
      */
     public InputHandlerImpl(final GameEngine gameEngine) {
         try {
-        	this.gameEngine = gameEngine; 
+            this.gameEngine = gameEngine; 
         } catch (final JexlException e) {
             e.printStackTrace();
             throw new IllegalStateException("GameEngine has not been initialized");

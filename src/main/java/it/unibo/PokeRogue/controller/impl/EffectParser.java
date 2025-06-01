@@ -33,9 +33,9 @@ public final class EffectParser {
     private static Optional<Weather> weather;
     private static final PlayerTrainerImpl PLAYER_MONEY = PlayerTrainerImpl.getTrainerInstance();
 
-	private EffectParser() {
-		//This shouldn't be instanciated.
-	} 
+    private EffectParser() {
+        //This shouldn't be instanciated.
+    } 
 
     private static void parseEffect(final JSONObject effect) throws IOException {
         final JSONArray checks = effect.getJSONArray("checks");
@@ -126,7 +126,7 @@ public final class EffectParser {
         }
     }
 
-	/**
+    /**
      * parses the effect of an ability or move and applies it autonomously
      * using the getters and setters of the given classes.
      *
@@ -152,7 +152,7 @@ public final class EffectParser {
         parseEffect(newEffect);
     }
 
-	/**
+    /**
      * parses the effect of a pokemObject and applies it autonomously
      * using the getters and setters of the given classes.
      *

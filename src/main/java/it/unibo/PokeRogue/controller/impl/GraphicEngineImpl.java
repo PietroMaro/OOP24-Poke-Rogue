@@ -34,8 +34,8 @@ public final class GraphicEngineImpl implements GraphicEngine {
     /**
      * Constructs the graphic engine and initializes the game window.
      * Sets up the layout, key listener, and basic window properties.
-	 *
-	 * @param gameEngine the main game engine
+     *
+     * @param gameEngine the main game engine
      */
     public GraphicEngineImpl(final GameEngine gameEngine) {
         this.gameWindow = new JFrame("Pokérogue Lite");

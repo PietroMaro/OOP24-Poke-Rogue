@@ -49,8 +49,8 @@ public final class SceneLoad extends Scene {
     /**
      * Constructs a new {@code SceneLoad} object, initializing internal structures
      * and retrieving the list of saves.
-	 *
-	 * @param savingSystemInstance the main saving system
+     *
+     * @param savingSystemInstance the main saving system
      */
     public SceneLoad(final SavingSystem savingSystemInstance) throws InstantiationException,
             IllegalAccessException,

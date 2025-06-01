@@ -65,16 +65,16 @@ final class TestAll {
         PlayerTrainerImpl.resetInstance();
     }
 
-	@BeforeAll
-	private static void initAllFactories() {
-		try {
-		PokemonFactory.init();
-		MoveFactory.init();
-		AbilityFactory.init();
-		} catch (final IOException e) {
-			e.printStackTrace();
-		}
-	}
+    @BeforeAll
+    private static void initAllFactories() {
+        try {
+        PokemonFactory.init();
+        MoveFactory.init();
+        AbilityFactory.init();
+        } catch (final IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
     void testPlayerTrainer() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
@@ -104,31 +104,31 @@ final class TestAll {
 
     }
 
-	@Test
-	void testMoveFactory() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
-			InstantiationException {
-		Move moveTest = null;
-		try {
-			moveTest = MoveFactory.moveFromName("absorb");
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
-		final UnsupportedOperationException ex = assertThrows(UnsupportedOperationException.class, () -> {
-			MoveFactory.moveFromName("nonExisting");
-		});
-		assertEquals(
-				ex.getMessage(),
-				"The move nonExisting blueprint was not found. "
-						+ "Is not present in moveList / Factory not initialized");
-		assertEquals(moveTest.getPp().getCurrentMax(), MAX_PP);
-		assertEquals(moveTest.getPp().getCurrentMin(), 0);
-		assertEquals(moveTest.getPp().getCurrentValue(), MAX_PP);
-		assertEquals(moveTest.isPhysical(), false);
-		assertEquals(moveTest.getAccuracy(), 100);
-		assertEquals(moveTest.getCritRate(), 0);
-		assertEquals(moveTest.getType(), Type.fromString("grass"));
-		assertEquals(moveTest.getPriority(), 0);
-	}
+    @Test
+    void testMoveFactory() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+            InstantiationException {
+        Move moveTest = null;
+        try {
+            moveTest = MoveFactory.moveFromName("absorb");
+        } catch (final Exception e) {
+            e.printStackTrace();
+        }
+        final UnsupportedOperationException ex = assertThrows(UnsupportedOperationException.class, () -> {
+            MoveFactory.moveFromName("nonExisting");
+        });
+        assertEquals(
+                ex.getMessage(),
+                "The move nonExisting blueprint was not found. "
+                        + "Is not present in moveList / Factory not initialized");
+        assertEquals(moveTest.getPp().getCurrentMax(), MAX_PP);
+        assertEquals(moveTest.getPp().getCurrentMin(), 0);
+        assertEquals(moveTest.getPp().getCurrentValue(), MAX_PP);
+        assertEquals(moveTest.isPhysical(), false);
+        assertEquals(moveTest.getAccuracy(), 100);
+        assertEquals(moveTest.getCritRate(), 0);
+        assertEquals(moveTest.getType(), Type.fromString("grass"));
+        assertEquals(moveTest.getPriority(), 0);
+    }
 
     @Test
     void testAbilityFactory() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
@@ -145,27 +145,27 @@ final class TestAll {
         assertEquals(abilityTest.situationChecks(), AbilitySituationChecks.fromString("attack"));
     }
 
-	@Test
-	void testMoveCopy() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
-			InstantiationException {
-		final Move moveTest1 = MoveFactory.moveFromName("absorb");
-		final Move moveTest2 = MoveFactory.moveFromName("absorb");
-		moveTest1.setPp(new RangeImpl<Integer>(moveTest1.getPp().getCurrentMin(), moveTest1.getPp().getCurrentMax(),
-				0));
-		assertNotSame(moveTest1, moveTest2);
-		assertNotSame(moveTest2.getPp().getCurrentValue(), 0);
-		assertEquals(moveTest1.getPp().getCurrentValue(), 0);
-	}
+    @Test
+    void testMoveCopy() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+            InstantiationException {
+        final Move moveTest1 = MoveFactory.moveFromName("absorb");
+        final Move moveTest2 = MoveFactory.moveFromName("absorb");
+        moveTest1.setPp(new RangeImpl<Integer>(moveTest1.getPp().getCurrentMin(), moveTest1.getPp().getCurrentMax(),
+                0));
+        assertNotSame(moveTest1, moveTest2);
+        assertNotSame(moveTest2.getPp().getCurrentValue(), 0);
+        assertEquals(moveTest1.getPp().getCurrentValue(), 0);
+    }
 
     @Test
     void testAllMovesEffect()
             throws IOException, NoSuchMethodException, IllegalAccessException, InvocationTargetException,
             InstantiationException {
-		final Optional<Move> moveTest1 = Optional.of(MoveFactory.moveFromName("absorb"));
-		final Optional<Move> moveTest2 = Optional.of(MoveFactory.moveFromName("absorb"));
-		final Pokemon pok1 = PokemonFactory.randomPokemon(3);
-		final Pokemon pok2 = PokemonFactory.randomPokemon(3);
-		final Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
+        final Optional<Move> moveTest1 = Optional.of(MoveFactory.moveFromName("absorb"));
+        final Optional<Move> moveTest2 = Optional.of(MoveFactory.moveFromName("absorb"));
+        final Pokemon pok1 = PokemonFactory.randomPokemon(3);
+        final Pokemon pok2 = PokemonFactory.randomPokemon(3);
+        final Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
 
         final JsonReader jsonReader = new JsonReaderImpl();
 
@@ -185,11 +185,11 @@ final class TestAll {
     void testAllAbilityEffect()
             throws IOException, NoSuchMethodException, IllegalAccessException, InvocationTargetException,
             InstantiationException {
-		final Optional<Move> moveTest1 = Optional.of(MoveFactory.moveFromName("absorb"));
-		final Optional<Move> moveTest2 = Optional.of(MoveFactory.moveFromName("absorb"));
-		final Pokemon pok1 = PokemonFactory.randomPokemon(3);
-		final Pokemon pok2 = PokemonFactory.randomPokemon(3);
-		final Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
+        final Optional<Move> moveTest1 = Optional.of(MoveFactory.moveFromName("absorb"));
+        final Optional<Move> moveTest2 = Optional.of(MoveFactory.moveFromName("absorb"));
+        final Pokemon pok1 = PokemonFactory.randomPokemon(3);
+        final Pokemon pok2 = PokemonFactory.randomPokemon(3);
+        final Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
 
         final JsonReader jsonReader = new JsonReaderImpl();
 
@@ -212,9 +212,9 @@ final class TestAll {
 
         final PokeEffectivenessCalc calculator = new PokeEffectivenessCalcImpl();
 
-		final Pokemon charmander = PokemonFactory.pokemonFromName("charmander");
-		final Pokemon venusaur = PokemonFactory.pokemonFromName("venusaur");
-		final Pokemon poliwag = PokemonFactory.pokemonFromName("poliwag");
+        final Pokemon charmander = PokemonFactory.pokemonFromName("charmander");
+        final Pokemon venusaur = PokemonFactory.pokemonFromName("venusaur");
+        final Pokemon poliwag = PokemonFactory.pokemonFromName("poliwag");
 
         assertEquals(HIGH_EFFECTIVENESS, calculator.calculateEffectiveness(charmander, venusaur));
         assertEquals(MEDIUM_EFFECTIVENESS, calculator.calculateEffectiveness(venusaur, poliwag));
@@ -240,16 +240,16 @@ final class TestAll {
         }
     }
 
-	@Test
-	void testAi() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
-			InstantiationException, IOException {
-		final TrainerImpl enemyTrainer = new TrainerImpl();
-		final Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
-		final EnemyAi ai = new EnemyAiImpl(99);
-		final Pokemon charmander = PokemonFactory.pokemonFromName("charmander");
-		final Pokemon venusaur = PokemonFactory.pokemonFromName("venusaur");
-		final Pokemon poliwag = PokemonFactory.pokemonFromName("poliwag");
-		final PlayerTrainerImpl playerTrainerImpl = PlayerTrainerImpl.getTrainerInstance();
+    @Test
+    void testAi() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+            InstantiationException, IOException {
+        final TrainerImpl enemyTrainer = new TrainerImpl();
+        final Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
+        final EnemyAi ai = new EnemyAiImpl(99);
+        final Pokemon charmander = PokemonFactory.pokemonFromName("charmander");
+        final Pokemon venusaur = PokemonFactory.pokemonFromName("venusaur");
+        final Pokemon poliwag = PokemonFactory.pokemonFromName("poliwag");
+        final PlayerTrainerImpl playerTrainerImpl = PlayerTrainerImpl.getTrainerInstance();
 
         playerTrainerImpl.addPokemon(poliwag, MAX_LENGTH_OF_POKESQUAD);
         enemyTrainer.addPokemon(charmander, MAX_LENGTH_OF_POKESQUAD);
@@ -262,15 +262,15 @@ final class TestAll {
 
     }
 
-	@Test
-	void testBattleRewards() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
-			InstantiationException, IOException {
-		final Pokemon charmander = PokemonFactory.pokemonFromName("charmander");
-		final Pokemon bulbasaur = PokemonFactory.pokemonFromName("bulbasaur");
-		final int beforeXP = charmander.getExp().getCurrentValue();
-		BattleRewards.awardBattleRewards(charmander, bulbasaur);
-		final int afterXP = charmander.getExp().getCurrentValue();
-		assertFalse(beforeXP > afterXP);
+    @Test
+    void testBattleRewards() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+            InstantiationException, IOException {
+        final Pokemon charmander = PokemonFactory.pokemonFromName("charmander");
+        final Pokemon bulbasaur = PokemonFactory.pokemonFromName("bulbasaur");
+        final int beforeXP = charmander.getExp().getCurrentValue();
+        BattleRewards.awardBattleRewards(charmander, bulbasaur);
+        final int afterXP = charmander.getExp().getCurrentValue();
+        assertFalse(beforeXP > afterXP);
 
     }
 
@@ -283,22 +283,22 @@ final class TestAll {
         assertTrue(enemyTrainer.getSquad().size() > 1);
     }
 
-	@Test
-	void testBattleEngine() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
-			InstantiationException, IOException {
-		final TrainerImpl enemyTrainer = new TrainerImpl();
-		final PlayerTrainerImpl playerTrainer = PlayerTrainerImpl.getTrainerInstance();
-		final Pokemon bulbasaur = PokemonFactory.pokemonFromName("bulbasaur");
-		final Pokemon charmander = PokemonFactory.pokemonFromName("charmander");
-		playerTrainer.addPokemon(bulbasaur, 1);
-		enemyTrainer.addPokemon(charmander, 1);
-		final EnemyAi ai = new EnemyAiImpl(99);
-		final int beforeLife = playerTrainer.getSquad().get(0).get().getActualStats().get(Stats.HP).getCurrentValue();
-		final BattleEngine battleEngine = new BattleEngineImpl(ai, new SavingSystemImpl());
-		battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""),
-				new Decision(DecisionTypeEnum.ATTACK, "0"), enemyTrainer);
-		final int afterLife = playerTrainer.getSquad().get(0).get().getActualStats().get(Stats.HP).getCurrentValue();
-		assertTrue(beforeLife > afterLife);
-	}
+    @Test
+    void testBattleEngine() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+            InstantiationException, IOException {
+        final TrainerImpl enemyTrainer = new TrainerImpl();
+        final PlayerTrainerImpl playerTrainer = PlayerTrainerImpl.getTrainerInstance();
+        final Pokemon bulbasaur = PokemonFactory.pokemonFromName("bulbasaur");
+        final Pokemon charmander = PokemonFactory.pokemonFromName("charmander");
+        playerTrainer.addPokemon(bulbasaur, 1);
+        enemyTrainer.addPokemon(charmander, 1);
+        final EnemyAi ai = new EnemyAiImpl(99);
+        final int beforeLife = playerTrainer.getSquad().get(0).get().getActualStats().get(Stats.HP).getCurrentValue();
+        final BattleEngine battleEngine = new BattleEngineImpl(ai, new SavingSystemImpl());
+        battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""),
+                new Decision(DecisionTypeEnum.ATTACK, "0"), enemyTrainer);
+        final int afterLife = playerTrainer.getSquad().get(0).get().getActualStats().get(Stats.HP).getCurrentValue();
+        assertTrue(beforeLife > afterLife);
+    }
 
 }

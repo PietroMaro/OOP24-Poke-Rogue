@@ -42,13 +42,13 @@ public final class PokemonFactory {
     private static final Set<String> ALL_POKEMON_SET = new HashSet<>();
     private static final Map<String, PokemonBlueprint> POKEMON_BLUEPRINTS = new HashMap<>();
 
-	private PokemonFactory() {
-		//Shouldn't be instanciated
-	}
+    private PokemonFactory() {
+        //Shouldn't be instanciated
+    }
 
-	/**
- 	* Initate the factory loading from memory.
- 	*/
+    /**
+     * Initate the factory loading from memory.
+     */
     public static void init() throws IOException {
         final JSONArray allPokemonJson = JSON_READER
                 .readJsonArray(
@@ -110,12 +110,12 @@ public final class PokemonFactory {
     }
 
 
-	 /**
-	 * generates a random pokemon with the given name.
-	 *
-	 * @param pokemonName the pokemon name 
-	 * @return the pokemon
-	 */
+     /**
+     * generates a random pokemon with the given name.
+     *
+     * @param pokemonName the pokemon name 
+     * @return the pokemon
+     */
     public static Pokemon pokemonFromName(final String pokemonName)
             throws InstantiationException,
             IllegalAccessException,
@@ -131,12 +131,12 @@ public final class PokemonFactory {
         return new PokemonImpl(pokemonBlueprint);
     }
 
-	/**
-	 * generates a random pokemon at the given level.
-	 *
-	 * @param level the level of the pokemon
-	 * @return the pokemon
-	 */
+    /**
+     * generates a random pokemon at the given level.
+     *
+     * @param level the level of the pokemon
+     * @return the pokemon
+     */
     public static Pokemon randomPokemon(final int level) throws InstantiationException,
             IllegalAccessException,
             NoSuchMethodException,
@@ -149,11 +149,11 @@ public final class PokemonFactory {
         return result;
     }
 
-	/**
-	 * Gives all the pokemon initiated.
-	 * 
-	 * @return the set
-	 */
+    /**
+     * Gives all the pokemon initiated.
+     * 
+     * @return the set
+     */
     public static Set<String> getAllPokemonList() {
         return new HashSet<>(ALL_POKEMON_SET);
     }

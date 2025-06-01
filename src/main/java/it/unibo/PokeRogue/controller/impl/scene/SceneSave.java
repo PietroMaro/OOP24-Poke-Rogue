@@ -42,7 +42,7 @@ public class SceneSave extends Scene {
      * Constructs and initializes the save scene by loading its graphical elements,
      * setting up initial button states, and preparing the view for rendering.
      *
-	 * @param savingSystem the main saving system
+     * @param savingSystem the main saving system
      * @throws IOException               if loading scene data fails.
      * @throws InstantiationException    if a required object can't be instantiated.
      * @throws IllegalAccessException    if access to a constructor is denied.
