@@ -31,8 +31,7 @@ import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
 import it.unibo.pokerogue.utilities.BattleRewards;
 import it.unibo.pokerogue.utilities.BattleUtilities;
-import it.unibo.pokerogue.utilities.api.PokemonBattleUtil;
-import it.unibo.pokerogue.utilities.impl.PokemonBattleUtilImpl;
+import it.unibo.pokerogue.utilities.DamageCalculator;
 import lombok.Getter;
 
 /**
@@ -49,7 +48,6 @@ public class BattleEngineImpl implements BattleEngine {
     private final EffectParser effectParserInstance;
     @Getter
     private final Optional<Weather> currentWeather;
-    private final PokemonBattleUtil pokemonBattleUtilInstance;
     private final AbilityFactory abilityFactoryInstance;
     private final StatusEffect statusEffectInstance;
     private final EnemyAi enemyAiInstance;
@@ -75,7 +73,6 @@ public class BattleEngineImpl implements BattleEngine {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
-        this.pokemonBattleUtilInstance = new PokemonBattleUtilImpl();
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
         this.effectParserInstance = EffectParserImpl.getInstance(EffectParserImpl.class);
         this.currentWeather = Optional.of(Weather.SUNLIGHT);
@@ -148,7 +145,7 @@ public class BattleEngineImpl implements BattleEngine {
         movePp.decrement(1);
         attackerMove.get().setPp(movePp);
         attackerMove.get().getPp().decrement(1);
-        final int finalDamage = pokemonBattleUtilInstance.calculateDamage(attackerPokemon, defenderPokemon,
+        final int finalDamage = DamageCalculator.calculateDamage(attackerPokemon, defenderPokemon,
                 attackerMove.get(),
                 this.currentWeather);
         defenderPokemon.getActualStats().get(Stats.HP).decrement(finalDamage);

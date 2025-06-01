@@ -15,8 +15,7 @@ import it.unibo.pokerogue.model.api.trainer.Trainer;
 import it.unibo.pokerogue.model.enums.DecisionTypeEnum;
 import it.unibo.pokerogue.model.enums.Stats;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
-import it.unibo.pokerogue.utilities.api.PokeEffectivenessCalc;
-import it.unibo.pokerogue.utilities.impl.PokeEffectivenessCalcImpl;
+import it.unibo.pokerogue.utilities.PokeEffectivenessCalc;
 
 import java.io.IOException;
 
@@ -32,7 +31,6 @@ public final class EnemyAiSwitchIn {
     private static final int ACCEPTED_EFFECTIVENESS_DIFFERENCE = 50;
 
     private final PlayerTrainerImpl playerTrainerInstance;
-    private final PokeEffectivenessCalc pokeEffectivenessCalculator;
     private final Map<Integer, Integer> pokeInSquadScore;
     private final Random random;
     private int switchPosition;
@@ -53,7 +51,6 @@ public final class EnemyAiSwitchIn {
     public EnemyAiSwitchIn(final boolean usePokemonInOrder, final boolean considerSwitching, final int switchFirstRate)
             throws IOException {
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-        this.pokeEffectivenessCalculator = new PokeEffectivenessCalcImpl();
         pokeInSquadScore = new HashMap<>();
         random = new Random();
         this.usePokemonInOrder = usePokemonInOrder;
@@ -194,7 +191,7 @@ public final class EnemyAiSwitchIn {
 
     private int calculateEffectivenessDifference(final int posEnemyPokemon, final int posPlayerPokemon,
             final Trainer enemyTrainer) {
-        return this.pokeEffectivenessCalculator.calculateEffectiveness(enemyTrainer.getPokemon(posEnemyPokemon).get(),
+        return PokeEffectivenessCalc.calculateEffectiveness(enemyTrainer.getPokemon(posEnemyPokemon).get(),
                 playerTrainerInstance.getPokemon(posPlayerPokemon).get());
     }
 

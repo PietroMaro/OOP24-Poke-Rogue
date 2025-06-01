@@ -15,10 +15,8 @@ import it.unibo.pokerogue.model.enums.DecisionTypeEnum;
 import it.unibo.pokerogue.model.enums.Stats;
 import it.unibo.pokerogue.model.enums.Weather;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
-import it.unibo.pokerogue.utilities.api.PokeEffectivenessCalc;
-import it.unibo.pokerogue.utilities.api.PokemonBattleUtil;
-import it.unibo.pokerogue.utilities.impl.PokeEffectivenessCalcImpl;
-import it.unibo.pokerogue.utilities.impl.PokemonBattleUtilImpl;
+import it.unibo.pokerogue.utilities.DamageCalculator;
+import it.unibo.pokerogue.utilities.PokeEffectivenessCalc;
 
 import java.io.IOException;
 
@@ -35,8 +33,6 @@ public final class EnemyAiAttack {
     private final Random random;
     private Map<Integer, Integer> scoresOfMoves;
     private List<Move> currentEnemyPokemonMoves;
-    private final PokeEffectivenessCalc pokeEffectivenessCalculator;
-    private final PokemonBattleUtil damageCalculator;
 
     private Pokemon currentPlayerPokemon;
 
@@ -52,8 +48,6 @@ public final class EnemyAiAttack {
      */
     public EnemyAiAttack(final boolean scoreMoves, final boolean hpAware) throws IOException {
         this.random = new Random();
-        this.damageCalculator = new PokemonBattleUtilImpl();
-        this.pokeEffectivenessCalculator = new PokeEffectivenessCalcImpl();
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
         this.scoreMoves = scoreMoves;
         this.hpAware = hpAware;
@@ -136,7 +130,7 @@ public final class EnemyAiAttack {
                 score = 100;
 
                 if (moveToBeScored.isPhysical()) {
-                    effectiveness = this.pokeEffectivenessCalculator.calculateAttackEffectiveness(moveToBeScored,
+                    effectiveness = PokeEffectivenessCalc.calculateAttackEffectiveness(moveToBeScored,
                             this.currentPlayerPokemon);
 
                     if (effectiveness == 0) {
@@ -186,7 +180,7 @@ public final class EnemyAiAttack {
             moveIndex = entry.getKey();
             moveToBeScored = this.currentEnemyPokemonMoves.get(moveIndex);
             actualMoveScore = entry.getValue();
-            moveDamage = this.damageCalculator.calculateDamage(this.currentEnemyPokemon, this.currentPlayerPokemon,
+            moveDamage = DamageCalculator.calculateDamage(this.currentEnemyPokemon, this.currentPlayerPokemon,
                     moveToBeScored, weather);
 
             if (moveDamage > bestMoveDamage) {
