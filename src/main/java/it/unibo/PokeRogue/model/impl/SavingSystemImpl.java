@@ -18,7 +18,7 @@ import java.util.Locale;
  * saving and loading Pokémon data using JSON files. Pokémon are stored
  * as a list of names and grouped into boxes of fixed size.
  */
-public class SavingSystemImpl extends Singleton implements SavingSystem {
+public class SavingSystemImpl implements SavingSystem {
     private static final int BOX_SIZE = 81;
     private final JsonReader jsonReader = new JsonReaderImpl();
     private JSONArray savedPokemon = new JSONArray();

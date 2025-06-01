@@ -11,7 +11,6 @@ import org.json.JSONObject;
 
 import it.unibo.pokerogue.model.api.Range;
 import it.unibo.pokerogue.model.api.move.Move;
-import it.unibo.pokerogue.model.api.move.MoveFactory;
 import it.unibo.pokerogue.model.enums.Type;
 import it.unibo.pokerogue.utilities.api.JsonReader;
 import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
@@ -21,21 +20,13 @@ import org.json.JSONArray;
 /**
  * Move factory implementation.
  */
-public class MoveFactoryImpl extends Singleton implements MoveFactory {
+public class MoveFactory {
 
     // make the access in memory and saves the information of all pokemon in local
-    private final JsonReader jsonReader = new JsonReaderImpl();
-    private final Map<String, Move> movesBlueprints = new HashMap<>();
+    private static final JsonReader jsonReader = new JsonReaderImpl();
+    private static final Map<String, Move> movesBlueprints = new HashMap<>();
 
-    /**
-     * Constructor initiate the factory.
-     */
-    public MoveFactoryImpl() throws IOException {
-        init();
-    }
-
-    @Override
-    public final void init() throws IOException {
+    public static final void init() throws IOException {
         final JSONArray allMoveJson = jsonReader
                 .readJsonArray(Paths
                         .get("src", "main", "resources",
@@ -47,7 +38,7 @@ public class MoveFactoryImpl extends Singleton implements MoveFactory {
         }
     }
 
-    private void addMoveToBlueprints(final String moveName) throws IOException {
+    private static void addMoveToBlueprints(final String moveName) throws IOException {
         final JSONObject moveJson = jsonReader.readJsonObject(Paths
                 .get("src", "main", "resources",
                         "pokemonData",
@@ -77,12 +68,11 @@ public class MoveFactoryImpl extends Singleton implements MoveFactory {
                 type,
                 priority);
 
-        this.movesBlueprints.put(moveName, newMove);
+        movesBlueprints.put(moveName, newMove);
     }
 
-    @Override
-    public final Move moveFromName(final String moveName) {
-        Move move = this.movesBlueprints.get(moveName);
+    public static final Move moveFromName(final String moveName) {
+        Move move = movesBlueprints.get(moveName);
         if (move == null) {
             throw new UnsupportedOperationException("The move " + moveName
                     + " blueprint was not found. Is not present in moveList / Factory not initialized");

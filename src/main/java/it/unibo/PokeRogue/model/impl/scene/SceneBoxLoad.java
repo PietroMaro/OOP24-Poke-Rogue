@@ -7,7 +7,6 @@ import it.unibo.pokerogue.model.api.SavingSystem;
 import it.unibo.pokerogue.model.api.pokemon.Pokemon;
 import it.unibo.pokerogue.model.impl.SavingSystemImpl;
 import it.unibo.pokerogue.model.impl.pokemon.PokemonFactory;
-import it.unibo.pokerogue.model.impl.pokemon.PokemonFactoryImpl;
 
 import java.util.ArrayList;
 import java.io.IOException;
@@ -25,7 +24,6 @@ public final class SceneBoxLoad {
     private static final int LENGTH_OF_POKEBOX = 81;
 
     private final SavingSystem savingSystemInstance;
-    private final PokemonFactory pokemonFactoryInstance;
 
     private final List<List<Pokemon>> boxes;
 
@@ -33,12 +31,11 @@ public final class SceneBoxLoad {
      * Constructs a new {@code SceneBoxModel} and initializes the saving system
      * and Pokémon factory instances.
      */
-    public SceneBoxLoad() throws InstantiationException,
+    public SceneBoxLoad(final SavingSystem savingSystem) throws InstantiationException,
             IllegalAccessException,
             InvocationTargetException,
             NoSuchMethodException {
-        this.savingSystemInstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
-        this.pokemonFactoryInstance = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
+        this.savingSystemInstance = savingSystem;
 
         this.boxes = new ArrayList<>();
 
@@ -56,19 +53,19 @@ public final class SceneBoxLoad {
             NoSuchMethodException,
             IOException {
         if ("".equals(savePath)) {
-            this.savingSystemInstance.savePokemon(pokemonFactoryInstance.pokemonFromName("bulbasaur"));
-            this.savingSystemInstance.savePokemon(pokemonFactoryInstance.pokemonFromName("charmander"));
-            this.savingSystemInstance.savePokemon(pokemonFactoryInstance.pokemonFromName("squirtle"));
-            this.addPokemonToBox(pokemonFactoryInstance.pokemonFromName("bulbasaur"));
-            this.addPokemonToBox(pokemonFactoryInstance.pokemonFromName("charmander"));
-            this.addPokemonToBox(pokemonFactoryInstance.pokemonFromName("squirtle"));
+            this.savingSystemInstance.savePokemon(PokemonFactory.pokemonFromName("bulbasaur"));
+            this.savingSystemInstance.savePokemon(PokemonFactory.pokemonFromName("charmander"));
+            this.savingSystemInstance.savePokemon(PokemonFactory.pokemonFromName("squirtle"));
+            this.addPokemonToBox(PokemonFactory.pokemonFromName("bulbasaur"));
+            this.addPokemonToBox(PokemonFactory.pokemonFromName("charmander"));
+            this.addPokemonToBox(PokemonFactory.pokemonFromName("squirtle"));
 
         } else {
             this.savingSystemInstance.loadData(Paths.get("src", "main", "resources", "saves", savePath).toString());
 
             for (final var box : this.savingSystemInstance.getSavedPokemon()) {
                 for (final String pokemonName : box) {
-                    this.addPokemonToBox(pokemonFactoryInstance.pokemonFromName(pokemonName));
+                    this.addPokemonToBox(PokemonFactory.pokemonFromName(pokemonName));
 
                 }
 

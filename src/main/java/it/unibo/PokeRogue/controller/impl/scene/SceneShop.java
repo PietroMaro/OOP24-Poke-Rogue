@@ -9,9 +9,8 @@ import java.util.Optional;
 
 import org.json.JSONObject;
 
-import it.unibo.pokerogue.controller.api.EffectParser;
+import it.unibo.pokerogue.controller.impl.EffectParser;
 import it.unibo.pokerogue.controller.api.scene.Scene;
-import it.unibo.pokerogue.controller.impl.EffectParserImpl;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.api.item.Item;
 import it.unibo.pokerogue.model.api.pokemon.Pokemon;
@@ -46,7 +45,6 @@ public class SceneShop extends Scene {
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final PlayerTrainerImpl playerTrainerInstance;
     private final SceneShopView sceneShopView;
-    private final EffectParser effectParser = EffectParserImpl.getInstance(EffectParserImpl.class);
     @Setter
     private int newSelectedButton;
     @Setter
@@ -160,8 +158,7 @@ public class SceneShop extends Scene {
                         && this.newSelectedButton <= this.graphicElementNameToInt.get(CHANGE_6)
                         && selectedItemForUse) {
                     this.initGraphicElements();
-                    applyItemToPokemon(this.newSelectedButton - CHANGE_POKEMON_INITIAL_POSITION, playerTrainerInstance,
-                            effectParser);
+                    applyItemToPokemon(this.newSelectedButton - CHANGE_POKEMON_INITIAL_POSITION, playerTrainerInstance);
                     this.newSelectedButton = this.graphicElementNameToInt.get(PRICY_ITEM_1);
                 } else if (this.newSelectedButton >= this.graphicElementNameToInt.get(PRICY_ITEM_1)
                         && this.newSelectedButton <= this.graphicElementNameToInt.get(PRICY_ITEM_3)) {
@@ -217,7 +214,7 @@ public class SceneShop extends Scene {
             SceneChanger.setScene("fight");
         } else if ("Valuable".equalsIgnoreCase(item.getType())) {
             final Optional<JSONObject> itemEffect = item.getEffect();
-            this.effectParser.parseEffect(itemEffect.get(), trainer.getPokemon(0).get());
+            EffectParser.parseEffect(itemEffect.get(), trainer.getPokemon(0).get());
             SceneChanger.setScene("fight");
         } else if ("Healing".equalsIgnoreCase(item.getType())
                 || "Boost".equalsIgnoreCase(item.getType()) || "PPRestore".equalsIgnoreCase(item.getType())) {
@@ -225,8 +222,7 @@ public class SceneShop extends Scene {
         }
     }
 
-    private void applyItemToPokemon(final int pokemonIndex, final PlayerTrainerImpl trainer,
-            final EffectParser effectParser) throws InstantiationException,
+    private void applyItemToPokemon(final int pokemonIndex, final PlayerTrainerImpl trainer) throws InstantiationException,
             IllegalAccessException, InvocationTargetException, NoSuchMethodException, IOException {
         if (this.selectedUsableItem != null) {
             final Optional<Pokemon> selectedPokemon = trainer
@@ -236,7 +232,7 @@ public class SceneShop extends Scene {
 
                 // Ottieni l'effetto dell'item
                 final Optional<JSONObject> itemEffect = this.selectedUsableItem.getEffect();
-                effectParser.parseEffect(itemEffect.get(), pokemon);
+                EffectParser.parseEffect(itemEffect.get(), pokemon);
                 this.selectedUsableItem = null;
                 SceneChanger.setScene("fight");
             }

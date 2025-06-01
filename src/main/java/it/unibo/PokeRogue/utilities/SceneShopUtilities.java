@@ -12,7 +12,7 @@ import it.unibo.pokerogue.model.api.pokemon.Pokemon;
 import it.unibo.pokerogue.model.api.trainer.Trainer;
 import it.unibo.pokerogue.model.enums.Stats;
 import it.unibo.pokerogue.model.impl.graphic.TextElementImpl;
-import it.unibo.pokerogue.model.impl.item.ItemFactoryImpl;
+import it.unibo.pokerogue.model.impl.item.ItemFactory;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 
 /**
@@ -92,14 +92,13 @@ public final class SceneShopUtilities {
             IllegalAccessException,
             NoSuchMethodException,
             InvocationTargetException {
-        final ItemFactoryImpl itemFactory = ItemFactoryImpl.getInstance(ItemFactoryImpl.class);
 
         SHOP_ITEMS.clear();
         for (int i = 0; i < PRICY_ITEMS_SIZE; i++) {
-            SHOP_ITEMS.add(itemFactory.randomItem());
+            SHOP_ITEMS.add(ItemFactory.randomItem());
         }
         for (int i = 0; i < FREE_ITEMS_SIZE; i++) {
-            SHOP_ITEMS.add(itemFactory.randomItem());
+            SHOP_ITEMS.add(ItemFactory.randomItem());
         }
     }
 

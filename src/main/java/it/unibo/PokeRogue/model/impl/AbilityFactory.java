@@ -10,7 +10,6 @@ import java.nio.file.Paths;
 import org.json.JSONObject;
 
 import it.unibo.pokerogue.model.api.ability.Ability;
-import it.unibo.pokerogue.model.api.ability.AbilityFactory;
 import it.unibo.pokerogue.model.enums.AbilitySituationChecks;
 import it.unibo.pokerogue.utilities.api.JsonReader;
 import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
@@ -20,19 +19,19 @@ import org.json.JSONArray;
 /**
  * The ability factory.
  */
-public class AbilityFactoryImpl extends Singleton implements AbilityFactory {
+public class AbilityFactory {
     // make the access in memory and saves the information of all pokemon in local
-    private final JsonReader jsonReader = new JsonReaderImpl();
-    private final Map<String, Ability> abilityBlueprints = new HashMap<>();
+    private static final JsonReader jsonReader = new JsonReaderImpl();
+    private static final Map<String, Ability> abilityBlueprints = new HashMap<>();
 
-    /**
-     * initiate the factory.
+	 /**
+     * Initializes the factory by reading all Ability names and their corresponding
+     * data
+     * from the JSON files.
+     *
+     * @throws IOException if an error occurs while reading item files
      */
-    public AbilityFactoryImpl() throws IOException {
-        init();
-    }
-
-    private void init() throws IOException {
+    public static void init() throws IOException {
         final JSONArray allAbilityJson;
         allAbilityJson = jsonReader.readJsonArray(Paths
                 .get("src", "main", "resources",
@@ -44,7 +43,7 @@ public class AbilityFactoryImpl extends Singleton implements AbilityFactory {
         }
     }
 
-    private void addAbilityToBlueprints(final String abilityName) throws IOException {
+    private static void addAbilityToBlueprints(final String abilityName) throws IOException {
         final JSONObject abilityJson = jsonReader
                 .readJsonObject(Paths.get("src", "main", "resources",
                         "pokemonData",
@@ -57,7 +56,7 @@ public class AbilityFactoryImpl extends Singleton implements AbilityFactory {
                 situationChecks,
                 Optional.ofNullable(effect));
 
-        this.abilityBlueprints.put(abilityName, newAbility);
+        abilityBlueprints.put(abilityName, newAbility);
     }
 
     /**
@@ -66,9 +65,8 @@ public class AbilityFactoryImpl extends Singleton implements AbilityFactory {
      * @param abilityName the ability string value
      * @return the ability
      */
-    @Override
-    public Ability abilityFromName(final String abilityName) {
-        final Ability ability = this.abilityBlueprints.get(abilityName);
+    public static Ability abilityFromName(final String abilityName) {
+        final Ability ability = abilityBlueprints.get(abilityName);
         if (ability == null) {
             throw new UnsupportedOperationException("The ability "
                     + abilityName

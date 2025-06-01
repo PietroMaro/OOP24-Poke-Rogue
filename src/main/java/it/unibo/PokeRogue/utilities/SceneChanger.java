@@ -1,10 +1,5 @@
 package it.unibo.pokerogue.utilities;
 
-import it.unibo.pokerogue.model.api.move.Move;
-import it.unibo.pokerogue.model.api.pokemon.Pokemon;
-import it.unibo.pokerogue.model.enums.Type;
-import it.unibo.pokerogue.utilities.api.JsonReader;
-import it.unibo.pokerogue.utilities.api.PokeEffectivenessCalc;
 import it.unibo.pokerogue.controller.api.GameEngine;
 import it.unibo.pokerogue.controller.api.GraphicEngine;
 import it.unibo.pokerogue.controller.api.scene.Scene;
@@ -16,24 +11,30 @@ import it.unibo.pokerogue.controller.impl.scene.SceneMove;
 import it.unibo.pokerogue.controller.impl.scene.SceneSave;
 import it.unibo.pokerogue.controller.impl.scene.SceneShop;
 import it.unibo.pokerogue.controller.impl.scene.fight.SceneFight;
+import it.unibo.pokerogue.model.api.SavingSystem;
+import it.unibo.pokerogue.model.impl.SavingSystemImpl;
 import java.lang.reflect.InvocationTargetException;
 import java.io.IOException;
 
-public final class SceneChanger{
+/**
+ * The utility class to change scenes.
+ */
+public final class SceneChanger {
 	private static GameEngine gameEngine;
 	private static GraphicEngine graphicEngine;
 	private static int fightLevel;
 	private static String fileToLoadName;
+	private static final SavingSystem savingSystem = new SavingSystemImpl();
 
-	private SceneChanger(){
+	private SceneChanger() {
 		//Shouldn't be instanciated.
 	}
 
    /**
    * Init the SceneChanger passing the necessary engines.
    * 
-   * @param gameEngine the game engine of the game.
-   * @param graphicEngine the graphic engine of the game.
+   * @param ge the game engine of the game.
+   * @param gre the graphic engine of the game.
    */
 	public static void init(GameEngine ge,GraphicEngine gre) {
 		gameEngine = ge;
@@ -79,14 +80,14 @@ public final class SceneChanger{
                 break;
 
             case "load":
-                newScene = new SceneLoad();
+                newScene = new SceneLoad(savingSystem);
                 break;
             case "box":
-                newScene = new SceneBox(fileToLoadName);
+                newScene = new SceneBox(fileToLoadName, savingSystem);
                 break;
             case "fight":
                 fightLevel = fightLevel + 1;
-                newScene = new SceneFight(fightLevel);
+                newScene = new SceneFight(fightLevel, savingSystem);
                 break;
             case "shop":
                 newScene = new SceneShop();
@@ -98,7 +99,7 @@ public final class SceneChanger{
                 newScene = new SceneInfo();
                 break;
             case "save":
-                newScene = new SceneSave();
+                newScene = new SceneSave(savingSystem);
                 break;
             default:
                 break;

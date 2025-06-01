@@ -6,6 +6,10 @@ import it.unibo.pokerogue.controller.api.GameEngine;
 import it.unibo.pokerogue.controller.api.GraphicEngine;
 import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.controller.impl.GraphicEngineImpl;
+import it.unibo.pokerogue.model.impl.item.ItemFactory;
+import it.unibo.pokerogue.model.impl.MoveFactory;
+import it.unibo.pokerogue.model.impl.AbilityFactory;
+import it.unibo.pokerogue.model.impl.pokemon.PokemonFactory;
 import it.unibo.pokerogue.utilities.SceneChanger;
 
 import java.io.IOException;
@@ -28,11 +32,16 @@ public final class Main {
     public static void main(final String[] args) {
 
         try {
-            final GameEngine mainGameEngine = GameEngineImpl.getInstance(GameEngineImpl.class);
-            final GraphicEngine mainGraphicEngine = GraphicEngineImpl.getInstance(GraphicEngineImpl.class);
+			ItemFactory.init();
+			MoveFactory.init();
+			AbilityFactory.init();
+			PokemonFactory.init();
+
+            final GameEngine mainGameEngine = new GameEngineImpl();
+            final GraphicEngine mainGraphicEngine = new GraphicEngineImpl(mainGameEngine);
 
             mainGameEngine.setGraphicEngine(mainGraphicEngine);
-			SceneChanger.init(mainGameEngine,mainGraphicEngine);
+			SceneChanger.init(mainGameEngine, mainGraphicEngine);
             SceneChanger.setScene("main");
         } catch (InstantiationException
                 | IllegalAccessException

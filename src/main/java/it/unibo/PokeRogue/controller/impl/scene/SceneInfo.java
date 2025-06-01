@@ -7,7 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import it.unibo.pokerogue.controller.api.scene.Scene;
-import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;

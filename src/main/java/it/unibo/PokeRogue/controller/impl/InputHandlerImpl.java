@@ -7,6 +7,7 @@ import java.io.IOException;
 import org.apache.commons.jexl3.JexlException;
 
 import it.unibo.pokerogue.controller.api.GameEngine;
+import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 
 /**
  * Handles keyboard input and delegates key events to the GameEngine.
@@ -19,14 +20,10 @@ public final class InputHandlerImpl extends KeyAdapter {
      * Constructs the input handler and initializes the game engine instance.
      *
      */
-    public InputHandlerImpl() {
+    public InputHandlerImpl(GameEngine gameEngine) {
         try {
-            gameEngine = GameEngineImpl.getInstance(GameEngineImpl.class);
-        } catch (InstantiationException
-                | IllegalAccessException
-                | InvocationTargetException
-                | JexlException
-                | NoSuchMethodException e) {
+            this.gameEngine = gameEngine; 
+        } catch (JexlException e) {
             e.printStackTrace();
             throw new IllegalStateException("GameEngine has not been initialized");
         }

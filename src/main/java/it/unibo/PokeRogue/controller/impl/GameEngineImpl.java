@@ -8,7 +8,6 @@ import it.unibo.pokerogue.controller.api.scene.Scene;
 import it.unibo.pokerogue.controller.api.GameEngine;
 import it.unibo.pokerogue.controller.api.GraphicEngine;
 
-import it.unibo.pokerogue.model.impl.Singleton;
 import lombok.Setter;
 import lombok.Getter;
 
@@ -22,7 +21,7 @@ import lombok.Getter;
  * It is a singleton, as it extends Singleton, ensuring a single
  * game engine instance exists throughout the application lifecycle.
  */
-public final class GameEngineImpl extends Singleton implements GameEngine {
+public final class GameEngineImpl implements GameEngine {
 
     private static final Logger LOGGER = Logger.getLogger(GameEngineImpl.class.getName());
 

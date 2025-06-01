@@ -6,9 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import it.unibo.pokerogue.controller.api.GameEngine;
 import it.unibo.pokerogue.controller.api.scene.Scene;
-import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.api.SavingSystem;
 import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
@@ -53,7 +51,7 @@ public final class SceneLoad extends Scene {
      * Constructs a new {@code SceneLoad} object, initializing internal structures
      * and retrieving the list of saves.
      */
-    public SceneLoad() throws InstantiationException,
+    public SceneLoad(SavingSystem savingSystemInstance) throws InstantiationException,
             IllegalAccessException,
             InvocationTargetException,
             NoSuchMethodException,
@@ -65,7 +63,7 @@ public final class SceneLoad extends Scene {
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
-        this.savingSystemInstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
+        this.savingSystemInstance = savingSystemInstance;
         this.savesList = savingSystemInstance
                 .getSaveFilesName(Paths.get("src", "main", "resources", "saves").toString());
         this.sceneLoadView = new SceneLoadView();

@@ -15,6 +15,8 @@ import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 import it.unibo.pokerogue.utilities.UtilitiesForScenes;
 import it.unibo.pokerogue.view.impl.scene.SceneBoxView;
 import it.unibo.pokerogue.utilities.SceneChanger;
+import it.unibo.pokerogue.model.api.SavingSystem;
+import it.unibo.pokerogue.model.impl.SavingSystemImpl;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -54,7 +56,7 @@ public class SceneBox extends Scene {
          * @param savePath the path to the save file used to load stored Pokémon boxes.
          * 
          */
-        public SceneBox(final String savePath) throws IOException,
+        public SceneBox(final String savePath, final SavingSystem savingSystem) throws IOException,
                         InstantiationException,
                         IllegalAccessException,
                         NoSuchMethodException,
@@ -68,7 +70,7 @@ public class SceneBox extends Scene {
                 this.allPanelsElements = new LinkedHashMap<>();
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
                 this.sceneBoxView = new SceneBoxView();
-                this.sceneBoxModel = new SceneBoxLoad();
+                this.sceneBoxModel = new SceneBoxLoad(savingSystem);
                 this.sceneBoxModel.setUpSave(savePath);
                 this.boxes = this.sceneBoxModel.getBoxes();
                 this.initStatus();

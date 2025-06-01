@@ -13,6 +13,8 @@ import it.unibo.pokerogue.model.impl.SavingSystemImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.view.impl.scene.save.SceneSaveView;
 import it.unibo.pokerogue.utilities.SceneChanger;
+import it.unibo.pokerogue.model.api.SavingSystem;
+import it.unibo.pokerogue.model.impl.SavingSystemImpl;
 
 /**
  * Represents the save scene in the game where the player can choose to either
@@ -33,7 +35,7 @@ public class SceneSave extends Scene {
     private final GraphicElementsRegistry graphicElements;
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final SceneSaveView sceneSaveView;
-    private final SavingSystemImpl savingSystem;
+    private final SavingSystem savingSystem;
     private String typedSaveName = "";
     private int newSelectedButton;
     private final Map<String, Integer> graphicElementNameToInt;
@@ -48,7 +50,7 @@ public class SceneSave extends Scene {
      * @throws NoSuchMethodException     if a method used via reflection is missing.
      * @throws InvocationTargetException if a method call via reflection fails.
      */
-    public SceneSave() throws IOException,
+    public SceneSave(SavingSystem savingSystem) throws IOException,
             InstantiationException,
             IllegalAccessException,
             NoSuchMethodException,
@@ -59,7 +61,7 @@ public class SceneSave extends Scene {
                 this.graphicElementNameToInt);
         this.graphicElements = this.getGraphicElements();
         this.allPanelsElements = new LinkedHashMap<>();
-        this.savingSystem = SavingSystemImpl.getInstance(SavingSystemImpl.class);
+        this.savingSystem = savingSystem;
         this.initStatus();
         this.sceneSaveView = new SceneSaveView(this.graphicElementNameToInt.get(EXIT_SAVE_LITTERAL));
         this.initGraphicElements();
