@@ -36,7 +36,7 @@ public final class EnemyAiImpl implements EnemyAi {
      * The AI's strategy and decision-making complexity increase as the battle level
      * rises.
      * 
-     * @param battleLvl    the current battle difficulty level
+     * @param battleLvl the current battle difficulty level
      */
     public EnemyAiImpl(final int battleLvl) throws IOException {
         boolean scoreMoves = false;
@@ -85,10 +85,6 @@ public final class EnemyAiImpl implements EnemyAi {
         }
 
         decision = this.aiOfAttack.whatAttackWillDo(weather, enemyTrainer);
-
-        if (decision.moveType() == DecisionTypeEnum.ATTACK) {
-            return decision;
-        }
 
         return decision;
     }
