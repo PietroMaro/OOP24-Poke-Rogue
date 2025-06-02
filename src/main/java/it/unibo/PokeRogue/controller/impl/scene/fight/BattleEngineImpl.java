@@ -5,7 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Optional;
 
-import it.unibo.pokerogue.controller.impl.EffectParser;
+import it.unibo.pokerogue.controller.impl.EffectInterpreter;
 import it.unibo.pokerogue.controller.api.EnemyAi;
 import it.unibo.pokerogue.controller.api.scene.fight.BattleEngine;
 import it.unibo.pokerogue.controller.api.scene.fight.StatusEffect;
@@ -21,12 +21,10 @@ import it.unibo.pokerogue.model.enums.Stats;
 import it.unibo.pokerogue.model.enums.Weather;
 import it.unibo.pokerogue.model.impl.AbilityFactory;
 import it.unibo.pokerogue.model.api.Range;
-import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
 import it.unibo.pokerogue.utilities.BattleRewards;
 import it.unibo.pokerogue.utilities.BattleUtilities;
 import it.unibo.pokerogue.utilities.DamageCalculator;
-import it.unibo.pokerogue.utilities.SceneChanger;
 
 import lombok.Getter;
 
@@ -138,7 +136,7 @@ public class BattleEngineImpl implements BattleEngine {
                 attackerMove.get(),
                 this.currentWeather);
         defenderPokemon.getActualStats().get(Stats.HP).decrement(finalDamage);
-        EffectParser.parseEffect(attackerMove.get().getEffect().get(), attackerPokemon, defenderPokemon,
+        EffectInterpreter.parseEffect(attackerMove.get().getEffect().get(), attackerPokemon, defenderPokemon,
                 attackerMove, opponentMove, this.currentWeather);
     }
 
@@ -229,7 +227,7 @@ public class BattleEngineImpl implements BattleEngine {
             final Optional<Move> userMove,
             final Optional<Move> targetMove, final AbilitySituationChecks situation) throws IOException {
         if (ability.situationChecks() == situation) {
-            EffectParser.parseEffect(ability.effect().get(), user, target, userMove, targetMove,
+            EffectInterpreter.parseEffect(ability.effect().get(), user, target, userMove, targetMove,
                     this.currentWeather);
         }
     }

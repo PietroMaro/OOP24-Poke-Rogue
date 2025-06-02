@@ -9,15 +9,13 @@ import java.util.Optional;
 
 import org.json.JSONObject;
 
-import it.unibo.pokerogue.controller.impl.EffectParser;
+import it.unibo.pokerogue.controller.impl.EffectInterpreter;
 import it.unibo.pokerogue.controller.api.scene.Scene;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.api.item.Item;
 import it.unibo.pokerogue.model.api.pokemon.Pokemon;
 import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
-import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
-import it.unibo.pokerogue.utilities.SceneChanger;
 import it.unibo.pokerogue.utilities.SceneShopUtilities;
 import it.unibo.pokerogue.view.impl.scene.shop.SceneShopView;
 import lombok.Setter;
@@ -213,7 +211,7 @@ public class SceneShop extends Scene {
             SceneChanger.setScene("fight");
         } else if ("Valuable".equalsIgnoreCase(item.type())) {
             final Optional<JSONObject> itemEffect = item.effect();
-            EffectParser.parseEffect(itemEffect.get(), trainer.getPokemon(0).get());
+            EffectInterpreter.parseEffect(itemEffect.get(), trainer.getPokemon(0).get());
             SceneChanger.setScene("fight");
         } else if ("Healing".equalsIgnoreCase(item.type())
                 || "Boost".equalsIgnoreCase(item.type()) || "PPRestore".equalsIgnoreCase(item.type())) {
@@ -231,7 +229,7 @@ public class SceneShop extends Scene {
 
                 // Ottieni l'effetto dell'item
                 final Optional<JSONObject> itemEffect = this.selectedUsableItem.effect();
-                EffectParser.parseEffect(itemEffect.get(), pokemon);
+                EffectInterpreter.parseEffect(itemEffect.get(), pokemon);
                 this.selectedUsableItem = null;
                 SceneChanger.setScene("fight");
             }

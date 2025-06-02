@@ -25,7 +25,7 @@ import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
  * 
  * Handles parsing and evaluation of effect-related expressions.
  */
-public final class EffectParser {
+public final class EffectInterpreter {
     private static Optional<Pokemon> us;
     private static Optional<Pokemon> enemy;
     private static Optional<Move> attackUs;
@@ -33,7 +33,7 @@ public final class EffectParser {
     private static Optional<Weather> weather;
     private static final PlayerTrainerImpl PLAYER_MONEY = PlayerTrainerImpl.getTrainerInstance();
 
-    private EffectParser() {
+    private EffectInterpreter() {
         //This shouldn't be instanciated.
     } 
 

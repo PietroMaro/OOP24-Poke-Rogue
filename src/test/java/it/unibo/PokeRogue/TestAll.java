@@ -175,7 +175,7 @@ final class TestAll {
                 if (Files.isRegularFile(entry)) {
                     final JSONObject moveJson = jsonReader.readJsonObject(entry.toString());
                     final JSONObject effect = moveJson.getJSONObject("effect");
-                    EffectParser.parseEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
+                    EffectInterpreter.parseEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
                 }
             }
         }
@@ -199,7 +199,7 @@ final class TestAll {
                 if (Files.isRegularFile(entry)) {
                     final JSONObject moveJson = jsonReader.readJsonObject(entry.toString());
                     final JSONObject effect = moveJson.getJSONObject("effect");
-                    EffectParser.parseEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
+                    EffectInterpreter.parseEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
                 }
             }
         }
@@ -233,7 +233,7 @@ final class TestAll {
                 if (Files.isRegularFile(entry)) {
                     final JSONObject itemJson = jsonReader.readJsonObject(entry.toString());
                     final JSONObject effect = itemJson.getJSONObject("effect");
-                    EffectParser.parseEffect(effect, pok1);
+                    EffectInterpreter.parseEffect(effect, pok1);
                 }
             }
         }
