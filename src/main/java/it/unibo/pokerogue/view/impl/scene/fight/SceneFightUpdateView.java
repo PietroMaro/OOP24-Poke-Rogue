@@ -49,7 +49,8 @@ public final class SceneFightUpdateView implements FightUpdateView {
                         final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final GraphicElementsRegistry graphicElements,
-                        final Map<String, Integer> graphicElementNameToInt, final SceneFight scene, final Trainer playerTrainerInstance) throws IOException {
+                        final Map<String, Integer> graphicElementNameToInt, final SceneFight scene,
+                        final Trainer playerTrainerInstance) throws IOException {
                 this.newSelectedButton = newSelectedButton;
                 this.updateSelectedButton(newSelectedButton, currentSceneGraphicElements);
                 this.updateMoves(currentSceneGraphicElements, allPanelsElements, graphicElements,
@@ -59,7 +60,7 @@ public final class SceneFightUpdateView implements FightUpdateView {
                 this.pokemonChange(currentSceneGraphicElements, allPanelsElements, graphicElements,
                                 graphicElementNameToInt, playerTrainerInstance);
                 this.mainMenu(currentSceneGraphicElements, allPanelsElements,
-                                graphicElementNameToInt, scene);
+                                graphicElementNameToInt, scene, playerTrainerInstance);
 
         }
 
@@ -75,7 +76,8 @@ public final class SceneFightUpdateView implements FightUpdateView {
         private void updateMoves(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final GraphicElementsRegistry graphicElements,
-                        final Map<String, Integer> graphicElementNameToInt, final Trainer playerTrainerInstance) throws IOException {
+                        final Map<String, Integer> graphicElementNameToInt, final Trainer playerTrainerInstance)
+                        throws IOException {
                 if (currentSelectedButton >= graphicElementNameToInt.get("MOVE_BUTTON_1")
                                 && currentSelectedButton < graphicElementNameToInt.get("CHANGE_POKEMON_1")) {
                         allPanelsElements.put(MOVE_PANEL_TEXT,
@@ -95,7 +97,8 @@ public final class SceneFightUpdateView implements FightUpdateView {
                 }
         }
 
-        private void initMoveText(final GraphicElementsRegistry currentSceneGraphicElements, final Trainer playerTrainerInstance) {
+        private void initMoveText(final GraphicElementsRegistry currentSceneGraphicElements,
+                        final Trainer playerTrainerInstance) {
                 UtilitiesForScenes
                                 .safeGetElementByName(currentSceneGraphicElements, "MOVE_1_TEXT", TextElementImpl.class)
                                 .setText(SceneFightUtilities.getMoveNameOrPlaceholder(FIRST_POSITION,
@@ -117,7 +120,8 @@ public final class SceneFightUpdateView implements FightUpdateView {
         private void updateBall(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final GraphicElementsRegistry graphicElements,
-                        final Map<String, Integer> graphicElementNameToInt, final Trainer playerTrainerInstance) throws IOException {
+                        final Map<String, Integer> graphicElementNameToInt, final Trainer playerTrainerInstance)
+                        throws IOException {
                 if (currentSelectedButton >= graphicElementNameToInt.get("POKEBALL_BUTTON")
                                 && currentSelectedButton < graphicElementNameToInt.get("BACKGROUND")) {
                         this.alreadyInMainMenu = false;
@@ -150,7 +154,8 @@ public final class SceneFightUpdateView implements FightUpdateView {
         private void pokemonChange(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
                         final GraphicElementsRegistry graphicElements,
-                        final Map<String, Integer> graphicElementNameToInt, final Trainer playerTrainerInstance) throws IOException {
+                        final Map<String, Integer> graphicElementNameToInt, final Trainer playerTrainerInstance)
+                        throws IOException {
                 if (currentSelectedButton >= graphicElementNameToInt.get("CHANGE_POKEMON_1")
                                 && currentSelectedButton < graphicElementNameToInt.get("POKEBALL_BUTTON")) {
                         this.alreadyInMainMenu = false;
@@ -168,7 +173,8 @@ public final class SceneFightUpdateView implements FightUpdateView {
                 }
         }
 
-        private void initChangeText(final GraphicElementsRegistry currentSceneGraphicElements, final Trainer playerTrainerInstance) {
+        private void initChangeText(final GraphicElementsRegistry currentSceneGraphicElements,
+                        final Trainer playerTrainerInstance) {
                 UtilitiesForScenes
                                 .safeGetElementByName(currentSceneGraphicElements, "POKEMON_0_NAME_TEXT",
                                                 TextElementImpl.class)
@@ -223,14 +229,15 @@ public final class SceneFightUpdateView implements FightUpdateView {
 
         private void mainMenu(final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
-                        final Map<String, Integer> graphicElementNameToInt, final SceneFight sceneInstance)
+                        final Map<String, Integer> graphicElementNameToInt, final SceneFight sceneInstance,
+                        final Trainer playerTrainerInstance)
                         throws IOException {
                 if ((this.currentSelectedButton <= graphicElementNameToInt.get("BALL_BUTTON") && !alreadyInMainMenu)
                                 || this.newSelectedButton == graphicElementNameToInt.get("RUN_BUTTON")) {
                         currentSceneGraphicElements.clear();
                         allPanelsElements.clear();
                         sceneInstance.setCurrentSelectedButton(currentSelectedButton);
-                        sceneInstance.initGraphicElements();
+                        sceneInstance.initGraphicElements(playerTrainerInstance);
                         alreadyInMainMenu = true;
                 }
         }

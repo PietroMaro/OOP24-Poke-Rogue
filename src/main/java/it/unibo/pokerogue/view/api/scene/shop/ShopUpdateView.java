@@ -5,6 +5,7 @@ import java.util.Map;
 
 import it.unibo.pokerogue.controller.impl.scene.SceneShop;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
+import it.unibo.pokerogue.model.api.trainer.Trainer;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.view.impl.scene.shop.SceneShopView;
 
@@ -30,13 +31,14 @@ public interface ShopUpdateView {
          *                                    controller.
          * @param sceneViewInstance           The current instance of the shop scene
          *                                    view implementation.
+         * @param playerTrainerInstance       Trainer instance.
          */
         void updateGraphic(int currentSelectedButton, int newSelectedButton,
                         GraphicElementsRegistry currentSceneGraphicElements,
                         GraphicElementsRegistry graphicElements,
                         Map<String, PanelElementImpl> allPanelsElements,
                         Map<String, Integer> graphicElementNameToInt, SceneShop sceneInstance,
-                        SceneShopView sceneViewInstance)
+                        SceneShopView sceneViewInstance, Trainer playerTrainerInstance)
                         throws IOException;
 
 }

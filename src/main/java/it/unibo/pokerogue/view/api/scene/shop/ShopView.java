@@ -5,8 +5,8 @@ import java.util.Map;
 
 import it.unibo.pokerogue.controller.impl.scene.SceneShop;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
+import it.unibo.pokerogue.model.api.trainer.Trainer;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
-import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 
 /**
  * Interface representing the view component for the Shop scene.
@@ -62,5 +62,5 @@ public interface ShopView {
          */
         void updatePlayerMoneyText(GraphicElementsRegistry sceneGraphicElements,
                         GraphicElementsRegistry graphicElements,
-                        PlayerTrainerImpl playerTrainerInstance);
+                        Trainer playerTrainerInstance);
 }

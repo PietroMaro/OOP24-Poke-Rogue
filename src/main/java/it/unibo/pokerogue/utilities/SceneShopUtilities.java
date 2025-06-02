@@ -13,7 +13,6 @@ import it.unibo.pokerogue.model.api.trainer.Trainer;
 import it.unibo.pokerogue.model.enums.Stats;
 import it.unibo.pokerogue.model.impl.graphic.TextElementImpl;
 import it.unibo.pokerogue.model.impl.item.ItemFactory;
-import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 
 /**
  * Utility class for handling various helper functions and constants used in the
@@ -63,7 +62,7 @@ public final class SceneShopUtilities {
      * @return A string in the format "current / max", or "??? / ???" if
      *         unavailable.
      */
-    public static String getPokemonLifeText(final int position, final PlayerTrainerImpl playerTrainerInstance) {
+    public static String getPokemonLifeText(final int position, final Trainer playerTrainerInstance) {
         final Optional<Pokemon> pokemonOpt = playerTrainerInstance.getPokemon(position);
 
         if (!pokemonOpt.isPresent()) {
@@ -181,7 +180,7 @@ public final class SceneShopUtilities {
      * @param playerTrainerInstance The player whose money value is displayed.
      */
     public static void updatePlayerMoneyText(final GraphicElementsRegistry sceneGraphicElements,
-            final PlayerTrainerImpl playerTrainerInstance) {
+            final Trainer playerTrainerInstance) {
         UtilitiesForScenes.safeGetElementByName(sceneGraphicElements, "PLAYER_MONEY_TEXT",
                 TextElementImpl.class)
                 .setText("MONEY: " + playerTrainerInstance.getMoney());

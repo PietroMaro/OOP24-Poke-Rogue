@@ -6,7 +6,7 @@
     "price": 5000,
     "rarity": "Master",
     "category": "Consumable",
-    "captureRate": 100.0,
+    "captureRate": 1000.0,
     "effect": {
         "checks": [],
         "activation": []

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
+import it.unibo.pokerogue.model.api.trainer.Trainer;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 
 /**
@@ -26,5 +27,5 @@ public interface ShopInitView {
     void initGraphicElements(int currentSelectedButton,
             GraphicElementsRegistry sceneGraphicElements,
             GraphicElementsRegistry graphicElements,
-            Map<String, PanelElementImpl> allPanelsElements) throws IOException;
+            Map<String, PanelElementImpl> allPanelsElements, final Trainer playerTrainerInstance) throws IOException;
 }

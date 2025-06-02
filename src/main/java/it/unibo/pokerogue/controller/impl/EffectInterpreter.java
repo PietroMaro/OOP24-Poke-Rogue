@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import it.unibo.pokerogue.model.api.move.Move;
 import it.unibo.pokerogue.model.api.pokemon.Pokemon;
+import it.unibo.pokerogue.model.api.trainer.Trainer;
 import it.unibo.pokerogue.model.enums.Stats;
 import it.unibo.pokerogue.model.enums.StatusCondition;
 import it.unibo.pokerogue.model.enums.Type;
@@ -33,30 +34,30 @@ public final class EffectInterpreter {
     private static Optional<Move> attackUs;
     private static Optional<Move> attackEnemy;
     private static Optional<Weather> weather;
-    private static final PlayerTrainerImpl PLAYER_MONEY = PlayerTrainerImpl.getTrainerInstance();
 
     private EffectInterpreter() {
-        //This shouldn't be instanciated.
-    } 
+        // This shouldn't be instanciated.
+    }
 
-    private static void interpertEffect(final JSONObject effect) throws IOException {
+    private static void interpertEffect(final JSONObject effect, final Trainer playerTrainerInstance)
+            throws IOException {
         final JSONArray checks = effect.getJSONArray("checks");
         final JSONArray activation = effect.getJSONArray("activation");
-        if (computeChecks(checks) && debug) {
-            activateActivations(activation);
+        if (computeChecks(checks, playerTrainerInstance) || debug) {
+            activateActivations(activation, playerTrainerInstance);
         }
     }
 
-    private static boolean computeChecks(final JSONArray checks) {
+    private static boolean computeChecks(final JSONArray checks, final Trainer playerTrainerInstance) {
         boolean result = true;
         for (int checkIndex = 0; checkIndex < checks.length(); checkIndex++) {
-            result = result && computeSingleCheck(checks.getJSONArray(checkIndex));
+            result = result && computeSingleCheck(checks.getJSONArray(checkIndex), playerTrainerInstance);
         }
         return result;
 
     }
 
-    private static boolean computeSingleCheck(final JSONArray check) {
+    private static boolean computeSingleCheck(final JSONArray check, final Trainer playerTrainerInstance) {
         if (check.length() != 3) {
             throw new IllegalArgumentException("CHECKS length have to be 3, but got: " + check.length());
         }
@@ -65,25 +66,25 @@ public final class EffectInterpreter {
 
         final String checkString = firstOperand + " " + check.getString(1) + " " + secondOperand;
         boolean result = false;
-        final Optional<Object> resultParsing = parseSingleExpression(checkString);
+        final Optional<Object> resultParsing = parseSingleExpression(checkString, playerTrainerInstance);
         if (resultParsing.isPresent()) {
             result = (boolean) resultParsing.get();
         }
         return result;
     }
 
-    private static Optional<Object> parseSingleExpression(final String expression) {
+    private static Optional<Object> parseSingleExpression(final String expression, final Trainer playerTrainerInstance) {
         final JexlEngine jexl = new JexlBuilder().create();
         final JexlExpression expr = jexl.createExpression(expression);
 
         try {
-            return Optional.ofNullable(expr.evaluate(createContext()));
+            return Optional.ofNullable(expr.evaluate(createContext(playerTrainerInstance)));
         } catch (final JexlException e) {
             return Optional.empty();
         }
     }
 
-    private static JexlContext createContext() {
+    private static JexlContext createContext(final Trainer playerTrainerInstance) {
         final JexlContext context = new MapContext();
         if (!us.isEmpty()) {
             context.set("us", us.get());
@@ -101,7 +102,7 @@ public final class EffectInterpreter {
             context.set("weather", weather.get());
         }
 
-        context.set("PLAYER_MONEY", PLAYER_MONEY);
+        context.set("PLAYER_MONEY", playerTrainerInstance);
         context.set("Optional", Optional.class);
         context.set("StatusCondition", StatusCondition.class);
         context.set("Type", Type.class);
@@ -119,12 +120,12 @@ public final class EffectInterpreter {
         return context;
     }
 
-    private static void activateActivations(final JSONArray activation) {
+    private static void activateActivations(final JSONArray activation, final Trainer playerTrainerInstance) {
         for (int actIndex = 0; actIndex < activation.length(); actIndex++) {
             parseSingleExpression(
                     activation.getJSONArray(actIndex).getString(0)
                             + " = "
-                            + activation.getJSONArray(actIndex).getString(1));
+                            + activation.getJSONArray(actIndex).getString(1), playerTrainerInstance);
         }
     }
 
@@ -145,13 +146,13 @@ public final class EffectInterpreter {
             final Pokemon newEnemy,
             final Optional<Move> newAttackUs,
             final Optional<Move> newAttackEnemy,
-            final Optional<Weather> newWeather) throws IOException {
+            final Optional<Weather> newWeather, final Trainer playerTrainerInstance) throws IOException {
         us = Optional.of(newUs);
         enemy = Optional.of(newEnemy);
         attackUs = newAttackUs;
         attackEnemy = newAttackEnemy;
         weather = newWeather;
-        interpertEffect(newEffect);
+        interpertEffect(newEffect, playerTrainerInstance);
     }
 
     /**
@@ -161,12 +162,12 @@ public final class EffectInterpreter {
      * @param effect  the json object representing the effect.
      * @param pokemon the pokemon to which the effect should be applied.
      */
-    public static void interpertEffect(final JSONObject effect, final Pokemon pokemon) throws IOException {
+    public static void interpertEffect(final JSONObject effect, final Pokemon pokemon, final Trainer playerTrainerInstance) throws IOException {
         us = Optional.of(pokemon);
         enemy = Optional.empty();
         attackUs = Optional.empty();
         attackEnemy = Optional.empty();
         weather = Optional.empty();
-        interpertEffect(effect);
+        interpertEffect(effect, playerTrainerInstance);
     }
 }

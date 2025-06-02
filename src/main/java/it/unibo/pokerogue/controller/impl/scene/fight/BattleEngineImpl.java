@@ -114,15 +114,15 @@ public class BattleEngineImpl implements BattleEngine {
                     abilityPlayer, abilityEnemy, playerTrainerInstance, enemyTrainerInstance, gameEngineInstance);
         }
         this.handleAbilityEffects(abilityPlayer, playerPokemon, enemyPokemon, playerMove, enemyMove,
-                AbilitySituationChecks.NEUTRAL);
+                AbilitySituationChecks.NEUTRAL, playerTrainerInstance);
         this.handleAbilityEffects(abilityEnemy, enemyPokemon, playerPokemon, enemyMove, playerMove,
-                AbilitySituationChecks.NEUTRAL);
+                AbilitySituationChecks.NEUTRAL, playerTrainerInstance);
         this.newEnemyCheck(playerTrainerInstance, enemyTrainerInstance, gameEngineInstance);
 
     }
 
     private void handleAttack(final Optional<Move> attackerMove, final Optional<Move> opponentMove,
-            final Pokemon attackerPokemon, final Pokemon defenderPokemon) throws IOException {
+            final Pokemon attackerPokemon, final Pokemon defenderPokemon, final Trainer playerTrainerInstance) throws IOException {
         if (attackerMove.get().getPp().getCurrentValue() <= 0) {
             return;
         }
@@ -135,7 +135,7 @@ public class BattleEngineImpl implements BattleEngine {
                 this.currentWeather);
         defenderPokemon.getActualStats().get(Stats.HP).decrement(finalDamage);
         EffectInterpreter.interpertEffect(attackerMove.get().getEffect().get(), attackerPokemon, defenderPokemon,
-                attackerMove, opponentMove, this.currentWeather);
+                attackerMove, opponentMove, this.currentWeather, playerTrainerInstance);
     }
 
     private void handlePokeball(final String pokeballName, final Trainer playerTrainerInstance,
@@ -183,10 +183,10 @@ public class BattleEngineImpl implements BattleEngine {
         if (decision.moveType() == DecisionTypeEnum.SWITCH_IN && statusEffectInstance.checkStatusSwitch(attackerPokemon)
                 && BattleUtilities.canSwitch(attackerTrainer, Integer.parseInt(decision.subType()))) {
             this.handleAbilityEffects(attackerAbility, attackerPokemon, defenderPokemon, atteckerMove, defenderMove,
-                    AbilitySituationChecks.SWITCHOUT);
+                    AbilitySituationChecks.SWITCHOUT, playerTrainerInstance);
             this.switchIn(decision.subType(), attackerTrainer);
             this.handleAbilityEffects(attackerAbility, attackerPokemon, defenderPokemon, atteckerMove, defenderMove,
-                    AbilitySituationChecks.SWITCHIN);
+                    AbilitySituationChecks.SWITCHIN, playerTrainerInstance);
             this.refreshActivePokemons(playerTrainerInstance, enemyTrainerInstance);
         }
         if (decision.moveType() == DecisionTypeEnum.POKEBALL) {
@@ -195,10 +195,10 @@ public class BattleEngineImpl implements BattleEngine {
         if (decision.moveType() == DecisionTypeEnum.ATTACK && statusEffectInstance.checkStatusAttack(attackerPokemon)
                 && BattleUtilities.knowsMove(attackerPokemon, Integer.parseInt(decision.subType()))) {
             handleAbilityEffects(attackerAbility, attackerPokemon, defenderPokemon, atteckerMove, defenderMove,
-                    AbilitySituationChecks.ATTACK);
+                    AbilitySituationChecks.ATTACK, playerTrainerInstance);
             handleAbilityEffects(defenderAbility, defenderPokemon, attackerPokemon, defenderMove, atteckerMove,
-                    AbilitySituationChecks.ATTACKED);
-            handleAttack(atteckerMove, defenderMove, attackerPokemon, defenderPokemon);
+                    AbilitySituationChecks.ATTACKED, playerTrainerInstance);
+            handleAttack(atteckerMove, defenderMove, attackerPokemon, defenderPokemon, playerTrainerInstance);
         }
     }
 
@@ -225,10 +225,11 @@ public class BattleEngineImpl implements BattleEngine {
 
     private void handleAbilityEffects(final Ability ability, final Pokemon user, final Pokemon target,
             final Optional<Move> userMove,
-            final Optional<Move> targetMove, final AbilitySituationChecks situation) throws IOException {
+            final Optional<Move> targetMove, final AbilitySituationChecks situation,
+            final Trainer playerTrainerInstance) throws IOException {
         if (ability.situationChecks() == situation) {
             EffectInterpreter.interpertEffect(ability.effect().get(), user, target, userMove, targetMove,
-                    this.currentWeather);
+                    this.currentWeather, playerTrainerInstance);
         }
     }
 
@@ -243,8 +244,10 @@ public class BattleEngineImpl implements BattleEngine {
             this.newMoveToLearn(this.playerPokemon, gameEngineInstance);
             gameEngineInstance.setScene("shop");
         } else if (this.enemyPokemon.getActualStats().get(Stats.HP).getCurrentValue() <= 0) {
-            final Decision enemyChoose = enemyAiInstance.nextMove(this.getCurrentWeather(), enemyTrainerInstance, playerTrainerInstance);
-            this.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""), enemyChoose, enemyTrainerInstance, playerTrainerInstance, gameEngineInstance);
+            final Decision enemyChoose = enemyAiInstance.nextMove(this.getCurrentWeather(), enemyTrainerInstance,
+                    playerTrainerInstance);
+            this.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""), enemyChoose, enemyTrainerInstance,
+                    playerTrainerInstance, gameEngineInstance);
             BattleRewards.awardBattleRewards(playerPokemon, enemyPokemon);
             this.newMoveToLearn(playerPokemon, gameEngineInstance);
         }
