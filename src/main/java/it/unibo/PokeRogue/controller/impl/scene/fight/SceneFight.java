@@ -6,7 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import it.unibo.pokerogue.controller.api.EnemyAi;
+import it.unibo.pokerogue.controller.api.ai.EnemyAi;
 import it.unibo.pokerogue.controller.api.scene.Scene;
 import it.unibo.pokerogue.controller.api.scene.fight.BattleEngine;
 import it.unibo.pokerogue.controller.impl.ai.EnemyAiImpl;

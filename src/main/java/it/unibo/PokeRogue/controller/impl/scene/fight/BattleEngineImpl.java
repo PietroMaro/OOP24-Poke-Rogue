@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import it.unibo.pokerogue.controller.impl.EffectParser;
-import it.unibo.pokerogue.controller.api.EnemyAi;
+import it.unibo.pokerogue.controller.api.ai.EnemyAi;
 import it.unibo.pokerogue.controller.api.scene.fight.BattleEngine;
 import it.unibo.pokerogue.controller.api.scene.fight.StatusEffect;
 import it.unibo.pokerogue.model.api.Decision;

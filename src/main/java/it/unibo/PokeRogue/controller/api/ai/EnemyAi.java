@@ -1,4 +1,4 @@
-package it.unibo.pokerogue.controller.api;
+package it.unibo.pokerogue.controller.api.ai;
 
 import java.util.Optional;
 

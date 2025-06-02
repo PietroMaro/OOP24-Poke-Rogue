@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
+import it.unibo.pokerogue.controller.api.ai.EnemyAiAttack;
 import it.unibo.pokerogue.model.api.Decision;
 import it.unibo.pokerogue.model.api.move.Move;
 import it.unibo.pokerogue.model.api.pokemon.Pokemon;
@@ -26,7 +27,7 @@ import java.io.IOException;
  * It can operate in simple random mode or more advanced scoring modes
  * depending on configuration flags.
  */
-public final class EnemyAiAttack {
+public final class EnemyAiAttackImpl implements EnemyAiAttack{
     private final PlayerTrainerImpl playerTrainerInstance;
     private int attackChosen;
     private Pokemon currentEnemyPokemon;
@@ -46,7 +47,7 @@ public final class EnemyAiAttack {
      * @param scoreMoves   if true, the AI will evaluate move effectiveness
      * @param hpAware      if true, the AI will take into account potential damage
      */
-    public EnemyAiAttack(final boolean scoreMoves, final boolean hpAware) throws IOException {
+    public EnemyAiAttackImpl(final boolean scoreMoves, final boolean hpAware) throws IOException {
         this.random = new Random();
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
         this.scoreMoves = scoreMoves;
@@ -54,7 +55,8 @@ public final class EnemyAiAttack {
 
     }
 
-    Decision whatAttackWillDo(final Optional<Weather> weather, final Trainer enemyTrainer) {
+    @Override
+    public Decision whatAttackWillDo(final Optional<Weather> weather, final Trainer enemyTrainer) {
         this.currentEnemyPokemon = enemyTrainer.getPokemon(0).get();
         this.currentEnemyPokemonMoves = this.currentEnemyPokemon.getActualMoves();
         this.currentPlayerPokemon = this.playerTrainerInstance.getPokemon(0).get();

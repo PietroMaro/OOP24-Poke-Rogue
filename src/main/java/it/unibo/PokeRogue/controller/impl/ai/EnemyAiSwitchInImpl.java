@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
 
+import it.unibo.pokerogue.controller.api.ai.EnemyAiSwitchIn;
 import it.unibo.pokerogue.model.api.Decision;
 import it.unibo.pokerogue.model.api.pokemon.Pokemon;
 import it.unibo.pokerogue.model.api.trainer.Trainer;
@@ -25,7 +26,7 @@ import java.io.IOException;
  * This logic considers various factors such as the order of the squad,
  * type matchups, and whether the AI is configured to make strategic switches.
  */
-public final class EnemyAiSwitchIn {
+public final class EnemyAiSwitchInImpl implements EnemyAiSwitchIn {
 
     private static final int MAX_TRAINER_SQUAD_SIZE = 6;
     private static final int ACCEPTED_EFFECTIVENESS_DIFFERENCE = 50;
@@ -48,7 +49,7 @@ public final class EnemyAiSwitchIn {
      * @param considerSwitching whether the AI should evaluate switching logic
      * @param switchFirstRate   chance (0-100) to prefer top switch candidate
      */
-    public EnemyAiSwitchIn(final boolean usePokemonInOrder, final boolean considerSwitching, final int switchFirstRate)
+    public EnemyAiSwitchInImpl(final boolean usePokemonInOrder, final boolean considerSwitching, final int switchFirstRate)
             throws IOException {
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
         pokeInSquadScore = new HashMap<>();
@@ -59,7 +60,8 @@ public final class EnemyAiSwitchIn {
 
     }
 
-    Decision switchInDecisionMaker(final Trainer enemyTrainer) {
+    @Override
+    public Decision switchInDecisionMaker(final Trainer enemyTrainer) {
 
         if (enemyTrainer.getPokemon(1).isPresent() && shouldSwitch(enemyTrainer)) {
 

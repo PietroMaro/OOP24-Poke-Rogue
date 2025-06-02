@@ -2,7 +2,7 @@ package it.unibo.pokerogue.controller.impl.ai;
 
 import java.util.Optional;
 
-import it.unibo.pokerogue.controller.api.EnemyAi;
+import it.unibo.pokerogue.controller.api.ai.EnemyAi;
 import it.unibo.pokerogue.model.api.Decision;
 import it.unibo.pokerogue.model.api.trainer.Trainer;
 import it.unibo.pokerogue.model.enums.DecisionTypeEnum;
@@ -25,8 +25,8 @@ public final class EnemyAiImpl implements EnemyAi {
     private static final int HIGH_AI_THRESHOLD = 75;
     private static final int DEFAULT_SWITCH_FIRST_RATE_PERCENT = 60;
 
-    private final EnemyAiSwitchIn aiOfSwitchIn;
-    private final EnemyAiAttack aiOfAttack;
+    private final EnemyAiSwitchInImpl aiOfSwitchIn;
+    private final EnemyAiAttackImpl aiOfAttack;
 
     /**
      * 
@@ -62,9 +62,9 @@ public final class EnemyAiImpl implements EnemyAi {
 
         }
 
-        this.aiOfSwitchIn = new EnemyAiSwitchIn(usePokemonInOrder, considerSwitching, switchFirstRate);
+        this.aiOfSwitchIn = new EnemyAiSwitchInImpl(usePokemonInOrder, considerSwitching, switchFirstRate);
 
-        this.aiOfAttack = new EnemyAiAttack(scoreMoves, hpAware);
+        this.aiOfAttack = new EnemyAiAttackImpl(scoreMoves, hpAware);
     }
 
     /**

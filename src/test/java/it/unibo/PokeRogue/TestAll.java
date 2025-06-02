@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import it.unibo.pokerogue.controller.api.EnemyAi;
+import it.unibo.pokerogue.controller.api.ai.EnemyAi;
 import it.unibo.pokerogue.controller.api.scene.fight.BattleEngine;
 import it.unibo.pokerogue.controller.impl.EffectParser;
 import it.unibo.pokerogue.controller.impl.ai.EnemyAiImpl;
