@@ -20,6 +20,7 @@ import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
 import it.unibo.pokerogue.utilities.SceneFightUtilities;
 import it.unibo.pokerogue.view.impl.scene.fight.SceneFightView;
+import it.unibo.pokerogue.model.api.SavingSystem;
 
 /**
  * The SceneFight class represents the battle scene in the game.
@@ -63,8 +64,9 @@ public class SceneFight extends Scene {
      * enemy trainer, AI, and battle engine.
      * 
      * @param battleLevel the level of the battle
+     * @param savingSystem the main saving system
      */
-    public SceneFight(final Integer battleLevel) throws IOException, NoSuchMethodException,
+    public SceneFight(final Integer battleLevel, final SavingSystem savingSystem) throws IOException, NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
@@ -76,7 +78,7 @@ public class SceneFight extends Scene {
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
         this.enemyAiInstance = new EnemyAiImpl(battleLevel);
-        this.battleEngineInstance = new BattleEngineImpl(enemyAiInstance);
+        this.battleEngineInstance = new BattleEngineImpl(enemyAiInstance, savingSystem);
         this.generateEnemyInstance = new GenerateEnemyImpl(battleLevel);
         this.generateEnemyInstance.generateEnemy(this.enemyTrainerInstance);
         this.initStatus();

@@ -6,20 +6,17 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import it.unibo.pokerogue.controller.api.GameEngine;
 import it.unibo.pokerogue.controller.api.scene.Scene;
-import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.api.SavingSystem;
 import it.unibo.pokerogue.model.api.pokemon.Pokemon;
 import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
-import it.unibo.pokerogue.model.impl.SavingSystemImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.model.impl.pokemon.PokemonFactory;
-import it.unibo.pokerogue.model.impl.pokemon.PokemonFactoryImpl;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 import it.unibo.pokerogue.utilities.UtilitiesForScenes;
 import it.unibo.pokerogue.view.impl.scene.SceneBoxView;
+import it.unibo.pokerogue.utilities.SceneChanger;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -43,7 +40,6 @@ public class SceneBox extends Scene {
 
         private final GraphicElementsRegistry currentSceneGraphicElements;
         private final Map<String, PanelElementImpl> allPanelsElements;
-        private final GameEngine gameEngineInstance;
         private int boxIndex;
         private int currentSelectedButton;
         private final PlayerTrainerImpl playerTrainerInstance;
@@ -55,16 +51,15 @@ public class SceneBox extends Scene {
         private final GraphicElementsRegistry graphicElements;
         private final Map<String, Integer> graphicElementNameToInt;
 
-        private final SavingSystem savingSystemInstance;
-        private final PokemonFactory pokemonFactoryInstance;
+        private final SavingSystem savingSystem;
 
         /**
          * Constructs a new SceneBox instance.
          *
          * @param savePath the path to the save file used to load stored Pokémon boxes.
-         * 
+                 * @param savingSystem the main save system
          */
-        public SceneBox(final String savePath) throws IOException,
+        public SceneBox(final String savePath, final SavingSystem savingSystem) throws IOException,
                         InstantiationException,
                         IllegalAccessException,
                         NoSuchMethodException,
@@ -76,12 +71,10 @@ public class SceneBox extends Scene {
                 this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                                 this.graphicElementNameToInt);
                 this.allPanelsElements = new LinkedHashMap<>();
-                this.savingSystemInstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
-                this.pokemonFactoryInstance = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
-                this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
                 this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
                 this.boxes = new ArrayList<>();
                 this.sceneBoxView = new SceneBoxView();
+                this.savingSystem = savingSystem;
                 this.setUpSave(savePath);
 
                 this.initStatus();
@@ -174,7 +167,7 @@ public class SceneBox extends Scene {
 
                         case KeyEvent.VK_ENTER:
                                 if (this.currentSelectedButton == START_BUTTON_POSITION) {
-                                        this.gameEngineInstance.setScene("fight");
+                                        SceneChanger.setScene("fight");
                                 }
 
                                 if (this.currentSelectedButton == UP_ARROW_BUTTON_POSITION && this.boxIndex > 0) {
@@ -276,20 +269,20 @@ public class SceneBox extends Scene {
                         NoSuchMethodException,
                         IOException {
                 if ("".equals(savePath)) {
-                        this.savingSystemInstance.savePokemon(pokemonFactoryInstance.pokemonFromName("bulbasaur"));
-                        this.savingSystemInstance.savePokemon(pokemonFactoryInstance.pokemonFromName("charmander"));
-                        this.savingSystemInstance.savePokemon(pokemonFactoryInstance.pokemonFromName("squirtle"));
-                        this.addPokemonToBox(pokemonFactoryInstance.pokemonFromName("bulbasaur"));
-                        this.addPokemonToBox(pokemonFactoryInstance.pokemonFromName("charmander"));
-                        this.addPokemonToBox(pokemonFactoryInstance.pokemonFromName("squirtle"));
+                        this.savingSystem.savePokemon(PokemonFactory.pokemonFromName("bulbasaur"));
+                        this.savingSystem.savePokemon(PokemonFactory.pokemonFromName("charmander"));
+                        this.savingSystem.savePokemon(PokemonFactory.pokemonFromName("squirtle"));
+                        this.addPokemonToBox(PokemonFactory.pokemonFromName("bulbasaur"));
+                        this.addPokemonToBox(PokemonFactory.pokemonFromName("charmander"));
+                        this.addPokemonToBox(PokemonFactory.pokemonFromName("squirtle"));
 
                 } else {
-                        this.savingSystemInstance
+                        this.savingSystem
                                         .loadData(Paths.get("src", "main", "resources", "saves", savePath).toString());
 
-                        for (final var box : this.savingSystemInstance.getSavedPokemon()) {
+                        for (final var box : this.savingSystem.getSavedPokemon()) {
                                 for (final String pokemonName : box) {
-                                        this.addPokemonToBox(pokemonFactoryInstance.pokemonFromName(pokemonName));
+                                        this.addPokemonToBox(PokemonFactory.pokemonFromName(pokemonName));
 
                                 }
 

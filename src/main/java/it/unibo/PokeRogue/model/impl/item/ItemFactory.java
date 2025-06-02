@@ -14,8 +14,6 @@ import java.util.Optional;
 
 import it.unibo.pokerogue.model.api.item.Item;
 import it.unibo.pokerogue.model.api.item.ItemBlueprint;
-import it.unibo.pokerogue.model.api.item.ItemFactory;
-import it.unibo.pokerogue.model.impl.Singleton;
 import it.unibo.pokerogue.utilities.api.JsonReader;
 import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
 
@@ -31,28 +29,22 @@ import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
  * Extends {@link Singleton} to enforce a single shared instance (if managed by
  * the superclass).
  */
-public class ItemFactoryImpl extends Singleton implements ItemFactory {
+public final class ItemFactory {
 
     /** JSON reader used to parse item data from files. */
-    private final JsonReader jsonReader = new JsonReaderImpl();
+    private static final JsonReader JSON_READER = new JsonReaderImpl();
 
     /** Random generator used for item selection. */
-    private final Random random = new Random();
+    private static final Random RANDOM = new Random();
 
     /** Set of all item names available in the factory. */
-    private final Set<String> allItemSet = new HashSet<>();
+    private static final Set<String> ALL_ITEM_SET = new HashSet<>();
 
     /** Map containing item names and their corresponding {@link ItemBlueprint}. */
-    private final Map<String, ItemBlueprint> itemBlueprints = new HashMap<>();
+    private static final Map<String, ItemBlueprint> ITEM_BLUEPRINTS = new HashMap<>();
 
-    /**
-     * Constructs a new {@code ItemFactoryImpl} and initializes item data from JSON
-     * files.
-     *
-     * @throws IOException if the JSON files cannot be read or parsed
-     */
-    public ItemFactoryImpl() throws IOException {
-        init();
+    private ItemFactory() {
+        //Shouldn't be instanciated
     }
 
     /**
@@ -62,8 +54,8 @@ public class ItemFactoryImpl extends Singleton implements ItemFactory {
      *
      * @throws IOException if an error occurs while reading item files
      */
-    private void init() throws IOException {
-        final JSONArray allItemJson = jsonReader
+    public static void init() throws IOException {
+        final JSONArray allItemJson = JSON_READER
                 .readJsonArray(Paths.get("src", "main", "resources", "itemsData", "itemsList.json").toString());
         for (int itemIndex = 0; itemIndex < allItemJson.length(); itemIndex += 1) {
             addItemToBlueprints(allItemJson.getString(itemIndex));
@@ -77,8 +69,8 @@ public class ItemFactoryImpl extends Singleton implements ItemFactory {
      * @param itemName the name of the item to load
      * @throws IOException if the item's JSON file cannot be read
      */
-    private void addItemToBlueprints(final String itemName) throws IOException {
-        final JSONObject itemJson = jsonReader
+    private static void addItemToBlueprints(final String itemName) throws IOException {
+        final JSONObject itemJson = JSON_READER
                 .readJsonObject(Paths.get("src", "main", "resources", "itemsData", "items", "data", itemName + ".json")
                         .toString());
 
@@ -95,8 +87,8 @@ public class ItemFactoryImpl extends Singleton implements ItemFactory {
         final ItemBlueprint newItem = new ItemBlueprint(
                 id, name, type, description, price, rarity, category, captureRate, Optional.ofNullable(effect));
 
-        this.itemBlueprints.put(name, newItem);
-        this.allItemSet.add(name);
+        ITEM_BLUEPRINTS.put(name, newItem);
+        ALL_ITEM_SET.add(name);
     }
 
     /**
@@ -107,9 +99,8 @@ public class ItemFactoryImpl extends Singleton implements ItemFactory {
      * @throws UnsupportedOperationException if the item name is not found in the
      *                                       blueprint map
      */
-    @Override
-    public Item itemFromName(final String itemName) {
-        final ItemBlueprint itemBlueprint = this.itemBlueprints.get(itemName);
+    public static Item itemFromName(final String itemName) {
+        final ItemBlueprint itemBlueprint = ITEM_BLUEPRINTS.get(itemName);
         if (itemBlueprint == null) {
             throw new UnsupportedOperationException(
                     "The item " + itemName + " blueprint was not found. "
@@ -119,23 +110,21 @@ public class ItemFactoryImpl extends Singleton implements ItemFactory {
     }
 
     /**
-     * Generates a random {@link Item} from the list of all available items.
+     * Generates a RANDOM {@link Item} from the list of all available items.
      *
-     * @return a randomly selected {@code Item}
+     * @return a RANDOMly selected {@code Item}
      */
-    @Override
-    public Item randomItem() {
-        final String generatedName = (String) this.allItemSet.toArray()[random.nextInt(this.allItemSet.size())];
-        return new ItemImpl(this.itemBlueprints.get(generatedName));
+    public static Item randomItem() {
+        final String generatedName = (String) ALL_ITEM_SET.toArray()[RANDOM.nextInt(ALL_ITEM_SET.size())];
+        return new ItemImpl(ITEM_BLUEPRINTS.get(generatedName));
     }
 
     /**
-     * Returns the complete set of item names available in this factory.
+     * Returns the complete set of item names available in the factory.
      *
      * @return a {@code Set} of all item names
      */
-    @Override
-    public Set<String> getAllItemList() {
-        return new HashSet<>(this.allItemSet);
+    public static Set<String> getAllItemList() {
+        return new HashSet<>(ALL_ITEM_SET);
     }
 }

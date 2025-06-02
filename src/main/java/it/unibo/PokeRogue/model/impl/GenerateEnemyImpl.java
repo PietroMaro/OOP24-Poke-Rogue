@@ -6,7 +6,6 @@ import java.util.Random;
 
 import it.unibo.pokerogue.model.api.GenerateEnemy;
 import it.unibo.pokerogue.model.impl.pokemon.PokemonFactory;
-import it.unibo.pokerogue.model.impl.pokemon.PokemonFactoryImpl;
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
 
 /**
@@ -20,7 +19,6 @@ public final class GenerateEnemyImpl implements GenerateEnemy {
     private static final int ENEMY_TRAINER_SPAWN = 5;
     private static final int MIN_LEVEL = 5;
 
-    private final PokemonFactory pokemonFactory;
     private final Integer battleLevel;
 
     /**
@@ -38,7 +36,6 @@ public final class GenerateEnemyImpl implements GenerateEnemy {
             InvocationTargetException,
             InstantiationException {
         this.battleLevel = battleLevel;
-        this.pokemonFactory = PokemonFactoryImpl.getInstance(PokemonFactoryImpl.class);
     }
 
     @Override
@@ -65,7 +62,7 @@ public final class GenerateEnemyImpl implements GenerateEnemy {
         final int variance = RANDOM.nextInt(3) - 2;
 
         final int level = Math.max(0, Math.min(baseLevel + variance < 1 ? 0 : baseLevel + variance, 100));
-        enemyTrainerInstance.addPokemon(pokemonFactory.randomPokemon(level), 1);
+        enemyTrainerInstance.addPokemon(PokemonFactory.randomPokemon(level), 1);
     }
 
     private void generateTrainerTeam(final TrainerImpl enemyTrainerInstance) throws NoSuchMethodException,
@@ -80,7 +77,7 @@ public final class GenerateEnemyImpl implements GenerateEnemy {
             final int variance = RANDOM.nextInt(3) - 2;
 
             final int level = Math.max(0, Math.min(baseLevel + variance < MIN_LEVEL ? 0 : baseLevel + variance, 100));
-            enemyTrainerInstance.addPokemon(pokemonFactory.randomPokemon(level), i);
+            enemyTrainerInstance.addPokemon(PokemonFactory.randomPokemon(level), i);
         }
     }
 

@@ -16,7 +16,7 @@ import it.unibo.pokerogue.model.enums.Nature;
 import it.unibo.pokerogue.model.enums.Stats;
 import it.unibo.pokerogue.model.enums.StatusCondition;
 import it.unibo.pokerogue.model.enums.Type;
-import it.unibo.pokerogue.model.impl.MoveFactoryImpl;
+import it.unibo.pokerogue.model.impl.MoveFactory;
 import it.unibo.pokerogue.model.impl.RangeImpl;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,7 +30,6 @@ import java.lang.reflect.InvocationTargetException;
  */
 @ToString
 public final class PokemonImpl implements Pokemon {
-    private final MoveFactoryImpl moveFactoryInstance;
     private final Random random = new Random();
     @Getter
     @Setter
@@ -104,7 +103,6 @@ public final class PokemonImpl implements Pokemon {
             IllegalAccessException,
             NoSuchMethodException,
             InvocationTargetException {
-        this.moveFactoryInstance = MoveFactoryImpl.getInstance(MoveFactoryImpl.class);
         this.baseStats = new EnumMap<>(Stats.class);
         this.baseStats.putAll(pokemonBlueprint.stats());
         generateivs();
@@ -192,7 +190,7 @@ public final class PokemonImpl implements Pokemon {
         final int firstMoveKey = 1;
         for (final Map.Entry<Integer, String> entry : this.levelMovesLearn.entrySet()) {
             if (entry.getKey() == firstMoveKey) {
-                this.actualMoves.add(moveFactoryInstance.moveFromName(entry.getValue()));
+                this.actualMoves.add(MoveFactory.moveFromName(entry.getValue()));
             }
         }
     }
@@ -269,20 +267,18 @@ public final class PokemonImpl implements Pokemon {
         if (this.levelMovesLearn.keySet().contains(this.level.getCurrentValue())) {
             final String moveToLearn = this.levelMovesLearn.get(this.level.getCurrentValue());
             if (this.actualMoves.size() < 4) {
-                this.actualMoves.add(moveFactoryInstance.moveFromName(moveToLearn));
+                this.actualMoves.add(MoveFactory.moveFromName(moveToLearn));
             } else {
                 if (!isPlayerPokemon) {
-                    this.actualMoves.set(random.nextInt(4), moveFactoryInstance.moveFromName(moveToLearn));
+                    this.actualMoves.set(random.nextInt(4), MoveFactory.moveFromName(moveToLearn));
                 } else {
                     this.hasToLearnMove = true;
-                    this.newMoveToLearn = Optional.of(moveFactoryInstance.moveFromName(moveToLearn));
+                    this.newMoveToLearn = Optional.of(MoveFactory.moveFromName(moveToLearn));
                 }
             }
         }
     }
-
-    @Override
-    public void learnNewMove(final Optional<Integer> indexMoveToReplace) {
+@Override public void learnNewMove(final Optional<Integer> indexMoveToReplace) {
         if (!(this.hasToLearnMove && !this.newMoveToLearn.isEmpty())) {
             throw new UnsupportedOperationException("The pokemon " + this.name + " doesn't have to learn a move");
         }

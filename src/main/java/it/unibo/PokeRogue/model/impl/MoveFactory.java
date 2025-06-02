@@ -11,7 +11,6 @@ import org.json.JSONObject;
 
 import it.unibo.pokerogue.model.api.Range;
 import it.unibo.pokerogue.model.api.move.Move;
-import it.unibo.pokerogue.model.api.move.MoveFactory;
 import it.unibo.pokerogue.model.enums.Type;
 import it.unibo.pokerogue.utilities.api.JsonReader;
 import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
@@ -21,22 +20,21 @@ import org.json.JSONArray;
 /**
  * Move factory implementation.
  */
-public class MoveFactoryImpl extends Singleton implements MoveFactory {
+public final class MoveFactory {
 
     // make the access in memory and saves the information of all pokemon in local
-    private final JsonReader jsonReader = new JsonReaderImpl();
-    private final Map<String, Move> movesBlueprints = new HashMap<>();
+    private static final JsonReader JSON_READER = new JsonReaderImpl();
+    private static final Map<String, Move> MOVES_BLUEPRINTS = new HashMap<>();
 
-    /**
-     * Constructor initiate the factory.
-     */
-    public MoveFactoryImpl() throws IOException {
-        init();
+    private MoveFactory() {
+        //Shouldn't be instanciated
     }
 
-    @Override
-    public final void init() throws IOException {
-        final JSONArray allMoveJson = jsonReader
+    /**
+     * Initialize the factory reading in memory.
+     */
+    public static void init() throws IOException {
+        final JSONArray allMoveJson = JSON_READER
                 .readJsonArray(Paths
                         .get("src", "main", "resources",
                                 "pokemonData",
@@ -47,8 +45,8 @@ public class MoveFactoryImpl extends Singleton implements MoveFactory {
         }
     }
 
-    private void addMoveToBlueprints(final String moveName) throws IOException {
-        final JSONObject moveJson = jsonReader.readJsonObject(Paths
+    private static void addMoveToBlueprints(final String moveName) throws IOException {
+        final JSONObject moveJson = JSON_READER.readJsonObject(Paths
                 .get("src", "main", "resources",
                         "pokemonData",
                         "moves",
@@ -77,12 +75,17 @@ public class MoveFactoryImpl extends Singleton implements MoveFactory {
                 type,
                 priority);
 
-        this.movesBlueprints.put(moveName, newMove);
+        MOVES_BLUEPRINTS.put(moveName, newMove);
     }
 
-    @Override
-    public final Move moveFromName(final String moveName) {
-        Move move = this.movesBlueprints.get(moveName);
+    /**
+     * Generate a name with the givven name.
+     *
+     * @param moveName the name of the move
+     * @return the move
+     */
+    public static Move moveFromName(final String moveName) {
+        Move move = MOVES_BLUEPRINTS.get(moveName);
         if (move == null) {
             throw new UnsupportedOperationException("The move " + moveName
                     + " blueprint was not found. Is not present in moveList / Factory not initialized");

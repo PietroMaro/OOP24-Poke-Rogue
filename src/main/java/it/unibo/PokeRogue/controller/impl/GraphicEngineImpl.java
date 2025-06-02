@@ -6,9 +6,9 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 
+import it.unibo.pokerogue.controller.api.GameEngine;
 import it.unibo.pokerogue.controller.api.GraphicEngine;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
-import it.unibo.pokerogue.model.impl.Singleton;
 import it.unibo.pokerogue.model.impl.graphic.BackgroundElementImpl;
 import it.unibo.pokerogue.model.impl.graphic.BoxElementImpl;
 import it.unibo.pokerogue.model.impl.graphic.ButtonElementImpl;
@@ -27,21 +27,23 @@ import it.unibo.pokerogue.model.impl.graphic.TextElementImpl;
  * The engine is implemented as a singleton by extending {@link Singleton},
  * ensuring that only one instance manages all visual output.
  */
-public final class GraphicEngineImpl extends Singleton implements GraphicEngine {
+public final class GraphicEngineImpl implements GraphicEngine {
     private final JFrame gameWindow;
     private Map<String, PanelElementImpl> allPanelElements;
 
     /**
      * Constructs the graphic engine and initializes the game window.
      * Sets up the layout, key listener, and basic window properties.
+     *
+     * @param gameEngine the main game engine
      */
-    public GraphicEngineImpl() {
+    public GraphicEngineImpl(final GameEngine gameEngine) {
         this.gameWindow = new JFrame("Pokérogue Lite");
         this.gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.gameWindow.setResizable(true);
         this.gameWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.gameWindow.setLayout(new GridLayout());
-        this.gameWindow.addKeyListener(new InputHandlerImpl());
+        this.gameWindow.addKeyListener(new InputHandlerImpl(gameEngine));
         this.gameWindow.setVisible(true);
         this.allPanelElements = null;
 

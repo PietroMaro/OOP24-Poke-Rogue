@@ -6,14 +6,13 @@ import java.awt.event.KeyEvent;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import it.unibo.pokerogue.controller.api.GameEngine;
 import it.unibo.pokerogue.controller.api.scene.Scene;
-import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.utilities.UtilitiesForScenes;
 import it.unibo.pokerogue.view.impl.scene.SceneMenuView;
+import it.unibo.pokerogue.utilities.SceneChanger;
 
 /**
  * The {@code SceneMenu} class implements the main menu scene of the game.
@@ -34,7 +33,6 @@ public final class SceneMenu extends Scene {
     private int currentSelectedButton;
     private final GraphicElementsRegistry currentSceneGraphicElements;
     private final Map<String, PanelElementImpl> allPanelsElements;
-    private final GameEngine gameEngineInstance;
     private final SceneMenuView sceneMenuView;
     private final GraphicElementsRegistry graphicElements;
     private final Map<String, Integer> graphicElementNameToInt;
@@ -56,7 +54,6 @@ public final class SceneMenu extends Scene {
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
-        this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
         this.sceneMenuView = new SceneMenuView();
         this.initStatus();
         this.initGraphicElements();
@@ -96,13 +93,13 @@ public final class SceneMenu extends Scene {
             case KeyEvent.VK_ENTER:
                 if (this.currentSelectedButton == this.graphicElementNameToInt.get("LOAD_BUTTON")) {
 
-                    this.gameEngineInstance.setScene("load");
+                    SceneChanger.setScene("load");
                 } else if (this.currentSelectedButton == this.graphicElementNameToInt.get("NEW_GAME_BUTTON")) {
 
-                    this.gameEngineInstance.setFileToLoad("");
-                    this.gameEngineInstance.setScene("box");
+                    SceneChanger.setFileToLoadName("");
+                    SceneChanger.setScene("box");
                 } else if (this.currentSelectedButton == this.graphicElementNameToInt.get("OPTIONS_BUTTON")) {
-                    this.gameEngineInstance.setScene("info");
+                    SceneChanger.setScene("info");
 
                 }
                 break;

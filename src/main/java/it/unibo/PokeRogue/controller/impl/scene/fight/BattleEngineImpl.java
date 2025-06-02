@@ -5,33 +5,29 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Optional;
 
-import it.unibo.pokerogue.controller.api.EffectParser;
+import it.unibo.pokerogue.controller.impl.EffectParser;
 import it.unibo.pokerogue.controller.api.EnemyAi;
-import it.unibo.pokerogue.controller.api.GameEngine;
 import it.unibo.pokerogue.controller.api.scene.fight.BattleEngine;
 import it.unibo.pokerogue.controller.api.scene.fight.StatusEffect;
-import it.unibo.pokerogue.controller.impl.EffectParserImpl;
-import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.model.api.Decision;
 import it.unibo.pokerogue.model.api.SavingSystem;
 import it.unibo.pokerogue.model.api.ability.Ability;
-import it.unibo.pokerogue.model.api.ability.AbilityFactory;
-import it.unibo.pokerogue.model.api.item.ItemFactory;
+import it.unibo.pokerogue.model.impl.item.ItemFactory;
 import it.unibo.pokerogue.model.api.move.Move;
 import it.unibo.pokerogue.model.api.pokemon.Pokemon;
 import it.unibo.pokerogue.model.enums.AbilitySituationChecks;
 import it.unibo.pokerogue.model.enums.DecisionTypeEnum;
 import it.unibo.pokerogue.model.enums.Stats;
 import it.unibo.pokerogue.model.enums.Weather;
-import it.unibo.pokerogue.model.impl.AbilityFactoryImpl;
+import it.unibo.pokerogue.model.impl.AbilityFactory;
 import it.unibo.pokerogue.model.api.Range;
-import it.unibo.pokerogue.model.impl.SavingSystemImpl;
-import it.unibo.pokerogue.model.impl.item.ItemFactoryImpl;
 import it.unibo.pokerogue.model.impl.trainer.PlayerTrainerImpl;
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
 import it.unibo.pokerogue.utilities.BattleRewards;
 import it.unibo.pokerogue.utilities.BattleUtilities;
 import it.unibo.pokerogue.utilities.DamageCalculator;
+import it.unibo.pokerogue.utilities.SceneChanger;
+
 import lombok.Getter;
 
 /**
@@ -45,18 +41,14 @@ public class BattleEngineImpl implements BattleEngine {
 
     private final TrainerImpl playerTrainerInstance;
 
-    private final EffectParser effectParserInstance;
     @Getter
     private final Optional<Weather> currentWeather;
-    private final AbilityFactory abilityFactoryInstance;
     private final StatusEffect statusEffectInstance;
     private final EnemyAi enemyAiInstance;
-    private final GameEngine gameEngineInstance;
     private final SavingSystem savingSystemInstance;
     private boolean captured;
     private Pokemon playerPokemon;
     private Pokemon enemyPokemon;
-    private final ItemFactory itemFactoryInstance;
 
     /**
      * Constructor for the BattleEngineImpl class that initializes the battle engine
@@ -66,22 +58,19 @@ public class BattleEngineImpl implements BattleEngine {
      *
      * 
      * @param enemyAiInstance the AI instance controlling the enemy's strategy
+     * @param savingSystem the main saving system
      */
-    public BattleEngineImpl(final EnemyAi enemyAiInstance)
+    public BattleEngineImpl(final EnemyAi enemyAiInstance, final SavingSystem savingSystem)
             throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
         this.playerTrainerInstance = PlayerTrainerImpl.getTrainerInstance();
-        this.effectParserInstance = EffectParserImpl.getInstance(EffectParserImpl.class);
         this.currentWeather = Optional.of(Weather.SUNLIGHT);
-        this.abilityFactoryInstance = AbilityFactoryImpl.getInstance(AbilityFactoryImpl.class);
         this.statusEffectInstance = new StatusEffectImpl();
         this.enemyAiInstance = enemyAiInstance;
-        this.gameEngineInstance = GameEngineImpl.getInstance(GameEngineImpl.class);
-        this.savingSystemInstance = SavingSystemImpl.getInstance(SavingSystemImpl.class);
-        this.itemFactoryInstance = new ItemFactoryImpl();
+        this.savingSystemInstance = savingSystem;
         this.captured = false;
     }
 
@@ -108,8 +97,8 @@ public class BattleEngineImpl implements BattleEngine {
         this.playerPokemon = playerTrainerInstance.getPokemon(FIRST_POSITION).get();
         this.enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
 
-        final Ability abilityPlayer = abilityFactoryInstance.abilityFromName(playerPokemon.getAbilityName());
-        final Ability abilityEnemy = abilityFactoryInstance.abilityFromName(enemyPokemon.getAbilityName());
+        final Ability abilityPlayer = AbilityFactory.abilityFromName(playerPokemon.getAbilityName());
+        final Ability abilityEnemy = AbilityFactory.abilityFromName(enemyPokemon.getAbilityName());
 
         final Optional<Move> playerMove = getSafeMove(playerPokemon, playerDecision);
         final Optional<Move> enemyMove = getSafeMove(enemyPokemon, enemyDecision);
@@ -149,7 +138,7 @@ public class BattleEngineImpl implements BattleEngine {
                 attackerMove.get(),
                 this.currentWeather);
         defenderPokemon.getActualStats().get(Stats.HP).decrement(finalDamage);
-        this.effectParserInstance.parseEffect(attackerMove.get().getEffect().get(), attackerPokemon, defenderPokemon,
+        EffectParser.parseEffect(attackerMove.get().getEffect().get(), attackerPokemon, defenderPokemon,
                 attackerMove, opponentMove, this.currentWeather);
     }
 
@@ -163,7 +152,7 @@ public class BattleEngineImpl implements BattleEngine {
         final int maxHP = enemyPokemon.getActualStats().get(Stats.HP).getCurrentMax();
         final int currentHP = enemyPokemon.getActualStats().get(Stats.HP).getCurrentValue();
         final int baseCaptureRate = enemyPokemon.getCaptureRate();
-        final double ballModifier = itemFactoryInstance.itemFromName(pokeballName).getCaptureRate();
+        final double ballModifier = ItemFactory.itemFromName(pokeballName).getCaptureRate();
         final Pokemon enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
         if (countBall > 0 && enemyTrainerInstance.isWild()) {
             playerTrainerInstance.getBall().put(pokeballName, countBall - 1);
@@ -240,7 +229,7 @@ public class BattleEngineImpl implements BattleEngine {
             final Optional<Move> userMove,
             final Optional<Move> targetMove, final AbilitySituationChecks situation) throws IOException {
         if (ability.situationChecks() == situation) {
-            this.effectParserInstance.parseEffect(ability.effect().get(), user, target, userMove, targetMove,
+            EffectParser.parseEffect(ability.effect().get(), user, target, userMove, targetMove,
                     this.currentWeather);
         }
     }
@@ -253,7 +242,7 @@ public class BattleEngineImpl implements BattleEngine {
         if (BattleUtilities.isTeamWipedOut(enemyTrainerInstance) || this.captured) {
             BattleRewards.awardBattleRewards(this.playerPokemon, this.enemyPokemon);
             this.newMoveToLearn(this.playerPokemon);
-            this.gameEngineInstance.setScene("shop");
+            SceneChanger.setScene("shop");
         } else if (this.enemyPokemon.getActualStats().get(Stats.HP).getCurrentValue() <= 0) {
             final Decision enemyChoose = enemyAiInstance.nextMove(this.getCurrentWeather(), enemyTrainerInstance);
             this.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""), enemyChoose, enemyTrainerInstance);
@@ -262,8 +251,8 @@ public class BattleEngineImpl implements BattleEngine {
         }
         if (BattleUtilities.isTeamWipedOut(playerTrainerInstance)) {
             PlayerTrainerImpl.resetInstance();
-            gameEngineInstance.setFightLevel(0);
-            this.gameEngineInstance.setScene("main");
+            SceneChanger.setFightLevel(0);
+            SceneChanger.setScene("main");
         } else if (playerPokemon.getActualStats().get(Stats.HP).getCurrentValue() <= 0) {
             playerTrainerInstance.switchPokemonPosition(FIRST_POSITION,
                     BattleUtilities.findFirstUsablePokemon(playerTrainerInstance));
@@ -296,7 +285,7 @@ public class BattleEngineImpl implements BattleEngine {
             InvocationTargetException,
             InstantiationException {
         if (playerPokemon.isHasToLearnMove()) {
-            this.gameEngineInstance.setScene("move");
+            SceneChanger.setScene("move");
         }
     }
 }
