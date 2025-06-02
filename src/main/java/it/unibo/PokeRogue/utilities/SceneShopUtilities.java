@@ -128,7 +128,7 @@ public final class SceneShopUtilities {
     public static void updateItemDescription(final GraphicElementsRegistry sceneGraphicElements, final Item item) {
         UtilitiesForScenes.safeGetElementByName(sceneGraphicElements, "ITEM_DESCRIPTION_TEXT",
                 TextElementImpl.class)
-                .setText(item.getDescription());
+                .setText(item.description());
     }
 
     /**
@@ -147,14 +147,14 @@ public final class SceneShopUtilities {
 
             UtilitiesForScenes.safeGetElementById(sceneGraphicElements, PRICY_ITEM_1_NAME_POSITION + i,
                     TextElementImpl.class)
-                    .setText(item.getName());
+                    .setText(item.name());
             UtilitiesForScenes.safeGetElementById(sceneGraphicElements, PRICY_ITEM_1_NAME_POSITION + i,
                     TextElementImpl.class)
                     .setLeftX(xPosition);
 
             UtilitiesForScenes.safeGetElementById(sceneGraphicElements, PRICY_ITEM_1_PRICE_POSITION + i,
                     TextElementImpl.class)
-                    .setText(String.valueOf(item.getPrice()));
+                    .setText(String.valueOf(item.price()));
             UtilitiesForScenes.safeGetElementById(sceneGraphicElements, PRICY_ITEM_1_PRICE_POSITION + i,
                     TextElementImpl.class)
                     .setLeftX(xPositionPrice);
@@ -166,7 +166,7 @@ public final class SceneShopUtilities {
 
             UtilitiesForScenes.safeGetElementById(sceneGraphicElements, FREE_ITEM_1_NAME_POSITION + i,
                     TextElementImpl.class)
-                    .setText(item.getName());
+                    .setText(item.name());
             UtilitiesForScenes.safeGetElementById(sceneGraphicElements, FREE_ITEM_1_NAME_POSITION + i,
                     TextElementImpl.class)
                     .setLeftX(xPosition);

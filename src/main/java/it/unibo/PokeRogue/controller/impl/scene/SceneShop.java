@@ -163,7 +163,7 @@ public class SceneShop extends Scene {
                 } else if (this.newSelectedButton >= this.graphicElementNameToInt.get(PRICY_ITEM_1)
                         && this.newSelectedButton <= this.graphicElementNameToInt.get(PRICY_ITEM_3)) {
                     final Item item = SceneShopUtilities.getShopItems(this.newSelectedButton - 4);
-                    if (playerTrainerInstance.getMoney() >= item.getPrice()) {
+                    if (playerTrainerInstance.getMoney() >= item.price()) {
                         this.selectedItemForUse = true;
                         buyItem(playerTrainerInstance, item);
                         buyedItem = true;
@@ -200,7 +200,7 @@ public class SceneShop extends Scene {
     private void buyItem(final PlayerTrainerImpl trainer, final Item item)
             throws InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchMethodException, IOException {
-        trainer.addMoney(-item.getPrice());
+        trainer.addMoney(-item.price());
         SceneShopUtilities.updatePlayerMoneyText(currentSceneGraphicElements, trainer);
         useOrHandleItem(trainer, item);
     }
@@ -208,16 +208,15 @@ public class SceneShop extends Scene {
     private void useOrHandleItem(final PlayerTrainerImpl trainer,
             final Item item) throws InstantiationException, IllegalAccessException, InvocationTargetException,
             NoSuchMethodException, IOException {
-        if ("Capture".equalsIgnoreCase(item.getType())) {
-            final int countBall = trainer.getBall().get(item.getName());
-            trainer.getBall().put(item.getName(), countBall + 1);
+        if ("Capture".equalsIgnoreCase(item.type())) {
+            trainer.addBall(item.name(), 1);
             SceneChanger.setScene("fight");
-        } else if ("Valuable".equalsIgnoreCase(item.getType())) {
-            final Optional<JSONObject> itemEffect = item.getEffect();
+        } else if ("Valuable".equalsIgnoreCase(item.type())) {
+            final Optional<JSONObject> itemEffect = item.effect();
             EffectParser.parseEffect(itemEffect.get(), trainer.getPokemon(0).get());
             SceneChanger.setScene("fight");
-        } else if ("Healing".equalsIgnoreCase(item.getType())
-                || "Boost".equalsIgnoreCase(item.getType()) || "PPRestore".equalsIgnoreCase(item.getType())) {
+        } else if ("Healing".equalsIgnoreCase(item.type())
+                || "Boost".equalsIgnoreCase(item.type()) || "PPRestore".equalsIgnoreCase(item.type())) {
             this.selectedUsableItem = item;
         }
     }
@@ -231,7 +230,7 @@ public class SceneShop extends Scene {
                 final Pokemon pokemon = selectedPokemon.get();
 
                 // Ottieni l'effetto dell'item
-                final Optional<JSONObject> itemEffect = this.selectedUsableItem.getEffect();
+                final Optional<JSONObject> itemEffect = this.selectedUsableItem.effect();
                 EffectParser.parseEffect(itemEffect.get(), pokemon);
                 this.selectedUsableItem = null;
                 SceneChanger.setScene("fight");
@@ -240,7 +239,7 @@ public class SceneShop extends Scene {
     }
 
     private void compensation(final PlayerTrainerImpl playerTrainerInstance) {
-        playerTrainerInstance.addMoney(selectedUsableItem.getPrice());
+        playerTrainerInstance.addMoney(selectedUsableItem.price());
         selectedUsableItem = null;
     }
 
