@@ -1,7 +1,7 @@
 package it.unibo.pokerogue.controller.impl;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyAdapter;
+import java.awt.event.KeyListener;
 import java.lang.reflect.InvocationTargetException;
 import java.io.IOException;
 import org.apache.commons.jexl3.JexlException;
@@ -12,7 +12,7 @@ import it.unibo.pokerogue.controller.api.GameEngine;
  * Handles keyboard input and delegates key events to the GameEngine.
  * This class extends KeyAdapter to override only the needed key events.
  */
-public final class InputHandlerImpl extends KeyAdapter {
+public final class InputHandlerImpl implements KeyListener {
     private final GameEngine gameEngine;
 
     /**
@@ -22,7 +22,7 @@ public final class InputHandlerImpl extends KeyAdapter {
      */
     public InputHandlerImpl(final GameEngine gameEngine) {
         try {
-            this.gameEngine = gameEngine; 
+            this.gameEngine = gameEngine;
         } catch (final JexlException e) {
             e.printStackTrace();
             throw new IllegalStateException("GameEngine has not been initialized");
@@ -40,5 +40,13 @@ public final class InputHandlerImpl extends KeyAdapter {
                 | NoSuchMethodException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void keyTyped(final KeyEvent e) {
+    }
+
+    @Override
+    public void keyReleased(final KeyEvent e) {
     }
 }
