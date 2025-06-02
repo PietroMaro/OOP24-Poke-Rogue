@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import it.unibo.pokerogue.controller.api.EnemyAi;
 import it.unibo.pokerogue.controller.api.scene.fight.BattleEngine;
+import it.unibo.pokerogue.controller.impl.EffectInterpreter;
 import it.unibo.pokerogue.controller.impl.EffectParser;
 import it.unibo.pokerogue.controller.impl.ai.EnemyAiImpl;
 import it.unibo.pokerogue.controller.impl.scene.fight.BattleEngineImpl;
@@ -30,7 +31,6 @@ import it.unibo.pokerogue.utilities.BattleRewards;
 import it.unibo.pokerogue.utilities.PokeEffectivenessCalc;
 import it.unibo.pokerogue.utilities.api.JsonReader;
 import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
-
 
 import org.json.JSONObject;
 
@@ -68,9 +68,9 @@ final class TestAll {
     @BeforeAll
     private static void initAllFactories() {
         try {
-        PokemonFactory.init();
-        MoveFactory.init();
-        AbilityFactory.init();
+            PokemonFactory.init();
+            MoveFactory.init();
+            AbilityFactory.init();
         } catch (final IOException e) {
             e.printStackTrace();
         }
@@ -166,7 +166,7 @@ final class TestAll {
         final Pokemon pok1 = PokemonFactory.randomPokemon(3);
         final Pokemon pok2 = PokemonFactory.randomPokemon(3);
         final Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
-
+        EffectInterpreter.setDebug(true);
         final JsonReader jsonReader = new JsonReaderImpl();
 
         final Path dirPath = Paths.get("src", "main", "resources", "pokemonData", "moves");
@@ -175,10 +175,12 @@ final class TestAll {
                 if (Files.isRegularFile(entry)) {
                     final JSONObject moveJson = jsonReader.readJsonObject(entry.toString());
                     final JSONObject effect = moveJson.getJSONObject("effect");
-                    EffectInterpreter.parseEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
+                    EffectInterpreter.interpertEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
                 }
             }
         }
+        EffectInterpreter.setDebug(false);
+
     }
 
     @Test
@@ -192,24 +194,25 @@ final class TestAll {
         final Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
 
         final JsonReader jsonReader = new JsonReaderImpl();
-
+        EffectInterpreter.setDebug(true);
         final Path dirPath = Paths.get("src", "main", "resources", "pokemonData", "abilities");
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
             for (final Path entry : stream) {
                 if (Files.isRegularFile(entry)) {
                     final JSONObject moveJson = jsonReader.readJsonObject(entry.toString());
                     final JSONObject effect = moveJson.getJSONObject("effect");
-                    EffectInterpreter.parseEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
+                    EffectInterpreter.interpertEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
                 }
             }
         }
+        EffectInterpreter.setDebug(false);
+
     }
 
     @Test
     void testEffectivenessCalculator()
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
             InstantiationException, IOException {
-
 
         final Pokemon charmander = PokemonFactory.pokemonFromName("charmander");
         final Pokemon venusaur = PokemonFactory.pokemonFromName("venusaur");
@@ -226,6 +229,7 @@ final class TestAll {
             InstantiationException, IOException {
         final JsonReader jsonReader = new JsonReaderImpl();
         final Pokemon pok1 = PokemonFactory.randomPokemon(3);
+        EffectInterpreter.setDebug(true);
 
         final Path dirPath = Paths.get("src", "main", "resources", "itemsData", "items", "data");
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
@@ -233,10 +237,12 @@ final class TestAll {
                 if (Files.isRegularFile(entry)) {
                     final JSONObject itemJson = jsonReader.readJsonObject(entry.toString());
                     final JSONObject effect = itemJson.getJSONObject("effect");
-                    EffectInterpreter.parseEffect(effect, pok1);
+                    EffectInterpreter.interpertEffect(effect, pok1);
                 }
             }
         }
+        EffectInterpreter.setDebug(false);
+
     }
 
     @Test
