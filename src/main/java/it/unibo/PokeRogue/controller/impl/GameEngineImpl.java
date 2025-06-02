@@ -28,7 +28,7 @@ public final class GameEngineImpl implements GameEngine {
     private GraphicEngine graphicEngineInstance;
     @Setter
     private Scene currentScene;
-    @Setter 
+    @Setter
     @Getter
     private String fileToLoadName;
     @Setter
@@ -37,7 +37,7 @@ public final class GameEngineImpl implements GameEngine {
     /**
      * Protected constructor for the GameEngineImpl.
      */
-    public  GameEngineImpl() {
+    public GameEngineImpl() {
         super();
         this.graphicEngineInstance = null;
     }
@@ -56,8 +56,8 @@ public final class GameEngineImpl implements GameEngine {
         this.currentScene.updateStatus(keyCode);
         this.currentScene.updateGraphic();
 
-        this.graphicEngineInstance.createPanels(this.currentScene.getAllPanelsElements());
-        this.graphicEngineInstance.drawScene(this.currentScene.getCurrentSceneGraphicElements());
+        this.graphicEngineInstance.renderScene(this.currentScene.getAllPanelsElements(),
+                this.currentScene.getCurrentSceneGraphicElements());
 
     }
 
