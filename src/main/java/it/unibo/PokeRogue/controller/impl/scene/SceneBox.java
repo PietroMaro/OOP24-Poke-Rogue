@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import it.unibo.pokerogue.controller.api.scene.Scene;
 import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
@@ -56,8 +57,9 @@ public class SceneBox extends Scene {
         /**
          * Constructs a new SceneBox instance.
          *
-         * @param savePath the path to the save file used to load stored Pokémon boxes.
-                 * @param savingSystem the main save system
+         * @param savePath     the path to the save file used to load stored Pokémon
+         *                     boxes.
+         * @param savingSystem the main save system
          */
         public SceneBox(final String savePath, final SavingSystem savingSystem) throws IOException,
                         InstantiationException,
@@ -166,7 +168,8 @@ public class SceneBox extends Scene {
                                 break;
 
                         case KeyEvent.VK_ENTER:
-                                if (this.currentSelectedButton == START_BUTTON_POSITION) {
+                                if (this.currentSelectedButton == START_BUTTON_POSITION
+                                                && this.numberOfPokemonInSquad() > 0) {
                                         SceneChanger.setScene("fight");
                                 }
 
@@ -305,4 +308,16 @@ public class SceneBox extends Scene {
                 this.boxes.get(this.boxes.size() - 1).add(pokemon);
 
         }
+
+        private int numberOfPokemonInSquad() {
+                int numberOfPokemon = 0;
+                for (Optional<Pokemon> pokemon : this.playerTrainerInstance.getSquad()) {
+                        if (pokemon.isPresent()) {
+                                numberOfPokemon++;
+                        }
+                }
+
+                return numberOfPokemon;
+        }
+
 }

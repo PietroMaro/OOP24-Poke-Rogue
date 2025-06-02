@@ -13,12 +13,7 @@ public interface ButtonElement {
      */
     void setSelected(boolean status);
 
-    /**
-     * Returns whether this button is currently selected.
-     * 
-     * @return true if selected, false otherwise
-     */
-    // boolean isSelected();
+
 
     /**
      * Returns the underlying BoxElementImpl representing the button's visuals.
