@@ -12,18 +12,15 @@ import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
  * and manage the UI panels for the game.
  */
 public interface GraphicEngine {
-    /**
-     * Draws all the visual elements of a scene.
-     *
-     * @param allGraphicElements the graphic elements to draw.
-     */
-    void drawScene(GraphicElementsRegistry allGraphicElements);
 
     /**
-     * Creates and adds panels to the UI.
+     * Render all the elements of a scene.
+     * 
+     * @param allPanelElements   a map of panel identifiers to their components.
+     * @param allGraphicElements the graphic elements to draw.
      *
-     * @param allPanelElements a map of panel identifiers to their components.
      */
-    void createPanels(Map<String, PanelElementImpl> allPanelElements);
+    public void renderScene(final Map<String, PanelElementImpl> panelElements,
+            final GraphicElementsRegistry allGraphicElements);
 
 }

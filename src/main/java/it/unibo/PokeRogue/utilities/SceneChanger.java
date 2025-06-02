@@ -105,8 +105,9 @@ public final class SceneChanger {
                 break;
         }
         gameEngine.setCurrentScene(newScene);
-        graphicEngine.createPanels(newScene.getAllPanelsElements());
-        graphicEngine.drawScene(newScene.getCurrentSceneGraphicElements());
+
+        graphicEngine.renderScene(newScene.getAllPanelsElements(),
+                newScene.getCurrentSceneGraphicElements());
     }
 
 }

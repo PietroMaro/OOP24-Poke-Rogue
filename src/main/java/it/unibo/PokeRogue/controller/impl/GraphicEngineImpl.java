@@ -49,13 +49,13 @@ public final class GraphicEngineImpl implements GraphicEngine {
 
     }
 
-    /**
-     * Draws the current game scene by rendering all provided graphic elements.
-     *
-     * @param allGraphicElements a registry of all graphic elements to draw.
-     */
-    @Override
-    public void drawScene(final GraphicElementsRegistry allGraphicElements) {
+    public void renderScene(final Map<String, PanelElementImpl> panelElements, final GraphicElementsRegistry allGraphicElements){
+        this.createPanels(panelElements);
+        this.drawGraphicElements(allGraphicElements);
+
+    }
+
+    private void drawGraphicElements(final GraphicElementsRegistry allGraphicElements) {
 
         for (final GraphicElementImpl graphicElement : allGraphicElements.getElements().values()) {
             switch (graphicElement) {
@@ -74,15 +74,7 @@ public final class GraphicEngineImpl implements GraphicEngine {
 
     }
 
-    /**
-     * Creates and adds all panels to the game window based on the provided mapping.
-     * Ensures nested panels are added correctly to their parents.
-     *
-     * @param panelElements a map of panel names to their corresponding panel
-     *                      elements.
-     */
-    @Override
-    public void createPanels(final Map<String, PanelElementImpl> panelElements) {
+    private void createPanels(final Map<String, PanelElementImpl> panelElements) {
         this.gameWindow.getContentPane().removeAll();
 
         this.allPanelElements = new LinkedHashMap<>(panelElements);
