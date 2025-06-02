@@ -327,6 +327,7 @@ public final class PokemonImpl implements Pokemon {
     @Override
     public void setStatusDuration(final Map<StatusCondition, Integer> newVal) {
         this.statusDuration = new EnumMap<>(StatusCondition.class);
+        this.statusDuration.putAll(newVal);
     }
 
     @Override

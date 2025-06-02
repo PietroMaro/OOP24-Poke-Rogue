@@ -152,7 +152,7 @@ public class BattleEngineImpl implements BattleEngine {
         final int maxHP = enemyPokemon.getActualStats().get(Stats.HP).getCurrentMax();
         final int currentHP = enemyPokemon.getActualStats().get(Stats.HP).getCurrentValue();
         final int baseCaptureRate = enemyPokemon.getCaptureRate();
-        final double ballModifier = ItemFactory.itemFromName(pokeballName).getCaptureRate();
+        final double ballModifier = ItemFactory.itemFromName(pokeballName).captureRate();
         final Pokemon enemyPokemon = enemyTrainerInstance.getPokemon(FIRST_POSITION).get();
         if (countBall > 0 && enemyTrainerInstance.isWild()) {
             playerTrainerInstance.getBall().put(pokeballName, countBall - 1);

@@ -110,4 +110,8 @@ public class TrainerImpl implements Trainer {
         return new HashMap<>(ball);
     }
 
+    public void addBall(final String name, final int amount) {
+        this.ball.put(name, this.ball.getOrDefault(name, 0) + amount);
+    }
+
 }

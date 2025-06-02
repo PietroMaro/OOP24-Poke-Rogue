@@ -175,8 +175,9 @@ public class StatusEffectImpl implements StatusEffect {
     private void decrementTimeDuration(final Pokemon pokemon, final StatusCondition status) {
         final Map<StatusCondition, Integer> pokemonStatusDurations = pokemon.getStatusDuration();
         final int turnLeft = pokemonStatusDurations.get(status) - DURATION_SHORT;
-
+        System.out.println(pokemonStatusDurations);
         pokemonStatusDurations.put(status, turnLeft);
+        System.out.println(pokemonStatusDurations);
         pokemon.setStatusDuration(pokemonStatusDurations);
         if (pokemonStatusDurations.get(status).equals(0)) {
             pokemonStatusDurations.clear();
