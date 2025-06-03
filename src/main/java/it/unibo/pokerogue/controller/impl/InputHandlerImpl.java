@@ -5,7 +5,8 @@ import java.awt.event.KeyListener;
 import java.lang.reflect.InvocationTargetException;
 import java.io.IOException;
 import org.apache.commons.jexl3.JexlException;
-
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import it.unibo.pokerogue.controller.api.GameEngine;
 
 /**
@@ -13,6 +14,7 @@ import it.unibo.pokerogue.controller.api.GameEngine;
  * This class extends KeyAdapter to override only the needed key events.
  */
 public final class InputHandlerImpl implements KeyListener {
+    private static final Logger Logger = LoggerFactory.getLogger(InputHandlerImpl.class);
     private final GameEngine gameEngine;
 
     /**
@@ -24,8 +26,8 @@ public final class InputHandlerImpl implements KeyListener {
         try {
             this.gameEngine = gameEngine;
         } catch (final JexlException e) {
-            e.printStackTrace();
-            throw new IllegalStateException("GameEngine has not been initialized");
+            Logger.error("GameEngine has not been initialized", e);
+            throw new IllegalStateException("GameEngine has not been initialized", e);
         }
     }
 
@@ -38,7 +40,7 @@ public final class InputHandlerImpl implements KeyListener {
                 | InvocationTargetException
                 | IOException
                 | NoSuchMethodException e) {
-            e.printStackTrace();
+            Logger.error("Exception occurred while handling key press", e);
         }
     }
 

@@ -49,7 +49,9 @@ public final class GraphicEngineImpl implements GraphicEngine {
 
     }
 
-    public void renderScene(final Map<String, PanelElementImpl> panelElements, final GraphicElementsRegistry allGraphicElements){
+    @Override
+    public void renderScene(final Map<String, PanelElementImpl> panelElements,
+            final GraphicElementsRegistry allGraphicElements) {
         this.createPanels(panelElements);
         this.drawGraphicElements(allGraphicElements);
 

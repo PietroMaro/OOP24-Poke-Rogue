@@ -27,5 +27,5 @@ public interface ShopInitView {
     void initGraphicElements(int currentSelectedButton,
             GraphicElementsRegistry sceneGraphicElements,
             GraphicElementsRegistry graphicElements,
-            Map<String, PanelElementImpl> allPanelsElements, final Trainer playerTrainerInstance) throws IOException;
+            Map<String, PanelElementImpl> allPanelsElements, Trainer playerTrainerInstance) throws IOException;
 }

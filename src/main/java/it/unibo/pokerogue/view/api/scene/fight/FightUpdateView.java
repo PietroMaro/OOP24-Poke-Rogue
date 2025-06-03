@@ -33,5 +33,6 @@ public interface FightUpdateView {
             GraphicElementsRegistry currentSceneGraphicElements,
             Map<String, PanelElementImpl> allPanelsElements,
             GraphicElementsRegistry graphicElements,
-            Map<String, Integer> graphicElementNameToInt, SceneFight scene, final Trainer playerTrainerInstance) throws IOException;
+            Map<String, Integer> graphicElementNameToInt, SceneFight scene, Trainer playerTrainerInstance)
+            throws IOException;
 }

@@ -22,28 +22,28 @@ public final class SceneShopInitView implements ShopInitView {
 
         private static final String FIRST_PANEL = "firstPanel";
 
-        /**
-         * Constructs a SceneShopInitView 
-         * 
-         */
         public SceneShopInitView() {
+                // This class is not meant to be instantiated.
         }
 
         @Override
         public void initGraphicElements(final int currentSelectedButton,
                         final GraphicElementsRegistry currentSceneGraphicElements,
                         final GraphicElementsRegistry graphicElements,
-                        final Map<String, PanelElementImpl> allPanelsElements, final Trainer playerTrainerInstance) throws IOException {
+                        final Map<String, PanelElementImpl> allPanelsElements, final Trainer playerTrainerInstance)
+                        throws IOException {
                 currentSceneGraphicElements.clear();
                 allPanelsElements.put(FIRST_PANEL, new PanelElementImpl("", new OverlayLayout(null)));
                 UtilitiesForScenes.loadSceneElements("sceneShopElements.json", "init",
                                 currentSceneGraphicElements,
                                 graphicElements);
                 this.initTextElements(currentSceneGraphicElements, playerTrainerInstance);
-                SceneShopUtilities.updateItemDescription(currentSceneGraphicElements, SceneShopUtilities.getShopItems(4));
+                SceneShopUtilities.updateItemDescription(currentSceneGraphicElements,
+                                SceneShopUtilities.getShopItems(4));
         }
 
-        private void initTextElements(final GraphicElementsRegistry currentSceneGraphicElements, final Trainer playerTrainerInstance) {
+        private void initTextElements(final GraphicElementsRegistry currentSceneGraphicElements,
+                        final Trainer playerTrainerInstance) {
                 SceneShopUtilities.updateItemsText(currentSceneGraphicElements);
                 UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "PLAYER_MONEY_TEXT",
                                 TextElementImpl.class)

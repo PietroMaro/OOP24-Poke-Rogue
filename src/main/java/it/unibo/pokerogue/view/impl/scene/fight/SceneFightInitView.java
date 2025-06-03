@@ -27,18 +27,16 @@ public final class SceneFightInitView implements FightInitView {
         private static final Integer FIRST_POSITION = 0;
         private static final String FIRST_PANEL = "firstPanel";
 
-        /**
-         * Constructs a new SceneFightInitView object.
-         * 
-         */
         public SceneFightInitView() {
+                // This class is not meant to be instantiated.
         }
 
         @Override
         public void initGraphicElements(final int currentSelectedButton,
                         final GraphicElementsRegistry currentSceneGraphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
-                        final GraphicElementsRegistry graphicElements, final Trainer enemyTrainerInstance, final Trainer playerTrainerInstance)
+                        final GraphicElementsRegistry graphicElements, final Trainer enemyTrainerInstance,
+                        final Trainer playerTrainerInstance)
                         throws IOException {
                 allPanelsElements.put(FIRST_PANEL, new PanelElementImpl("", new OverlayLayout(null)));
                 UtilitiesForScenes.loadSceneElements("sceneFightElement.json", "init", currentSceneGraphicElements,

@@ -56,7 +56,6 @@ public final class SceneBoxView implements BoxView {
 
                 // Pokemon Buttons
                 for (int pokemonIndex = 0; pokemonIndex < LENGTH_OF_POKEBOX; pokemonIndex++) {
-
                         currentSceneGraphicElements.put(pokemonIndex + FIRST_POKEMON_BUTTON_POSITION,
                                         new ButtonElementImpl(FIRST_PANEL_NAME, null, Color.BLACK, 0,
                                                         POKEMON_BUTTON_START_X

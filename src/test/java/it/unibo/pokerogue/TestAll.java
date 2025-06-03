@@ -328,7 +328,7 @@ final class TestAll {
         enemyTrainer.addPokemon(charmander, 1);
         battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.POKEBALL, "masterball"),
                 new Decision(DecisionTypeEnum.NOTHING, ""), enemyTrainer, playerTrainer, gameEngineInstance);
-        assertTrue(playerTrainer.getBall().get("pokeball") == STARTER_POKEBALL);
+        assertTrue(playerTrainer.getBall().get("pokeball").equals(STARTER_POKEBALL));
     }
 
     @Test

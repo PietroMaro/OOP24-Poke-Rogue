@@ -102,7 +102,7 @@ public final class EffectInterpreter {
             context.set("weather", weather.get());
         }
 
-        context.set("PLAYER_MONEY", playerTrainerInstance);
+        context.set("playerMoney", playerTrainerInstance);
         context.set("Optional", Optional.class);
         context.set("StatusCondition", StatusCondition.class);
         context.set("Type", Type.class);
