@@ -25,6 +25,7 @@ import it.unibo.pokerogue.model.impl.GenerateEnemyImpl;
 import it.unibo.pokerogue.model.impl.MoveFactory;
 import it.unibo.pokerogue.model.impl.RangeImpl;
 import it.unibo.pokerogue.model.impl.SavingSystemImpl;
+import it.unibo.pokerogue.model.impl.item.ItemFactory;
 import it.unibo.pokerogue.model.impl.pokemon.PokemonFactory;
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
 import it.unibo.pokerogue.utilities.BattleRewards;
@@ -59,6 +60,7 @@ final class TestAll {
     private static final int VERY_LOW_EFFECTIVENESS = 20;
     private static final String ABSORB_LITTERAL = "absorb";
     private static final String CHARMANDER_LITTERAL = "charmander";
+    private static final Integer STARTER_POKEBALL = 5;
 
     @BeforeAll
     private static void initAllFactories() {
@@ -160,6 +162,7 @@ final class TestAll {
         final Optional<Move> moveTest2 = Optional.of(MoveFactory.moveFromName("absorb"));
         final Pokemon pok1 = PokemonFactory.randomPokemon(3);
         final Pokemon pok2 = PokemonFactory.randomPokemon(3);
+        final Trainer playerTrainerInstance = new TrainerImpl();
         final Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
         EffectInterpreter.setDebug(true);
         final JsonReader jsonReader = new JsonReaderImpl();
@@ -170,7 +173,8 @@ final class TestAll {
                 if (Files.isRegularFile(entry)) {
                     final JSONObject moveJson = jsonReader.readJsonObject(entry.toString());
                     final JSONObject effect = moveJson.getJSONObject("effect");
-                    EffectInterpreter.interpertEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
+                    EffectInterpreter.interpertEffect(effect, pok1, pok2, moveTest1, moveTest2, weather,
+                            playerTrainerInstance);
                 }
             }
         }
@@ -187,7 +191,7 @@ final class TestAll {
         final Pokemon pok1 = PokemonFactory.randomPokemon(3);
         final Pokemon pok2 = PokemonFactory.randomPokemon(3);
         final Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
-
+        final Trainer playerTrainerInstance = new TrainerImpl();
         final JsonReader jsonReader = new JsonReaderImpl();
         EffectInterpreter.setDebug(true);
         final Path dirPath = Paths.get("src", "main", "resources", "pokemonData", "abilities");
@@ -196,7 +200,8 @@ final class TestAll {
                 if (Files.isRegularFile(entry)) {
                     final JSONObject moveJson = jsonReader.readJsonObject(entry.toString());
                     final JSONObject effect = moveJson.getJSONObject("effect");
-                    EffectInterpreter.interpertEffect(effect, pok1, pok2, moveTest1, moveTest2, weather);
+                    EffectInterpreter.interpertEffect(effect, pok1, pok2, moveTest1, moveTest2, weather,
+                            playerTrainerInstance);
                 }
             }
         }
@@ -225,14 +230,14 @@ final class TestAll {
         final JsonReader jsonReader = new JsonReaderImpl();
         final Pokemon pok1 = PokemonFactory.randomPokemon(3);
         EffectInterpreter.setDebug(true);
-
+        final Trainer playerTrainerInstance = new TrainerImpl();
         final Path dirPath = Paths.get("src", "main", "resources", "itemsData", "items", "data");
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
             for (final Path entry : stream) {
                 if (Files.isRegularFile(entry)) {
                     final JSONObject itemJson = jsonReader.readJsonObject(entry.toString());
                     final JSONObject effect = itemJson.getJSONObject("effect");
-                    EffectInterpreter.interpertEffect(effect, pok1);
+                    EffectInterpreter.interpertEffect(effect, pok1, playerTrainerInstance);
                 }
             }
         }
@@ -250,14 +255,10 @@ final class TestAll {
         final Pokemon venusaur = PokemonFactory.pokemonFromName("venusaur");
         final Pokemon poliwag = PokemonFactory.pokemonFromName("poliwag");
         final TrainerImpl playerTrainerImpl = new TrainerImpl();
-
         playerTrainerImpl.addPokemon(poliwag, MAX_LENGTH_OF_POKESQUAD);
         enemyTrainer.addPokemon(charmander, MAX_LENGTH_OF_POKESQUAD);
-
         assertEquals(ai.nextMove(weather, enemyTrainer, playerTrainerImpl), new Decision(DecisionTypeEnum.ATTACK, "0"));
-
         enemyTrainer.addPokemon(venusaur, MAX_LENGTH_OF_POKESQUAD);
-
         assertEquals(ai.nextMove(weather, enemyTrainer, playerTrainerImpl),
                 new Decision(DecisionTypeEnum.SWITCH_IN, "1"));
 
@@ -285,7 +286,8 @@ final class TestAll {
     }
 
     @Test
-    void testBattleEngine() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+    void testBattleEngineNothingDecision()
+            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
             InstantiationException, IOException {
         final Trainer enemyTrainer = new TrainerImpl();
         final Trainer playerTrainer = new TrainerImpl();
@@ -298,9 +300,58 @@ final class TestAll {
         final int beforeLife = playerTrainer.getSquad().get(0).get().getActualStats().get(Stats.HP).getCurrentValue();
         final BattleEngine battleEngine = new BattleEngineImpl(ai, new SavingSystemImpl());
         battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""),
-                new Decision(DecisionTypeEnum.ATTACK, "0"), playerTrainer, enemyTrainer, gameEngineInstance);
+                new Decision(DecisionTypeEnum.ATTACK, "0"), enemyTrainer, playerTrainer, gameEngineInstance);
         final int afterLife = playerTrainer.getSquad().get(0).get().getActualStats().get(Stats.HP).getCurrentValue();
         assertTrue(beforeLife > afterLife);
+    }
+
+    @Test
+    void testBattleEngineBall() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+            InstantiationException, IOException {
+        ItemFactory.init();
+        final Trainer enemyTrainer = new TrainerImpl();
+        enemyTrainer.setWild(true);
+        final Trainer playerTrainer = new TrainerImpl();
+        final Pokemon bulbasaur = PokemonFactory.pokemonFromName("bulbasaur");
+        final Pokemon charmander = PokemonFactory.pokemonFromName("charmander");
+        final GameEngine gameEngineInstance = new GameEngineImpl();
+        playerTrainer.addPokemon(bulbasaur, 1);
+        enemyTrainer.addPokemon(charmander, 1);
+        playerTrainer.addBall("masterball", 1);
+        final EnemyAi ai = new EnemyAiImpl(99);
+        final BattleEngine battleEngine = new BattleEngineImpl(ai, new SavingSystemImpl());
+        battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.POKEBALL, "masterball"),
+                new Decision(DecisionTypeEnum.NOTHING, ""), enemyTrainer, playerTrainer, gameEngineInstance);
+        assertTrue(playerTrainer.getBall().get("masterball") == 0);
+        assertTrue(playerTrainer.getSquad().get(1).get().getName().equals("charmander"));
+        enemyTrainer.setWild(false);
+        enemyTrainer.addPokemon(charmander, 1);
+        battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.POKEBALL, "masterball"),
+                new Decision(DecisionTypeEnum.NOTHING, ""), enemyTrainer, playerTrainer, gameEngineInstance);
+        assertTrue(playerTrainer.getBall().get("pokeball") == STARTER_POKEBALL);
+    }
+
+    @Test
+    void testBattleEngineSwitchIn() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+            InstantiationException, IOException {
+        ItemFactory.init();
+        final Trainer enemyTrainer = new TrainerImpl();
+        enemyTrainer.setWild(true);
+        final Trainer playerTrainer = new TrainerImpl();
+        final Pokemon bulbasaur = PokemonFactory.pokemonFromName("bulbasaur");
+        final Pokemon charizard = PokemonFactory.pokemonFromName("charizard");
+        final Pokemon charmander = PokemonFactory.pokemonFromName("charmander");
+        final GameEngine gameEngineInstance = new GameEngineImpl();
+        playerTrainer.addPokemon(bulbasaur, 2);
+        playerTrainer.addPokemon(charizard, 2);
+        enemyTrainer.addPokemon(charmander, 1);
+        final EnemyAi ai = new EnemyAiImpl(99);
+        final int beforeLife = playerTrainer.getSquad().get(0).get().getActualStats().get(Stats.HP).getCurrentValue();
+        final BattleEngine battleEngine = new BattleEngineImpl(ai, new SavingSystemImpl());
+        battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.SWITCH_IN, "1"),
+                new Decision(DecisionTypeEnum.ATTACK, "0"), enemyTrainer, playerTrainer, gameEngineInstance);
+        final int afterLife = playerTrainer.getSquad().get(1).get().getActualStats().get(Stats.HP).getCurrentValue();
+        assertTrue(beforeLife == afterLife);
     }
 
 }

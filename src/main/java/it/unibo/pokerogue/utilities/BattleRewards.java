@@ -32,13 +32,7 @@ public final class BattleRewards {
         final int baseExp = 120;
         final int enemyLevel = defeatedPokemon.getLevel().getCurrentValue();
         final int playerLevel = winnerPokemon.getLevel().getCurrentValue();
-
-        final double base = 2.0 * enemyLevel + 10.0 / enemyLevel + playerLevel + 10.0;
-        final double exponent = Math.pow(base, 2.5);
-        final double expRaw = baseExp * enemyLevel / 5.0 * exponent;
-
-        final int gainedExp = (int) Math.floor(expRaw) + 1;
-
+        final int gainedExp = (int) ((baseExp * enemyLevel) / (7.0 + (playerLevel * 0.5)));
         winnerPokemon.increaseExp(gainedExp, true);
 
         final Map<Stats, Integer> awardedEvs = defeatedPokemon.getGivesEv();

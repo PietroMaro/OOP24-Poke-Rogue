@@ -67,7 +67,6 @@ public final class GameEngineImpl implements GameEngine {
             case "main":
                 currentScene = new SceneMenu();
                 break;
-
             case "load":
                 currentScene = new SceneLoad(this.savingSystemInstance);
                 break;

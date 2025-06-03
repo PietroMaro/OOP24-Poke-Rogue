@@ -95,7 +95,7 @@ public class SceneMove extends Scene {
             InvocationTargetException,
             InstantiationException {
         final String move1Litteral = "MOVE_1_BUTTON";
-        final String move5Litteral = "MOVE_1_BUTTON";
+        final String move5Litteral = "MOVE_5_BUTTON";
 
         switch (inputKey) {
             case KeyEvent.VK_UP:
