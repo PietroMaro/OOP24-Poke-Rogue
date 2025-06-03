@@ -21,6 +21,129 @@ Note: Recompile with -Xlint:unchecked for details.
 > Task :testClasses
 > Task :cpdCheck SKIPPED
 > Task :populateDefaultSpotBugsExcludes
+> Task :spotbugsTest
+
+> Task :spotbugsMain
+M V EI2: new it.unibo.pokerogue.controller.impl.InputHandlerImpl(GameEngine) may expose internal representation by storing an externally mutable object into InputHandlerImpl.gameEngine  At InputHandlerImpl.java:[line 27]
+
+> Task :checkstyleTest
+
+> Task :checkstyleMain
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/model/impl/AbilityFactory.java:28:36: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/Scene.java:48:40: Redundant 'final' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/Scene.java:48:59: Expected @param tag for 'savingSystemInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/Scene.java:48:81: Redundant 'final' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/Scene.java:48:95: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/Scene.java:58:53: Redundant 'final' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/Scene.java:58:70: Expected @param tag for 'gameEngineInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/Scene.java:59:13: Redundant 'final' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/Scene.java:59:27: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/Scene.java:59:50: Redundant 'final' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/Scene.java:59:69: Expected @param tag for 'savingSystemInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/fight/BattleEngine.java:30:24: Redundant 'final' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/fight/BattleEngine.java:30:55: Redundant 'final' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/fight/BattleEngine.java:31:13: Redundant 'final' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/fight/BattleEngine.java:31:49: Redundant 'final' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/fight/BattleEngine.java:31:63: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/fight/BattleEngine.java:32:13: Redundant 'final' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/fight/BattleEngine.java:32:30: Expected @param tag for 'gameEngineInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/GameEngine.java:1: File does not end with a newline. [NewlineAtEndOfFile]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/EnemyAi.java:23:80: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/GraphicEngine.java:19:8: Unused @param tag for 'allPanelElements'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/GraphicEngine.java:23:5: Redundant 'public' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/GraphicEngine.java:23:29: Redundant 'final' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/GraphicEngine.java:23:65: Expected @param tag for 'panelElements'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/GraphicEngine.java:24:13: Redundant 'final' modifier. [RedundantModifier]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/EffectInterpreter.java:149:63: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/EffectInterpreter.java:165: Line is longer than 130 characters (found 144). [LineLength]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/EffectInterpreter.java:165:102: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/scene/SceneMove.java:50:22: Parameter playerTrainerInstance should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/scene/SceneMove.java:50:30: Variable 'playerTrainerInstance' should be declared final. [FinalLocalVariable]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/scene/SceneMove.java:50:30: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/scene/SceneInfo.java:80: Line is longer than 130 characters (found 157). [LineLength]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/scene/SceneBox.java:62:39: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/scene/SceneBox.java:206: Line is longer than 130 characters (found 132). [LineLength]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/scene/SceneSave.java:81: Line is longer than 130 characters (found 157). [LineLength]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/scene/SceneSave.java:142: Line is longer than 130 characters (found 150). [LineLength]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/scene/fight/BattleEngineImpl.java:125: Line is longer than 130 characters (found 131). [LineLength]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/scene/fight/SceneFight.java:71:67: Expected @param tag for 'gameEngineInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/scene/fight/SceneFight.java:72: Line is longer than 130 characters (found 132). [LineLength]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/scene/fight/SceneFight.java:72:68: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/scene/fight/SceneFight.java:101:57: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/scene/SceneShop.java:67:36: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/scene/SceneShop.java:271:34: ',' is preceded with whitespace. [NoWhitespaceBefore]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/ai/EnemyAiAttack.java:53:92: Parameter playerTrainerInstance should be final. [FinalParameters]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/ai/EnemyAiAttack.java:53:100: Variable 'playerTrainerInstance' should be declared final. [FinalLocalVariable]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/ai/EnemyAiSwitchIn.java:84: Line is longer than 130 characters (found 139). [LineLength]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/InputHandlerImpl.java:17:33: Name 'Logger' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'. [ConstantName]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/api/scene/shop/ShopInitView.java:30:70: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/api/scene/fight/FightView.java:32: Line is longer than 130 characters (found 145). [LineLength]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/api/scene/fight/FightView.java:52: Line is longer than 130 characters (found 138). [LineLength]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/api/scene/fight/FightView.java:52:97: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/api/scene/fight/FightUpdateView.java:36:85: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopView.java:27:8: Unused @param tag for 'sceneGraphicElements'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopView.java:29:8: Unused @param tag for 'graphicElements'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopView.java:31:8: Unused @param tag for 'allPanelsElements'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopView.java:34:8: Unused @param tag for 'scene'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopView.java:36:8: Unused @param tag for 'graphicElementNameToInt'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopView.java:62:43: Expected @param tag for 'currentSceneGraphicElements'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopView.java:62:102: Expected @param tag for 'graphicElements'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopView.java:63:82: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopView.java:77:43: Expected @param tag for 'currentSceneGraphicElements'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopView.java:77:102: Expected @param tag for 'graphicElements'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopView.java:78:49: Expected @param tag for 'allPanelsElements'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopView.java:78:95: Expected @param tag for 'graphicElementNameToInt'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopView.java:79:29: Expected @param tag for 'sceneInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopView.java:79:64: Expected @param tag for 'sceneViewInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopView.java:79:97: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopInitView.java:25:9: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopUpdateView.java:1: File does not end with a newline. [NewlineAtEndOfFile]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopUpdateView.java:68: Line is longer than 130 characters (found 143). [LineLength]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopUpdateView.java:88: Line is longer than 130 characters (found 143). [LineLength]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/shop/SceneShopUpdateView.java:169: Line is longer than 130 characters (found 174). [LineLength]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/fight/SceneFightInitView.java:30:9: Missing a Javadoc comment. [MissingJavadocMethod]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/fight/SceneFightView.java:42: Line is longer than 130 characters (found 152). [LineLength]
+[ant:checkstyle] [ERROR] /home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/view/impl/scene/fight/SceneFightView.java:52: Line is longer than 130 characters (found 145). [LineLength]
+
+> Task :checkstyleMain FAILED
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/Main.java:48:	AvoidPrintStackTrace:	Avoid printStackTrace(); use a logger call instead.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/GraphicEngine.java:23:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/GraphicEngine.java:23:	UnnecessaryModifier:	Unnecessary modifier 'public' on method 'renderScene': the method is declared in an interface type
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/Scene.java:48:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/Scene.java:58:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/api/scene/fight/BattleEngine.java:30:	FinalParameterInAbstractMethod:	Final parameter in abstract method
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/pokerogue/TestAll.java:61:	UnusedPrivateField:	Avoid unused private fields such as 'ABSORB_LITTERAL'.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/pokerogue/TestAll.java:61:	AvoidDuplicateLiterals:	The String literal "absorb" appears 8 times in this file; the first occurrence is on line 61
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/pokerogue/TestAll.java:62:	UnusedPrivateField:	Avoid unused private fields such as 'CHARMANDER_LITTERAL'.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/pokerogue/TestAll.java:62:	AvoidDuplicateLiterals:	The String literal "charmander" appears 8 times in this file; the first occurrence is on line 62
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/pokerogue/TestAll.java:66:	UnusedPrivateMethod:	Avoid unused private methods such as 'initAllFactories()'.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/pokerogue/TestAll.java:72:	AvoidPrintStackTrace:	Avoid printStackTrace(); use a logger call instead.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/pokerogue/TestAll.java:110:	AvoidCatchingGenericException:	Avoid catching generic exceptions such as NullPointerException, RuntimeException, Exception in try-catch block
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/pokerogue/TestAll.java:111:	AvoidPrintStackTrace:	Avoid printStackTrace(); use a logger call instead.
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/pokerogue/TestAll.java:123:	SimplifiableTestAssertion:	Assertion may be simplified using assertFalse
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/pokerogue/TestAll.java:150:	UseDiamondOperator:	Explicit type arguments can be replaced by a diamond: `new RangeImpl<>(...)`
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/pokerogue/TestAll.java:271:	AvoidDuplicateLiterals:	The String literal "bulbasaur" appears 4 times in this file; the first occurrence is on line 271
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/pokerogue/TestAll.java:320:	AvoidDuplicateLiterals:	The String literal "masterball" appears 4 times in this file; the first occurrence is on line 320
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/pokerogue/TestAll.java:325:	SimplifiableTestAssertion:	Assertion may be simplified using assertEquals
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/pokerogue/TestAll.java:326:	SimplifiableTestAssertion:	Assertion may be simplified using assertEquals
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/pokerogue/TestAll.java:326:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/pokerogue/TestAll.java:331:	SimplifiableTestAssertion:	Assertion may be simplified using assertEquals
+/home/tommaso/OOP24-Poke-Rogue/src/test/java/it/unibo/pokerogue/TestAll.java:354:	SimplifiableTestAssertion:	Assertion may be simplified using assertEquals
+> Task :pmdTest FAILED
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/InputHandlerImpl.java:17:	FieldNamingConventions:	The constant name 'Logger' doesn't match '[A-Z][A-Z_0-9]*'
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/ai/EnemyAiAttack.java:53:	MethodArgumentCouldBeFinal:	Parameter 'playerTrainerInstance' is not assigned and could be declared final
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/scene/SceneBox.java:62:	UnusedFormalParameter:	Avoid unused constructor parameters such as 'playerTrainerInstance'.
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/scene/SceneMove.java:50:	MethodArgumentCouldBeFinal:	Parameter 'playerTrainerInstance' is not assigned and could be declared final
+
+> Task :spotbugsMain
+M D ICAST: Integral division result cast to double or float in it.unibo.pokerogue.view.impl.scene.SceneBoxView.initGraphicElements(GraphicElementsRegistry, Map, GraphicElementsRegistry)  At SceneBoxView.java:[line 59]
+M D ICAST: Integral division result cast to double or float in it.unibo.pokerogue.view.impl.scene.SceneBoxView.loadPokemonSprites(List, int, GraphicElementsRegistry)  At SceneBoxView.java:[line 87]
+
+/home/tommaso/OOP24-Poke-Rogue/src/main/java/it/unibo/pokerogue/controller/impl/scene/fight/SceneFight.java:71:	UnusedFormalParameter:	Avoid unused constructor parameters such as 'gameEngineInstance'.
+
+> Task :spotbugsMain FAILED
+L D UwF: GameEngineImpl.graphicEngineInstance not initialized in constructor and dereferenced in it.unibo.pokerogue.controller.impl.GameEngineImpl.keyPressedToScene(int)  At GameEngineImpl.java:[line 115]
+L D UwF: GameEngineImpl.graphicEngineInstance not initialized in constructor and dereferenced in it.unibo.pokerogue.controller.impl.GameEngineImpl.setScene(String)  At GameEngineImpl.java:[line 97]
 
 > Task :test
 
@@ -62,7 +185,12 @@ TestAll > testAbilityFactory() PASSED
 
 TestAll > testBattleEngineBall() STARTED
 
-TestAll > testBattleEngineBall() PASSED
+> Task :pmdMain FAILED
+
+> Task :test FAILED
+
+TestAll > testBattleEngineBall() FAILED
+    java.lang.NullPointerException at TestAll.java:323
 
 TestAll > testAllAbilityEffect() STARTED
 
@@ -70,165 +198,26 @@ TestAll > testAllAbilityEffect() PASSED
 
 TestAll > testAllMovesEffect() STARTED
 
-> Task :checkstyleTest
-
-> Task :checkstyleMain
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\EnemyAi.java:23:80: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\GameEngine.java:1: File does not end with a newline. [NewlineAtEndOfFile]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\GraphicEngine.java:19:8: Unused @param tag for 'allPanelElements'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\GraphicEngine.java:23:5: Redundant 'public' modifier. [RedundantModifier]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\GraphicEngine.java:23:29: Redundant 'final' modifier. [RedundantModifier]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\GraphicEngine.java:23:65: Expected @param tag for 'panelElements'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\GraphicEngine.java:24:13: Redundant 'final' modifier. [RedundantModifier]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\fight\BattleEngine.java:30:24: Redundant 'final' modifier. [RedundantModifier]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\fight\BattleEngine.java:30:55: Redundant 'final' modifier. [RedundantModifier]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\fight\BattleEngine.java:31:13: Redundant 'final' modifier. [RedundantModifier]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\fight\BattleEngine.java:31:49: Redundant 'final' modifier. [RedundantModifier]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\fight\BattleEngine.java:31:63: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\fight\BattleEngine.java:32:13: Redundant 'final' modifier. [RedundantModifier]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\fight\BattleEngine.java:32:30: Expected @param tag for 'gameEngineInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\Scene.java:48:40: Redundant 'final' modifier. [RedundantModifier]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\Scene.java:48:59: Expected @param tag for 'savingSystemInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\Scene.java:48:81: Redundant 'final' modifier. [RedundantModifier]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\Scene.java:48:95: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\Scene.java:58:53: Redundant 'final' modifier. [RedundantModifier]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\Scene.java:58:70: Expected @param tag for 'gameEngineInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\Scene.java:59:13: Redundant 'final' modifier. [RedundantModifier]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\Scene.java:59:27: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\Scene.java:59:50: Redundant 'final' modifier. [RedundantModifier]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\Scene.java:59:69: Expected @param tag for 'savingSystemInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\ai\EnemyAiAttack.java:53:92: Parameter playerTrainerInstance should be final. [FinalParameters]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\ai\EnemyAiAttack.java:53:100: Variable 'playerTrainerInstance' should be declared final. [FinalLocalVariable]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\ai\EnemyAiSwitchIn.java:84: Line is longer than 130 characters (found 139). [LineLength]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\EffectInterpreter.java:149:63: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\EffectInterpreter.java:165: Line is longer than 130 characters (found 144). [LineLength]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\EffectInterpreter.java:165:102: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\InputHandlerImpl.java:17:33: Name 'Logger' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'. [ConstantName]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\scene\fight\BattleEngineImpl.java:125: Line is longer than 130 characters (found 131). [LineLength]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\scene\fight\SceneFight.java:71:67: Expected @param tag for 'gameEngineInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\scene\fight\SceneFight.java:72: Line is longer than 130 characters (found 132). [LineLength]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\scene\fight\SceneFight.java:72:68: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\scene\fight\SceneFight.java:101:57: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\scene\SceneBox.java:62:39: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\scene\SceneBox.java:206: Line is longer than 130 characters (found 132). [LineLength]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\scene\SceneInfo.java:80: Line is longer than 130 characters (found 157). [LineLength]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\scene\SceneMove.java:50:22: Parameter playerTrainerInstance should be final. [FinalParameters]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\scene\SceneMove.java:50:30: Variable 'playerTrainerInstance' should be declared final. [FinalLocalVariable]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\scene\SceneMove.java:50:30: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\scene\SceneSave.java:81: Line is longer than 130 characters (found 157). [LineLength]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\scene\SceneSave.java:142: Line is longer than 130 characters (found 150). [LineLength]
-
-> Task :test
-
 TestAll > testAllMovesEffect() PASSED
 
 TestAll > testBattleEngineSwitchIn() STARTED
 
 TestAll > testBattleEngineSwitchIn() PASSED
 
-> Task :spotbugsTest
+13 tests completed, 1 failed
 
-> Task :checkstyleMain
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\scene\SceneShop.java:67:36: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\scene\SceneShop.java:271:34: ',' is preceded with whitespace. [NoWhitespaceBefore]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\model\api\item\Item.java:12:1: Type Javadoc comment is missing @param captureRate tag. [JavadocType]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\model\api\item\Item.java:12:1: Type Javadoc comment is missing @param category tag. [JavadocType]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\model\api\item\Item.java:12:1: Type Javadoc comment is missing @param description tag. [JavadocType]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\model\api\item\Item.java:12:1: Type Javadoc comment is missing @param effect tag. [JavadocType]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\model\api\item\Item.java:12:1: Type Javadoc comment is missing @param id tag. [JavadocType]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\model\api\item\Item.java:12:1: Type Javadoc comment is missing @param name tag. [JavadocType]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\model\api\item\Item.java:12:1: Type Javadoc comment is missing @param price tag. [JavadocType]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\model\api\item\Item.java:12:1: Type Javadoc comment is missing @param rarity tag. [JavadocType]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\model\api\item\Item.java:12:1: Type Javadoc comment is missing @param type tag. [JavadocType]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\model\api\trainer\Trainer.java:102:18: Redundant 'final' modifier. [RedundantModifier]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\model\api\trainer\Trainer.java:102:37: Redundant 'final' modifier. [RedundantModifier]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\model\impl\AbilityFactory.java:28:36: File contains tab characters (this is the first instance). [FileTabCharacter]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\api\scene\fight\FightUpdateView.java:36:85: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\api\scene\fight\FightView.java:32: Line is longer than 130 characters (found 145). [LineLength]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\api\scene\fight\FightView.java:52: Line is longer than 130 characters (found 138). [LineLength]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\api\scene\fight\FightView.java:52:97: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\api\scene\shop\ShopInitView.java:30:70: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\fight\SceneFightInitView.java:30:9: Missing a Javadoc comment. [MissingJavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\fight\SceneFightView.java:42: Line is longer than 130 characters (found 152). [LineLength]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\fight\SceneFightView.java:52: Line is longer than 130 characters (found 145). [LineLength]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopInitView.java:25:9: Missing a Javadoc comment. [MissingJavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopUpdateView.java:1: File does not end with a newline. [NewlineAtEndOfFile]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopUpdateView.java:68: Line is longer than 130 characters (found 143). [LineLength]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopUpdateView.java:88: Line is longer than 130 characters (found 143). [LineLength]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopUpdateView.java:169: Line is longer than 130 characters (found 174). [LineLength]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopView.java:27:8: Unused @param tag for 'sceneGraphicElements'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopView.java:29:8: Unused @param tag for 'graphicElements'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopView.java:31:8: Unused @param tag for 'allPanelsElements'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopView.java:34:8: Unused @param tag for 'scene'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopView.java:36:8: Unused @param tag for 'graphicElementNameToInt'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopView.java:62:43: Expected @param tag for 'currentSceneGraphicElements'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopView.java:62:102: Expected @param tag for 'graphicElements'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopView.java:63:82: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopView.java:77:43: Expected @param tag for 'currentSceneGraphicElements'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopView.java:77:102: Expected @param tag for 'graphicElements'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopView.java:78:49: Expected @param tag for 'allPanelsElements'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopView.java:78:95: Expected @param tag for 'graphicElementNameToInt'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopView.java:79:29: Expected @param tag for 'sceneInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopView.java:79:64: Expected @param tag for 'sceneViewInstance'. [JavadocMethod]
-[ant:checkstyle] [ERROR] C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\view\impl\scene\shop\SceneShopView.java:79:97: Expected @param tag for 'playerTrainerInstance'. [JavadocMethod]
+[Incubating] Problems report is available at: file:///home/tommaso/OOP24-Poke-Rogue/build/reports/problems/problems-report.html
 
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\Main.java:48:	AvoidPrintStackTrace:	Avoid printStackTrace(); use a logger call instead.
-
-> Task :checkstyleMain FAILED
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\GraphicEngine.java:23:	FinalParameterInAbstractMethod:	Final parameter in abstract method
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\GraphicEngine.java:23:	UnnecessaryModifier:	Unnecessary modifier 'public' on method 'renderScene': the method is declared in an interface type
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\Scene.java:48:	FinalParameterInAbstractMethod:	Final parameter in abstract method
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\Scene.java:58:	FinalParameterInAbstractMethod:	Final parameter in abstract method
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\api\scene\fight\BattleEngine.java:30:	FinalParameterInAbstractMethod:	Final parameter in abstract method
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:61:	UnusedPrivateField:	Avoid unused private fields such as 'ABSORB_LITTERAL'.
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:61:	AvoidDuplicateLiterals:	The String literal "absorb" appears 8 times in this file; the first occurrence is on line 61
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:62:	UnusedPrivateField:	Avoid unused private fields such as 'CHARMANDER_LITTERAL'.
-
-> Task :spotbugsMain
-M V EI2: new it.unibo.pokerogue.controller.impl.InputHandlerImpl(GameEngine) may expose internal representation by storing an externally mutable object into InputHandlerImpl.gameEngine  At InputHandlerImpl.java:[line 27]
-
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:62:	AvoidDuplicateLiterals:	The String literal "charmander" appears 8 times in this file; the first occurrence is on line 62
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:66:	UnusedPrivateMethod:	Avoid unused private methods such as 'initAllFactories()'.
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:72:	AvoidPrintStackTrace:	Avoid printStackTrace(); use a logger call instead.
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:110:	AvoidCatchingGenericException:	Avoid catching generic exceptions such as NullPointerException, RuntimeException, Exception in try-catch block
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:111:	AvoidPrintStackTrace:	Avoid printStackTrace(); use a logger call instead.
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:123:	SimplifiableTestAssertion:	Assertion may be simplified using assertFalse
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:150:	UseDiamondOperator:	Explicit type arguments can be replaced by a diamond: `new RangeImpl<>(...)`
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:271:	AvoidDuplicateLiterals:	The String literal "bulbasaur" appears 4 times in this file; the first occurrence is on line 271
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:320:	AvoidDuplicateLiterals:	The String literal "masterball" appears 4 times in this file; the first occurrence is on line 320
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:325:	SimplifiableTestAssertion:	Assertion may be simplified using assertEquals
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:326:	SimplifiableTestAssertion:	Assertion may be simplified using assertEquals
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:326:	LiteralsFirstInComparisons:	Position literals first in String comparisons
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:331:	SimplifiableTestAssertion:	Assertion may be simplified using assertEquals
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\test\java\it\unibo\pokerogue\TestAll.java:354:	SimplifiableTestAssertion:	Assertion may be simplified using assertEquals
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\InputHandlerImpl.java:17:	FieldNamingConventions:	The constant name 'Logger' doesn't match '[A-Z][A-Z_0-9]*'
-
-> Task :pmdTest FAILED
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\ai\EnemyAiAttack.java:53:	MethodArgumentCouldBeFinal:	Parameter 'playerTrainerInstance' is not assigned and could be declared final
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\scene\SceneBox.java:62:	UnusedFormalParameter:	Avoid unused constructor parameters such as 'playerTrainerInstance'.
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\scene\SceneMove.java:50:	MethodArgumentCouldBeFinal:	Parameter 'playerTrainerInstance' is not assigned and could be declared final
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\controller\impl\scene\fight\SceneFight.java:71:	UnusedFormalParameter:	Avoid unused constructor parameters such as 'gameEngineInstance'.
-C:\Users\admin\Desktop\progettoJava - Copia (2)\OOP24-Poke-Rogue\src\main\java\it\unibo\pokerogue\model\api\trainer\Trainer.java:102:	FinalParameterInAbstractMethod:	Final parameter in abstract method
-
-> Task :spotbugsMain
-M D ICAST: Integral division result cast to double or float in it.unibo.pokerogue.view.impl.scene.SceneBoxView.initGraphicElements(GraphicElementsRegistry, Map, GraphicElementsRegistry)  At SceneBoxView.java:[line 61]
-M D ICAST: Integral division result cast to double or float in it.unibo.pokerogue.view.impl.scene.SceneBoxView.loadPokemonSprites(List, int, GraphicElementsRegistry)  At SceneBoxView.java:[line 89]
-
-> Task :pmdMain FAILED
-> Task :spotbugsMain FAILED
-
-[Incubating] Problems report is available at: file:///C:/Users/admin/Desktop/progettoJava%20-%20Copia%20(2)/OOP24-Poke-Rogue/build/reports/problems/problems-report.html
-
-FAILURE: Build completed with 4 failures.
+FAILURE: Build completed with 5 failures.
 
 1: Task failed with an exception.
 -----------
 * What went wrong:
 Execution failed for task ':checkstyleMain'.
 > A failure occurred while executing org.gradle.api.plugins.quality.internal.CheckstyleAction
-   > Checkstyle rule violations were found. See the report at: file:///C:/Users/admin/Desktop/progettoJava%20-%20Copia%20(2)/OOP24-Poke-Rogue/build/reports/checkstyle/main.html
-     Checkstyle files with violations: 27
-     Checkstyle violations by severity: [error:86]
+   > Checkstyle rule violations were found. See the report at: file:///home/tommaso/OOP24-Poke-Rogue/build/reports/checkstyle/main.html
+     Checkstyle files with violations: 25
+     Checkstyle violations by severity: [error:75]
 
 
 * Try:
@@ -240,24 +229,13 @@ Execution failed for task ':checkstyleMain'.
 * What went wrong:
 Execution failed for task ':pmdTest'.
 > A failure occurred while executing org.gradle.api.plugins.quality.internal.PmdAction
-   > 17 PMD rule violations were found. See the report at: file:///C:/Users/admin/Desktop/progettoJava%20-%20Copia%20(2)/OOP24-Poke-Rogue/build/reports/pmd/test.html
+   > 17 PMD rule violations were found. See the report at: file:///home/tommaso/OOP24-Poke-Rogue/build/reports/pmd/test.html
 
 * Try:
 > Run with --scan to get full insights.
 ==============================================================================
 
 3: Task failed with an exception.
------------
-* What went wrong:
-Execution failed for task ':pmdMain'.
-> A failure occurred while executing org.gradle.api.plugins.quality.internal.PmdAction
-   > 12 PMD rule violations were found. See the report at: file:///C:/Users/admin/Desktop/progettoJava%20-%20Copia%20(2)/OOP24-Poke-Rogue/build/reports/pmd/main.html
-
-* Try:
-> Run with --scan to get full insights.
-==============================================================================
-
-4: Task failed with an exception.
 -----------
 * What went wrong:
 Execution failed for task ':spotbugsMain'.
@@ -271,11 +249,32 @@ Execution failed for task ':spotbugsMain'.
 > Get more help at https://help.gradle.org.
 ==============================================================================
 
+4: Task failed with an exception.
+-----------
+* What went wrong:
+Execution failed for task ':pmdMain'.
+> A failure occurred while executing org.gradle.api.plugins.quality.internal.PmdAction
+   > 11 PMD rule violations were found. See the report at: file:///home/tommaso/OOP24-Poke-Rogue/build/reports/pmd/main.html
+
+* Try:
+> Run with --scan to get full insights.
+==============================================================================
+
+5: Task failed with an exception.
+-----------
+* What went wrong:
+Execution failed for task ':test'.
+> There were failing tests. See the report at: file:///home/tommaso/OOP24-Poke-Rogue/build/reports/tests/test/index.html
+
+* Try:
+> Run with --scan to get full insights.
+==============================================================================
+
 Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
 
 You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
 
 For more on this, please refer to https://docs.gradle.org/8.12.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD FAILED in 29s
+BUILD FAILED in 32s
 21 actionable tasks: 21 executed
