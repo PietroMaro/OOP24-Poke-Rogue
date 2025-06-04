@@ -16,11 +16,11 @@ public interface GraphicEngine {
     /**
      * Render all the elements of a scene.
      * 
-     * @param allPanelElements   a map of panel identifiers to their components.
+     * @param panelElements      a map of panel identifiers to their components.
      * @param allGraphicElements the graphic elements to draw.
      *
      */
-    public void renderScene(final Map<String, PanelElementImpl> panelElements,
-            final GraphicElementsRegistry allGraphicElements);
+    void renderScene(Map<String, PanelElementImpl> panelElements,
+            GraphicElementsRegistry allGraphicElements);
 
 }

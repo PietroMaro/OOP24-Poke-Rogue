@@ -99,6 +99,6 @@ public interface Trainer {
      * @param name name.
      * @param amount amout of ball.
      */
-    void addBall(final String name, final int amount);
+    void addBall(String name, int amount);
 
 }

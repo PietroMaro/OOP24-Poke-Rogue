@@ -14,7 +14,7 @@ import it.unibo.pokerogue.controller.api.GameEngine;
  * This class extends KeyAdapter to override only the needed key events.
  */
 public final class InputHandlerImpl implements KeyListener {
-    private static final Logger Logger = LoggerFactory.getLogger(InputHandlerImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(InputHandlerImpl.class);
     private final GameEngine gameEngine;
 
     /**
@@ -26,7 +26,7 @@ public final class InputHandlerImpl implements KeyListener {
         try {
             this.gameEngine = gameEngine;
         } catch (final JexlException e) {
-            Logger.error("GameEngine has not been initialized", e);
+            LOGGER.error("GameEngine has not been initialized", e);
             throw new IllegalStateException("GameEngine has not been initialized", e);
         }
     }
@@ -40,7 +40,7 @@ public final class InputHandlerImpl implements KeyListener {
                 | InvocationTargetException
                 | IOException
                 | NoSuchMethodException e) {
-            Logger.error("Exception occurred while handling key press", e);
+            LOGGER.error("Exception occurred while handling key press", e);
         }
     }
 

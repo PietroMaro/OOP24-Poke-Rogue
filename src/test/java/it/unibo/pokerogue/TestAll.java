@@ -60,7 +60,7 @@ final class TestAll {
     private static final int VERY_LOW_EFFECTIVENESS = 20;
     private static final String ABSORB_LITTERAL = "absorb";
     private static final String CHARMANDER_LITTERAL = "charmander";
-    private static final Integer STARTER_POKEBALL = 5;
+    private static final int STARTER_POKEBALL = 5;
 
     @BeforeAll
     private static void initAllFactories() {
@@ -328,7 +328,7 @@ final class TestAll {
         enemyTrainer.addPokemon(charmander, 1);
         battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.POKEBALL, "masterball"),
                 new Decision(DecisionTypeEnum.NOTHING, ""), enemyTrainer, playerTrainer, gameEngineInstance);
-        assertTrue(playerTrainer.getBall().get("pokeball").equals(STARTER_POKEBALL));
+        assertTrue(playerTrainer.getBall().get("pokeball") == STARTER_POKEBALL);
     }
 
     @Test

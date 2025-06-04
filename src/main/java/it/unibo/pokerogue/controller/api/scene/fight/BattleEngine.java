@@ -22,14 +22,20 @@ public interface BattleEngine {
      * Executes a single turn of the battle between the player and the enemy,
      * based on the provided decisions.
      *
-     * @param playerDecision       the player's decision for this turn
-     * @param enemyDecision        the enemy's decision for this turn
-     * @param enemyTrainerInstance the instance of the enemy trainer involved in the
-     *                             battle
+     * @param playerDecision        the player's decision for this turn
+     * @param enemyDecision         the enemy's decision for this turn
+     * @param enemyTrainerInstance  the instance of the enemy trainer involved in
+     *                              the
+     *                              battle
+     * @param playerTrainerInstance the instance of the player trainer involved in
+     *                              the
+     *                              battle
+     * @param gameEngineInstance    the instance of the game engine used to handle
+     *                              game logic and scene transitions.
      */
-    void runBattleTurn(final Decision playerDecision, final Decision enemyDecision,
-            final Trainer enemyTrainerInstance, final Trainer playerTrainerInstance,
-            final GameEngine gameEngineInstance)
+    void runBattleTurn(Decision playerDecision, Decision enemyDecision,
+            Trainer enemyTrainerInstance, Trainer playerTrainerInstance,
+            GameEngine gameEngineInstance)
             throws NoSuchMethodException,
             IOException,
             IllegalAccessException,

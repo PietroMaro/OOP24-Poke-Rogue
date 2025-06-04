@@ -50,8 +50,6 @@ public final class GameEngineImpl implements GameEngine {
      * Protected constructor for the GameEngineImpl.
      */
     public GameEngineImpl() {
-        super();
-        this.graphicEngineInstance = null;
         this.savingSystemInstance = new SavingSystemImpl();
         this.playerTrainerInstance = new TrainerImpl();
     }
@@ -96,6 +94,8 @@ public final class GameEngineImpl implements GameEngine {
             default:
                 break;
         }
+        this.graphicEngineInstance.renderScene(this.currentScene.getAllPanelsElements(),
+                this.currentScene.getCurrentSceneGraphicElements());
     }
 
     @Override

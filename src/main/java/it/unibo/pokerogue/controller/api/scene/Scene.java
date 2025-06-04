@@ -41,22 +41,45 @@ public abstract class Scene {
      * Updates the graphical representation of the scene.
      * 
      * Implementations should refresh or redraw the scene's visual components based
-     * on the current state.
+     * on the current state, including trainer status and any saved data.
      * 
-     * 
+     * @param savingSystemInstance  the instance responsible for handling game save
+     *                              and load operations
+     * @param playerTrainerInstance the current player's trainer whose data affects
+     *                              the scene display
+     * @throws IOException if an I/O error occurs during graphical update (e.g.,
+     *                     loading resources)
      */
-    public abstract void updateGraphic(final SavingSystem savingSystemInstance, final Trainer playerTrainerInstance)
+    public abstract void updateGraphic(SavingSystem savingSystemInstance, Trainer playerTrainerInstance)
             throws IOException;
 
     /**
      * Updates the scene's internal state in response to user input.
-     * Implementations must define how to react to a key input event, such as moving
-     * selections or triggering actions.
      * 
-     * @param inputKey the key code of the user input event.
+     * Implementations must define how to react to a key input event, such as moving
+     * selections, triggering actions, or navigating between different scene states.
+     * 
+     * @param inputKey              the key code of the user input event.
+     * @param gameEngineInstance    the game engine instance, used to manage scene
+     *                              transitions and core game logic.
+     * @param playerTrainerInstance the current player's trainer, whose state may
+     *                              influence or be modified by the input.
+     * @param savingSystemInstance  the saving system used to persist or retrieve
+     *                              game data during interaction.
+     * 
+     * @throws NoSuchMethodException     if a reflective method call fails due to a
+     *                                   missing method.
+     * @throws IOException               if an input/output operation fails during
+     *                                   update.
+     * @throws IllegalAccessException    if a reflective call is made to an
+     *                                   inaccessible method.
+     * @throws InvocationTargetException if a reflective method call throws an
+     *                                   exception.
+     * @throws InstantiationException    if an object cannot be instantiated
+     *                                   reflectively.
      */
-    public abstract void updateStatus(int inputKey, final GameEngine gameEngineInstance,
-            final Trainer playerTrainerInstance, final SavingSystem savingSystemInstance) throws NoSuchMethodException,
+    public abstract void updateStatus(int inputKey, GameEngine gameEngineInstance,
+            Trainer playerTrainerInstance, SavingSystem savingSystemInstance) throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
             InvocationTargetException,

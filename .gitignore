@@ -14,3 +14,4 @@ scripts/
 .settings/
 .classpath
 
+build.log
