@@ -35,8 +35,9 @@ import lombok.Setter;
  */
 public final class GameEngineImpl implements GameEngine {
     private static final Logger LOGGER = Logger.getLogger(GameEngineImpl.class.getName());
-    private GraphicEngine graphicEngineInstance;
+    private final GraphicEngine graphicEngineInstance;
     @Setter
+    @Getter
     private Scene currentScene;
     @Setter
     @Getter
@@ -116,11 +117,6 @@ public final class GameEngineImpl implements GameEngine {
         this.graphicEngineInstance.renderScene(this.currentScene.getAllPanelsElements(),
                 this.currentScene.getCurrentSceneGraphicElements());
 
-    }
-
-    @Override
-    public void setGraphicEngine(final GraphicEngine graphicEngine) {
-        this.graphicEngineInstance = graphicEngine;
     }
 
     /**

@@ -10,12 +10,14 @@ import java.util.logging.Logger;
 import it.unibo.pokerogue.model.api.trainer.Trainer;
 import it.unibo.pokerogue.controller.api.EnemyAi;
 import it.unibo.pokerogue.controller.api.GameEngine;
+import it.unibo.pokerogue.controller.api.scene.Scene;
 import it.unibo.pokerogue.controller.api.scene.fight.BattleEngine;
 import it.unibo.pokerogue.controller.impl.EffectInterpreter;
 import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.controller.impl.ai.EnemyAiImpl;
 import it.unibo.pokerogue.controller.impl.scene.fight.BattleEngineImpl;
 import it.unibo.pokerogue.model.api.Decision;
+import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.api.Range;
 import it.unibo.pokerogue.model.api.ability.Ability;
 import it.unibo.pokerogue.model.api.move.Move;
@@ -30,6 +32,7 @@ import it.unibo.pokerogue.model.impl.GenerateEnemyImpl;
 import it.unibo.pokerogue.model.impl.MoveFactory;
 import it.unibo.pokerogue.model.impl.RangeImpl;
 import it.unibo.pokerogue.model.impl.SavingSystemImpl;
+import it.unibo.pokerogue.model.impl.graphic.GraphicElementImpl;
 import it.unibo.pokerogue.model.impl.item.ItemFactory;
 import it.unibo.pokerogue.model.impl.pokemon.PokemonFactory;
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
@@ -46,6 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -341,6 +345,19 @@ final class TestAll {
                 new Decision(DecisionTypeEnum.ATTACK, "0"), enemyTrainer, playerTrainer, gameEngineInstance);
         final int afterLife = playerTrainer.getSquad().get(1).get().getActualStats().get(Stats.HP).getCurrentValue();
         assertEquals(beforeLife, afterLife);
+    }
+
+    @Test
+    void graphicTestMenu() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+    InstantiationException, IOException {
+        final GameEngineImpl gameEngine = new GameEngineImpl();
+        gameEngine.setScene("main");
+        gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
+        Scene scene = gameEngine.getCurrentScene();
+        GraphicElementsRegistry currentSceneGraphicElementsscene = scene.getCurrentSceneGraphicElements();
+        GraphicElementImpl element = currentSceneGraphicElementsscene.getByName("NEW_GAME_BUTTON");
+        System.out.println(element.getBorder());
+        //assertEquals(element.getBorder(), );
     }
 
 }

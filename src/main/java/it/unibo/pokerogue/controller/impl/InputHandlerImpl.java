@@ -5,6 +5,9 @@ import java.awt.event.KeyListener;
 import java.lang.reflect.InvocationTargetException;
 import java.io.IOException;
 import org.slf4j.LoggerFactory;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import org.slf4j.Logger;
 import it.unibo.pokerogue.controller.api.GameEngine;
 
@@ -23,6 +26,7 @@ public final class InputHandlerImpl implements KeyListener {
      *
      * @param gameEngine the game engine interface used to handle key input
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public InputHandlerImpl(final GameEngine gameEngine) {
         if (gameEngine == null) {
             throw new IllegalArgumentException("GameEngine cannot be null");
@@ -39,8 +43,7 @@ public final class InputHandlerImpl implements KeyListener {
                 | InvocationTargetException
                 | IOException
                 | NoSuchMethodException e) {
-            e.printStackTrace();
-            LOGGER.error("Exception occurred while handling key press", e.getMessage());
+            LOGGER.error("Exception occurred while handling key press", e);
         }
     }
 

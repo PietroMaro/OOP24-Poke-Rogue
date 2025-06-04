@@ -6,9 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import it.unibo.pokerogue.controller.api.GameEngine;
-import it.unibo.pokerogue.controller.api.GraphicEngine;
 import it.unibo.pokerogue.controller.impl.GameEngineImpl;
-import it.unibo.pokerogue.controller.impl.GraphicEngineImpl;
 import it.unibo.pokerogue.model.impl.item.ItemFactory;
 import it.unibo.pokerogue.model.impl.MoveFactory;
 import it.unibo.pokerogue.model.impl.AbilityFactory;
@@ -39,9 +37,7 @@ public final class Main {
             PokemonFactory.init();
 
             final GameEngine mainGameEngine = new GameEngineImpl();
-            final GraphicEngine mainGraphicEngine = new GraphicEngineImpl(mainGameEngine);
 
-            mainGameEngine.setGraphicEngine(mainGraphicEngine);
             mainGameEngine.setScene("main");
 
         } catch (InstantiationException
@@ -49,8 +45,7 @@ public final class Main {
                 | InvocationTargetException
                 | IOException
                 | NoSuchMethodException e) {
-            e.printStackTrace();
-            LOGGER.log(Level.SEVERE, "An error occurred while starting the application", e.getMessage());
+            LOGGER.log(Level.SEVERE, "An error occurred while starting the application", e);
         }
     }
 }

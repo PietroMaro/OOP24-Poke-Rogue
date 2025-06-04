@@ -40,13 +40,6 @@ public interface GameEngine {
       NoSuchMethodException;
 
   /**
-   * Sets the graphical engine used to render scenes and elements.
-   * 
-   * @param graphicEngine the instance of {@link GraphicEngine} to be used.
-   */
-  void setGraphicEngine(GraphicEngine graphicEngine);
-
-  /**
    * Sets the file path that should be used for loading content or saving
    * progress.
    * 
