@@ -55,7 +55,7 @@ public class Move {
             final int accuracy, final int critRate, final int baseDamage, final int calculatedDamage,
             final double stab, final boolean isCrit, final Type type, final int priority) {
         this.name = name;
-        this.pp = new RangeImpl<>(pp.getCurrentMin(), pp.getCurrentValue(), pp.getCurrentMax());
+        this.pp = new RangeImpl<>(pp.getCurrentMin(), pp.getCurrentMax(), pp.getCurrentValue());
         this.isPhysical = isPhysical;
         this.effect = effect.map(json -> new JSONObject(json.toString()));
         this.accuracy = accuracy;
@@ -69,29 +69,14 @@ public class Move {
     }
 
     /**
-     * Returns the current PP range of the move.
-     *
-     * @return a Range representing the current minimum, current value,
-     *         and maximum PP of the move.
-     */
-    public Range<Integer> getPp() {
-        return new RangeImpl<>(this.pp.getCurrentMin(), this.pp.getCurrentValue(), this.pp.getCurrentMax());
-    }
-
-    /**
      * Sets the PP range of the move.
      *
      * @param ppToSet the Range containing the new minimum, current value,
      *                and maximum PP to assign.
      */
-    /*
-     * public void setPp(final Range<Integer> ppToSet) {
-     * this.pp = new RangeImpl<>(ppToSet.getCurrentMin(), ppToSet.getCurrentValue(),
-     * ppToSet.getCurrentMax());
-     * }
-     */
-    public void setPp(final int ppToSet) {
-        this.pp = new RangeImpl<>(this.pp.getCurrentMin(), ppToSet, this.pp.getCurrentMax());
+
+    public void setPp(final Range<Integer> ppToSet) {
+        this.pp = new RangeImpl<>(ppToSet.getCurrentMin(), ppToSet.getCurrentMax(), ppToSet.getCurrentValue());
     }
 
     /**
@@ -106,7 +91,7 @@ public class Move {
     public final Move deepCopy() {
         return new Move(
                 this.name,
-                new RangeImpl<>(this.pp.getCurrentMin(), this.pp.getCurrentValue(), this.pp.getCurrentMax()),
+                new RangeImpl<>(this.pp.getCurrentMin(), this.pp.getCurrentMax(), this.pp.getCurrentValue()),
                 this.isPhysical,
                 Optional.of(new JSONObject(this.effect.get().toString())),
                 this.accuracy,

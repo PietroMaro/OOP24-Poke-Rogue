@@ -16,6 +16,7 @@ import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.controller.impl.ai.EnemyAiImpl;
 import it.unibo.pokerogue.controller.impl.scene.fight.BattleEngineImpl;
 import it.unibo.pokerogue.model.api.Decision;
+import it.unibo.pokerogue.model.api.Range;
 import it.unibo.pokerogue.model.api.ability.Ability;
 import it.unibo.pokerogue.model.api.move.Move;
 import it.unibo.pokerogue.model.api.pokemon.Pokemon;
@@ -121,9 +122,8 @@ final class TestAll {
             InstantiationException {
         final Move moveTest1 = MoveFactory.moveFromName(ABSORB_LITTERAL);
         final Move moveTest2 = MoveFactory.moveFromName(ABSORB_LITTERAL);
-        //moveTest1.setPp(new RangeImpl<>(moveTest1.getPp().getCurrentMin(), moveTest1.getPp().getCurrentMax(),
-                //0));
-        moveTest1.setPp(0);
+        moveTest1.setPp(new RangeImpl<>(moveTest1.getPp().getCurrentMin(), moveTest1.getPp().getCurrentMax(),
+                0));
         assertNotSame(moveTest1, moveTest2);
         assertNotSame(moveTest2.getPp().getCurrentValue(), 0);
         assertEquals(moveTest1.getPp().getCurrentValue(), 0);
@@ -220,18 +220,19 @@ final class TestAll {
 
     }
 
-	@Test
-	void testPpItem() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+    @Test
+    void testPpItem() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
             InstantiationException, IOException {
         final Pokemon venusaur = PokemonFactory.pokemonFromName("venusaur");
         final Trainer playerTrainerInstance = new TrainerImpl();
-		final Item elixir = ItemFactory.itemFromName("Elixir");
-        venusaur.getActualMoves().getFirst().setPp(0);
-        assertEquals(venusaur.getActualMoves().getFirst().getPp().getCurrentValue(),0);
-		EffectInterpreter.interpertEffect(elixir.effect().get(), venusaur, playerTrainerInstance);
+        final Item elixir = ItemFactory.itemFromName("Elixir");
+        final Range<Integer> move = venusaur.getActualMoves().getFirst().getPp();
+        venusaur.getActualMoves().getFirst().setPp(move.getCurrentMin(), move.getCurrentMax(),0);
+        assertEquals(venusaur.getActualMoves().getFirst().getPp().getCurrentValue(), 0);
+        EffectInterpreter.interpertEffect(elixir.effect().get(), venusaur, playerTrainerInstance);
         System.out.println(venusaur.getActualMoves().getFirst().getPp().getCurrentValue());
-        //assertEquals(venusaur.getActualMoves().getFirst().getPp().getCurrentValue(),0);
-	}
+        // assertEquals(venusaur.getActualMoves().getFirst().getPp().getCurrentValue(),0);
+    }
 
     @Test
     void testAi() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
