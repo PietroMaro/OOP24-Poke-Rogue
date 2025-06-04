@@ -35,7 +35,7 @@ public final class SceneBoxView implements BoxView {
         private static final double POKEMON_START_Y = 0.115;
         private static final double OFFSET_X = 0.049;
         private static final double OFFSET_Y = 0.09;
-        private static final double POKEMON_BUTTON_START_X = 0.46;
+        private static final double POKEMON_BUTTON_START_X = 0.465;
         private static final double POKEMON_BUTTON_START_Y = 0.125;
         private static final int START_BUTTON_POSITION = 5;
         private static final int FIRST_POKEMON_BUTTON_POSITION = 6;
@@ -62,8 +62,8 @@ public final class SceneBoxView implements BoxView {
                                                                         + pokemonIndex % POKE_BOX_ROW_LENGTH
                                                                                         * OFFSET_X,
                                                         POKEMON_BUTTON_START_Y
-                                                                        + pokemonIndex / POKE_BOX_ROW_LENGTH
-                                                                                        * OFFSET_Y,
+                                                                        + Math.floorDiv(pokemonIndex,
+                                                                                        POKE_BOX_ROW_LENGTH) * OFFSET_Y,
                                                         POKEMON_BUTTON_WIDTH,
                                                         POKEMON_BUTTON_HEIGHT));
 
@@ -85,10 +85,11 @@ public final class SceneBoxView implements BoxView {
                                                 new SpriteElementImpl("pokemonPanel",
                                                                 currentBox.get(pokemonIndex)
                                                                                 .getSpriteFront().get(),
-                                                                POKEMON_START_X + (pokemonIndex % POKE_BOX_ROW_LENGTH
-                                                                                * OFFSET_X),
-                                                                POKEMON_START_Y + (pokemonIndex / POKE_BOX_ROW_LENGTH
-                                                                                * OFFSET_Y),
+                                                                POKEMON_START_X + pokemonIndex % POKE_BOX_ROW_LENGTH
+                                                                                * OFFSET_X,
+                                                                POKEMON_START_Y + Math.floorDiv(pokemonIndex,
+                                                                                POKE_BOX_ROW_LENGTH)
+                                                                                * OFFSET_Y,
                                                                 POKEMON_SPRITE_WIDTH,
                                                                 POKEMON_SPRITE_HEIGHT));
 
