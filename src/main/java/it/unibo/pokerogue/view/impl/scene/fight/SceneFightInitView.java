@@ -27,6 +27,11 @@ public final class SceneFightInitView implements FightInitView {
         private static final Integer FIRST_POSITION = 0;
         private static final String FIRST_PANEL = "firstPanel";
 
+        /**
+         * Constructs a new {@code SceneFightInitView}.
+         * This is the default constructor for initializing the view component
+         * responsible for rendering the fight initialization screen.
+         */
         public SceneFightInitView() {
                 // This class is not meant to be instantiated.
         }

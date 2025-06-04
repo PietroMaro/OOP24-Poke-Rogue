@@ -122,7 +122,8 @@ public class BattleEngineImpl implements BattleEngine {
     }
 
     private void handleAttack(final Optional<Move> attackerMove, final Optional<Move> opponentMove,
-            final Pokemon attackerPokemon, final Pokemon defenderPokemon, final Trainer playerTrainerInstance) throws IOException {
+            final Pokemon attackerPokemon, final Pokemon defenderPokemon, final Trainer playerTrainerInstance)
+            throws IOException {
         if (attackerMove.get().getPp().getCurrentValue() <= 0) {
             return;
         }

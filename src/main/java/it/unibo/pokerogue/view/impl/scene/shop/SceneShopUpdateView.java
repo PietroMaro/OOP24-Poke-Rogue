@@ -44,6 +44,7 @@ public final class SceneShopUpdateView implements ShopUpdateView {
                 this.currentSelectedButton = currentSelectedButton;
                 this.newSelectedButton = newSelectedButton;
         }
+
         @Override
         public void updateGraphic(final int currentSelectedButton, final int newSelectedButton,
                         final GraphicElementsRegistry currentSceneGraphicElements,
@@ -62,10 +63,12 @@ public final class SceneShopUpdateView implements ShopUpdateView {
                                 sceneViewInstance, playerTrainerInstance);
 
         }
+
         private void updatePokemonSelection(final GraphicElementsRegistry currentSceneGraphicElements,
                         final GraphicElementsRegistry graphicElements,
                         final Map<String, PanelElementImpl> allPanelsElements,
-                        final Map<String, Integer> graphicElementNameToInt, final SceneShop sceneInstance, final Trainer playerTrainerInstance)
+                        final Map<String, Integer> graphicElementNameToInt, final SceneShop sceneInstance,
+                        final Trainer playerTrainerInstance)
                         throws IOException {
                 if (this.newSelectedButton >= graphicElementNameToInt.get("CHANGE_POKEMON_1_BUTTON")
                                 && this.newSelectedButton <= graphicElementNameToInt
@@ -85,7 +88,8 @@ public final class SceneShopUpdateView implements ShopUpdateView {
                 }
         }
 
-        private void initPokemonSelectionText(final GraphicElementsRegistry currentSceneGraphicElements, final Trainer playerTrainerInstance) {
+        private void initPokemonSelectionText(final GraphicElementsRegistry currentSceneGraphicElements,
+                        final Trainer playerTrainerInstance) {
                 UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "POKEMON_1_NAME_TEXT",
                                 TextElementImpl.class)
                                 .setText(SceneShopUtilities.getPokemonNameAt(playerTrainerInstance, FIRST_POSITION));
@@ -166,7 +170,8 @@ public final class SceneShopUpdateView implements ShopUpdateView {
                         allPanelsElements.clear();
                         sceneInstance.setCurrentSelectedButton(this.currentSelectedButton);
                         sceneInstance.setNewSelectedButton(this.newSelectedButton);
-                        sceneViewInstance.initGraphicElements(this.newSelectedButton, currentSceneGraphicElements, graphicElements, allPanelsElements, playerTrainerInstance);
+                        sceneViewInstance.initGraphicElements(this.newSelectedButton, currentSceneGraphicElements,
+                                        graphicElements, allPanelsElements, playerTrainerInstance);
                 }
         }
 }

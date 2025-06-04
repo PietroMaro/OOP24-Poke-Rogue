@@ -29,7 +29,8 @@ public interface FightView {
         void initGraphicElements(int currentSelectedButton,
                         GraphicElementsRegistry currentSceneGraphicElements,
                         Map<String, PanelElementImpl> allPanelsElements,
-                        GraphicElementsRegistry graphicElements, Trainer enemyTrainerInstance, Trainer playerTrainerInstance) throws IOException;
+                        GraphicElementsRegistry graphicElements, Trainer enemyTrainerInstance,
+                        Trainer playerTrainerInstance) throws IOException;
 
         /**
          * Updates the graphical elements for the battle scene.
@@ -44,10 +45,12 @@ public interface FightView {
          * @param graphicElementNameToInt     a mapping from graphic element names to
          *                                    integer identifiers
          * @param scene                       the current fight scene instance
+         * @param playerTrainerInstance       the instance of the player trainer
          */
         void updateGraphic(int currentSelectedButton, int newSelectedButton,
                         GraphicElementsRegistry currentSceneGraphicElements,
                         Map<String, PanelElementImpl> allPanelsElements,
                         GraphicElementsRegistry graphicElements,
-                        Map<String, Integer> graphicElementNameToInt, SceneFight scene, Trainer playerTrainerInstance) throws IOException;
+                        Map<String, Integer> graphicElementNameToInt, SceneFight scene, Trainer playerTrainerInstance)
+                        throws IOException;
 }

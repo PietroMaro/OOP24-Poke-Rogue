@@ -23,6 +23,7 @@ public interface ShopInitView {
      *                              elements
      * @param graphicElements       the global registry of all graphical elements
      * @param allPanelsElements     a map to store panel elements for the scene
+     * @param playerTrainerInstance the instance of the player trainer
      */
     void initGraphicElements(int currentSelectedButton,
             GraphicElementsRegistry sceneGraphicElements,

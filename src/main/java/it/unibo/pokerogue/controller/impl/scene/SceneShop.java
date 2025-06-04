@@ -55,14 +55,26 @@ public class SceneShop extends Scene {
     private Item selectedUsableItem;
 
     /**
-     * Constructs the SceneShop, initializes UI elements and internal state.
+     * Constructs a new {@code SceneShop} and initializes its graphical components
+     * and internal state.
+     * This constructor is responsible for:
+     * Loading the UI configuration from the {@code sceneShopElements.json} file
+     * Initializing the registry of graphic elements and panel mappings
+     * Setting up the initial UI status
+     * Creating the associated view and populating it with the player's data
      *
-     * @throws IOException               if UI elements cannot be loaded
-     * @throws InstantiationException    if an object cannot be instantiated
-     * @throws IllegalAccessException    if access to a class or method is illegal
-     * @throws NoSuchMethodException     if a method is not found via reflection
-     * @throws InvocationTargetException if a method throws an exception during
+     * @param playerTrainerInstance the instance of the player's trainer used to
+     *                              populate UI elements
+     * @throws IOException               if an error occurs while loading UI
+     *                                   elements from the JSON file
+     * @throws InstantiationException    if an object required for initialization
+     *                                   cannot be instantiated
+     * @throws IllegalAccessException    if reflective access to a method or class
+     *                                   is denied
+     * @throws NoSuchMethodException     if a required method is not found via
      *                                   reflection
+     * @throws InvocationTargetException if an exception is thrown during method
+     *                                   invocation via reflection
      */
     public SceneShop(final Trainer playerTrainerInstance) throws IOException,
             InstantiationException,
@@ -266,9 +278,9 @@ public class SceneShop extends Scene {
     public void updateGraphic(final SavingSystem savingSystemInstance, final Trainer playerTrainerInstance)
             throws IOException {
         this.sceneShopView.updateGraphic(currentSelectedButton, newSelectedButton,
-        currentSceneGraphicElements, graphicElements,
-        allPanelsElements, graphicElementNameToInt,
-        this, this.sceneShopView , playerTrainerInstance);
+                currentSceneGraphicElements, graphicElements,
+                allPanelsElements, graphicElementNameToInt,
+                this, this.sceneShopView, playerTrainerInstance);
         this.currentSelectedButton = this.newSelectedButton;
     }
 

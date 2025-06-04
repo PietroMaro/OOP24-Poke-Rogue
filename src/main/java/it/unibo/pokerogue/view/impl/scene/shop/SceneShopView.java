@@ -24,17 +24,8 @@ public class SceneShopView {
      * Constructs the shop view and initializes its internal components for
      * rendering and updating.
      *
-     * @param sceneGraphicElements    Registry of elements specific to the current
-     *                                shop scene.
-     * @param graphicElements         Global graphic element registry shared with
-     *                                other scenes.
-     * @param allPanelsElements       Mapping of panel elements by name.
-     * @param currentSelectedButton   Button currently selected in the UI.
-     * @param newSelectedButton       Button the user is navigating to.
-     * @param scene                   Reference to the main shop scene for
-     *                                interaction handling.
-     * @param graphicElementNameToInt Mapping of graphic element names to their
-     *                                identifiers.
+     * @param currentSelectedButton Button currently selected in the UI.
+     * @param newSelectedButton     Button the user is navigating to.
      * @throws IOException
      * @throws InvocationTargetException
      * @throws NoSuchMethodException
@@ -51,10 +42,19 @@ public class SceneShopView {
 
     /**
      * Initializes the graphical elements for the shop scene UI.
+     * This method sets up the visual components and panels required for the shop
+     * scene,
+     * delegating the initialization to the {@code sceneShopInitView} instance.
      *
-     * @param currentSelectedButton The currently selected button during
-     *                              initialization.
-     * @param allPanelsElements     A map holding panel elements used in the scene.
+     * @param currentSelectedButton       The currently selected button during
+     *                                    initialization.
+     * @param currentSceneGraphicElements The registry of the current scene's
+     *                                    graphic elements.
+     * @param graphicElements             The global graphic elements registry.
+     * @param allPanelsElements           A map holding panel elements used in the
+     *                                    scene.
+     * @param playerTrainerInstance       The trainer instance representing the
+     *                                    player.
      * @throws IOException If an error occurs while loading or initializing graphic
      *                     resources.
      */
@@ -68,10 +68,25 @@ public class SceneShopView {
 
     /**
      * Updates the graphical interface to reflect the latest user interaction.
+     * This method delegates the update to the {@code sceneShopUpdateView} instance,
+     * passing all necessary parameters related to the current scene state and UI
+     * elements.
      *
-     * @param currentSelectedButton The button that was previously selected.
-     * @param newSelectedButton     The button that is now selected.
-     * @throws IOException If the update process fails due to graphical issues.
+     * @param currentSelectedButton       The button that was previously selected.
+     * @param newSelectedButton           The button that is now selected.
+     * @param currentSceneGraphicElements The registry of the current scene's
+     *                                    graphic elements.
+     * @param graphicElements             The global graphic elements registry.
+     * @param allPanelsElements           Map containing all panel elements used in
+     *                                    the scene.
+     * @param graphicElementNameToInt     Mapping from graphic element names to
+     *                                    their integer identifiers.
+     * @param sceneInstance               The current SceneShop instance.
+     * @param sceneViewInstance           The view instance responsible for
+     *                                    rendering the scene.
+     * @param playerTrainerInstance       The trainer instance representing the
+     *                                    player.
+     * @throws IOException If an error occurs during the graphical update process.
      */
     public void updateGraphic(final int currentSelectedButton, final int newSelectedButton,
             final GraphicElementsRegistry currentSceneGraphicElements, final GraphicElementsRegistry graphicElements,

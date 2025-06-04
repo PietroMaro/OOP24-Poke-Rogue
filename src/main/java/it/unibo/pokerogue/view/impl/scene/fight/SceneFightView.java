@@ -39,7 +39,8 @@ public final class SceneFightView implements FightView {
     public void initGraphicElements(final int currentSelectedButton,
             final GraphicElementsRegistry currentSceneGraphicElements,
             final Map<String, PanelElementImpl> allPanelsElements,
-            final GraphicElementsRegistry graphicElements, final Trainer enemyTrainerInstance, final Trainer playerTrainerInstance) throws IOException {
+            final GraphicElementsRegistry graphicElements, final Trainer enemyTrainerInstance,
+            final Trainer playerTrainerInstance) throws IOException {
         this.sceneFightInitView.initGraphicElements(currentSelectedButton, currentSceneGraphicElements,
                 allPanelsElements, graphicElements, enemyTrainerInstance, playerTrainerInstance);
     }
@@ -49,7 +50,8 @@ public final class SceneFightView implements FightView {
             final GraphicElementsRegistry currentSceneGraphicElements,
             final Map<String, PanelElementImpl> allPanelsElements,
             final GraphicElementsRegistry graphicElements,
-            final Map<String, Integer> graphicElementNameToInt, final SceneFight scene, final Trainer playerTrainerInstance) throws IOException {
+            final Map<String, Integer> graphicElementNameToInt, final SceneFight scene,
+            final Trainer playerTrainerInstance) throws IOException {
         this.sceneFightUpdateView.updateGraphic(currentSelectedButton, newSelectedButton, currentSceneGraphicElements,
                 allPanelsElements, graphicElements, graphicElementNameToInt, scene, playerTrainerInstance);
     }

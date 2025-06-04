@@ -28,6 +28,8 @@ public interface FightUpdateView {
      * @param graphicElementNameToInt     a mapping from graphic element names to
      *                                    integer identifiers
      * @param scene                       the current fight scene instance
+     * @param playerTrainerInstance       the instance of the player's trainer used
+     *                                    to populate UI elements
      */
     void updateGraphic(int currentSelectedButton, int newSelectedButton,
             GraphicElementsRegistry currentSceneGraphicElements,

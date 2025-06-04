@@ -25,10 +25,10 @@ public final class AbilityFactory {
     private static final Map<String, Ability> ABILITY_BLUEPRINTS = new HashMap<>();
 
     private AbilityFactory() {
-        //Shouldn't be instantiated	
+        // Shouldn't be instantiated
     }
 
-     /**
+    /**
      * Initializes the factory by reading all Ability names and their corresponding
      * data
      * from the JSON files.

@@ -81,7 +81,8 @@ public final class EnemyAiSwitchIn {
         }
 
         if (canSwitch(enemyTrainer) && this.isBetterOptionInSquad()
-                && this.calculateEffectivenessDifference(0, 0, enemyTrainer, playerTrainerInstance) <= ACCEPTED_EFFECTIVENESS_DIFFERENCE) {
+                && this.calculateEffectivenessDifference(0, 0, enemyTrainer,
+                        playerTrainerInstance) <= ACCEPTED_EFFECTIVENESS_DIFFERENCE) {
             this.typeBasedSwitchIn();
 
             return true;

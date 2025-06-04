@@ -60,7 +60,6 @@ public class SceneInfo extends Scene {
 
     /**
      * Updates the scene state based on the provided key input.
-     * <p>
      * Handles actions such as navigating back to the main scene when the
      * "BACK_BUTTON" is pressed.
      *
@@ -77,7 +76,8 @@ public class SceneInfo extends Scene {
      */
     @Override
     public void updateStatus(final int inputKey, final GameEngine gameEngineInstance,
-            final Trainer playerTrainerInstance, final SavingSystem savingSystemInstance) throws IOException, InstantiationException, IllegalAccessException,
+            final Trainer playerTrainerInstance, final SavingSystem savingSystemInstance)
+            throws IOException, InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchMethodException {
         switch (inputKey) {
             case KeyEvent.VK_ENTER:

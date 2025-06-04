@@ -78,7 +78,8 @@ public class SceneSave extends Scene {
      */
     @Override
     public void updateStatus(final int inputKey, final GameEngine gameEngineInstance,
-            final Trainer playerTrainerInstance, final SavingSystem savingSystemInstance) throws IOException, InstantiationException, IllegalAccessException,
+            final Trainer playerTrainerInstance, final SavingSystem savingSystemInstance)
+            throws IOException, InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchMethodException {
 
         this.handleTextInput(inputKey);
@@ -139,7 +140,8 @@ public class SceneSave extends Scene {
         }
     }
 
-    private void savingCheck(final SavingSystem savingSystemInstance, final GameEngine gameEngineInstance) throws IOException, InstantiationException,
+    private void savingCheck(final SavingSystem savingSystemInstance, final GameEngine gameEngineInstance)
+            throws IOException, InstantiationException,
             IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         if (savingSystemInstance.getSaveFilesName(SAVE_PATH).contains(typedSaveName + ".json")) {
             typedSaveName = "already present";
@@ -157,7 +159,8 @@ public class SceneSave extends Scene {
      * @throws IOException if an error occurs during update rendering.
      */
     @Override
-    public void updateGraphic(final SavingSystem savingSystemInstance, final Trainer playerTrainerInstance) throws IOException {
+    public void updateGraphic(final SavingSystem savingSystemInstance, final Trainer playerTrainerInstance)
+            throws IOException {
         this.sceneSaveView.updateGraphic(this.newSelectedButton, this.currentSceneGraphicElements);
     }
 

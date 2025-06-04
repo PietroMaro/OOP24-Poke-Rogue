@@ -73,7 +73,8 @@ public final class EffectInterpreter {
         return result;
     }
 
-    private static Optional<Object> parseSingleExpression(final String expression, final Trainer playerTrainerInstance) {
+    private static Optional<Object> parseSingleExpression(final String expression,
+            final Trainer playerTrainerInstance) {
         final JexlEngine jexl = new JexlBuilder().create();
         final JexlExpression expr = jexl.createExpression(expression);
 
@@ -125,7 +126,8 @@ public final class EffectInterpreter {
             parseSingleExpression(
                     activation.getJSONArray(actIndex).getString(0)
                             + " = "
-                            + activation.getJSONArray(actIndex).getString(1), playerTrainerInstance);
+                            + activation.getJSONArray(actIndex).getString(1),
+                    playerTrainerInstance);
         }
     }
 
@@ -133,12 +135,13 @@ public final class EffectInterpreter {
      * parses the effect of an ability or move and applies it autonomously
      * using the getters and setters of the given classes.
      *
-     * @param newEffect      the json object representing the effect.
-     * @param newUs          the pokémon using the ability or move.
-     * @param newEnemy       the opposing pokémon.
-     * @param newAttackUs    the move used by our pokémon.
-     * @param newAttackEnemy the move used by the enemy pokémon.
-     * @param newWeather     the current weather condition.
+     * @param newEffect             the json object representing the effect.
+     * @param newUs                 the pokémon using the ability or move.
+     * @param newEnemy              the opposing pokémon.
+     * @param newAttackUs           the move used by our pokémon.
+     * @param newAttackEnemy        the move used by the enemy pokémon.
+     * @param newWeather            the current weather condition.
+     * @param playerTrainerInstance the player trainer current instance
      */
     public static void interpertEffect(
             final JSONObject newEffect,
@@ -159,10 +162,13 @@ public final class EffectInterpreter {
      * parses the effect of a pokemObject and applies it autonomously
      * using the getters and setters of the given classes.
      *
-     * @param effect  the json object representing the effect.
-     * @param pokemon the pokemon to which the effect should be applied.
+     * @param effect                the json object representing the effect.
+     * @param pokemon               the pokemon to which the effect should be
+     *                              applied.
+     * @param playerTrainerInstance the player trainer current instance
      */
-    public static void interpertEffect(final JSONObject effect, final Pokemon pokemon, final Trainer playerTrainerInstance) throws IOException {
+    public static void interpertEffect(final JSONObject effect, final Pokemon pokemon,
+            final Trainer playerTrainerInstance) throws IOException {
         us = Optional.of(pokemon);
         enemy = Optional.empty();
         attackUs = Optional.empty();

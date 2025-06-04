@@ -40,12 +40,27 @@ public class SceneMove extends Scene {
     private final Map<String, Integer> graphicElementNameToInt;
 
     /**
-     * Constructs a new SceneMove.
-     * Initializes the graphic elements, panels, game engine instance, utility
-     * class,
-     * view, player trainer, and the first Pokemon of the player.
-     * Also sets the initial status and initializes the graphic elements' visual
-     * state.
+     * Constructs a new {@code SceneMove}.
+     * This constructor initializes all necessary components for the move selection
+     * scene,
+     * including loading graphical elements from a JSON file, setting up the mapping
+     * of
+     * graphic element names to IDs, initializing panel structures, and creating the
+     * view for the scene.
+     * It also retrieves the first Pokémon from the player's squad and sets the
+     * initial
+     * scene status and visual state.
+     *
+     * @param playerTrainerInstance the current instance of the player's trainer
+     * @throws NoSuchMethodException     if a method required via reflection is not
+     *                                   found
+     * @throws IOException               if an error occurs while loading resources
+     * @throws IllegalAccessException    if a reflective access to a method or field
+     *                                   is denied
+     * @throws InvocationTargetException if an exception is thrown by an invoked
+     *                                   method
+     * @throws InstantiationException    if an object cannot be instantiated
+     *                                   reflectively
      */
     public SceneMove(final Trainer playerTrainerInstance) throws NoSuchMethodException,
             IOException,

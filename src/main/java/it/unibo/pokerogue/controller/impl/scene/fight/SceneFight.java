@@ -65,8 +65,9 @@ public class SceneFight extends Scene {
      * Initializes all the necessary components for the battle scene, including the
      * enemy trainer, AI, and battle engine.
      * 
-     * @param battleLevel          the level of the battle
-     * @param savingSystemInstance the main saving system
+     * @param battleLevel           the level of the battle
+     * @param savingSystemInstance  the main saving system
+     * @param playerTrainerInstance the player trainer current instance
      */
     public SceneFight(final Integer battleLevel, final SavingSystem savingSystemInstance,
             final Trainer playerTrainerInstance) throws IOException, NoSuchMethodException,
@@ -95,8 +96,16 @@ public class SceneFight extends Scene {
     }
 
     /**
-     * Initializes the graphic elements displayed in the scene.
-     * This method sets up the UI components for the battle interface.
+     * Initializes the graphic elements displayed in the battle scene.
+     * 
+     * This method prepares and configures all UI components necessary for
+     * the fight interface, including buttons, panels, and other visuals.
+     *
+     * @param playerTrainerInstance the current instance of the player's trainer,
+     *                              used to populate UI elements with the player's
+     *                              data.
+     * @throws IOException if any error occurs while loading UI resources or scene
+     *                     data.
      */
     public final void initGraphicElements(final Trainer playerTrainerInstance) throws IOException {
         this.sceneFightView.initGraphicElements(this.currentSelectedButton, this.currentSceneGraphicElements,
@@ -104,8 +113,16 @@ public class SceneFight extends Scene {
     }
 
     /**
-     * Updates the graphic elements based on the current selected button and the new
-     * selected button.
+     * Updates the graphical elements of the battle scene based on user interaction.
+     * 
+     * This method refreshes the visual state of the interface by updating the
+     * highlighted or selected UI elements, and reflecting changes in game state.
+     *
+     * @param savingSystemInstance  the saving system instance, used for saving game
+     *                              state if required.
+     * @param playerTrainerInstance the current instance of the player's trainer,
+     *                              whose data may affect the interface.
+     * @throws IOException if any error occurs while updating UI resources.
      */
     @Override
     public void updateGraphic(final SavingSystem savingSystemInstance, final Trainer playerTrainerInstance)
@@ -118,10 +135,27 @@ public class SceneFight extends Scene {
 
     /**
      * Updates the status of the scene based on the key input from the user.
-     * This method handles user interactions, such as navigating through the buttons
-     * or performing actions.
-     * 
-     * @param inputKey the key pressed by the user
+     * This method handles the interaction logic for the fight scene UI. It
+     * processes
+     * directional keys to navigate between UI elements (such as action buttons),
+     * and the ENTER key to trigger actions (like attacking, using items, or
+     * switching Pokémon).
+     *
+     * @param inputKey              the key pressed by the user (e.g., arrow keys or
+     *                              ENTER)
+     * @param gameEngineInstance    the current instance of the game engine managing
+     *                              the game loop
+     * @param playerTrainerInstance the current instance of the player's trainer,
+     *                              used to determine actions
+     * @param savingSystemInstance  the saving system used for persistence, if
+     *                              necessary
+     * @throws NoSuchMethodException     if a reflection call to a method fails
+     * @throws IOException               if an I/O error occurs
+     * @throws IllegalAccessException    if reflection tries to access an
+     *                                   inaccessible method
+     * @throws InvocationTargetException if a reflective method invocation causes an
+     *                                   exception
+     * @throws InstantiationException    if a reflective instantiation fails
      */
     @Override
     public void updateStatus(final int inputKey, final GameEngine gameEngineInstance,

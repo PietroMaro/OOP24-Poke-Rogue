@@ -22,6 +22,11 @@ public final class SceneShopInitView implements ShopInitView {
 
         private static final String FIRST_PANEL = "firstPanel";
 
+        /**
+         * Constructs a new {@code SceneShopInitView}.
+         * This class is not meant to be instantiated directly. It is likely used only
+         * in a static context or intended to be extended.
+         */
         public SceneShopInitView() {
                 // This class is not meant to be instantiated.
         }
