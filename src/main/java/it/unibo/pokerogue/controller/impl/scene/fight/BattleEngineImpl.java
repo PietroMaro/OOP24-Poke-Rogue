@@ -129,7 +129,7 @@ public class BattleEngineImpl implements BattleEngine {
         }
         final Range<Integer> movePp = attackerMove.get().getPp();
         movePp.decrement(1);
-        attackerMove.get().setPp(movePp);
+        attackerMove.get().setPp(movePp.getCurrentValue());
         attackerMove.get().getPp().decrement(1);
         final int finalDamage = DamageCalculator.calculateDamage(attackerPokemon, defenderPokemon,
                 attackerMove.get(),

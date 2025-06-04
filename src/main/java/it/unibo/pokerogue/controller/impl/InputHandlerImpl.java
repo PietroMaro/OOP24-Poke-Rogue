@@ -40,7 +40,8 @@ public final class InputHandlerImpl implements KeyListener {
                 | InvocationTargetException
                 | IOException
                 | NoSuchMethodException e) {
-            LOGGER.error("Exception occurred while handling key press", e);
+            e.printStackTrace();
+            LOGGER.error("Exception occurred while handling key press", e.getMessage());
         }
     }
 

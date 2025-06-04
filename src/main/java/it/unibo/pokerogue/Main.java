@@ -45,11 +45,12 @@ public final class Main {
             mainGameEngine.setScene("main");
 
         } catch (InstantiationException
-                 | IllegalAccessException
-                 | InvocationTargetException
-                 | IOException
-                 | NoSuchMethodException e) {
-            LOGGER.log(Level.SEVERE, "An error occurred while starting the application", e);
+                | IllegalAccessException
+                | InvocationTargetException
+                | IOException
+                | NoSuchMethodException e) {
+            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "An error occurred while starting the application", e.getMessage());
         }
     }
 }
