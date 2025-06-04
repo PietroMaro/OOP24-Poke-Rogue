@@ -4,7 +4,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.lang.reflect.InvocationTargetException;
 import java.io.IOException;
-import org.apache.commons.jexl3.JexlException;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import it.unibo.pokerogue.controller.api.GameEngine;
@@ -18,17 +17,17 @@ public final class InputHandlerImpl implements KeyListener {
     private final GameEngine gameEngine;
 
     /**
-     * Constructs the input handler and initializes the game engine instance.
+     * Creates an input handler with a reference to the game engine interface.
+     * This does not expose internal state because the game engine is passed as an
+     * interface.
      *
-     * @param gameEngine the main game engine
+     * @param gameEngine the game engine interface used to handle key input
      */
     public InputHandlerImpl(final GameEngine gameEngine) {
-        try {
-            this.gameEngine = gameEngine;
-        } catch (final JexlException e) {
-            LOGGER.error("GameEngine has not been initialized", e);
-            throw new IllegalStateException("GameEngine has not been initialized", e);
+        if (gameEngine == null) {
+            throw new IllegalArgumentException("GameEngine cannot be null");
         }
+        this.gameEngine = gameEngine;
     }
 
     @Override

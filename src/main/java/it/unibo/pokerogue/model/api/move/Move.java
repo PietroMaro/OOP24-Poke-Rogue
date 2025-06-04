@@ -13,14 +13,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 /**
- * Represents a Pokémon move, with information like damage, accuracy, and
- * effects.
- */
-
-/* Since the EffectInterpreter uses the jex4l library to interpret,
- * we don't have full control over how setters and getters are used internally
- * during the process. This makes it impossible (or so it seemed to us)
- * to return a copy of the current values in the pp getter instead of a reference.
+ * Represents a Pokémon move, encapsulating details such as damage, accuracy,
+ * type, priority, and potential additional effects.
+ * A {@code Move} can be either physical or special and may contain optional
+ * effects described as JSON. It supports copying and modification of internal
+ * state such as PP (Power Points), damage values, and type-related bonuses.
+ *
+ * Note: Due to limitations in the effect interpretation mechanism
+ * defensive copying of the {@link Range} object is limited, and direct
+ * references may be exposed through the getter.
+ *
+ * @author
  */
 @SuppressFBWarnings("EI_EXPOSE_REP")
 @Getter

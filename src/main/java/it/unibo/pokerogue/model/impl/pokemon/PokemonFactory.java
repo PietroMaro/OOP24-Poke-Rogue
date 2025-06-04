@@ -66,15 +66,15 @@ public final class PokemonFactory {
                                 POKEMON_DATA, "pokemon", "data", pokemonName + ".json")
                         .toString());
         final int pokedexNumber = pokemonJson.getInt("pokedexNumber");
-        final List<String> types = jsonArrayToList(pokemonJson.getJSONArray("types"),String.class);
+        final List<String> types = jsonArrayToList(pokemonJson.getJSONArray("types"), String.class);
         final int captureRate = pokemonJson.getInt("captureRate");
         final int minLevelForEncounter = pokemonJson.getInt("minLevelForEncounter");
         final Map<Stats, Integer> stats = statsMap(pokemonJson.getJSONObject("stats"));
-        final Map<String, String> learnableMoves = jsonObjectToMap(pokemonJson.getJSONObject("moves"),String.class);
+        final Map<String, String> learnableMoves = jsonObjectToMap(pokemonJson.getJSONObject("moves"), String.class);
         final String growthRate = pokemonJson.getString("growthRate");
         final String name = pokemonJson.getString("name");
         final int weight = pokemonJson.getInt("weight");
-        final List<String> possibleAbilities = jsonArrayToList(pokemonJson.getJSONArray("abilites"),String.class);
+        final List<String> possibleAbilities = jsonArrayToList(pokemonJson.getJSONArray("abilites"), String.class);
         final Map<Stats, Integer> givesEV = statsMap(pokemonJson.getJSONObject("givesEV"));
         final Optional<Image> newPokemonSpriteFront = Optional.of(ImageIO.read(new File(Paths
                 .get(SRC_LITTERAL, MAIN_LITTERAL, RESOURCES_LITTERAL,
@@ -157,7 +157,7 @@ public final class PokemonFactory {
         return new HashSet<>(ALL_POKEMON_SET);
     }
 
-    private static <T> List<T> jsonArrayToList(final JSONArray jsonArray, Class<T> clazz) {
+    private static <T> List<T> jsonArrayToList(final JSONArray jsonArray, final Class<T> clazz) {
         final List<T> result = new ArrayList<>();
         for (int index = 0; index < jsonArray.length(); index += 1) {
             result.add(clazz.cast(jsonArray.get(index)));
@@ -166,7 +166,7 @@ public final class PokemonFactory {
         return result;
     }
 
-    private static <T> Map<String, T> jsonObjectToMap(final JSONObject jsonObject, Class<T> clazz) {
+    private static <T> Map<String, T> jsonObjectToMap(final JSONObject jsonObject, final Class<T> clazz) {
         final Map<String, T> result = new HashMap<>();
         final Iterator<String> keys = jsonObject.keys();
         while (keys.hasNext()) {
