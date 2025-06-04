@@ -1,5 +1,6 @@
 package it.unibo.pokerogue.model.api.move;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.json.JSONObject;
 
 import it.unibo.pokerogue.model.api.Range;
@@ -16,6 +17,12 @@ import lombok.Setter;
  * effects.
  */
 
+/* Since the EffectInterpreter uses the jex4l library to interpret,
+ * we don't have full control over how setters and getters are used internally
+ * during the process. This makes it impossible (or so it seemed to us)
+ * to return a copy of the current values in the pp getter instead of a reference.
+ */
+@SuppressFBWarnings("EI_EXPOSE_REP")
 @Getter
 @Setter
 @RequiredArgsConstructor
