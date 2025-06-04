@@ -47,7 +47,7 @@ public class SceneMove extends Scene {
      * Also sets the initial status and initializes the graphic elements' visual
      * state.
      */
-    public SceneMove(Trainer playerTrainerInstance) throws NoSuchMethodException,
+    public SceneMove(final Trainer playerTrainerInstance) throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
             InvocationTargetException,

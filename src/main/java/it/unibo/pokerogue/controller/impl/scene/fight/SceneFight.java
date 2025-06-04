@@ -68,8 +68,8 @@ public class SceneFight extends Scene {
      * @param battleLevel          the level of the battle
      * @param savingSystemInstance the main saving system
      */
-    public SceneFight(final Integer battleLevel, final GameEngine gameEngineInstance,
-            final SavingSystem savingSystemInstance, final Trainer playerTrainerInstance) throws IOException, NoSuchMethodException,
+    public SceneFight(final Integer battleLevel, final SavingSystem savingSystemInstance,
+            final Trainer playerTrainerInstance) throws IOException, NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
@@ -112,7 +112,8 @@ public class SceneFight extends Scene {
             throws IOException {
         this.sceneFightView.updateGraphic(this.currentSelectedButton, this.newSelectedButton,
                 this.currentSceneGraphicElements,
-                this.allPanelsElements, this.graphicElements, this.graphicElementNameToInt, this, playerTrainerInstance);
+                this.allPanelsElements, this.graphicElements, this.graphicElementNameToInt, this,
+                playerTrainerInstance);
     }
 
     /**
