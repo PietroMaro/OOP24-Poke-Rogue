@@ -227,10 +227,11 @@ final class TestAll {
         final Trainer playerTrainerInstance = new TrainerImpl();
         final Item elixir = ItemFactory.itemFromName("Elixir");
         final Range move = venusaur.getActualMoves().getFirst().getPp();
+        venusaur.getActualMoves().getFirst().setPp(new RangeImpl(move.getCurrentMin(), move.getCurrentMax(), 0));
         assertEquals(venusaur.getActualMoves().getFirst().getPp().getCurrentValue(), 0);
         EffectInterpreter.interpertEffect(elixir.effect().get(), venusaur, playerTrainerInstance);
-        System.out.println(venusaur.getActualMoves().getFirst().getPp().getCurrentValue());
-        // assertEquals(venusaur.getActualMoves().getFirst().getPp().getCurrentValue(),0);
+        assertEquals(venusaur.getActualMoves().getFirst().getPp().getCurrentValue(),
+                venusaur.getActualMoves().getFirst().getPp().getCurrentMax());
     }
 
     @Test
