@@ -1,5 +1,6 @@
 package it.unibo.pokerogue;
 
+import it.unibo.pokerogue.model.api.item.Item;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -73,6 +74,7 @@ final class TestAll {
             PokemonFactory.init();
             MoveFactory.init();
             AbilityFactory.init();
+            ItemFactory.init();
         } catch (final IOException e) {
             LOGGER.log(Level.SEVERE, "Failed to initialize factories", e);
         }
@@ -119,8 +121,9 @@ final class TestAll {
             InstantiationException {
         final Move moveTest1 = MoveFactory.moveFromName(ABSORB_LITTERAL);
         final Move moveTest2 = MoveFactory.moveFromName(ABSORB_LITTERAL);
-        moveTest1.setPp(new RangeImpl<>(moveTest1.getPp().getCurrentMin(), moveTest1.getPp().getCurrentMax(),
-                0));
+        //moveTest1.setPp(new RangeImpl<>(moveTest1.getPp().getCurrentMin(), moveTest1.getPp().getCurrentMax(),
+                //0));
+        moveTest1.setPp(0);
         assertNotSame(moveTest1, moveTest2);
         assertNotSame(moveTest2.getPp().getCurrentValue(), 0);
         assertEquals(moveTest1.getPp().getCurrentValue(), 0);
@@ -216,6 +219,19 @@ final class TestAll {
         EffectInterpreter.setDebug(false);
 
     }
+
+	@Test
+	void testPpItem() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+            InstantiationException, IOException {
+        final Pokemon venusaur = PokemonFactory.pokemonFromName("venusaur");
+        final Trainer playerTrainerInstance = new TrainerImpl();
+		final Item elixir = ItemFactory.itemFromName("Elixir");
+        venusaur.getActualMoves().getFirst().setPp(0);
+        assertEquals(venusaur.getActualMoves().getFirst().getPp().getCurrentValue(),0);
+		EffectInterpreter.interpertEffect(elixir.effect().get(), venusaur, playerTrainerInstance);
+        System.out.println(venusaur.getActualMoves().getFirst().getPp().getCurrentValue());
+        //assertEquals(venusaur.getActualMoves().getFirst().getPp().getCurrentValue(),0);
+	}
 
     @Test
     void testAi() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
