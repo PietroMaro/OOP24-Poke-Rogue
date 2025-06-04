@@ -1,6 +1,9 @@
 package it.unibo.pokerogue;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.unibo.pokerogue.controller.api.GameEngine;
 import it.unibo.pokerogue.controller.api.GraphicEngine;
@@ -10,7 +13,6 @@ import it.unibo.pokerogue.model.impl.item.ItemFactory;
 import it.unibo.pokerogue.model.impl.MoveFactory;
 import it.unibo.pokerogue.model.impl.AbilityFactory;
 import it.unibo.pokerogue.model.impl.pokemon.PokemonFactory;
-import java.io.IOException;
 
 /**
  * The entry point of the application.
@@ -18,8 +20,10 @@ import java.io.IOException;
  */
 public final class Main {
 
+    private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
+
     private Main() {
-        // Shouldn't be instanciated
+        // Shouldn't be instantiated
     }
 
     /**
@@ -28,7 +32,6 @@ public final class Main {
      * @param args command-line arguments (not used)
      */
     public static void main(final String[] args) {
-
         try {
             ItemFactory.init();
             MoveFactory.init();
@@ -40,14 +43,13 @@ public final class Main {
 
             mainGameEngine.setGraphicEngine(mainGraphicEngine);
             mainGameEngine.setScene("main");
+
         } catch (InstantiationException
-                | IllegalAccessException
-                | InvocationTargetException
-                | IOException
-                | NoSuchMethodException e) {
-            e.printStackTrace();
-
+                 | IllegalAccessException
+                 | InvocationTargetException
+                 | IOException
+                 | NoSuchMethodException e) {
+            LOGGER.log(Level.SEVERE, "An error occurred while starting the application", e);
         }
-
     }
 }

@@ -50,6 +50,7 @@ public final class GameEngineImpl implements GameEngine {
      * Protected constructor for the GameEngineImpl.
      */
     public GameEngineImpl() {
+        this.graphicEngineInstance = new GraphicEngineImpl(this);
         this.savingSystemInstance = new SavingSystemImpl();
         this.playerTrainerInstance = new TrainerImpl();
     }
@@ -69,7 +70,7 @@ public final class GameEngineImpl implements GameEngine {
                 currentScene = new SceneLoad(this.savingSystemInstance);
                 break;
             case "box":
-                currentScene = new SceneBox(this.fileToLoadName, this.savingSystemInstance, this.playerTrainerInstance);
+                currentScene = new SceneBox(this.fileToLoadName, this.savingSystemInstance);
                 break;
             case "fight":
                 if (fightLevel == null) {
@@ -77,7 +78,7 @@ public final class GameEngineImpl implements GameEngine {
                 } else {
                     fightLevel = fightLevel + 1;
                 }
-                currentScene = new SceneFight(fightLevel, this, savingSystemInstance, this.playerTrainerInstance);
+                currentScene = new SceneFight(fightLevel, savingSystemInstance, this.playerTrainerInstance);
                 break;
             case "shop":
                 currentScene = new SceneShop(this.playerTrainerInstance);

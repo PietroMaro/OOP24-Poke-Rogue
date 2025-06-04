@@ -58,13 +58,9 @@ public class SceneBox extends Scene {
          *                             boxes.
          * @param savingSystemInstance the main save system
          */
-        public SceneBox(final String savePath, final SavingSystem savingSystemInstance,
-                        final Trainer playerTrainerInstance) throws IOException,
-                        InstantiationException,
-                        IllegalAccessException,
-                        NoSuchMethodException,
+        public SceneBox(final String savePath, final SavingSystem savingSystemInstance)
+                        throws IOException, InstantiationException, IllegalAccessException, NoSuchMethodException,
                         InvocationTargetException {
-
                 this.loadGraphicElements("sceneBoxElements.json");
                 this.graphicElementNameToInt = this.getGraphicElementNameToInt();
                 this.graphicElements = this.getGraphicElements();
@@ -101,7 +97,8 @@ public class SceneBox extends Scene {
          */
         @Override
         public void updateStatus(final int inputKey, final GameEngine gameEngineInstance,
-                        final Trainer playerTrainerInstance, final SavingSystem savingSystemInstance) throws IOException,
+                        final Trainer playerTrainerInstance, final SavingSystem savingSystemInstance)
+                        throws IOException,
                         InstantiationException,
                         IllegalAccessException,
                         InvocationTargetException,
@@ -203,7 +200,8 @@ public class SceneBox extends Scene {
          * @throws IOException if an I/O error occurs while loading resources.
          */
         @Override
-        public void updateGraphic(final SavingSystem savingSystemInstance, final Trainer playerTrainerInstance) throws IOException {
+        public void updateGraphic(final SavingSystem savingSystemInstance, final Trainer playerTrainerInstance)
+                        throws IOException {
                 this.sceneBoxView.updateGraphic(this.currentSelectedButton, this.newSelectedButton, this.boxIndex,
                                 this.newBoxIndex, this.boxes,
                                 playerTrainerInstance, this.currentSceneGraphicElements,

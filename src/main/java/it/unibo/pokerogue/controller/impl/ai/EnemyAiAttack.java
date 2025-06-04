@@ -50,7 +50,7 @@ public final class EnemyAiAttack {
         this.hpAware = hpAware;
     }
 
-    Decision whatAttackWillDo(final Optional<Weather> weather, final Trainer enemyTrainer, Trainer playerTrainerInstance) {
+    Decision whatAttackWillDo(final Optional<Weather> weather, final Trainer enemyTrainer, final Trainer playerTrainerInstance) {
         this.currentEnemyPokemon = enemyTrainer.getPokemon(0).get();
         this.currentEnemyPokemonMoves = this.currentEnemyPokemon.getActualMoves();
         this.currentPlayerPokemon = playerTrainerInstance.getPokemon(0).get();

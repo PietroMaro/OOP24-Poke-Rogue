@@ -45,7 +45,7 @@ public abstract class Scene {
      * 
      * 
      */
-    public abstract void updateGraphic(final SavingSystem savingSystemInstance, final Trainer playerTrainerInstance)
+    public abstract void updateGraphic(SavingSystem savingSystemInstance, Trainer playerTrainerInstance)
             throws IOException;
 
     /**
@@ -55,8 +55,8 @@ public abstract class Scene {
      * 
      * @param inputKey the key code of the user input event.
      */
-    public abstract void updateStatus(int inputKey, final GameEngine gameEngineInstance,
-            final Trainer playerTrainerInstance, final SavingSystem savingSystemInstance) throws NoSuchMethodException,
+    public abstract void updateStatus(int inputKey, GameEngine gameEngineInstance,
+            Trainer playerTrainerInstance, SavingSystem savingSystemInstance) throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
             InvocationTargetException,

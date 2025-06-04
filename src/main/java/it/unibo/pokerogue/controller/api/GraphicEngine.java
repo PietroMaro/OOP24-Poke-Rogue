@@ -20,7 +20,7 @@ public interface GraphicEngine {
      * @param allGraphicElements the graphic elements to draw.
      *
      */
-    public void renderScene(final Map<String, PanelElementImpl> panelElements,
-            final GraphicElementsRegistry allGraphicElements);
+    void renderScene(Map<String, PanelElementImpl> panelElements,
+            GraphicElementsRegistry allGraphicElements);
 
 }

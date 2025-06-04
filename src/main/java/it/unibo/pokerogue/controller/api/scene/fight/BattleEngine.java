@@ -27,9 +27,9 @@ public interface BattleEngine {
      * @param enemyTrainerInstance the instance of the enemy trainer involved in the
      *                             battle
      */
-    void runBattleTurn(final Decision playerDecision, final Decision enemyDecision,
-            final Trainer enemyTrainerInstance, final Trainer playerTrainerInstance,
-            final GameEngine gameEngineInstance)
+    void runBattleTurn(Decision playerDecision, Decision enemyDecision,
+            Trainer enemyTrainerInstance, Trainer playerTrainerInstance,
+            GameEngine gameEngineInstance)
             throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
