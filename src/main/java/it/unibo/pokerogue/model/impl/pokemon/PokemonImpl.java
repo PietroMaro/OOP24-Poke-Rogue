@@ -39,17 +39,17 @@ public final class PokemonImpl implements Pokemon {
     @Setter
     private Nature nature;
     private Map<Stats, Integer> iv; // 0-31 random when spawned
-    private Map<Stats, Range<Integer>> ev; // 0-255 the pokemon can have a total of 510
-    private Range<Integer> level;
-    private Map<Stats, Range<Integer>> actualStats;
-    private Map<Stats, Range<Integer>> tempStatsBonus;
+    private Map<Stats, Range> ev; // 0-255 the pokemon can have a total of 510
+    private Range level;
+    private Map<Stats, Range> actualStats;
+    private Map<Stats, Range> tempStatsBonus;
     private Map<Integer, String> levelMovesLearn;
     private List<Move> actualMoves = new ArrayList<>();
     @Getter
     @Setter
     private String levelUpCurve; // https://m.bulbapedia.bulbagarden.net/wiki/Experience
     private Map<Stats, Integer> givesEv;
-    private Range<Integer> exp;
+    private Range exp;
     @Getter
     @Setter
     private int pokedexNumber;
@@ -108,7 +108,7 @@ public final class PokemonImpl implements Pokemon {
         generateivs();
         generateEvs();
         this.nature = Nature.getRandomNature();
-        this.level = new RangeImpl<>(1, 100, 1);
+        this.level = new RangeImpl(1, 100, 1);
         calculateActualStats();
         initTempStatsBonus();
         initLevelMovesLearn(pokemonBlueprint.learnableMoves());
@@ -143,7 +143,7 @@ public final class PokemonImpl implements Pokemon {
         final int minEv = 0;
         this.ev = new EnumMap<>(Stats.class);
         for (final Stats stat : Stats.values()) {
-            this.ev.put(stat, new RangeImpl<>(minEv, maxEv, minEv));
+            this.ev.put(stat, new RangeImpl(minEv, maxEv, minEv));
         }
     }
 
@@ -165,10 +165,10 @@ public final class PokemonImpl implements Pokemon {
         final int defaultTempStat = 0;
         this.tempStatsBonus = new EnumMap<>(Stats.class);
         for (final Stats stat : Stats.values()) {
-            this.tempStatsBonus.put(stat, new RangeImpl<>(minTempStat, maxTempStat, defaultTempStat));
+            this.tempStatsBonus.put(stat, new RangeImpl(minTempStat, maxTempStat, defaultTempStat));
         }
-        this.tempStatsBonus.put(Stats.CRIT_RATE, new RangeImpl<>(minTempStat, maxTempStat, defaultTempStat));
-        this.tempStatsBonus.put(Stats.ACCURACY, new RangeImpl<>(minTempStat, maxTempStat, defaultTempStat));
+        this.tempStatsBonus.put(Stats.CRIT_RATE, new RangeImpl(minTempStat, maxTempStat, defaultTempStat));
+        this.tempStatsBonus.put(Stats.ACCURACY, new RangeImpl(minTempStat, maxTempStat, defaultTempStat));
     }
 
     private void initTypes(final List<String> types) {
@@ -206,7 +206,7 @@ public final class PokemonImpl implements Pokemon {
                 + this.ev.get(Stats.HP).getCurrentValue() / 4.0) * this.level.getCurrentValue() / 100.0)
                 + this.level.getCurrentValue() + 10.0);
 
-        final Range<Integer> rangeHp = new RangeImpl<>(0, maxLife, maxLife);
+        final Range rangeHp = new RangeImpl(0, maxLife, maxLife);
         actualStats.put(Stats.HP, rangeHp);
         for (final Stats stat : Stats.values()) {
             if (stat == Stats.HP
@@ -230,7 +230,7 @@ public final class PokemonImpl implements Pokemon {
                 statValue *= negativeMultiplier;
             }
 
-            final Range<Integer> rangeStat = new RangeImpl<>(0, maxStat, statValue);
+            final Range rangeStat = new RangeImpl(0, maxStat, statValue);
             actualStats.put(stat, rangeStat);
         }
 
@@ -255,7 +255,7 @@ public final class PokemonImpl implements Pokemon {
         } else if ("slow".equals(this.levelUpCurve)) {
             newRequiredExp = (int) (constDivider * Math.pow(currentLevel, 3) / 4);
         }
-        this.exp = new RangeImpl<>(0, newRequiredExp, 0);
+        this.exp = new RangeImpl(0, newRequiredExp, 0);
     }
 
     @Override
@@ -297,7 +297,7 @@ public final class PokemonImpl implements Pokemon {
     @Override
     public void increaseExp(final int amount, final boolean isPlayerPokemon) {
         this.exp.increment(amount);
-        if (this.exp.getCurrentValue().equals(this.exp.getCurrentMax())) {
+        if (this.exp.getCurrentValue() == this.exp.getCurrentMax()) {
             levelUp(isPlayerPokemon);
         }
     }
@@ -346,17 +346,17 @@ public final class PokemonImpl implements Pokemon {
     }
 
     @Override
-    public Map<Stats, Range<Integer>> getEv() {
+    public Map<Stats, Range> getEv() {
         return new EnumMap<>(this.ev);
     }
 
     @Override
-    public void setEv(final Map<Stats, Range<Integer>> ev) {
+    public void setEv(final Map<Stats, Range> ev) {
         if (ev == null) {
             this.ev = null;
         } else {
-            final Map<Stats, Range<Integer>> copy = new EnumMap<>(Stats.class);
-            for (final Map.Entry<Stats, Range<Integer>> entry : ev.entrySet()) {
+            final Map<Stats, Range> copy = new EnumMap<>(Stats.class);
+            for (final Map.Entry<Stats, Range> entry : ev.entrySet()) {
                 copy.put(entry.getKey(), entry.getValue().copyOf());
             }
             this.ev = new EnumMap<>(copy);
@@ -364,32 +364,32 @@ public final class PokemonImpl implements Pokemon {
     }
 
     @Override
-    public Range<Integer> getLevel() {
+    public Range getLevel() {
         return this.level == null ? null : this.level.copyOf();
     }
 
     @Override
-    public void setLevel(final Range<Integer> level) {
+    public void setLevel(final Range level) {
         this.level = level == null ? null : level.copyOf();
     }
 
     @Override
-    public Map<Stats, Range<Integer>> getActualStats() {
+    public Map<Stats, Range> getActualStats() {
         return new EnumMap<>(this.actualStats);
     }
 
     @Override
-    public void setActualStats(final Map<Stats, Range<Integer>> newVal) {
+    public void setActualStats(final Map<Stats, Range> newVal) {
         this.actualStats = new EnumMap<>(newVal);
     }
 
     @Override
-    public Map<Stats, Range<Integer>> getTempStatsBonus() {
+    public Map<Stats, Range> getTempStatsBonus() {
         return new EnumMap<>(this.tempStatsBonus);
     }
 
     @Override
-    public void setTempStatsBonus(final Map<Stats, Range<Integer>> tempStatsBonus) {
+    public void setTempStatsBonus(final Map<Stats, Range> tempStatsBonus) {
         this.tempStatsBonus = new EnumMap<>(tempStatsBonus);
     }
 
@@ -415,12 +415,12 @@ public final class PokemonImpl implements Pokemon {
     }
 
     @Override
-    public Range<Integer> getExp() {
+    public Range getExp() {
         return exp == null ? null : exp.copyOf();
     }
 
     @Override
-    public void setExp(final Range<Integer> exp) {
+    public void setExp(final Range exp) {
         this.exp = exp == null ? null : exp.copyOf();
     }
 

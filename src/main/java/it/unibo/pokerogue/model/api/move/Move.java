@@ -21,7 +21,7 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class Move {
     private String name;
-    private Range<Integer> pp;
+    private Range pp;
     private boolean isPhysical;
     private Optional<JSONObject> effect;
     private int accuracy;
@@ -51,11 +51,11 @@ public class Move {
      * @param type             the elemental type of the move
      * @param priority         the priority level of the move in battle
      */
-    public Move(final String name, final Range<Integer> pp, final boolean isPhysical, final Optional<JSONObject> effect,
+    public Move(final String name, final Range pp, final boolean isPhysical, final Optional<JSONObject> effect,
             final int accuracy, final int critRate, final int baseDamage, final int calculatedDamage,
             final double stab, final boolean isCrit, final Type type, final int priority) {
         this.name = name;
-        this.pp = new RangeImpl<>(pp.getCurrentMin(), pp.getCurrentMax(), pp.getCurrentValue());
+        this.pp = new RangeImpl(pp.getCurrentMin(), pp.getCurrentMax(), pp.getCurrentValue());
         this.isPhysical = isPhysical;
         this.effect = effect.map(json -> new JSONObject(json.toString()));
         this.accuracy = accuracy;
@@ -75,8 +75,8 @@ public class Move {
      *                and maximum PP to assign.
      */
 
-    public void setPp(final Range<Integer> ppToSet) {
-        this.pp = new RangeImpl<>(ppToSet.getCurrentMin(), ppToSet.getCurrentMax(), ppToSet.getCurrentValue());
+    public void setPp(final Range ppToSet) {
+        this.pp = new RangeImpl(ppToSet.getCurrentMin(), ppToSet.getCurrentMax(), ppToSet.getCurrentValue());
     }
 
     /**
@@ -91,7 +91,7 @@ public class Move {
     public final Move deepCopy() {
         return new Move(
                 this.name,
-                new RangeImpl<>(this.pp.getCurrentMin(), this.pp.getCurrentMax(), this.pp.getCurrentValue()),
+                new RangeImpl(this.pp.getCurrentMin(), this.pp.getCurrentMax(), this.pp.getCurrentValue()),
                 this.isPhysical,
                 Optional.of(new JSONObject(this.effect.get().toString())),
                 this.accuracy,

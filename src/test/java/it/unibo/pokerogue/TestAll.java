@@ -122,7 +122,7 @@ final class TestAll {
             InstantiationException {
         final Move moveTest1 = MoveFactory.moveFromName(ABSORB_LITTERAL);
         final Move moveTest2 = MoveFactory.moveFromName(ABSORB_LITTERAL);
-        moveTest1.setPp(new RangeImpl<>(moveTest1.getPp().getCurrentMin(), moveTest1.getPp().getCurrentMax(),
+        moveTest1.setPp(new RangeImpl(moveTest1.getPp().getCurrentMin(), moveTest1.getPp().getCurrentMax(),
                 0));
         assertNotSame(moveTest1, moveTest2);
         assertNotSame(moveTest2.getPp().getCurrentValue(), 0);
@@ -226,8 +226,7 @@ final class TestAll {
         final Pokemon venusaur = PokemonFactory.pokemonFromName("venusaur");
         final Trainer playerTrainerInstance = new TrainerImpl();
         final Item elixir = ItemFactory.itemFromName("Elixir");
-        final Range<Integer> move = venusaur.getActualMoves().getFirst().getPp();
-        venusaur.getActualMoves().getFirst().setPp(move.getCurrentMin(), move.getCurrentMax(),0);
+        final Range move = venusaur.getActualMoves().getFirst().getPp();
         assertEquals(venusaur.getActualMoves().getFirst().getPp().getCurrentValue(), 0);
         EffectInterpreter.interpertEffect(elixir.effect().get(), venusaur, playerTrainerInstance);
         System.out.println(venusaur.getActualMoves().getFirst().getPp().getCurrentValue());

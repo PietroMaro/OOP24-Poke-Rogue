@@ -152,7 +152,7 @@ public class StatusEffectImpl implements StatusEffect {
                     break;
                 case StatusCondition.SEEDED:
                     final int seededDamage = pokemon.getActualStats().get(Stats.HP).getCurrentMax() / 16;
-                    final Map<Stats, Range<Integer>> enemyStats = enemy.getActualStats();
+                    final Map<Stats, Range> enemyStats = enemy.getActualStats();
                     calculateDamage(pokemon, seededDamage);
                     enemyStats.get(Stats.HP).increment(seededDamage);
                     pokemon.setActualStats(enemyStats);
@@ -185,7 +185,7 @@ public class StatusEffectImpl implements StatusEffect {
     }
 
     private void calculateDamage(final Pokemon pokemon, final int damage) {
-        final Map<Stats, Range<Integer>> pokemonStats = pokemon.getActualStats();
+        final Map<Stats, Range> pokemonStats = pokemon.getActualStats();
         pokemonStats.get(Stats.HP).decrement(damage);
 
         pokemon.setActualStats(pokemonStats);

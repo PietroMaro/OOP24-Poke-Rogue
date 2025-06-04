@@ -112,56 +112,56 @@ public interface Pokemon {
      * 
      * @return the parameter
      */
-    Map<Stats, Range<Integer>> getEv();
+    Map<Stats, Range> getEv();
 
     /**
      * Simple setter.
      * 
      * @param newVal value to set
      */
-    void setEv(Map<Stats, Range<Integer>> newVal);
+    void setEv(Map<Stats, Range> newVal);
 
     /**
      * Simple getter.
      * 
      * @return the parameter
      */
-    Range<Integer> getLevel();
+    Range getLevel();
 
     /**
      * Simple setter.
      * 
      * @param newVal value to set
      */
-    void setLevel(Range<Integer> newVal);
+    void setLevel(Range newVal);
 
     /**
      * Simple getter.
      * 
      * @return the parameter
      */
-    Map<Stats, Range<Integer>> getActualStats();
+    Map<Stats, Range> getActualStats();
 
     /**
      * Simple setter.
      * 
      * @param newVal value to set
      */
-    void setActualStats(Map<Stats, Range<Integer>> newVal);
+    void setActualStats(Map<Stats, Range> newVal);
 
     /**
      * Simple getter.
      * 
      * @return the parameter
      */
-    Map<Stats, Range<Integer>> getTempStatsBonus();
+    Map<Stats, Range> getTempStatsBonus();
 
     /**
      * Simple setter.
      * 
      * @param newVal value to set
      */
-    void setTempStatsBonus(Map<Stats, Range<Integer>> newVal);
+    void setTempStatsBonus(Map<Stats, Range> newVal);
 
     /**
      * Simple getter.
@@ -224,14 +224,14 @@ public interface Pokemon {
      * 
      * @return the parameter
      */
-    Range<Integer> getExp();
+    Range getExp();
 
     /**
      * Simple setter.
      * 
      * @param newVal value to set
      */
-    void setExp(Range<Integer> newVal);
+    void setExp(Range newVal);
 
     /**
      * Simple getter.

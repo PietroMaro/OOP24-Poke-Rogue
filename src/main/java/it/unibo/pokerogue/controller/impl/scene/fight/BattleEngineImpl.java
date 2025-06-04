@@ -127,7 +127,7 @@ public class BattleEngineImpl implements BattleEngine {
         if (attackerMove.get().getPp().getCurrentValue() <= 0) {
             return;
         }
-        final Range<Integer> movePp = attackerMove.get().getPp();
+        final Range movePp = attackerMove.get().getPp();
         movePp.decrement(1);
         attackerMove.get().setPp(movePp);
         attackerMove.get().getPp().decrement(1);

@@ -14,16 +14,16 @@ import lombok.Setter;
  * @param <T> the type of number used for the range (e.g., Integer, Double)
  */
 @ToString
-public class RangeImpl<T extends Number> implements Range<T> {
+public class RangeImpl implements Range {
 
     @Getter
     @Setter
-    private T currentMin;
+    private int currentMin;
     @Getter
     @Setter
-    private T currentMax;
+    private int currentMax;
     @Getter
-    private T currentValue;
+    private int currentValue;
 
     /**
      * Constructs a new RangeImpl with specified minimum, maximum, and current
@@ -33,7 +33,7 @@ public class RangeImpl<T extends Number> implements Range<T> {
      * @param currentMax   the maximum value of the range
      * @param currentValue the initial current value (should be within min and max)
      */
-    public RangeImpl(final T currentMin, final T currentMax, final T currentValue) {
+    public RangeImpl(final int currentMin, final int currentMax, final int currentValue) {
 
         this.currentMin = currentMin;
 
@@ -43,45 +43,32 @@ public class RangeImpl<T extends Number> implements Range<T> {
     }
 
     @Override
-    public final void increment(final T x) {
-        final double newValue = this.currentValue.doubleValue() + x.doubleValue();
-        if (newValue <= this.currentMax.doubleValue()) {
-            this.currentValue = convertToType(newValue);
+    public final void increment(final int x) {
+        final int newValue = this.currentValue + x;
+        if (newValue <= this.currentMax) {
+            this.currentValue = newValue;
         } else {
             this.currentValue = currentMax;
         }
     }
 
     @Override
-    public final void decrement(final T x) {
-        final double newValue = this.currentValue.doubleValue() - x.doubleValue();
-        if (newValue > this.currentMin.doubleValue()) {
-            this.currentValue = convertToType(newValue);
+    public final void decrement(final int x) {
+        final int newValue = this.currentValue - x;
+        if (newValue > this.currentMin) {
+            this.currentValue = newValue;
         } else {
             this.currentValue = currentMin;
         }
     }
 
-    private T convertToType(final double value) {
-        if (currentValue instanceof Integer) {
-            return (T) (Integer) (int) value;
-        } else if (currentValue instanceof Double) {
-            return (T) (Double) value;
-        } else if (currentValue instanceof Long) {
-            return (T) (Long) (long) value;
-        } else if (currentValue instanceof Float) {
-            return (T) (Float) (float) value;
-        }
-        throw new UnsupportedOperationException("Unsupported Number type");
-    }
-
     @Override
-    public final void setCurrentValue(final T newValue) {
+    public final void setCurrentValue(final int newValue) {
         this.currentValue = newValue;
-        if (newValue.doubleValue() > this.currentMax.doubleValue()) {
+        if (newValue > this.currentMax) {
             this.currentValue = currentMax;
         }
-        if (newValue.doubleValue() < this.currentMin.doubleValue()) {
+        if (newValue < this.currentMin) {
             this.currentValue = currentMin;
         }
     }
@@ -93,7 +80,7 @@ public class RangeImpl<T extends Number> implements Range<T> {
      *         maximum.
      */
     @Override
-    public Range<T> copyOf() {
-        return new RangeImpl<>(this.getCurrentMin(), this.getCurrentMax(), this.getCurrentValue());
+    public Range copyOf() {
+        return new RangeImpl(this.getCurrentMin(), this.getCurrentMax(), this.getCurrentValue());
     }
 }

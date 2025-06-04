@@ -53,7 +53,7 @@ public final class MoveFactory {
                         moveName + ".json")
                 .toString());
         final String name = moveName;
-        final Range<Integer> pp = new RangeImpl<>(0, moveJson.getInt("pp"), moveJson.getInt("pp"));
+        final Range pp = new RangeImpl(0, moveJson.getInt("pp"), moveJson.getInt("pp"));
         final boolean isPhysical = moveJson.getBoolean("isPhysical");
         final JSONObject effect = moveJson.getJSONObject("effect");
         final int accuracy = moveJson.getInt("accuracy");

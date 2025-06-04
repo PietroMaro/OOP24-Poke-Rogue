@@ -7,7 +7,7 @@ package it.unibo.pokerogue.model.api;
  *
  * @param <T> the type of value (e.g. Integer, Double)
  */
-public interface Range<T> {
+public interface Range {
 
     /**
      * Decreases the current value by the given amount.
@@ -15,7 +15,7 @@ public interface Range<T> {
      *
      * @param x how much to subtract
      */
-    void decrement(T x);
+    void decrement(int x);
 
     /**
      * Increases the current value by the given amount.
@@ -23,36 +23,36 @@ public interface Range<T> {
      *
      * @param x how much to add
      */
-    void increment(T x);
+    void increment(int x);
 
     /**
      * @return the minimum value of the range
      */
-    T getCurrentMin();
+    int getCurrentMin();
 
     /**
      * @return the maximum value of the range
      */
-    T getCurrentMax();
+    int getCurrentMax();
 
     /**
      * @return the current value, always between min and max
      */
-    T getCurrentValue();
+    int getCurrentValue();
 
     /**
      * Sets the minimum value of the range.
      *
      * @param x the new minimum value
      */
-    void setCurrentMin(T x);
+    void setCurrentMin(int x);
 
     /**
      * Sets the maximum value of the range.
      *
      * @param x the new maximum value
      */
-    void setCurrentMax(T x);
+    void setCurrentMax(int x);
 
     /**
      * Sets the current value.
@@ -61,12 +61,12 @@ public interface Range<T> {
      *
      * @param x the new value to set
      */
-    void setCurrentValue(T x);
+    void setCurrentValue(int x);
 
     /**
      * Returns a copy of this range.
      *
      * @return a new Range object with the same current minimum, value, and maximum
      */
-    Range<T> copyOf();
+    Range copyOf();
 }
