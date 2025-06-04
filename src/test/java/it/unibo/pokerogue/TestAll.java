@@ -32,6 +32,7 @@ import it.unibo.pokerogue.model.impl.GenerateEnemyImpl;
 import it.unibo.pokerogue.model.impl.MoveFactory;
 import it.unibo.pokerogue.model.impl.RangeImpl;
 import it.unibo.pokerogue.model.impl.SavingSystemImpl;
+import it.unibo.pokerogue.model.impl.graphic.ButtonElementImpl;
 import it.unibo.pokerogue.model.impl.graphic.GraphicElementImpl;
 import it.unibo.pokerogue.model.impl.item.ItemFactory;
 import it.unibo.pokerogue.model.impl.pokemon.PokemonFactory;
@@ -55,6 +56,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collection;
 import java.util.Optional;
 
 /**
@@ -353,11 +355,11 @@ final class TestAll {
         final GameEngineImpl gameEngine = new GameEngineImpl();
         gameEngine.setScene("main");
         gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
-        Scene scene = gameEngine.getCurrentScene();
-        GraphicElementsRegistry currentSceneGraphicElementsscene = scene.getCurrentSceneGraphicElements();
-        GraphicElementImpl element = currentSceneGraphicElementsscene.getByName("NEW_GAME_BUTTON");
-        System.out.println(element.getBorder());
-        //assertEquals(element.getBorder(), );
+        final Scene scene = gameEngine.getCurrentScene();
+        final GraphicElementsRegistry currentSceneGraphicElements = scene.getCurrentSceneGraphicElements();
+        final GraphicElementImpl element = currentSceneGraphicElements.getByName("NEW_GAME_BUTTON");
+        final ButtonElementImpl button = (ButtonElementImpl) element;
+        System.out.println(button.getButtonBox());
     }
 
 }
