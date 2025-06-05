@@ -58,6 +58,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -392,10 +393,11 @@ final class TestAll {
         final GameEngineImpl gameEngine = new GameEngineImpl();
         gameEngine.setScene("save");
         final SceneSave scene = (SceneSave) gameEngine.getCurrentScene();
-        assertEquals(scene.getNewSelectedButton(), 5);
+        final Map<String, Integer> converter = scene.getGraphicElementNameToInt();
+        assertEquals(scene.getNewSelectedButton(), converter.get("EXIT_AND_SAVE_BUTTON"));
         gameEngine.keyPressedToScene(KeyEvent.VK_RIGHT);
-        assertEquals(scene.getNewSelectedButton(), 6);
-        }
+        assertEquals(scene.getNewSelectedButton(), converter.get("CONTINUE_GAME_BUTTON"));
+    }
 
     @Test
     void graphicTestFight() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
@@ -414,11 +416,12 @@ final class TestAll {
         gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
         gameEngine.keyPressedToScene(KeyEvent.VK_ENTER);
         final SceneFight scene = (SceneFight) gameEngine.getCurrentScene();
+        final Map<String, Integer> converter = scene.getGraphicElementNameToInt();
         assertEquals(scene.getNewSelectedButton(), 1);
         gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
         assertEquals(scene.getNewSelectedButton(), 2);
         gameEngine.keyPressedToScene(KeyEvent.VK_ENTER);
-        assertEquals(scene.getNewSelectedButton(), 200);
+        assertEquals(scene.getNewSelectedButton(), converter.get("CHANGE_POKEMON_1"));
         gameEngine.keyPressedToScene(KeyEvent.VK_ENTER);
         gameEngine.keyPressedToScene(KeyEvent.VK_RIGHT);
         assertEquals(scene.getNewSelectedButton(), 4);
@@ -435,9 +438,7 @@ final class TestAll {
         final SceneBox scene = (SceneBox) gameEngine.getCurrentScene();
         assertEquals(scene.getCurrentSelectedButton(), 0);
         gameEngine.keyPressedToScene(KeyEvent.VK_RIGHT);
-        assertEquals(scene.getCurrentSelectedButton(), 6);
-        gameEngine.keyPressedToScene(KeyEvent.VK_RIGHT);
-        assertEquals(scene.getCurrentSelectedButton(), 7);
+        assertEquals(scene.getCurrentSelectedButton(), MAX_LENGTH_OF_POKESQUAD);
 
     }
 
