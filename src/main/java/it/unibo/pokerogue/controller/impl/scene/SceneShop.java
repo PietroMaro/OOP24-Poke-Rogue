@@ -47,6 +47,7 @@ public class SceneShop extends Scene {
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final SceneShopView sceneShopView;
     @Setter
+    @Getter
     private int newSelectedButton;
     @Setter
     @Getter
