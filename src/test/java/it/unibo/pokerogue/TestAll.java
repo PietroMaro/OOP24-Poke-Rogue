@@ -59,6 +59,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -375,16 +376,17 @@ final class TestAll {
         gameEngine.setScene("shop");
         gameEngine.keyPressedToScene(KeyEvent.VK_RIGHT);
         final SceneShop scene = (SceneShop) gameEngine.getCurrentScene();
-        assertEquals(scene.getNewSelectedButton(), 5);
+        final Map<String, Integer> converter = scene.getGraphicElementNameToInt();
+        assertEquals(scene.getNewSelectedButton(), converter.get("PRICY_ITEM_2_BUTTON"));
         gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
-        assertEquals(scene.getNewSelectedButton(), 2);
+        assertEquals(scene.getNewSelectedButton(), converter.get("FREE_ITEM_2_BUTTON"));
         gameEngine.keyPressedToScene(KeyEvent.VK_LEFT);
         gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
-        assertEquals(scene.getNewSelectedButton(), 7);
+        assertEquals(scene.getNewSelectedButton(), converter.get("REROL_BUTTON"));
         gameEngine.keyPressedToScene(KeyEvent.VK_ENTER);
-        assertEquals(scene.getNewSelectedButton(), 7);
+        assertEquals(scene.getNewSelectedButton(), converter.get("REROL_BUTTON"));
         gameEngine.keyPressedToScene(KeyEvent.VK_RIGHT);
-        assertEquals(scene.getNewSelectedButton(), 8);
+        assertEquals(scene.getNewSelectedButton(), converter.get("TEAM_BUTTON"));
     }
 
     @Test
