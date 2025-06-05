@@ -19,6 +19,7 @@ public final class GenerateEnemyImpl implements GenerateEnemy {
     private static final Random RANDOM = new Random();
     private static final int ENEMY_TRAINER_SPAWN = 5;
     private static final int MIN_LEVEL = 5;
+    private static final int FINAL_LEVEL = 100;
 
     private final Integer battleLevel;
 
@@ -28,7 +29,7 @@ public final class GenerateEnemyImpl implements GenerateEnemy {
      *
      * @param battleLevel the level of the battle, which influences the
      *                    difficulty and strength of the generated enemy
-     * @param gameEngineInstance gameEngine.9
+     * @param gameEngineInstance gameEngine.
      */
     public GenerateEnemyImpl(final Integer battleLevel, final GameEngine gameEngineInstance)
             throws NoSuchMethodException,
@@ -37,7 +38,7 @@ public final class GenerateEnemyImpl implements GenerateEnemy {
             InvocationTargetException,
             InstantiationException {
         this.battleLevel = battleLevel;
-        if (this.battleLevel == 2) {
+        if (this.battleLevel == FINAL_LEVEL) {
             gameEngineInstance.setScene("save");
         }
     }

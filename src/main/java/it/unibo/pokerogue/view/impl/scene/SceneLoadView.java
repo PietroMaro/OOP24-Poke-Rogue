@@ -57,11 +57,11 @@ public final class SceneLoadView implements LoadView {
 
                                 savesName = savesName.substring(0, savesName.length() - REMOVE_EXTENSION);
 
-                                text = "Salvataggio: " + savesName + ", Grandezza Box: " + boxPokemonNumber;
+                                text = "Save: " + savesName + ", Box Size: " + boxPokemonNumber;
 
                         } else {
 
-                                text = "Salvataggio: Nessuno, Grandezza Box: 0 ";
+                                text = "Save: None, Box Size: 0 ";
                         }
 
                         UtilitiesForScenes.safeGetElementById(sceneGraphicElements, x + 10, TextElementImpl.class)
