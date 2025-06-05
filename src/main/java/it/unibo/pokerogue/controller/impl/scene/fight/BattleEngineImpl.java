@@ -37,6 +37,7 @@ import lombok.Getter;
 public class BattleEngineImpl implements BattleEngine {
     private static final Integer FIRST_POSITION = 0;
     private static final Integer MAX_SQUAD = 6;
+    private static final int FINAL_LEVEL = 100;
     @Getter
     private final Optional<Weather> currentWeather;
     private final StatusEffect statusEffectInstance;
@@ -81,11 +82,13 @@ public class BattleEngineImpl implements BattleEngine {
      *                       item usage
      * @param enemyDecision  the enemy's decision for this turn, controlled either
      *                       by AI or predefined logic
+     * @param battleLevel    battleLevel.
+     * 
      */
     @Override
     public void runBattleTurn(final Decision playerDecision, final Decision enemyDecision,
             final Trainer enemyTrainerInstance, final Trainer playerTrainerInstance,
-            final GameEngine gameEngineInstance) throws NoSuchMethodException,
+            final GameEngine gameEngineInstance, final int battleLevel) throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
             InvocationTargetException,
@@ -103,21 +106,25 @@ public class BattleEngineImpl implements BattleEngine {
         if (playerDecision.moveType().priority() >= enemyDecision.moveType().priority()
                 && playerHasPriority(playerMove, enemyMove, playerTrainerInstance, enemyTrainerInstance)) {
             this.executeDecision(playerDecision, playerTrainerInstance, enemyTrainerInstance, playerMove, enemyMove,
-                    abilityPlayer, abilityEnemy, playerTrainerInstance, enemyTrainerInstance, gameEngineInstance);
+                    abilityPlayer, abilityEnemy, playerTrainerInstance, enemyTrainerInstance, gameEngineInstance,
+                    battleLevel);
             this.executeDecision(enemyDecision, enemyTrainerInstance, playerTrainerInstance, enemyMove, playerMove,
-                    abilityEnemy, abilityPlayer, playerTrainerInstance, enemyTrainerInstance, gameEngineInstance);
+                    abilityEnemy, abilityPlayer, playerTrainerInstance, enemyTrainerInstance, gameEngineInstance,
+                    battleLevel);
 
         } else {
             this.executeDecision(enemyDecision, enemyTrainerInstance, playerTrainerInstance, enemyMove, playerMove,
-                    abilityEnemy, abilityPlayer, playerTrainerInstance, enemyTrainerInstance, gameEngineInstance);
+                    abilityEnemy, abilityPlayer, playerTrainerInstance, enemyTrainerInstance, gameEngineInstance,
+                    battleLevel);
             this.executeDecision(playerDecision, playerTrainerInstance, enemyTrainerInstance, playerMove, enemyMove,
-                    abilityPlayer, abilityEnemy, playerTrainerInstance, enemyTrainerInstance, gameEngineInstance);
+                    abilityPlayer, abilityEnemy, playerTrainerInstance, enemyTrainerInstance, gameEngineInstance,
+                    battleLevel);
         }
         this.handleAbilityEffects(abilityPlayer, playerPokemon, enemyPokemon, playerMove, enemyMove,
                 AbilitySituationChecks.NEUTRAL, playerTrainerInstance);
         this.handleAbilityEffects(abilityEnemy, enemyPokemon, playerPokemon, enemyMove, playerMove,
                 AbilitySituationChecks.NEUTRAL, playerTrainerInstance);
-        this.newEnemyCheck(playerTrainerInstance, enemyTrainerInstance, gameEngineInstance);
+        this.newEnemyCheck(playerTrainerInstance, enemyTrainerInstance, gameEngineInstance, battleLevel);
 
     }
 
@@ -138,7 +145,7 @@ public class BattleEngineImpl implements BattleEngine {
     }
 
     private void handlePokeball(final String pokeballName, final Trainer playerTrainerInstance,
-            final Trainer enemyTrainerInstance, final GameEngine gameEngineInstance)
+            final Trainer enemyTrainerInstance, final GameEngine gameEngineInstance, final int battleLevel)
             throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
@@ -159,7 +166,7 @@ public class BattleEngineImpl implements BattleEngine {
                     playerTrainerInstance.addPokemon(enemyPokemon, MAX_SQUAD);
                     this.savingSystemInstance.savePokemon(enemyPokemon);
                     this.captured = true;
-                    this.newEnemyCheck(playerTrainerInstance, enemyTrainerInstance, gameEngineInstance);
+                    this.newEnemyCheck(playerTrainerInstance, enemyTrainerInstance, gameEngineInstance, battleLevel);
                 } else {
                     this.savingSystemInstance.savePokemon(enemyPokemon);
                 }
@@ -172,7 +179,8 @@ public class BattleEngineImpl implements BattleEngine {
             final Optional<Move> defenderMove,
             final Ability attackerAbility,
             final Ability defenderAbility, final Trainer playerTrainerInstance,
-            final Trainer enemyTrainerInstance, final GameEngine gameEngineInstance) throws NoSuchMethodException,
+            final Trainer enemyTrainerInstance, final GameEngine gameEngineInstance, final int battleLevel)
+            throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
             InvocationTargetException,
@@ -189,7 +197,8 @@ public class BattleEngineImpl implements BattleEngine {
             this.refreshActivePokemons(playerTrainerInstance, enemyTrainerInstance);
         }
         if (decision.moveType() == DecisionTypeEnum.POKEBALL) {
-            this.handlePokeball(decision.subType(), playerTrainerInstance, enemyTrainerInstance, gameEngineInstance);
+            this.handlePokeball(decision.subType(), playerTrainerInstance, enemyTrainerInstance, gameEngineInstance,
+                    battleLevel);
         }
         if (decision.moveType() == DecisionTypeEnum.ATTACK && statusEffectInstance.checkStatusAttack(attackerPokemon)
                 && BattleUtilities.knowsMove(attackerPokemon, Integer.parseInt(decision.subType()))) {
@@ -233,11 +242,14 @@ public class BattleEngineImpl implements BattleEngine {
     }
 
     private void newEnemyCheck(final Trainer playerTrainerInstance, final Trainer enemyTrainerInstance,
-            final GameEngine gameEngineInstance) throws NoSuchMethodException,
+            final GameEngine gameEngineInstance, final int battleLevel) throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
+        if (battleLevel == FINAL_LEVEL) {
+            gameEngineInstance.setScene("save");
+        }
         if (BattleUtilities.isTeamWipedOut(enemyTrainerInstance) || this.captured) {
             BattleRewards.awardBattleRewards(this.playerPokemon, this.enemyPokemon);
             this.newMoveToLearn(this.playerPokemon, gameEngineInstance);
@@ -246,7 +258,7 @@ public class BattleEngineImpl implements BattleEngine {
             final Decision enemyChoose = enemyAiInstance.nextMove(this.getCurrentWeather(), enemyTrainerInstance,
                     playerTrainerInstance);
             this.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""), enemyChoose, enemyTrainerInstance,
-                    playerTrainerInstance, gameEngineInstance);
+                    playerTrainerInstance, gameEngineInstance, battleLevel);
             BattleRewards.awardBattleRewards(playerPokemon, enemyPokemon);
             this.newMoveToLearn(playerPokemon, gameEngineInstance);
         }

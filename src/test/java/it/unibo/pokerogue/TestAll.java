@@ -278,8 +278,7 @@ final class TestAll {
     void testGenerateEnemy() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
             InstantiationException, IOException {
         final TrainerImpl enemyTrainer = new TrainerImpl();
-        final GameEngine gameEngine = new GameEngineImpl();
-        final GenerateEnemyImpl generateEnemyInstance = new GenerateEnemyImpl(5, gameEngine);
+        final GenerateEnemyImpl generateEnemyInstance = new GenerateEnemyImpl(5);
         generateEnemyInstance.generateEnemy(enemyTrainer);
         assertTrue(enemyTrainer.getSquad().size() > 1);
     }
@@ -299,7 +298,7 @@ final class TestAll {
         final int beforeLife = playerTrainer.getSquad().get(0).get().getActualStats().get(Stats.HP).getCurrentValue();
         final BattleEngine battleEngine = new BattleEngineImpl(ai, new SavingSystemImpl());
         battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""),
-                new Decision(DecisionTypeEnum.ATTACK, "0"), enemyTrainer, playerTrainer, gameEngineInstance);
+                new Decision(DecisionTypeEnum.ATTACK, "0"), enemyTrainer, playerTrainer, gameEngineInstance, 0);
         final int afterLife = playerTrainer.getSquad().get(0).get().getActualStats().get(Stats.HP).getCurrentValue();
         assertTrue(beforeLife > afterLife);
     }
@@ -320,13 +319,13 @@ final class TestAll {
         final EnemyAi ai = new EnemyAiImpl(99);
         final BattleEngine battleEngine = new BattleEngineImpl(ai, new SavingSystemImpl());
         battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.POKEBALL, MASTERBALL_LITTERAL),
-                new Decision(DecisionTypeEnum.NOTHING, ""), enemyTrainer, playerTrainer, gameEngineInstance);
+                new Decision(DecisionTypeEnum.NOTHING, ""), enemyTrainer, playerTrainer, gameEngineInstance, 0);
         assertEquals(playerTrainer.getBall().get(MASTERBALL_LITTERAL), 0);
         assertEquals(playerTrainer.getSquad().get(1).get().getName(), CHARMANDER_LITTERAL);
         enemyTrainer.setWild(false);
         enemyTrainer.addPokemon(charmander, 1);
         battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.POKEBALL, MASTERBALL_LITTERAL),
-                new Decision(DecisionTypeEnum.NOTHING, ""), enemyTrainer, playerTrainer, gameEngineInstance);
+                new Decision(DecisionTypeEnum.NOTHING, ""), enemyTrainer, playerTrainer, gameEngineInstance, 0);
         assertEquals(playerTrainer.getBall().get("pokeball"), STARTER_POKEBALL);
     }
 
@@ -348,7 +347,7 @@ final class TestAll {
         final int beforeLife = playerTrainer.getSquad().get(0).get().getActualStats().get(Stats.HP).getCurrentValue();
         final BattleEngine battleEngine = new BattleEngineImpl(ai, new SavingSystemImpl());
         battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.SWITCH_IN, "1"),
-                new Decision(DecisionTypeEnum.ATTACK, "0"), enemyTrainer, playerTrainer, gameEngineInstance);
+                new Decision(DecisionTypeEnum.ATTACK, "0"), enemyTrainer, playerTrainer, gameEngineInstance, 0);
         final int afterLife = playerTrainer.getSquad().get(1).get().getActualStats().get(Stats.HP).getCurrentValue();
         assertEquals(beforeLife, afterLife);
     }

@@ -61,7 +61,7 @@ public class SceneFight extends Scene {
     private final GenerateEnemy generateEnemyInstance;
     private final GraphicElementsRegistry graphicElements;
     private final Map<String, Integer> graphicElementNameToInt;
-
+    private final int battleLevel;
     /**
      * Constructor for SceneFight.
      * Initializes all the necessary components for the battle scene, including the
@@ -70,15 +70,15 @@ public class SceneFight extends Scene {
      * @param battleLevel           the level of the battle
      * @param savingSystemInstance  the main saving system
      * @param playerTrainerInstance the player trainer current instance
-     * @param gameEngineInstance gameEngine
      * 
      */
     public SceneFight(final Integer battleLevel, final SavingSystem savingSystemInstance,
-            final Trainer playerTrainerInstance, final GameEngine gameEngineInstance)
+            final Trainer playerTrainerInstance)
             throws IOException, NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
+        this.battleLevel = battleLevel;
         this.loadGraphicElements("sceneFightElements.json");
         this.graphicElementNameToInt = this.getGraphicElementNameToInt();
         this.graphicElements = this.getGraphicElements();
@@ -88,7 +88,7 @@ public class SceneFight extends Scene {
         this.allPanelsElements = new LinkedHashMap<>();
         this.enemyAiInstance = new EnemyAiImpl(battleLevel);
         this.battleEngineInstance = new BattleEngineImpl(enemyAiInstance, savingSystemInstance);
-        this.generateEnemyInstance = new GenerateEnemyImpl(battleLevel, gameEngineInstance);
+        this.generateEnemyInstance = new GenerateEnemyImpl(battleLevel);
         this.generateEnemyInstance.generateEnemy(this.enemyTrainerInstance);
         this.initStatus();
         this.sceneFightView = new SceneFightView(currentSelectedButton, newSelectedButton);
@@ -298,7 +298,7 @@ public class SceneFight extends Scene {
         final Decision enemyChoose = enemyAiInstance.nextMove(battleEngineInstance.getCurrentWeather(),
                 this.enemyTrainerInstance, playerTrainerInstance);
         this.battleEngineInstance.runBattleTurn(decision, enemyChoose, this.enemyTrainerInstance, playerTrainerInstance,
-                gameEngineInstance);
+                gameEngineInstance, battleLevel);
     }
 
     /**

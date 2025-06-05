@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
-import it.unibo.pokerogue.controller.api.GameEngine;
 import it.unibo.pokerogue.model.api.GenerateEnemy;
 import it.unibo.pokerogue.model.impl.pokemon.PokemonFactory;
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
@@ -19,7 +18,6 @@ public final class GenerateEnemyImpl implements GenerateEnemy {
     private static final Random RANDOM = new Random();
     private static final int ENEMY_TRAINER_SPAWN = 5;
     private static final int MIN_LEVEL = 5;
-    private static final int FINAL_LEVEL = 100;
 
     private final Integer battleLevel;
 
@@ -29,18 +27,14 @@ public final class GenerateEnemyImpl implements GenerateEnemy {
      *
      * @param battleLevel the level of the battle, which influences the
      *                    difficulty and strength of the generated enemy
-     * @param gameEngineInstance gameEngine.
      */
-    public GenerateEnemyImpl(final Integer battleLevel, final GameEngine gameEngineInstance)
+    public GenerateEnemyImpl(final Integer battleLevel)
             throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
         this.battleLevel = battleLevel;
-        if (this.battleLevel == FINAL_LEVEL) {
-            gameEngineInstance.setScene("save");
-        }
     }
 
     @Override

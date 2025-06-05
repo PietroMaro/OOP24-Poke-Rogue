@@ -32,10 +32,12 @@ public interface BattleEngine {
      *                              battle
      * @param gameEngineInstance    the instance of the game engine used to handle
      *                              game logic and scene transitions.
+     * @param battleLevel           battleLevel.
+     * 
      */
     void runBattleTurn(Decision playerDecision, Decision enemyDecision,
             Trainer enemyTrainerInstance, Trainer playerTrainerInstance,
-            GameEngine gameEngineInstance)
+            GameEngine gameEngineInstance, int battleLevel)
             throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
