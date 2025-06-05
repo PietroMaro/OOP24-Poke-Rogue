@@ -56,7 +56,6 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collection;
 import java.util.Optional;
 
 /**
@@ -354,7 +353,7 @@ final class TestAll {
     InstantiationException, IOException {
         final GameEngineImpl gameEngine = new GameEngineImpl();
         gameEngine.setScene("main");
-        gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
+        gameEngine.keyPressedToScene(KeyEvent.VK_ENTER);
         final Scene scene = gameEngine.getCurrentScene();
         final GraphicElementsRegistry currentSceneGraphicElements = scene.getGraphicElements();
         final GraphicElementImpl element = currentSceneGraphicElements.getByName("NEW_GAME_BUTTON");
