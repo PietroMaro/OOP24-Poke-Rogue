@@ -3,6 +3,8 @@ package it.unibo.pokerogue.controller.impl.scene;
 import java.io.IOException;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -29,7 +31,7 @@ import it.unibo.pokerogue.model.api.trainer.Trainer;
 public class SceneSave extends Scene {
     private static final String EXIT_SAVE_LITTERAL = "EXIT_AND_SAVE_BUTTON";
     private static final String CONTINUE_LITTERAL = "CONTINUE_GAME_BUTTON";
-    private static final String SAVE_PATH = "src\\main\\resources\\saves";
+    private static final Path SAVE_PATH = Paths.get("src", "main", "resources", "saves");
     private static final int MAX_NAME_LENGTH = 12;
     private final GraphicElementsRegistry currentSceneGraphicElements;
     private final GraphicElementsRegistry graphicElements;
@@ -145,11 +147,11 @@ public class SceneSave extends Scene {
     private void savingCheck(final SavingSystem savingSystemInstance, final GameEngine gameEngineInstance)
             throws IOException, InstantiationException,
             IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-        if (savingSystemInstance.getSaveFilesName(SAVE_PATH).contains(typedSaveName + ".json")) {
+        if (savingSystemInstance.getSaveFilesName(String.valueOf(SAVE_PATH)).contains(typedSaveName + ".json")) {
             typedSaveName = "already present";
             sceneSaveView.updateInputText(typedSaveName, this.currentSceneGraphicElements);
         } else {
-            savingSystemInstance.saveData(SAVE_PATH, typedSaveName + ".json");
+            savingSystemInstance.saveData(String.valueOf(SAVE_PATH), typedSaveName + ".json");
             gameEngineInstance.setScene("main");
         }
 
