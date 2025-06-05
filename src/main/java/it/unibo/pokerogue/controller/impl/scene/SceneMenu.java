@@ -15,6 +15,7 @@ import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.utilities.UtilitiesForScenes;
 import it.unibo.pokerogue.view.impl.scene.SceneMenuView;
+import lombok.Getter;
 
 /**
  * The {@code SceneMenu} class implements the main menu scene of the game.
@@ -31,7 +32,7 @@ import it.unibo.pokerogue.view.impl.scene.SceneMenuView;
  * 
  */
 public final class SceneMenu extends Scene {
-
+    @Getter
     private int currentSelectedButton;
     private final GraphicElementsRegistry currentSceneGraphicElements;
     private final Map<String, PanelElementImpl> allPanelsElements;
