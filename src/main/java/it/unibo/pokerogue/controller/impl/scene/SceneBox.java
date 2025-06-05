@@ -17,6 +17,7 @@ import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.model.impl.pokemon.PokemonFactory;
 import it.unibo.pokerogue.utilities.UtilitiesForScenes;
 import it.unibo.pokerogue.view.impl.scene.SceneBoxView;
+import lombok.Getter;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -41,6 +42,7 @@ public class SceneBox extends Scene {
         private final GraphicElementsRegistry currentSceneGraphicElements;
         private final Map<String, PanelElementImpl> allPanelsElements;
         private int boxIndex;
+        @Getter
         private int currentSelectedButton;
         private final List<List<Pokemon>> boxes;
         private final SceneBoxView sceneBoxView;

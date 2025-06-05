@@ -21,6 +21,7 @@ import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
 import it.unibo.pokerogue.utilities.SceneFightUtilities;
 import it.unibo.pokerogue.view.impl.scene.fight.SceneFightView;
+import lombok.Getter;
 import it.unibo.pokerogue.model.api.SavingSystem;
 import it.unibo.pokerogue.model.api.trainer.Trainer;
 
@@ -53,6 +54,7 @@ public class SceneFight extends Scene {
     private int currentSelectedButton;
     private final TrainerImpl enemyTrainerInstance;
     private final SceneFightView sceneFightView;
+    @Getter
     private int newSelectedButton;
     private final EnemyAi enemyAiInstance;
     private final BattleEngine battleEngineInstance;

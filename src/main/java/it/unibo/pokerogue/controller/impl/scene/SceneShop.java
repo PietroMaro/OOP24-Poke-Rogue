@@ -50,6 +50,7 @@ public class SceneShop extends Scene {
     @Getter
     private int newSelectedButton;
     @Setter
+    @Getter
     private int currentSelectedButton;
     private final Map<String, Integer> graphicElementNameToInt;
     private boolean selectedItemForUse;

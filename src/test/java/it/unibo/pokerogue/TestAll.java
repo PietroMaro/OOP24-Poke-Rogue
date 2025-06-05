@@ -14,11 +14,13 @@ import it.unibo.pokerogue.controller.api.scene.fight.BattleEngine;
 import it.unibo.pokerogue.controller.impl.EffectInterpreter;
 import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.controller.impl.ai.EnemyAiImpl;
+import it.unibo.pokerogue.controller.impl.scene.SceneBox;
 import it.unibo.pokerogue.controller.impl.scene.SceneInfo;
 import it.unibo.pokerogue.controller.impl.scene.SceneMenu;
 import it.unibo.pokerogue.controller.impl.scene.SceneSave;
 import it.unibo.pokerogue.controller.impl.scene.SceneShop;
 import it.unibo.pokerogue.controller.impl.scene.fight.BattleEngineImpl;
+import it.unibo.pokerogue.controller.impl.scene.fight.SceneFight;
 import it.unibo.pokerogue.model.api.Decision;
 import it.unibo.pokerogue.model.api.Range;
 import it.unibo.pokerogue.model.api.ability.Ability;
@@ -392,6 +394,57 @@ final class TestAll {
         assertEquals(scene.getNewSelectedButton(), 5);
         gameEngine.keyPressedToScene(KeyEvent.VK_RIGHT);
         assertEquals(scene.getNewSelectedButton(), 6);
+    void graphicTestFight() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+            InstantiationException, IOException {
+        final GameEngineImpl gameEngine = new GameEngineImpl();
+        gameEngine.setScene(MAIN);
+        gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
+        gameEngine.keyPressedToScene(KeyEvent.VK_ENTER);
+        gameEngine.keyPressedToScene(KeyEvent.VK_RIGHT);
+        gameEngine.keyPressedToScene(KeyEvent.VK_ENTER);
+        gameEngine.keyPressedToScene(KeyEvent.VK_LEFT);
+        gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
+        gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
+        gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
+        gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
+        gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
+        gameEngine.keyPressedToScene(KeyEvent.VK_ENTER);
+        final SceneFight scene = (SceneFight) gameEngine.getCurrentScene();
+        assertEquals(scene.getNewSelectedButton(), 1);
+        gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
+        assertEquals(scene.getNewSelectedButton(), 2);
+        gameEngine.keyPressedToScene(KeyEvent.VK_ENTER);
+        assertEquals(scene.getNewSelectedButton(), 200);
+        gameEngine.keyPressedToScene(KeyEvent.VK_ENTER);
+        gameEngine.keyPressedToScene(KeyEvent.VK_RIGHT);
+        assertEquals(scene.getNewSelectedButton(), 4);
+
+    }
+
+    @Test
+    void graphicTestBox() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+            InstantiationException, IOException {
+        final GameEngineImpl gameEngine = new GameEngineImpl();
+        gameEngine.setScene(MAIN);
+        gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
+        gameEngine.keyPressedToScene(KeyEvent.VK_ENTER);
+        final SceneBox scene = (SceneBox) gameEngine.getCurrentScene();
+        assertEquals(scene.getCurrentSelectedButton(), 0);
+        gameEngine.keyPressedToScene(KeyEvent.VK_RIGHT);
+        assertEquals(scene.getCurrentSelectedButton(), 6);
+        gameEngine.keyPressedToScene(KeyEvent.VK_RIGHT);
+        assertEquals(scene.getCurrentSelectedButton(), 7);
+
+    }
+
+    @Test
+    void graphicTestInfo() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+            InstantiationException, IOException {
+        final GameEngineImpl gameEngine = new GameEngineImpl();
+        gameEngine.setScene("info");
+        final SceneInfo scene = (SceneInfo) gameEngine.getCurrentScene();
+        assertEquals(scene.getNewSelectedButton(), 1);
+
     }
 
 }
