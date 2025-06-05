@@ -275,7 +275,8 @@ final class TestAll {
     void testGenerateEnemy() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
             InstantiationException, IOException {
         final TrainerImpl enemyTrainer = new TrainerImpl();
-        final GenerateEnemyImpl generateEnemyInstance = new GenerateEnemyImpl(5);
+        final GameEngine gameEngine = new GameEngineImpl();
+        final GenerateEnemyImpl generateEnemyInstance = new GenerateEnemyImpl(5, gameEngine);
         generateEnemyInstance.generateEnemy(enemyTrainer);
         assertTrue(enemyTrainer.getSquad().size() > 1);
     }

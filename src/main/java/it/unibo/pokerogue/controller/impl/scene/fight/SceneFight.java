@@ -70,9 +70,12 @@ public class SceneFight extends Scene {
      * @param battleLevel           the level of the battle
      * @param savingSystemInstance  the main saving system
      * @param playerTrainerInstance the player trainer current instance
+     * @param gameEngineInstance gameEngine
+     * 
      */
     public SceneFight(final Integer battleLevel, final SavingSystem savingSystemInstance,
-            final Trainer playerTrainerInstance) throws IOException, NoSuchMethodException,
+            final Trainer playerTrainerInstance, final GameEngine gameEngineInstance)
+            throws IOException, NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
@@ -85,7 +88,7 @@ public class SceneFight extends Scene {
         this.allPanelsElements = new LinkedHashMap<>();
         this.enemyAiInstance = new EnemyAiImpl(battleLevel);
         this.battleEngineInstance = new BattleEngineImpl(enemyAiInstance, savingSystemInstance);
-        this.generateEnemyInstance = new GenerateEnemyImpl(battleLevel);
+        this.generateEnemyInstance = new GenerateEnemyImpl(battleLevel, gameEngineInstance);
         this.generateEnemyInstance.generateEnemy(this.enemyTrainerInstance);
         this.initStatus();
         this.sceneFightView = new SceneFightView(currentSelectedButton, newSelectedButton);

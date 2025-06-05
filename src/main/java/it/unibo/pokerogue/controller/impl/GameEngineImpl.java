@@ -79,7 +79,7 @@ public final class GameEngineImpl implements GameEngine {
                 } else {
                     fightLevel = fightLevel + 1;
                 }
-                currentScene = new SceneFight(fightLevel, savingSystemInstance, this.playerTrainerInstance);
+                currentScene = new SceneFight(fightLevel, savingSystemInstance, this.playerTrainerInstance, this);
                 break;
             case "shop":
                 currentScene = new SceneShop(this.playerTrainerInstance);
