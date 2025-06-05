@@ -16,10 +16,8 @@ import it.unibo.pokerogue.model.impl.graphic.GraphicElementImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.model.impl.graphic.SpriteElementImpl;
 import it.unibo.pokerogue.model.impl.graphic.TextElementImpl;
-
-/**
- * Implementation of the {@link GraphicEngine} interface.
- *
+/**        
+ * Implementation of the {@link GraphicEngine} interface.                   
  * This class is responsible for managing the graphical rendering of the game.
  * It creates panels, adds graphical elements to them, and handles full-scene
  * drawing.

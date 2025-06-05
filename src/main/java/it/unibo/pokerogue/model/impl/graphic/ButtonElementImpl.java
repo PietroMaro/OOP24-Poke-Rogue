@@ -5,7 +5,6 @@ import java.awt.Color;
 import org.json.JSONObject;
 
 import it.unibo.pokerogue.model.api.graphic.ButtonElement;
-import lombok.AccessLevel;
 import lombok.Getter;
 
 /**
@@ -21,7 +20,7 @@ public final class ButtonElementImpl extends GraphicElementImpl implements Butto
     private final BoxElementImpl buttonBox;
     //private final boolean selected = false;
 
-    @Getter(AccessLevel.NONE)
+    @Getter
     private final int borderThickness;
 
     /**
