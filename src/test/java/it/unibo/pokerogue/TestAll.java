@@ -356,10 +356,13 @@ final class TestAll {
         gameEngine.setScene("main");
         gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
         final Scene scene = gameEngine.getCurrentScene();
-        final GraphicElementsRegistry currentSceneGraphicElements = scene.getCurrentSceneGraphicElements();
+        final GraphicElementsRegistry currentSceneGraphicElements = scene.getGraphicElements();
         final GraphicElementImpl element = currentSceneGraphicElements.getByName("NEW_GAME_BUTTON");
         final ButtonElementImpl button = (ButtonElementImpl) element;
-        System.out.println(button.getButtonBox());
+        System.out.println(currentSceneGraphicElements.getElements());
+        System.out.println(element);
+        System.out.println(button);
+
     }
 
 }
