@@ -10,14 +10,13 @@ import java.util.logging.Logger;
 import it.unibo.pokerogue.model.api.trainer.Trainer;
 import it.unibo.pokerogue.controller.api.EnemyAi;
 import it.unibo.pokerogue.controller.api.GameEngine;
-import it.unibo.pokerogue.controller.api.scene.Scene;
 import it.unibo.pokerogue.controller.api.scene.fight.BattleEngine;
 import it.unibo.pokerogue.controller.impl.EffectInterpreter;
 import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.controller.impl.ai.EnemyAiImpl;
+import it.unibo.pokerogue.controller.impl.scene.SceneMenu;
 import it.unibo.pokerogue.controller.impl.scene.fight.BattleEngineImpl;
 import it.unibo.pokerogue.model.api.Decision;
-import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.api.Range;
 import it.unibo.pokerogue.model.api.ability.Ability;
 import it.unibo.pokerogue.model.api.move.Move;
@@ -32,8 +31,6 @@ import it.unibo.pokerogue.model.impl.GenerateEnemyImpl;
 import it.unibo.pokerogue.model.impl.MoveFactory;
 import it.unibo.pokerogue.model.impl.RangeImpl;
 import it.unibo.pokerogue.model.impl.SavingSystemImpl;
-import it.unibo.pokerogue.model.impl.graphic.ButtonElementImpl;
-import it.unibo.pokerogue.model.impl.graphic.GraphicElementImpl;
 import it.unibo.pokerogue.model.impl.item.ItemFactory;
 import it.unibo.pokerogue.model.impl.pokemon.PokemonFactory;
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
@@ -71,6 +68,7 @@ final class TestAll {
     private static final String CHARMANDER_LITTERAL = "charmander";
     private static final String BULBASAUR_LITTERAL = "bulbasaur";
     private static final String MASTERBALL_LITTERAL = "masterball";
+    private static final String MAIN = "main";
     private static final int STARTER_POKEBALL = 5;
     private static final Logger LOGGER = Logger.getLogger(GameEngineImpl.class.getName());
 
@@ -147,7 +145,7 @@ final class TestAll {
         EffectInterpreter.setDebug(true);
         final JsonReader jsonReader = new JsonReaderImpl();
 
-        final Path dirPath = Paths.get("src", "main", "resources", "pokemonData", "moves");
+        final Path dirPath = Paths.get("src", MAIN, "resources", "pokemonData", "moves");
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
             for (final Path entry : stream) {
                 if (Files.isRegularFile(entry)) {
@@ -174,7 +172,7 @@ final class TestAll {
         final Trainer playerTrainerInstance = new TrainerImpl();
         final JsonReader jsonReader = new JsonReaderImpl();
         EffectInterpreter.setDebug(true);
-        final Path dirPath = Paths.get("src", "main", "resources", "pokemonData", "abilities");
+        final Path dirPath = Paths.get("src", MAIN, "resources", "pokemonData", "abilities");
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
             for (final Path entry : stream) {
                 if (Files.isRegularFile(entry)) {
@@ -211,7 +209,7 @@ final class TestAll {
         final Pokemon pok1 = PokemonFactory.randomPokemon(3);
         EffectInterpreter.setDebug(true);
         final Trainer playerTrainerInstance = new TrainerImpl();
-        final Path dirPath = Paths.get("src", "main", "resources", "itemsData", "items", "data");
+        final Path dirPath = Paths.get("src", MAIN, "resources", "itemsData", "items", "data");
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(dirPath)) {
             for (final Path entry : stream) {
                 if (Files.isRegularFile(entry)) {
@@ -350,16 +348,17 @@ final class TestAll {
 
     @Test
     void graphicTestMenu() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
-    InstantiationException, IOException {
+            InstantiationException, IOException {
         final GameEngineImpl gameEngine = new GameEngineImpl();
-        gameEngine.setScene("main");
+        gameEngine.setScene(MAIN);
         gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
-        final Scene scene = gameEngine.getCurrentScene();
-        final GraphicElementsRegistry currentSceneGraphicElements = scene.getCurrentSceneGraphicElements();
-        final GraphicElementImpl element = currentSceneGraphicElements.getByName("NEW_GAME_BUTTON");
-        final ButtonElementImpl button = (ButtonElementImpl) element;
-        System.out.println(currentSceneGraphicElements.getElements());
-        assertEquals(button.getBorderThickness(), 3);
+        final SceneMenu scene = (SceneMenu) gameEngine.getCurrentScene();
+        assertEquals(scene.getCurrentSelectedButton(), 1);
+        gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
+        assertEquals(scene.getCurrentSelectedButton(), 2);
+        gameEngine.keyPressedToScene(KeyEvent.VK_UP);
+        gameEngine.keyPressedToScene(KeyEvent.VK_UP);
+        assertEquals(scene.getCurrentSelectedButton(), 0);
     }
 
 }
