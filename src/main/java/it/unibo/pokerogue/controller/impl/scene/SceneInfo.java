@@ -14,6 +14,7 @@ import it.unibo.pokerogue.model.api.trainer.Trainer;
 import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.view.impl.scene.SceneInfoView;
+import lombok.Getter;
 
 /**
  * Scene representing the "Info" screen of the game.
@@ -28,6 +29,7 @@ public class SceneInfo extends Scene {
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GraphicElementsRegistry graphicElements;
     private final SceneInfoView sceneInfoView;
+    @Getter
     private int newSelectedButton;
     private final Map<String, Integer> graphicElementNameToInt;
 

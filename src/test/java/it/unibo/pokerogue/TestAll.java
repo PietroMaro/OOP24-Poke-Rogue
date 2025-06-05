@@ -14,7 +14,10 @@ import it.unibo.pokerogue.controller.api.scene.fight.BattleEngine;
 import it.unibo.pokerogue.controller.impl.EffectInterpreter;
 import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.controller.impl.ai.EnemyAiImpl;
+import it.unibo.pokerogue.controller.impl.scene.SceneInfo;
 import it.unibo.pokerogue.controller.impl.scene.SceneMenu;
+import it.unibo.pokerogue.controller.impl.scene.SceneSave;
+import it.unibo.pokerogue.controller.impl.scene.SceneShop;
 import it.unibo.pokerogue.controller.impl.scene.fight.BattleEngineImpl;
 import it.unibo.pokerogue.model.api.Decision;
 import it.unibo.pokerogue.model.api.Range;
@@ -359,6 +362,36 @@ final class TestAll {
         gameEngine.keyPressedToScene(KeyEvent.VK_UP);
         gameEngine.keyPressedToScene(KeyEvent.VK_UP);
         assertEquals(scene.getCurrentSelectedButton(), 0);
+    }
+
+    @Test
+    void testShopGraphic() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+            InstantiationException, IOException {
+        final GameEngineImpl gameEngine = new GameEngineImpl();
+        gameEngine.setScene("shop");
+        gameEngine.keyPressedToScene(KeyEvent.VK_RIGHT);
+        final SceneShop scene = (SceneShop) gameEngine.getCurrentScene();
+        assertEquals(scene.getNewSelectedButton(), 5);
+        gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
+        assertEquals(scene.getNewSelectedButton(), 2);
+        gameEngine.keyPressedToScene(KeyEvent.VK_LEFT);
+        gameEngine.keyPressedToScene(KeyEvent.VK_DOWN);
+        assertEquals(scene.getNewSelectedButton(), 7);
+        gameEngine.keyPressedToScene(KeyEvent.VK_ENTER);
+        assertEquals(scene.getNewSelectedButton(), 7);
+        gameEngine.keyPressedToScene(KeyEvent.VK_RIGHT);
+        assertEquals(scene.getNewSelectedButton(), 8);
+    }
+
+    @Test
+    void testSaveGraphic() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+            InstantiationException, IOException {
+        final GameEngineImpl gameEngine = new GameEngineImpl();
+        gameEngine.setScene("save");
+        final SceneSave scene = (SceneSave) gameEngine.getCurrentScene();
+        assertEquals(scene.getNewSelectedButton(), 5);
+        gameEngine.keyPressedToScene(KeyEvent.VK_RIGHT);
+        assertEquals(scene.getNewSelectedButton(), 6);
     }
 
 }

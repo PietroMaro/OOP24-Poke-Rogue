@@ -12,6 +12,7 @@ import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
 import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.view.impl.scene.save.SceneSaveView;
+import lombok.Getter;
 import it.unibo.pokerogue.model.api.SavingSystem;
 import it.unibo.pokerogue.model.api.trainer.Trainer;
 
@@ -35,6 +36,7 @@ public class SceneSave extends Scene {
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final SceneSaveView sceneSaveView;
     private String typedSaveName = "";
+    @Getter
     private int newSelectedButton;
     private final Map<String, Integer> graphicElementNameToInt;
 

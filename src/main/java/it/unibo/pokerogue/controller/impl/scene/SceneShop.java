@@ -21,6 +21,7 @@ import it.unibo.pokerogue.model.impl.GraphicElementsRegistryImpl;
 import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 import it.unibo.pokerogue.utilities.SceneShopUtilities;
 import it.unibo.pokerogue.view.impl.scene.shop.SceneShopView;
+import lombok.Getter;
 import lombok.Setter;
 
 /**
@@ -46,6 +47,7 @@ public class SceneShop extends Scene {
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final SceneShopView sceneShopView;
     @Setter
+    @Getter
     private int newSelectedButton;
     @Setter
     private int currentSelectedButton;
