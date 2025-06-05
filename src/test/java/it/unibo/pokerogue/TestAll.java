@@ -358,7 +358,7 @@ final class TestAll {
         final GraphicElementsRegistry currentSceneGraphicElements = scene.getCurrentSceneGraphicElements();
         final GraphicElementImpl element = currentSceneGraphicElements.getByName("NEW_GAME_BUTTON");
         final ButtonElementImpl button = (ButtonElementImpl) element;
-        System.out.println(currentSceneGraphicElements);
+        System.out.println(currentSceneGraphicElements.getElements());
         assertEquals(button.getBorderThickness(), 3);
     }
 
