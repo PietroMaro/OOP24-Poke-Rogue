@@ -394,6 +394,9 @@ final class TestAll {
         assertEquals(scene.getNewSelectedButton(), 5);
         gameEngine.keyPressedToScene(KeyEvent.VK_RIGHT);
         assertEquals(scene.getNewSelectedButton(), 6);
+        }
+
+    @Test
     void graphicTestFight() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
             InstantiationException, IOException {
         final GameEngineImpl gameEngine = new GameEngineImpl();
