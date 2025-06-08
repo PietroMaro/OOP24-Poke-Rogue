@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import it.unibo.pokerogue.controller.api.GameEngine;
 import it.unibo.pokerogue.controller.api.scene.Scene;
@@ -303,17 +302,6 @@ public class SceneBox extends Scene {
 
                 this.boxes.get(this.boxes.size() - 1).add(pokemon);
 
-        }
-
-        private int numberOfPokemonInSquad() {
-                int numberOfPokemon = 0;
-                for (Optional<Pokemon> pokemon : this.playerTrainerInstance.getSquad()) {
-                        if (pokemon.isPresent()) {
-                                numberOfPokemon++;
-                        }
-                }
-
-                return numberOfPokemon;
         }
 
 }

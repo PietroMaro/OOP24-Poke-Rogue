@@ -17,12 +17,16 @@ public interface EnemyAiAttack {
     /**
      * Determines which attack the enemy Trainer will perform.
      *
-     * @param weather      An Optional containing the current Weather condition in
-     *                     the battle,
-     *                     or empty if no specific weather is active.
-     * @param enemyTrainer The Trainer controlled by the AI, whose state and team
-     *                     are used
-     *                     to make the attack decision.
+     * @param weather               An Optional containing the current Weather
+     *                              condition in
+     *                              the battle,
+     *                              or empty if no specific weather is active.
+     * @param enemyTrainer          The Trainer controlled by the AI, whose state
+     *                              and team
+     *                              are used
+     *                              to make the attack decision.
+     * @param playerTrainerInstance The current trainer of the player
+     * 
      * @return A Decision object representing the selected attack action.
      */
     Decision whatAttackWillDo(Optional<Weather> weather, Trainer enemyTrainer, Trainer playerTrainerInstance);
