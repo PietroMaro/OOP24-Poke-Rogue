@@ -42,7 +42,7 @@
         "101": {
             "type": "text",
             "panelName": "firstPanel",
-            "text": "Continua",
+            "text": "Continue",
             "textColor": "#000000",
             "textDimension": 0.08,
             "leftX": 0.45,
@@ -52,7 +52,7 @@
             "type": "text",
             "panelName": "firstPanel",
             "textColor": "#000000",
-            "text": "Nuova Partita",
+            "text": "New Game",
             "textDimension": 0.08,
             "leftX": 0.44,
             "leftY": 0.44
@@ -61,7 +61,7 @@
             "type": "text",
             "panelName": "firstPanel",
             "textColor": "#000000",
-            "text": "Opzioni",
+            "text": "Info",
             "textDimension": 0.08,
             "leftX": 0.455,
             "leftY": 0.64

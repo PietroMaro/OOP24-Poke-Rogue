@@ -16,5 +16,5 @@ public interface EnemyAiSwitchIn {
      * 
      * @return A Decision object representing the selected switch-in action.
      */
-    Decision switchInDecisionMaker(final Trainer enemyTrainer);
+    Decision switchInDecisionMaker(final Trainer enemyTrainer, final Trainer playerTrainerInstance);
 }

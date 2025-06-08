@@ -8,8 +8,9 @@ import it.unibo.pokerogue.model.enums.Weather;
 
 /**
  * Interface for defining the AI behavior of an enemy Trainer during combat.
- * This interface allows implementing different strategies for choosing which 
- * attack the enemy should perform based on the current weather and the enemy Trainer's status.
+ * This interface allows implementing different strategies for choosing which
+ * attack the enemy should perform based on the current weather and the enemy
+ * Trainer's status.
  */
 public interface EnemyAiAttack {
 
@@ -24,6 +25,6 @@ public interface EnemyAiAttack {
      *                     to make the attack decision.
      * @return A Decision object representing the selected attack action.
      */
-    Decision whatAttackWillDo(final Optional<Weather> weather, final Trainer enemyTrainer);
+    Decision whatAttackWillDo(Optional<Weather> weather, Trainer enemyTrainer, Trainer playerTrainerInstance);
 
 }
