@@ -39,11 +39,8 @@ public final class AbilityFactory {
      */
     public static void init() throws IOException {
         final JSONArray allAbilityJson;
-        allAbilityJson = JSON_READER.readJsonArray(Paths
-                .get("src", "main", "resources",
-                        "pokemonData",
-                        "abilitiesList.json")
-                .toString());
+        allAbilityJson = JSON_READER.readJsonArray("pokemonData/abilitiesList.json");
+
         for (int abilityIndex = 0; abilityIndex < allAbilityJson.length(); abilityIndex += 1) {
             addAbilityToBlueprints(allAbilityJson.getString(abilityIndex));
         }
@@ -51,10 +48,8 @@ public final class AbilityFactory {
 
     private static void addAbilityToBlueprints(final String abilityName) throws IOException {
         final JSONObject abilityJson = JSON_READER
-                .readJsonObject(Paths.get("src", "main", "resources",
-                        "pokemonData",
-                        "abilities",
-                        abilityName + ".json").toString());
+                .readJsonObject("pokemonData/abilities/" + abilityName + ".json");
+
         final AbilitySituationChecks situationChecks = AbilitySituationChecks
                 .fromString(abilityJson.getString("situationChecks"));
         final JSONObject effect = abilityJson.getJSONObject("effect");

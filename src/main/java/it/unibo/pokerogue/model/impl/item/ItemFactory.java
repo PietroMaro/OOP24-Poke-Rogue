@@ -41,8 +41,8 @@ public final class ItemFactory {
      * @throws IOException if an item file cannot be read
      */
     public static void init() throws IOException {
-        final JSONArray allItemJson = JSON_READER.readJsonArray(
-                Paths.get("src", "main", "resources", "itemsData", "itemsList.json").toString());
+        final JSONArray allItemJson = JSON_READER.readJsonArray("itemsData/itemsList.json");
+
         for (int i = 0; i < allItemJson.length(); i++) {
             addItemToBlueprints(allItemJson.getString(i));
         }
@@ -50,7 +50,7 @@ public final class ItemFactory {
 
     private static void addItemToBlueprints(final String itemName) throws IOException {
         final JSONObject json = JSON_READER.readJsonObject(
-                Paths.get("src", "main", "resources", "itemsData", "items", "data", itemName + ".json").toString());
+                "itemsData/items/data/" + itemName + ".json");
 
         final Item item = new Item(
                 json.getInt("id"),
