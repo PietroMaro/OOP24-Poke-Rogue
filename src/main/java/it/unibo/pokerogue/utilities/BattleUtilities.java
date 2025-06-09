@@ -15,12 +15,14 @@ import it.unibo.pokerogue.model.enums.Stats;
  * finding the first usable Pokémon, and verifying whether a Pokémon can switch
  * or knows a particular move.
  * It is not meant to be instantiated.
+ * 
+ * @author Miraglia Tommaso Cosimo
  */
 public final class BattleUtilities {
 
     /**
-    * Private constructor to prevent instantiation of utility class.
-    */
+     * Private constructor to prevent instantiation of utility class.
+     */
     private BattleUtilities() {
     }
 

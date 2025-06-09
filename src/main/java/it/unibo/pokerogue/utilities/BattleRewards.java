@@ -8,6 +8,8 @@ import it.unibo.pokerogue.model.enums.Stats;
 /**
  * Represents the rewards earned after a battle,
  * like experience, items, money, and other bonuses.
+ * 
+ * @author Miraglia Tommaso Cosimo
  */
 public final class BattleRewards {
 

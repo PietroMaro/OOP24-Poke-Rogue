@@ -7,6 +7,8 @@ import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
 
 /**
  * Interface for generating enemy trainers.
+ * 
+ * @author Miraglia Tommaso Cosimo
  */
 public interface GenerateEnemy {
 

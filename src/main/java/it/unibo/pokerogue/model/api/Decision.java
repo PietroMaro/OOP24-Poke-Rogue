@@ -8,6 +8,9 @@ import it.unibo.pokerogue.model.enums.DecisionTypeEnum;
  *
  * @param moveType the main type of decision
  * @param subType  an optional sub-category or specific identifier
+ * 
+ * @author Miraglia Tommaso Cosimo
+ * 
  */
 public record Decision(
         DecisionTypeEnum moveType,

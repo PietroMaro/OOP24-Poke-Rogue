@@ -9,6 +9,7 @@ import it.unibo.pokerogue.model.api.pokemon.Pokemon;
  * Implementing classes should define how the effect influences actions such as
  * attacking or switching,
  * and how it is applied to the Pokémon.
+ * @author Miraglia Tommaso Cosimo
  */
 public interface StatusEffect {
 

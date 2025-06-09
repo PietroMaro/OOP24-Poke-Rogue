@@ -3,6 +3,8 @@ package it.unibo.pokerogue.model.enums;
 /**
  * Enum representing different types of decisions
  * that can be made during a battle.
+ * 
+ * @author Miraglia Tommaso Cosimo
  */
 public enum DecisionTypeEnum {
 

@@ -27,6 +27,9 @@ import java.lang.reflect.InvocationTargetException;
  * available to learn, and select which move to replace if a new one is learned.
  * It handles user input for navigation and action selection within the move
  * management interface.
+ * 
+ * @author Miraglia Tommaso Cosimo
+ * 
  */
 public class SceneMove extends Scene {
 

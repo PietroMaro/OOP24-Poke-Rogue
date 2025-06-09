@@ -13,6 +13,8 @@ import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
  * enemies in the battle scene.
  * Depending on the battle level, this class can generate either a wild Pokémon
  * or an enemy trainer with a team of Pokémon.
+ * 
+ * @author Miraglia Tommaso Cosimo
  */
 public final class GenerateEnemyImpl implements GenerateEnemy {
     private static final Random RANDOM = new Random();

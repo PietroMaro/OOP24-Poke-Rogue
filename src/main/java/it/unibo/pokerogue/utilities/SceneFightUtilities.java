@@ -17,6 +17,8 @@ import it.unibo.pokerogue.model.impl.graphic.TextElementImpl;
 /**
  * Utility class providing constants and helper methods
  * for managing the fight scene in the game.
+ * 
+ * @author Miraglia Tommaso Cosimo
  */
 public final class SceneFightUtilities {
     private static final int ATTACK_START_CODE = 100;
