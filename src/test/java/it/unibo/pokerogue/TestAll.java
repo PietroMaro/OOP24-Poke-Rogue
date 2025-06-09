@@ -8,7 +8,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import it.unibo.pokerogue.model.api.trainer.Trainer;
-import it.unibo.pokerogue.controller.api.EnemyAi;
 import it.unibo.pokerogue.controller.api.GameEngine;
 import it.unibo.pokerogue.controller.api.scene.fight.BattleEngine;
 import it.unibo.pokerogue.controller.impl.EffectInterpreter;
