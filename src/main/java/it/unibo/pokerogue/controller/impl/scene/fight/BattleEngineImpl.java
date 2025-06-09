@@ -256,6 +256,7 @@ public class BattleEngineImpl implements BattleEngine {
         if (BattleUtilities.isTeamWipedOut(enemyTrainerInstance) || this.captured) {
             BattleRewards.awardBattleRewards(this.playerPokemon, this.enemyPokemon);
             this.newMoveToLearn(this.playerPokemon, gameEngineInstance);
+            gameEngineInstance.setFightLevel(4);
             gameEngineInstance.setScene("shop");
         } else if (this.enemyPokemon.getActualStats().get(Stats.HP).getCurrentValue() <= 0) {
             final Decision enemyChoose = enemyAiInstance.nextMove(this.getCurrentWeather(), enemyTrainerInstance,
@@ -267,7 +268,7 @@ public class BattleEngineImpl implements BattleEngine {
         }
         if (BattleUtilities.isTeamWipedOut(playerTrainerInstance)) {
             gameEngineInstance.resetInstance();
-            gameEngineInstance.setFightLevel(0);
+            gameEngineInstance.setFightLevel(null);
             gameEngineInstance.setScene("main");
         } else if (playerPokemon.getActualStats().get(Stats.HP).getCurrentValue() <= 0) {
             playerTrainerInstance.switchPokemonPosition(FIRST_POSITION,

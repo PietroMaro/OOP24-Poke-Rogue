@@ -25,10 +25,10 @@ public class StatusEffectImpl implements StatusEffect {
     private static final double CONFUSION_CHARMED_FAIL_CHANCE = 0.5;
     private static final double FLINCH_FAIL_CHANCE = 0.2;
     private static final int DURATION_SHORT = 1;
-    private static final int DURATION_MEDIUM = 3;
-    private static final int DURATION_LONG = 5;
-    private static final int DURATION_VERY_LONG = 6;
-    private static final int DURATION_EXTRA_LONG = 8;
+    private static final int DURATION_MEDIUM = 2;
+    private static final int DURATION_LONG = 3;
+    private static final int DURATION_VERY_LONG = 4;
+    private static final int DURATION_EXTRA_LONG = 5;
     private final Map<StatusCondition, Integer> statusMap;
 
     /**
