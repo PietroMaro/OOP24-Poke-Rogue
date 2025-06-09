@@ -12,6 +12,8 @@ import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 /**
  * Interface representing the view layer for a Pokémon storage box within the
  * UI.
+ * 
+ * @author Maretti Pietro
  **/
 public interface BoxView {
 

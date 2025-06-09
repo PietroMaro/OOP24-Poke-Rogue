@@ -50,7 +50,7 @@ public final class GameEngineImpl implements GameEngine {
     /**
      * Protected constructor for the GameEngineImpl.
      */
-    public GameEngineImpl() {
+    public GameEngineImpl() throws IOException {
         this.graphicEngineInstance = new GraphicEngineImpl(this);
         this.savingSystemInstance = new SavingSystemImpl();
         this.playerTrainerInstance = new TrainerImpl();

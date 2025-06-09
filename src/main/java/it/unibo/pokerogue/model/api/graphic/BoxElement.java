@@ -5,6 +5,8 @@ import java.awt.Color;
 /**
  * Interface representing a rectangular box element with customizable color and
  * border.
+ * 
+ * @author Maretti Pietro
  */
 public interface BoxElement {
     /**

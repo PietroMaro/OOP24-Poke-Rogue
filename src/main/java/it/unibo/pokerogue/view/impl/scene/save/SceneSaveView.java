@@ -10,9 +10,10 @@ import it.unibo.pokerogue.view.api.scene.save.SaveView;
 /**
  * Class responsible for managing the initialization and update views
  * of the save scene's graphical elements.
- * <p>
  * It coordinates the initialization of the scene's UI components and
  * updates the visual state when the user interacts with the save menu.
+ * 
+ * @author Casadio Alex
  */
 public final class SceneSaveView implements SaveView {
     private final SceneSaveInitView sceneSaveInitView;

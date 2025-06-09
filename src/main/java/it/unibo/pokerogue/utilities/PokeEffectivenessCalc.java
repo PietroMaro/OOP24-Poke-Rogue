@@ -28,7 +28,7 @@ import java.io.IOException;
  * The effectiveness data is read from a JSON file located at:
  * {@code src/pokemon_data/pokemonEffectiveness.json}
  *
- * 
+ * @author Tverdohleb Egor
  */
 public final class PokeEffectivenessCalc {
 
@@ -41,10 +41,8 @@ public final class PokeEffectivenessCalc {
         final JSONObject root;
 
         try {
-            root = jsonReader
-                    .readJsonObject(
-                            Paths.get("src", "main", "resources", "pokemonData", "pokemonEffectiveness.json")
-                                    .toString());
+            root = jsonReader.readJsonObject("pokemonData/pokemonEffectiveness.json");
+
         } catch (final IOException e) {
 
             throw new ExceptionInInitializerError(e);

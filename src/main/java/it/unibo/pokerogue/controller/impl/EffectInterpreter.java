@@ -25,6 +25,8 @@ import lombok.Setter;
  * A singleton implementation of the EffectParser interface.
  * 
  * Handles parsing and evaluation of effect-related expressions.
+ * 
+ * @author Tverdohleb Egor
  */
 public final class EffectInterpreter {
     @Setter

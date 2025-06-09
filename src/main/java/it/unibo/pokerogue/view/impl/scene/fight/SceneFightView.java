@@ -15,6 +15,8 @@ import it.unibo.pokerogue.view.api.scene.fight.FightView;
  * the graphical elements in the battle scene. The class makes use of the
  * `SceneFightInitView` to initialize the elements and
  * `SceneFightUpdateView` to update them as the battle progresses.
+ * 
+ * @author Miraglia Tommaso Cosimo
  */
 public final class SceneFightView implements FightView {
     private final SceneFightInitView sceneFightInitView;

@@ -10,6 +10,7 @@ import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Paths;
 
 import org.json.JSONObject;
@@ -18,6 +19,8 @@ import org.json.JSONObject;
  * Implementation of a text graphic element that can be rendered on a panel.
  * It supports loading text properties from JSON and rendering the text
  * with a custom or default font, color, position, and size.
+ * 
+ * @author Maretti Pietro
  */
 @Setter
 public final class TextElementImpl extends GraphicElementImpl {
@@ -84,8 +87,9 @@ public final class TextElementImpl extends GraphicElementImpl {
 
         try {
 
-            customFont = Font.createFont(Font.TRUETYPE_FONT,
-                    new File(Paths.get("src", "main", "resources", "font", "pixelFont.ttf").toString()));
+            InputStream is = getClass().getClassLoader().getResourceAsStream("font/pixelFont.ttf");
+            customFont = Font.createFont(Font.TRUETYPE_FONT, is);
+
             customFont = customFont.deriveFont(Font.PLAIN,
                     Math.min((int) (getWidth() * this.textDimension) / 3, (int) (getHeight() * this.textDimension)));
         } catch (final IOException | FontFormatException e) {

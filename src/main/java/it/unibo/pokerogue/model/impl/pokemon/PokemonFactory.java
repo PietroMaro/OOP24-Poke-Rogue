@@ -29,6 +29,8 @@ import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
 
 /**
  * The factory that generates all pokemons.
+ * 
+ * @author Tverdohleb Egor
  */
 public final class PokemonFactory {
 
@@ -52,19 +54,17 @@ public final class PokemonFactory {
     public static void init() throws IOException {
         final JSONArray allPokemonJson = JSON_READER
                 .readJsonArray(
-                        Paths.get(SRC_LITTERAL, MAIN_LITTERAL, RESOURCES_LITTERAL,
-                                POKEMON_DATA, "pokemonList.json").toString());
+                        POKEMON_DATA + "/pokemonList.json");
         for (int pokemonIndex = 0; pokemonIndex < allPokemonJson.length(); pokemonIndex += 1) {
             addPokemonToBlueprints(allPokemonJson.getString(pokemonIndex));
         }
     }
 
     private static void addPokemonToBlueprints(final String pokemonName) throws IOException {
-        final JSONObject pokemonJson = JSON_READER
-                .readJsonObject(Paths
-                        .get(SRC_LITTERAL, MAIN_LITTERAL, RESOURCES_LITTERAL,
-                                POKEMON_DATA, "pokemon", "data", pokemonName + ".json")
-                        .toString());
+        final String basePath = POKEMON_DATA + "/pokemon/";
+
+        final JSONObject pokemonJson = JSON_READER.readJsonObject(basePath + "data/" + pokemonName + ".json");
+
         final int pokedexNumber = pokemonJson.getInt("pokedexNumber");
         final List<String> types = jsonArrayToList(pokemonJson.getJSONArray("types"), String.class);
         final int captureRate = pokemonJson.getInt("captureRate");
@@ -76,20 +76,15 @@ public final class PokemonFactory {
         final int weight = pokemonJson.getInt("weight");
         final List<String> possibleAbilities = jsonArrayToList(pokemonJson.getJSONArray("abilites"), String.class);
         final Map<Stats, Integer> givesEV = statsMap(pokemonJson.getJSONObject("givesEV"));
-        final Optional<Image> newPokemonSpriteFront = Optional.of(ImageIO.read(new File(Paths
-                .get(SRC_LITTERAL, MAIN_LITTERAL, RESOURCES_LITTERAL,
-                        POKEMON_DATA,
-                        "pokemon",
-                        "sprites",
-                        pokemonName + "_front.png")
-                .toString())));
-        final Optional<Image> newPokemonSpriteBack = Optional.of(ImageIO.read(new File(Paths
-                .get(SRC_LITTERAL, MAIN_LITTERAL, RESOURCES_LITTERAL,
-                        POKEMON_DATA,
-                        "pokemon",
-                        "sprites",
-                        pokemonName + "_back.png")
-                .toString())));
+
+        final Optional<Image> newPokemonSpriteFront = Optional.ofNullable(ImageIO.read(
+                PokemonFactory.class.getClassLoader().getResourceAsStream(
+                        basePath + "sprites/" + pokemonName + "_front.png")));
+
+        final Optional<Image> newPokemonSpriteBack = Optional.ofNullable(ImageIO.read(
+                PokemonFactory.class.getClassLoader().getResourceAsStream(
+                        basePath + "sprites/" + pokemonName + "_back.png")));
+
         final PokemonBlueprint newPokemon = new PokemonBlueprint(
                 pokedexNumber,
                 types,

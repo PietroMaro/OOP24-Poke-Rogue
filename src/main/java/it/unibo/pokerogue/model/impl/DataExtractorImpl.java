@@ -22,6 +22,8 @@ import java.nio.file.Path;
  * Responsible for extracting Pokémon data, moves, and abilities from the
  * PokéAPI,
  * and storing it as JSON files in the specified destination folder.
+ * 
+ * @author Tverdohleb Egor
  */
 public class DataExtractorImpl implements DataExtractor {
     private static final int STAT_NUMBER = 6;

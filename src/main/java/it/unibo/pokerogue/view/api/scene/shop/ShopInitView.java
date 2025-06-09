@@ -11,6 +11,7 @@ import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
  * Interface representing the view component responsible for initializing the
  * shop scene.
  * 
+ * @author Casadio Alex
  */
 public interface ShopInitView {
     /**

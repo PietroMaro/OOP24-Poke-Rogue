@@ -19,6 +19,8 @@ import lombok.Getter;
  * panel.
  * Supports loading images from file paths or JSON configuration,
  * positioning and scaling relative to the component size.
+ * 
+ * @author Maretti Pietro
  */
 @Getter
 public final class SpriteElementImpl extends GraphicElementImpl implements SpriteElement {
@@ -51,7 +53,8 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
             final double spriteHeight) throws IOException {
         super(panelName);
 
-        this.spriteImage = ImageIO.read(new File(pathToImage));
+        var is = getClass().getClassLoader().getResourceAsStream(pathToImage);
+        this.spriteImage = ImageIO.read(is);
 
         this.leftUpX = leftUpX;
         this.leftUpY = leftUpY;
@@ -71,8 +74,12 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
     public SpriteElementImpl(final JSONObject jsonMetrix) throws IOException {
         super(jsonMetrix.getString("panelName"));
         if (!"null".equals(jsonMetrix.getString("imageFileName"))) {
-            this.spriteImage = ImageIO.read(new File(UtilitiesForScenes
-                    .getPathString(jsonMetrix.getString("dirToImage"), jsonMetrix.getString("imageFileName"))));
+            final String path = UtilitiesForScenes
+                    .getPathString(jsonMetrix.getString("dirToImage"), jsonMetrix.getString("imageFileName"));
+
+            var is = getClass().getClassLoader().getResourceAsStream(path);
+            this.spriteImage = ImageIO.read(is);
+
         }
 
         if (jsonMetrix.has("width")) {
@@ -131,13 +138,15 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
 
     @Override
     public Image getSpriteImage() {
+
         return this.copyImage(spriteImage);
 
     }
 
     @Override
     public void setImage(final String pathToImage) throws IOException {
-        this.spriteImage = ImageIO.read(new File(pathToImage));
+        var is = getClass().getClassLoader().getResourceAsStream(pathToImage);
+        this.spriteImage = ImageIO.read(is);
     }
 
     @Override

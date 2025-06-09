@@ -40,7 +40,7 @@ import lombok.Getter;
 public class BattleEngineImpl implements BattleEngine {
     private static final Integer FIRST_POSITION = 0;
     private static final Integer MAX_SQUAD = 6;
-    private static final int FINAL_LEVEL = 100;
+    private static final int FINAL_LEVEL = 1;
     @Getter
     private final Optional<Weather> currentWeather;
     private final StatusEffect statusEffectInstance;

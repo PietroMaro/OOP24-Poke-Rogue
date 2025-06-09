@@ -6,6 +6,8 @@ import it.unibo.pokerogue.model.impl.graphic.SpriteElementImpl;
 
 /**
  * Interface for elements that represent a background image.
+ * 
+ * @author Maretti Pietro
  */
 public interface BackgroundElement {
 

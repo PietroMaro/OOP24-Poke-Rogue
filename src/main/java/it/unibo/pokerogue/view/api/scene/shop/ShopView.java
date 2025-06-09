@@ -11,7 +11,7 @@ import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 /**
  * Interface representing the view component for the Shop scene.
  * 
- * 
+ * @author Casadio Alex
  */
 public interface ShopView {
         /**

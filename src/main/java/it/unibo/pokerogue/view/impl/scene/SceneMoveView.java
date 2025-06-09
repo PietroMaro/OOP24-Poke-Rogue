@@ -17,6 +17,8 @@ import it.unibo.pokerogue.view.api.scene.MoveView;
  * Represents the graphical view component for the SceneMove.
  * This class is responsible for initializing and arranging the visual elements
  * displayed to the user when the "Move" scene is active.
+ * 
+ * @author Miraglia Tommaso Cosimo
  */
 public final class SceneMoveView implements MoveView {
         private static final String FIRST_PANEL_STRING = "firstPanel";

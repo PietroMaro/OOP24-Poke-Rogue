@@ -6,6 +6,8 @@ import it.unibo.pokerogue.model.api.trainer.Trainer;
 /**
  * Interface for defining the AI behavior of an enemy Trainer when deciding
  * which pokémon will be swtiched in.
+ * 
+ * @author Maretti Pietro
  */
 public interface EnemyAiSwitchIn {
 

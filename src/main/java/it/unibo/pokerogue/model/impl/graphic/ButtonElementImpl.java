@@ -11,6 +11,8 @@ import lombok.Getter;
  * Implementation of a button graphic element, which is visually represented
  * by an underlying box element with customizable colors and border thickness.
  * Supports selection state that visually adjusts the border thickness.
+ * 
+ * @author Maretti Pietro
  */
 @Getter
 public final class ButtonElementImpl extends GraphicElementImpl implements ButtonElement {

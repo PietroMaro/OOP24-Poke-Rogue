@@ -20,6 +20,8 @@ import it.unibo.pokerogue.view.api.scene.LoadView;
  * It handles the creation of panels, background images, save slots
  * visualization, and
  * interaction buttons dynamically based on existing saves.
+ * 
+ * @author Maretti Pietro
  */
 
 public final class SceneLoadView implements LoadView {
@@ -51,9 +53,7 @@ public final class SceneLoadView implements LoadView {
 
                                 savesName = savesList.get(x + savesListStart);
                                 boxPokemonNumber = savingSystemInstance
-                                                .howManyPokemonInSave(Paths
-                                                                .get("src", "main", "resources", "saves", savesName)
-                                                                .toString());
+                                                .howManyPokemonInSave(savesName);
 
                                 savesName = savesName.substring(0, savesName.length() - REMOVE_EXTENSION);
 

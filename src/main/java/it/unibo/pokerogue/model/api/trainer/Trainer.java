@@ -9,6 +9,8 @@ import it.unibo.pokerogue.model.api.pokemon.Pokemon;
 /**
  * Represents a trainer in the game with a squad of Pokemons, Pokeballs, and
  * other attributes.
+ * 
+ * @author Miraglia Tommaso Cosimo
  */
 public interface Trainer {
     /**
@@ -96,7 +98,7 @@ public interface Trainer {
     /**
      * Add ball.
      * 
-     * @param name name.
+     * @param name   name.
      * @param amount amout of ball.
      */
     void addBall(String name, int amount);

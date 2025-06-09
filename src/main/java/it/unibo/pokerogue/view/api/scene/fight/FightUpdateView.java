@@ -10,6 +10,8 @@ import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 
 /**
  * Interface for updating the fight scene view.
+ * 
+ * @author Miraglia Tommaso Cosimo
  */
 public interface FightUpdateView {
     /**

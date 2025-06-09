@@ -11,6 +11,8 @@ import it.unibo.pokerogue.model.enums.Weather;
  * This interface allows implementing different strategies for choosing which
  * attack the enemy should perform based on the current weather and the enemy
  * Trainer's status.
+ * 
+ * @author Maretti Pietro
  */
 public interface EnemyAiAttack {
 

@@ -23,7 +23,7 @@ import lombok.Setter;
  * defensive copying of the {@link Range} object is limited, and direct
  * references may be exposed through the getter.
  *
- * @author
+ * @author Tverdohleb Egor
  */
 @SuppressFBWarnings("EI_EXPOSE_REP")
 @Getter

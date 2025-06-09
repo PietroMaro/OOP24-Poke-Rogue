@@ -17,6 +17,8 @@ import java.io.IOException;
  * Pokémon
  * or attack intelligently. It adjusts its behavior dynamically using internal
  * flags set during construction.
+ * 
+ * @author Maretti Pietro
  */
 public final class EnemyAiImpl implements EnemyAi {
 
@@ -77,7 +79,8 @@ public final class EnemyAiImpl implements EnemyAi {
      *         data
      */
     @Override
-    public Decision nextMove(final Optional<Weather> weather, final Trainer enemyTrainer, final Trainer playerTrainerInstance) {
+    public Decision nextMove(final Optional<Weather> weather, final Trainer enemyTrainer,
+            final Trainer playerTrainerInstance) {
         Decision decision = this.aiOfSwitchIn.switchInDecisionMaker(enemyTrainer, playerTrainerInstance);
 
         if (decision.moveType() == DecisionTypeEnum.SWITCH_IN) {

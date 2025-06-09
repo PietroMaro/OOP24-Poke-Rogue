@@ -29,6 +29,8 @@ import java.nio.file.Paths;
  * 
  * Handles rendering, user interaction, and Pokémon transfer between storage and
  * party.
+ * 
+ * @author Maretti Pietro
  */
 public class SceneBox extends Scene {
 
@@ -275,8 +277,8 @@ public class SceneBox extends Scene {
                         this.addPokemonToBox(PokemonFactory.pokemonFromName("squirtle"));
 
                 } else {
-                        savingSystemInstance
-                                        .loadData(Paths.get("src", "main", "resources", "saves", savePath).toString());
+                     savingSystemInstance.loadData(savePath);
+
 
                         for (final var box : savingSystemInstance.getSavedPokemon()) {
                                 for (final String pokemonName : box) {

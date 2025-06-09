@@ -21,6 +21,8 @@ import it.unibo.pokerogue.view.api.scene.fight.FightInitView;
  * It sets up various UI components such as buttons, text elements, sprites, and
  * background for the player's and enemy's Pokémon.
  * It also manages the layout and positioning of these elements on the screen.
+ * 
+ * @author Miraglia Tommaso Cosimo
  */
 public final class SceneFightInitView implements FightInitView {
 

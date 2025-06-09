@@ -4,6 +4,8 @@ import java.awt.Color;
 
 /**
  * Enum representing Pokémon types with their associated display colors.
+ * 
+ * @author Tverdohleb Egor
  */
 public enum TypeColors {
     /** Type: Bug. */

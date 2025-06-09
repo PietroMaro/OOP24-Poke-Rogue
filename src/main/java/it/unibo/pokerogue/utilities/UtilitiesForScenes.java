@@ -15,6 +15,8 @@ import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
 /**
  * Utility class for managing scene-related file paths, button states,
  * and loading/removing dynamic graphic elements.
+ * 
+ * @author Maretti Pietro
  */
 public final class UtilitiesForScenes {
 
@@ -31,7 +33,7 @@ public final class UtilitiesForScenes {
      */
     public static String getPathString(final String sceneDirName, final String fileName) {
 
-        return Paths.get("src", "main", "resources", "sceneImages", sceneDirName, fileName).toString();
+        return Paths.get("sceneImages", sceneDirName, fileName).toString().replace("\\", "/");
 
     }
 
@@ -85,7 +87,7 @@ public final class UtilitiesForScenes {
 
         final JsonReader jsonReader = new JsonReaderImpl();
         final JSONObject root = jsonReader
-                .readJsonObject(Paths.get("src", "main", "resources", "sceneData", fileName).toString());
+                .readJsonObject("sceneData/" + fileName);
 
         final JSONArray initArrayIndex = root.getJSONObject("dynamicObjects").getJSONArray(loadSectionName);
 
@@ -112,7 +114,7 @@ public final class UtilitiesForScenes {
 
         final JsonReader jsonReader = new JsonReaderImpl();
         final JSONObject root = jsonReader
-                .readJsonObject(Paths.get("src", "main", "resources", "sceneData", fileName).toString());
+                .readJsonObject("sceneData/" + fileName);
 
         final JSONArray initArrayIndex = root.getJSONObject("dynamicObjects").getJSONArray(loadSectionName);
 
