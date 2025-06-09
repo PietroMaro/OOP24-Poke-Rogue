@@ -13,6 +13,8 @@ import lombok.Getter;
  * Extends {@link JLayeredPane} to support layering of visual components.
  * Each graphic element is associated with a panel name indicating
  * where it should be placed in the UI hierarchy.
+ * 
+ *@author Maretti Pietro
  */
 public class GraphicElementImpl extends JLayeredPane implements GraphicElement {
 

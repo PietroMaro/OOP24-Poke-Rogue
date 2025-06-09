@@ -10,6 +10,8 @@ import it.unibo.pokerogue.view.api.scene.save.SaveUpdateView;
 /**
  * Responsible for managing and updating the visual state of the save scene UI,
  * specifically handling the selection state of buttons.
+ * 
+ * @author Casadio Alex
  */
 public final class SceneSaveUpdateView implements SaveUpdateView {
     private int currentSelectedButton;

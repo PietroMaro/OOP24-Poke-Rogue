@@ -1,7 +1,0 @@
-Insieme: GamePlayLoop + GameEngine
-
-Egor Tverdohleb: Modelizazione Pokemon + Mosse + Save system
-Tommaso Cosimo Miraglia: GUI Game fight + Modello Inventario giocatore
-Alex Casadio:  GUI Negozio + Logica negozio + ricompense
-Pietro Maretti: GUI Menu + GUI Box + AI 
-

@@ -10,6 +10,7 @@ import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
  * Interface representing the view component for the Menu scene of the
  * application.
  * 
+ * @author Maretti Pietro
  */
 public interface MenuView {
     /**

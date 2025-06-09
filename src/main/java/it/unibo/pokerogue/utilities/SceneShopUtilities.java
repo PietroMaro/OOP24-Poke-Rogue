@@ -21,10 +21,10 @@ import it.unibo.pokerogue.model.impl.item.ItemFactory;
  * names,
  * prices, and player-related display texts.
  *
- * <p>
  * This class is not meant to be instantiated and contains only static methods
  * and constants.
- * </p>
+ * 
+ * @author Casadio Alex
  */
 public final class SceneShopUtilities {
     private static final String QUESTION_MARK_STRING = "???";

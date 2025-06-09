@@ -7,6 +7,7 @@ import it.unibo.pokerogue.model.impl.graphic.GraphicElementImpl;
 /**
  * Interface representing a registry for managing graphic elements.
  * 
+ * @author Maretti Pietro
  */
 public interface GraphicElementsRegistry {
 

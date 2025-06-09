@@ -4,6 +4,8 @@ package it.unibo.pokerogue.model.enums;
  * Represents various status conditions that a character or entity
  * can experience in a game. These conditions may affect the entity's
  * actions, stats, or behavior during gameplay.
+ * 
+ * @author Miraglia Tommaso
  */
 public enum StatusCondition {
 

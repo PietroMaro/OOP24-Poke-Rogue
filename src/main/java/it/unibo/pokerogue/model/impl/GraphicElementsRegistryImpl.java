@@ -12,7 +12,8 @@ import it.unibo.pokerogue.model.impl.graphic.GraphicElementImpl;
  * This class manages a collection of graphic elements identified by integer IDs
  * and provides methods to access, add, remove, and clear elements.
  * It also supports lookup of elements by their associated string names.
- *
+ * 
+ *@author Maretti Pietro
  */
 public final class GraphicElementsRegistryImpl implements GraphicElementsRegistry {
     private final Map<Integer, GraphicElementImpl> elements;

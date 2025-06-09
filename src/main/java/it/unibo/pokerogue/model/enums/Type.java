@@ -2,6 +2,8 @@ package it.unibo.pokerogue.model.enums;
 
 /**
  * The type of the pokemon enum.
+ * 
+ * @author Tverdohleb Egor
  */
 public enum Type {
     /**

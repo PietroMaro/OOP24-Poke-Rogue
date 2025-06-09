@@ -15,6 +15,8 @@ import it.unibo.pokerogue.utilities.SceneShopUtilities;
  * updates
  * to subcomponents responsible for rendering elements and updating UI
  * interactions.
+ * 
+ * @author Casadio Alex
  */
 public class SceneShopView {
     private final SceneShopInitView sceneShopInitView;

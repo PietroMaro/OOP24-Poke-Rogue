@@ -27,6 +27,8 @@ import java.lang.reflect.InvocationTargetException;
 
 /**
  * the Pokemon class.
+ * 
+ * @author Tverdohleb Egor
  */
 @ToString
 public final class PokemonImpl implements Pokemon {
@@ -278,7 +280,9 @@ public final class PokemonImpl implements Pokemon {
             }
         }
     }
-@Override public void learnNewMove(final Optional<Integer> indexMoveToReplace) {
+
+    @Override
+    public void learnNewMove(final Optional<Integer> indexMoveToReplace) {
         if (!(this.hasToLearnMove && !this.newMoveToLearn.isEmpty())) {
             throw new UnsupportedOperationException("The pokemon " + this.name + " doesn't have to learn a move");
         }

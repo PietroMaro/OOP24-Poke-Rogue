@@ -24,6 +24,8 @@ import java.awt.Color;
 /**
  * Handles the graphical representation and layout setup of the Pokémon storage
  * box scene.
+ * 
+ * @author Maretti Pietro
  */
 public final class SceneBoxView implements BoxView {
         private static final int LENGTH_OF_POKEBOX = 81;

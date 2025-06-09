@@ -32,6 +32,7 @@ import java.nio.file.Paths;
  * for different scenes, as well as abstract methods for updating the scene's
  * state and graphics.
  *
+ * @author Maretti Pietro
  */
 public abstract class Scene {
     private GraphicElementsRegistry graphicElements;

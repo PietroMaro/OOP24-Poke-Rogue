@@ -24,6 +24,8 @@ import java.io.IOException;
  * switch Pokémon.
  * This logic considers various factors such as the order of the squad,
  * type matchups, and whether the AI is configured to make strategic switches.
+ * 
+ * @author Maretti Pietro
  */
 public final class EnemyAiSwitchInImpl implements EnemyAiSwitchIn {
 
@@ -46,7 +48,8 @@ public final class EnemyAiSwitchInImpl implements EnemyAiSwitchIn {
      * @param considerSwitching whether the AI should evaluate switching logic
      * @param switchFirstRate   chance (0-100) to prefer top switch candidate
      */
-    public EnemyAiSwitchInImpl(final boolean usePokemonInOrder, final boolean considerSwitching, final int switchFirstRate)
+    public EnemyAiSwitchInImpl(final boolean usePokemonInOrder, final boolean considerSwitching,
+            final int switchFirstRate)
             throws IOException {
         pokeInSquadScore = new HashMap<>();
         random = new Random();
@@ -58,7 +61,6 @@ public final class EnemyAiSwitchInImpl implements EnemyAiSwitchIn {
 
     @Override
     public Decision switchInDecisionMaker(final Trainer enemyTrainer, final Trainer playerTrainerInstance) {
-
 
         if (enemyTrainer.getPokemon(1).isPresent() && shouldSwitch(enemyTrainer, playerTrainerInstance)) {
 

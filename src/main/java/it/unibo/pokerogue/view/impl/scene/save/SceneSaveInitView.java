@@ -15,6 +15,8 @@ import it.unibo.pokerogue.view.api.scene.save.SaveInitView;
  * state
  * when the save scene is first displayed. It interacts with the panel system
  * and scene registry.
+ * 
+ * @author Casadio Alex
  */
 public final class SceneSaveInitView implements SaveInitView {
         private static final String FIRST_PANEL = "firstPanel";

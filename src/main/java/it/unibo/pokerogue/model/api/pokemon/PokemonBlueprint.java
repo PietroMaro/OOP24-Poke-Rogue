@@ -25,6 +25,8 @@ import java.awt.Image;
  * @param givesEv              pokemon givesEV
  * @param spriteFront          pokemon spriteFront
  * @param spriteBack           pokemon spriteBack
+ * 
+ * @author Tverdohleb Egor
  */
 public record PokemonBlueprint(
         int pokedexNumber,

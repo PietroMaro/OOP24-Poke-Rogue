@@ -4,6 +4,8 @@ package it.unibo.pokerogue.model.api;
  * A utility interface that represents a range with a minimum, maximum,
  * and current value. The current value cannot go below the minimum
  * or above the maximum.
+ * 
+ * @author Tverdohleb Egor
  */
 public interface Range {
 

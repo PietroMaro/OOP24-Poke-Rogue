@@ -10,6 +10,8 @@ import it.unibo.pokerogue.model.api.graphic.PanelElement;
  * Implementation of a panel graphic element that wraps a Swing component with a
  * layout.
  * It handles special case for OverlayLayout to ensure proper layering behavior.
+ * 
+ * @author Maretti Pietro
  */
 public final class PanelElementImpl extends GraphicElementImpl implements PanelElement {
 

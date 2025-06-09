@@ -17,6 +17,7 @@ import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
  * This includes initialization of visual elements and displaying save slot
  * information in a paginated manner.
  * 
+ * @author Maretti Pietro
  */
 
 public interface LoadView {

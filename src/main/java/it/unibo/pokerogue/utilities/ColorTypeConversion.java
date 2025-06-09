@@ -13,6 +13,7 @@ import it.unibo.pokerogue.model.enums.TypeColors;
  * specific Pokemon type.
  * If the type is not recognized, it returns black as a default.
  * 
+ * @author Tverdohleb Egor
  */
 public final class ColorTypeConversion {
 

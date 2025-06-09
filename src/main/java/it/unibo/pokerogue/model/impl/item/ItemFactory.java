@@ -20,6 +20,8 @@ import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
  * Factory for creating and retrieving items.
  * Loads item data from JSON files once and provides access to immutable item
  * records.
+ *
+ * @author Casadio Alex
  */
 public final class ItemFactory {
 

@@ -29,6 +29,8 @@ import java.nio.file.Paths;
  * 
  * Handles rendering, user interaction, and Pokémon transfer between storage and
  * party.
+ * 
+ * @author Maretti Pietro
  */
 public class SceneBox extends Scene {
 

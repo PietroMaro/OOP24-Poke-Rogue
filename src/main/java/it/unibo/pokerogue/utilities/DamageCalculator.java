@@ -14,7 +14,7 @@ import it.unibo.pokerogue.model.enums.Weather;
  * Provides methods to apply battle mechanics such as weather effects,
  * burn penalties, critical hits, STAB, and type effectiveness.
  * 
- * 
+ * @author Maretti Pietro
  */
 public final class DamageCalculator {
     private static final int DAMAGE_CALCULATOR_0 = 85;

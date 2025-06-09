@@ -18,6 +18,8 @@ import org.json.JSONObject;
  * Implementation of a text graphic element that can be rendered on a panel.
  * It supports loading text properties from JSON and rendering the text
  * with a custom or default font, color, position, and size.
+ * 
+ * @author Maretti Pietro
  */
 @Setter
 public final class TextElementImpl extends GraphicElementImpl {

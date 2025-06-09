@@ -18,6 +18,8 @@ import org.json.JSONArray;
 
 /**
  * The ability factory.
+ * 
+ * @author Tverdohleb Egor
  */
 public final class AbilityFactory {
     // make the access in memory and saves the information of all pokemon in local

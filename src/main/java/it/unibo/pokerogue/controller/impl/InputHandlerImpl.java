@@ -14,6 +14,8 @@ import it.unibo.pokerogue.controller.api.GameEngine;
 /**
  * Handles keyboard input and delegates key events to the GameEngine.
  * This class extends KeyAdapter to override only the needed key events.
+ * 
+ * @author Maretti Pietro
  */
 public final class InputHandlerImpl implements KeyListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(InputHandlerImpl.class);

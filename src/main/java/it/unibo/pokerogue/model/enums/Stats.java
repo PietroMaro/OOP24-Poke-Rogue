@@ -2,6 +2,8 @@ package it.unibo.pokerogue.model.enums;
 
 /**
  * Enum representing different stats that can affect a character or Pokémon.
+ * 
+ * @author Tverdohleb Egor
  */
 public enum Stats {
 

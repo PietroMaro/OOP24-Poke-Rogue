@@ -13,6 +13,7 @@ import it.unibo.pokerogue.view.impl.scene.shop.SceneShopView;
  * Interface representing the view component responsible for updating the shop
  * scene graphics.
  * 
+ * @author Casadio Alex
  */
 public interface ShopUpdateView {
         /**

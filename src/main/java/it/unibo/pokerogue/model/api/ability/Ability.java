@@ -10,8 +10,10 @@ import it.unibo.pokerogue.model.enums.AbilitySituationChecks;
  * 
  * @param situationChecks the situaion where the ability has to activate
  * @param effect          of the ability
+ * 
+ * @author Tverdohleb Egor
  */
 public record Ability(
-        AbilitySituationChecks situationChecks,
-        Optional<JSONObject> effect) {
+                AbilitySituationChecks situationChecks,
+                Optional<JSONObject> effect) {
 }

@@ -19,6 +19,8 @@ import lombok.Getter;
  * panel.
  * Supports loading images from file paths or JSON configuration,
  * positioning and scaling relative to the component size.
+ * 
+ * @author Maretti Pietro
  */
 @Getter
 public final class SpriteElementImpl extends GraphicElementImpl implements SpriteElement {

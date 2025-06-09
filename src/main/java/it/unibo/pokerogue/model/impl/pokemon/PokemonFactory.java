@@ -29,6 +29,8 @@ import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
 
 /**
  * The factory that generates all pokemons.
+ * 
+ * @author Tverdohleb Egor
  */
 public final class PokemonFactory {
 

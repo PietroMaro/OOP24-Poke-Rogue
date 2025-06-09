@@ -13,6 +13,8 @@ import it.unibo.pokerogue.view.api.scene.InfoView;
 /**
  * View class responsible for initializing and managing graphic elements
  * specific to the Info scene.
+ * 
+ * @author Casadio Alex
  */
 public final class SceneInfoView implements InfoView {
     private static final String FIRST_PANEL = "firstPanel";

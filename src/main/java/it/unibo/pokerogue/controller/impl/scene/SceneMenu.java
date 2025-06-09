@@ -30,6 +30,7 @@ import lombok.Getter;
  * representation and delegates the setup of UI components to
  * {@link SceneMenuView}.
  * 
+ * @author Maretti Pietro
  */
 public final class SceneMenu extends Scene {
     @Getter

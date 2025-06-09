@@ -9,6 +9,8 @@ import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 /**
  * Interface representing the view component for the Info scene of the
  * application.
+ * 
+ * @author Casadio Alex
  **/
 public interface InfoView {
 

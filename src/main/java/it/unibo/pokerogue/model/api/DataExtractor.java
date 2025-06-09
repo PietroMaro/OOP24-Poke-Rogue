@@ -6,6 +6,8 @@ import java.io.IOException;
  * Interface for extracting Pokémon data from the PokéAPI
  * (https://pokeapi.co/api/v2/).
  * Supports extracting Pokémon, moves, and writing results to JSON files.
+ * 
+ * @author Tverdohleb Egor
  */
 public interface DataExtractor {
 

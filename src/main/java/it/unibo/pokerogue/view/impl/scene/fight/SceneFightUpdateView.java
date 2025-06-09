@@ -16,6 +16,8 @@ import it.unibo.pokerogue.view.api.scene.fight.FightUpdateView;
 /**
  * Class responsible for handling the update logic of the fight scene view.
  * It manages UI changes that occur when the user interacts with fight options.
+ * 
+ * @author Mirraglia Tommaso Cosimo
  */
 public final class SceneFightUpdateView implements FightUpdateView {
         private static final Integer FIRST_POSITION = 0;

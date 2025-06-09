@@ -20,6 +20,8 @@ import it.unibo.pokerogue.view.api.scene.shop.ShopUpdateView;
  * This includes updating selected item highlights, showing item descriptions,
  * switching between the main menu and Pokémon selection views, and managing UI
  * state.
+ * 
+ * @author Casadio Alex
  */
 public final class SceneShopUpdateView implements ShopUpdateView {
         private static final Integer FIRST_POSITION = 0;

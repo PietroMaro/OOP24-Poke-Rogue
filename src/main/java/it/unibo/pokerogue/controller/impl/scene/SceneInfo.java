@@ -23,6 +23,8 @@ import lombok.Getter;
  * events,
  * and coordinates updating the scene state and view.
  * Extends the abstract {@link Scene} class.
+ * 
+ * @author Casadio Alex
  */
 public class SceneInfo extends Scene {
     private final GraphicElementsRegistry currentSceneGraphicElements;

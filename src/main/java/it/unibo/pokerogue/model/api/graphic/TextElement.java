@@ -3,6 +3,8 @@ package it.unibo.pokerogue.model.api.graphic;
 /**
  * Interface defining the contract for a text element that can be rendered on
  * screen.
+ * 
+ * @author Maretti Pietro
  */
 public interface TextElement {
     /**

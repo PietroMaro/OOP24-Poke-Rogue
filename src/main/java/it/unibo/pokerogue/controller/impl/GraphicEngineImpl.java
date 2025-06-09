@@ -25,6 +25,8 @@ import it.unibo.pokerogue.model.impl.graphic.TextElementImpl;
  * 
  * The engine is implemented as a singleton by extending {@link Singleton},
  * ensuring that only one instance manages all visual output.
+ * 
+ * @author Maretti Pietro
  */
 public final class GraphicEngineImpl implements GraphicEngine {
     private final JFrame gameWindow;
