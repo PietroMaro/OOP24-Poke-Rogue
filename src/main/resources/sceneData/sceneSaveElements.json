@@ -23,7 +23,7 @@
         "3": {
             "type": "text",
             "panelName": "firstPanel",
-            "text": "continue the game",
+            "text": "exit without saving",
             "textColor": "#000000",
             "textDimension": 0.05,
             "leftX": 0.64,
