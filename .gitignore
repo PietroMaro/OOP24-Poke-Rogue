@@ -5,6 +5,7 @@
 build/
 bin/
 scripts/
+appdata/
 
 # Ignore Idea customizations
 .idea

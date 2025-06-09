@@ -9,6 +9,7 @@ import it.unibo.pokerogue.controller.api.GameEngine;
 import it.unibo.pokerogue.controller.impl.GameEngineImpl;
 import it.unibo.pokerogue.model.impl.item.ItemFactory;
 import it.unibo.pokerogue.model.impl.MoveFactory;
+import it.unibo.pokerogue.model.api.SavingSystem;
 import it.unibo.pokerogue.model.impl.AbilityFactory;
 import it.unibo.pokerogue.model.impl.pokemon.PokemonFactory;
 
@@ -35,6 +36,7 @@ public final class Main {
             MoveFactory.init();
             AbilityFactory.init();
             PokemonFactory.init();
+    
 
             final GameEngine mainGameEngine = new GameEngineImpl();
 
