@@ -277,8 +277,8 @@ public class SceneBox extends Scene {
                         this.addPokemonToBox(PokemonFactory.pokemonFromName("squirtle"));
 
                 } else {
-                        savingSystemInstance
-                                        .loadData(Paths.get("src", "main", "resources", "saves", savePath).toString());
+                     savingSystemInstance.loadData("saves/" + savePath);
+
 
                         for (final var box : savingSystemInstance.getSavedPokemon()) {
                                 for (final String pokemonName : box) {

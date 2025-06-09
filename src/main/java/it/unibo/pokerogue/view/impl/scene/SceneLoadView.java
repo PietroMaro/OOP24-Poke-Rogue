@@ -53,9 +53,7 @@ public final class SceneLoadView implements LoadView {
 
                                 savesName = savesList.get(x + savesListStart);
                                 boxPokemonNumber = savingSystemInstance
-                                                .howManyPokemonInSave(Paths
-                                                                .get("src", "main", "resources", "saves", savesName)
-                                                                .toString());
+                                                .howManyPokemonInSave("saves/" + savesName);
 
                                 savesName = savesName.substring(0, savesName.length() - REMOVE_EXTENSION);
 

@@ -32,6 +32,14 @@ public final class JsonReaderImpl implements JsonReader {
      */
     @Override
     public String readJsonStringFromFile(final String filePath) throws IOException {
+        // Prova a caricare come risorsa dal classpath
+        try (var inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
+            if (inputStream != null) {
+                return new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+            }
+        }
+
+        // Altrimenti, prova a leggerlo dal filesystem
         final Path path = Path.of(filePath);
         if (Files.notExists(path)) {
             final Path parent = path.getParent();

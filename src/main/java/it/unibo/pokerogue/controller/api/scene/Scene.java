@@ -136,7 +136,8 @@ public abstract class Scene {
     protected final void loadGraphicElements(final String fileName) throws IOException {
         final JsonReader jsonReader = new JsonReaderImpl();
         final JSONObject root = jsonReader
-                .readJsonObject(Paths.get("src", "main", "resources", "sceneData", fileName).toString());
+                .readJsonObject("sceneData/" + fileName);
+
         graphicElementNameToInt = new HashMap<>();
 
         final JSONObject mapper = root.getJSONObject("mapper");

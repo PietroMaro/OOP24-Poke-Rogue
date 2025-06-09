@@ -65,8 +65,8 @@ public final class SceneLoad extends Scene {
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
-        this.savesList = savingSystemInstance
-                .getSaveFilesName(Paths.get("src", "main", "resources", "saves").toString());
+        this.savesList = savingSystemInstance.getSaveFilesName("saves");
+
         this.sceneLoadView = new SceneLoadView();
         this.initStatus();
         this.initGraphicElements(savingSystemInstance);

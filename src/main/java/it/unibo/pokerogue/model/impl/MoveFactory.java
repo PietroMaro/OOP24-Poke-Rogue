@@ -29,7 +29,7 @@ public final class MoveFactory {
     private static final Map<String, Move> MOVES_BLUEPRINTS = new HashMap<>();
 
     private MoveFactory() {
-        //Shouldn't be instanciated
+        // Shouldn't be instanciated
     }
 
     /**
@@ -37,23 +37,14 @@ public final class MoveFactory {
      */
     public static void init() throws IOException {
         final JSONArray allMoveJson = JSON_READER
-                .readJsonArray(Paths
-                        .get("src", "main", "resources",
-                                "pokemonData",
-                                "movesList.json")
-                        .toString());
+                .readJsonArray("pokemonData/movesList.json");
         for (int moveIndex = 0; moveIndex < allMoveJson.length(); moveIndex += 1) {
             addMoveToBlueprints(allMoveJson.getString(moveIndex));
         }
     }
 
     private static void addMoveToBlueprints(final String moveName) throws IOException {
-        final JSONObject moveJson = JSON_READER.readJsonObject(Paths
-                .get("src", "main", "resources",
-                        "pokemonData",
-                        "moves",
-                        moveName + ".json")
-                .toString());
+        final JSONObject moveJson = JSON_READER.readJsonObject("pokemonData/moves/" + moveName + ".json");
         final String name = moveName;
         final Range pp = new RangeImpl(0, moveJson.getInt("pp"), moveJson.getInt("pp"));
         final boolean isPhysical = moveJson.getBoolean("isPhysical");

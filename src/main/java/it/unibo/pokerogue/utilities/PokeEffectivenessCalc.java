@@ -41,10 +41,8 @@ public final class PokeEffectivenessCalc {
         final JSONObject root;
 
         try {
-            root = jsonReader
-                    .readJsonObject(
-                            Paths.get("src", "main", "resources", "pokemonData", "pokemonEffectiveness.json")
-                                    .toString());
+            root = jsonReader.readJsonObject("pokemonData/pokemonEffectiveness.json");
+
         } catch (final IOException e) {
 
             throw new ExceptionInInitializerError(e);
