@@ -34,6 +34,8 @@ import lombok.Getter;
  * Implementation of the {@link BattleEngine} interface.
  * Manages the execution of battle turns, handling player and enemy actions,
  * effects, weather, abilities, and AI decisions.
+ * 
+ * @author Miraglia Tommaso Cosimo
  */
 public class BattleEngineImpl implements BattleEngine {
     private static final Integer FIRST_POSITION = 0;

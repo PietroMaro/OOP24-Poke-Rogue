@@ -33,6 +33,8 @@ import it.unibo.pokerogue.model.api.trainer.Trainer;
  * coordinates the battle engine.
  * It also updates the graphic elements displayed on the screen based on user
  * interactions.
+ * 
+ * @author Miraglia Tommaso Cosimo
  */
 
 public class SceneFight extends Scene {
@@ -62,6 +64,7 @@ public class SceneFight extends Scene {
     private final GraphicElementsRegistry graphicElements;
     private final Map<String, Integer> graphicElementNameToInt;
     private final int battleLevel;
+
     /**
      * Constructor for SceneFight.
      * Initializes all the necessary components for the battle scene, including the

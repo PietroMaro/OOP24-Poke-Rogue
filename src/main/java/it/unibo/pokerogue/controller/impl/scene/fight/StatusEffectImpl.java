@@ -17,6 +17,9 @@ import it.unibo.pokerogue.model.enums.StatusCondition;
  * on Pokémon during a battle, including attack/switch restrictions, damage over
  * time,
  * and stat changes.
+ * 
+ * @author Miraglia Tommaso Cosimo
+ * 
  */
 public class StatusEffectImpl implements StatusEffect {
     private static final double CONFUSION_CHARMED_FAIL_CHANCE = 0.5;

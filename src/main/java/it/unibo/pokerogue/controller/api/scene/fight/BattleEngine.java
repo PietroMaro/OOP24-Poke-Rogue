@@ -16,6 +16,7 @@ import it.unibo.pokerogue.model.enums.Weather;
  * Implementations of this interface handle turn-based decisions, status
  * effects,
  * weather conditions, ability interactions, and item usage during combat.
+ * 
  * @author Miraglia Tommaso Cosimo
  */
 public interface BattleEngine {

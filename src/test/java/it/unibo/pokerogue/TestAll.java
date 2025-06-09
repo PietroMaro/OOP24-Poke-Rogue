@@ -4,6 +4,7 @@ import it.unibo.pokerogue.model.api.item.Item;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import it.unibo.pokerogue.controller.api.ai.EnemyAi;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

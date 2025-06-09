@@ -13,6 +13,6 @@ import it.unibo.pokerogue.model.enums.DecisionTypeEnum;
  * 
  */
 public record Decision(
-        DecisionTypeEnum moveType,
-        String subType) {
+                DecisionTypeEnum moveType,
+                String subType) {
 }
