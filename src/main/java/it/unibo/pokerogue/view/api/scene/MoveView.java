@@ -10,6 +10,7 @@ import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
  * Interface representing the view component for the Move scene of the
  * application.
  * 
+ * @author Mirglia Tommaso Cosimo
  */
 public interface MoveView {
     /**

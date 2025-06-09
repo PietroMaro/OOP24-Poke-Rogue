@@ -11,6 +11,8 @@ import it.unibo.pokerogue.model.enums.Weather;
  *
  * Implementations of this interface define how an enemy chooses its next move
  * based on many factors.
+ * 
+ * @author Maretti Pietro
  */
 public interface EnemyAi {
     /**

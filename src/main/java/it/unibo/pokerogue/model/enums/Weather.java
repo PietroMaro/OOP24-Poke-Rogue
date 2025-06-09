@@ -3,6 +3,8 @@ package it.unibo.pokerogue.model.enums;
 /**
  * The weather that can be applied to a
  * pokemon battle.
+ * 
+ * @author Tverdohleb Egor
  */
 public enum Weather {
     /**

@@ -10,6 +10,8 @@ import java.util.Random;
 
 /**
  * Pokemon nature enumerator.
+ * 
+ * @author Tverdohleb Egor
  */
 public enum Nature {
     /**

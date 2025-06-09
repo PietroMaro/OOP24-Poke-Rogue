@@ -10,6 +10,8 @@ import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
  *
  * This interface defines the operations needed to render scenes
  * and manage the UI panels for the game.
+ * 
+ * @author Maretti Pietro
  */
 public interface GraphicEngine {
 

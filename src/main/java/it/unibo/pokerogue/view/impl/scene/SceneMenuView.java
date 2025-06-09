@@ -16,6 +16,8 @@ import java.io.IOException;
  * the graphic elements and panels used in the menu scene of the game.
  * It creates and organizes the background, buttons, and text elements
  * associated with the menu UI.
+ * 
+ * @author Maretti Pietro
  */
 public final class SceneMenuView implements MenuView {
 

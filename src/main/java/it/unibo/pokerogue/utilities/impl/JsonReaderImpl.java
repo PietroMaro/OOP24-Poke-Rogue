@@ -16,6 +16,8 @@ import java.nio.file.StandardOpenOption;
  * Final implementation of the {@link JsonReader} interface.
  * 
  * Provides methods to read JSON data from files.
+ * 
+ * @author Tverdohleb Egor
  */
 public final class JsonReaderImpl implements JsonReader {
 

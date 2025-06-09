@@ -28,6 +28,7 @@ import java.lang.reflect.InvocationTargetException;
  * or return to the main menu. It supports pagination to handle a large number
  * of saves, showing up to 10 saves per page.
  * 
+ * @author Maretti Pietro
  */
 public final class SceneLoad extends Scene {
 

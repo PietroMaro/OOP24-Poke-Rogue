@@ -10,6 +10,8 @@ import lombok.Setter;
  * 
  * This class defines a range with minimum and maximum limits and
  * maintains a current value constrained within those bounds.
+ * 
+ * @author Tverdohleb Egor
  */
 @ToString
 public class RangeImpl implements Range {

@@ -9,6 +9,8 @@ import it.unibo.pokerogue.model.impl.graphic.PanelElementImpl;
 
 /**
  * Interface representing the initialization logic for the fight scene UI.
+ * 
+ * @author Miraglia Tommaso Cosimo
  */
 public interface FightInitView {
     /**

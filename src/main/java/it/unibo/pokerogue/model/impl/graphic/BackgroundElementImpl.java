@@ -9,6 +9,8 @@ import it.unibo.pokerogue.model.api.graphic.BackgroundElement;
 /**
  * A graphic element that represents a full-screen background sprite.
  * It internally uses a SpriteElementImpl that spans the entire panel.
+ * 
+ * @author Maretti Pietro
  */
 public final class BackgroundElementImpl extends GraphicElementImpl implements BackgroundElement {
     private static final long serialVersionUID = 1L;

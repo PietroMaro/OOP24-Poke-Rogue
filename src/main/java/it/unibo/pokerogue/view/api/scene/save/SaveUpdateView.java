@@ -8,6 +8,7 @@ import it.unibo.pokerogue.model.api.GraphicElementsRegistry;
  * Interface representing the view component responsible for updating the save
  * scene's graphics.
  * 
+ * @author Casadio Alex
  */
 public interface SaveUpdateView {
 

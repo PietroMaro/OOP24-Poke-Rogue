@@ -15,6 +15,8 @@ import java.awt.Image;
 
 /**
  * The interface of pokemon class.
+ * 
+ * @author Tverdohleb Egor
  */
 public interface Pokemon {
     /**

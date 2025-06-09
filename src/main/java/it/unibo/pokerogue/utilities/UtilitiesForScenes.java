@@ -15,6 +15,8 @@ import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
 /**
  * Utility class for managing scene-related file paths, button states,
  * and loading/removing dynamic graphic elements.
+ * 
+ * @author Maretti Pietro
  */
 public final class UtilitiesForScenes {
 

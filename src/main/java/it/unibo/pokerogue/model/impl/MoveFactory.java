@@ -19,6 +19,8 @@ import org.json.JSONArray;
 
 /**
  * Move factory implementation.
+ * 
+ * @author Tverdohleb Egor
  */
 public final class MoveFactory {
 

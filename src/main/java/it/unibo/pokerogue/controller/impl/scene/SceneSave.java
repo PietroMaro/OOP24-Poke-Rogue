@@ -21,12 +21,12 @@ import it.unibo.pokerogue.model.api.trainer.Trainer;
 /**
  * Represents the save scene in the game where the player can choose to either
  * continue playing or exit and save their progress.
- * <p>
  * This class handles the graphical elements and user interactions specific to
  * the save scene,
  * such as switching between buttons using the keyboard and triggering scene
  * transitions.
- * </p>
+ * 
+ * @author Casadio Alex
  */
 public class SceneSave extends Scene {
     private static final String EXIT_SAVE_LITTERAL = "EXIT_AND_SAVE_BUTTON";

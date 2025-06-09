@@ -14,6 +14,8 @@ import lombok.Setter;
 /**
  * Implementation of a rectangular box element with optional border and fill
  * color.
+ * 
+ * @author Maretti Pietro
  */
 @Getter
 public final class BoxElementImpl extends GraphicElementImpl implements BoxElement {

@@ -20,6 +20,8 @@ import it.unibo.pokerogue.view.api.scene.LoadView;
  * It handles the creation of panels, background images, save slots
  * visualization, and
  * interaction buttons dynamically based on existing saves.
+ * 
+ * @author Maretti Pietro
  */
 
 public final class SceneLoadView implements LoadView {

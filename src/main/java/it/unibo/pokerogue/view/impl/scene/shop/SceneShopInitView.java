@@ -17,6 +17,8 @@ import it.unibo.pokerogue.view.api.scene.shop.ShopInitView;
  * Handles the initialization of graphical elements for the shop scene.
  * It prepares UI components such as panels, item texts, and player money
  * display.
+ * 
+ * @author Casadio Alex
  */
 public final class SceneShopInitView implements ShopInitView {
 

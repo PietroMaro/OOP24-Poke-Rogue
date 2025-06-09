@@ -15,6 +15,8 @@ import lombok.Setter;
 /**
  * Implementation of the {@link Trainer} interface.
  * Represents a trainer with a squad of Pokemons, money, and Pokeballs.
+ * 
+ * @author Miraglia Tommaso Cosimo
  */
 @Getter
 @Setter

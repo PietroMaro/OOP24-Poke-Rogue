@@ -7,6 +7,8 @@ import java.io.IOException;
 /**
  * This class provides functionality to read and parse JSON data
  * from various sources, converting it into usable Java objects.
+ * 
+ * @author Tverdohleb Egor
  */
 public interface JsonReader {
 

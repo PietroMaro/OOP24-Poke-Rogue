@@ -2,6 +2,8 @@ package it.unibo.pokerogue.model.enums;
 
 /**
  * The situation in which we check if we should activate the ability.
+ * 
+ * @author Tverdohleb Egor
  */
 public enum AbilitySituationChecks {
     /**

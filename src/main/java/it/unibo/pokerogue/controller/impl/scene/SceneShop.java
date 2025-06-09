@@ -28,6 +28,8 @@ import lombok.Setter;
  * Represents the in-game shop scene where players can purchase and use items.
  * Handles user input, manages graphical elements, and controls item
  * transactions.
+ * 
+ * @author Casadio Alex
  */
 public class SceneShop extends Scene {
     private static final String FREE_ITEM_1 = "FREE_ITEM_1_BUTTON";

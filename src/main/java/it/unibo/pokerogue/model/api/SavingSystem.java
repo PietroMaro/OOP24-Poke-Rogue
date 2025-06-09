@@ -9,6 +9,8 @@ import java.io.IOException;
 /**
  * Interface for a system that manages saving and loading Pokémon data.
  * Supports file-based persistence and grouping of saved Pokémon.
+ * 
+ * @author Maretti Pietro
  */
 public interface SavingSystem {
     /**

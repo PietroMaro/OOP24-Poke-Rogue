@@ -5,6 +5,8 @@ import java.io.IOException;
 
 /**
  * Interface for graphical sprite elements that support changing their image.
+ * 
+ * @author Maretti Pietro
  */
 public interface SpriteElement {
     /**

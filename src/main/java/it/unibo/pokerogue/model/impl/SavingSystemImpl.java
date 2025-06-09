@@ -17,6 +17,8 @@ import java.util.Locale;
  * Implementation of the {@link SavingSystem} interface that handles
  * saving and loading Pokémon data using JSON files. Pokémon are stored
  * as a list of names and grouped into boxes of fixed size.
+ * 
+ * @author Maretti Pietro
  */
 public class SavingSystemImpl implements SavingSystem {
     private static final int BOX_SIZE = 81;

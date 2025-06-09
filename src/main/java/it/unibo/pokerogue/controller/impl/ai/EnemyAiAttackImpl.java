@@ -25,6 +25,8 @@ import java.io.IOException;
  * used by the enemy AI when selecting an attack during a Pokémon battle.
  * It can operate in simple random mode or more advanced scoring modes
  * depending on configuration flags.
+ * 
+ * @author Maretti Pietro
  */
 public final class EnemyAiAttackImpl implements EnemyAiAttack {
 
