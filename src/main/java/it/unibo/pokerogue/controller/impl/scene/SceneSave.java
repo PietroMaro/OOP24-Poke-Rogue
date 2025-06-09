@@ -33,6 +33,7 @@ public class SceneSave extends Scene {
     private static final String CONTINUE_LITTERAL = "CONTINUE_GAME_BUTTON";
     private static final Path SAVE_PATH = Paths.get("src", "main", "resources", "saves");
     private static final int MAX_NAME_LENGTH = 12;
+    private static final int MIN_NAME_LENGTH = 1;
     private final GraphicElementsRegistry currentSceneGraphicElements;
     private final GraphicElementsRegistry graphicElements;
     private final Map<String, PanelElementImpl> allPanelsElements;
@@ -149,6 +150,9 @@ public class SceneSave extends Scene {
             IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         if (savingSystemInstance.getSaveFilesName(String.valueOf(SAVE_PATH)).contains(typedSaveName + ".json")) {
             typedSaveName = "already present";
+            sceneSaveView.updateInputText(typedSaveName, this.currentSceneGraphicElements);
+        } else if (typedSaveName.length() < MIN_NAME_LENGTH) {
+            typedSaveName = "at least 1 character";
             sceneSaveView.updateInputText(typedSaveName, this.currentSceneGraphicElements);
         } else {
             savingSystemInstance.saveData(String.valueOf(SAVE_PATH), typedSaveName + ".json");
