@@ -154,7 +154,7 @@ public class SceneSave extends Scene {
             typedSaveName = "at least 1 character";
             sceneSaveView.updateInputText(typedSaveName, this.currentSceneGraphicElements);
         } else {
-            
+            gameEngineInstance.resetInstance();
             savingSystemInstance.saveData( typedSaveName + ".json");
             gameEngineInstance.setScene("main");
         }
