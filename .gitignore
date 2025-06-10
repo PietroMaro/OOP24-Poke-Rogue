@@ -14,5 +14,7 @@ appdata/
 .project
 .settings/
 .classpath
-
 build.log
+
+# Ignore VSCode settings
+.vscode
