@@ -33,7 +33,7 @@ import java.util.jar.JarFile;
  * 
  * @author Egor Tverdohleb
  */
-public class SavingSystemImpl implements SavingSystem {
+public final class SavingSystemImpl implements SavingSystem {
     private static final int BOX_SIZE = 81;
     private static final Logger LOGGER = LoggerFactory.getLogger(InputHandlerImpl.class);
     private static final String USER_DIR = "user.dir";
@@ -53,13 +53,15 @@ public class SavingSystemImpl implements SavingSystem {
         final File appDir = new File(currentDir, APPDATA);
 
         if (!appDir.exists() && !appDir.mkdirs()) {
-            throw new IOException("Impossibile creare la cartella: " + appDir.getAbsolutePath());
+            LOGGER.error("Unable to create directory: " + appDir.getAbsolutePath());
+
         }
 
         final String resourcePath = "saves";
         final ClassLoader classLoader = getClass().getClassLoader();
 
         try {
+
             final URL resource = classLoader.getResource(resourcePath);
 
             if ("jar".equals(resource.getProtocol())) {
@@ -81,26 +83,28 @@ public class SavingSystemImpl implements SavingSystem {
             } else if ("file".equals(resource.getProtocol())) {
                 final File folder = new File(resource.toURI());
                 if (folder.exists() && folder.isDirectory()) {
-                    for (final File file : folder
-                            .listFiles((dir, name) -> name.toLowerCase(Locale.ROOT).endsWith(".json"))) {
-                        final File outFile = new File(appDir, file.getName());
-                        Files.copy(file.toPath(), outFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    final File[] files = folder
+                            .listFiles((dir, name) -> name.toLowerCase(Locale.ROOT).endsWith(".json"));
+                    if (files != null) {
+                        for (final File file : files) {
+                            if (file != null) {
+                                final File outFile = new File(appDir, file.getName());
+                                Files.copy(file.toPath(), outFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                            }
+                        }
+                    } else {
+                        LOGGER.warn("The directory" + folder.getAbsolutePath() + " does not contain any JSON files");
                     }
                 }
+
             }
 
         } catch (URISyntaxException | IOException e) {
-            throw new IOException("Errore durante l'estrazione dei file di salvataggio", e);
+            LOGGER.error("Error while extracting save files", e);
         }
 
     }
 
-    /**
-     * Saves the given Pokémon to the current memory store.
-     * If the Pokémon name already exists in the save, it is ignored.
-     *
-     * @param pokemon the Pokémon to save
-     */
     @Override
     public void savePokemon(final Pokemon pokemon) {
         for (int pokemonIndex = 0; pokemonIndex < this.savedPokemon.length(); pokemonIndex += 1) {
@@ -111,12 +115,6 @@ public class SavingSystemImpl implements SavingSystem {
         savedPokemon.put(pokemon.getName());
     }
 
-    /**
-     * Loads Pokémon names from the specified JSON save file into memory.
-     *
-     * @param fileName the name of the file to load
-     * @throws IOException if the file does not exist or cannot be read
-     */
     @Override
     public void loadData(final String fileName) throws IOException {
         final String currentDir = System.getProperty(USER_DIR);
@@ -124,42 +122,31 @@ public class SavingSystemImpl implements SavingSystem {
         final File file = new File(appDir, fileName);
 
         if (!file.exists()) {
-            throw new IOException("Il file " + file.getAbsolutePath() + " non esiste.");
+            LOGGER.error("The file " + file.getAbsolutePath() + " does not exist.");
+
         }
 
         this.savedPokemon = jsonReader.readJsonArray(file.getAbsolutePath());
     }
 
-    /**
-     * Saves the current in-memory Pokémon names to the specified JSON file.
-     * Creates the file and appdata directory if they do not exist.
-     *
-     * @param fileName the name of the file to write
-     * @throws IOException if an error occurs while writing the file
-     */
     @Override
     public void saveData(final String fileName) throws IOException {
         final String currentDir = System.getProperty(USER_DIR);
         final File appDir = new File(currentDir, APPDATA);
 
         if (!appDir.exists() && !appDir.mkdirs()) {
-            throw new IOException("Impossibile creare la cartella: " + appDir.getAbsolutePath());
+            LOGGER.error("Unable to create directory: " + appDir.getAbsolutePath());
         }
 
         final File file = new File(appDir, fileName);
 
         if (!file.exists() && !file.createNewFile()) {
-            throw new IOException("Impossibile creare il file: " + file.getAbsolutePath());
+            LOGGER.error("Unable to create file: " + file.getAbsolutePath());
         }
 
         jsonReader.dumpJsonToFile(file.getAbsolutePath(), this.savedPokemon);
     }
 
-    /**
-     * Groups all saved Pokémon into boxes with a maximum of 81 entries each.
-     * 
-     * @return a list of boxes, each containing up to 81 Pokémon names
-     */
     @Override
     public List<List<String>> getSavedPokemon() {
         final List<List<String>> result = new ArrayList<>();
@@ -177,12 +164,6 @@ public class SavingSystemImpl implements SavingSystem {
         return result;
     }
 
-    /**
-     * Returns the list of save file names (ending with .json) available
-     * in the appdata folder.
-     *
-     * @return a list of JSON save file names
-     */
     @Override
     public List<String> getSaveFilesName() {
         final List<String> jsonFiles = new ArrayList<>();
@@ -209,13 +190,6 @@ public class SavingSystemImpl implements SavingSystem {
         return jsonFiles;
     }
 
-    /**
-     * Returns the number of Pokémon stored in the specified save file.
-     *
-     * @param fileName the name of the save file
-     * @return the number of Pokémon in the file
-     * @throws IOException if the file cannot be read
-     */
     @Override
     public int howManyPokemonInSave(final String fileName) throws IOException {
         final String currentDir = System.getProperty(USER_DIR);
