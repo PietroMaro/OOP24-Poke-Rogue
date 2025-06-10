@@ -153,6 +153,7 @@ public class SceneSave extends Scene {
             sceneSaveView.updateInputText(typedSaveName, this.currentSceneGraphicElements);
         } else {
             gameEngineInstance.resetInstance();
+            gameEngineInstance.setFightLevel(null);
             savingSystemInstance.saveData(typedSaveName + ".json");
             gameEngineInstance.setScene("main");
         }
