@@ -48,7 +48,7 @@ public class SceneFight extends Scene {
     private static final int USE_ULTRABALL = 302;
     private static final int USE_MASTERBALL = 303;
     private static final int DO_NOTHING = 4;
-    private static final int FINAL_LEVEL = 3;
+    private static final int FINAL_LEVEL = 10;
 
     private static final String FIGHT_BUTTON = "FIGHT_BUTTON";
 

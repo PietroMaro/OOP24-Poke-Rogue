@@ -254,8 +254,6 @@ public class BattleEngineImpl implements BattleEngine {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
-        System.out.println(battleLevel);
-        System.out.println(this.finalLevel);
 
         if (battleLevel == this.finalLevel) {
             gameEngineInstance.setScene("save");
