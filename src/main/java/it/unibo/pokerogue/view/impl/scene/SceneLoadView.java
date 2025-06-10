@@ -1,6 +1,5 @@
 package it.unibo.pokerogue.view.impl.scene;
 
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.io.IOException;

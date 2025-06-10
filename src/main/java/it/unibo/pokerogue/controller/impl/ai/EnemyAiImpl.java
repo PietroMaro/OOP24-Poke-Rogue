@@ -22,9 +22,9 @@ import java.io.IOException;
  */
 public final class EnemyAiImpl implements EnemyAi {
 
-    private static final int LOW_AI_THRESHOLD = 15;
-    private static final int MEDIUM_AI_THRESHOLD = 40;
-    private static final int HIGH_AI_THRESHOLD = 75;
+    private static final double LOW_AI_THRESHOLD = 0.15;
+    private static final double MEDIUM_AI_THRESHOLD = 0.40;
+    private static final double HIGH_AI_THRESHOLD = 0.75;
     private static final int DEFAULT_SWITCH_FIRST_RATE_PERCENT = 60;
 
     private final EnemyAiSwitchInImpl aiOfSwitchIn;
@@ -38,28 +38,29 @@ public final class EnemyAiImpl implements EnemyAi {
      * The AI's strategy and decision-making complexity increase as the battle level
      * rises.
      * 
-     * @param battleLvl the current battle difficulty level
+     * @param battleLvl    the current battle difficulty level
+     * @param finalLevel the maximum battle level after which the game terminates
      */
-    public EnemyAiImpl(final int battleLvl) throws IOException {
+    public EnemyAiImpl(final int battleLvl, final int finalLevel) throws IOException {
         boolean scoreMoves = false;
         boolean hpAware = false;
         boolean considerSwitching = false;
         boolean usePokemonInOrder = true;
         int switchFirstRate = DEFAULT_SWITCH_FIRST_RATE_PERCENT;
 
-        if (battleLvl >= LOW_AI_THRESHOLD) {
+        if (battleLvl >= finalLevel * LOW_AI_THRESHOLD) {
             scoreMoves = true;
             usePokemonInOrder = false;
 
         }
 
-        if (battleLvl > MEDIUM_AI_THRESHOLD) {
+        if (battleLvl > finalLevel * MEDIUM_AI_THRESHOLD) {
             considerSwitching = true;
             hpAware = true;
 
         }
 
-        if (battleLvl > HIGH_AI_THRESHOLD) {
+        if (battleLvl > finalLevel * HIGH_AI_THRESHOLD) {
             switchFirstRate = 90;
 
         }

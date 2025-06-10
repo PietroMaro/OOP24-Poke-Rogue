@@ -22,7 +22,6 @@ import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.file.Paths;
 
 /**
  * Abstract base class representing a generic scene in the game.

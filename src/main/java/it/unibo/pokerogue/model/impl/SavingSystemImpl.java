@@ -4,7 +4,6 @@ import java.util.List;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -34,30 +33,39 @@ import java.util.jar.JarFile;
  * 
  * @author Egor Tverdohleb
  */
-public class SavingSystemImpl implements SavingSystem {
+public final class SavingSystemImpl implements SavingSystem {
     private static final int BOX_SIZE = 81;
+    private static final Logger LOGGER = LoggerFactory.getLogger(InputHandlerImpl.class);
+    private static final String USER_DIR = "user.dir";
+    private static final String APPDATA = "appdata";
     private final JsonReader jsonReader = new JsonReaderImpl();
     private JSONArray savedPokemon = new JSONArray();
-    private static final Logger LOGGER = LoggerFactory.getLogger(InputHandlerImpl.class);
 
+    /**
+     * Constructs the saving system and ensures the appdata folder is initialized
+     * with default save files extracted from the resource folder.
+     * 
+     * @throws IOException if the appdata directory cannot be created or resources
+     *                     cannot be extracted
+     */
     public SavingSystemImpl() throws IOException {
-        final String currentDir = System.getProperty("user.dir");
-        final File appDir = new File(currentDir, "appdata");
+        final String currentDir = System.getProperty(USER_DIR);
+        final File appDir = new File(currentDir, APPDATA);
 
         if (!appDir.exists() && !appDir.mkdirs()) {
-            throw new IOException("Impossibile creare la cartella: " + appDir.getAbsolutePath());
+            LOGGER.error("Unable to create directory: " + appDir.getAbsolutePath());
+
         }
 
         final String resourcePath = "saves";
         final ClassLoader classLoader = getClass().getClassLoader();
 
         try {
+
             final URL resource = classLoader.getResource(resourcePath);
 
-           
-
-            if (resource.getProtocol().equals("jar")) {
-                final String jarPath = resource.getPath().substring(5, resource.getPath().indexOf("!"));
+            if ("jar".equals(resource.getProtocol())) {
+                final String jarPath = resource.getPath().substring(5, resource.getPath().indexOf('!'));
                 try (JarFile jarFile = new JarFile(URLDecoder.decode(jarPath, "UTF-8"))) {
                     final Enumeration<JarEntry> entries = jarFile.entries();
                     while (entries.hasMoreElements()) {
@@ -65,25 +73,34 @@ public class SavingSystemImpl implements SavingSystem {
                         final String name = entry.getName();
                         if (name.startsWith(resourcePath + "/") && name.endsWith(".json")) {
                             final InputStream is = classLoader.getResourceAsStream(name);
-                            final File outFile = new File(appDir, name.substring(name.lastIndexOf("/") + 1));
+                            final File outFile = new File(appDir, name.substring(name.lastIndexOf('/') + 1));
                             if (is != null && !outFile.exists()) {
                                 Files.copy(is, outFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                             }
                         }
                     }
                 }
-            } else if (resource.getProtocol().equals("file")) {
+            } else if ("file".equals(resource.getProtocol())) {
                 final File folder = new File(resource.toURI());
                 if (folder.exists() && folder.isDirectory()) {
-                    for (File file : folder.listFiles((dir, name) -> name.toLowerCase().endsWith(".json"))) {
-                        final File outFile = new File(appDir, file.getName());
-                        Files.copy(file.toPath(), outFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    final File[] files = folder
+                            .listFiles((dir, name) -> name.toLowerCase(Locale.ROOT).endsWith(".json"));
+                    if (files != null) {
+                        for (final File file : files) {
+                            if (file != null) {
+                                final File outFile = new File(appDir, file.getName());
+                                Files.copy(file.toPath(), outFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                            }
+                        }
+                    } else {
+                        LOGGER.warn("The directory" + folder.getAbsolutePath() + " does not contain any JSON files");
                     }
                 }
+
             }
 
-        } catch (Exception e) {
-            throw new IOException("Errore durante l'estrazione dei file di salvataggio", e);
+        } catch (URISyntaxException | IOException e) {
+            LOGGER.error("Error while extracting save files", e);
         }
 
     }
@@ -100,12 +117,13 @@ public class SavingSystemImpl implements SavingSystem {
 
     @Override
     public void loadData(final String fileName) throws IOException {
-        final String currentDir = System.getProperty("user.dir");
-        final File appDir = new File(currentDir, "appdata");
+        final String currentDir = System.getProperty(USER_DIR);
+        final File appDir = new File(currentDir, APPDATA);
         final File file = new File(appDir, fileName);
 
         if (!file.exists()) {
-            throw new IOException("Il file " + file.getAbsolutePath() + " non esiste.");
+            LOGGER.error("The file " + file.getAbsolutePath() + " does not exist.");
+
         }
 
         this.savedPokemon = jsonReader.readJsonArray(file.getAbsolutePath());
@@ -113,21 +131,17 @@ public class SavingSystemImpl implements SavingSystem {
 
     @Override
     public void saveData(final String fileName) throws IOException {
-        final String currentDir = System.getProperty("user.dir");
-        final File appDir = new File(currentDir, "appdata");
+        final String currentDir = System.getProperty(USER_DIR);
+        final File appDir = new File(currentDir, APPDATA);
 
-        if (!appDir.exists()) {
-            if (!appDir.mkdirs()) {
-                throw new IOException("Impossibile creare la cartella: " + appDir.getAbsolutePath());
-            }
+        if (!appDir.exists() && !appDir.mkdirs()) {
+            LOGGER.error("Unable to create directory: " + appDir.getAbsolutePath());
         }
 
         final File file = new File(appDir, fileName);
 
-        if (!file.exists()) {
-            if (!file.createNewFile()) {
-                throw new IOException("Impossibile creare il file: " + file.getAbsolutePath());
-            }
+        if (!file.exists() && !file.createNewFile()) {
+            LOGGER.error("Unable to create file: " + file.getAbsolutePath());
         }
 
         jsonReader.dumpJsonToFile(file.getAbsolutePath(), this.savedPokemon);
@@ -155,8 +169,8 @@ public class SavingSystemImpl implements SavingSystem {
         final List<String> jsonFiles = new ArrayList<>();
 
         try {
-            final String userDir = System.getProperty("user.dir");
-            final File appdataFolder = new File(userDir, "appdata");
+            final String userDir = System.getProperty(USER_DIR);
+            final File appdataFolder = new File(userDir, APPDATA);
 
             if (appdataFolder.exists() && appdataFolder.isDirectory()) {
                 final File[] files = appdataFolder
@@ -169,8 +183,8 @@ public class SavingSystemImpl implements SavingSystem {
                     }
                 }
             }
-        } catch (Exception e) {
-            LOGGER.error("Error while reading save files from appdata folder: ", e);
+        } catch (final SecurityException e) {
+            LOGGER.error("Security error while accessing appdata folder: ", e);
         }
 
         return jsonFiles;
@@ -178,8 +192,8 @@ public class SavingSystemImpl implements SavingSystem {
 
     @Override
     public int howManyPokemonInSave(final String fileName) throws IOException {
-        final String currentDir = System.getProperty("user.dir");
-        final File appDir = new File(currentDir, "appdata");
+        final String currentDir = System.getProperty(USER_DIR);
+        final File appDir = new File(currentDir, APPDATA);
 
         final File file = new File(appDir, fileName);
 
