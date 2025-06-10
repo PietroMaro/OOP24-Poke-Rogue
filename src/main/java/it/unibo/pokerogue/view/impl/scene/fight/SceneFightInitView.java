@@ -54,7 +54,11 @@ public final class SceneFightInitView implements FightInitView {
         }
 
         private void initTextElements(final GraphicElementsRegistry currentSceneGraphicElements,
-                        final Trainer enemyTrainerInstance, final Trainer playerTrainerInstance) {
+                        final Trainer enemyTrainerInstance, final Trainer playerTrainerInstance) throws IOException {
+                if (enemyTrainerInstance.isWild()) {
+                        UtilitiesForScenes.removeSceneElements("sceneFightElement.json", "removeTrainerText",
+                                        currentSceneGraphicElements);
+                }
                 UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "DETAILS_CONTAINER_TEXT",
                                 TextElementImpl.class).setText(
                                                 "What will "

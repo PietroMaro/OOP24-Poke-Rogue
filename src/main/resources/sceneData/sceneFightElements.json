@@ -592,6 +592,15 @@
             "panelName": "changePanel",
             "dirToImage": "fight",
             "imageFileName": "bg.png"
+        },
+        "484": {
+            "type": "text",
+            "panelName": "firstPanel",
+            "text": "TRAINER",
+            "textColor": "#FFFFFF",
+            "textDimension": 0.04,
+            "leftX": 0.18,
+            "leftY": 0.06
         }
     },
     "mapper": {
@@ -655,10 +664,12 @@
         "MASTERBALL_TEXT": 478,
         "CANCEL_TEXT": 480,
         "BACK_TEXT": 482,
-        "BACKGROUND_CHANGE": 483
+        "BACKGROUND_CHANGE": 483,
+        "TRAINER_TEXT": 484
     },
     "dynamicObjects": {
         "init": [
+            484,
             421,
             402,
             403,
@@ -740,6 +751,9 @@
             204,
             205,
             483
+        ],
+        "removeTrainerText": [
+            484
         ]
     }
 }
