@@ -37,7 +37,7 @@ import lombok.Getter;
  * 
  * @author Miraglia Tommaso Cosimo
  */
-public class BattleEngineImpl implements BattleEngine {
+public final class BattleEngineImpl implements BattleEngine {
     private static final Integer FIRST_POSITION = 0;
     private static final Integer MAX_SQUAD = 6;
     @Getter
@@ -77,21 +77,6 @@ public class BattleEngineImpl implements BattleEngine {
         this.captured = false;
     }
 
-    /**
-     * Calculates the priority of moves for the battle, handles ability effects,
-     * applies
-     * status conditions, and processes switch-ins or Pokéball actions.
-     * This method determines the flow of actions during a turn by evaluating both
-     * Pokémon's abilities, their moves, and any status effects or conditions that
-     * apply.
-     *
-     * @param playerDecision the player's decision for this turn, including move or
-     *                       item usage
-     * @param enemyDecision  the enemy's decision for this turn, controlled either
-     *                       by AI or predefined logic
-     * @param battleLevel    battleLevel.
-     * 
-     */
     @Override
     public void runBattleTurn(final Decision playerDecision, final Decision enemyDecision,
             final Trainer enemyTrainerInstance, final Trainer playerTrainerInstance,

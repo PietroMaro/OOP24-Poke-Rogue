@@ -21,7 +21,7 @@ import it.unibo.pokerogue.model.enums.StatusCondition;
  * @author Miraglia Tommaso Cosimo
  * 
  */
-public class StatusEffectImpl implements StatusEffect {
+public final class StatusEffectImpl implements StatusEffect {
     private static final double CONFUSION_CHARMED_FAIL_CHANCE = 0.5;
     private static final double FLINCH_FAIL_CHANCE = 0.2;
     private static final int DURATION_SHORT = 1;
@@ -57,12 +57,6 @@ public class StatusEffectImpl implements StatusEffect {
         statusMap.put(StatusCondition.SEEDED, DURATION_MEDIUM);
     }
 
-    /**
-     * Checks if the given Pokémon is allowed to attack based on its current status.
-     *
-     * @param pokemon the Pokémon attempting to attack
-     * @return {@code true} if it can attack; {@code false} otherwise
-     */
     @Override
     public Boolean checkStatusAttack(final Pokemon pokemon) {
 
@@ -86,13 +80,6 @@ public class StatusEffectImpl implements StatusEffect {
         return true;
     }
 
-    /**
-     * Checks if the given Pokémon is allowed to switch out based on its current
-     * status.
-     *
-     * @param pokemon the Pokémon attempting to switch
-     * @return {@code true} if it can switch; {@code false} otherwise
-     */
     @Override
     public Boolean checkStatusSwitch(final Pokemon pokemon) {
 
@@ -109,13 +96,6 @@ public class StatusEffectImpl implements StatusEffect {
         return true;
     }
 
-    /**
-     * Applies the effect of the current status condition to the Pokémon.
-     * May also affect the enemy Pokémon (e.g., Leech Seed).
-     *
-     * @param pokemon the Pokémon affected by the status
-     * @param enemy   the opposing Pokémon (used for effects like Leech Seed)
-     */
     @Override
     public void applyStatus(final Pokemon pokemon, final Pokemon enemy) {
 
