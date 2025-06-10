@@ -48,6 +48,7 @@ public class SceneFight extends Scene {
     private static final int USE_ULTRABALL = 302;
     private static final int USE_MASTERBALL = 303;
     private static final int DO_NOTHING = 4;
+    private static final int FINAL_LEVEL = 3;
 
     private static final String FIGHT_BUTTON = "FIGHT_BUTTON";
 
@@ -89,8 +90,8 @@ public class SceneFight extends Scene {
         this.currentSceneGraphicElements = new GraphicElementsRegistryImpl(new LinkedHashMap<>(),
                 this.graphicElementNameToInt);
         this.allPanelsElements = new LinkedHashMap<>();
-        this.enemyAiInstance = new EnemyAiImpl(battleLevel);
-        this.battleEngineInstance = new BattleEngineImpl(enemyAiInstance, savingSystemInstance);
+        this.enemyAiInstance = new EnemyAiImpl(battleLevel, FINAL_LEVEL);
+        this.battleEngineInstance = new BattleEngineImpl(enemyAiInstance, savingSystemInstance, FINAL_LEVEL);
         this.generateEnemyInstance = new GenerateEnemyImpl(battleLevel);
         this.generateEnemyInstance.generateEnemy(this.enemyTrainerInstance);
         this.initStatus();

@@ -248,7 +248,7 @@ final class TestAll {
             InstantiationException, IOException {
         final TrainerImpl enemyTrainer = new TrainerImpl();
         final Optional<Weather> weather = Optional.of(Weather.SUNLIGHT);
-        final EnemyAi ai = new EnemyAiImpl(99);
+        final EnemyAi ai = new EnemyAiImpl(99, 100);
         final Pokemon charmander = PokemonFactory.pokemonFromName(CHARMANDER_LITTERAL);
         final Pokemon venusaur = PokemonFactory.pokemonFromName("venusaur");
         final Pokemon poliwag = PokemonFactory.pokemonFromName("poliwag");
@@ -294,9 +294,9 @@ final class TestAll {
         final GameEngine gameEngineInstance = new GameEngineImpl();
         playerTrainer.addPokemon(bulbasaur, 1);
         enemyTrainer.addPokemon(charmander, 1);
-        final EnemyAi ai = new EnemyAiImpl(99);
+        final EnemyAi ai = new EnemyAiImpl(99, 100);
         final int beforeLife = playerTrainer.getSquad().get(0).get().getActualStats().get(Stats.HP).getCurrentValue();
-        final BattleEngine battleEngine = new BattleEngineImpl(ai, new SavingSystemImpl());
+        final BattleEngine battleEngine = new BattleEngineImpl(ai, new SavingSystemImpl(), 100);
         battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.NOTHING, ""),
                 new Decision(DecisionTypeEnum.ATTACK, "0"), enemyTrainer, playerTrainer, gameEngineInstance, 0);
         final int afterLife = playerTrainer.getSquad().get(0).get().getActualStats().get(Stats.HP).getCurrentValue();
@@ -316,8 +316,8 @@ final class TestAll {
         playerTrainer.addPokemon(bulbasaur, 1);
         enemyTrainer.addPokemon(charmander, 1);
         playerTrainer.addBall(MASTERBALL_LITTERAL, 1);
-        final EnemyAi ai = new EnemyAiImpl(99);
-        final BattleEngine battleEngine = new BattleEngineImpl(ai, new SavingSystemImpl());
+        final EnemyAi ai = new EnemyAiImpl(99, 100);
+        final BattleEngine battleEngine = new BattleEngineImpl(ai, new SavingSystemImpl(), 100);
         battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.POKEBALL, MASTERBALL_LITTERAL),
                 new Decision(DecisionTypeEnum.NOTHING, ""), enemyTrainer, playerTrainer, gameEngineInstance, 0);
         assertEquals(playerTrainer.getBall().get(MASTERBALL_LITTERAL), 0);
@@ -343,9 +343,9 @@ final class TestAll {
         playerTrainer.addPokemon(bulbasaur, 2);
         playerTrainer.addPokemon(charizard, 2);
         enemyTrainer.addPokemon(charmander, 1);
-        final EnemyAi ai = new EnemyAiImpl(99);
+        final EnemyAi ai = new EnemyAiImpl(99, 100);
         final int beforeLife = playerTrainer.getSquad().get(0).get().getActualStats().get(Stats.HP).getCurrentValue();
-        final BattleEngine battleEngine = new BattleEngineImpl(ai, new SavingSystemImpl());
+        final BattleEngine battleEngine = new BattleEngineImpl(ai, new SavingSystemImpl(), 100);
         battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.SWITCH_IN, "1"),
                 new Decision(DecisionTypeEnum.ATTACK, "0"), enemyTrainer, playerTrainer, gameEngineInstance, 0);
         final int afterLife = playerTrainer.getSquad().get(1).get().getActualStats().get(Stats.HP).getCurrentValue();

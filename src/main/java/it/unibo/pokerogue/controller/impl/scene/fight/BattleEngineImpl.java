@@ -40,12 +40,12 @@ import lombok.Getter;
 public class BattleEngineImpl implements BattleEngine {
     private static final Integer FIRST_POSITION = 0;
     private static final Integer MAX_SQUAD = 6;
-    private static final int FINAL_LEVEL = 1;
     @Getter
     private final Optional<Weather> currentWeather;
     private final StatusEffect statusEffectInstance;
     private final EnemyAi enemyAiInstance;
     private final SavingSystem savingSystemInstance;
+    private final int finalLevel;
     private boolean captured;
     private Pokemon playerPokemon;
     private Pokemon enemyPokemon;
@@ -59,8 +59,11 @@ public class BattleEngineImpl implements BattleEngine {
      * 
      * @param enemyAiInstance the AI instance controlling the enemy's strategy
      * @param savingSystem    the main saving system
+     * @param finalLevel      the maximum battle level after
+     *                        which the game terminates
+     * 
      */
-    public BattleEngineImpl(final EnemyAi enemyAiInstance, final SavingSystem savingSystem)
+    public BattleEngineImpl(final EnemyAi enemyAiInstance, final SavingSystem savingSystem, final int finalLevel)
             throws NoSuchMethodException,
             IOException,
             IllegalAccessException,
@@ -70,6 +73,7 @@ public class BattleEngineImpl implements BattleEngine {
         this.statusEffectInstance = new StatusEffectImpl();
         this.enemyAiInstance = enemyAiInstance;
         this.savingSystemInstance = savingSystem;
+        this.finalLevel = finalLevel;
         this.captured = false;
     }
 
@@ -250,7 +254,10 @@ public class BattleEngineImpl implements BattleEngine {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
-        if (battleLevel == FINAL_LEVEL) {
+        System.out.println(battleLevel);
+        System.out.println(this.finalLevel);
+
+        if (battleLevel == this.finalLevel) {
             gameEngineInstance.setScene("save");
         }
         if (BattleUtilities.isTeamWipedOut(enemyTrainerInstance) || this.captured) {
