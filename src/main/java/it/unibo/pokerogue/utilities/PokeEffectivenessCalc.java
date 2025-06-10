@@ -27,7 +27,7 @@ import java.io.IOException;
  * The effectiveness data is read from a JSON file located at:
  * {@code src/pokemon_data/pokemonEffectiveness.json}
  *
- * @author Tverdohleb Egor
+ * @author Maretti Pietro
  */
 public final class PokeEffectivenessCalc {
 
