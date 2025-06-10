@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import it.unibo.pokerogue.controller.api.GameEngine;
 import it.unibo.pokerogue.controller.api.scene.Scene;
@@ -31,7 +32,7 @@ import java.lang.reflect.InvocationTargetException;
  * 
  * @author Maretti Pietro
  */
-public class SceneBox extends Scene {
+public final class SceneBox extends Scene {
 
         private static final int START_BUTTON_POSITION = 5;
         private static final int FIRST_POKEMON_BUTTON_POSITION = 6;
@@ -78,26 +79,6 @@ public class SceneBox extends Scene {
                 this.initGraphicElements();
         }
 
-        /**
-         * Updates the status of the scene based on the user input key.
-         * Handles the navigation and interaction within the Pokémon box UI,
-         * including moving the selection cursor, switching boxes, and adding/removing
-         * Pokémon.
-         *
-         * @param inputKey the key code of the pressed key (e.g., KeyEvent.VK_UP,
-         *                 VK_DOWN, VK_ENTER, etc.)
-         * @throws IOException               if an I/O error occurs during scene changes
-         *                                   or updates.
-         * @throws InstantiationException    if a class for a new scene cannot be
-         *                                   instantiated.
-         * @throws IllegalAccessException    if the currently executing method does not
-         *                                   have access to the definition of the
-         *                                   specified class.
-         * @throws InvocationTargetException if the underlying method throws an
-         *                                   exception.
-         * @throws NoSuchMethodException     if a method expected for instantiation is
-         *                                   not found.
-         */
         @Override
         public void updateStatus(final int inputKey, final GameEngine gameEngineInstance,
                         final Trainer playerTrainerInstance, final SavingSystem savingSystemInstance)
@@ -164,7 +145,9 @@ public class SceneBox extends Scene {
                                 break;
 
                         case KeyEvent.VK_ENTER:
-                                if (this.currentSelectedButton == START_BUTTON_POSITION) {
+                                if (this.currentSelectedButton == START_BUTTON_POSITION
+                                                && this.isPlayerSquadNotEmpty(playerTrainerInstance)) {
+
                                         gameEngineInstance.setScene("fight");
                                 }
 
@@ -196,12 +179,6 @@ public class SceneBox extends Scene {
 
         }
 
-        /**
-         * Updates the graphical representation of the current box scene,
-         * including the selected Pokémon and the box view.
-         *
-         * @throws IOException if an I/O error occurs while loading resources.
-         */
         @Override
         public void updateGraphic(final SavingSystem savingSystemInstance, final Trainer playerTrainerInstance)
                         throws IOException {
@@ -241,21 +218,11 @@ public class SceneBox extends Scene {
                 UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, this.currentSceneGraphicElements);
         }
 
-        /**
-         * Returns a copy of the current scene's graphical elements registry.
-         *
-         * @return a copy of the current GraphicElementsRegistry.
-         */
         @Override
         public GraphicElementsRegistry getCurrentSceneGraphicElements() {
                 return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);
         }
 
-        /**
-         * Returns a map containing all panel elements currently loaded in the scene.
-         *
-         * @return a LinkedHashMap of all PanelElementImpl objects.
-         */
         @Override
         public Map<String, PanelElementImpl> getAllPanelsElements() {
                 return new LinkedHashMap<>(this.allPanelsElements);
@@ -276,16 +243,19 @@ public class SceneBox extends Scene {
                         this.addPokemonToBox(PokemonFactory.pokemonFromName("squirtle"));
 
                 } else {
-                     savingSystemInstance.loadData(savePath);
+                        savingSystemInstance.loadData(savePath);
 
+                        final List<List<String>> boxes = savingSystemInstance.getSavedPokemon();
 
-                        for (final var box : savingSystemInstance.getSavedPokemon()) {
+                        for (final List<String> box : boxes) {
+
                                 for (final String pokemonName : box) {
                                         this.addPokemonToBox(PokemonFactory.pokemonFromName(pokemonName));
 
                                 }
 
                         }
+
                 }
 
         }
@@ -302,6 +272,19 @@ public class SceneBox extends Scene {
                 }
 
                 this.boxes.get(this.boxes.size() - 1).add(pokemon);
+
+        }
+
+        private boolean isPlayerSquadNotEmpty(final Trainer playerTrainerInstance) {
+
+                for (final Optional<Pokemon> pokemon : playerTrainerInstance.getSquad()) {
+                        if (pokemon.isPresent()) {
+                                return true;
+                        }
+
+                }
+
+                return false;
 
         }
 

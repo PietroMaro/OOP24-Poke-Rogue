@@ -150,17 +150,21 @@ public final class SavingSystemImpl implements SavingSystem {
     @Override
     public List<List<String>> getSavedPokemon() {
         final List<List<String>> result = new ArrayList<>();
-        final List<String> newBox = new ArrayList<>();
         for (int pokemonIndex = 0; pokemonIndex < this.savedPokemon.length(); pokemonIndex += 1) {
-            if (newBox.size() >= BOX_SIZE) {
-                result.add(newBox);
-                newBox.clear();
+
+            if (result.isEmpty()) {
+                result.add(new ArrayList<>());
             }
-            newBox.add(this.savedPokemon.getString(pokemonIndex));
+
+            if (result.get(result.size() - 1).size() == BOX_SIZE) {
+                result.add(new ArrayList<>());
+
+            }
+
+            result.get(result.size() - 1).add(this.savedPokemon.getString(pokemonIndex));
+
         }
-        if (!newBox.isEmpty()) {
-            result.add(newBox);
-        }
+
         return result;
     }
 
