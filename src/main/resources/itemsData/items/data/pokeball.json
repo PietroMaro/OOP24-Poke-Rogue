@@ -2,7 +2,7 @@
     "id": 3,
     "name": "pokeball",
     "type": "Capture",
-    "description": "A standard Pok\u00c3\u00a9 Ball.",
+    "description": "A standard Poke Ball.",
     "price": 200,
     "rarity": "Common",
     "category": "Consumable",

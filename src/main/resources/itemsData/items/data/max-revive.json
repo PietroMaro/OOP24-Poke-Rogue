@@ -2,7 +2,7 @@
     "id": 9,
     "name": "Revive",
     "type": "Healing",
-    "description": "Revives a Pok\u00c3\u00a9mon with half of his max HP.",
+    "description": "Revives a Pokemon with half of his max HP.",
     "price": 1500,
     "rarity": "Common",
     "category": "Consumable",

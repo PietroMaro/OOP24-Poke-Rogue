@@ -2,7 +2,7 @@
     "id": 10,
     "name": "Max Revive",
     "type": "Healing",
-    "description": "Revives a Pok\u00c3\u00a9mon with full HP.",
+    "description": "Revives a Pokemon with full HP.",
     "price": 4000,
     "rarity": "Great",
     "category": "Consumable",

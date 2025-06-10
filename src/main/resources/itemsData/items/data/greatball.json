@@ -2,7 +2,7 @@
     "id": 1,
     "name": "megaball",
     "type": "Capture",
-    "description": "A Pok\u00c3\u00a9 Ball with a refined capture rate.",
+    "description": "A Poke Ball with a refined capture rate.",
     "price": 600,
     "rarity": "Great",
     "category": "Consumable",

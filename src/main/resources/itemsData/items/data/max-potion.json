@@ -2,7 +2,7 @@
     "id": 8,
     "name": "Max Potion",
     "type": "Healing",
-    "description": "Completely restores of a single Pok\u00c3\u00a9mon.",
+    "description": "Completely restores of a single Pokemon.",
     "price": 2500,
     "rarity": "Rare",
     "category": "Consumable",
