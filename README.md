@@ -1,4 +1,5 @@
-# Sample Gradle Project
+# PokeRogue 
+ 
+This is the repository of the OOP project PokeRogue.
 
-This is a repository that can be used as a base to develop an OOP project.
-The tools seen in the lab are pre-integrated in the build file.
+
