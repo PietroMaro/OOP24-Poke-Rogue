@@ -1,7 +1,6 @@
 package it.unibo.pokerogue.controller.impl.scene;
 
 import java.awt.event.KeyEvent;
-import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;

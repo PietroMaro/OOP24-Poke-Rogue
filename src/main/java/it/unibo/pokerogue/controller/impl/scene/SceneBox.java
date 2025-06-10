@@ -21,7 +21,6 @@ import lombok.Getter;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.file.Paths;
 
 /**
  * Represents the Box scene where the player can view and manage stored

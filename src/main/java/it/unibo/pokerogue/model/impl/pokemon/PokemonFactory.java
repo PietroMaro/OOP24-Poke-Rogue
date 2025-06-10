@@ -1,9 +1,7 @@
 package it.unibo.pokerogue.model.impl.pokemon;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -34,10 +32,7 @@ import it.unibo.pokerogue.utilities.impl.JsonReaderImpl;
  */
 public final class PokemonFactory {
 
-    private static final String SRC_LITTERAL = "src";
     private static final String POKEMON_DATA = "pokemonData";
-    private static final String MAIN_LITTERAL = "main";
-    private static final String RESOURCES_LITTERAL = "resources";
 
     private static final JsonReader JSON_READER = new JsonReaderImpl();
     private static final Random RANDOM = new Random();

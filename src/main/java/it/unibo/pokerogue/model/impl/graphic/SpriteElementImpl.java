@@ -3,7 +3,6 @@ package it.unibo.pokerogue.model.impl.graphic;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -53,7 +52,7 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
             final double spriteHeight) throws IOException {
         super(panelName);
 
-        var is = getClass().getClassLoader().getResourceAsStream(pathToImage);
+        final var is = getClass().getClassLoader().getResourceAsStream(pathToImage);
         this.spriteImage = ImageIO.read(is);
 
         this.leftUpX = leftUpX;
@@ -77,7 +76,7 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
             final String path = UtilitiesForScenes
                     .getPathString(jsonMetrix.getString("dirToImage"), jsonMetrix.getString("imageFileName"));
 
-            var is = getClass().getClassLoader().getResourceAsStream(path);
+            final var is = getClass().getClassLoader().getResourceAsStream(path);
             this.spriteImage = ImageIO.read(is);
 
         }
@@ -145,7 +144,7 @@ public final class SpriteElementImpl extends GraphicElementImpl implements Sprit
 
     @Override
     public void setImage(final String pathToImage) throws IOException {
-        var is = getClass().getClassLoader().getResourceAsStream(pathToImage);
+        final var is = getClass().getClassLoader().getResourceAsStream(pathToImage);
         this.spriteImage = ImageIO.read(is);
     }
 

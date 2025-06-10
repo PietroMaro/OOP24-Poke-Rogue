@@ -3,8 +3,6 @@ package it.unibo.pokerogue.controller.impl.scene;
 import java.io.IOException;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -155,7 +153,7 @@ public class SceneSave extends Scene {
             sceneSaveView.updateInputText(typedSaveName, this.currentSceneGraphicElements);
         } else {
             gameEngineInstance.resetInstance();
-            savingSystemInstance.saveData( typedSaveName + ".json");
+            savingSystemInstance.saveData(typedSaveName + ".json");
             gameEngineInstance.setScene("main");
         }
 
