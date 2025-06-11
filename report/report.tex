@@ -496,9 +496,9 @@ Nonostante tutto, considero l’esperienza estremamente formativa: ho imparato d
 \chapter{Guida utente}
 
 \section*{A.1 Inizio del gioco}
-In tutte le schermate, l’utente può utilizzare i tasti freccia \textbf{su} e \textbf{giù} per spostarsi tra le opzioni disponibili.  
+In tutte le schermate, l’utente può utilizzare i tasti freccia \textbf{su} , \textbf{giù} ,\textbf{destra} e \textbf{sinistra} per spostarsi tra le opzioni disponibili.  
 Una volta selezionata l’opzione desiderata, è sufficiente premere il tasto \textbf{Invio} per confermare.
-L’uso del mouse non è supportato.
+\textbf{L’uso del mouse non è supportato.}
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{immagini/scermataHome.png}
@@ -509,13 +509,27 @@ Dopo aver aperto l’applicativo, ci si troverà nella schermata principale (Fig
 Questa schermata presenta tre opzioni principali:
 
 \begin{itemize}
-  \item \textbf{Continue}: consente di riprendere una partita precedentemente salvata;
+  \item \textbf{Continue}: consente di riprendere una partita precedentemente salvata (sono presenti salvataggi utili alla demo);
   \item \textbf{New Game}: avvia una nuova partita da zero;
   \item \textbf{Info}: mostra informazioni aggiuntive sul gioco.
 \end{itemize}
 
 Per iniziare una nuova partita, selezionare l'opzione \texttt{New Game} e premere Invio.
 Se si desidera esplorare i salvataggi disponibili, ad esempio per sperimentare il funzionamento di elementi specifici come il box oppure per riprendere una sessione precedente, è possibile accedere all’elenco dei salvataggi attraverso l’opzione \texttt{Load Game}, disponibile una volta selezionata \texttt{Continue}.
+
+\section{Selezione vecchio salvataggio}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{immagini/schermataLoad.png}
+  \caption{Visualizzazione dei salvataggi}
+  \label{fig:load_screen}
+\end{figure}
+
+Nel menu di selezione di caricamento sono presenti dimensione(numero di pokemon sbloccati) e nome del salvataggio.
+Sono presenti più schermato con salvataggi infatti arrivando al salvataggio a fondo pagina e scendendo nuovamente si avrà un'altra schermata con altri salvataggi.
+Se si volesse tornare in dietro, solamente in questa scena, sarà possibile premere il tasto \textbf{backspace}.
+
 
 \section{Panoramica del Pokémon Selezionato}
 
@@ -524,14 +538,15 @@ Prima di iniziare il round, viene sempre visualizzata una schermata riepilogativ
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{immagini/schermataBox.png}
-  \caption{Panoramica del Pokémon selezionato prima dell’inizio del round}
+  \caption{Panoramica del Pokémon selezionato prima dell'inizio del round, esempio di New Game}
   \label{fig:pokemon_panorama}
 \end{figure}
 
 Nel \textbf{pannello a sinistra} vengono mostrate le informazioni relative al Pokémon selezionato, come il nome, il tipo, l’abilità e la mossa attualmente assegnata.\\
 Nel \textbf{pannello a destra}, in alto, sono visibili i primi tre Pokémon disponibili.\\
 Nel caso si carichi un salvataggio in cui sono stati catturati altri Pokémon durante partite precedenti, anche questi verranno mostrati e potranno essere selezionati.\\
-Una volta selezionato almeno un Pokémon, sarà possibile premere il pulsante \texttt{Start} per avviare il gioco.
+Una volta scelto il Pokémon premere invio per aggiungerlo alla squadra, si potrà notare che occuperà uno dei 3 slot disponibili sopra al pulsante \textbf{Start}, sarà possibile rimuovere i Pokémon selezionati premendo invio sullo slot che occupano.\\
+Una volta selezionato almeno un Pokémon, sarà possibile premere il pulsante \textbf{Start} per avviare il gioco.
 
 \section{Fase di Combattimento}
 
@@ -546,9 +561,27 @@ Una volta avviato il round, l’utente accede alla fase di combattimento, durant
 A destra sono disponibili quattro opzioni, rappresentate da pulsanti rettangolari:
 
 \begin{itemize}
-  \item \textbf{FIGHT}: per attaccare utilizzando una delle mosse del Pokémon. Inizialmente ogni Pokémon avrà a disposizione una mossa, ma con il crescere del livello se ne sbloccheranno di nuove;
-  \item \textbf{BALL}: per tentare la cattura del Pokémon avversario, da tenere conto che se si starà affrontando un Trainer e non un Pokémon selvatico non sarà possibile catturarlo, infatti si potrà notare che le PokéBall non diminuiranno;
-  \item \textbf{POKEMON}: per cambiare il Pokémon attivo con un altro del proprio team;
+  \item \textbf{FIGHT}: per attaccare utilizzando una delle mosse del Pokémon. Inizialmente ogni Pokémon avrà a disposizione una mossa, ma con il crescere del livello se ne sbloccheranno di nuove, da notare che ogni mossa avrà un limite di utilizzi (PP) che potranno essere ricaricati tramite oggetti dello Shop;
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth]{immagini/moveImg.png}
+    \caption{Le mosse non ancora sbloccate verrano visualizzate come "???", sarà possibile utilizzarle ma non avranno alcun effetto}
+    \label{fig:combat_phase}
+\end{figure}
+  \item \textbf{BALL}: per tentare la cattura del Pokémon avversario, da tenere conto che se si starà affrontando un Trainer e non un Pokémon selvatico non sarà possibile catturarlo, infatti si potrà notare che le PokéBall non diminuiranno. Se il Pokémon verrà catturato correttamente e si avrà spazio in squadra ne diventerà un membro.
+  \begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth]{immagini/ballImg.png}
+    \caption{Ad ogni partita si parte con 5 Poké Ball ognuna di esse ha probabilità maggiore di cattura incrementale, fino ad arrivare alla Master Ball che ha una probabilità assicurata di cattura.}
+    \label{fig:combat_phase}
+\end{figure}
+  \item \textbf{POKEMON}: per cambiare il Pokémon attivo con un altro del proprio team, basterà scegliere con quale Pokémon sostituirlo posizionandosi sopra e premendo \textbf{Start};
+  \begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth]{immagini/changePoke.png}
+    \caption{Gli spazi vuoti della squadra saranno visti come "???", sarà possibile utilizzarli ma non avranno alcun effetto, quando verranno catturati nuovi Pokémon verrano rimpiazzati}
+    \label{fig:combat_phase}
+\end{figure}
   \item \textbf{RUN}: per saltare il turno.
 \end{itemize}
 
@@ -563,8 +596,22 @@ Dopo la fase di combattimento, il giocatore ha accesso a un negozio in cui può 
 \end{figure}
 Nella \textbf{parte superiore destra} è visualizzato il totale di denaro a disposizione del giocatore, mentre al centro sono disposti i vari oggetti acquistabili, ciascuno rappresentato da il nome dell’oggetto e il relativo prezzo.
 Gli oggetti sono divisi in gratuiti e a pagamento (presentano il prezzo), gli oggetti a pagamento sono acquistabili solo se si hanno abbstanza soldi.\\
-Nella \textbf{parte inferiore sinistra} è presente un pulsante “\texttt{REROLL}” che permette di aggiornare casualmente gli oggetti in vendita al costo di 50 monete. In basso a destra, un pulsante “\texttt{TEAM}” consente di accedere alla schermata del proprio team.\\
+Nella \textbf{parte inferiore sinistra} è presente un pulsante “\texttt{REROLL}” che permette di aggiornare casualmente gli oggetti in vendita al costo di 50 monete.Nella \textbf{parte inferiore destra}, è presente un pulsante “\texttt{TEAM}” consente di accedere alla schermata del proprio team.\\
 Infine, nella \textbf{parte inferiore centrale} si trova un riquadro descrittivo che mostra informazioni dettagliate sull’oggetto attualmente selezionato, aiutando il giocatore nella scelta d’acquisto.
+
+\section{Salvataggio}
+Dopo il decimo combattimento, si aprirà la schermata di salvataggio.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{immagini/schermataSalvataggio.png}
+  \caption{Visualizzazione della schermata di salvataggio.}
+  \label{fig:save_screen}
+\end{figure}
+
+Nel \textbf{pulsante a sinistra} è visualizzato il nome del salvataggio, che va scritto dall'utente tramite tastiera, sarà possibile usare ogni carattere, numero, spazi e sarà possibile cancellare ciò che si ha scritto utilizzando backspace, con lunghezza in caratteri compresa tra 1 e 12, una volta scritto il nome basterà premere invio sul bottone e verrà creato un nuovo salvataggio, nel caso il nome sia già presente oppure non rispetti i limiti di dimensione non sarà possibile salvare.
+Se ivece si desidera uscire senza salvare la partita basterà utilizzare il \textbf{pulsante a destra}
+
 
 
 
