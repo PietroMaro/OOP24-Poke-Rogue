@@ -157,6 +157,9 @@ public final class BattleEngineImpl implements BattleEngine {
                 if (playerTrainerInstance.getSquad().size() <= MAX_SQUAD) {
                     playerTrainerInstance.addPokemon(enemyPokemon, MAX_SQUAD);
                     this.savingSystemInstance.savePokemon(enemyPokemon);
+                    final var listActualMoves = enemyPokemon.getActualMoves();
+                    listActualMoves.remove(listActualMoves.size()-1);
+                    enemyPokemon.setActualMoves(listActualMoves);
                     this.captured = true;
                     this.newEnemyCheck(playerTrainerInstance, enemyTrainerInstance, gameEngineInstance, battleLevel);
                 } else {
