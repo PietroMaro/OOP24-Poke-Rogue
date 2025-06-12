@@ -496,16 +496,20 @@ Nonostante tutto, considero l’esperienza estremamente formativa: ho imparato d
 \chapter{Guida utente}
 
 \section*{A.1 Inizio del gioco}
-In tutte le schermate, l’utente può utilizzare i tasti freccia \textbf{su} , \textbf{giù} ,\textbf{destra} e \textbf{sinistra} per spostarsi tra le opzioni disponibili.  
-Una volta selezionata l’opzione desiderata, è sufficiente premere il tasto \textbf{Invio} per confermare.
-\textbf{L’uso del mouse non è supportato.}
+In tutte le schermate, l’utente può utilizzare i tasti freccia \textbf{su}, \textbf{giù}, \textbf{destra} e \textbf{sinistra} per spostarsi tra le opzioni disponibili.  
+Una volta selezionata l’opzione desiderata, è sufficiente premere il tasto \textbf{Invio} per confermare.\\
+\textbf{L’uso del mouse non è supportato.}\\
+La presenza del tasto \textbf{Back} in una schermata consente di tornare a quella precedente.
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{immagini/scermataHome.png}
   \caption{Schermata principale del gioco al lancio dell'applicazione}
+    \label{fig:scermataHome}
+
 \end{figure}
 
-Dopo aver aperto l’applicativo, ci si troverà nella schermata principale (Figura A.1).  
+Dopo l’apertura dell’applicativo, si accede alla schermata principale (vedi Figura ~\ref{fig:scermataHome}).\\
 Questa schermata presenta tre opzioni principali:
 
 \begin{itemize}
@@ -514,8 +518,9 @@ Questa schermata presenta tre opzioni principali:
   \item \textbf{Info}: mostra informazioni aggiuntive sul gioco.
 \end{itemize}
 
-Per iniziare una nuova partita, selezionare l'opzione \texttt{New Game} e premere Invio.
-Se si desidera esplorare i salvataggi disponibili, ad esempio per sperimentare il funzionamento di elementi specifici come il box oppure per riprendere una sessione precedente, è possibile accedere all’elenco dei salvataggi attraverso l’opzione \texttt{Load Game}, disponibile una volta selezionata \texttt{Continue}.
+Per iniziare una nuova partita, selezionare l’opzione \texttt{New Game} e premere \textbf{Invio}.\\
+Se si desidera esplorare i salvataggi disponibili ad esempio, per sperimentare il funzionamento di elementi specifici come il box, oppure per riprendere una sessione precedente è possibile accedere all’elenco dei salvataggi tramite l’opzione \texttt{Load Game}, disponibile una volta selezionato \texttt{Continue}.
+
 
 \section{Selezione vecchio salvataggio}
 
@@ -526,27 +531,31 @@ Se si desidera esplorare i salvataggi disponibili, ad esempio per sperimentare i
   \label{fig:load_screen}
 \end{figure}
 
-Nel menu di selezione di caricamento sono presenti dimensione(numero di pokemon sbloccati) e nome del salvataggio.
-Sono presenti più schermato con salvataggi infatti arrivando al salvataggio a fondo pagina e scendendo nuovamente si avrà un'altra schermata con altri salvataggi.
-Se si volesse tornare in dietro, solamente in questa scena, sarà possibile premere il tasto \textbf{backspace}.
+Nel menu di selezione del salvataggio sono visibili la dimensione (ovvero il numero di Pokémon sbloccati) e il nome del salvataggio.\\
+Sono presenti più schermate di salvataggi, se si hanno più di 9 salvataggi, raggiungendo l’ultimo salvataggio visibile e premendo nuovamente il tasto freccia giù, si accederà a una nuova schermata con altri salvataggi.\\
+Per tornare indietro al menu, solo in questa scena, è possibile premere il tasto \textbf{Backspace}.
 
 
-\section{Panoramica del Pokémon Selezionato}
+\section{Scelta del proprio team}
 
-Prima di iniziare il round, viene sempre visualizzata una schermata riepilogativa del Pokémon selezionato dall’utente (Figura~\ref{fig:pokemon_panorama}), contenente i dettagli principali delle sue caratteristiche.
+Prima di iniziare una run, viene sempre visualizzata una schermata in cui bisognerà formare il proprio team. (Figura~\ref{fig:pokemon_panorama}).\\
+Posizionandosi con il cursore su un Pokémon, vengono mostrate le sue caratteristiche.
+
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{immagini/schermataBox.png}
-  \caption{Panoramica del Pokémon selezionato prima dell'inizio del round, esempio di New Game}
+  \caption{Immagine rappresentativa del Box contenente i primi tre Pokémon che vengono dati di base iniziando una nuova partita.}
   \label{fig:pokemon_panorama}
 \end{figure}
 
-Nel \textbf{pannello a sinistra} vengono mostrate le informazioni relative al Pokémon selezionato, come il nome, il tipo, l’abilità e la mossa attualmente assegnata.\\
-Nel \textbf{pannello a destra}, in alto, sono visibili i primi tre Pokémon disponibili.\\
-Nel caso si carichi un salvataggio in cui sono stati catturati altri Pokémon durante partite precedenti, anche questi verranno mostrati e potranno essere selezionati.\\
-Una volta scelto il Pokémon premere invio per aggiungerlo alla squadra, si potrà notare che occuperà uno dei 3 slot disponibili sopra al pulsante \textbf{Start}, sarà possibile rimuovere i Pokémon selezionati premendo invio sullo slot che occupano.\\
-Una volta selezionato almeno un Pokémon, sarà possibile premere il pulsante \textbf{Start} per avviare il gioco.
+Nel caso in cui si carichi un salvataggio in cui sono stati catturati altri Pokémon durante partite precedenti, anche questi verranno mostrati e potranno essere selezionati.\\
+Tuttavia, verranno rigenerati con statistiche differenti e partiranno dal livello 1.\\
+Una volta scelto un Pokémon, premere \textbf{Invio} per aggiungerlo alla squadra: occuperà uno dei tre slot disponibili sopra al pulsante \textbf{Start}.\\
+È possibile rimuovere un Pokémon selezionato premendo \textbf{Invio} sullo slot che occupa.\\
+Se la prima schermata del Box è piena, si può navigare tra le altre pagine utilizzando i bottoni a forma di freccia; il numero visualizzato all’interno di ciascun bottone indica la pagina corrente.\\
+Dopo aver selezionato almeno un Pokémon, è possibile premere il pulsante \textbf{Start} per avviare il gioco.
+
 
 \section{Fase di Combattimento}
 
@@ -558,35 +567,73 @@ Una volta avviato il round, l’utente accede alla fase di combattimento, durant
   \caption{Visualizzazione della fase di combattimento}
   \label{fig:combat_phase}
 \end{figure}
-A destra sono disponibili quattro opzioni, rappresentate da pulsanti rettangolari:
 
+Il riquadro a destra mostra le statistiche del proprio Pokémon. Un valore particolarmente importante da monitorare durante tutta la battaglia è la vita del Pokémon, rappresentata nell’immagine dal valore \texttt{12/12}. Quando la vita raggiunge \texttt{0/12}, il Pokémon non sarà più utilizzabile e verrà automaticamente sostituito con il primo Pokémon disponibile nella squadra.\\
+Nel caso in cui non ci siano altri Pokémon disponibili, si tornerà direttamente al \textbf{menu} iniziale senza possibilità di salvare i progressi.\\
+È importante considerare anche lo \textit{Status} del Pokémon, anch’esso visibile nel riquadro delle statistiche: questo può influenzare le scelte strategiche durante il combattimento, ad esempio causando danni aggiuntivi o annullando l’efficacia degli attacchi, rendendo alcune azioni inefficaci.\\
+Gli Status possono essere applicati tramite abilità passive del Pokémon avversario oppure come effetto delle mosse, e durano per diversi turni.
+A destra sono disponibili quattro opzioni, rappresentate da pulsanti rettangolari:
 \begin{itemize}
-  \item \textbf{FIGHT}: per attaccare utilizzando una delle mosse del Pokémon. Inizialmente ogni Pokémon avrà a disposizione una mossa, ma con il crescere del livello se ne sbloccheranno di nuove, da notare che ogni mossa avrà un limite di utilizzi (PP) che potranno essere ricaricati tramite oggetti dello Shop;
+  \item \textbf{FIGHT}: consente di attaccare utilizzando una delle mosse del Pokémon. Inizialmente, ogni Pokémon avrà a disposizione una sola mossa, ma con l’aumentare del livello se ne sbloccheranno di nuove. Ogni mossa ha un numero limitato di utilizzi (PP), che possono essere ricaricati tramite oggetti acquistabili nello Shop.\\
+  Se si tenta di attaccare con una mossa esaurita (PP pari a 0), l’attacco non avrà effetto e il Pokémon nemico eseguirà comunque la propria azione.\\
+  
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{immagini/moveImg.png}
+    \caption{Le mosse non ancora sbloccate vengono visualizzate come "???": è possibile selezionarle, ma non avranno alcun effetto. Il Pokémon nemico, se in grado, attaccherà comunque.}
+    \label{fig:move_display}
+  \end{figure}
+
+  \item \textbf{BALL}: permette di tentare la cattura del Pokémon avversario.\\
+  Tuttavia, se si affronta un allenatore (identificabile dal tag \textbf{TRAINER} visibile nel riquadro delle statistiche in alto a sinistra), la cattura non sarà possibile: in questo caso, le Poké Ball non diminuiranno.\\
+  Se la cattura va a buon fine e vi è spazio nella squadra, il Pokémon catturato ne entrerà a far parte. In caso contrario, verrà comunque registrato nel salvataggio, solo se non è già presente nel Box iniziale.\\
+  Ogni tentativo di cattura consuma un turno, quindi, se il Pokémon nemico non viene catturato, potrà comunque eseguire la propria azione. Importante notare che catturare un Pokémon aumenta l'esperienza del proprio Pokèmon in campo, il che può portare a un level up.
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{immagini/ballImg.png}
+    \caption{Ogni partita inizia con cinque Poké Ball e una Master Ball. Ogni Poké Ball ha una probabilità di cattura diversa, dalla più bassa alla più alta, con la Master Ball che garantisce la cattura sicura.}
+    \label{fig:ball_display}
+  \end{figure}
+
+  \item \textbf{POKEMON}: consente di cambiare il Pokémon attivo con un altro del proprio team, a patto che sia ancora in vita. Per effettuare il cambio, selezionare il Pokémon desiderato e premere \textbf{Invio}. Dopo il cambio, il Pokémon nemico eseguirà la propria azione.
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{immagini/changePoke.png}
+    \caption{Gli spazi vuoti nella squadra vengono visualizzati come "???". È possibile selezionarli, ma non avranno effetto. Quando nuovi Pokémon vengono catturati, andranno a riempire questi slot.}
+    \label{fig:pokemon_change}
+  \end{figure}
+
+  \item \textbf{RUN}: consente di saltare il turno.
+\end{itemize}
+Proseguendo nel gioco, quando un Pokémon raggiunge determinati livelli, imparerà nuove mosse.\\
+Le prime tre mosse apprese verranno aggiunte automaticamente al suo set.\\
+A partire dalla quarta mossa, invece, sarà richiesto l’intervento dell’utente.\\
+In questi casi, comparirà una schermata che permetterà al giocatore di sostituire una delle mosse attualmente conosciute con la nuova mossa disponibile.
+Se si desidera mantenere le mosse già apprese, sarà sufficiente premere \textbf{Invio} sulla nuova mossa per rifiutarla e tornare al gioco senza effettuare modifiche.\\
+Dopo questa scelta, si verrà riportati alla fase di combattimento, nel caso si stia affrontando un allenatore con altri Pokémon ancora in vita; altrimenti, si accederà direttamente allo \textit{Shop}.
+
 \begin{figure}[H]
   \centering
-    \includegraphics[width=\textwidth]{immagini/moveImg.png}
-    \caption{Le mosse non ancora sbloccate verrano visualizzate come "???", sarà possibile utilizzarle ma non avranno alcun effetto}
-    \label{fig:combat_phase}
+  \includegraphics[width=\textwidth]{immagini/NewMoveToLearn.png}
+  \caption{Schermata per lo sblocco di nuove mosse}
+  \label{fig:save_screen}
 \end{figure}
-  \item \textbf{BALL}: per tentare la cattura del Pokémon avversario, da tenere conto che se si starà affrontando un Trainer e non un Pokémon selvatico non sarà possibile catturarlo, infatti si potrà notare che le PokéBall non diminuiranno. Se il Pokémon verrà catturato correttamente e si avrà spazio in squadra ne diventerà un membro.
-  \begin{figure}[H]
+\noindent
+È importante ricordare che i nemici con il tag \textbf{TRAINER} dispongono di una squadra di Pokémon: sarà necessario sconfiggerli tutti per poter accedere allo Shop.
+
+\begin{figure}[H]
   \centering
-    \includegraphics[width=\textwidth]{immagini/ballImg.png}
-    \caption{Ad ogni partita si parte con 5 Poké Ball ognuna di esse ha probabilità maggiore di cattura incrementale, fino ad arrivare alla Master Ball che ha una probabilità assicurata di cattura.}
-    \label{fig:combat_phase}
+  \includegraphics[width=\textwidth]{immagini/Trainer.png}
+  \caption{Visualizzazione del tag \textbf{TRAINER} e della vita del Pokémon nemico.}
+  \label{fig:trainer_tag}
 \end{figure}
-  \item \textbf{POKEMON}: per cambiare il Pokémon attivo con un altro del proprio team, basterà scegliere con quale Pokémon sostituirlo posizionandosi sopra e premendo \textbf{Start};
-  \begin{figure}[H]
-  \centering
-    \includegraphics[width=\textwidth]{immagini/changePoke.png}
-    \caption{Gli spazi vuoti della squadra saranno visti come "???", sarà possibile utilizzarli ma non avranno alcun effetto, quando verranno catturati nuovi Pokémon verrano rimpiazzati}
-    \label{fig:combat_phase}
-\end{figure}
-  \item \textbf{RUN}: per saltare il turno.
-\end{itemize}
 
 \section{Shop}
-Dopo la fase di combattimento, il giocatore ha accesso a un negozio in cui può acquistare oggetti utili per i round successivi.
+
+Dopo aver vinto la fase di combattimento, il giocatore accede allo \textit{Shop}, dove può acquistare oggetti utili per i round successivi.\\
+È possibile acquistare un solo oggetto per volta. Alcuni oggetti richiedono di essere applicati direttamente a un Pokémon: in tal caso, verrà aperto un menu con una meccanica simile a quella del pulsante \textbf{POKEMON}.
 
 \begin{figure}[H]
   \centering
@@ -594,11 +641,15 @@ Dopo la fase di combattimento, il giocatore ha accesso a un negozio in cui può 
   \caption{Visualizzazione della schermata dello shop.}
   \label{fig:shop_screen}
 \end{figure}
-Nella \textbf{parte superiore destra} è visualizzato il totale di denaro a disposizione del giocatore, mentre al centro sono disposti i vari oggetti acquistabili, ciascuno rappresentato da il nome dell’oggetto e il relativo prezzo.
-Gli oggetti sono divisi in gratuiti e a pagamento (presentano il prezzo), gli oggetti a pagamento sono acquistabili solo se si hanno abbstanza soldi.\\
-Nella \textbf{parte inferiore sinistra} è presente un pulsante “\texttt{REROLL}” che permette di aggiornare casualmente gli oggetti in vendita al costo di 50 monete.Nella \textbf{parte inferiore destra}, è presente un pulsante “\texttt{TEAM}” consente di accedere alla schermata del proprio team.\\
-Infine, nella \textbf{parte inferiore centrale} si trova un riquadro descrittivo che mostra informazioni dettagliate sull’oggetto attualmente selezionato, aiutando il giocatore nella scelta d’acquisto.
 
+Nella \textbf{parte superiore destra} è visualizzato il totale di denaro a disposizione del giocatore, mentre al centro sono disposti i vari oggetti acquistabili, ciascuno rappresentato dal nome e dal relativo prezzo.\\
+Gli oggetti si dividono in gratuiti e a pagamento (con prezzo visibile); gli oggetti a pagamento sono acquistabili solo se si dispone di abbastanza denaro.\\
+Nella \textbf{parte inferiore sinistra} è presente il pulsante \texttt{REROLL}, che permette di aggiornare casualmente gli oggetti in vendita al costo di 50 monete. Anche questo pulsante è utilizzabile solo se si ha sufficiente denaro.\\
+Nella \textbf{parte inferiore destra} si trova il pulsante \texttt{TEAM}, che consente di accedere alla schermata della propria squadra per osservare i Pokémon disponibili prima di scegliere l’oggetto più adatto alle proprie esigenze.\\
+Infine, nella \textbf{parte inferiore centrale} è presente un riquadro descrittivo che mostra informazioni dettagliate sull’oggetto attualmente selezionato, aiutando il giocatore nella scelta d’acquisto.
+
+
+\newpage
 \section{Salvataggio}
 Dopo il decimo combattimento, si aprirà la schermata di salvataggio.
 
@@ -609,10 +660,19 @@ Dopo il decimo combattimento, si aprirà la schermata di salvataggio.
   \label{fig:save_screen}
 \end{figure}
 
-Nel \textbf{pulsante a sinistra} è visualizzato il nome del salvataggio, che va scritto dall'utente tramite tastiera, sarà possibile usare ogni carattere, numero, spazi e sarà possibile cancellare ciò che si ha scritto utilizzando backspace, con lunghezza in caratteri compresa tra 1 e 12, una volta scritto il nome basterà premere invio sul bottone e verrà creato un nuovo salvataggio, nel caso il nome sia già presente oppure non rispetti i limiti di dimensione non sarà possibile salvare.
-Se ivece si desidera uscire senza salvare la partita basterà utilizzare il \textbf{pulsante a destra}
 
 
+Nel \textbf{pulsante a sinistra} è visualizzato il nome del salvataggio, che va scritto dall'utente tramite tastiera, sarà possibile usare ogni carattere, numero, spazi e sarà possibile cancellare ciò che si ha scritto utilizzando  \textbf{backspace}, con lunghezza in caratteri compresa tra 1 e 12, una volta scritto il nome basterà premere invio sul bottone e verrà creato un nuovo salvataggio, nel caso il nome sia già presente oppure non rispetti i limiti di dimensione non sarà possibile salvare.
+Se invece si desidera uscire senza salvare la partita basterà utilizzare il \textbf{pulsante a destra}. Ogni decisione presa ti riporterà al Menù principale del gioco.\\
 
+\subsection*{Versione Demo}
+
+Nella versione Demo sono state apportate alcune modifiche mirate a facilitare e velocizzare il processo di test:
+
+\begin{itemize}
+    \item \textbf{Incremento dell’esperienza ottenuta}: i punti esperienza (EXP) guadagnati durante le battaglie sono stati aumentati, così da permettere un avanzamento di livello più rapido.
+    
+    \item \textbf{Sblocco anticipato delle mosse per gli starter}: i tre Pokémon iniziali – \textit{Bulbasaur}, \textit{Charmander} e \textit{Squirtle} – ora apprendono tutte le loro prime mosse nei \textbf{primi 6 livelli}. Questo intervento ha lo scopo di consentire il test completo della scena di \textit{selezione delle mosse}, permettendo al giocatore di decidere quali mantenere già nelle fasi iniziali del gioco.
+\end{itemize}
 
 \end{document}
