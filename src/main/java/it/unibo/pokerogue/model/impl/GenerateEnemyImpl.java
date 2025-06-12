@@ -2,9 +2,11 @@ package it.unibo.pokerogue.model.impl;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
 import java.util.Random;
 
 import it.unibo.pokerogue.model.api.GenerateEnemy;
+import it.unibo.pokerogue.model.api.pokemon.Pokemon;
 import it.unibo.pokerogue.model.impl.pokemon.PokemonFactory;
 import it.unibo.pokerogue.model.impl.trainer.TrainerImpl;
 
@@ -64,6 +66,7 @@ public final class GenerateEnemyImpl implements GenerateEnemy {
 
         final int level = Math.max(0, Math.min(baseLevel + variance < 1 ? 0 : baseLevel + variance, 100));
         enemyTrainerInstance.addPokemon(PokemonFactory.randomPokemon(level), 1);
+        addSafeMove(enemyTrainerInstance);
     }
 
     private void generateTrainerTeam(final TrainerImpl enemyTrainerInstance) throws NoSuchMethodException,
@@ -80,6 +83,7 @@ public final class GenerateEnemyImpl implements GenerateEnemy {
             final int level = Math.max(0, Math.min(baseLevel + variance < MIN_LEVEL ? 0 : baseLevel + variance, 100));
             enemyTrainerInstance.addPokemon(PokemonFactory.randomPokemon(level), i);
         }
+        addSafeMove(enemyTrainerInstance);
     }
 
     private int calculatePokemonLevel() {
@@ -87,5 +91,15 @@ public final class GenerateEnemyImpl implements GenerateEnemy {
         final double scalingFactor = 0.8;
         return (int) Math.floor(1 + Math.pow(battleLevel, scalingFactor) * scalingFactor);
 
+    }
+
+    private void addSafeMove(final TrainerImpl enemyTrainerInstance) {
+        for (final Optional<Pokemon> pokemon : enemyTrainerInstance.getSquad()) {
+            if (pokemon.isPresent()) {
+                final var listActualMoves = pokemon.get().getActualMoves();
+                listActualMoves.add(MoveFactory.moveFromName("basic"));
+                pokemon.get().setActualMoves(listActualMoves);
+            }
+        }
     }
 }
