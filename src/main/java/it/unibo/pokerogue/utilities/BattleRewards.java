@@ -31,7 +31,7 @@ public final class BattleRewards {
      * @param defeatedPokemon the Pokémon that was defeated in the battle
      */
     public static void awardBattleRewards(final Pokemon winnerPokemon, final Pokemon defeatedPokemon) {
-        final int baseExp = 120;
+        final int baseExp = 250;
         final int enemyLevel = defeatedPokemon.getLevel().getCurrentValue();
         final int playerLevel = winnerPokemon.getLevel().getCurrentValue();
         final int gainedExp = (int) (baseExp * enemyLevel / (7.0 + (playerLevel * 0.5)));

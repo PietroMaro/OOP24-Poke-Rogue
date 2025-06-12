@@ -46,11 +46,14 @@ public final class GameEngineImpl implements GameEngine {
     private Integer fightLevel;
     private final SavingSystem savingSystemInstance;
     private Trainer playerTrainerInstance;
-
+    @Setter
+    @Getter
+    private boolean inShop;
     /**
      * Protected constructor for the GameEngineImpl.
      */
     public GameEngineImpl() throws IOException {
+        this.inShop = false;
         this.graphicEngineInstance = new GraphicEngineImpl(this);
         this.savingSystemInstance = new SavingSystemImpl();
         this.playerTrainerInstance = new TrainerImpl();

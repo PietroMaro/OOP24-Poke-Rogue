@@ -143,7 +143,7 @@ public final class SceneFightUpdateView implements FightUpdateView {
                         UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "ULTRABALL_TEXT",
                                         TextElementImpl.class)
                                         .setText(playerTrainerInstance.getBall().get("ultraball")
-                                                        + " x Ulta Ball");
+                                                        + " x Ultra Ball");
                         UtilitiesForScenes.safeGetElementByName(currentSceneGraphicElements, "MASTERBALL_TEXT",
                                         TextElementImpl.class)
                                         .setText(playerTrainerInstance.getBall()

@@ -244,8 +244,8 @@ public final class BattleEngineImpl implements BattleEngine {
         }
         if (BattleUtilities.isTeamWipedOut(enemyTrainerInstance) || this.captured) {
             BattleRewards.awardBattleRewards(this.playerPokemon, this.enemyPokemon);
+            gameEngineInstance.setInShop(true);
             this.newMoveToLearn(this.playerPokemon, gameEngineInstance);
-            gameEngineInstance.setScene("shop");
         } else if (this.enemyPokemon.getActualStats().get(Stats.HP).getCurrentValue() <= 0) {
             final Decision enemyChoose = enemyAiInstance.nextMove(this.getCurrentWeather(), enemyTrainerInstance,
                     playerTrainerInstance);
@@ -293,6 +293,8 @@ public final class BattleEngineImpl implements BattleEngine {
             InstantiationException {
         if (playerPokemon.isHasToLearnMove()) {
             gameEngineInstance.setScene("move");
+        } else if (gameEngineInstance.isInShop()) {
+            gameEngineInstance.setScene("shop");
         }
     }
 }

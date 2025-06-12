@@ -320,7 +320,7 @@ final class TestAll {
         final BattleEngine battleEngine = new BattleEngineImpl(ai, new SavingSystemImpl(), 100);
         battleEngine.runBattleTurn(new Decision(DecisionTypeEnum.POKEBALL, MASTERBALL_LITTERAL),
                 new Decision(DecisionTypeEnum.NOTHING, ""), enemyTrainer, playerTrainer, gameEngineInstance, 0);
-        assertEquals(playerTrainer.getBall().get(MASTERBALL_LITTERAL), 0);
+        assertEquals(playerTrainer.getBall().get(MASTERBALL_LITTERAL), 1);
         assertEquals(playerTrainer.getSquad().get(1).get().getName(), CHARMANDER_LITTERAL);
         enemyTrainer.setWild(false);
         enemyTrainer.addPokemon(charmander, 1);

@@ -16,10 +16,10 @@
     },
     "moves": {
         "1": "tackle",
-        "46": "solar-beam",
+        "3": "solar-beam",
         "25": "sweet-scent",
         "4": "growl",
-        "15": "sleep-powder",
+        "5": "sleep-powder",
         "39": "synthesis",
         "2": "leech-seed",
         "20": "razor-leaf",

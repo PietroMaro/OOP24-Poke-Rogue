@@ -43,7 +43,7 @@ public class TrainerImpl implements Trainer {
         this.ball.put("pokeball", STARTING_POKEBALL_NUMBER);
         this.ball.put("megaball", 0);
         this.ball.put("ultraball", 0);
-        this.ball.put("masterball", 0);
+        this.ball.put("masterball", 1);
         for (int pokeSquadPosition = 0; pokeSquadPosition < MAX_SQUAD_SIZE; pokeSquadPosition++) {
             squad.add(Optional.empty());
         }

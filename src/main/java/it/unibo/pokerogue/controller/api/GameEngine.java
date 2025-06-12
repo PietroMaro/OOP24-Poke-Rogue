@@ -2,7 +2,6 @@ package it.unibo.pokerogue.controller.api;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-
 /**
  * Interface representing the main game engine.
  * 
@@ -60,4 +59,18 @@ public interface GameEngine {
    */
   void resetInstance();
 
+    /**
+     * To see if you are in the shop or need
+     * to come back to the fight.
+     * @return {@link boolean}
+     * 
+   */
+  boolean isInShop();
+
+      /**
+     * To set if you are in the shop or need
+     * to come back to the fight.
+     * @param newVal
+   */
+  void setInShop(boolean newVal);
 }

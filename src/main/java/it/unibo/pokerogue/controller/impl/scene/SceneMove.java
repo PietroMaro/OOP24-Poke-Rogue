@@ -152,7 +152,12 @@ public class SceneMove extends Scene {
             InvocationTargetException,
             InstantiationException {
         playerPokemon.learnNewMove(Optional.of(currentSelectedButton));
-        gameEngineInstance.setScene("fight");
+        if (gameEngineInstance.isInShop()) {
+            gameEngineInstance.setScene("shop");
+            gameEngineInstance.setInShop(false);
+        } else {
+            gameEngineInstance.setScene("fight");
+        }
     }
 
     private void initGraphicElements() throws IOException {
