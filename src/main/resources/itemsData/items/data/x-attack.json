@@ -2,7 +2,7 @@
     "id": 15,
     "name": "X Attack",
     "type": "Boost",
-    "description": "Raises the user's Attack stat for 5 battles.",
+    "description": "Raises the user's Attack stat.",
     "price": 500,
     "rarity": "Common",
     "category": "Consumable",

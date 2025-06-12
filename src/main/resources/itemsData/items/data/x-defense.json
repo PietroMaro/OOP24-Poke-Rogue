@@ -2,7 +2,7 @@
     "id": 16,
     "name": "X Defense",
     "type": "Boost",
-    "description": "Raises the user's Defense stat for 5 battles.",
+    "description": "Raises the user's Defense stat.",
     "price": 500,
     "rarity": "Common",
     "category": "Consumable",

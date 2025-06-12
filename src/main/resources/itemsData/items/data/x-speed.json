@@ -2,7 +2,7 @@
     "id": 17,
     "name": "X Speed",
     "type": "Boost",
-    "description": "Raises the user's Speed stat for 5 battles.",
+    "description": "Raises the user's Speed stat.",
     "price": 500,
     "rarity": "Common",
     "category": "Consumable",

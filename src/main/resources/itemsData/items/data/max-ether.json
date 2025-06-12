@@ -2,7 +2,7 @@
     "id": 12,
     "name": "Max Ether",
     "type": "PPRestore",
-    "description": "Restores 7 PP to all moves of a Pokemon.",
+    "description": "Restores 7 PP to the first Pokemon's move.",
     "price": 2000,
     "rarity": "Common",
     "category": "Consumable",

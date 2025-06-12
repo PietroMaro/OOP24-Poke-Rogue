@@ -2,7 +2,7 @@
     "id": 11,
     "name": "Ether",
     "type": "PPRestore",
-    "description": "Restores 5 PP to all moves of a Pokemon.",
+    "description": "Restores 5 PP to the first Pokemon's move.",
     "price": 1200,
     "rarity": "Common",
     "category": "Consumable",
