@@ -26,7 +26,7 @@ import lombok.Getter;
  * 
  * @author Casadio Alex
  */
-public class SceneInfo extends Scene {
+public final class SceneInfo extends Scene {
     private final GraphicElementsRegistry currentSceneGraphicElements;
     private final Map<String, PanelElementImpl> allPanelsElements;
     private final GraphicElementsRegistry graphicElements;
@@ -62,22 +62,6 @@ public class SceneInfo extends Scene {
         this.initGraphicElements();
     }
 
-    /**
-     * Updates the scene state based on the provided key input.
-     * Handles actions such as navigating back to the main scene when the
-     * "BACK_BUTTON" is pressed.
-     *
-     * @param inputKey the integer code of the pressed key
-     * @throws IOException               if an IO error occurs during update
-     * @throws InstantiationException    if reflective instantiation fails during
-     *                                   update
-     * @throws IllegalAccessException    if reflective access is denied during
-     *                                   update
-     * @throws InvocationTargetException if reflective method invocation fails
-     *                                   during update
-     * @throws NoSuchMethodException     if required methods are missing during
-     *                                   update
-     */
     @Override
     public void updateStatus(final int inputKey, final GameEngine gameEngineInstance,
             final Trainer playerTrainerInstance, final SavingSystem savingSystemInstance)
@@ -104,31 +88,16 @@ public class SceneInfo extends Scene {
      *
      * @throws IOException if graphic elements fail to initialize properly
      */
-    public final void initGraphicElements() throws IOException {
+    public void initGraphicElements() throws IOException {
         this.sceneInfoView.initGraphicElements(currentSceneGraphicElements, allPanelsElements, this.graphicElements);
     }
 
-    /**
-     * Updates the graphical display of the scene.
-     * <p>
-     * Currently not implemented for this scene.
-     *
-     * @throws IOException if an IO error occurs during graphical update
-     */
     @Override
     public void updateGraphic(final SavingSystem savingSystemInstance, final Trainer playerTrainerInstance)
             throws IOException {
         // No graphical update logic implemented yet
     }
 
-    /**
-     * Returns a new instance of {@link GraphicElementsRegistry} containing
-     * the current scene's graphic elements. This ensures encapsulation by not
-     * exposing
-     * internal references.
-     *
-     * @return a copy of the current scene's graphic elements registry
-     */
     @Override
     public GraphicElementsRegistry getCurrentSceneGraphicElements() {
         return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);

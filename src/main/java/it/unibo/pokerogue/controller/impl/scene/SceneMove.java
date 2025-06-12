@@ -31,7 +31,7 @@ import java.lang.reflect.InvocationTargetException;
  * @author Miraglia Tommaso Cosimo
  * 
  */
-public class SceneMove extends Scene {
+public final class SceneMove extends Scene {
 
     private int currentSelectedButton;
     private final GraphicElementsRegistry currentSceneGraphicElements;
@@ -82,11 +82,6 @@ public class SceneMove extends Scene {
         this.initGraphicElements();
     }
 
-    /**
-     * Updates the visual state of the scene.
-     * This method is responsible for highlighting the newly selected button
-     * and unhighlighting the previously selected button.
-     */
     @Override
     public void updateGraphic(final SavingSystem savingSystemInstance, final Trainer playerTrainerInstance) {
         UtilitiesForScenes.setButtonStatus(currentSelectedButton, false, this.currentSceneGraphicElements);
@@ -95,16 +90,6 @@ public class SceneMove extends Scene {
         UtilitiesForScenes.setButtonStatus(this.currentSelectedButton, true, this.currentSceneGraphicElements);
     }
 
-    /**
-     * Updates the scene's internal state based on user input.
-     * Handles key presses for navigation (up, down) to select different move
-     * options
-     * and triggers the action (learning a new move) when the enter key is pressed
-     * on a move selection.
-     *
-     * @param inputKey The key code representing the user's input (e.g.,
-     *                 KeyEvent.VK_UP).
-     */
     @Override
     public void updateStatus(final int inputKey, final GameEngine gameEngineInstance,
             final Trainer playerTrainerInstance, final SavingSystem savingSystemInstance) throws NoSuchMethodException,
@@ -166,21 +151,11 @@ public class SceneMove extends Scene {
         this.currentSelectedButton = graphicElementNameToInt.get("MOVE_1_BUTTON");
     }
 
-    /**
-     * Returns a copy of the current scene's graphical elements registry.
-     *
-     * @return a copy of the current GraphicElementsRegistry.
-     */
     @Override
     public GraphicElementsRegistry getCurrentSceneGraphicElements() {
         return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);
     }
 
-    /**
-     * Returns a map containing all panel elements currently loaded in the scene.
-     *
-     * @return a LinkedHashMap of all PanelElementImpl objects.
-     */
     @Override
     public Map<String, PanelElementImpl> getAllPanelsElements() {
         return new LinkedHashMap<>(this.allPanelsElements);
