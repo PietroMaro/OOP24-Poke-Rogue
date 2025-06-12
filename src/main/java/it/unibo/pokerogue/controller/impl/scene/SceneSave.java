@@ -26,7 +26,7 @@ import it.unibo.pokerogue.model.api.trainer.Trainer;
  * 
  * @author Casadio Alex
  */
-public class SceneSave extends Scene {
+public final class SceneSave extends Scene {
     private static final String EXIT_SAVE_LITTERAL = "EXIT_AND_SAVE_BUTTON";
     private static final String CONTINUE_LITTERAL = "CONTINUE_GAME_BUTTON";
     private static final int MAX_NAME_LENGTH = 12;
@@ -66,18 +66,6 @@ public class SceneSave extends Scene {
         this.initGraphicElements();
     }
 
-    /**
-     * Updates the scene's status in response to user input.
-     * Arrow keys toggle button focus; Enter activates the selected option.
-     *
-     * @param inputKey The key code of the user input.
-     * @throws IOException               if a scene transition fails due to IO
-     *                                   error.
-     * @throws InstantiationException    if a required object can't be instantiated.
-     * @throws IllegalAccessException    if reflection access fails.
-     * @throws InvocationTargetException if a reflective method call fails.
-     * @throws NoSuchMethodException     if a reflective method is missing.
-     */
     @Override
     public void updateStatus(final int inputKey, final GameEngine gameEngineInstance,
             final Trainer playerTrainerInstance, final SavingSystem savingSystemInstance)
@@ -160,22 +148,12 @@ public class SceneSave extends Scene {
 
     }
 
-    /**
-     * Refreshes the UI graphics based on the current state and selected button.
-     *
-     * @throws IOException if an error occurs during update rendering.
-     */
     @Override
     public void updateGraphic(final SavingSystem savingSystemInstance, final Trainer playerTrainerInstance)
             throws IOException {
         this.sceneSaveView.updateGraphic(this.newSelectedButton, this.currentSceneGraphicElements);
     }
 
-    /**
-     * Returns a copy of the current scene's graphical elements registry.
-     *
-     * @return a copy of the current GraphicElementsRegistry.
-     */
     @Override
     public GraphicElementsRegistry getCurrentSceneGraphicElements() {
         return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);

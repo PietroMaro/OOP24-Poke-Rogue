@@ -31,7 +31,7 @@ import lombok.Setter;
  * 
  * @author Casadio Alex
  */
-public class SceneShop extends Scene {
+public final class SceneShop extends Scene {
     private static final String FREE_ITEM_1 = "FREE_ITEM_1_BUTTON";
     private static final String FREE_ITEM_3 = "FREE_ITEM_3_BUTTON";
     private static final String TEAM_LITTERAL = "TEAM_BUTTON";
@@ -97,17 +97,6 @@ public class SceneShop extends Scene {
         this.initGraphicElements(playerTrainerInstance);
     }
 
-    /**
-     * Updates the scene state based on user input.
-     * Handles navigation, item purchase and usage, team interactions.
-     *
-     * @param inputKey the key code representing user input
-     * @throws IOException               if an I/O error occurs
-     * @throws InstantiationException    if object instantiation fails
-     * @throws IllegalAccessException    if access to a method is illegal
-     * @throws InvocationTargetException if method invocation fails
-     * @throws NoSuchMethodException     if method is not found
-     */
     @Override
     public void updateStatus(final int inputKey, final GameEngine gameEngineInstance,
             final Trainer playerTrainerInstance, final SavingSystem savingSystemInstance) throws IOException,
@@ -274,11 +263,6 @@ public class SceneShop extends Scene {
         }
     }
 
-    /**
-     * Updates the current graphics based on user interaction.
-     *
-     * @throws IOException if graphics update fails
-     */
     @Override
     public void updateGraphic(final SavingSystem savingSystemInstance, final Trainer playerTrainerInstance)
             throws IOException {
@@ -289,25 +273,11 @@ public class SceneShop extends Scene {
         this.currentSelectedButton = this.newSelectedButton;
     }
 
-    /**
-     * Returns a copy of the map containing all panel elements.
-     *
-     * @return a new {@link LinkedHashMap} instance with the current panel elements,
-     *         ensuring the original map remains unmodified.
-     */
     @Override
     public Map<String, PanelElementImpl> getAllPanelsElements() {
         return new LinkedHashMap<>(this.allPanelsElements);
     }
 
-    /**
-     * Returns a new instance of {@link GraphicElementsRegistry} containing the
-     * current scene's graphic elements.
-     * This ensures encapsulation by avoiding direct exposure of the internal
-     * registry.
-     *
-     * @return a copy of the current scene's {@code GraphicElementsRegistry}.
-     */
     @Override
     public GraphicElementsRegistry getCurrentSceneGraphicElements() {
         return new GraphicElementsRegistryImpl(this.currentSceneGraphicElements);
